@@ -10,7 +10,7 @@ public class SchoolBean
 	private String url;					// 學校網址#
 	private String schoolcovername;		// 學校圖片 檔名
 	private Byte[] titlePage;			// 學校圖片#(封面)(817px*358px)
-	private String coverbytelength;		// 學校圖片 檔名長度
+	private long coverbytelength;		// 學校圖片 檔名長度
 	private String aboutMe;				// 關於我
 	private String managerEmail;		// 開通帳號的聯絡人E-mail 
 	private String projectManager;		// 開通帳號的聯絡人姓名
