@@ -25,7 +25,7 @@ public class FullProjBean
 	private byte[] pdf;	             			// pdf
 	private long pdfLength;          			// pdf檔案長度
 	private int reviews;			 			// 評論
-	private int missionBoardId;	     			// 任務板編號(相關任務協作) FK
+	private int missionBoardId;	     			// 任務板編號(相關任務協作)
 	private String reviewsContent;   			// 評論內容
 	private String schoolConfirm;               // 學校確認狀態(同意、預設null)	
 	private String memberConfirm;               // 發起人確認狀態(同意、預設null)

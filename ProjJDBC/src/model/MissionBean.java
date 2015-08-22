@@ -4,7 +4,7 @@ import java.util.List;
 
 public class MissionBean 
 {
-	private int fullProjId;         // 完整計畫編號 FK
+	private int missionBoardId;         // 任務集編號 FK
 	private int missionId;          // 任務編號 PK
 	private String name;               // 任務名稱
 	private int	host;               // 執行者(主要負責執行的人) FK 會員編號	

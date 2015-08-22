@@ -1,6 +1,6 @@
 package model;
 
-public class MissionMessageBoardBean 
+public class MissionMessageBean 
 {
 	private int fullProjId;                 // 計畫編號(完整計畫編號) FK
 	private int missionSetId;               // 任務編號 FK
