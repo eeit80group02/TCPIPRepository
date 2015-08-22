@@ -2,7 +2,7 @@ package model;
 
 public class SchoolDemandBean 
 {
-	private int schooldemandid;      	 // 計畫需求編號 PK identity
+	private int schoolDemandId;      	 // 計畫需求編號 PK identity
 	private int schoolId;            	 // 學校編號 FK
 	private int participant;             // 預計參與的學生人數
 	private String activityTopicPicture; // 活動主題(指學校希望志工規劃的主題)
