@@ -3,7 +3,7 @@ package model;
 public class FullProjBean
 {
 	private int fullProjId;             		// 完整計畫 PK 流水
-	private int initProjId;          			// 初步計畫 FK
+	private int primaryProjId;         			// 初步計畫 FK
 	private int schoolDemandId;          		// 學校需求 FK *命名可能有問題
 	private int memberId;                		// 發起人     FK
 	private int schoolId;                		// 學校編號 FK
@@ -21,9 +21,9 @@ public class FullProjBean
 	private java.util.Date createDate;			// 建立日期(完整計畫發布的日期)
 	private String projStatus;       			// 計畫狀態(招募中;已失敗;已完成)	
 	private String orgArchitecture;	 			// 成員架構(文字敘述)
-	private String pdfName;          			// pdf檔名
-	private byte[] pdf;	             			// pdf
-	private long pdfLength;          			// pdf檔案長度
+	private String projFileName;          		// pdf檔名
+	private byte[] projFile;	             	// pdf
+	private long proFileLength;          		// pdf檔案長度
 	private int reviews;			 			// 評論
 	private int missionBoardId;	     			// 任務板編號(相關任務協作)
 	private String reviewsContent;   			// 評論內容
