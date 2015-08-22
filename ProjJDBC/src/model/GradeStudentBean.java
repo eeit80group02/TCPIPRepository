@@ -1,6 +1,6 @@
 package model;
 
-public class GradestudsBean {
+public class GradeStudentBean {
 	private int schoolId;				// 學校編號
 	private int anniversary;			// 學年度(ex:104)
 	private int elementaryFirst;		// 年級(一年級)
