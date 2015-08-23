@@ -1,6 +1,6 @@
 package model;
 
-public class ProcesMemberBean
+public class ProcessingMemberBean
 {
 	private int schoolDemandId;     	// 計畫需求編號 FK
 	private int memberId;        	    //會員編號 FK
