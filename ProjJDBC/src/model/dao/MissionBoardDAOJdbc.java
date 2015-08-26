@@ -269,7 +269,7 @@ public class MissionBoardDAOJdbc
 	}
 	
 	private static final String SELECT_ALL = "SELECT missionBoardId,fullProjId,name,missionSetNum FROM MissionBoard";
-	public List<MissionBoardBean> select()
+	public List<MissionBoardBean> getAll()
 	{
 		List<MissionBoardBean> result = new ArrayList<MissionBoardBean>();
 		MissionBoardBean bean;
@@ -349,7 +349,7 @@ public class MissionBoardDAOJdbc
 		
 		// select
 		List<MissionBoardBean> selectBead;
-		selectBead = dao.select();
+		selectBead = dao.getAll();
 		System.out.println(selectBead);
 		
 		// insert
