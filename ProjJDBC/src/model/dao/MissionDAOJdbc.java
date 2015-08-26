@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.PreAction;
-
 import model.MissionBean;
 
 public class MissionDAOJdbc
@@ -56,13 +54,13 @@ public class MissionDAOJdbc
 		return result;
 	}
 	
-	public static void main(String[] args[])
+	public static void main(String[] args)
 	{
 		MissionDAOJdbc dao = new MissionDAOJdbc();
 		 
 		// findByPrimaryKey
 		MissionBean findByPKBean;
-		findByPKBean = dao.findByPrimaryKey(1);
+		findByPKBean = dao.findByPrimaryKey(2);
 		System.out.println(findByPKBean);
 	}
 }
