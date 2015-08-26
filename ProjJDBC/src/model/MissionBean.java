@@ -2,7 +2,7 @@ package model;
 
 public class MissionBean 
 {
-	private int missionBoardId;     // 任務集編號 FK
+	private int missionSetId;       // 任務集編號 FK
 	private int missionId;          // 任務編號 PK
 	private String name;            // 任務名稱
 	private int	host;               // 執行者(主要負責執行的人) FK 會員編號	
@@ -12,13 +12,13 @@ public class MissionBean
 	private	String missionStatus;   // 任務進行狀態(進行中,已完成)
 	private	int mainMissionSetId;   // 主任務編號(「有值」的時候就是子任務) FK
 	
-	public int getMissionBoardId()
+	public int getMissionSetId()
 	{
-		return missionBoardId;
+		return missionSetId;
 	}
-	public void setMissionBoardId(int missionBoardId)
+	public void setMissionSetId(int missionSetId)
 	{
-		this.missionBoardId = missionBoardId;
+		this.missionSetId = missionSetId;
 	}
 	public int getMissionId()
 	{
@@ -87,7 +87,7 @@ public class MissionBean
 	@Override
 	public String toString()
 	{
-		return "MissionBean [missionBoardId=" + missionBoardId + ", missionId=" + missionId + ", name=" + name + ", host=" + host + ", endTime=" + endTime + ", missionPriority=" + missionPriority + ", missionPosition=" + missionPosition
-				+ ", missionStatus=" + missionStatus + ", mainMissionSetId=" + mainMissionSetId + "]";
+		return "MissionBean [missionSetId=" + missionSetId + ", missionId=" + missionId + ", name=" + name + ", host=" + host + ", endTime=" + endTime + ", missionPriority=" + missionPriority + ", missionPosition=" + missionPosition + ", missionStatus="
+				+ missionStatus + ", mainMissionSetId=" + mainMissionSetId + "]";
 	}
 }
