@@ -2,29 +2,29 @@ package model;
 
 public class MissionBean 
 {
-	private int missionSetId;       // 任務集編號 FK
-	private int missionId;          // 任務編號 PK
+	private Integer missionSetId;       // 任務集編號 FK
+	private Integer missionId;          // 任務編號 PK
 	private String name;            // 任務名稱
-	private int	host;               // 執行者(主要負責執行的人) FK 會員編號	
+	private Integer	host;               // 執行者(主要負責執行的人) FK 會員編號	
 	private java.util.Date endTime; // 執行任務的截止時間
-	private	int missionPriority;    // 執行任務的優先次序
-	private	int missionPosition;    // 擺在哪個指定的位置(任務順序上下)
+	private	Integer missionPriority;    // 執行任務的優先次序
+	private	Integer missionPosition;    // 擺在哪個指定的位置(任務順序上下)
 	private	String missionStatus;   // 任務進行狀態(進行中,已完成)
-	private	int mainMissionSetId;   // 主任務編號(「有值」的時候就是子任務) FK
+	private	Integer mainMissionSetId;   // 主任務編號(「有值」的時候就是子任務) FK
 	
-	public int getMissionSetId()
+	public Integer getMissionSetId()
 	{
 		return missionSetId;
 	}
-	public void setMissionSetId(int missionSetId)
+	public void setMissionSetId(Integer missionSetId)
 	{
 		this.missionSetId = missionSetId;
 	}
-	public int getMissionId()
+	public Integer getMissionId()
 	{
 		return missionId;
 	}
-	public void setMissionId(int missionId)
+	public void setMissionId(Integer missionId)
 	{
 		this.missionId = missionId;
 	}
@@ -36,11 +36,11 @@ public class MissionBean
 	{
 		this.name = name;
 	}
-	public int getHost()
+	public Integer getHost()
 	{
 		return host;
 	}
-	public void setHost(int host)
+	public void setHost(Integer host)
 	{
 		this.host = host;
 	}
@@ -52,19 +52,19 @@ public class MissionBean
 	{
 		this.endTime = endTime;
 	}
-	public int getMissionPriority()
+	public Integer getMissionPriority()
 	{
 		return missionPriority;
 	}
-	public void setMissionPriority(int missionPriority)
+	public void setMissionPriority(Integer missionPriority)
 	{
 		this.missionPriority = missionPriority;
 	}
-	public int getMissionPosition()
+	public Integer getMissionPosition()
 	{
 		return missionPosition;
 	}
-	public void setMissionPosition(int missionPosition)
+	public void setMissionPosition(Integer missionPosition)
 	{
 		this.missionPosition = missionPosition;
 	}
@@ -76,11 +76,11 @@ public class MissionBean
 	{
 		this.missionStatus = missionStatus;
 	}
-	public int getMainMissionSetId()
+	public Integer getMainMissionSetId()
 	{
 		return mainMissionSetId;
 	}
-	public void setMainMissionSetId(int mainMissionSetId)
+	public void setMainMissionSetId(Integer mainMissionSetId)
 	{
 		this.mainMissionSetId = mainMissionSetId;
 	}
@@ -90,4 +90,5 @@ public class MissionBean
 		return "MissionBean [missionSetId=" + missionSetId + ", missionId=" + missionId + ", name=" + name + ", host=" + host + ", endTime=" + endTime + ", missionPriority=" + missionPriority + ", missionPosition=" + missionPosition + ", missionStatus="
 				+ missionStatus + ", mainMissionSetId=" + mainMissionSetId + "]";
 	}
+
 }
