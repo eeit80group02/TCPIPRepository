@@ -16,14 +16,14 @@ public class MissionDAOJdbc
 	private static final String URL = "jdbc:sqlserver://localhost:1433;dataBaseName=TCPIP";
 	private static final String USERNAME = "sa";
 	private static final String PASSWORD = "passw0rd";
-	
+
 	private static final String INSERT = "INSERT INTO Mission (missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId) VALUES(?,?,?,?,?,?,?,?)";
+
 	public MissionBean insert(MissionBean bean)
 	{
 		MissionBean result = null;
-		
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
 		{
 			pstmt.setInt(1,bean.getMissionSetId());
 			pstmt.setString(2,bean.getName());
@@ -47,7 +47,7 @@ public class MissionDAOJdbc
 					int pk = 0;
 					if(key.next())
 						pk = key.getInt(1);
-					
+
 					result = findByPrimaryKey(pk);
 				}
 				catch(Exception e)
@@ -60,17 +60,17 @@ public class MissionDAOJdbc
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	private static final String DELETE = "DELETE FROM Mission WHERE missionId = ?";
+
 	public boolean delete(int id)
 	{
 		boolean result = false;
-		
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
 			pstmt.setInt(1,id);
 			int num = pstmt.executeUpdate();
@@ -81,17 +81,17 @@ public class MissionDAOJdbc
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
+
 	private static final String UPDATE = "UPDATE Mission SET missionSetId = ?,name = ?,host = ?,endTime = ?,missionPriority = ?,missionPosition = ?,missionStatus = ?,mainMissionSetId = ? WHERE missionId = ?";
+
 	public MissionBean update(MissionBean bean)
 	{
 		MissionBean result = null;
-		
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 		{
 			pstmt.setInt(1,bean.getMissionSetId());
 			pstmt.setString(2,bean.getName());
@@ -119,16 +119,17 @@ public class MissionDAOJdbc
 		{
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
+
 	private static final String FIND_BY_PRIMARYKEY = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission WHERE missionId = ?";
+
 	public MissionBean findByPrimaryKey(int id)
 	{
 		MissionBean result = null;
-		
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(FIND_BY_PRIMARYKEY);)
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(FIND_BY_PRIMARYKEY);)
 		{
 			pstmt.setInt(1,id);
 			try(ResultSet rs = pstmt.executeQuery();)
@@ -158,15 +159,15 @@ public class MissionDAOJdbc
 		}
 		return result;
 	}
-	
+
 	private static final String SELECT_ALL = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission";
+
 	public List<MissionBean> getAll()
 	{
 		List<MissionBean> result = new ArrayList<MissionBean>();
 		MissionBean bean = null;
-		
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);)
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);)
 		{
 			try(ResultSet rs = pstmt.executeQuery();)
 			{
@@ -196,21 +197,21 @@ public class MissionDAOJdbc
 		}
 		return result;
 	}
-	
+
 	public static void main(String[] args)
 	{
 		MissionDAOJdbc dao = new MissionDAOJdbc();
-		 
+
 		// findByPrimaryKey
 		MissionBean findByPKBean;
 		findByPKBean = dao.findByPrimaryKey(19);
 		System.out.println(findByPKBean);
-		
+
 		// select
 		List<MissionBean> selectBead;
 		selectBead = dao.getAll();
 		System.out.println(selectBead);
-		
+
 		// insert
 		MissionBean insertData = new MissionBean();
 		MissionBean insertBean;
@@ -224,11 +225,11 @@ public class MissionDAOJdbc
 		insertData.setMainMissionSetId(null);
 		insertBean = dao.insert(insertData);
 		System.out.println(insertBean);
-		
+
 		// delete
 		boolean delete = dao.delete(17);
 		System.out.println("Delete : " + delete);
-		
+
 		// update
 		MissionBean updateData = new MissionBean();
 		MissionBean updateBean;
