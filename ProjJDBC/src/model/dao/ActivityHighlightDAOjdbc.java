@@ -1,14 +1,14 @@
-package model;
+package model.dao;
 
 import java.util.Arrays;
 
-public class ActivityHighlightBean 
+public class ActivityHighlightDAOjdbc
 {
-	private int fullProjId;      	// 完整計畫編號 FK
-	private int memberId;        	// 會員編號(活動發起人) FK
-	private byte[] imageCover;   	// 圖片(花絮的封面用的圖片)
-	private String vedioURL;     	// 影片路徑(嵌入youtube影片的網址-參考flyingV)
-	private String content;  	 	// 文章(花絮的內文 - 用ckeditor編輯)
+	private int fullProjId;      	// 摰閮蝺刻�� FK
+	private int memberId;        	// ��蝺刻��(瘣餃�韏瑚犖) FK
+	private byte[] imageCover;   	// ����(�蝯桃��������)
+	private String vedioURL;     	// 敶梁�楝敺�(撋youtube敶梁��雯��-���lyingV)
+	private String content;  	 	// ����(�蝯桃���� - �ckeditor蝺刻摩)
 	
 	public int getFullProjId() {
 		return fullProjId;
