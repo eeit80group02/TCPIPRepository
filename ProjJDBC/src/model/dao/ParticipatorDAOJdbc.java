@@ -2,7 +2,8 @@ package model.dao;
 
 /*
  * 編寫者: Z.Y
- * 測試日期: 2015/08/31
+ * 撰寫日期: 2015/08/31
+ * 修改日期: 第一次修改 2015-09-02 20:41
  * 
  */
 
@@ -12,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -150,29 +152,30 @@ public class ParticipatorDAOJdbc {
 				pstmt.setInt(1, bean.getFullProjId());
 				pstmt.setInt(2, bean.getMemberId());
 				//java.util.Date transfer java.sql.Date
+				
 				java.util.Date startTime = bean.getActivityStartTime();
 				if(startTime != null){
 					long tempTime = startTime.getTime();
-					pstmt.setDate(3, new java.sql.Date(tempTime));
+					pstmt.setTimestamp(3, new java.sql.Timestamp(tempTime));
 				} else {
-					pstmt.setDate(3, null);
+					pstmt.setTimestamp(3, null);
 				}
 				//java.util.Date transfer java.sql.Date
 				java.util.Date endTime = bean.getActivityEndTime();
 				if(endTime != null){
 					long tempTime = endTime.getTime();
-					pstmt.setDate(4, new java.sql.Date(tempTime));
+					pstmt.setTimestamp(4, new java.sql.Timestamp(tempTime));
 				} else {
-					pstmt.setDate(4, null);
+					pstmt.setTimestamp(4, null);
 				}
 				pstmt.setString(5, bean.getParticipateStatus());
 				//java.util.Date transfer java.sql.Date
 				java.util.Date checkTime = bean.getCheckTime();
 				if(checkTime != null){
 					long tempTime = checkTime.getTime();
-					pstmt.setDate(6, new java.sql.Date(tempTime));
+					pstmt.setTimestamp(6, new java.sql.Timestamp(tempTime));
 				} else {
-					pstmt.setDate(6, null);
+					pstmt.setTimestamp(6, null);
 				}
 				pstmt.setString(7, bean.getIsParticipate());
 				int i = pstmt.executeUpdate();
@@ -216,24 +219,24 @@ public class ParticipatorDAOJdbc {
 			pstmt = conn.prepareStatement(UPDATE);
 			if(activityStartTime != null){
 				long tempTime = activityStartTime.getTime();
-				pstmt.setDate(1, new java.sql.Date(tempTime));
+				pstmt.setTimestamp(1, new java.sql.Timestamp(tempTime));
 			} else {
-				pstmt.setDate(1, null);
+				pstmt.setTimestamp(1, null);
 			}
 			
 			if(activityEndTime != null){
 				long tempTime = activityEndTime.getTime();
-				pstmt.setDate(2, new java.sql.Date(tempTime));
+				pstmt.setTimestamp(2, new java.sql.Timestamp(tempTime));
 			} else {
-				pstmt.setDate(2, null);
+				pstmt.setTimestamp(2, null);
 			}
 			pstmt.setString(3, participateStatus);
 			
 			if(checkTime != null){
 				long tempTime = checkTime.getTime();
-				pstmt.setDate(4, new java.sql.Date(tempTime));
+				pstmt.setTimestamp(4, new java.sql.Timestamp(tempTime));
 			} else {
-				pstmt.setDate(4, null);
+				pstmt.setTimestamp(4, null);
 			}
 			
 			pstmt.setString(5, isParticipate);
@@ -304,13 +307,13 @@ public class ParticipatorDAOJdbc {
 		}
 */
 		
-
-/*		//		insert 新增
+/*		
+		//		insert 新增
 		ParticipatorBean bean1 = new ParticipatorBean();
 		bean1.setFullProjId(1);
 		bean1.setMemberId(4);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String theDate = "2013-4-12";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String theDate = "2013-4-12 14:25:36";
 		bean1.setActivityStartTime(sdf.parse(theDate));
 		bean1.setActivityEndTime(sdf.parse(theDate));
 		bean1.setParticipateStatus("待審核");
@@ -318,19 +321,21 @@ public class ParticipatorDAOJdbc {
 		bean1.setIsParticipate("否");
 		System.out.println(service.insert(bean1));
 */
-
-/*		//		update 更新
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String date1 = "2014-02-13";
-		String date2 = "2014-04-23";
-		String date3 = "2014-07-11";
+		
+/*
+		//		update 更新
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date1 = "2014-02-13 18:25:36";
+		String date2 = "2014-04-23 19:25:36";
+		String date3 = "2014-07-11 21:25:36";
 		ParticipatorBean updateResult = service.update(sdf.parse(date1), sdf.parse(date2), "同時間內已經參與其他計畫", sdf.parse(date3), "是", 1, 4);
 		System.out.println(updateResult);
 */
 		
-/*		//		delete 刪除
+/*		
+		//		delete 刪除
 		System.out.println(service.delete(1, 4));
 
- */
+*/
 	}
 }

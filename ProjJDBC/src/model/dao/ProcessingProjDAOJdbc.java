@@ -2,6 +2,7 @@ package model.dao;
 /*
  * 編寫者: Z.Y
  * 測試日期: 2015/08/31
+ * 修改日期: 第一次修改 2015-09-02 21:21
  * 
  */
 import java.sql.Connection;
@@ -138,9 +139,9 @@ public class ProcessingProjDAOJdbc {
 				java.util.Date ckTime = bean.getCheckTime();
 				if(ckTime != null){
 					long tempTime = ckTime.getTime();
-					pstmt.setDate(3, new java.sql.Date(tempTime));
+					pstmt.setTimestamp(3, new java.sql.Timestamp(tempTime));
 				} else {
-					pstmt.setDate(3, null);
+					pstmt.setTimestamp(3, null);
 				}
 				int i = pstmt.executeUpdate();
 				if(i==1){
@@ -181,9 +182,9 @@ public class ProcessingProjDAOJdbc {
 			//日期格式轉換
 			if(checkTime != null){
 				long tempTime = checkTime.getTime();
-				pstmt.setDate(1, new java.sql.Date(tempTime));
+				pstmt.setTimestamp(1, new java.sql.Timestamp(tempTime));
 			} else {
-				pstmt.setDate(1, null);
+				pstmt.setTimestamp(1, null);
 			
 			}
 			pstmt.setInt(2, primaryProjId);
@@ -271,8 +272,8 @@ public class ProcessingProjDAOJdbc {
 		ProcessingProjBean bean1 = new ProcessingProjBean();
 		bean1.setPrimaryProjId(3);
 		bean1.setSchoolId(14731);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String theDate = "2015-4-12";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String theDate = "2015-4-12 21:20:35";
 		bean1.setCheckTime(sdf.parse(theDate));
 		
 		System.out.println(service.insert(bean1));
@@ -280,8 +281,8 @@ public class ProcessingProjDAOJdbc {
 
 /*		
 		//		update 更新
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String date1 = "2015-02-13";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date1 = "2015-02-13 06:21:21";
 		ProcessingProjBean updateResult = service.update(sdf.parse(date1), 3, 14731);
 		System.out.println(updateResult);
 */

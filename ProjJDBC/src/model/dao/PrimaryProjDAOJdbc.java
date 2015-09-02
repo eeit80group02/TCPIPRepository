@@ -2,6 +2,7 @@ package model.dao;
 /*
  * 編寫者: Z.Y
  * 測試日期: 2015/08/31
+ * 修改日期: 第一次修改 2015-09-02 20:41
  * 
  */
 import java.sql.Connection;
@@ -169,17 +170,17 @@ public class PrimaryProjDAOJdbc {
 				java.util.Date startTime = bean.getActivityStartTime();
 				if(startTime != null){
 					long temp = startTime.getTime();
-					pstmt.setDate(9, new java.sql.Date(temp));
+					pstmt.setTimestamp(9, new java.sql.Timestamp(temp));
 				} else {
-					pstmt.setDate(9, null);
+					pstmt.setTimestamp(9, null);
 				}
 				//日期格式轉換
 				java.util.Date endTime = bean.getActivityEndTime();
 				if(endTime != null){
 					long temp = endTime.getTime();
-					pstmt.setDate(10, new java.sql.Date(temp));
+					pstmt.setTimestamp(10, new java.sql.Timestamp(temp));
 				} else {
-					pstmt.setDate(10, null);
+					pstmt.setTimestamp(10, null);
 				}
 				pstmt.setInt(11, bean.getDemandNum());
 				pstmt.setInt(12, bean.getBudget());
@@ -187,9 +188,9 @@ public class PrimaryProjDAOJdbc {
 				java.util.Date createTime = bean.getCreateDate();
 				if(createTime != null){
 					long temp = createTime.getTime();
-					pstmt.setDate(13, new java.sql.Date(temp));
+					pstmt.setTimestamp(13, new java.sql.Timestamp(temp));
 				} else {
-					pstmt.setDate(13, null);
+					pstmt.setTimestamp(13, null);
 				}
 				pstmt.setString(14, bean.getProjStatus());
 				
@@ -247,25 +248,25 @@ public class PrimaryProjDAOJdbc {
 			//日期格式轉換
 			if(activityStartTime != null){
 				long temp = activityStartTime.getTime();
-				pstmt.setDate(9, new java.sql.Date(temp));
+				pstmt.setTimestamp(9, new java.sql.Timestamp(temp));
 			} else {
-				pstmt.setDate(9, null);
+				pstmt.setTimestamp(9, null);
 			}
 			//日期格式轉換
 			if(activityEndTime != null){
 				long temp = activityEndTime.getTime();
-				pstmt.setDate(10, new java.sql.Date(temp));
+				pstmt.setTimestamp(10, new java.sql.Timestamp(temp));
 			} else {
-				pstmt.setDate(10, null);
+				pstmt.setTimestamp(10, null);
 			}
 			pstmt.setInt(11, demandNum);
 			pstmt.setInt(12, budget);
 			//日期格式轉換
 			if(createDate != null){
 				long temp = createDate.getTime();
-				pstmt.setDate(13, new java.sql.Date(temp));
+				pstmt.setTimestamp(13, new java.sql.Timestamp(temp));
 			} else {
-				pstmt.setDate(13, null);
+				pstmt.setTimestamp(13, null);
 			}
 			pstmt.setString(14, projStatus);
 			pstmt.setInt(15, primaryProjId);
@@ -348,8 +349,8 @@ public class PrimaryProjDAOJdbc {
 		}
 */
 		
-
-/*		//insert 新增
+/*
+		//insert 新增
 		PrimaryProjBean bean1 = new PrimaryProjBean();
 //		bean1.setPrimaryProjId(2); //資料庫有設計IDENTITY(1,1)所以這行不用加
 		bean1.setMemberId(6);
@@ -361,32 +362,33 @@ public class PrimaryProjDAOJdbc {
 		bean1.setContent("初步計畫的內文檔案內容會比摘要多很多.......");
 		bean1.setIdealPlace("新竹尖石鄉");
 		//
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String theDate1 = "2015-5-22";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String theDate1 = "2015-5-22 18:21:52";
 		bean1.setActivityStartTime(sdf.parse(theDate1));
-		String theDate2 = "2015-5-28";
+		String theDate2 = "2015-5-28 21:28:11";
 		bean1.setActivityEndTime(sdf.parse(theDate2));
 		bean1.setDemandNum(30);
 		bean1.setBudget(20000);
-		String theDate3 = "2015-1-13";
+		String theDate3 = "2015-1-13 05:55:01";
 		bean1.setCreateDate(sdf.parse(theDate3));
 		bean1.setProjStatus("洽談失敗");
 		System.out.println(service.insert(bean1));
 */
 		
-
-/*		//update 更新
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String date1 = "2015-04-28";
-		String date2 = "2015-04-04";
-		String date3 = "2014-12-11";
-		PrimaryProjBean updateResult = service.update(5, "大俠愛吃漢堡飽", "計畫封面名稱", null, 123456, "填寫摘要的地方", "填寫很長的內文的地方", "台東都蘭國小", sdf.parse(date1), sdf.parse(date2), 21, 300000, sdf.parse(date3), "洽談失敗", 2);
+/*
+		//update 更新
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date1 = "2015-04-15 05:05:05";
+		String date2 = "2015-05-01 18:21:32";
+		String date3 = "2015-01-28 19:54:12";
+		PrimaryProjBean updateResult = service.update(5, "大俠愛吃漢堡飽", "計畫封面名稱", null, 123456, "填寫摘要的地方", "填寫很長的內文的地方", "台東都蘭國小", sdf.parse(date1), sdf.parse(date2), 21, 300000, sdf.parse(date3), "洽談失敗", 4);
 		System.out.println(updateResult);
 */
-
-/*		//delete 刪除
+		
+/*
+		//delete 刪除
 		PrimaryProjBean bean2 = new PrimaryProjBean();
-		bean2.setPrimaryProjId(2);
+		bean2.setPrimaryProjId(4);
 		System.out.println(service.delete(bean2));
 */
 	}

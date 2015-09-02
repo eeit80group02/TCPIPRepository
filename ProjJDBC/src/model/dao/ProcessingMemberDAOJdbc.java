@@ -2,6 +2,7 @@ package model.dao;
 /*
  * 編寫者: Z.Y
  * 測試日期: 2015/08/31
+ * 修改日期: 第一次修改 2015-09-02 21:18
  * 
  */
 import java.sql.Connection;
@@ -138,9 +139,9 @@ public class ProcessingMemberDAOJdbc {
 				java.util.Date dateTime = bean.getDatetime();
 				if( dateTime != null){
 					long temp = dateTime.getTime();
-					pstmt.setDate(3, new java.sql.Date(temp));
+					pstmt.setTimestamp(3, new java.sql.Timestamp(temp));
 				} else {
-					pstmt.setDate(3, null);
+					pstmt.setTimestamp(3, null);
 				}
 				int i = pstmt.executeUpdate();
 				if(i==1){
@@ -181,9 +182,9 @@ public class ProcessingMemberDAOJdbc {
 			pstmt = conn.prepareStatement(UPDATE);
 			if(checkTime != null){
 				long temp = checkTime.getTime();
-				pstmt.setDate(1, new java.sql.Date(temp));
+				pstmt.setTimestamp(1, new java.sql.Timestamp(temp));
 			} else {
-				pstmt.setDate(1, null);
+				pstmt.setTimestamp(1, null);
 			}
 			pstmt.setInt(2, schoolDemandId);
 			pstmt.setInt(3, memberId);
@@ -272,9 +273,9 @@ public class ProcessingMemberDAOJdbc {
 		//		insert 新增
 		ProcessingMemberBean bean1 = new ProcessingMemberBean();
 		bean1.setSchoolDemandId(1);
-		bean1.setMemberId(2);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String theDate = "2015-4-12";
+		bean1.setMemberId(6);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String theDate = "2015-4-12 15:11:44";
 		bean1.setDatetime(sdf.parse(theDate));
 		
 		System.out.println(service.insert(bean1));
@@ -282,15 +283,15 @@ public class ProcessingMemberDAOJdbc {
 
 /*		
 		//		update 更新
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		String date1 = "2015-02-13";
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date1 = "2015-02-13 21:21:21";
 		ProcessingMemberBean updateResult = service.update(sdf.parse(date1), 3, 7);
 		System.out.println(updateResult);
 */
 
-/*		
+/*	
 		//		delete 刪除
-		System.out.println(service.delete(1, 4));
+		System.out.println(service.delete(1, 6));
 */
 	}
 
