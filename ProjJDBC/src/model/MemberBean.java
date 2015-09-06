@@ -1,183 +1,223 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Date;
 
-public class MemberBean 
+// 2015/09/04 by finn
+public class MemberBean implements Serializable
 {
-	private int memberId;             			// 會員編號 PK
-	private String lastName;             		// 姓氏
-	private String firstName;            		// 名字
-	private String idNumber;             		// 身分證字號
-	private String phone;             			// 電話（手機電話二者選一）
-	private String cellPhone;             		// 手機(手機電話二者選一)
-	private java.util.Date birthday;            // 生日
+	private static final long serialVersionUID = 1L;
 	
-	private String address;             		// 地址
-	private String gender;             			// 性別
-	private String email;             			// E-mail(要驗證)
-	private String pitctureName;                // 照片檔名
-	private byte[] pitcture;             		// 照片(大頭照)
-	private long pitctureLength;                // 照片長度
-	private java.util.Date registerTime;        // 註冊日期
-	private int recommendCount;             	// 被推薦總次數(預設給0)
-	private String account;             		// 帳號（英文字母'數字）（不允許底線跟英文句點）
-	private byte[] password;             		// 密碼（英文字母'數字）（不允許底線跟英文句點）
-	private String accountStatus;             	// 帳號狀態(啟用/停用/待認證)
-	
-	public MemberBean(){
-		
+	private Integer memberId;				// 會員編號 PK
+	private String lastName;				// 姓氏
+	private String firstName;				// 名字
+	private String idNumber;				// 身分證字號
+	private String phone;					// 電話手機電話二者選一）
+	private String cellPhone;				// 手機(手機電話二者選一)
+	private java.util.Date birthday;		// 生日
+	private String address;					// 地址
+	private String gender;					// 性別
+	private String email;					// E-mail(要驗證)
+	private String pictureName;				// 照片檔名
+	private byte[] picture;					// 照片(大頭照)
+	private Long pictureLength;				// 照片長度
+	private java.util.Date registerTime;	// 註冊日期
+	private Integer recommendCount;			// 被推薦總次數(預設給0)
+	private String account;					// 帳號（英文字母'數字）（不允許底線跟英文句點）
+	private byte[] password;				// 密碼（英文字母'數字）（不允許底線跟英文句點）
+	private String accountStatus;			// 帳號狀態(啟用/停用/待認證[預設])
+
+	public MemberBean()
+	{
+
 	}
-	
-	public MemberBean(int memberId, String lastName, String firstName,
-			String idNumber, String phone, String cellPhone, Date birthday,
-			String address, String gender, String email, String pitctureName,
-			byte[] pitcture, long pitctureLength, Date registerTime,
-			int recommendCount, String account, byte[] password,
-			String accountStatus) {
-//		super();
-		this.memberId = memberId;
-		this.lastName = lastName;
-		this.firstName = firstName;
-		this.idNumber = idNumber;
-		this.phone = phone;
-		this.cellPhone = cellPhone;
-		this.birthday = birthday;
-		this.address = address;
-		this.gender = gender;
-		this.email = email;
-		this.pitctureName = pitctureName;
-		this.pitcture = pitcture;
-		this.pitctureLength = pitctureLength;
-		this.registerTime = registerTime;
-		this.recommendCount = recommendCount;
-		this.account = account;
-		this.password = password;
-		this.accountStatus = accountStatus;
-	}
-	
-	public int getMemberId() {
+
+	public Integer getMemberId()
+	{
 		return memberId;
 	}
-	public void setMemberId(int memberId) {
+
+	public void setMemberId(Integer memberId)
+	{
 		this.memberId = memberId;
 	}
-	public String getLastName() {
+
+	public String getLastName()
+	{
 		return lastName;
 	}
-	public void setLastName(String lastName) {
+
+	public void setLastName(String lastName)
+	{
 		this.lastName = lastName;
 	}
-	public String getFirstName() {
+
+	public String getFirstName()
+	{
 		return firstName;
 	}
-	public void setFirstName(String firstName) {
+
+	public void setFirstName(String firstName)
+	{
 		this.firstName = firstName;
 	}
-	public String getIdNumber() {
+
+	public String getIdNumber()
+	{
 		return idNumber;
 	}
-	public void setIdNumber(String idNumber) {
+
+	public void setIdNumber(String idNumber)
+	{
 		this.idNumber = idNumber;
 	}
-	public String getPhone() {
+
+	public String getPhone()
+	{
 		return phone;
 	}
-	public void setPhone(String phone) {
+
+	public void setPhone(String phone)
+	{
 		this.phone = phone;
 	}
-	public String getCellPhone() {
+
+	public String getCellPhone()
+	{
 		return cellPhone;
 	}
-	public void setCellPhone(String cellPhone) {
+
+	public void setCellPhone(String cellPhone)
+	{
 		this.cellPhone = cellPhone;
 	}
-	public java.util.Date getBirthday() {
+
+	public java.util.Date getBirthday()
+	{
 		return birthday;
 	}
-	public void setBirthday(java.util.Date birthday) {
+
+	public void setBirthday(java.util.Date birthday)
+	{
 		this.birthday = birthday;
 	}
-	public String getAddress() {
+
+	public String getAddress()
+	{
 		return address;
 	}
-	public void setAddress(String address) {
+
+	public void setAddress(String address)
+	{
 		this.address = address;
 	}
-	public String getGender() {
+
+	public String getGender()
+	{
 		return gender;
 	}
-	public void setGender(String gender) {
+
+	public void setGender(String gender)
+	{
 		this.gender = gender;
 	}
-	public String getEmail() {
+
+	public String getEmail()
+	{
 		return email;
 	}
-	public void setEmail(String email) {
+
+	public void setEmail(String email)
+	{
 		this.email = email;
 	}
-	public String getPitctureName() {
-		return pitctureName;
+
+	public String getPictureName()
+	{
+		return pictureName;
 	}
-	public void setPitctureName(String pitctureName) {
-		this.pitctureName = pitctureName;
+
+	public void setPictureName(String pictureName)
+	{
+		this.pictureName = pictureName;
 	}
-	public byte[] getPitcture() {
-		return pitcture;
+
+	public byte[] getPicture()
+	{
+		return picture;
 	}
-	public void setPitcture(byte[] pitcture) {
-		this.pitcture = pitcture;
+
+	public void setPicture(byte[] picture)
+	{
+		this.picture = picture;
 	}
-	public long getPitctureLength() {
-		return pitctureLength;
+
+	public Long getPictureLength()
+	{
+		return pictureLength;
 	}
-	public void setPitctureLength(long pitctureLength) {
-		this.pitctureLength = pitctureLength;
+
+	public void setPictureLength(Long pictureLength)
+	{
+		this.pictureLength = pictureLength;
 	}
-	public java.util.Date getRegisterTime() {
+
+	public java.util.Date getRegisterTime()
+	{
 		return registerTime;
 	}
-	public void setRegisterTime(java.util.Date registerTime) {
+
+	public void setRegisterTime(java.util.Date registerTime)
+	{
 		this.registerTime = registerTime;
 	}
-	public int getRecommendCount() {
+
+	public Integer getRecommendCount()
+	{
 		return recommendCount;
 	}
-	public void setRecommendCount(int recommendCount) {
+
+	public void setRecommendCount(Integer recommendCount)
+	{
 		this.recommendCount = recommendCount;
 	}
-	public String getAccount() {
+
+	public String getAccount()
+	{
 		return account;
 	}
-	public void setAccount(String account) {
+
+	public void setAccount(String account)
+	{
 		this.account = account;
 	}
-	public byte[] getPassword() {
+
+	public byte[] getPassword()
+	{
 		return password;
 	}
-	public void setPassword(byte[] password) {
+
+	public void setPassword(byte[] password)
+	{
 		this.password = password;
 	}
-	public String getAccountStatus() {
+
+	public String getAccountStatus()
+	{
 		return accountStatus;
 	}
-	public void setAccountStatus(String accountStatus) {
+
+	public void setAccountStatus(String accountStatus)
+	{
 		this.accountStatus = accountStatus;
 	}
-	@Override
-	public String toString() {
-		return "MemberBean [memberId=" + memberId + ", lastName=" + lastName
-				+ ", firstName=" + firstName + ", idNumber=" + idNumber
-				+ ", phone=" + phone + ", cellPhone=" + cellPhone
-				+ ", birthday=" + birthday + ", address=" + address
-				+ ", gender=" + gender + ", email=" + email + ", pitctureName="
-				+ pitctureName + ", pitcture=" + Arrays.toString(pitcture)
-				+ ", pitctureLength=" + pitctureLength + ", registerTime="
-				+ registerTime + ", recommendCount=" + recommendCount
-				+ ", account=" + account + ", password="
-				+ Arrays.toString(password) + ", accountStatus="
-				+ accountStatus + "]";
-	}
-}
 
+	@Override
+	public String toString()
+	{
+		return "MemberBean [memberId=" + memberId + ", lastName=" + lastName + ", firstName=" + firstName + ", idNumber=" + idNumber + ", phone=" + phone + ", cellPhone=" + cellPhone + ", birthday=" + birthday + ", address=" + address + ", gender="
+				+ gender + ", email=" + email + ", pictureName=" + pictureName + ", pictureLength=" + pictureLength + ", registerTime=" + registerTime + ", recommendCount=" + recommendCount + ", account=" + account + ", password="
+				+ Arrays.toString(password) + ", accountStatus=" + accountStatus + "]";
+	}
 	
+}
