@@ -1,260 +1,308 @@
 package model.dao;
 
+import global.GlobalService;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.sql.Types;
 
 import model.DonationBean;
 
-public class DonationDAOjdbc {
+public class DonationDAOjdbc
+{
 
-	private static final String URL = "jdbc:sqlserver://localhost:1433;database=TCPIP";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "sa123456";
+	private static final String URL = GlobalService.URL;
+	private static final String USERNAME = GlobalService.USERNAME;
+	private static final String PASSWORD = GlobalService.PASSWORD;
 
-	private static final String SELECT_BY_PRYMARY_KEY = "select * from Donation where donationId=? and schoolId=?";
-	private static final String GET_ALL = "select * from Donation";
-	private static final String INSERT = "insert into Donation (schoolId, donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE = "update Donation set donationStatus=?,supplyName=?,originalDemandNumber=?,originalDemandUnit=?,demandNumber=?,size=?,demandContent=?,supplyStatus=?,demandTime=?,expireTime=?,imageName=?,imageFile=?,imageLength=?,remark=? where donationId=? and schoolId=?";
-	private static final String DELETE = "delete from Donation where donationId=? and schoolId=?";
+	private static final String SELECT_BY_PRYMARY_KEY = "SELECT donationId,schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark FROM Donation where donationId = ?";
+	private static final String GET_ALL = "SELECT donationId,schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark FROM Donation";
+	private static final String INSERT = "INSERT INTO Donation (schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE Donation SET schoolId = ?,donationStatus = ?,supplyName = ?,originalDemandNumber = ?,originalDemandUnit = ?,demandNumber = ?,size = ?,demandContent=?,supplyStatus = ?,demandTime = ?,expireTime = ?,imageName = ?,imageFile = ?,imageLength = ?,remark = ? where donationId = ?";
+	private static final String DELETE = "DELETE FROM Donation WHERE donationId = ?";
 
-	public DonationBean insert(DonationBean bean) {
-		List<DonationBean> list = new ArrayList<DonationBean>();
+	public DonationBean insert(DonationBean bean)
+	{
 		DonationBean result = null;
 
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+		if(bean != null)
+		{
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
+			{
 
-			if (bean != null) {
-				pstmt.setInt(1, bean.getSchoolId());
-				pstmt.setString(2, bean.getDonationStatus());
-				pstmt.setString(3, bean.getSupplyName());
-				pstmt.setInt(4, bean.getOriginalDemandNumber());
-				pstmt.setString(5, bean.getOriginalDemandUnit());
-				pstmt.setInt(6, bean.getDemandNumber());
-				pstmt.setString(7, bean.getSize());
-				pstmt.setString(8, bean.getDemandContent());
-				pstmt.setString(9, bean.getSupplyStatus());
-
-				java.util.Date tempdate01 = bean.getDemandTime();
-
-				if (tempdate01 != null) {
-					long time01 = tempdate01.getTime();
-					pstmt.setDate(10, new java.sql.Date(time01));
-				} else {
-					pstmt.setDate(10, null);
+				pstmt.setInt(1,bean.getSchoolId());
+				pstmt.setString(2,bean.getDonationStatus());
+				pstmt.setString(3,bean.getSupplyName());
+				pstmt.setInt(4,bean.getOriginalDemandNumber());
+				pstmt.setString(5,bean.getOriginalDemandUnit());
+				pstmt.setInt(6,bean.getDemandNumber());
+				pstmt.setString(7,bean.getSize());
+				pstmt.setString(8,bean.getDemandContent());
+				pstmt.setString(9,bean.getSupplyStatus());
+				pstmt.setTimestamp(10,new java.sql.Timestamp(bean.getDemandTime().getTime()));
+				pstmt.setTimestamp(11,new java.sql.Timestamp(bean.getExpireTime().getTime()));
+				pstmt.setString(12,bean.getImageName());
+				pstmt.setBytes(13,bean.getImageFile());
+				pstmt.setLong(14,bean.getImageLength());
+				
+				if(bean.getRemark() != null)
+				{
+					pstmt.setString(15,bean.getRemark());
 				}
-
-				java.util.Date tempdate02 = bean.getExpireTime();
-
-				if (tempdate02 != null) {
-					long time02 = tempdate02.getTime();
-					pstmt.setDate(11, new java.sql.Date(time02));
-				} else {
-					pstmt.setDate(11, null);
+				else
+				{
+					pstmt.setNull(15,Types.NVARCHAR);
 				}
-
-				pstmt.setString(12, bean.getImageName());
-				pstmt.setBytes(13, bean.getImageFile());
-				pstmt.setLong(14, bean.getImageLength());
-				pstmt.setString(15, bean.getRemark());
 
 				int count = pstmt.executeUpdate();
-				if (count == 1) {
+				if(count == 1)
+				{
 					System.out.println("insert success");
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 
-		return result;
-	}
-
-	public DonationBean update(DonationBean bean) {
-		DonationBean result = null;
-
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(UPDATE);) {
-
-			if (bean != null) {
-
-				pstmt.setString(1, bean.getDonationStatus());
-				pstmt.setString(2, bean.getSupplyName());
-				pstmt.setInt(3, bean.getOriginalDemandNumber());
-				pstmt.setString(4, bean.getOriginalDemandUnit());
-				pstmt.setInt(5, bean.getDemandNumber());
-				pstmt.setString(6, bean.getSize());
-				pstmt.setString(7, bean.getDemandContent());
-				pstmt.setString(8, bean.getSupplyStatus());
-
-				java.util.Date tempdate01 = bean.getDemandTime();
-
-				if (tempdate01 != null) {
-					long time01 = tempdate01.getTime();
-					pstmt.setDate(9, new java.sql.Date(time01));
-				} else {
-					pstmt.setDate(9, null);
-				}
-
-				java.util.Date tempdate02 = bean.getExpireTime();
-
-				if (tempdate02 != null) {
-					long time02 = tempdate02.getTime();
-					pstmt.setDate(10, new java.sql.Date(time02));
-				} else {
-					pstmt.setDate(10, null);
-				}
-
-				pstmt.setString(11, bean.getImageName());
-				pstmt.setBytes(12, bean.getImageFile());
-				pstmt.setLong(13, bean.getImageLength());
-				pstmt.setString(14, bean.getRemark());
-
-				pstmt.setInt(15, bean.getDonationId());
-				pstmt.setInt(16, bean.getSchoolId());
-
-				int count = pstmt.executeUpdate();
-				if (count >= 1) {
-					result = bean;
-					System.out.println("update success");
-				}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		return result;
 	}
+//
+//	public DonationBean update(DonationBean bean)
+//	{
+//		DonationBean result = null;
+//
+//		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
+//		{
+//
+//			if(bean != null)
+//			{
+//
+//				pstmt.setString(1,bean.getDonationStatus());
+//				pstmt.setString(2,bean.getSupplyName());
+//				pstmt.setInt(3,bean.getOriginalDemandNumber());
+//				pstmt.setString(4,bean.getOriginalDemandUnit());
+//				pstmt.setInt(5,bean.getDemandNumber());
+//				pstmt.setString(6,bean.getSize());
+//				pstmt.setString(7,bean.getDemandContent());
+//				pstmt.setString(8,bean.getSupplyStatus());
+//
+//				java.util.Date tempdate01 = bean.getDemandTime();
+//
+//				if(tempdate01 != null)
+//				{
+//					long time01 = tempdate01.getTime();
+//					pstmt.setDate(9,new java.sql.Date(time01));
+//				}
+//				else
+//				{
+//					pstmt.setDate(9,null);
+//				}
+//
+//				java.util.Date tempdate02 = bean.getExpireTime();
+//
+//				if(tempdate02 != null)
+//				{
+//					long time02 = tempdate02.getTime();
+//					pstmt.setDate(10,new java.sql.Date(time02));
+//				}
+//				else
+//				{
+//					pstmt.setDate(10,null);
+//				}
+//
+//				pstmt.setString(11,bean.getImageName());
+//				pstmt.setBytes(12,bean.getImageFile());
+//				pstmt.setLong(13,bean.getImageLength());
+//				pstmt.setString(14,bean.getRemark());
+//
+//				pstmt.setInt(15,bean.getDonationId());
+//				pstmt.setInt(16,bean.getSchoolId());
+//
+//				int count = pstmt.executeUpdate();
+//				if(count >= 1)
+//				{
+//					result = bean;
+//					System.out.println("update success");
+//				}
+//			}
+//		}
+//		catch(SQLException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		return result;
+//	}
+//
+//	public boolean delete(int donationId,int schoolId)
+//	{
+//
+//		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(DELETE);)
+//		{
+//
+//			pstmt.setInt(1,donationId);
+//			pstmt.setInt(2,schoolId);
+//
+//			int count = pstmt.executeUpdate();
+//			if(count >= 1)
+//			{
+//				System.out.println("delete success");
+//				return true;
+//			}
+//
+//		}
+//		catch(SQLException e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		return false;
+//	}
 
-	public boolean delete(int donationId, int schoolId) {
-
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(DELETE);) {
-
-			pstmt.setInt(1, donationId);
-			pstmt.setInt(2, schoolId);
-
-			int count = pstmt.executeUpdate();
-			if (count >= 1) {
-				System.out.println("delete success");
-				return true;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return false;
-	}
-
-	public DonationBean findByPrimaryKey(int donationId, int schoolId) {
+	public DonationBean findByPrimaryKey(int donationId)
+	{
 		DonationBean bean = null;
-		ResultSet rs = null;
 
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_PRYMARY_KEY);) {
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_PRYMARY_KEY);)
+		{
 
-			pstmt.setInt(1, donationId);
-			pstmt.setInt(2, schoolId);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				bean = new DonationBean();
+			pstmt.setInt(1,donationId);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					bean = new DonationBean();
 
-				bean.setDonationId(rs.getInt("donationId"));
-				bean.setSchoolId(rs.getInt("schoolId"));
-				bean.setDonationStatus(rs.getString("donationStatus"));
-				bean.setSupplyName(rs.getString("supplyName"));
-				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
-				bean.setOriginalDemandUnit("originalDemandUnit");
-				bean.setDemandNumber(rs.getInt("demandNumber"));
-				bean.setSize(rs.getString("size"));
-				bean.setDemandContent(rs.getString("demandContent"));
-				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
-				bean.setImageName(rs.getString("imageName"));
-				bean.setImageFile(rs.getBytes("imageFile"));
-				bean.setImageLength(rs.getLong("imageLength"));
-				bean.setRemark(rs.getString("remark"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+					bean.setDonationId(rs.getInt("donationId"));
+					bean.setSchoolId(rs.getInt("schoolId"));
+					bean.setDonationStatus(rs.getString("donationStatus"));
+					bean.setSupplyName(rs.getString("supplyName"));
+					bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
+					bean.setOriginalDemandUnit("originalDemandUnit");
+					bean.setDemandNumber(rs.getInt("demandNumber"));
+					bean.setSize(rs.getString("size"));
+					bean.setDemandContent(rs.getString("demandContent"));
+					bean.setSupplyStatus(rs.getString("supplyStatus"));
+					bean.setDemandTime(rs.getDate("demandTime"));
+					bean.setExpireTime(rs.getDate("expireTime"));
+					bean.setImageName(rs.getString("imageName"));
+					bean.setImageFile(rs.getBytes("imageFile"));
+					bean.setImageLength(rs.getLong("imageLength"));
+					
+					if(rs.getObject("remark") != null)
+					{
+						bean.setRemark(rs.getString("remark"));
+					}
+					else
+					{
+						bean.setRemark((String)rs.getObject("remark"));
+					}
 				}
 			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
 		}
 
 		return bean;
 	}
+//
+//	public List<DonationBean> getAll()
+//	{
+//		List<DonationBean> list = new ArrayList<DonationBean>();
+//		DonationBean bean = null;
+//		ResultSet rs = null;
+//
+//		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(GET_ALL);)
+//		{
+//			rs = pstmt.executeQuery();
+//			while(rs.next())
+//			{
+//				bean = new DonationBean();
+//				bean.setDonationId(rs.getInt("donationId"));
+//				bean.setSchoolId(rs.getInt("schoolId"));
+//				bean.setDonationStatus(rs.getString("donationStatus"));
+//				bean.setSupplyName(rs.getString("supplyName"));
+//				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
+//				bean.setOriginalDemandUnit("originalDemandUnit");
+//				bean.setDemandNumber(rs.getInt("demandNumber"));
+//				bean.setSize(rs.getString("size"));
+//				bean.setDemandContent(rs.getString("demandContent"));
+//				bean.setSupplyStatus(rs.getString("supplyStatus"));
+//				bean.setDemandTime(rs.getDate("demandTime"));
+//				bean.setExpireTime(rs.getDate("expireTime"));
+//				bean.setImageName(rs.getString("imageName"));
+//				bean.setImageFile(rs.getBytes("imageFile"));
+//				bean.setImageLength(rs.getLong("imageLength"));
+//				bean.setRemark(rs.getString("remark"));
+//				list.add(bean);
+//			}
+//		}
+//		catch(SQLException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		finally
+//		{
+//			if(rs != null)
+//			{
+//				try
+//				{
+//					rs.close();
+//				}
+//				catch(SQLException e)
+//				{
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//
+//		return list;
+//	}
 
-	public List<DonationBean> getAll() {
-		List<DonationBean> list = new ArrayList<DonationBean>();
-		DonationBean bean = null;
-		ResultSet rs = null;
-
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(GET_ALL);) {
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				bean = new DonationBean();
-				bean.setDonationId(rs.getInt("donationId"));
-				bean.setSchoolId(rs.getInt("schoolId"));
-				bean.setDonationStatus(rs.getString("donationStatus"));
-				bean.setSupplyName(rs.getString("supplyName"));
-				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
-				bean.setOriginalDemandUnit("originalDemandUnit");
-				bean.setDemandNumber(rs.getInt("demandNumber"));
-				bean.setSize(rs.getString("size"));
-				bean.setDemandContent(rs.getString("demandContent"));
-				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
-				bean.setImageName(rs.getString("imageName"));
-				bean.setImageFile(rs.getBytes("imageFile"));
-				bean.setImageLength(rs.getLong("imageLength"));
-				bean.setRemark(rs.getString("remark"));
-				list.add(bean);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return list;
-	}
-
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		DonationDAOjdbc daojdbc = new DonationDAOjdbc();
 		/** INSERT OK **/
-		// DonationBean bean1 = new DonationBean();
-		// bean1.setSchoolId(21216);
-		// bean1.setDonationStatus("");
-		// bean1.setSupplyName("");
-		// bean1.setOriginalDemandNumber(12);
-		// bean1.setOriginalDemandUnit("");
-		// bean1.setDemandNumber(12);
-		// bean1.setSize("");
-		// bean1.setDemandContent("");
-		// bean1.setSupplyStatus("");
-		// bean1.setDemandTime(new Date());
-		// bean1.setExpireTime(new Date());
-		// bean1.setImageName("");
-		// bean1.setImageFile(null);
-		// bean1.setImageLength(123);
-		// bean1.setRemark("");
-		// daojdbc.insert(bean1);
+		DonationBean bean1 = new DonationBean();
+		bean1.setSchoolId(11503);
+		bean1.setDonationStatus("否");
+		bean1.setSupplyName("尺");
+		bean1.setOriginalDemandNumber(12);
+		bean1.setOriginalDemandUnit("打");
+		bean1.setDemandNumber(12);
+		bean1.setSize("15公分的尺");
+		bean1.setDemandContent("數學課學生沒尺可用");
+		bean1.setSupplyStatus("不拘");
+		bean1.setDemandTime(GlobalService.convertStringToDate("2015-08-24"));
+		bean1.setExpireTime(GlobalService.convertStringToDate("2015-08-30"));
+		File file = new File("image/member/member02.jpg");
+		try(FileInputStream fis = new FileInputStream(file);)
+		{
+			bean1.setImageName(file.getName());
+			bean1.setImageFile(GlobalService.convertInputStreamToByteArray(fis));
+			bean1.setImageLength(file.length());
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		bean1.setRemark("尺的用途單純教學使用");
+		daojdbc.insert(bean1);
 
 		/** UPDATE OK **/
 		// DonationBean bean2 = new DonationBean();
@@ -291,11 +339,12 @@ public class DonationDAOjdbc {
 		// bean4.getSchoolId());
 
 		/** GET_ALL OK **/
-		List<DonationBean> list = daojdbc.getAll();
-		System.out.println();
-		for (DonationBean bean5 : list) {
-			System.out.println("" + bean5.getDonationId() + "\t" + bean5.getSchoolId());
-		}
+//		List<DonationBean> list = daojdbc.getAll();
+//		System.out.println();
+//		for(DonationBean bean5 : list)
+//		{
+//			System.out.println("" + bean5.getDonationId() + "\t" + bean5.getSchoolId());
+//		}
 	}
 
 }

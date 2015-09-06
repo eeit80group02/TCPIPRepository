@@ -23,21 +23,6 @@ public class MemberDAOJdbc
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
-	// JNDI
-//	private DataSource dataSource;
-//	public MemberDAOJdbc()
-//	{
-//		try
-//		{
-//			Context ctx = new InitialContext();
-//			this.dataSource = (DataSource)ctx.lookup("java:comp/env/jdbc/TCPIPServer");
-//		}
-//		catch(NamingException e)
-//		{
-//			e.printStackTrace();
-//		}
-//	}
-
 	private static final String SELECT_BY_PK = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus FROM Member WHERE memberId = ?";
 	private static final String SELECT_ALL = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus FROM Member";
 	private static final String INSERT = "INSERT INTO Member (lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -47,39 +32,15 @@ public class MemberDAOJdbc
 	public MemberBean insert(MemberBean bean)
 	{
 		MemberBean result = null;
-		
+
 		if(bean != null)
 		{
 			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
 			{
-				if(bean.getLastName() != null)
-				{
-					pstmt.setString(1,bean.getLastName());
-				}
-				else
-				{
-					pstmt.setNull(1,Types.NVARCHAR);
-				}
-
-				if(bean.getFirstName() != null)
-				{
-					pstmt.setString(2,bean.getFirstName());
-				}
-				else
-				{
-					pstmt.setNull(2,Types.NVARCHAR);
-				}
-
-				if(bean.getIdNumber() != null)
-				{
-					pstmt.setString(3,bean.getIdNumber());
-				}
-				else
-				{
-					pstmt.setNull(3,Types.NVARCHAR);
-				}
-
+				pstmt.setString(1,bean.getLastName());
+				pstmt.setString(2,bean.getFirstName());
+				pstmt.setString(3,bean.getIdNumber());
 				if(bean.getPhone() != null)
 				{
 					pstmt.setString(4,bean.getPhone());
@@ -98,113 +59,18 @@ public class MemberDAOJdbc
 					pstmt.setNull(5,Types.NVARCHAR);
 				}
 
-				if(bean.getBirthday() != null)
-				{
-					pstmt.setTimestamp(6,new java.sql.Timestamp(bean.getBirthday().getTime()));
-				}
-				else
-				{
-					pstmt.setNull(6,Types.TIMESTAMP);
-				}
-
-				if(bean.getAddress() != null)
-				{
-					pstmt.setString(7,bean.getAddress());
-				}
-				else
-				{
-					pstmt.setNull(7,Types.NVARCHAR);
-				}
-
-				if(bean.getGender() != null)
-				{
-					pstmt.setString(8,bean.getGender());
-				}
-				else
-				{
-					pstmt.setNull(8,Types.NVARCHAR);
-				}
-
-				if(bean.getEmail() != null)
-				{
-					pstmt.setString(9,bean.getEmail());
-				}
-				else
-				{
-					pstmt.setNull(9,Types.NVARCHAR);
-				}
-
-				if(bean.getPictureName() != null)
-				{
-					pstmt.setString(10,bean.getPictureName());
-				}
-				else
-				{
-					pstmt.setNull(10,Types.NVARCHAR);
-				}
-
-				if(bean.getPicture() != null)
-				{
-					pstmt.setBytes(11,bean.getPicture());
-				}
-				else
-				{
-					pstmt.setNull(11,Types.VARBINARY);
-				}
-
-				if(bean.getPictureLength() != null)
-				{
-					pstmt.setLong(12,bean.getPictureLength());
-				}
-				else
-				{
-					pstmt.setNull(12,Types.BIGINT);
-				}
-
-				if(bean.getRegisterTime() != null)
-				{
-					pstmt.setTimestamp(13,new java.sql.Timestamp(bean.getRegisterTime().getTime()));
-				}
-				else
-				{
-					pstmt.setNull(13,Types.TIMESTAMP);
-				}
-
-				if(bean.getRecommendCount() != null)
-				{
-					pstmt.setInt(14,bean.getRecommendCount());
-				}
-				else
-				{
-					pstmt.setNull(14,Types.INTEGER);
-				}
-
-				if(bean.getAccount() != null)
-				{
-					pstmt.setString(15,bean.getAccount());
-				}
-				else
-				{
-					pstmt.setNull(15,Types.NVARCHAR);
-				}
-
-				if(bean.getPassword() != null)
-				{
-					pstmt.setBytes(16,bean.getPassword());
-				}
-				else
-				{
-					pstmt.setNull(16,Types.VARBINARY);
-				}
-
-				if(bean.getAccountStatus() != null)
-				{
-					pstmt.setString(17,bean.getAccountStatus());
-				}
-				else
-				{
-					pstmt.setNull(17,Types.NVARCHAR);
-				}
+				pstmt.setTimestamp(6,new java.sql.Timestamp(bean.getBirthday().getTime()));
+				pstmt.setString(7,bean.getAddress());
+				pstmt.setString(8,bean.getGender());
+				pstmt.setString(9,bean.getEmail());
+				pstmt.setString(10,bean.getPictureName());
+				pstmt.setBytes(11,bean.getPicture());
+				pstmt.setLong(12,bean.getPictureLength());
+				pstmt.setTimestamp(13,new java.sql.Timestamp(bean.getRegisterTime().getTime()));
+				pstmt.setInt(14,bean.getRecommendCount());
+				pstmt.setString(15,bean.getAccount());
+				pstmt.setBytes(16,bean.getPassword());
+				pstmt.setString(17,bean.getAccountStatus());
 
 				int num = pstmt.executeUpdate();
 				if(num == 1)
@@ -235,40 +101,16 @@ public class MemberDAOJdbc
 	public MemberBean update(MemberBean bean)
 	{
 		MemberBean result = null;
-		
+
 		if(bean != null)
 		{
 			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 			{
-
-				if(bean.getLastName() != null)
-				{
-					pstmt.setString(1,bean.getLastName());
-				}
-				else
-				{
-					pstmt.setNull(1,Types.NVARCHAR);
-				}
-
-				if(bean.getFirstName() != null)
-				{
-					pstmt.setString(2,bean.getFirstName());
-				}
-				else
-				{
-					pstmt.setNull(2,Types.NVARCHAR);
-				}
-
-				if(bean.getIdNumber() != null)
-				{
-					pstmt.setString(3,bean.getIdNumber());
-				}
-				else
-				{
-					pstmt.setNull(3,Types.NVARCHAR);
-				}
-
+				pstmt.setString(1,bean.getLastName());
+				pstmt.setString(2,bean.getFirstName());
+				pstmt.setString(3,bean.getIdNumber());
+				
 				if(bean.getPhone() != null)
 				{
 					pstmt.setString(4,bean.getPhone());
@@ -286,123 +128,20 @@ public class MemberDAOJdbc
 				{
 					pstmt.setNull(5,Types.NVARCHAR);
 				}
-
-				if(bean.getBirthday() != null)
-				{
-					pstmt.setTimestamp(6,new java.sql.Timestamp(bean.getBirthday().getTime()));
-				}
-				else
-				{
-					pstmt.setNull(6,Types.TIMESTAMP);
-				}
-
-				if(bean.getAddress() != null)
-				{
-					pstmt.setString(7,bean.getAddress());
-				}
-				else
-				{
-					pstmt.setNull(7,Types.NVARCHAR);
-				}
-
-				if(bean.getGender() != null)
-				{
-					pstmt.setString(8,bean.getGender());
-				}
-				else
-				{
-					pstmt.setNull(8,Types.NVARCHAR);
-				}
-
-				if(bean.getEmail() != null)
-				{
-					pstmt.setString(9,bean.getEmail());
-				}
-				else
-				{
-					pstmt.setNull(9,Types.NVARCHAR);
-				}
-
-				if(bean.getPictureName() != null)
-				{
-					pstmt.setString(10,bean.getPictureName());
-				}
-				else
-				{
-					pstmt.setNull(10,Types.NVARCHAR);
-				}
-
-				if(bean.getPicture() != null)
-				{
-					pstmt.setBytes(11,bean.getPicture());
-				}
-				else
-				{
-					pstmt.setNull(11,Types.VARBINARY);
-				}
-
-				if(bean.getPictureLength() != null)
-				{
-					pstmt.setLong(12,bean.getPictureLength());
-				}
-				else
-				{
-					pstmt.setNull(12,Types.BIGINT);
-				}
-
-				if(bean.getRegisterTime() != null)
-				{
-					pstmt.setTimestamp(13,new java.sql.Timestamp(bean.getRegisterTime().getTime()));
-				}
-				else
-				{
-					pstmt.setNull(13,Types.TIMESTAMP);
-				}
-
-				if(bean.getRecommendCount() != null)
-				{
-					pstmt.setInt(14,bean.getRecommendCount());
-				}
-				else
-				{
-					pstmt.setNull(14,Types.INTEGER);
-				}
-
-				if(bean.getAccount() != null)
-				{
-					pstmt.setString(15,bean.getAccount());
-				}
-				else
-				{
-					pstmt.setNull(15,Types.NVARCHAR);
-				}
-
-				if(bean.getPassword() != null)
-				{
-					pstmt.setBytes(16,bean.getPassword());
-				}
-				else
-				{
-					pstmt.setNull(16,Types.VARBINARY);
-				}
-
-				if(bean.getAccountStatus() != null)
-				{
-					pstmt.setString(17,bean.getAccountStatus());
-				}
-				else
-				{
-					pstmt.setNull(17,Types.NVARCHAR);
-				}
-
-				if(bean.getMemberId() != null)
-				{
-					pstmt.setInt(18,bean.getMemberId());
-				}
-				else
-				{
-					pstmt.setNull(18,Types.INTEGER);
-				}
+				
+				pstmt.setTimestamp(6,new java.sql.Timestamp(bean.getBirthday().getTime()));
+				pstmt.setString(7,bean.getAddress());
+				pstmt.setString(8,bean.getGender());
+				pstmt.setString(9,bean.getEmail());
+				pstmt.setString(10,bean.getPictureName());
+				pstmt.setBytes(11,bean.getPicture());
+				pstmt.setLong(12,bean.getPictureLength());
+				pstmt.setTimestamp(13,new java.sql.Timestamp(bean.getRegisterTime().getTime()));
+				pstmt.setInt(14,bean.getRecommendCount());
+				pstmt.setString(15,bean.getAccount());
+				pstmt.setBytes(16,bean.getPassword());
+				pstmt.setString(17,bean.getAccountStatus());
+				pstmt.setInt(18,bean.getMemberId());
 
 				int num = pstmt.executeUpdate();
 				if(num == 1)
@@ -451,43 +190,12 @@ public class MemberDAOJdbc
 				while(rs.next())
 				{
 					result = new MemberBean();
-					
-					if(rs.getObject("memberId") != null)
-					{
-						result.setMemberId(rs.getInt("memberId"));
-					}
-					else
-					{
-						result.setMemberId((Integer)rs.getObject("memberId"));
-					}
-					
-					if(rs.getObject("LastName") != null)
-					{
-						result.setLastName(rs.getString("LastName"));
-					}
-					else
-					{
-						result.setLastName((String)rs.getObject("LastName"));
-					}
-					
-					if(rs.getObject("FirstName") != null)
-					{
-						result.setFirstName(rs.getString("FirstName"));
-					}
-					else
-					{
-						result.setFirstName((String)rs.getObject("FirstName"));
-					}
-					
-					if(rs.getObject("IdNumber") != null)
-					{
-						result.setIdNumber(rs.getString("IdNumber"));
-					}
-					else
-					{
-						result.setIdNumber((String)rs.getObject("IdNumber"));
-					}
-					
+
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+
 					if(rs.getObject("Phone") != null)
 					{
 						result.setPhone(rs.getString("Phone"));
@@ -496,7 +204,7 @@ public class MemberDAOJdbc
 					{
 						result.setPhone((String)rs.getObject("Phone"));
 					}
-	
+
 					if(rs.getObject("CellPhone") != null)
 					{
 						result.setCellPhone(rs.getString("CellPhone"));
@@ -505,117 +213,22 @@ public class MemberDAOJdbc
 					{
 						result.setCellPhone((String)rs.getObject("CellPhone"));
 					}
-					
-					if(rs.getObject("Birthday") != null)
-					{
-						result.setBirthday(rs.getDate("Birthday"));
-					}
-					else
-					{
-						result.setBirthday((java.util.Date)rs.getObject("Birthday"));
-					}
-					
-					if(rs.getObject("Address") != null)
-					{
-						result.setAddress(rs.getString("Address"));
-					}
-					else
-					{
-						result.setAddress((String)rs.getObject("Address"));
-					}
-					
-					if(rs.getObject("Gender") != null)
-					{
-						result.setGender(rs.getString("Gender"));
-					}
-					else
-					{
-						result.setGender((String)rs.getObject("Gender"));
-					}
-					
-					if(rs.getObject("Email") != null)
-					{
-						result.setEmail(rs.getString("Email"));
-					}
-					else
-					{
-						result.setEmail((String)rs.getObject("Email"));
-					}
-					
-					if(rs.getObject("PictureName") != null)
-					{
-						result.setPictureName(rs.getString("PictureName"));
-					}
-					else
-					{
-						result.setPictureName((String)rs.getObject("PictureName"));
-					}
-					
-					if(rs.getObject("Picture") != null)
-					{
-						result.setPicture(rs.getBytes("Picture"));
-					}
-					else
-					{
-						result.setPicture((byte[])rs.getObject("Picture"));
-					}
-					
-					if(rs.getObject("PictureLength") != null)
-					{
-						result.setPictureLength(rs.getLong("PictureLength"));
-					}
-					else
-					{
-						result.setPictureLength((Long)rs.getObject("PictureLength"));
-					}
-					
-					if(rs.getObject("RegisterTime") != null)
-					{		
-						result.setRegisterTime(rs.getDate("RegisterTime"));
-					}
-					else
-					{
-						result.setRegisterTime((java.util.Date)rs.getObject("RegisterTime"));
-					}
-					
-					if(rs.getObject("RecommendCount") != null)
-					{
-						result.setRecommendCount(rs.getInt("RecommendCount"));
-					}
-					else
-					{
-						result.setRecommendCount((Integer)rs.getObject("RecommendCount"));
-					}
-					
-					if(rs.getObject("Account") != null)
-					{
-						result.setAccount(rs.getString("Account"));
-					}
-					else
-					{
-						result.setAccount((String)rs.getObject("Account"));
-					}
-					
-					if(rs.getObject("Password") != null)
-					{
-						result.setPassword(rs.getBytes("Password"));
-					}
-					else
-					{
-						result.setPassword((byte[])rs.getObject("Password"));
-					}
-					
-					if(rs.getObject("AccountStatus") != null)
-					{
-						result.setAccountStatus(rs.getString("AccountStatus"));
-					}
-					else
-					{
-						result.setAccountStatus((String)rs.getObject("AccountStatus"));
-					}
+
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -642,42 +255,11 @@ public class MemberDAOJdbc
 				{
 					bean = new MemberBean();
 					
-					if(rs.getObject("memberId") != null)
-					{
-						bean.setMemberId(rs.getInt("memberId"));
-					}
-					else
-					{
-						bean.setMemberId((Integer)rs.getObject("memberId"));
-					}
-					
-					if(rs.getObject("LastName") != null)
-					{
-						bean.setLastName(rs.getString("LastName"));
-					}
-					else
-					{
-						bean.setLastName((String)rs.getObject("LastName"));
-					}
-					
-					if(rs.getObject("FirstName") != null)
-					{
-						bean.setFirstName(rs.getString("FirstName"));
-					}
-					else
-					{
-						bean.setFirstName((String)rs.getObject("FirstName"));
-					}
-					
-					if(rs.getObject("IdNumber") != null)
-					{
-						bean.setIdNumber(rs.getString("IdNumber"));
-					}
-					else
-					{
-						bean.setIdNumber((String)rs.getObject("IdNumber"));
-					}
-					
+					bean.setMemberId(rs.getInt("memberId"));
+					bean.setLastName(rs.getString("LastName"));
+					bean.setFirstName(rs.getString("FirstName"));
+					bean.setIdNumber(rs.getString("IdNumber"));
+
 					if(rs.getObject("Phone") != null)
 					{
 						bean.setPhone(rs.getString("Phone"));
@@ -686,7 +268,7 @@ public class MemberDAOJdbc
 					{
 						bean.setPhone((String)rs.getObject("Phone"));
 					}
-	
+
 					if(rs.getObject("CellPhone") != null)
 					{
 						bean.setCellPhone(rs.getString("CellPhone"));
@@ -695,119 +277,24 @@ public class MemberDAOJdbc
 					{
 						bean.setCellPhone((String)rs.getObject("CellPhone"));
 					}
-					
-					if(rs.getObject("Birthday") != null)
-					{
-						bean.setBirthday(rs.getDate("Birthday"));
-					}
-					else
-					{
-						bean.setBirthday((java.util.Date)rs.getObject("Birthday"));
-					}
-					
-					if(rs.getObject("Address") != null)
-					{
-						bean.setAddress(rs.getString("Address"));
-					}
-					else
-					{
-						bean.setAddress((String)rs.getObject("Address"));
-					}
-					
-					if(rs.getObject("Gender") != null)
-					{
-						bean.setGender(rs.getString("Gender"));
-					}
-					else
-					{
-						bean.setGender((String)rs.getObject("Gender"));
-					}
-					
-					if(rs.getObject("Email") != null)
-					{
-						bean.setEmail(rs.getString("Email"));
-					}
-					else
-					{
-						bean.setEmail((String)rs.getObject("Email"));
-					}
-					
-					if(rs.getObject("PictureName") != null)
-					{
-						bean.setPictureName(rs.getString("PictureName"));
-					}
-					else
-					{
-						bean.setPictureName((String)rs.getObject("PictureName"));
-					}
-					
-					if(rs.getObject("Picture") != null)
-					{
-						bean.setPicture(rs.getBytes("Picture"));
-					}
-					else
-					{
-						bean.setPicture((byte[])rs.getObject("Picture"));
-					}
-					
-					if(rs.getObject("PictureLength") != null)
-					{
-						bean.setPictureLength(rs.getLong("PictureLength"));
-					}
-					else
-					{
-						bean.setPictureLength((Long)rs.getObject("PictureLength"));
-					}
-					
-					if(rs.getObject("RegisterTime") != null)
-					{		
-						bean.setRegisterTime(rs.getDate("RegisterTime"));
-					}
-					else
-					{
-						bean.setRegisterTime((java.util.Date)rs.getObject("RegisterTime"));
-					}
-					
-					if(rs.getObject("RecommendCount") != null)
-					{
-						bean.setRecommendCount(rs.getInt("RecommendCount"));
-					}
-					else
-					{
-						bean.setRecommendCount((Integer)rs.getObject("RecommendCount"));
-					}
-					
-					if(rs.getObject("Account") != null)
-					{
-						bean.setAccount(rs.getString("Account"));
-					}
-					else
-					{
-						bean.setAccount((String)rs.getObject("Account"));
-					}
-					
-					if(rs.getObject("Password") != null)
-					{
-						bean.setPassword(rs.getBytes("Password"));
-					}
-					else
-					{
-						bean.setPassword((byte[])rs.getObject("Password"));
-					}
-					
-					if(rs.getObject("AccountStatus") != null)
-					{
-						bean.setAccountStatus(rs.getString("AccountStatus"));
-					}
-					else
-					{
-						bean.setAccountStatus((String)rs.getObject("AccountStatus"));
-					}
+
+					bean.setBirthday(rs.getDate("Birthday"));
+					bean.setAddress(rs.getString("Address"));
+					bean.setGender(rs.getString("Gender"));
+					bean.setEmail(rs.getString("Email"));
+					bean.setPictureName(rs.getString("PictureName"));
+					bean.setPicture(rs.getBytes("Picture"));
+					bean.setPictureLength(rs.getLong("PictureLength"));
+					bean.setRegisterTime(rs.getDate("RegisterTime"));
+					bean.setRecommendCount(rs.getInt("RecommendCount"));
+					bean.setAccount(rs.getString("Account"));
+					bean.setPassword(rs.getBytes("Password"));
+					bean.setAccountStatus(rs.getString("AccountStatus"));
 					
 					result.add(bean);
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -837,19 +324,10 @@ public class MemberDAOJdbc
 		bean1.setEmail("eeit80@orz.tw");
 		
 		File file = new File("image/member/member01.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream data = new ByteArrayOutputStream();)
+		try(FileInputStream fis = new FileInputStream(file);)
 		{
 			bean1.setPictureName(file.getName());
-			
-			byte[] buffer = new byte[1024 * 8];
-			int nRead = fis.read(buffer);
-			while(nRead != -1)
-			{
-				data.write(buffer,0,nRead);
-				nRead = fis.read(buffer);
-			}
-			bean1.setPicture(data.toByteArray());
+			bean1.setPicture(GlobalService.convertInputStreamToByteArray(fis));
 			bean1.setPictureLength(file.length());
 		}
 		catch(Exception e)
@@ -881,26 +359,16 @@ public class MemberDAOJdbc
 		bean2.setEmail("eeit80@orz.tw");
 		
 		file = new File("image/member/member02.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream data = new ByteArrayOutputStream();)
+		try(FileInputStream fis = new FileInputStream(file);)
 		{
 			bean2.setPictureName(file.getName());
-			
-			byte[] buffer = new byte[1024 * 8];
-			int nRead = fis.read(buffer);
-			while(nRead != -1)
-			{
-				data.write(buffer,0,nRead);
-				nRead = fis.read(buffer);
-			}
-			bean2.setPicture(data.toByteArray());
+			bean2.setPicture(GlobalService.convertInputStreamToByteArray(fis));
 			bean2.setPictureLength(file.length());
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		
 		bean2.setRegisterTime(new java.util.Date(System.currentTimeMillis()));
 		bean2.setRecommendCount(0);
 		bean2.setAccount("eeit8080");

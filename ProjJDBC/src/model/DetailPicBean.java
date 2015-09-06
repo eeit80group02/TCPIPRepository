@@ -1,50 +1,75 @@
 package model;
 
-public class DetailPicBean {
-	private int fullProjId; // 計畫編號(完整計畫編號) FK
-	private String imageName; // 圖片檔名
-	private byte[] image; // 圖檔(檔案)
-	private long imageLength; // 圖片長度(file)
-	private String imageDescribe; // 圖片敘述
+import java.io.Serializable;
 
-	public int getFullProjId() {
+public class DetailPicBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	
+	private Integer fullProjId;		// 計畫編號(完整計畫編號) FK PK
+	private String imageName;		// 圖片檔名 PK
+	private byte[] image;			// 圖檔(檔案)
+	private Long imageLength;		// 圖片長度(file)
+	private String imageDescribe;	// 圖片敘述
+	
+	public DetailPicBean()
+	{
+	}
+
+	public Integer getFullProjId()
+	{
 		return fullProjId;
 	}
 
-	public void setFullProjId(int fullProjId) {
+	public void setFullProjId(Integer fullProjId)
+	{
 		this.fullProjId = fullProjId;
 	}
 
-	public String getImageName() {
+	public String getImageName()
+	{
 		return imageName;
 	}
 
-	public void setImageName(String imageName) {
+	public void setImageName(String imageName)
+	{
 		this.imageName = imageName;
 	}
 
-	public byte[] getImage() {
+	public byte[] getImage()
+	{
 		return image;
 	}
 
-	public void setImage(byte[] image) {
+	public void setImage(byte[] image)
+	{
 		this.image = image;
 	}
 
-	public long getImageLength() {
+	public Long getImageLength()
+	{
 		return imageLength;
 	}
 
-	public void setImageLength(long imageLength) {
+	public void setImageLength(Long imageLength)
+	{
 		this.imageLength = imageLength;
 	}
 
-	public String getImageDescribe() {
+	public String getImageDescribe()
+	{
 		return imageDescribe;
 	}
 
-	public void setImageDescribe(String imageDescribe) {
+	public void setImageDescribe(String imageDescribe)
+	{
 		this.imageDescribe = imageDescribe;
+	}
+
+	@Override
+	public String toString()
+	{
+		return "DetailPicBean [fullProjId=" + fullProjId + ", imageName=" + imageName + ", imageLength=" + imageLength + ", imageDescribe=" + imageDescribe + "]";
 	}
 
 }
