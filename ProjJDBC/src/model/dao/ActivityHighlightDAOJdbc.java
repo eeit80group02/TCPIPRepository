@@ -42,52 +42,12 @@ public class ActivityHighlightDAOJdbc
 				if(rs.next())
 				{
 					result = new ActivityHighlightBean();
-					
-					if(rs.getObject("FullProjId") != null)
-					{
-						result.setFullProjId(rs.getInt("FullProjId"));
-					}
-					else
-					{
-						result.setFullProjId((Integer)rs.getObject("FullProjId"));
-					}
-					
-					if(rs.getObject("MemberId") != null)
-					{
-						result.setMemberId(rs.getInt("MemberId"));
-					}
-					else
-					{
-						result.setMemberId((Integer)rs.getObject("MemberId"));
-					}
-					
-					if(rs.getObject("frontCoverName") != null)
-					{
-						result.setFrontCoverName(rs.getString("frontCoverName"));
-					}
-					else
-					{
-						result.setFrontCoverName((String)rs.getObject("frontCoverName"));
-					}
-					
-					if(rs.getObject("frontCover") != null)
-					{
-						result.setFrontCover(rs.getBytes("frontCover"));
-					}
-					else
-					{
-						result.setFrontCover((byte[])rs.getObject("frontCover"));
-					}
-					
-					if(rs.getObject("frontCoverLength") != null)
-					{
-						result.setFrontCoverLength(rs.getLong("frontCoverLength"));
-					}
-					else
-					{
-						result.setFrontCoverLength((Long)rs.getObject("frontCoverLength"));
-					}
-					
+					result.setFullProjId(rs.getInt("FullProjId"));
+					result.setMemberId(rs.getInt("MemberId"));
+					result.setFrontCoverName(rs.getString("frontCoverName"));
+					result.setFrontCover(rs.getBytes("frontCover"));
+					result.setFrontCoverLength(rs.getLong("frontCoverLength"));
+
 					if(rs.getObject("VedioURL") != null)
 					{
 						result.setVedioURL(rs.getString("VedioURL"));
@@ -96,18 +56,10 @@ public class ActivityHighlightDAOJdbc
 					{
 						result.setVedioURL((String)rs.getObject("VedioURL"));
 					}
-					
-					if(rs.getObject("Content") != null)
-					{
-						result.setContent(rs.getString("Content"));
-					}
-					else
-					{
-						result.setContent((String)rs.getObject("Content"));
-					}
+					result.setContent(rs.getString("Content"));
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -131,52 +83,13 @@ public class ActivityHighlightDAOJdbc
 				while(rs.next())
 				{
 					bean = new ActivityHighlightBean();
-					
-					if(rs.getObject("FullProjId") != null)
-					{
-						bean.setFullProjId(rs.getInt("FullProjId"));
-					}
-					else
-					{
-						bean.setFullProjId((Integer)rs.getObject("FullProjId"));
-					}
-					
-					if(rs.getObject("MemberId") != null)
-					{
-						bean.setMemberId(rs.getInt("MemberId"));
-					}
-					else
-					{
-						bean.setMemberId((Integer)rs.getObject("MemberId"));
-					}
-					
-					if(rs.getObject("frontCoverName") != null)
-					{
-						bean.setFrontCoverName(rs.getString("frontCoverName"));
-					}
-					else
-					{
-						bean.setFrontCoverName((String)rs.getObject("frontCoverName"));
-					}
-					
-					if(rs.getObject("frontCover") != null)
-					{
-						bean.setFrontCover(rs.getBytes("frontCover"));
-					}
-					else
-					{
-						bean.setFrontCover((byte[])rs.getObject("frontCover"));
-					}
-					
-					if(rs.getObject("frontCoverLength") != null)
-					{
-						bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
-					}
-					else
-					{
-						bean.setFrontCoverLength((Long)rs.getObject("frontCoverLength"));
-					}
-					
+
+					bean.setFullProjId(rs.getInt("FullProjId"));
+					bean.setMemberId(rs.getInt("MemberId"));
+					bean.setFrontCoverName(rs.getString("frontCoverName"));
+					bean.setFrontCover(rs.getBytes("frontCover"));
+					bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
+
 					if(rs.getObject("VedioURL") != null)
 					{
 						bean.setVedioURL(rs.getString("VedioURL"));
@@ -186,18 +99,11 @@ public class ActivityHighlightDAOJdbc
 						bean.setVedioURL((String)rs.getObject("VedioURL"));
 					}
 					
-					if(rs.getObject("Content") != null)
-					{
-						bean.setContent(rs.getString("Content"));
-					}
-					else
-					{
-						bean.setContent((String)rs.getObject("Content"));
-					}
+					bean.setContent(rs.getString("Content"));
 					result.add(bean);
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -215,53 +121,15 @@ public class ActivityHighlightDAOJdbc
 		
 		if(bean != null)
 		{
-			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
 
-				if(bean.getFullProjId() != null)
-				{
-					pstmt.setInt(1,bean.getFullProjId());
-				}
-				else
-				{
-					pstmt.setNull(1,Types.INTEGER);
-				}
-
-				if(bean.getMemberId() != null)
-				{
-					pstmt.setInt(2,bean.getMemberId());
-				}
-				else
-				{
-					pstmt.setNull(2,Types.INTEGER);
-				}
-
-				if(bean.getFrontCoverName() != null)
-				{
-					pstmt.setString(3,bean.getFrontCoverName());
-				}
-				else
-				{
-					pstmt.setNull(3,Types.NVARCHAR);
-				}
-
-				if(bean.getFrontCover() != null)
-				{
-					pstmt.setBytes(4,bean.getFrontCover());
-				}
-				else
-				{
-					pstmt.setNull(4,Types.VARBINARY);
-				}
-
-				if(bean.getFrontCoverLength() != null)
-				{
-					pstmt.setLong(5,bean.getFrontCoverLength());
-				}
-				else
-				{
-					pstmt.setNull(5,Types.BIGINT);
-				}
+				pstmt.setInt(1,bean.getFullProjId());
+				pstmt.setInt(2,bean.getMemberId());
+				pstmt.setString(3,bean.getFrontCoverName());
+				pstmt.setBytes(4,bean.getFrontCover());
+				pstmt.setLong(5,bean.getFrontCoverLength());
 
 				if(bean.getVedioURL() != null)
 				{
@@ -272,14 +140,7 @@ public class ActivityHighlightDAOJdbc
 					pstmt.setNull(6,Types.NVARCHAR);
 				}
 
-				if(bean.getContent() != null)
-				{
-					pstmt.setString(7,bean.getContent());
-				}
-				else
-				{
-					pstmt.setNull(7,Types.NVARCHAR);
-				}
+				pstmt.setString(7,bean.getContent());
 
 				int num = pstmt.executeUpdate();
 
@@ -302,44 +163,14 @@ public class ActivityHighlightDAOJdbc
 		
 		if(bean != null)
 		{
-			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(UPDATE))
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE))
 			{
 
-				if(bean.getMemberId() != null)
-				{
-					pstmt.setInt(1,bean.getMemberId());
-				}
-				else
-				{
-					pstmt.setNull(1,Types.INTEGER);
-				}
-
-				if(bean.getFrontCoverName() != null)
-				{
-					pstmt.setString(2,bean.getFrontCoverName());
-				}
-				else
-				{
-					pstmt.setNull(2,Types.NVARCHAR);
-				}
-
-				if(bean.getFrontCover() != null)
-				{
-					pstmt.setBytes(3,bean.getFrontCover());
-				}
-				else
-				{
-					pstmt.setNull(3,Types.VARBINARY);
-				}
-
-				if(bean.getFrontCoverLength() != null)
-				{
-					pstmt.setLong(4,bean.getFrontCoverLength());
-				}
-				else
-				{
-					pstmt.setNull(4,Types.BIGINT);
-				}
+				pstmt.setInt(1,bean.getMemberId());
+				pstmt.setString(2,bean.getFrontCoverName());
+				pstmt.setBytes(3,bean.getFrontCover());
+				pstmt.setLong(4,bean.getFrontCoverLength());
 
 				if(bean.getVedioURL() != null)
 				{
@@ -350,23 +181,8 @@ public class ActivityHighlightDAOJdbc
 					pstmt.setNull(5,Types.NVARCHAR);
 				}
 
-				if(bean.getContent() != null)
-				{
-					pstmt.setString(6,bean.getContent());
-				}
-				else
-				{
-					pstmt.setNull(6,Types.NVARCHAR);
-				}
-				
-				if(bean.getFullProjId() != null)
-				{
-					pstmt.setInt(7,bean.getFullProjId());
-				}
-				else
-				{
-					pstmt.setNull(7,Types.INTEGER);
-				}
+				pstmt.setString(6,bean.getContent());
+				pstmt.setInt(7,bean.getFullProjId());
 
 				int num = pstmt.executeUpdate();
 				if(num == 1)
@@ -412,19 +228,10 @@ public class ActivityHighlightDAOJdbc
 		bean1.setMemberId(1);
 		
 		File file = new File("image/member/member01.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream data = new ByteArrayOutputStream();)
+		try(FileInputStream fis = new FileInputStream(file);)
 		{
 			bean1.setFrontCoverName(file.getName());
-			
-			byte[] buffer = new byte[1024 * 8];
-			int nRead = fis.read(buffer);
-			while(nRead != -1)
-			{
-				data.write(buffer,0,nRead);
-				nRead = fis.read(buffer);
-			}
-			bean1.setFrontCover(data.toByteArray());
+			bean1.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
 			bean1.setFrontCoverLength(file.length());
 		}
 		catch(Exception e)
@@ -435,14 +242,6 @@ public class ActivityHighlightDAOJdbc
 		bean1.setVedioURL("http://tw.yahoo.com");
 		bean1.setContent("測試.......");
 		bean1 = dao.insert(bean1);
-//		bean1.setFullProjId(1);
-//		bean1.setMemberId(null);
-//		bean1.setFrontCover(null);
-//		bean1.setFrontCoverLength(null);
-//		bean1.setFrontCoverName(null);
-//		bean1.setVedioURL(null);
-//		bean1.setContent(null);
-//		bean1 = dao.insert(bean1);
 		System.out.println(bean1);
 		
 		// update
@@ -451,19 +250,10 @@ public class ActivityHighlightDAOJdbc
 		bean2.setMemberId(2);
 		
 		file = new File("image/member/member02.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream data = new ByteArrayOutputStream();)
+		try(FileInputStream fis = new FileInputStream(file);)
 		{
 			bean2.setFrontCoverName(file.getName());
-			
-			byte[] buffer = new byte[1024 * 8];
-			int nRead = fis.read(buffer);
-			while(nRead != -1)
-			{
-				data.write(buffer,0,nRead);
-				nRead = fis.read(buffer);
-			}
-			bean2.setFrontCover(data.toByteArray());
+			bean2.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
 			bean2.setFrontCoverLength(file.length());
 		}
 		catch(Exception e)

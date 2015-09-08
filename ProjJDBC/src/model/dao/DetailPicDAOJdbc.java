@@ -59,7 +59,7 @@ public class DetailPicDAOJdbc
 					}
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -102,7 +102,7 @@ public class DetailPicDAOJdbc
 					resultlist.add(bean);
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -222,25 +222,16 @@ public class DetailPicDAOJdbc
 		bean1.setFullProjId(2);
 		
 		File file = new File("image/primaryProj/primaryProj01.jpg");
-		bean1.setImageName(file.getName());
-		try(FileInputStream fis = new FileInputStream(file);
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();)
+		try(FileInputStream fis = new FileInputStream(file);)
 		{
-			byte[] buffer = new byte[1024 * 8];
-			
-			int nRead = fis.read(buffer);
-			while(nRead != -1)
-			{
-				baos.write(buffer,0,nRead);
-				nRead = fis.read(buffer);
-			}
-			bean1.setImage(baos.toByteArray());
+			bean1.setImageName(file.getName());
+			bean1.setImage(GlobalService.convertInputStreamToByteArray(fis));
+			bean1.setImageLength(file.length());
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
-		bean1.setImageLength(file.length());
 		bean1.setImageDescribe(null);
 		bean1 = daojdbc.insert(bean1);
 		System.out.println(bean1);
