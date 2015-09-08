@@ -1,151 +1,197 @@
 package model;
 
-public class DonationBean {
-	private int donationId; // 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
-	private int schoolId; // 學校編號 FK
-	private String donationStatus; // 捐獻是否完成
-	private String supplyName; // 物資名稱
-	private int originalDemandNumber; // 原始輸入需求數量(數量)
-	private String originalDemandUnit; // 原始輸入需求數量(單位)
-	private int demandNumber; // 現在需求數量及單位(數量)
-	
-	private String size; // 尺寸規格(物品的大小>長*寬*高)
-	private String demandContent; // 需求說明(為什麼需要這項物資)
-	private String supplyStatus; // 物資狀態(全新/二手/不拘)
-	
-	private java.util.Date demandTime; // 募集提出需求時間(物品開始募集時間)(即刻上架)
-	private java.util.Date expireTime; // 募集截止時間(物品結束募集時間)(當日0:00下架)
-	private String imageName; // 圖片檔名
-	private byte[] imageFile; // 圖片(需要的物品的圖片)
-	private long imageLength; // 圖片長度
-	private String remark; // 備註(可以填寫額外的訊息)
+import java.io.Serializable;
 
-	public int getDonationId() {
+public class DonationBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	
+	private Integer donationId; 			// 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
+	private Integer schoolId;				// 學校編號 FK
+	private String donationStatus; 			// 捐獻是否完成
+	private String supplyName;				// 物資名稱
+	private Integer originalDemandNumber;	// 原始輸入需求數量(數量)
+	private String originalDemandUnit;		// 原始輸入需求數量(單位)
+	private Integer demandNumber;			// 現在需求數量及單位(數量)
+	private String size;					// 尺寸規格(物品的大小>長*寬*高)
+	private String demandContent;			// 需求說明(為什麼需要這項物資)
+	private String supplyStatus;			// 物資狀態(全新/二手/不拘)
+	private java.util.Date demandTime;		// 募集提出需求時間(物品開始募集時間)(即刻上架)
+	private java.util.Date expireTime;		// 募集截止時間(物品結束募集時間)(當日0:00下架)
+	private String imageName;				// 圖片檔名
+	private byte[] imageFile;				// 圖片(需要的物品的圖片)
+	private Long imageLength;				// 圖片長度
+	private String remark;					// 備註(可以填寫額外的訊息)\
+	
+	public DonationBean()
+	{
+	}
+
+	public Integer getDonationId()
+	{
 		return donationId;
 	}
 
-	public void setDonationId(int donationId) {
+	public void setDonationId(Integer donationId)
+	{
 		this.donationId = donationId;
 	}
 
-	public int getSchoolId() {
+	public Integer getSchoolId()
+	{
 		return schoolId;
 	}
 
-	public void setSchoolId(int schoolId) {
+	public void setSchoolId(Integer schoolId)
+	{
 		this.schoolId = schoolId;
 	}
 
-	public String getDonationStatus() {
+	public String getDonationStatus()
+	{
 		return donationStatus;
 	}
 
-	public void setDonationStatus(String donationStatus) {
+	public void setDonationStatus(String donationStatus)
+	{
 		this.donationStatus = donationStatus;
 	}
 
-	public String getSupplyName() {
+	public String getSupplyName()
+	{
 		return supplyName;
 	}
 
-	public void setSupplyName(String supplyName) {
+	public void setSupplyName(String supplyName)
+	{
 		this.supplyName = supplyName;
 	}
 
-	public int getOriginalDemandNumber() {
+	public Integer getOriginalDemandNumber()
+	{
 		return originalDemandNumber;
 	}
 
-	public void setOriginalDemandNumber(int originalDemandNumber) {
+	public void setOriginalDemandNumber(Integer originalDemandNumber)
+	{
 		this.originalDemandNumber = originalDemandNumber;
 	}
 
-	public String getOriginalDemandUnit() {
+	public String getOriginalDemandUnit()
+	{
 		return originalDemandUnit;
 	}
 
-	public void setOriginalDemandUnit(String originalDemandUnit) {
+	public void setOriginalDemandUnit(String originalDemandUnit)
+	{
 		this.originalDemandUnit = originalDemandUnit;
 	}
 
-	public int getDemandNumber() {
+	public Integer getDemandNumber()
+	{
 		return demandNumber;
 	}
 
-	public void setDemandNumber(int demandNumber) {
+	public void setDemandNumber(Integer demandNumber)
+	{
 		this.demandNumber = demandNumber;
 	}
 
-	public String getSize() {
+	public String getSize()
+	{
 		return size;
 	}
 
-	public void setSize(String size) {
+	public void setSize(String size)
+	{
 		this.size = size;
 	}
 
-	public String getDemandContent() {
+	public String getDemandContent()
+	{
 		return demandContent;
 	}
 
-	public void setDemandContent(String demandContent) {
+	public void setDemandContent(String demandContent)
+	{
 		this.demandContent = demandContent;
 	}
 
-	public String getSupplyStatus() {
+	public String getSupplyStatus()
+	{
 		return supplyStatus;
 	}
 
-	public void setSupplyStatus(String supplyStatus) {
+	public void setSupplyStatus(String supplyStatus)
+	{
 		this.supplyStatus = supplyStatus;
 	}
 
-	public java.util.Date getDemandTime() {
+	public java.util.Date getDemandTime()
+	{
 		return demandTime;
 	}
 
-	public void setDemandTime(java.util.Date demandTime) {
+	public void setDemandTime(java.util.Date demandTime)
+	{
 		this.demandTime = demandTime;
 	}
 
-	public java.util.Date getExpireTime() {
+	public java.util.Date getExpireTime()
+	{
 		return expireTime;
 	}
 
-	public void setExpireTime(java.util.Date expireTime) {
+	public void setExpireTime(java.util.Date expireTime)
+	{
 		this.expireTime = expireTime;
 	}
 
-	public String getImageName() {
+	public String getImageName()
+	{
 		return imageName;
 	}
 
-	public void setImageName(String imageName) {
+	public void setImageName(String imageName)
+	{
 		this.imageName = imageName;
 	}
 
-	public byte[] getImageFile() {
+	public byte[] getImageFile()
+	{
 		return imageFile;
 	}
 
-	public void setImageFile(byte[] imageFile) {
+	public void setImageFile(byte[] imageFile)
+	{
 		this.imageFile = imageFile;
 	}
 
-	public long getImageLength() {
+	public Long getImageLength()
+	{
 		return imageLength;
 	}
 
-	public void setImageLength(long imageLength) {
+	public void setImageLength(Long imageLength)
+	{
 		this.imageLength = imageLength;
 	}
 
-	public String getRemark() {
+	public String getRemark()
+	{
 		return remark;
 	}
 
-	public void setRemark(String remark) {
+	public void setRemark(String remark)
+	{
 		this.remark = remark;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "DonationBean [donationId=" + donationId + ", schoolId=" + schoolId + ", donationStatus=" + donationStatus + ", supplyName=" + supplyName + ", originalDemandNumber=" + originalDemandNumber + ", originalDemandUnit=" + originalDemandUnit
+				+ ", demandNumber=" + demandNumber + ", size=" + size + ", demandContent=" + demandContent + ", supplyStatus=" + supplyStatus + ", demandTime=" + demandTime + ", expireTime=" + expireTime + ", imageName=" + imageName + ", imageLength="
+				+ imageLength + ", remark=" + remark + "]";
+	}
 }

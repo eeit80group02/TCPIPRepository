@@ -247,56 +247,50 @@ public class MemberDAOJdbc
 		MemberBean bean = null;
 		
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);)
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();)
 		{
-			try(ResultSet rs = pstmt.executeQuery();)
+			while(rs.next())
 			{
-				while(rs.next())
+				bean = new MemberBean();
+
+				bean.setMemberId(rs.getInt("memberId"));
+				bean.setLastName(rs.getString("LastName"));
+				bean.setFirstName(rs.getString("FirstName"));
+				bean.setIdNumber(rs.getString("IdNumber"));
+
+				if(rs.getObject("Phone") != null)
 				{
-					bean = new MemberBean();
-					
-					bean.setMemberId(rs.getInt("memberId"));
-					bean.setLastName(rs.getString("LastName"));
-					bean.setFirstName(rs.getString("FirstName"));
-					bean.setIdNumber(rs.getString("IdNumber"));
-
-					if(rs.getObject("Phone") != null)
-					{
-						bean.setPhone(rs.getString("Phone"));
-					}
-					else
-					{
-						bean.setPhone((String)rs.getObject("Phone"));
-					}
-
-					if(rs.getObject("CellPhone") != null)
-					{
-						bean.setCellPhone(rs.getString("CellPhone"));
-					}
-					else
-					{
-						bean.setCellPhone((String)rs.getObject("CellPhone"));
-					}
-
-					bean.setBirthday(rs.getDate("Birthday"));
-					bean.setAddress(rs.getString("Address"));
-					bean.setGender(rs.getString("Gender"));
-					bean.setEmail(rs.getString("Email"));
-					bean.setPictureName(rs.getString("PictureName"));
-					bean.setPicture(rs.getBytes("Picture"));
-					bean.setPictureLength(rs.getLong("PictureLength"));
-					bean.setRegisterTime(rs.getDate("RegisterTime"));
-					bean.setRecommendCount(rs.getInt("RecommendCount"));
-					bean.setAccount(rs.getString("Account"));
-					bean.setPassword(rs.getBytes("Password"));
-					bean.setAccountStatus(rs.getString("AccountStatus"));
-					
-					result.add(bean);
+					bean.setPhone(rs.getString("Phone"));
 				}
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
+				else
+				{
+					bean.setPhone((String)rs.getObject("Phone"));
+				}
+
+				if(rs.getObject("CellPhone") != null)
+				{
+					bean.setCellPhone(rs.getString("CellPhone"));
+				}
+				else
+				{
+					bean.setCellPhone((String)rs.getObject("CellPhone"));
+				}
+
+				bean.setBirthday(rs.getDate("Birthday"));
+				bean.setAddress(rs.getString("Address"));
+				bean.setGender(rs.getString("Gender"));
+				bean.setEmail(rs.getString("Email"));
+				bean.setPictureName(rs.getString("PictureName"));
+				bean.setPicture(rs.getBytes("Picture"));
+				bean.setPictureLength(rs.getLong("PictureLength"));
+				bean.setRegisterTime(rs.getDate("RegisterTime"));
+				bean.setRecommendCount(rs.getInt("RecommendCount"));
+				bean.setAccount(rs.getString("Account"));
+				bean.setPassword(rs.getBytes("Password"));
+				bean.setAccountStatus(rs.getString("AccountStatus"));
+
+				result.add(bean);
 			}
 		}
 		catch(SQLException e)

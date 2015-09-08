@@ -76,36 +76,30 @@ public class ActivityHighlightDAOJdbc
 		List<ActivityHighlightBean> result = new ArrayList<ActivityHighlightBean>();
 		ActivityHighlightBean bean = null;
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(GET_ALL);)
+			PreparedStatement pstmt = conn.prepareStatement(GET_ALL);
+			ResultSet rs = pstmt.executeQuery();)
 		{
-			try(ResultSet rs = pstmt.executeQuery();)
+			while(rs.next())
 			{
-				while(rs.next())
+				bean = new ActivityHighlightBean();
+
+				bean.setFullProjId(rs.getInt("FullProjId"));
+				bean.setMemberId(rs.getInt("MemberId"));
+				bean.setFrontCoverName(rs.getString("frontCoverName"));
+				bean.setFrontCover(rs.getBytes("frontCover"));
+				bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
+
+				if(rs.getObject("VedioURL") != null)
 				{
-					bean = new ActivityHighlightBean();
-
-					bean.setFullProjId(rs.getInt("FullProjId"));
-					bean.setMemberId(rs.getInt("MemberId"));
-					bean.setFrontCoverName(rs.getString("frontCoverName"));
-					bean.setFrontCover(rs.getBytes("frontCover"));
-					bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
-
-					if(rs.getObject("VedioURL") != null)
-					{
-						bean.setVedioURL(rs.getString("VedioURL"));
-					}
-					else
-					{
-						bean.setVedioURL((String)rs.getObject("VedioURL"));
-					}
-					
-					bean.setContent(rs.getString("Content"));
-					result.add(bean);
+					bean.setVedioURL(rs.getString("VedioURL"));
 				}
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
+				else
+				{
+					bean.setVedioURL((String)rs.getObject("VedioURL"));
+				}
+
+				bean.setContent(rs.getString("Content"));
+				result.add(bean);
 			}
 		}
 		catch(SQLException e)

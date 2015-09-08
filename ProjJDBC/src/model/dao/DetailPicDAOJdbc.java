@@ -77,34 +77,28 @@ public class DetailPicDAOJdbc
 		DetailPicBean bean = null;
 
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(GET_ALL);)
+			PreparedStatement pstmt = conn.prepareStatement(GET_ALL);
+			ResultSet rs = pstmt.executeQuery();)
 		{
-			try(ResultSet rs = pstmt.executeQuery();)
+			while(rs.next())
 			{
-				while(rs.next())
-				{
-					bean = new DetailPicBean();
+				bean = new DetailPicBean();
 
-					bean.setFullProjId(rs.getInt("fullProjId"));
-					bean.setImageName(rs.getString("imageName"));
-					bean.setImage(rs.getBytes("image"));
-					bean.setImageLength(rs.getLong("imageLength"));
-					
-					if(rs.getObject("imageDescribe") != null)
-					{
-						bean.setImageDescribe(rs.getString("imageDescribe"));
-					}
-					else
-					{
-						bean.setImageDescribe((String)rs.getObject("imageDescribe"));
-					}
-					
-					resultlist.add(bean);
+				bean.setFullProjId(rs.getInt("fullProjId"));
+				bean.setImageName(rs.getString("imageName"));
+				bean.setImage(rs.getBytes("image"));
+				bean.setImageLength(rs.getLong("imageLength"));
+
+				if(rs.getObject("imageDescribe") != null)
+				{
+					bean.setImageDescribe(rs.getString("imageDescribe"));
 				}
-			}
-			catch(SQLException e)
-			{
-				e.printStackTrace();
+				else
+				{
+					bean.setImageDescribe((String)rs.getObject("imageDescribe"));
+				}
+
+				resultlist.add(bean);
 			}
 		}
 		catch(SQLException e)
@@ -194,7 +188,6 @@ public class DetailPicDAOJdbc
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
-
 			pstmt.setInt(1,fullProjId);
 			pstmt.setString(2,imageName);
 
