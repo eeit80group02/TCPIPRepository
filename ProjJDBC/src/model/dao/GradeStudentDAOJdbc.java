@@ -24,7 +24,9 @@ public class GradeStudentDAOJdbc
 	public List<GradeStudentBean> getAll()
 	{
 		List<GradeStudentBean> result = null;
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);ResultSet rset = stmt.executeQuery();)
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rset = pstmt.executeQuery();)
 		{
 			result = new ArrayList<GradeStudentBean>();
 			while(rset.next())
@@ -126,7 +128,8 @@ public class GradeStudentDAOJdbc
 	public GradeStudentBean findByPrimaryKey(int schoolId,int anniversary)
 	{
 		GradeStudentBean result = null;
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
 		{
 			pstmt.setInt(1,schoolId);
 			pstmt.setInt(2,anniversary);
@@ -238,7 +241,8 @@ public class GradeStudentDAOJdbc
 		GradeStudentBean result = null;
 		if(bean != null)
 		{
-			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
 
 				pstmt.setInt(1,bean.getSchoolId());
@@ -449,7 +453,8 @@ public class GradeStudentDAOJdbc
 
 	public boolean delete(int schoolId,int anniversary)
 	{
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(DELETE);)
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
 			pstmt.setInt(1,schoolId);
 			pstmt.setInt(2,anniversary);

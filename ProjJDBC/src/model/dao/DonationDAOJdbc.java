@@ -15,7 +15,7 @@ import java.util.List;
 
 import model.DonationBean;
 
-public class DonationDAOjdbc
+public class DonationDAOJdbc
 {
 
 	private static final String URL = GlobalService.URL;
@@ -245,7 +245,7 @@ public class DonationDAOjdbc
 
 	public static void main(String[] args)
 	{
-		DonationDAOjdbc daojdbc = new DonationDAOjdbc();
+		DonationDAOJdbc daojdbc = new DonationDAOJdbc();
 		/** INSERT OK **/
 		DonationBean bean1 = new DonationBean();
 		bean1.setSchoolId(11503);

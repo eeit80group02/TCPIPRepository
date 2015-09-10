@@ -15,7 +15,7 @@ import java.util.List;
 
 import model.SchoolBean;
 
-public class SchoolDAOJDBC
+public class SchoolDAOJdbc
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -238,7 +238,7 @@ public class SchoolDAOJDBC
 
 	public static void main(String[] args)
 	{
-		SchoolDAOJDBC dao = new SchoolDAOJDBC();
+		SchoolDAOJdbc dao = new SchoolDAOJdbc();
 //		List<SchoolBean> beans = dao.getAll();
 //		System.out.println(beans.size());
 //		SchoolBean bean = dao.findByPrimaryKey(11503);

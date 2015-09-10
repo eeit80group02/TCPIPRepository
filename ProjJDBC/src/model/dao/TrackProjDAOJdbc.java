@@ -12,7 +12,7 @@ import java.util.List;
 
 import model.TrackProjBean;
 
-public class TrackProjDAOJDBC
+public class TrackProjDAOJdbc
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -156,7 +156,7 @@ public class TrackProjDAOJDBC
 	
 	public static void main(String[] args)
 	{
-		TrackProjDAOJDBC dao = new TrackProjDAOJDBC();
+		TrackProjDAOJdbc dao = new TrackProjDAOJdbc();
 		List<TrackProjBean> beans = dao.getAll();
 		System.out.println(beans);
 		TrackProjBean bean = dao.findByPrimaryKey(1);

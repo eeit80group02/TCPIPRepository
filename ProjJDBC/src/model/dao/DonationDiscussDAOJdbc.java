@@ -14,7 +14,7 @@ import java.util.List;
 
 import model.DonationDiscussBean;
 
-public class DonationDiscussDAOjdbc
+public class DonationDiscussDAOJdbc
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -251,7 +251,7 @@ public class DonationDiscussDAOjdbc
 
 	public static void main(String[] args)
 	{
-		DonationDiscussDAOjdbc daojdbc = new DonationDiscussDAOjdbc();
+		DonationDiscussDAOJdbc daojdbc = new DonationDiscussDAOJdbc();
 		/** INSERT OK **/
 		DonationDiscussBean bean1 = new DonationDiscussBean();
 		bean1.setDonationId(1);

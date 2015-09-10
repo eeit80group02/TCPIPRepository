@@ -12,7 +12,7 @@ import java.util.List;
 
 import model.SchoolDemandBean;
 
-public class SchoolDemandDAOJDBC
+public class SchoolDemandDAOJdbc
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -188,7 +188,7 @@ public class SchoolDemandDAOJDBC
 	
 	public static void main(String[] args)
 	{
-		SchoolDemandDAOJDBC dao = new SchoolDemandDAOJDBC();
+		SchoolDemandDAOJdbc dao = new SchoolDemandDAOJdbc();
 //		List<SchoolDemandBean> beans = dao.getAll();
 //		System.out.println(beans);
 //		SchoolDemandBean bean = dao.findByPrimaryKey(1);

@@ -12,7 +12,7 @@ import java.util.List;
 
 import model.TrainMapBean;
 
-public class TrainMapDAOJDBC
+public class TrainMapDAOJdbc
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -20,7 +20,7 @@ public class TrainMapDAOJDBC
 
 	public static void main(String[] args)
 	{
-		TrainMapDAOJDBC dao = new TrainMapDAOJDBC();
+		TrainMapDAOJdbc dao = new TrainMapDAOJdbc();
 		List<TrainMapBean> beans = dao.getAll();
 		System.out.println(beans);
 		TrainMapBean bean = dao.findByPrimaryKey("臺北站");
@@ -113,13 +113,14 @@ public class TrainMapDAOJDBC
 	public TrainMapBean update(String newName,String name)
 	{
 		TrainMapBean result = null;
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(UPDATE);)
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 		{
-			stmt.setString(1,newName);
+			pstmt.setString(1,newName);
 
-			stmt.setString(2,name);
+			pstmt.setString(2,name);
 
-			int i = stmt.executeUpdate();
+			int i = pstmt.executeUpdate();
 			if(i == 1)
 			{
 				result = new TrainMapBean();
@@ -137,10 +138,11 @@ public class TrainMapDAOJDBC
 	private static final String DELETE = "delete from trainmap where name = ?";
 	public boolean delete(String name)
 	{
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(DELETE);)
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
-			stmt.setString(1,name);
-			int i = stmt.executeUpdate();
+			pstmt.setString(1,name);
+			int i = pstmt.executeUpdate();
 			if(i == 1)
 			{
 				return true;

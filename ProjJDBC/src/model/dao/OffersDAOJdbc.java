@@ -22,7 +22,9 @@ public class OffersDAOJdbc
 	public List<OffersBean> getAll()
 	{
 		List<OffersBean> result = null;
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);ResultSet rset = stmt.executeQuery();)
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rset = pstmt.executeQuery();)
 		{
 			result = new ArrayList<OffersBean>();
 			while(rset.next())
@@ -47,10 +49,10 @@ public class OffersDAOJdbc
 	{
 		OffersBean result = null;
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID);)
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
 		{
-			stmt.setInt(1,schoolDemandId);
-			try(ResultSet rset = stmt.executeQuery();)
+			pstmt.setInt(1,schoolDemandId);
+			try(ResultSet rset = pstmt.executeQuery();)
 			{
 				while(rset.next())
 				{
@@ -82,14 +84,14 @@ public class OffersDAOJdbc
 		if(bean != null)
 		{
 			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-				PreparedStatement ptmt = conn.prepareStatement(INSERT);)
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
 
-				ptmt.setInt(1,bean.getSchoolDemandId());
-				ptmt.setBoolean(2,bean.getRoom());
-				ptmt.setBoolean(3,bean.getPlace());
-				ptmt.setBoolean(4,bean.getFood());
-				int i = ptmt.executeUpdate();
+				pstmt.setInt(1,bean.getSchoolDemandId());
+				pstmt.setBoolean(2,bean.getRoom());
+				pstmt.setBoolean(3,bean.getPlace());
+				pstmt.setBoolean(4,bean.getFood());
+				int i = pstmt.executeUpdate();
 				if(i == 1)
 				{
 					result = findByPrimaryKey(bean.getSchoolDemandId());
@@ -109,7 +111,8 @@ public class OffersDAOJdbc
 		OffersBean result = null;
 		if(bean != null)
 		{
-			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 			{
 				pstmt.setBoolean(1,bean.getRoom());
 				pstmt.setBoolean(2,bean.getPlace());
