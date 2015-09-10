@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class GlobalService
-{
+{ 
 	public static final String HOST = "127.0.0.1";
 	public static final String USERNAME = "sasa";
 	public static final String PASSWORD = "passw0rd";
