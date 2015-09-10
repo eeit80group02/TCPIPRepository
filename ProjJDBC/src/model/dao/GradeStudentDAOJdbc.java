@@ -1,185 +1,498 @@
 package model.dao;
 
+import global.GlobalService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.GradeStudentBean;
 
-public class GradeStudentDAOJdbc {
+public class GradeStudentDAOJdbc
+{
+	private static final String URL = GlobalService.URL;
+	private static final String USERNAME = GlobalService.USERNAME;
+	private static final String PASSWORD = GlobalService.PASSWORD;
 
-	public static void main(String[] args) {
+	private static final String SELECT_ALL = "SELECT schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth,juniorFirst,juniorSecond,juniorThird FROM GradeStudent";
+
+	public List<GradeStudentBean> getAll()
+	{
+		List<GradeStudentBean> result = null;
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);ResultSet rset = stmt.executeQuery();)
+		{
+			result = new ArrayList<GradeStudentBean>();
+			while(rset.next())
+			{
+				GradeStudentBean bean = new GradeStudentBean();
+				bean.setSchoolId(rset.getInt("schoolId"));
+				bean.setAnniversary(rset.getInt("anniversary"));
+
+				if(rset.getObject("elementaryFirst") != null)
+				{
+					bean.setElementaryFirst(rset.getInt("elementaryFirst"));
+				}
+				else
+				{
+					bean.setElementaryFirst((Integer)rset.getObject("elementaryFirst"));
+				}
+
+				if(rset.getObject("elementarySecond") != null)
+				{
+					bean.setElementarySecond(rset.getInt("elementarySecond"));
+				}
+				else
+				{
+					bean.setElementarySecond((Integer)rset.getObject("elementarySecond"));
+				}
+
+				if(rset.getObject("elementaryThird") != null)
+				{
+					bean.setElementaryThird(rset.getInt("elementaryThird"));
+				}
+				else
+				{
+					bean.setElementaryThird((Integer)rset.getObject("elementaryThird"));
+				}
+				if(rset.getObject("elementaryFourth") != null)
+				{
+					bean.setElementaryFourth(rset.getInt("elementaryFourth"));
+				}
+				else
+				{
+					bean.setElementaryFourth((Integer)rset.getObject("elementaryFourth"));
+				}
+				if(rset.getObject("elementaryFifth") != null)
+				{
+					bean.setElementaryFifth(rset.getInt("elementaryFifth"));
+				}
+				else
+				{
+					bean.setElementaryFifth((Integer)rset.getObject("elementaryFifth"));
+				}
+
+				if(rset.getObject("elementarySixth") != null)
+				{
+					bean.setElementarySixth(rset.getInt("elementarySixth"));
+				}
+				else
+				{
+					bean.setElementarySixth((Integer)rset.getObject("elementarySixth"));
+				}
+
+				if(rset.getObject("juniorFirst") != null)
+				{
+					bean.setJuniorFirst(rset.getInt("juniorFirst"));
+				}
+				else
+				{
+					bean.setJuniorFirst((Integer)rset.getObject("juniorFirst"));
+				}
+
+				if(rset.getObject("juniorSecond") != null)
+				{
+					bean.setJuniorSecond(rset.getInt("juniorSecond"));
+				}
+				else
+				{
+					bean.setJuniorSecond((Integer)rset.getObject("juniorSecond"));
+				}
+
+				if(rset.getObject("juniorThird") != null)
+				{
+					bean.setJuniorThird(rset.getInt("juniorThird"));
+				}
+				else
+				{
+					bean.setJuniorThird((Integer)rset.getObject("juniorThird"));
+				}
+				result.add(bean);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	private static final String SELECT_BY_ID = "SELECT schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth,juniorFirst,juniorSecond,juniorThird FROM GradeStudent WHERE schoolId = ? AND anniversary = ?";
+
+	public GradeStudentBean findByPrimaryKey(int schoolId,int anniversary)
+	{
+		GradeStudentBean result = null;
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
+		{
+			pstmt.setInt(1,schoolId);
+			pstmt.setInt(2,anniversary);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				while(rset.next())
+				{
+					result = new GradeStudentBean();
+					result.setSchoolId(rset.getInt("schoolId"));
+					result.setAnniversary(rset.getInt("anniversary"));
+
+					if(rset.getObject("elementaryFirst") != null)
+					{
+						result.setElementaryFirst(rset.getInt("elementaryFirst"));
+					}
+					else
+					{
+						result.setElementaryFirst((Integer)rset.getObject("elementaryFirst"));
+					}
+
+					if(rset.getObject("elementarySecond") != null)
+					{
+						result.setElementarySecond(rset.getInt("elementarySecond"));
+					}
+					else
+					{
+						result.setElementarySecond((Integer)rset.getObject("elementarySecond"));
+					}
+
+					if(rset.getObject("elementaryThird") != null)
+					{
+						result.setElementaryThird(rset.getInt("elementaryThird"));
+					}
+					else
+					{
+						result.setElementaryThird((Integer)rset.getObject("elementaryThird"));
+					}
+					if(rset.getObject("elementaryFourth") != null)
+					{
+						result.setElementaryFourth(rset.getInt("elementaryFourth"));
+					}
+					else
+					{
+						result.setElementaryFourth((Integer)rset.getObject("elementaryFourth"));
+					}
+					if(rset.getObject("elementaryFifth") != null)
+					{
+						result.setElementaryFifth(rset.getInt("elementaryFifth"));
+					}
+					else
+					{
+						result.setElementaryFifth((Integer)rset.getObject("elementaryFifth"));
+					}
+
+					if(rset.getObject("elementarySixth") != null)
+					{
+						result.setElementarySixth(rset.getInt("elementarySixth"));
+					}
+					else
+					{
+						result.setElementarySixth((Integer)rset.getObject("elementarySixth"));
+					}
+
+					if(rset.getObject("juniorFirst") != null)
+					{
+						result.setJuniorFirst(rset.getInt("juniorFirst"));
+					}
+					else
+					{
+						result.setJuniorFirst((Integer)rset.getObject("juniorFirst"));
+					}
+
+					if(rset.getObject("juniorSecond") != null)
+					{
+						result.setJuniorSecond(rset.getInt("juniorSecond"));
+					}
+					else
+					{
+						result.setJuniorSecond((Integer)rset.getObject("juniorSecond"));
+					}
+
+					if(rset.getObject("juniorThird") != null)
+					{
+						result.setJuniorThird(rset.getInt("juniorThird"));
+					}
+					else
+					{
+						result.setJuniorThird((Integer)rset.getObject("juniorThird"));
+					}
+				}
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	private static final String INSERT = "INSERT INTO GradeStudent(schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth,juniorFirst,juniorSecond,juniorThird) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+
+	public GradeStudentBean insert(GradeStudentBean bean)
+	{
+		GradeStudentBean result = null;
+		if(bean != null)
+		{
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+			{
+
+				pstmt.setInt(1,bean.getSchoolId());
+				pstmt.setInt(2,bean.getAnniversary());
+
+				if(bean.getElementaryFirst() != null)
+				{
+					pstmt.setInt(3,bean.getElementaryFirst());
+				}
+				else
+				{
+					pstmt.setNull(3,Types.INTEGER);
+				}
+
+				if(bean.getElementarySecond() != null)
+				{
+					pstmt.setInt(4,bean.getElementarySecond());
+				}
+				else
+				{
+					pstmt.setNull(4,Types.INTEGER);
+				}
+
+				if(bean.getElementaryThird() != null)
+				{
+					pstmt.setInt(5,bean.getElementaryThird());
+				}
+				else
+				{
+					pstmt.setNull(5,Types.INTEGER);
+				}
+
+				if(bean.getElementaryFourth() != null)
+				{
+					pstmt.setInt(6,bean.getElementaryFourth());
+				}
+				else
+				{
+					pstmt.setNull(6,Types.INTEGER);
+				}
+
+				if(bean.getElementaryFifth() != null)
+				{
+					pstmt.setInt(7,bean.getElementaryFifth());
+				}
+				else
+				{
+					pstmt.setNull(7,Types.INTEGER);
+				}
+
+				if(bean.getElementarySixth() != null)
+				{
+					pstmt.setInt(8,bean.getElementarySixth());
+				}
+				else
+				{
+					pstmt.setNull(8,Types.INTEGER);
+				}
+
+				if(bean.getJuniorFirst() != null)
+				{
+					pstmt.setInt(9,bean.getJuniorFirst());
+				}
+				else
+				{
+					pstmt.setNull(9,Types.INTEGER);
+				}
+
+				if(bean.getJuniorSecond() != null)
+				{
+					pstmt.setInt(10,bean.getJuniorSecond());
+				}
+				else
+				{
+					pstmt.setNull(10,Types.INTEGER);
+				}
+				if(bean.getJuniorThird() != null)
+				{
+					pstmt.setInt(11,bean.getJuniorThird());
+				}
+				else
+				{
+					pstmt.setNull(11,Types.INTEGER);
+				}
+
+				int i = pstmt.executeUpdate();
+				if(i == 1)
+				{
+					result = findByPrimaryKey(bean.getSchoolId(),bean.getAnniversary());
+				}
+			}
+
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	private static final String UPDATE = "UPDATE GradeStudent SET elementaryFirst = ?,elementarySecond = ?,elementaryThird = ?,elementaryFourth = ?,elementaryFifth = ?,elementarySixth = ?,juniorFirst = ?,juniorSecond = ?,juniorThird = ? WHERE schoolId = ? AND anniversary = ?";
+
+	public GradeStudentBean update(GradeStudentBean bean)
+	{
+		GradeStudentBean result = null;
+		if(bean != null)
+		{
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
+			{
+				if(bean.getElementaryFirst() != null)
+				{
+					pstmt.setInt(1,bean.getElementaryFirst());
+				}
+				else
+				{
+					pstmt.setNull(1,Types.INTEGER);
+				}
+
+				if(bean.getElementarySecond() != null)
+				{
+					pstmt.setInt(2,bean.getElementarySecond());
+				}
+				else
+				{
+					pstmt.setNull(2,Types.INTEGER);
+				}
+
+				if(bean.getElementaryThird() != null)
+				{
+					pstmt.setInt(3,bean.getElementaryThird());
+				}
+				else
+				{
+					pstmt.setNull(3,Types.INTEGER);
+				}
+
+				if(bean.getElementaryFourth() != null)
+				{
+					pstmt.setInt(4,bean.getElementaryFourth());
+				}
+				else
+				{
+					pstmt.setNull(4,Types.INTEGER);
+				}
+
+				if(bean.getElementaryFifth() != null)
+				{
+					pstmt.setInt(5,bean.getElementaryFifth());
+				}
+				else
+				{
+					pstmt.setNull(5,Types.INTEGER);
+				}
+
+				if(bean.getElementarySixth() != null)
+				{
+					pstmt.setInt(6,bean.getElementarySixth());
+				}
+				else
+				{
+					pstmt.setNull(6,Types.INTEGER);
+				}
+
+				if(bean.getJuniorFirst() != null)
+				{
+					pstmt.setInt(7,bean.getJuniorFirst());
+				}
+				else
+				{
+					pstmt.setNull(7,Types.INTEGER);
+				}
+
+				if(bean.getJuniorSecond() != null)
+				{
+					pstmt.setInt(8,bean.getJuniorSecond());
+				}
+				else
+				{
+					pstmt.setNull(8,Types.INTEGER);
+				}
+				if(bean.getJuniorThird() != null)
+				{
+					pstmt.setInt(9,bean.getJuniorThird());
+				}
+				else
+				{
+					pstmt.setNull(9,Types.INTEGER);
+				}
+				
+				pstmt.setInt(10,bean.getSchoolId());
+				pstmt.setInt(11,bean.getAnniversary());
+				int i = pstmt.executeUpdate();
+				if(i == 1)
+				{
+					result = this.findByPrimaryKey(bean.getSchoolId(),bean.getAnniversary());
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	private static final String DELETE = "DELETE FROM GradeStudent WHERE schoolId = ? AND anniversary = ?";
+
+	public boolean delete(int schoolId,int anniversary)
+	{
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(DELETE);)
+		{
+			pstmt.setInt(1,schoolId);
+			pstmt.setInt(2,anniversary);
+			int i = pstmt.executeUpdate();
+			if(i == 1)
+			{
+				return true;
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public static void main(String[] args)
+	{
 		GradeStudentDAOJdbc jdbc = new GradeStudentDAOJdbc();
 		GradeStudentBean bean = new GradeStudentBean();
-		bean.setSchoolId(999999);
-		bean.setAnniversary(103);
+		bean.setSchoolId(11503);
+		bean.setAnniversary(101);
 		bean.setElementaryFirst(126);
 		bean.setElementarySecond(111);
 		bean.setElementaryThird(107);
 		bean.setElementaryFourth(113);
 		bean.setElementaryFifth(100);
 		bean.setElementarySixth(107);
-		System.out.println(jdbc.insert(bean));
-		System.out.println(jdbc.findByPrimaryKey(999999));
-		System.out.println(jdbc.update(103, 111, 111, 111, 111, 111, 111, 0, 0, 0, 999999));
-		System.out.println(jdbc.delete(999999));
-		System.out.println(jdbc.getAll().size());
-		
-		
-	}
-	private static final String URL = "jdbc:sqlserver://localhost:1433;database=TCPIP";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "sa123456";
-	
-	private static final String SELECT_ALL = "select * from GradeStudent ";
-	public List<GradeStudentBean> getAll(){
-		List<GradeStudentBean> result = null;
-		try (
-			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
-			ResultSet rset = stmt.executeQuery();) {
-			
-			result = new ArrayList<GradeStudentBean>();
-			while(rset.next()) {
-				GradeStudentBean bean = new GradeStudentBean();
-				bean.setSchoolId(rset.getInt("schoolId"));
-				bean.setAnniversary(rset.getInt("anniversary"));
-				bean.setElementaryFirst(rset.getInt("elementaryFirst"));
-				bean.setElementarySecond(rset.getInt("elementarySecond"));
-				bean.setElementaryThird(rset.getInt("elementaryThird"));
-				bean.setElementaryFourth(rset.getInt("elementaryFourth"));
-				bean.setElementaryFifth(rset.getInt("elementaryFifth"));
-				bean.setElementarySixth(rset.getInt("elementarySixth"));
-				bean.setJuniorFirst(rset.getInt("juniorFirst"));
-				bean.setJuniorSecond(rset.getInt("juniorSecond"));
-				bean.setJuniorThird(rset.getInt("juniorThird"));
-				result.add(bean);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	private static final String SELECT_BY_ID = "select * from GradeStudent where schoolId =?";
-	public GradeStudentBean findByPrimaryKey(int schoolId){
-		GradeStudentBean result = null;
-		ResultSet rset= null;
-		try (
-			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID);){
-			stmt.setInt(1, schoolId);
-			rset = stmt.executeQuery();
-			while(rset.next()) {
-				result = new GradeStudentBean();
-				result.setSchoolId(rset.getInt("schoolId"));
-				result.setAnniversary(rset.getInt("anniversary"));
-				result.setElementaryFirst(rset.getInt("elementaryFirst"));
-				result.setElementarySecond(rset.getInt("elementarySecond"));
-				result.setElementaryThird(rset.getInt("elementaryThird"));
-				result.setElementaryFourth(rset.getInt("elementaryFourth"));
-				result.setElementaryFifth(rset.getInt("elementaryFifth"));
-				result.setElementarySixth(rset.getInt("elementarySixth"));
-				result.setJuniorFirst(rset.getInt("juniorFirst"));
-				result.setJuniorSecond(rset.getInt("juniorSecond"));
-				result.setJuniorThird(rset.getInt("juniorThird"));
-				return result;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rset!=null) {
-				try {
-					rset.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return result;
-	}
-	
-	private static final String INSERT = "insert into GradeStudent (schoolId, anniversary, elementaryFirst, elementarySecond, elementaryThird,"
-																+ "elementaryFourth, elementaryFifth, elementarySixth, juniorFirst, juniorSecond,"
-																+ "juniorThird) values (?,?,?,?,?,?,?,?,?,?,?)"; 
-	public GradeStudentBean insert(GradeStudentBean bean) {
-		GradeStudentBean result = null;
-		try(
-				Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(INSERT);) {
-			if(bean!=null) {
-				stmt.setInt(1, bean.getSchoolId());
-				stmt.setInt(2, bean.getAnniversary());
-				stmt.setInt(3, bean.getElementaryFirst());
-				stmt.setInt(4, bean.getElementarySecond());
-				stmt.setInt(5, bean.getElementaryThird());
-				stmt.setInt(6, bean.getElementaryFourth());
-				stmt.setInt(7, bean.getElementaryFifth());
-				stmt.setInt(8, bean.getElementarySixth());
-				stmt.setInt(9, bean.getJuniorFirst());
-				stmt.setInt(10, bean.getJuniorSecond());
-				stmt.setInt(11, bean.getJuniorThird());
-				int i = stmt.executeUpdate();
-				if(i==1) {
-					result = bean;
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	
-	private static final String UPDATE ="update GradeStudent set anniversary=?, elementaryFirst=?, elementarySecond=?, elementaryThird=?,"
-																+"elementaryFourth=?, elementaryFifth=?, elementarySixth=?, juniorFirst=?,"
-																+ "juniorSecond=?, juniorThird=? where schoolId=?";
-	
-	public GradeStudentBean update(int anniversary, int elementaryFirst, int elementarySecond, int elementaryThird, 
-								   int elementaryFourth, int elementaryFifth, int elementarySixth, int juniorFirst, 
-								   int juniorSecond, int juniorThird, int schoolId ){
-		GradeStudentBean result = null;
-		try(
-				Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(UPDATE);) {
-			stmt.setInt(1, anniversary);
-			stmt.setInt(2, elementaryFirst);
-			stmt.setInt(3, elementarySecond);
-			stmt.setInt(4, elementaryThird);
-			stmt.setInt(5, elementaryFourth);
-			stmt.setInt(6, elementaryFifth);
-			stmt.setInt(7, elementarySixth);
-			stmt.setInt(8, juniorFirst);
-			stmt.setInt(9, juniorSecond);
-			stmt.setInt(10, juniorThird);
-			stmt.setInt(11, schoolId);
-			int i = stmt.executeUpdate();
-			if(i==1) {
-				result = this.findByPrimaryKey(schoolId);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-	private static final String DELETE = "delete from GradeStudent where schoolId=?";
-	public boolean delete(int schoolId) {
-		try(
-				Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(DELETE);) {			
-			stmt.setInt(1, schoolId);
-			int i = stmt.executeUpdate();
-			if(i==1) {
-				return true;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 
+		GradeStudentBean bean2 = new GradeStudentBean();
+		bean2.setSchoolId(11503);
+		bean2.setAnniversary(100);
+		bean2.setElementaryFirst(126);
+		bean2.setElementarySecond(111);
+		bean2.setElementaryThird(107);
+		bean2.setElementaryFourth(113);
+		bean2.setElementaryFifth(100);
+		bean2.setJuniorFirst(777);
+		System.out.println(jdbc.insert(bean));
+		System.out.println(jdbc.findByPrimaryKey(11503,103));
+		System.out.println(jdbc.update(bean2));
+		System.out.println(jdbc.delete(21503,100));
+		System.out.println(jdbc.getAll().size());
+
+	}
 }

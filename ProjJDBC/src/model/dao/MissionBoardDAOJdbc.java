@@ -1,5 +1,7 @@
 package model.dao;
 
+import global.GlobalService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -12,22 +14,18 @@ import model.MissionBoardBean;
 
 public class MissionBoardDAOJdbc
 {
-	private static final String URL = "jdbc:sqlserver://localhost:1433;dataBaseName=TCPIP";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "passw0rd";
+	private static final String URL = GlobalService.URL;
+	private static final String USERNAME = GlobalService.USERNAME;
+	private static final String PASSWORD = GlobalService.PASSWORD;
 	
 	private static final String INSERT = "INSERT INTO MissionBoard (fullProjId,name,missionSetNum) VALUES (?,?,?)";
 	public MissionBoardBean insert(MissionBoardBean bean)
 	{
 		MissionBoardBean result = null;
 		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet key = null;
-		try
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
 		{
-			conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1,bean.getFullProjId());
 			pstmt.setString(2,bean.getName());
 			pstmt.setInt(3,bean.getMissionSetNum());
@@ -36,56 +34,23 @@ public class MissionBoardDAOJdbc
 			
 			if(num == 1)
 			{
-				key = pstmt.getGeneratedKeys();
-				
-				int pk = 0;
-				if(key.next())
-					pk = key.getInt(1);
-				
-				result = findByPrimaryKey(pk);
+				try(ResultSet key = pstmt.getGeneratedKeys();)
+				{
+					if(key.next())
+					{
+						result = findByPrimaryKey(key.getInt(1));
+					}
+				}
+				catch(Exception e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-		}
-		finally
-		{
-
-			if(key != null)
-			{
-				try
-				{
-					key.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-			if(pstmt != null)
-			{
-				try
-				{
-					pstmt.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(conn != null)
-			{
-				try
-				{
-					conn.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
 		}
 		return result;
 	}
@@ -95,12 +60,10 @@ public class MissionBoardDAOJdbc
 	{
 		boolean result = false;
 		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
-			conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			pstmt = conn.prepareStatement(DELETE);
+			
 			pstmt.setInt(1,id);
 			
 			int num = pstmt.executeUpdate();
@@ -114,32 +77,6 @@ public class MissionBoardDAOJdbc
 		{
 			e.printStackTrace();
 		}
-		finally
-		{
-			if(pstmt != null)
-			{
-				try
-				{
-					pstmt.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(conn != null)
-			{
-				try
-				{
-					conn.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
 		return result;
 	}
 	
@@ -147,13 +84,10 @@ public class MissionBoardDAOJdbc
 	public MissionBoardBean update(MissionBoardBean bean)
 	{
 		MissionBoardBean result = null;
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		try
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 		{
-			conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			pstmt = conn.prepareStatement(UPDATE);
 			pstmt.setInt(1,bean.getFullProjId());
 			pstmt.setString(2,bean.getName());
 			pstmt.setInt(3,bean.getMissionSetNum());
@@ -170,32 +104,6 @@ public class MissionBoardDAOJdbc
 		{
 			e.printStackTrace();
 		}
-		finally
-		{
-			if(pstmt != null)
-			{
-				try
-				{
-					pstmt.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(conn != null)
-			{
-				try
-				{
-					conn.close();
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
-		}
 		return result;
 	}
 	
@@ -203,67 +111,30 @@ public class MissionBoardDAOJdbc
 	public MissionBoardBean findByPrimaryKey(int id)
 	{
 		MissionBoardBean result = null;
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try
+
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(FIND_BY_PRIMARYKEY);)
 		{
-			conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			pstmt = conn.prepareStatement(FIND_BY_PRIMARYKEY);
 			pstmt.setInt(1,id);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next())
+			try(ResultSet rs = pstmt.executeQuery();)
 			{
-				result = new MissionBoardBean();
-				result.setMissionBoardId(rs.getInt(1));
-				result.setFullProjId(rs.getInt(2));
-				result.setName(rs.getString(3));
-				result.setMissionSetNum(rs.getInt(4));
+				if(rs.next())
+				{
+					result = new MissionBoardBean();
+					result.setMissionBoardId(rs.getInt(1));
+					result.setFullProjId(rs.getInt(2));
+					result.setName(rs.getString(3));
+					result.setMissionSetNum(rs.getInt(4));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
 			}
 		}
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(rs != null)
-			{
-				try
-				{
-					rs.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(pstmt != null)
-			{
-				try
-				{
-					pstmt.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(conn != null)
-			{
-				try
-				{
-					conn.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			}
 		}
 		return result;
 	}
@@ -274,15 +145,10 @@ public class MissionBoardDAOJdbc
 		List<MissionBoardBean> result = new ArrayList<MissionBoardBean>();
 		MissionBoardBean bean;
 		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rs = pstmt.executeQuery();)
 		{
-			conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			pstmt = conn.prepareStatement(SELECT_ALL);
-			rs = pstmt.executeQuery();
-			
 			while(rs.next())
 			{
 				bean = new MissionBoardBean();
@@ -297,44 +163,6 @@ public class MissionBoardDAOJdbc
 		catch(SQLException e)
 		{
 			e.printStackTrace();
-		}
-		finally
-		{
-			if(rs != null)
-			{
-				try
-				{
-					rs.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(pstmt != null)
-			{
-				try
-				{
-					pstmt.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			}
-			
-			if(conn != null)
-			{
-				try
-				{
-					conn.close();
-				}
-				catch(SQLException e)
-				{
-					e.printStackTrace();
-				}
-			}
 		}
 		return result;
 	}
@@ -372,7 +200,7 @@ public class MissionBoardDAOJdbc
 		System.out.println(updateBean);
 		
 		// delete
-		boolean delete = dao.delete(2);
+		boolean delete = dao.delete(100);
 		System.out.println("Delete : " + delete);
 	}
 }

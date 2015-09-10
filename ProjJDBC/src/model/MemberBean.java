@@ -3,7 +3,6 @@ package model;
 import java.io.Serializable;
 import java.util.Arrays;
 
-// 2015/09/04 by finn
 public class MemberBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +25,7 @@ public class MemberBean implements Serializable
 	private String account;					// 帳號（英文字母'數字）（不允許底線跟英文句點）
 	private byte[] password;				// 密碼（英文字母'數字）（不允許底線跟英文句點）
 	private String accountStatus;			// 帳號狀態(啟用/停用/待認證[預設])
+	private String identityCode;			// 激活碼
 
 	public MemberBean()
 	{
@@ -212,12 +212,22 @@ public class MemberBean implements Serializable
 		this.accountStatus = accountStatus;
 	}
 
+	public String getIdentityCode()
+	{
+		return identityCode;
+	}
+
+	public void setIdentityCode(String identityCode)
+	{
+		this.identityCode = identityCode;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "MemberBean [memberId=" + memberId + ", lastName=" + lastName + ", firstName=" + firstName + ", idNumber=" + idNumber + ", phone=" + phone + ", cellPhone=" + cellPhone + ", birthday=" + birthday + ", address=" + address + ", gender="
 				+ gender + ", email=" + email + ", pictureName=" + pictureName + ", pictureLength=" + pictureLength + ", registerTime=" + registerTime + ", recommendCount=" + recommendCount + ", account=" + account + ", password="
-				+ Arrays.toString(password) + ", accountStatus=" + accountStatus + "]";
+				+ Arrays.toString(password) + ", accountStatus=" + accountStatus + ", identityCode=" + identityCode + "]";
 	}
 	
 }

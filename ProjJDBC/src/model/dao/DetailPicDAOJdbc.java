@@ -5,7 +5,6 @@ import global.GlobalService;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -43,20 +42,11 @@ public class DetailPicDAOJdbc
 				if(rs.next())
 				{
 					bean = new DetailPicBean();
-
 					bean.setFullProjId(rs.getInt("fullProjId"));
 					bean.setImageName(rs.getString("imageName"));
 					bean.setImage(rs.getBytes("image"));
 					bean.setImageLength(rs.getLong("imageLength"));
-					
-					if(rs.getObject("imageDescribe") != null)
-					{
-						bean.setImageDescribe(rs.getString("imageDescribe"));
-					}
-					else
-					{
-						bean.setImageDescribe((String)rs.getObject("imageDescribe"));
-					}
+					bean.setImageDescribe(rs.getString("imageDescribe"));
 				}
 			}
 			catch(SQLException e)
@@ -83,21 +73,11 @@ public class DetailPicDAOJdbc
 			while(rs.next())
 			{
 				bean = new DetailPicBean();
-
 				bean.setFullProjId(rs.getInt("fullProjId"));
 				bean.setImageName(rs.getString("imageName"));
 				bean.setImage(rs.getBytes("image"));
 				bean.setImageLength(rs.getLong("imageLength"));
-
-				if(rs.getObject("imageDescribe") != null)
-				{
-					bean.setImageDescribe(rs.getString("imageDescribe"));
-				}
-				else
-				{
-					bean.setImageDescribe((String)rs.getObject("imageDescribe"));
-				}
-
+				bean.setImageDescribe(rs.getString("imageDescribe"));
 				resultlist.add(bean);
 			}
 		}

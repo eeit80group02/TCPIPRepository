@@ -1,19 +1,30 @@
 package model;
 
-public class TrainMapBean {
+import java.io.Serializable;
+
+public class TrainMapBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	
 	private String name; // 火車站名稱
 
-	@Override
-	public String toString() {
-		return "TrainMapBean [name=" + name + "]";
+	public TrainMapBean()
+	{
 	}
 
-	public String getName() {
+	public String getName()
+	{
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 
+	@Override
+	public String toString()
+	{
+		return "TrainMapBean [name=" + name + "]";
+	}
 }

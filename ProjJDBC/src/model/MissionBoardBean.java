@@ -1,48 +1,64 @@
 package model;
 
-public class MissionBoardBean 
+import java.io.Serializable;
+
+public class MissionBoardBean implements Serializable
 {
-	private int missionBoardId;  // 任務版流水號
-	private int fullProjId;      // 完整計畫編號 FK	
-	private String name;         //	計畫名稱
-	private int missionSetNum;	 // 任務集數量
+	private static final long serialVersionUID = 1L;
 	
-	public int getMissionBoardId()
+	private Integer missionBoardId;	// 任務版流水號
+	private Integer fullProjId;		// 完整計畫編號 FK	
+	private String name;         	// 計畫名稱
+	private Integer missionSetNum;	// 任務集數量
+	
+	public MissionBoardBean()
+	{
+	}
+
+	public Integer getMissionBoardId()
 	{
 		return missionBoardId;
 	}
-	public void setMissionBoardId(int missionBoardId)
+
+	public void setMissionBoardId(Integer missionBoardId)
 	{
 		this.missionBoardId = missionBoardId;
 	}
-	public int getFullProjId()
+
+	public Integer getFullProjId()
 	{
 		return fullProjId;
 	}
-	public void setFullProjId(int fullProjId)
+
+	public void setFullProjId(Integer fullProjId)
 	{
 		this.fullProjId = fullProjId;
 	}
+
 	public String getName()
 	{
 		return name;
 	}
+
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	public int getMissionSetNum()
+
+	public Integer getMissionSetNum()
 	{
 		return missionSetNum;
 	}
-	public void setMissionSetNum(int missionSetNum)
+
+	public void setMissionSetNum(Integer missionSetNum)
 	{
 		this.missionSetNum = missionSetNum;
 	}
-	
+
 	@Override
 	public String toString()
 	{
 		return "MissionBoardBean [missionBoardId=" + missionBoardId + ", fullProjId=" + fullProjId + ", name=" + name + ", missionSetNum=" + missionSetNum + "]";
 	}
+	
 }

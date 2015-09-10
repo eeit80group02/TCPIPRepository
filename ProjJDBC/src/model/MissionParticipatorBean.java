@@ -1,32 +1,53 @@
 package model;
 
-public class MissionParticipatorBean 
+import java.io.Serializable;
+
+public class MissionParticipatorBean implements Serializable
 {
-	private int missionParticipatorId;    	// 流水號
-	private int missionId;  				// 任務編號   FK
-	private int memberId;      				// 參與者(協助任務執行的人) FK
-	public int getMissionParticipatorId() {
+	private static final long serialVersionUID = 1L;
+	
+	private Integer missionParticipatorId;    	// 流水號
+	private Integer missionId;  				// 任務編號   FK
+	private Integer memberId;      				// 參與者(協助任務執行的人) FK
+
+	public MissionParticipatorBean()
+	{
+	}
+
+	public Integer getMissionParticipatorId()
+	{
 		return missionParticipatorId;
 	}
-	public void setMissionParticipatorId(int missionParticipatorId) {
+
+	public void setMissionParticipatorId(Integer missionParticipatorId)
+	{
 		this.missionParticipatorId = missionParticipatorId;
 	}
-	public int getMissionId() {
+
+	public Integer getMissionId()
+	{
 		return missionId;
 	}
-	public void setMissionId(int missionId) {
+
+	public void setMissionId(Integer missionId)
+	{
 		this.missionId = missionId;
 	}
-	public int getMemberId() {
+
+	public Integer getMemberId()
+	{
 		return memberId;
 	}
-	public void setMemberId(int memberId) {
+
+	public void setMemberId(Integer memberId)
+	{
 		this.memberId = memberId;
 	}
+
 	@Override
-	public String toString() {
-		return "MissionParticipatorBean [missionParticipatorId="
-				+ missionParticipatorId + ", missionId=" + missionId
-				+ ", memberId=" + memberId + "]";
+	public String toString()
+	{
+		return "MissionParticipatorBean [missionParticipatorId=" + missionParticipatorId + ", missionId=" + missionId + ", memberId=" + memberId + "]";
 	}
+	
 } 

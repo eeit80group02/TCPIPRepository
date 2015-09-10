@@ -13,13 +13,15 @@ public class GlobalService
 	public static final String PASSWORD = "passw0rd";
 	public static final String DATABASE = "TCPIP";
 	public static final String URL = "jdbc:sqlserver://" + GlobalService.HOST + ":1433;databaseName=" + GlobalService.DATABASE;
-	
+	public static final String JNDI = "java:comp/env/jdbc/TCPIP";
 	private static SimpleDateFormat sdf;
+	
 	static
 	{
 		sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.setLenient(false);
 	}
+	
 	public static byte[] convertInputStreamToByteArray(InputStream is)
 	{
 		byte[] buffer = new byte[1024 * 8];
@@ -69,7 +71,6 @@ public class GlobalService
 		{
 			e.printStackTrace();
 		}
-		
 		return result; 
 	}
 }

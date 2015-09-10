@@ -1,46 +1,64 @@
 package model;
 
-public class MissionSetBean 
+import java.io.Serializable;
+
+public class MissionSetBean implements Serializable
 {
-	private int missionBoardId;	     // 任務版編號 FK
-	private int missionSetId;    	 // 任務集編號 PK
-	private String name;        	 // 任務集名稱
-	private int missionSetOrder; 	 // 任務集順序
-	public int getMissionBoardId()
+	private static final long serialVersionUID = 1L;
+	
+	private Integer missionSetId;		// 任務集編號 PK
+	private Integer missionBoardId;		// 任務版編號 FK
+	private String name;        	 	// 任務集名稱
+	private Integer missionSetOrder;	// 任務集順序
+	
+	public MissionSetBean()
 	{
-		return missionBoardId;
 	}
-	public void setMissionBoardId(int missionBoardId)
-	{
-		this.missionBoardId = missionBoardId;
-	}
-	public int getMissionSetId()
+
+	public Integer getMissionSetId()
 	{
 		return missionSetId;
 	}
-	public void setMissionSetId(int missionSetId)
+
+	public void setMissionSetId(Integer missionSetId)
 	{
 		this.missionSetId = missionSetId;
 	}
+
+	public Integer getMissionBoardId()
+	{
+		return missionBoardId;
+	}
+
+	public void setMissionBoardId(Integer missionBoardId)
+	{
+		this.missionBoardId = missionBoardId;
+	}
+
 	public String getName()
 	{
 		return name;
 	}
+
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	public int getMissionSetOrder()
+
+	public Integer getMissionSetOrder()
 	{
 		return missionSetOrder;
 	}
-	public void setMissionSetOrder(int missionSetOrder)
+
+	public void setMissionSetOrder(Integer missionSetOrder)
 	{
 		this.missionSetOrder = missionSetOrder;
 	}
+
 	@Override
 	public String toString()
 	{
-		return "MissionSetBean [missionBoardId=" + missionBoardId + ", missionSetId=" + missionSetId + ", name=" + name + ", missionSetOrder=" + missionSetOrder + "]";
+		return "MissionSetBean [missionSetId=" + missionSetId + ", missionBoardId=" + missionBoardId + ", name=" + name + ", missionSetOrder=" + missionSetOrder + "]";
 	}
+	
 }

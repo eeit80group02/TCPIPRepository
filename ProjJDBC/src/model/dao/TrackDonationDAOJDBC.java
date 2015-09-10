@@ -1,5 +1,7 @@
 package model.dao;
 
+import global.GlobalService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,135 +12,152 @@ import java.util.List;
 
 import model.TrackDonationBean;
 
-public class TrackDonationDAOJDBC {
-	private static final String URL = "jdbc:sqlserver://localhost:1433;database=TCPIP";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "sa123456";
+public class TrackDonationDAOJDBC
+{
+	private static final String URL = GlobalService.URL;
+	private static final String USERNAME = GlobalService.USERNAME;
+	private static final String PASSWORD = GlobalService.PASSWORD;
 
-	public static void main(String[] args) {
-		TrackDonationDAOJDBC dao = new TrackDonationDAOJDBC();
-		List<TrackDonationBean> beans = dao.getAll();
-		// System.out.println(beans);
-		TrackDonationBean bean = dao.findByPrimaryKey(3, 6);
-		System.out.println(bean);
-
-		bean.setDonationId(2);
-		bean.setMemberId(7);
-		System.out.println(dao.insert(bean));
-		System.out.println(dao.update(4, 6, 2, 7));
-		System.out.println(dao.delete(4, 6));
-	}
-
-	private static final String SELECT_BY_ID = "select * from trackdonation where donationId = ? AND memberId = ?";
-
-	public TrackDonationBean findByPrimaryKey(int donationId, int memberId) {
+	private static final String SELECT_BY_ID = "SELECT trackDonationId,donationId,memberId FROM trackdonation WHERE trackDonationId = ?";
+	public TrackDonationBean findByPrimaryKey(int trackDonationId)
+	{
 		TrackDonationBean result = null;
 
-		ResultSet rset = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID);) {
-			stmt.setInt(1, donationId);
-			stmt.setInt(2, memberId);
-			rset = stmt.executeQuery();
-			if (rset.next()) {
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
+		{
+			pstmt.setInt(1,trackDonationId);
+			ResultSet rset = pstmt.executeQuery();
+			if(rset.next())
+			{
 				result = new TrackDonationBean();
+				result.setTrackDonationId(rset.getInt("trackDonationId"));
 				result.setDonationId(rset.getInt("donationId"));
 				result.setMemberId(rset.getInt("memberId"));
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
-		} finally {
-			if (rset != null) {
-				try {
-					rset.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 		}
 		return result;
 	}
 
-	private static final String SELECT_ALL = "select * from trackdonation";
-
-	public List<TrackDonationBean> getAll() {
+	private static final String SELECT_ALL = "SELECT trackDonationId,donationId,memberId FROM trackdonation";
+	public List<TrackDonationBean> getAll()
+	{
 		List<TrackDonationBean> result = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
-				ResultSet rset = stmt.executeQuery();) {
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rset = pstmt.executeQuery();)
+		{
 			result = new ArrayList<TrackDonationBean>();
-			while (rset.next()) {
+			while(rset.next())
+			{
 				TrackDonationBean bean = new TrackDonationBean();
+				bean.setTrackDonationId(rset.getInt("trackDonationId"));
 				bean.setDonationId(rset.getInt("donationId"));
 				bean.setMemberId(rset.getInt("memberId"));
 
 				result.add(bean);
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		return result;
 	}
 
-	private static final String INSERT = "insert into trackdonation (donationId, memberId) values (?, ?)";
-
-	public TrackDonationBean insert(TrackDonationBean bean) {
+	private static final String INSERT = "INSERT INTO trackdonation (donationId, memberId) values (?, ?)";
+	public TrackDonationBean insert(TrackDonationBean bean)
+	{
 		TrackDonationBean result = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(INSERT);) {
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
+		{
+			pstmt.setInt(1,bean.getDonationId());
+			pstmt.setInt(2,bean.getMemberId());
 
-			stmt.setInt(1, bean.getDonationId());
-			stmt.setInt(2, bean.getMemberId());
-
-			int i = stmt.executeUpdate();
-			if (i == 1) {
-				result = this.findByPrimaryKey(bean.getDonationId(), bean.getMemberId());
+			int i = pstmt.executeUpdate();
+			if(i == 1)
+			{
+				ResultSet key = pstmt.getGeneratedKeys();
+				if(key.next())
+				{
+					result = this.findByPrimaryKey(key.getInt(1));
+				}
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		return result;
 	}
 
-	private static final String UPDATE = "update trackdonation set donationId = ?, memberId = ? where donationId = ? AND memberId = ?";
-
-	public TrackDonationBean update(int newDonationId, int newMemberId, int donationId, int memberId) {
+	private static final String UPDATE = "UPDATE trackdonation SET donationId = ?, memberId = ? WHERE trackDonationId = ?";
+	public TrackDonationBean update(TrackDonationBean bean)
+	{
 		TrackDonationBean result = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(UPDATE);) {
-			stmt.setInt(1, newDonationId);
-			stmt.setInt(2, newMemberId);
+		
+		if(bean != null)
+		{
+			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
+			{
+				pstmt.setInt(1,bean.getDonationId());
+				pstmt.setInt(2,bean.getMemberId());
+				pstmt.setInt(3,bean.getTrackDonationId());
 
-			stmt.setInt(3, donationId);
-			stmt.setInt(4, memberId);
-
-			int i = stmt.executeUpdate();
-			if (i == 1) {
-				result = new TrackDonationBean();
-				result.setDonationId(newDonationId);
-				result.setMemberId(newMemberId);
+				int i = pstmt.executeUpdate();
+				if(i == 1)
+				{
+					result = this.findByPrimaryKey(bean.getTrackDonationId());
+				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
 		}
-
 		return result;
 	}
 
-	private static final String DELETE = "delete from trackdonation where donationId = ? AND memberId = ?";
-
-	public boolean delete(int donationId, int memberId) {
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(DELETE);) {
-			stmt.setInt(1, donationId);
-			stmt.setInt(2, memberId);
-			int i = stmt.executeUpdate();
-			if (i == 1) {
+	private static final String DELETE = "DELETE FROM trackdonation WHERE trackDonationId = ?";
+	public boolean delete(int trackDonationId)
+	{
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
+		{
+			pstmt.setInt(1,trackDonationId);
+			int i = pstmt.executeUpdate();
+			if(i == 1)
+			{
 				return true;
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public static void main(String[] args)
+	{
+		TrackDonationDAOJDBC dao = new TrackDonationDAOJDBC();
+		List<TrackDonationBean> beans = dao.getAll();
+		System.out.println(beans);
+		TrackDonationBean bean = dao.findByPrimaryKey(1);
+		System.out.println(bean);
+
+		TrackDonationBean bean1 = new TrackDonationBean();
+//		bean1.setTrackDonationId(1);
+		bean1.setDonationId(1);
+		bean1.setMemberId(2);
+//		System.out.println(dao.insert(bean1));
+//		System.out.println(dao.update(bean1));
+		System.out.println(dao.delete(1));
 	}
 }

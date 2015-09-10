@@ -2,7 +2,6 @@ package model.dao;
 
 import global.GlobalService;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -18,7 +17,6 @@ import model.ActivityHighlightBean;
 
 public class ActivityHighlightDAOJdbc
 {
-
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
@@ -47,15 +45,7 @@ public class ActivityHighlightDAOJdbc
 					result.setFrontCoverName(rs.getString("frontCoverName"));
 					result.setFrontCover(rs.getBytes("frontCover"));
 					result.setFrontCoverLength(rs.getLong("frontCoverLength"));
-
-					if(rs.getObject("VedioURL") != null)
-					{
-						result.setVedioURL(rs.getString("VedioURL"));
-					}
-					else
-					{
-						result.setVedioURL((String)rs.getObject("VedioURL"));
-					}
+					result.setVedioURL(rs.getString("VedioURL"));
 					result.setContent(rs.getString("Content"));
 				}
 			}
@@ -88,16 +78,7 @@ public class ActivityHighlightDAOJdbc
 				bean.setFrontCoverName(rs.getString("frontCoverName"));
 				bean.setFrontCover(rs.getBytes("frontCover"));
 				bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
-
-				if(rs.getObject("VedioURL") != null)
-				{
-					bean.setVedioURL(rs.getString("VedioURL"));
-				}
-				else
-				{
-					bean.setVedioURL((String)rs.getObject("VedioURL"));
-				}
-
+				bean.setVedioURL(rs.getString("VedioURL"));
 				bean.setContent(rs.getString("Content"));
 				result.add(bean);
 			}

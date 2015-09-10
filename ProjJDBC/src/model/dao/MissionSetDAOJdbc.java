@@ -1,7 +1,8 @@
 package model.dao;
 
+import global.GlobalService;
+
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,14 +10,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MissionBoardBean;
 import model.MissionSetBean;
 
 public class MissionSetDAOJdbc
 {
-	private static final String URL = "jdbc:sqlserver://localhost:1433;dataBaseName=TCPIP";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "passw0rd";
+	private static final String URL = GlobalService.URL;
+	private static final String USERNAME = GlobalService.USERNAME;
+	private static final String PASSWORD = GlobalService.PASSWORD;
 	
 	private static final String INSERT = "INSERT INTO MissionSet (missionBoardId,name,missionSetOrder) VALUES (?,?,?)";
 	public MissionSetBean insert(MissionSetBean bean)
@@ -41,7 +41,7 @@ public class MissionSetDAOJdbc
 					
 					result = findByPrimaryKey(pk);
 				}
-				catch(Exception e)
+				catch(SQLException e)
 				{
 					e.printStackTrace();
 				}
@@ -124,7 +124,7 @@ public class MissionSetDAOJdbc
 					result.setMissionSetOrder(rs.getInt(4));
 				}
 			}
-			catch(Exception e)
+			catch(SQLException e)
 			{
 				e.printStackTrace();
 			}
@@ -181,7 +181,7 @@ public class MissionSetDAOJdbc
 		// insert
 		MissionSetBean insertData = new MissionSetBean();
 		MissionSetBean insertBean;
-		insertData.setMissionBoardId(4);
+		insertData.setMissionBoardId(3);
 		insertData.setName("團康組");
 		insertData.setMissionSetOrder(1);
 		insertBean = dao.insert(insertData);
@@ -194,8 +194,8 @@ public class MissionSetDAOJdbc
 		// update
 		MissionSetBean updateData = new MissionSetBean();
 		MissionSetBean updateBean;
-		updateData.setMissionSetId(6);
-		updateData.setMissionBoardId(4);
+		updateData.setMissionSetId(1);
+		updateData.setMissionBoardId(3);
 		updateData.setName("神組");
 		updateData.setMissionSetOrder(1);
 		updateBean = dao.update(updateData);

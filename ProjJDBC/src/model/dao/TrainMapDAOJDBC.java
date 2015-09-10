@@ -1,5 +1,7 @@
 package model.dao;
 
+import global.GlobalService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -10,13 +12,14 @@ import java.util.List;
 
 import model.TrainMapBean;
 
+public class TrainMapDAOJDBC
+{
+	private static final String URL = GlobalService.URL;
+	private static final String USERNAME = GlobalService.USERNAME;
+	private static final String PASSWORD = GlobalService.PASSWORD;
 
-public class TrainMapDAOJDBC {
-	private static final String URL = "jdbc:sqlserver://localhost:1433;database=TCPIP";
-	private static final String USERNAME = "sa";
-	private static final String PASSWORD = "sa123456";
-
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 		TrainMapDAOJDBC dao = new TrainMapDAOJDBC();
 		List<TrainMapBean> beans = dao.getAll();
 		System.out.println(beans);
@@ -25,53 +28,58 @@ public class TrainMapDAOJDBC {
 
 		bean.setName("海科館站");
 		System.out.println(dao.insert(bean));
-		System.out.println(dao.update("平溪站(平溪線)", "海科館站"));
+		System.out.println(dao.update("平溪站(平溪線)","海科館站"));
 		System.out.println(dao.delete("平溪站(平溪線)"));
 	}
 
-	private static final String SELECT_BY_ID = "select * from trainmap where name = ?";
-
-	public TrainMapBean findByPrimaryKey(String name) {
+	private static final String SELECT_BY_ID = "select name from trainmap where name = ?";
+	public TrainMapBean findByPrimaryKey(String name)
+	{
 		TrainMapBean result = null;
 
-		ResultSet rset = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID);) {
-			stmt.setString(1, name);
-			rset = stmt.executeQuery();
-			if (rset.next()) {
-				result = new TrainMapBean();
-				result.setName(rset.getString("name"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rset != null) {
-				try {
-					rset.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
+		{
+			pstmt.setString(1,name);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				if(rset.next())
+				{
+					result = new TrainMapBean();
+					result.setName(rset.getString("name"));
 				}
 			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
 		}
 		return result;
 	}
 
-	private static final String SELECT_ALL = "select * from trainmap";
-
-	public List<TrainMapBean> getAll() {
+	private static final String SELECT_ALL = "select name from trainmap";
+	public List<TrainMapBean> getAll()
+	{
 		List<TrainMapBean> result = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
-				ResultSet rset = stmt.executeQuery();) {
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+			ResultSet rset = pstmt.executeQuery();)
+		{
 			result = new ArrayList<TrainMapBean>();
-			while (rset.next()) {
+			while(rset.next())
+			{
 				TrainMapBean bean = new TrainMapBean();
 				bean.setName(rset.getString("name"));
 
 				result.add(bean);
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		return result;
@@ -79,18 +87,22 @@ public class TrainMapDAOJDBC {
 
 	private static final String INSERT = "insert into trainmap (name) values (?)";
 
-	public TrainMapBean insert(TrainMapBean bean) {
+	public TrainMapBean insert(TrainMapBean bean)
+	{
 		TrainMapBean result = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(INSERT);) {
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+		{
+			pstmt.setString(1,bean.getName());
 
-			stmt.setString(1, bean.getName());
-
-			int i = stmt.executeUpdate();
-			if (i == 1) {
+			int i = pstmt.executeUpdate();
+			if(i == 1)
+			{
 				result = this.findByPrimaryKey(bean.getName());
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		return result;
@@ -98,20 +110,24 @@ public class TrainMapDAOJDBC {
 
 	private static final String UPDATE = "update trainmap set name = ? where name = ?";
 
-	public TrainMapBean update(String newName, String name) {
+	public TrainMapBean update(String newName,String name)
+	{
 		TrainMapBean result = null;
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(UPDATE);) {
-			stmt.setString(1, newName);
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(UPDATE);)
+		{
+			stmt.setString(1,newName);
 
-			stmt.setString(2, name);
+			stmt.setString(2,name);
 
 			int i = stmt.executeUpdate();
-			if (i == 1) {
+			if(i == 1)
+			{
 				result = new TrainMapBean();
 				result.setName(newName);
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 
@@ -119,16 +135,19 @@ public class TrainMapDAOJDBC {
 	}
 
 	private static final String DELETE = "delete from trainmap where name = ?";
-
-	public boolean delete(String name) {
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement stmt = conn.prepareStatement(DELETE);) {
-			stmt.setString(1, name);
+	public boolean delete(String name)
+	{
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement stmt = conn.prepareStatement(DELETE);)
+		{
+			stmt.setString(1,name);
 			int i = stmt.executeUpdate();
-			if (i == 1) {
+			if(i == 1)
+			{
 				return true;
 			}
-		} catch (SQLException e) {
+		}
+		catch(SQLException e)
+		{
 			e.printStackTrace();
 		}
 		return false;

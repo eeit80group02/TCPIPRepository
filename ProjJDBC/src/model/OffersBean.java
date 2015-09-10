@@ -1,41 +1,64 @@
 package model;
 
-public class OffersBean 
+import java.io.Serializable;
+
+public class OffersBean implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+	
+	private Integer schoolDemandId;		// 計畫需求編號 FK pk
+	private Boolean room;				// 住宿(1表示提供 0 表示不提供)
+	private Boolean place;				// 活動場地(1表示提供 0 表示不提供)
+	private Boolean food;				// 伙食(1表示提供 0 表示不提供)
+	
+	public OffersBean()
+	{
+	}
 
-	private int schoolDemandId;       //  計畫需求編號 FK
-	private boolean room;     // 住宿(1表示提供 0 表示不提供)
-	private boolean place;    // 活動場地(1表示提供 0 表示不提供)
-	private boolean food;     // 伙食(1表示提供 0 表示不提供)
-
-	public int getSchoolDemandId() {
+	public Integer getSchoolDemandId()
+	{
 		return schoolDemandId;
 	}
-	public void setSchoolDemandId(int schoolDemandId) {
+
+	public void setSchoolDemandId(Integer schoolDemandId)
+	{
 		this.schoolDemandId = schoolDemandId;
 	}
-	public boolean isRoom() {
+
+	public Boolean getRoom()
+	{
 		return room;
 	}
-	public void setRoom(boolean room) {
+
+	public void setRoom(Boolean room)
+	{
 		this.room = room;
 	}
-	public boolean isPlace() {
+
+	public Boolean getPlace()
+	{
 		return place;
 	}
-	public void setPlace(boolean place) {
+
+	public void setPlace(Boolean place)
+	{
 		this.place = place;
 	}
-	public boolean isFood() {
+
+	public Boolean getFood()
+	{
 		return food;
 	}
-	public void setFood(boolean food) {
+
+	public void setFood(Boolean food)
+	{
 		this.food = food;
 	}
+
 	@Override
-	public String toString() {
-		return "OffersBean [schoolDemandId=" + schoolDemandId + ", room="
-				+ room + ", place=" + place + ", food=" + food + "]";
+	public String toString()
+	{
+		return "OffersBean [schoolDemandId=" + schoolDemandId + ", room=" + room + ", place=" + place + ", food=" + food + "]";
 	}
-	
+
 }

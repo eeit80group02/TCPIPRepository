@@ -66,12 +66,10 @@ public class DonationDAOjdbc
 				if(count == 1)
 				{
 					ResultSet key = pstmt.getGeneratedKeys();
-					int pk = 0;
 					if(key.next())
 					{
-						pk = key.getInt(1);
+						result = findByPrimaryKey(key.getInt(1));
 					}
-					result = findByPrimaryKey(pk);
 					System.out.println("insert success");
 				}
 			}
@@ -188,15 +186,7 @@ public class DonationDAOjdbc
 					bean.setImageName(rs.getString("imageName"));
 					bean.setImageFile(rs.getBytes("imageFile"));
 					bean.setImageLength(rs.getLong("imageLength"));
-					
-					if(rs.getObject("remark") != null)
-					{
-						bean.setRemark(rs.getString("remark"));
-					}
-					else
-					{
-						bean.setRemark((String)rs.getObject("remark"));
-					}
+					bean.setRemark(rs.getString("remark"));
 				}
 			}
 			catch(SQLException e)
@@ -240,15 +230,7 @@ public class DonationDAOjdbc
 				bean.setImageName(rs.getString("imageName"));
 				bean.setImageFile(rs.getBytes("imageFile"));
 				bean.setImageLength(rs.getLong("imageLength"));
-				
-				if(rs.getObject("remark") != null)
-				{
-					bean.setRemark(rs.getString("remark"));
-				}
-				else
-				{
-					bean.setRemark((String)rs.getObject("remark"));
-				}
+				bean.setRemark(rs.getString("remark"));
 				
 				list.add(bean);
 			}
@@ -323,7 +305,7 @@ public class DonationDAOjdbc
 		daojdbc.update(bean2);
 
 		/** DELETE OK **/
-		boolean count = daojdbc.delete(1);
+		boolean count = daojdbc.delete(100);
 		System.out.println(count);
 
 		/** SELECT_BY_PRYMARY_KEY **/

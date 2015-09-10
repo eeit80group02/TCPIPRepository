@@ -1,27 +1,52 @@
 package model;
 
-public class TrackProjBean {
-	private int fullProjId; // 完整計畫編號 FK
-	private int memberId; // 會員編號 FK
+import java.io.Serializable;
 
-	@Override
-	public String toString() {
-		return "TrackProjBean [fullProjId=" + fullProjId + ", memberId=" + memberId + "]";
+public class TrackProjBean implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+	
+	private Integer trackProjId;		// 流水號
+	private Integer fullProjId; 		// 完整計畫編號 FK
+	private Integer memberId;			// 會員編號 FK
+	
+	public TrackProjBean()
+	{
 	}
 
-	public int getFullProjId() {
+	public Integer getTrackProjId()
+	{
+		return trackProjId;
+	}
+
+	public void setTrackProjId(Integer trackProjId)
+	{
+		this.trackProjId = trackProjId;
+	}
+
+	public Integer getFullProjId()
+	{
 		return fullProjId;
 	}
 
-	public void setFullProjId(int fullProjId) {
+	@Override
+	public String toString()
+	{
+		return "TrackProjBean [trackProjId=" + trackProjId + ", fullProjId=" + fullProjId + ", memberId=" + memberId + "]";
+	}
+
+	public void setFullProjId(Integer fullProjId)
+	{
 		this.fullProjId = fullProjId;
 	}
 
-	public int getMemberId() {
+	public Integer getMemberId()
+	{
 		return memberId;
 	}
 
-	public void setMemberId(int memberId) {
+	public void setMemberId(Integer memberId)
+	{
 		this.memberId = memberId;
 	}
 

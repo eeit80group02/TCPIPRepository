@@ -1,33 +1,74 @@
 package model;
 
-public class ProcessingMemberBean
+import java.io.Serializable;
+
+public class ProcessingMemberBean implements Serializable
 {
-	private int schoolDemandId;     	// 計畫需求編號 FK
-	private int memberId;        	    //會員編號 FK
-	private java.util.Date datetime;    // (指活動發起人下決定跟哪個學校接洽的那刻)(允許空值，只有洽談成功的學校有值)
-	public int getSchoolDemandId() {
+	private static final long serialVersionUID = 1L;
+	
+	private Integer processingMemberId;	// 流水號
+	private Integer schoolDemandId; 	// 計畫需求編號 FK
+	private Integer memberId; 			// 會員編號 FK
+	private java.util.Date checkTime; 	// 審核時間(指活動發起人下決定跟哪個學校接洽的那刻)(允許空值，只有洽談成功的學校有值)
+	private String checkStatus;			// 審核狀態(已通過 未通過 待審核)
+	
+	public ProcessingMemberBean()
+	{
+	}
+
+	public Integer getProcessingMemberId()
+	{
+		return processingMemberId;
+	}
+
+	public void setProcessingMemberId(Integer processingMemberId)
+	{
+		this.processingMemberId = processingMemberId;
+	}
+
+	public Integer getSchoolDemandId()
+	{
 		return schoolDemandId;
 	}
-	public void setSchoolDemandId(int schoolDemandId) {
+
+	public void setSchoolDemandId(Integer schoolDemandId)
+	{
 		this.schoolDemandId = schoolDemandId;
 	}
-	public int getMemberId() {
+
+	public Integer getMemberId()
+	{
 		return memberId;
 	}
-	public void setMemberId(int memberId) {
+
+	public void setMemberId(Integer memberId)
+	{
 		this.memberId = memberId;
 	}
-	public java.util.Date getDatetime() {
-		return datetime;
+
+	public java.util.Date getCheckTime()
+	{
+		return checkTime;
 	}
-	public void setDatetime(java.util.Date datetime) {
-		this.datetime = datetime;
+
+	public void setCheckTime(java.util.Date checkTime)
+	{
+		this.checkTime = checkTime;
 	}
-	
+
+	public String getCheckStatus()
+	{
+		return checkStatus;
+	}
+
+	public void setCheckStatus(String checkStatus)
+	{
+		this.checkStatus = checkStatus;
+	}
+
 	@Override
-	public String toString() {
-		return "ProcessingMemberBean [schoolDemandId=" + schoolDemandId
-				+ ", memberId=" + memberId + ", datetime=" + datetime + "]";
+	public String toString()
+	{
+		return "ProcessingMemberBean [processingMemberId=" + processingMemberId + ", schoolDemandId=" + schoolDemandId + ", memberId=" + memberId + ", checkTime=" + checkTime + ", checkStatus=" + checkStatus + "]";
 	}
 }
-

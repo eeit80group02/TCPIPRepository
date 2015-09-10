@@ -2,7 +2,6 @@ package model.dao;
 
 import global.GlobalService;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -23,8 +22,8 @@ public class MemberDAOJdbc
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
-	private static final String SELECT_BY_PK = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus FROM Member WHERE memberId = ?";
-	private static final String SELECT_ALL = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus FROM Member";
+	private static final String SELECT_BY_PK = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE memberId = ?";
+	private static final String SELECT_ALL = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member";
 	private static final String INSERT = "INSERT INTO Member (lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE = "UPDATE Member set lastName = ?,firstName = ?,idNumber = ?,phone = ?,cellPhone = ?,birthday = ?,address = ?,gender = ?,email = ?,pictureName=?, picture = ?,pictureLength = ?,registerTime=?, recommendCount = ?,account = ?,password = ?,accountStatus = ? WHERE memberId = ?";
 	private static final String DELETE = "DELETE FROM Member WHERE memberId = ?";
@@ -77,12 +76,10 @@ public class MemberDAOJdbc
 				{
 					try(ResultSet key = pstmt.getGeneratedKeys();)
 					{
-						int pk = 0;
 						if(key.next())
 						{
-							pk = key.getInt(1);
+							result = select(key.getInt(1));
 						}
-						result = select(pk);
 					}
 					catch(Exception e)
 					{
@@ -195,25 +192,8 @@ public class MemberDAOJdbc
 					result.setLastName(rs.getString("LastName"));
 					result.setFirstName(rs.getString("FirstName"));
 					result.setIdNumber(rs.getString("IdNumber"));
-
-					if(rs.getObject("Phone") != null)
-					{
-						result.setPhone(rs.getString("Phone"));
-					}
-					else
-					{
-						result.setPhone((String)rs.getObject("Phone"));
-					}
-
-					if(rs.getObject("CellPhone") != null)
-					{
-						result.setCellPhone(rs.getString("CellPhone"));
-					}
-					else
-					{
-						result.setCellPhone((String)rs.getObject("CellPhone"));
-					}
-
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
 					result.setBirthday(rs.getDate("Birthday"));
 					result.setAddress(rs.getString("Address"));
 					result.setGender(rs.getString("Gender"));
@@ -226,6 +206,7 @@ public class MemberDAOJdbc
 					result.setAccount(rs.getString("Account"));
 					result.setPassword(rs.getBytes("Password"));
 					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
 				}
 			}
 			catch(SQLException e)
@@ -258,25 +239,8 @@ public class MemberDAOJdbc
 				bean.setLastName(rs.getString("LastName"));
 				bean.setFirstName(rs.getString("FirstName"));
 				bean.setIdNumber(rs.getString("IdNumber"));
-
-				if(rs.getObject("Phone") != null)
-				{
-					bean.setPhone(rs.getString("Phone"));
-				}
-				else
-				{
-					bean.setPhone((String)rs.getObject("Phone"));
-				}
-
-				if(rs.getObject("CellPhone") != null)
-				{
-					bean.setCellPhone(rs.getString("CellPhone"));
-				}
-				else
-				{
-					bean.setCellPhone((String)rs.getObject("CellPhone"));
-				}
-
+				bean.setPhone(rs.getString("Phone"));
+				bean.setCellPhone(rs.getString("CellPhone"));
 				bean.setBirthday(rs.getDate("Birthday"));
 				bean.setAddress(rs.getString("Address"));
 				bean.setGender(rs.getString("Gender"));
@@ -289,6 +253,7 @@ public class MemberDAOJdbc
 				bean.setAccount(rs.getString("Account"));
 				bean.setPassword(rs.getBytes("Password"));
 				bean.setAccountStatus(rs.getString("AccountStatus"));
+				bean.setIdentityCode(rs.getString("identityCode"));
 
 				result.add(bean);
 			}
