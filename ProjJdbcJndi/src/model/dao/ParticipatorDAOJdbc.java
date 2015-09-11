@@ -23,8 +23,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.ParticipatorBean;
+import model.dao.interfaces.ParticipatorDAO;
 
-public class ParticipatorDAOJdbc
+public class ParticipatorDAOJdbc implements ParticipatorDAO
 {
 	private DataSource datasource;
 
@@ -40,9 +41,11 @@ public class ParticipatorDAOJdbc
 			e.printStackTrace();
 		}
 	}
+	
 	// SQL 指令
 	// Select by ID
 	private static final String SELECT_BY_ID = "SELECT participatorId,fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate FROM Participator WHERE participatorId = ?";
+	@Override
 	public ParticipatorBean findByPrimaryKey(int participatorId)
 	{
 		ParticipatorBean result = null;
@@ -80,6 +83,7 @@ public class ParticipatorDAOJdbc
 	// Select ALL ----->getAll(){}
 	private static final String SELECT_ALL = "SELECT participatorId,fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate FROM Participator";
 
+	@Override
 	public List<ParticipatorBean> getAll()
 	{
 		List<ParticipatorBean> result = null;
@@ -113,6 +117,7 @@ public class ParticipatorDAOJdbc
 
 	// 新增 --------> insert(){}
 	private static final String INSERT = "INSERT INTO Participator(fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate) VALUES (?,?,?,?,?,?,?)";
+	@Override
 	public ParticipatorBean insert(ParticipatorBean bean)
 	{
 		ParticipatorBean result = null;
@@ -171,6 +176,7 @@ public class ParticipatorDAOJdbc
 
 	// 修改 -------->update(){}
 	private static final String UPDATE = "UPDATE Participator SET fullProjId = ?,memberId = ?,activityStartTime = ?,activityEndTime = ?,participateStatus = ?,checkTime = ?,isParticipate = ? WHERE participatorId = ?";
+	@Override
 	public ParticipatorBean update(ParticipatorBean bean)
 	{
 		ParticipatorBean result = null;
@@ -223,6 +229,7 @@ public class ParticipatorDAOJdbc
 	// 刪除 ------> delete(){}
 	private static final String DELETE = "DELETE FROM Participator WHERE participatorId = ?";
 
+	@Override
 	public boolean delete(int participatorId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -245,7 +252,7 @@ public class ParticipatorDAOJdbc
 	// 測試檔
 	public static void main(String[] args) throws Exception
 	{
-		ParticipatorDAOJdbc dao = new ParticipatorDAOJdbc();
+		ParticipatorDAO dao = new ParticipatorDAOJdbc();
 		
 		// findByPrimaryKey for Test 查詢單一筆資料
 		ParticipatorBean bean = dao.findByPrimaryKey(1);

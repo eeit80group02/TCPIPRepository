@@ -8,18 +8,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.DonationOrderBean;
+import model.dao.interfaces.DonationOrderDAO;
 
-public class DonationOrderDAOJdbc
+public class DonationOrderDAOJdbc implements DonationOrderDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String INSERT = "INSERT INTO DonationOeder(memberId,name,address,phone,cellPhone,email,pickTime,donationOederDate,dealId) VALUES (?,?,?,?,?,?,?,?,?)";
+	@Override
 	public DonationOrderBean insert(DonationOrderBean bean)
 	{
 		DonationOrderBean result = null;
@@ -72,6 +75,7 @@ public class DonationOrderDAOJdbc
 	}
 	
 	private static final String DELETE = "DELETE FROM DonationOeder WHERE donationOederId = ?";
+	@Override
 	public boolean delete(int id)
 	{
 		boolean result = false;
@@ -94,6 +98,7 @@ public class DonationOrderDAOJdbc
 	}
 	
 	private static final String UPDATE = "UPDATE DonationOeder SET memberId = ?,name = ?,address = ?,phone = ?,cellPhone = ?,email = ?,pickTime = ?,donationOederDate = ?,dealId = ? WHERE donationOederId = ?";
+	@Override
 	public DonationOrderBean update(DonationOrderBean bean)
 	{
 		DonationOrderBean result = null;
@@ -137,6 +142,7 @@ public class DonationOrderDAOJdbc
 	}
 	
 	private static final String FIND_BY_PRIMARYKEY = "SELECT donationOederId,memberId,name,address,phone,cellPhone,email,pickTime,donationOederDate,dealId FROM DonationOeder WHERE donationOederId = ?";
+	@Override
 	public DonationOrderBean findByPrimaryKey(int id)
 	{
 		DonationOrderBean result = null;
@@ -176,6 +182,7 @@ public class DonationOrderDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT donationOederId,memberId,name,address,phone,cellPhone,email,pickTime,donationOederDate,dealId FROM DonationOeder";
+	@Override
 	public List<DonationOrderBean> getAll()
 	{
 		List<DonationOrderBean> result = new ArrayList<DonationOrderBean>();
@@ -211,7 +218,7 @@ public class DonationOrderDAOJdbc
 	}
 	public static void main(String[] args)
 	{
-		DonationOrderDAOJdbc dao = new DonationOrderDAOJdbc();
+		DonationOrderDAO dao = new DonationOrderDAOJdbc();
 		
 		// findByPrimaryKey
 		DonationOrderBean findByPKBean;
@@ -232,7 +239,14 @@ public class DonationOrderDAOJdbc
 		insertData.setPhone("66316666");
 		insertData.setCellPhone("0966315566");
 		insertData.setEmail("Orz@org.com");
-		insertData.setPickTime(GlobalService.convertStringToDate("2015-08-09"));
+		try
+		{
+			insertData.setPickTime(GlobalService.convertStringToDate("2015-08-09"));
+		}
+		catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
 		insertData.setDonationOederDate(new java.util.Date(System.currentTimeMillis()));
 		insertData.setDealId(null);
 		insertBean = dao.insert(insertData);
@@ -248,7 +262,14 @@ public class DonationOrderDAOJdbc
 		updateData.setPhone("66316666");
 		updateData.setCellPhone("0966315566");
 		updateData.setEmail("Orz@org.com");
-		updateData.setPickTime(GlobalService.convertStringToDate("2015-08-09"));
+		try
+		{
+			updateData.setPickTime(GlobalService.convertStringToDate("2015-08-09"));
+		}
+		catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
 		updateData.setDonationOederDate(new java.util.Date(System.currentTimeMillis()));
 		updateData.setDealId("x12345");
 		updateBean = dao.update(updateData);

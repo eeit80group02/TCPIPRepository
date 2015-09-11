@@ -10,12 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.DonationBean;
+import model.dao.interfaces.DonationDAO;
 
-public class DonationDAOJdbc
+public class DonationDAOJdbc implements DonationDAO
 {
 
 	private static final String URL = GlobalService.URL;
@@ -28,6 +30,7 @@ public class DonationDAOJdbc
 	private static final String UPDATE = "UPDATE Donation SET schoolId = ?,donationStatus = ?,supplyName = ?,originalDemandNumber = ?,originalDemandUnit = ?,demandNumber = ?,size = ?,demandContent=?,supplyStatus = ?,demandTime = ?,expireTime = ?,imageName = ?,imageFile = ?,imageLength = ?,remark = ? where donationId = ?";
 	private static final String DELETE = "DELETE FROM Donation WHERE donationId = ?";
 
+	@Override
 	public DonationBean insert(DonationBean bean)
 	{
 		DonationBean result = null;
@@ -82,6 +85,7 @@ public class DonationDAOJdbc
 		return result;
 	}
 
+	@Override
 	public DonationBean update(DonationBean bean)
 	{
 		DonationBean result = null;
@@ -134,6 +138,7 @@ public class DonationDAOJdbc
 		return result;
 	}
 
+	@Override
 	public boolean delete(int donationId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -156,6 +161,7 @@ public class DonationDAOJdbc
 		return false;
 	}
 
+	@Override
 	public DonationBean findByPrimaryKey(int donationId)
 	{
 		DonationBean bean = null;
@@ -202,6 +208,7 @@ public class DonationDAOJdbc
 		return bean;
 	}
 
+	@Override
 	public List<DonationBean> getAll()
 	{
 		List<DonationBean> list = new ArrayList<DonationBean>();
@@ -245,7 +252,7 @@ public class DonationDAOJdbc
 
 	public static void main(String[] args)
 	{
-		DonationDAOJdbc daojdbc = new DonationDAOJdbc();
+		DonationDAO daojdbc = new DonationDAOJdbc();
 		/** INSERT OK **/
 		DonationBean bean1 = new DonationBean();
 		bean1.setSchoolId(11503);
@@ -257,8 +264,15 @@ public class DonationDAOJdbc
 		bean1.setSize("15公分的尺");
 		bean1.setDemandContent("數學課學生沒尺可用");
 		bean1.setSupplyStatus("不拘");
-		bean1.setDemandTime(GlobalService.convertStringToDate("2015-08-24"));
-		bean1.setExpireTime(GlobalService.convertStringToDate("2015-08-30"));
+		try
+		{
+			bean1.setDemandTime(GlobalService.convertStringToDate("2015-08-24"));
+			bean1.setExpireTime(GlobalService.convertStringToDate("2015-08-30"));
+		}
+		catch(ParseException e1)
+		{
+			e1.printStackTrace();
+		}
 		File file = new File("image/member/member02.jpg");
 		try(FileInputStream fis = new FileInputStream(file);)
 		{
@@ -287,8 +301,15 @@ public class DonationDAOJdbc
 		bean2.setSize("15公分的尺2");
 		bean2.setDemandContent("數學課學生沒尺可用3rr");
 		bean2.setSupplyStatus("不拘rr");
-		bean2.setDemandTime(GlobalService.convertStringToDate("2015-08-30"));
-		bean2.setExpireTime(GlobalService.convertStringToDate("2015-08-31"));
+		try
+		{
+			bean2.setDemandTime(GlobalService.convertStringToDate("2015-08-30"));
+			bean2.setExpireTime(GlobalService.convertStringToDate("2015-08-31"));
+		}
+		catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
 		file = new File("image/member/member01.jpg");
 		try(FileInputStream fis = new FileInputStream(file);)
 		{

@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.TrainMapBean;
+import model.dao.interfaces.TrainMapDAO;
 
-public class TrainMapDAOJdbc
+public class TrainMapDAOJdbc implements TrainMapDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -20,7 +21,7 @@ public class TrainMapDAOJdbc
 
 	public static void main(String[] args)
 	{
-		TrainMapDAOJdbc dao = new TrainMapDAOJdbc();
+		TrainMapDAO dao = new TrainMapDAOJdbc();
 		List<TrainMapBean> beans = dao.getAll();
 		System.out.println(beans);
 		TrainMapBean bean = dao.findByPrimaryKey("臺北站");
@@ -33,6 +34,7 @@ public class TrainMapDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "select name from trainmap where name = ?";
+	@Override
 	public TrainMapBean findByPrimaryKey(String name)
 	{
 		TrainMapBean result = null;
@@ -62,6 +64,7 @@ public class TrainMapDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "select name from trainmap";
+	@Override
 	public List<TrainMapBean> getAll()
 	{
 		List<TrainMapBean> result = null;
@@ -87,6 +90,7 @@ public class TrainMapDAOJdbc
 
 	private static final String INSERT = "insert into trainmap (name) values (?)";
 
+	@Override
 	public TrainMapBean insert(TrainMapBean bean)
 	{
 		TrainMapBean result = null;
@@ -110,6 +114,7 @@ public class TrainMapDAOJdbc
 
 	private static final String UPDATE = "update trainmap set name = ? where name = ?";
 
+	@Override
 	public TrainMapBean update(String newName,String name)
 	{
 		TrainMapBean result = null;
@@ -136,6 +141,7 @@ public class TrainMapDAOJdbc
 	}
 
 	private static final String DELETE = "delete from trainmap where name = ?";
+	@Override
 	public boolean delete(String name)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);

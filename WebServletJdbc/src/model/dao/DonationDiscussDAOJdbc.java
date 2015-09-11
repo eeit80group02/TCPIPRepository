@@ -17,8 +17,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.DonationDiscussBean;
+import model.dao.interfaces.DonationDiscussDAO;
 
-public class DonationDiscussDAOJdbc
+public class DonationDiscussDAOJdbc implements DonationDiscussDAO
 {
 	private static final String SELECT_BY_PRYMARY_KEY = "SELECT donationDiscussId,donationId,memberId,memberMessage,memberMessageTime,schoolId,schoolMessage,schoolMessageTime FROM DonationDiscuss WHERE donationDiscussId = ?";
 	private static final String GET_ALL = "SELECT donationDiscussId,donationId,memberId,memberMessage,memberMessageTime,schoolId,schoolMessage,schoolMessageTime FROM DonationDiscuss";
@@ -27,7 +28,7 @@ public class DonationDiscussDAOJdbc
 	private static final String DELETE = "DELETE FROM DonationDiscuss WHERE donationDiscussId = ?";
 	
 	private DataSource datasource;
-
+	
 	public DonationDiscussDAOJdbc()
 	{
 		try
@@ -41,6 +42,7 @@ public class DonationDiscussDAOJdbc
 		}
 	}
 	
+	@Override
 	public DonationDiscussBean findByPrimaryKey(int donationDiscussId)
 	{
 		DonationDiscussBean bean = null;
@@ -85,6 +87,7 @@ public class DonationDiscussDAOJdbc
 		return bean;
 	}
 
+	@Override
 	public List<DonationDiscussBean> getAll()
 	{
 		List<DonationDiscussBean> resultList = new ArrayList<DonationDiscussBean>();
@@ -125,6 +128,7 @@ public class DonationDiscussDAOJdbc
 		return resultList;
 	}
 
+	@Override
 	public DonationDiscussBean insert(DonationDiscussBean bean)
 	{
 		DonationDiscussBean result = null;
@@ -185,6 +189,7 @@ public class DonationDiscussDAOJdbc
 		return result;
 	}
 
+	@Override
 	public DonationDiscussBean update(DonationDiscussBean bean)
 	{
 		DonationDiscussBean result = null;
@@ -194,6 +199,7 @@ public class DonationDiscussDAOJdbc
 			try(Connection conn = datasource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 			{
+
 				pstmt.setInt(1,bean.getDonationId());
 				pstmt.setInt(2,bean.getMemberId());
 				pstmt.setString(3,bean.getMemberMessage());
@@ -243,12 +249,13 @@ public class DonationDiscussDAOJdbc
 		return result;
 	}
 
-	public boolean delete(int donationId)
+	@Override
+	public boolean delete(int donationDiscussId)
 	{
 		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
-			pstmt.setInt(1,donationId);
+			pstmt.setInt(1,donationDiscussId);
 			int count = pstmt.executeUpdate();
 			if(count == 1)
 			{
@@ -265,7 +272,7 @@ public class DonationDiscussDAOJdbc
 
 	public static void main(String[] args)
 	{
-		DonationDiscussDAOJdbc daojdbc = new DonationDiscussDAOJdbc();
+		DonationDiscussDAO daojdbc = new DonationDiscussDAOJdbc();
 		/** INSERT OK **/
 		DonationDiscussBean bean1 = new DonationDiscussBean();
 		bean1.setDonationId(1);

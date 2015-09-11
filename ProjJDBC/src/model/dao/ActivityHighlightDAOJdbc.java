@@ -14,8 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ActivityHighlightBean;
+import model.dao.interfaces.ActivityHighlightDAO;
 
-public class ActivityHighlightDAOJdbc
+public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -27,6 +28,7 @@ public class ActivityHighlightDAOJdbc
 	private static final String UPDATE = "UPDATE ActivityHighlight SET memberId = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,vedioURL = ?,content = ? WHERE fullProjId = ?";
 	private static final String DELETE = "DELETE FROM ActivityHighlight WHERE fullProjId = ?";
 
+	@Override
 	public ActivityHighlightBean findByPrimaryKey(int fullProjId)
 	{
 		ActivityHighlightBean result = null;
@@ -61,6 +63,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public List<ActivityHighlightBean> getAll()
 	{
 		List<ActivityHighlightBean> result = new ArrayList<ActivityHighlightBean>();
@@ -90,6 +93,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public ActivityHighlightBean insert(ActivityHighlightBean bean)
 	{
 		ActivityHighlightBean result = null;
@@ -132,6 +136,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public ActivityHighlightBean update(ActivityHighlightBean bean)
 	{
 		ActivityHighlightBean result = null;
@@ -173,6 +178,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public boolean delete(int fullProjId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -195,7 +201,7 @@ public class ActivityHighlightDAOJdbc
 
 	public static void main(String[] args)
 	{
-		ActivityHighlightDAOJdbc dao = new ActivityHighlightDAOJdbc();
+		ActivityHighlightDAO dao = new ActivityHighlightDAOJdbc();
 		
 		// insert
 		ActivityHighlightBean bean1 = new ActivityHighlightBean();

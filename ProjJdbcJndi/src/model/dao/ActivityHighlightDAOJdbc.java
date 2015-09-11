@@ -18,8 +18,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.ActivityHighlightBean;
+import model.dao.interfaces.ActivityHighlightDAO;
 
-public class ActivityHighlightDAOJdbc
+public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 {
 	private static final String SELECT_BY_PRYMARY_KEY = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,vedioURL,content FROM ActivityHighlight WHERE fullProjId = ?";
 	private static final String GET_ALL = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,vedioURL,content FROM ActivityHighlight";
@@ -41,7 +42,8 @@ public class ActivityHighlightDAOJdbc
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Override
 	public ActivityHighlightBean findByPrimaryKey(int fullProjId)
 	{
 		ActivityHighlightBean result = null;
@@ -76,6 +78,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public List<ActivityHighlightBean> getAll()
 	{
 		List<ActivityHighlightBean> result = new ArrayList<ActivityHighlightBean>();
@@ -105,6 +108,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public ActivityHighlightBean insert(ActivityHighlightBean bean)
 	{
 		ActivityHighlightBean result = null;
@@ -147,6 +151,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public ActivityHighlightBean update(ActivityHighlightBean bean)
 	{
 		ActivityHighlightBean result = null;
@@ -188,6 +193,7 @@ public class ActivityHighlightDAOJdbc
 		return result;
 	}
 
+	@Override
 	public boolean delete(int fullProjId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -210,7 +216,7 @@ public class ActivityHighlightDAOJdbc
 
 	public static void main(String[] args)
 	{
-		ActivityHighlightDAOJdbc dao = new ActivityHighlightDAOJdbc();
+		ActivityHighlightDAO dao = new ActivityHighlightDAOJdbc();
 		
 		// insert
 		ActivityHighlightBean bean1 = new ActivityHighlightBean();

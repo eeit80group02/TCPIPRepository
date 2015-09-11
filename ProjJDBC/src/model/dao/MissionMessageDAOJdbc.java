@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.MissionMessageBean;
+import model.dao.interfaces.MissionMessageDAO;
 
-public class MissionMessageDAOJdbc
+public class MissionMessageDAOJdbc implements MissionMessageDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;

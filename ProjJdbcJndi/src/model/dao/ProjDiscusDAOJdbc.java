@@ -16,8 +16,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.ProjDiscusBean;
+import model.dao.interfaces.ProjDiscusDAO;
 
-public class ProjDiscusDAOJdbc
+public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 {
 	private DataSource datasource;
 
@@ -35,6 +36,7 @@ public class ProjDiscusDAOJdbc
 	}
 	
 	private static final String SELECT_ALL = "SELECT projDiscussId,fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime FROM ProjDiscuss";
+	@Override
 	public List<ProjDiscusBean> getAll()
 	{
 		List<ProjDiscusBean> result = null;
@@ -74,6 +76,7 @@ public class ProjDiscusDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT projDiscussId,fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime FROM ProjDiscuss WHERE projDiscussId = ?";
+	@Override
 	public ProjDiscusBean findByPrimaryKey(int projDiscussId)
 	{
 		ProjDiscusBean result = null;
@@ -120,6 +123,7 @@ public class ProjDiscusDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO ProjDiscuss (fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime) VALUES (?,?,?,?,?,?,?)";
+	@Override
 	public ProjDiscusBean insert(ProjDiscusBean bean)
 	{
 		ProjDiscusBean result = null;
@@ -179,6 +183,7 @@ public class ProjDiscusDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE ProjDiscuss SET fullProjId = ?,questionMemberId = ?,questionMemberContent = ?,questionMemberTime = ?,answerMemberId = ?,answerMemberContent = ?,answerMemberTime = ? WHERE projDiscussId = ?";
+	@Override
 	public ProjDiscusBean update(ProjDiscusBean bean)
 	{
 		ProjDiscusBean result = null;
@@ -234,6 +239,7 @@ public class ProjDiscusDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM ProjDiscuss WHERE projDiscussId = ?";
+	@Override
 	public boolean delete(int projDiscussId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -255,7 +261,7 @@ public class ProjDiscusDAOJdbc
 
 	public static void main(String[] args)
 	{
-		ProjDiscusDAOJdbc dao = new ProjDiscusDAOJdbc();
+		ProjDiscusDAO dao = new ProjDiscusDAOJdbc();
 		
 		// insert
 		ProjDiscusBean bean = new ProjDiscusBean();

@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.MissionParticipatorBean;
+import model.dao.interfaces.MissionParticipatorDAO;
 
-public class MissionParticipatorDAOJdbc
+public class MissionParticipatorDAOJdbc implements MissionParticipatorDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;

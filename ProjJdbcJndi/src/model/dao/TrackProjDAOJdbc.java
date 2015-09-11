@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.TrackProjBean;
+import model.dao.interfaces.TrackProjDAO;
 
-public class TrackProjDAOJdbc
+public class TrackProjDAOJdbc implements TrackProjDAO
 {
 	private DataSource datasource;
 
@@ -34,6 +35,7 @@ public class TrackProjDAOJdbc
 	}
 	
 	private static final String SELECT_BY_ID = "SELECT trackProjId,fullProjId,memberId FROM TrackProj WHERE trackProjId = ?";
+	@Override
 	public TrackProjBean findByPrimaryKey(int trackProjId)
 	{
 		TrackProjBean result = null;
@@ -66,6 +68,7 @@ public class TrackProjDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT trackProjId,fullProjId,memberId FROM TrackProj";
+	@Override
 	public List<TrackProjBean> getAll()
 	{
 		List<TrackProjBean> result = null;
@@ -92,6 +95,7 @@ public class TrackProjDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO Trackproj (fullProjId, memberId) values (?, ?)";
+	@Override
 	public TrackProjBean insert(TrackProjBean bean)
 	{
 		TrackProjBean result = null;
@@ -123,6 +127,7 @@ public class TrackProjDAOJdbc
 
 	private static final String UPDATE = "UPDATE Trackproj SET fullProjId = ?, memberId = ? WHERE trackProjId = ?";
 
+	@Override
 	public TrackProjBean update(TrackProjBean bean)
 	{
 		TrackProjBean result = null;
@@ -150,6 +155,7 @@ public class TrackProjDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM Trackproj WHERE trackProjId = ?";
+	@Override
 	public boolean delete(int trackProjId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -171,7 +177,7 @@ public class TrackProjDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		TrackProjDAOJdbc dao = new TrackProjDAOJdbc();
+		TrackProjDAO dao = new TrackProjDAOJdbc();
 		List<TrackProjBean> beans = dao.getAll();
 		System.out.println(beans);
 		TrackProjBean bean = dao.findByPrimaryKey(1);

@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.PrimaryProjBean;
+import model.dao.interfaces.PrimaryProjDAO;
 
-public class PrimaryProjDAOJdbc
+public class PrimaryProjDAOJdbc implements PrimaryProjDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -29,6 +30,7 @@ public class PrimaryProjDAOJdbc
 	// Select by ID
 	private static final String SELECT_BY_ID = "SELECT primaryProjId,memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus FROM PrimaryProj WHERE primaryProjId = ?";
 
+	@Override
 	public PrimaryProjBean findByPrimaryKey(int primaryProjId)
 	{
 		PrimaryProjBean result = null;
@@ -75,6 +77,7 @@ public class PrimaryProjDAOJdbc
 	// Select ALL ----->getAll(){}
 	private static final String SELECT_ALL = "SELECT primaryProjId,memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus FROM PrimaryProj";
 
+	@Override
 	public List<PrimaryProjBean> getAll()
 	{
 		List<PrimaryProjBean> result = null;
@@ -115,6 +118,7 @@ public class PrimaryProjDAOJdbc
 
 	// 新增 --------> insert(){}
 	private static final String INSERT = "INSERT INTO PrimaryProj(memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	@Override
 	public PrimaryProjBean insert(PrimaryProjBean bean)
 	{
 		PrimaryProjBean result = null;
@@ -166,6 +170,7 @@ public class PrimaryProjDAOJdbc
 
 	// 修改 -------->update(){}
 	private static final String UPDATE = "UPDATE PrimaryProj SET memberId = ?,title = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,projAbstract = ?, content=?,idealPlace = ?,activityStartTime = ?,activityEndTime = ?,demandNum = ?,budget = ?,createDate = ?,projStatus = ? WHERE primaryProjId = ?";
+	@Override
 	public PrimaryProjBean update(PrimaryProjBean bean)
 	{
 		PrimaryProjBean result = null;
@@ -206,6 +211,7 @@ public class PrimaryProjDAOJdbc
 
 	// 刪除 ------> delete(){}
 	private static final String DELETE = "DELETE FROM PrimaryProj WHERE primaryProjId = ?";
+	@Override
 	public boolean delete(int primaryProjId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -228,7 +234,7 @@ public class PrimaryProjDAOJdbc
 
 	public static void main(String[] args) throws Exception
 	{
-		PrimaryProjDAOJdbc dao = new PrimaryProjDAOJdbc();
+		PrimaryProjDAO dao = new PrimaryProjDAOJdbc();
 		// findByPrimaryKey
 //		PrimaryProjBean bean = dao.findByPrimaryKey(1);
 //		System.out.println(bean);

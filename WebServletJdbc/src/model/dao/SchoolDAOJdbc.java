@@ -5,7 +5,6 @@ import global.GlobalService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,20 +12,38 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import model.SchoolBean;
+import model.dao.interfaces.SchoolDAO;
 
-public class SchoolDAOJdbc
+public class SchoolDAOJdbc implements SchoolDAO
 {
-	private static final String URL = GlobalService.URL;
-	private static final String USERNAME = GlobalService.USERNAME;
-	private static final String PASSWORD = GlobalService.PASSWORD;
+	private DataSource datasource;
 
+	public SchoolDAOJdbc()
+	{
+		try
+		{
+			Context context = new InitialContext();
+			datasource = (DataSource)context.lookup(GlobalService.JNDI);
+		}
+		catch(NamingException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	private static final String SELECT_BY_ID = "SELECT schoolId,name,phone,addressDistrict,addressComplete,url,frontCoverName,frontCover,frontCoverLength,aboutMe,managerEmail,projectManager,accountContact,password,accountStatus FROM School WHERE schoolId = ?";
+	@Override
 	public SchoolBean findByPrimaryKey(int schoolId)
 	{
 		SchoolBean result = null;
 
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
 		{
 			pstmt.setInt(1,schoolId);
@@ -74,10 +91,11 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT schoolId,name,phone,addressDistrict,addressComplete,url,frontCoverName,frontCover,frontCoverLength,aboutMe,managerEmail,projectManager,accountContact,password,accountStatus FROM School";
+	@Override
 	public List<SchoolBean> getAll()
 	{
 		List<SchoolBean> result = null;
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
 			ResultSet rset = pstmt.executeQuery();)
 		{
@@ -121,12 +139,13 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO School (schoolId,name,phone,addressDistrict,addressComplete,url,frontCoverName,frontCover,frontCoverLength,aboutMe,managerEmail,projectManager,accountContact,password,accountStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	@Override
 	public SchoolBean insert(SchoolBean bean)
 	{
 		SchoolBean result = null;
 		if(bean != null)
 		{
-			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			try(Connection conn = datasource.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
 				pstmt.setInt(1,bean.getSchoolId());
@@ -169,13 +188,15 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE School SET name = ?,phone = ?,addressDistrict = ?,addressComplete = ?, url = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,aboutMe = ?,managerEmail = ?,projectManager = ?,accountContact = ?,password = ?,accountStatus = ? where schoolId = ?";
+	@Override
 	public SchoolBean update(SchoolBean bean)
 	{
 		SchoolBean result = null;
 		
 		if(bean != null)
 		{
-			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
+			try(Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
 			{
 				pstmt.setString(1,bean.getName());
 				pstmt.setString(2,bean.getPhone());
@@ -217,9 +238,10 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM school WHERE schoolId = ?";
+	@Override
 	public boolean delete(int schoolId)
 	{
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
 			pstmt.setInt(1,schoolId);
@@ -238,7 +260,7 @@ public class SchoolDAOJdbc
 
 	public static void main(String[] args)
 	{
-		SchoolDAOJdbc dao = new SchoolDAOJdbc();
+		SchoolDAO dao = new SchoolDAOJdbc();
 //		List<SchoolBean> beans = dao.getAll();
 //		System.out.println(beans.size());
 //		SchoolBean bean = dao.findByPrimaryKey(11503);

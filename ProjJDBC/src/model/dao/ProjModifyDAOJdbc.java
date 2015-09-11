@@ -12,14 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ProjModifyBean;
+import model.dao.interfaces.ProjModifyDAO;
 
-public class ProjModifyDAOJdbc
+public class ProjModifyDAOJdbc implements ProjModifyDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String SELECT_ALL = "SELECT projModifyId,fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime FROM ProjModify";
+	@Override
 	public List<ProjModifyBean> getAll()
 	{
 		List<ProjModifyBean> result = null;
@@ -68,6 +70,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT projModifyId,fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime FROM ProjModify WHERE projModifyId = ?";
+	@Override
 	public ProjModifyBean findByPrimaryKey(int projModifyId)
 	{
 		ProjModifyBean result = null;
@@ -123,6 +126,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO ProjModify (fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime) VALUES (?,?,?,?,?,?,?)";
+	@Override
 	public ProjModifyBean insert(ProjModifyBean bean)
 	{
 		ProjModifyBean result = null;
@@ -206,6 +210,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE ProjModify SET fullProjId = ?,schoolId = ?,schoolMessage = ?,schoolMessageTime = ?,memberId = ?,memberMessage = ?,memberMessageTime = ? WHERE projModifyId = ?";
+	@Override
 	public ProjModifyBean update(ProjModifyBean bean)
 	{
 		ProjModifyBean result = null;
@@ -286,6 +291,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM ProjModify WHERE projModifyId = ?";
+	@Override
 	public boolean delete(int projModifyId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -307,7 +313,7 @@ public class ProjModifyDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		ProjModifyDAOJdbc dao = new ProjModifyDAOJdbc();
+		ProjModifyDAO dao = new ProjModifyDAOJdbc();
 		
 		// insert
 //		ProjModifyBean bean1 = new ProjModifyBean();

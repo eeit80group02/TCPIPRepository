@@ -15,15 +15,16 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.MissionParticipatorBean;
+import model.dao.interfaces.MissionParticipatorDAO;
 
-public class MissionParticipatorDAOJdbc
+public class MissionParticipatorDAOJdbc implements MissionParticipatorDAO
 {
 	private static final String SELECT_BY_PK = "SELECT missionParticipatorId,missionId,memberId FROM MissionParticipator WHERE missionParticipatorId = ?";
 	private static final String SELECT_ALL = "SELECT missionParticipatorId,missionId,memberId FROM MissionParticipator";
 	private static final String INSERT = "INSERT INTO MissionParticipator (missionId,memberId) VALUES (?,?)";
 	private static final String UPDATE = "UPDATE MissionParticipator SET missionId = ?,memberId = ? WHERE missionParticipatorId = ?";
 	private static final String DELETE = "DELETE FROM MissionParticipator WHERE missionParticipatorId = ?";
-
+	
 	private DataSource datasource;
 
 	public MissionParticipatorDAOJdbc()

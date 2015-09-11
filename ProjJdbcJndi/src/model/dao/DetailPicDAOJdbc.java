@@ -19,8 +19,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.DetailPicBean;
+import model.dao.interfaces.DetailPicDAO;
 
-public class DetailPicDAOJdbc
+public class DetailPicDAOJdbc implements DetailPicDAO
 {
 	private static final String SELECT_BY_PRYMARY_KEY = "SELECT fullProjId,imageName,image,imageLength,imageDescribe FROM DetailPic WHERE fullProjId = ? AND imageName = ?";
 	private static final String GET_ALL = "SELECT fullProjId,imageName,image,imageLength,imageDescribe FROM DetailPic";
@@ -43,6 +44,7 @@ public class DetailPicDAOJdbc
 		}
 	}
 	
+	@Override
 	public DetailPicBean findByPrimaryKey(int fullProjId,String imageName)
 	{
 		DetailPicBean bean = null;
@@ -76,6 +78,7 @@ public class DetailPicDAOJdbc
 		return bean;
 	}
 
+	@Override
 	public List<DetailPicBean> getAll()
 	{
 		List<DetailPicBean> resultlist = new ArrayList<DetailPicBean>();
@@ -103,6 +106,7 @@ public class DetailPicDAOJdbc
 		return resultlist;
 	}
 
+	@Override
 	public DetailPicBean insert(DetailPicBean bean)
 	{
 		DetailPicBean result = null;
@@ -139,6 +143,7 @@ public class DetailPicDAOJdbc
 		return result;
 	}
 
+	@Override
 	public DetailPicBean update(DetailPicBean bean)
 	{
 		DetailPicBean result = null;
@@ -178,6 +183,7 @@ public class DetailPicDAOJdbc
 		return result;
 	}
 
+	@Override
 	public boolean delete(int fullProjId,String imageName)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -203,7 +209,7 @@ public class DetailPicDAOJdbc
 
 	public static void main(String[] args)
 	{
-		DetailPicDAOJdbc daojdbc = new DetailPicDAOJdbc();
+		DetailPicDAO daojdbc = new DetailPicDAOJdbc();
 		/** INSERT OK **/
 		
 		DetailPicBean bean1 = new DetailPicBean();

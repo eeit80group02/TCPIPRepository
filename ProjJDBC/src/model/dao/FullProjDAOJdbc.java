@@ -10,18 +10,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.FullProjBean;
+import model.dao.interfaces.FullProjDAO;
 
-public class FullProjDAOJdbc
+public class FullProjDAOJdbc implements FullProjDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String SELECT_ALL = "SELECT fullProjId,primaryProjId,schoolDemandId,memberId,schoolId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,location,activityStartTime,activityEndTime,estMember,budget,createDate,projStatus,orgArchitecture,projFileName,projFile,projFileLength,reviews,reviewsContent,schoolConfirm,memberConfirm FROM FullProj";
+	@Override
 	public List<FullProjBean> getAll()
 	{
 		List<FullProjBean> result = null;
@@ -121,6 +124,7 @@ public class FullProjDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT fullProjId,primaryProjId,schoolDemandId,memberId,schoolId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,location,activityStartTime,activityEndTime,estMember,budget,createDate,projStatus,orgArchitecture,projFileName,projFile,projFileLength,reviews,reviewsContent,schoolConfirm,memberConfirm FROM FullProj WHERE fullProjId = ?";
+	@Override
 	public FullProjBean findByPrimaryKey(int fullProjId)
 	{
 		FullProjBean result = null;
@@ -226,6 +230,7 @@ public class FullProjDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO FullProj (primaryProjId,schoolDemandId,memberId,schoolId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,location,activityStartTime,activityEndTime,estMember,budget,createDate,projStatus,orgArchitecture,projFileName,projFile,projFileLength,reviews,reviewsContent,schoolConfirm,memberConfirm) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	@Override
 	public FullProjBean insert(FullProjBean bean)
 	{
 		FullProjBean result = null;
@@ -382,6 +387,7 @@ public class FullProjDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE FullProj SET primaryProjId = ?,schoolDemandId = ?,memberId = ?,schoolId = ?,title = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,projAbstract = ?,content = ?,location = ?,activityStartTime = ?,activityEndTime = ?,estMember = ?,budget = ?,createDate = ?,projStatus = ?,orgArchitecture = ?,projFileName = ?,projFile = ?,projFileLength = ?,reviews = ?,reviewsContent = ?,schoolConfirm = ?,memberConfirm = ? WHERE fullProjId = ?";
+	@Override
 	public FullProjBean update(FullProjBean bean)
 	{
 		FullProjBean result = null;
@@ -530,6 +536,7 @@ public class FullProjDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM FullProj WHERE fullProjId = ?";
+	@Override
 	public boolean delete(int fullProjId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -551,7 +558,7 @@ public class FullProjDAOJdbc
 
 	public static void main(String[] args)
 	{
-		FullProjDAOJdbc jdbc = new FullProjDAOJdbc();
+		FullProjDAO jdbc = new FullProjDAOJdbc();
 		FullProjBean bean = new FullProjBean();
 //		bean.setFullProjId(4);
 		bean.setPrimaryProjId(1);
@@ -574,8 +581,15 @@ public class FullProjDAOJdbc
 		bean.setProjAbstract("hahahaha神來也");
 		bean.setContent("神道此一遊");
 		bean.setLocation(null);
-		bean.setActivityStartTime(GlobalService.convertStringToDate("2015-08-08"));
-		bean.setActivityEndTime(GlobalService.convertStringToDate("2015-08-20"));
+		try
+		{
+			bean.setActivityStartTime(GlobalService.convertStringToDate("2015-08-08"));
+			bean.setActivityEndTime(GlobalService.convertStringToDate("2015-08-20"));
+		}
+		catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
 		bean.setEstMember(20);
 		bean.setBudget(90000);
 		bean.setCreateDate(null);
@@ -615,7 +629,7 @@ public class FullProjDAOJdbc
 //		bean.setBudget(90000);
 //		bean.setCreateDate(new java.util.Date(System.currentTimeMillis()));
 //		bean.setProjStatus("洽談中");
-//		bean.setOrgArchitecture("活動 激動 XXX");
+//		bean.setOrgArchitecture("活動 激動");
 //		
 //		file = new File("image/primaryProj/primaryProj02.jpg");
 //		try(FileInputStream fis = new FileInputStream(file);)

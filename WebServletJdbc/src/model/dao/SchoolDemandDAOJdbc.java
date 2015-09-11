@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.SchoolDemandBean;
+import model.dao.interfaces.SchoolDemandDAO;
 
-public class SchoolDemandDAOJdbc
+public class SchoolDemandDAOJdbc implements SchoolDemandDAO
 {
 	private DataSource datasource;
 
@@ -34,6 +35,7 @@ public class SchoolDemandDAOJdbc
 	}
 	
 	private static final String SELECT_BY_ID = "SELECT schoolDemandId,schoolId,participant,activityTopic,activityLocation,activitySuitable,activityHost,activityContact,createDate,content,demandStatus FROM SchoolDemand WHERE schoolDemandId = ?";
+	@Override
 	public SchoolDemandBean findByPrimaryKey(int schoolDemandId)
 	{
 		SchoolDemandBean result = null;
@@ -74,6 +76,7 @@ public class SchoolDemandDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT schoolDemandId,schoolId,participant,activityTopic,activityLocation,activitySuitable,activityHost,activityContact,createDate,content,demandStatus FROM SchoolDemand";
+	@Override
 	public List<SchoolDemandBean> getAll()
 	{
 		List<SchoolDemandBean> result = null;
@@ -108,6 +111,7 @@ public class SchoolDemandDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO schooldemand (schoolId,participant,activityTopic,activityLocation,activitySuitable,activityHost,activityContact,createDate,content,demandStatus) VALUES (?,?,?,?,?,?,?,?,?,?)";
+	@Override
 	public SchoolDemandBean insert(SchoolDemandBean bean)
 	{
 		SchoolDemandBean result = null;
@@ -147,6 +151,7 @@ public class SchoolDemandDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE Schooldemand SET schoolId = ?,participant = ?,activityTopic = ?,activityLocation = ?,activitySuitable = ?,activityHost = ?,activityContact = ?,createDate = ?,content = ?,demandStatus = ? WHERE schoolDemandId = ?";
+	@Override
 	public SchoolDemandBean update(SchoolDemandBean bean)
 	{
 		SchoolDemandBean result = null;
@@ -182,6 +187,7 @@ public class SchoolDemandDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM schooldemand WHERE schoolDemandId = ?";
+	@Override
 	public boolean delete(int schoolDemandId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -203,7 +209,7 @@ public class SchoolDemandDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		SchoolDemandDAOJdbc dao = new SchoolDemandDAOJdbc();
+		SchoolDemandDAO dao = new SchoolDemandDAOJdbc();
 //		List<SchoolDemandBean> beans = dao.getAll();
 //		System.out.println(beans);
 //		SchoolDemandBean bean = dao.findByPrimaryKey(1);

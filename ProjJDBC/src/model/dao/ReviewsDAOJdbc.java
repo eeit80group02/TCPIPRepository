@@ -12,14 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ReviewsBean;
+import model.dao.interfaces.ReviewsDAO;
 
-public class ReviewsDAOJdbc
+public class ReviewsDAOJdbc implements ReviewsDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String SELECT_ALL = "SELECT reviewsId,fullProjId,referMemberId,referedMemberId,isReviews,content FROM Reviews";
+	@Override
 	public List<ReviewsBean> getAll()
 	{
 		List<ReviewsBean> result = null;
@@ -57,6 +59,7 @@ public class ReviewsDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT reviewsId,fullProjId,referMemberId,referedMemberId,isReviews,content FROM Reviews WHERE reviewsId = ?";
+	@Override
 	public ReviewsBean findByPrimaryKey(int reviewsId)
 	{
 		ReviewsBean result = null;
@@ -100,6 +103,7 @@ public class ReviewsDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO Reviews (fullProjId,referMemberId,referedMemberId,isReviews,content) VALUES (?,?,?,?,?)";
+	@Override
 	public ReviewsBean insert(ReviewsBean bean)
 	{
 		ReviewsBean result = null;
@@ -150,6 +154,7 @@ public class ReviewsDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE Reviews SET fullProjId = ?,referMemberId = ?,referedMemberId = ?,isReviews = ?,content = ? WHERE reviewsId = ?";
+	@Override
 	public ReviewsBean update(ReviewsBean bean)
 	{
 		ReviewsBean result = null;
@@ -196,6 +201,7 @@ public class ReviewsDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM Reviews WHERE reviewsId = ?";
+	@Override
 	public boolean delete(int reviewsId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -217,7 +223,7 @@ public class ReviewsDAOJdbc
 
 	public static void main(String[] args)
 	{
-		ReviewsDAOJdbc jdbc = new ReviewsDAOJdbc();
+		ReviewsDAO jdbc = new ReviewsDAOJdbc();
 		ReviewsBean bean = new ReviewsBean();
 		bean.setFullProjId(1);
 		bean.setReferMemberId(1);

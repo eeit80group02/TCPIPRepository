@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.OffersBean;
+import model.dao.interfaces.OffersDAO;
 
-public class OffersDAOJdbc
+public class OffersDAOJdbc implements OffersDAO
 {
 	private DataSource datasource;
 
@@ -32,8 +33,9 @@ public class OffersDAOJdbc
 			e.printStackTrace();
 		}
 	}
-
+	
 	private static final String SELECT_ALL = "select * from Offers ";
+	@Override
 	public List<OffersBean> getAll()
 	{
 		List<OffersBean> result = null;
@@ -60,14 +62,15 @@ public class OffersDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT schoolDemandId,room,place,food FROM Offers WHERE schoolDemandId =?";
+	@Override
 	public OffersBean findByPrimaryKey(int schoolDemandId)
 	{
 		OffersBean result = null;
 		try(Connection conn = datasource.getConnection();
-			PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID);)
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
 		{
-			stmt.setInt(1,schoolDemandId);
-			try(ResultSet rset = stmt.executeQuery();)
+			pstmt.setInt(1,schoolDemandId);
+			try(ResultSet rset = pstmt.executeQuery();)
 			{
 				while(rset.next())
 				{
@@ -93,6 +96,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String INSERT = "insert into Offers (schoolDemandId, room, place, food) values (?,?,?,?)";
+	@Override
 	public OffersBean insert(OffersBean bean)
 	{
 		OffersBean result = null;
@@ -121,6 +125,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE Offers SET room = ?,place = ?,food = ? WHERE schoolDemandId = ?";
+	@Override
 	public OffersBean update(OffersBean bean)
 	{
 		OffersBean result = null;
@@ -148,6 +153,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM Offers WHERE schoolDemandId = ?";
+	@Override
 	public boolean delete(int schoolDemandId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -169,7 +175,7 @@ public class OffersDAOJdbc
 
 	public static void main(String[] args)
 	{
-		OffersDAOJdbc jdbc = new OffersDAOJdbc();
+		OffersDAO jdbc = new OffersDAOJdbc();
 		OffersBean bean = new OffersBean();
 		bean.setSchoolDemandId(2);
 		bean.setRoom(false);

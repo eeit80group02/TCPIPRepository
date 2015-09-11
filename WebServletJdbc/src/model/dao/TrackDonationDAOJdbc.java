@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.TrackDonationBean;
+import model.dao.interfaces.TrackDonationDAO;
 
-public class TrackDonationDAOJdbc
+public class TrackDonationDAOJdbc implements TrackDonationDAO
 {
 	private DataSource datasource;
 
@@ -34,6 +35,7 @@ public class TrackDonationDAOJdbc
 	}
 	
 	private static final String SELECT_BY_ID = "SELECT trackDonationId,donationId,memberId FROM trackdonation WHERE trackDonationId = ?";
+	@Override
 	public TrackDonationBean findByPrimaryKey(int trackDonationId)
 	{
 		TrackDonationBean result = null;
@@ -59,6 +61,7 @@ public class TrackDonationDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT trackDonationId,donationId,memberId FROM trackdonation";
+	@Override
 	public List<TrackDonationBean> getAll()
 	{
 		List<TrackDonationBean> result = null;
@@ -85,6 +88,7 @@ public class TrackDonationDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO trackdonation (donationId, memberId) values (?, ?)";
+	@Override
 	public TrackDonationBean insert(TrackDonationBean bean)
 	{
 		TrackDonationBean result = null;
@@ -112,6 +116,7 @@ public class TrackDonationDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE trackdonation SET donationId = ?, memberId = ? WHERE trackDonationId = ?";
+	@Override
 	public TrackDonationBean update(TrackDonationBean bean)
 	{
 		TrackDonationBean result = null;
@@ -140,6 +145,7 @@ public class TrackDonationDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM trackdonation WHERE trackDonationId = ?";
+	@Override
 	public boolean delete(int trackDonationId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -161,7 +167,7 @@ public class TrackDonationDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		TrackDonationDAOJdbc dao = new TrackDonationDAOJdbc();
+		TrackDonationDAO dao = new TrackDonationDAOJdbc();
 		List<TrackDonationBean> beans = dao.getAll();
 		System.out.println(beans);
 		TrackDonationBean bean = dao.findByPrimaryKey(1);

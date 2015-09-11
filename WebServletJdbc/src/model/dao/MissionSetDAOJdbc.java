@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.MissionSetBean;
+import model.dao.interfaces.MissionSetDAO;
 
-public class MissionSetDAOJdbc
+public class MissionSetDAOJdbc implements MissionSetDAO
 {
 	private DataSource datasource;
 
@@ -31,7 +32,7 @@ public class MissionSetDAOJdbc
 		{
 			e.printStackTrace();
 		}
-	}
+	}	
 	
 	private static final String INSERT = "INSERT INTO MissionSet (missionBoardId,name,missionSetOrder) VALUES (?,?,?)";
 	public MissionSetBean insert(MissionSetBean bean)

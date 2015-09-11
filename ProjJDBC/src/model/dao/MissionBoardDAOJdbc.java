@@ -11,8 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.MissionBoardBean;
+import model.dao.interfaces.MissionBoardDAO;
 
-public class MissionBoardDAOJdbc
+public class MissionBoardDAOJdbc implements MissionBoardDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -43,7 +44,6 @@ public class MissionBoardDAOJdbc
 				}
 				catch(Exception e)
 				{
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

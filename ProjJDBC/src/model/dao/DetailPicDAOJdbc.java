@@ -15,8 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.DetailPicBean;
+import model.dao.interfaces.DetailPicDAO;
 
-public class DetailPicDAOJdbc
+public class DetailPicDAOJdbc implements DetailPicDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -28,6 +29,7 @@ public class DetailPicDAOJdbc
 	private static final String UPDATE = "UPDATE DetailPic SET imageName = ?,image = ?,imageLength = ?,imageDescribe = ? WHERE fullProjId = ? AND imageName = ?";
 	private static final String DELETE = "DELETE FROM DetailPic WHERE fullProjId = ? AND imageName = ?";
 
+	@Override
 	public DetailPicBean findByPrimaryKey(int fullProjId,String imageName)
 	{
 		DetailPicBean bean = null;
@@ -61,6 +63,7 @@ public class DetailPicDAOJdbc
 		return bean;
 	}
 
+	@Override
 	public List<DetailPicBean> getAll()
 	{
 		List<DetailPicBean> resultlist = new ArrayList<DetailPicBean>();
@@ -88,6 +91,7 @@ public class DetailPicDAOJdbc
 		return resultlist;
 	}
 
+	@Override
 	public DetailPicBean insert(DetailPicBean bean)
 	{
 		DetailPicBean result = null;
@@ -124,6 +128,7 @@ public class DetailPicDAOJdbc
 		return result;
 	}
 
+	@Override
 	public DetailPicBean update(DetailPicBean bean)
 	{
 		DetailPicBean result = null;
@@ -163,6 +168,7 @@ public class DetailPicDAOJdbc
 		return result;
 	}
 
+	@Override
 	public boolean delete(int fullProjId,String imageName)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -188,7 +194,7 @@ public class DetailPicDAOJdbc
 
 	public static void main(String[] args)
 	{
-		DetailPicDAOJdbc daojdbc = new DetailPicDAOJdbc();
+		DetailPicDAO daojdbc = new DetailPicDAOJdbc();
 		/** INSERT OK **/
 		
 		DetailPicBean bean1 = new DetailPicBean();

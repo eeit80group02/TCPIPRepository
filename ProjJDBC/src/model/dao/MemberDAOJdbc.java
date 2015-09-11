@@ -15,8 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.MemberBean;
+import model.dao.interfaces.MemberDAO;
 
-public class MemberDAOJdbc
+public class MemberDAOJdbc implements MemberDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -28,6 +29,7 @@ public class MemberDAOJdbc
 	private static final String UPDATE = "UPDATE Member set lastName = ?,firstName = ?,idNumber = ?,phone = ?,cellPhone = ?,birthday = ?,address = ?,gender = ?,email = ?,pictureName=?, picture = ?,pictureLength = ?,registerTime=?, recommendCount = ?,account = ?,password = ?,accountStatus = ? WHERE memberId = ?";
 	private static final String DELETE = "DELETE FROM Member WHERE memberId = ?";
 
+	@Override
 	public MemberBean insert(MemberBean bean)
 	{
 		MemberBean result = null;
@@ -95,6 +97,7 @@ public class MemberDAOJdbc
 		return result;
 	}
 
+	@Override
 	public MemberBean update(MemberBean bean)
 	{
 		MemberBean result = null;
@@ -154,6 +157,7 @@ public class MemberDAOJdbc
 		return result;
 	}
 
+	@Override
 	public boolean delete(int id)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -174,6 +178,7 @@ public class MemberDAOJdbc
 		return false;
 	}
 
+	@Override
 	public MemberBean select(int id)
 	{
 		MemberBean result = null;
@@ -222,6 +227,7 @@ public class MemberDAOJdbc
 		return result;
 	}
 
+	@Override
 	public List<MemberBean> select()
 	{
 		List<MemberBean> result = new ArrayList<MemberBean>();
@@ -268,7 +274,7 @@ public class MemberDAOJdbc
 	public static void main(String[] args) throws Exception
 	{
 		// insert
-		MemberDAOJdbc dao = new MemberDAOJdbc();
+		MemberDAO dao = new MemberDAOJdbc();
 		
 		MemberBean bean1 = new MemberBean();
 //		bean1.setMemberId(null);

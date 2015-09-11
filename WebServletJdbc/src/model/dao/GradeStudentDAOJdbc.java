@@ -16,8 +16,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.GradeStudentBean;
+import model.dao.interfaces.GradeStudentDAO;
 
-public class GradeStudentDAOJdbc
+public class GradeStudentDAOJdbc implements GradeStudentDAO
 {
 	private DataSource datasource;
 
@@ -36,6 +37,7 @@ public class GradeStudentDAOJdbc
 	
 	private static final String SELECT_ALL = "SELECT schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth,juniorFirst,juniorSecond,juniorThird FROM GradeStudent";
 
+	@Override
 	public List<GradeStudentBean> getAll()
 	{
 		List<GradeStudentBean> result = null;
@@ -140,6 +142,7 @@ public class GradeStudentDAOJdbc
 
 	private static final String SELECT_BY_ID = "SELECT schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth,juniorFirst,juniorSecond,juniorThird FROM GradeStudent WHERE schoolId = ? AND anniversary = ?";
 
+	@Override
 	public GradeStudentBean findByPrimaryKey(int schoolId,int anniversary)
 	{
 		GradeStudentBean result = null;
@@ -251,6 +254,7 @@ public class GradeStudentDAOJdbc
 
 	private static final String INSERT = "INSERT INTO GradeStudent(schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth,juniorFirst,juniorSecond,juniorThird) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
+	@Override
 	public GradeStudentBean insert(GradeStudentBean bean)
 	{
 		GradeStudentBean result = null;
@@ -360,6 +364,7 @@ public class GradeStudentDAOJdbc
 
 	private static final String UPDATE = "UPDATE GradeStudent SET elementaryFirst = ?,elementarySecond = ?,elementaryThird = ?,elementaryFourth = ?,elementaryFifth = ?,elementarySixth = ?,juniorFirst = ?,juniorSecond = ?,juniorThird = ? WHERE schoolId = ? AND anniversary = ?";
 
+	@Override
 	public GradeStudentBean update(GradeStudentBean bean)
 	{
 		GradeStudentBean result = null;
@@ -466,10 +471,11 @@ public class GradeStudentDAOJdbc
 
 	private static final String DELETE = "DELETE FROM GradeStudent WHERE schoolId = ? AND anniversary = ?";
 
+	@Override
 	public boolean delete(int schoolId,int anniversary)
 	{
 		try(Connection conn = datasource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(DELETE);)
+			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
 			pstmt.setInt(1,schoolId);
 			pstmt.setInt(2,anniversary);
@@ -488,7 +494,7 @@ public class GradeStudentDAOJdbc
 
 	public static void main(String[] args)
 	{
-		GradeStudentDAOJdbc jdbc = new GradeStudentDAOJdbc();
+		GradeStudentDAO jdbc = new GradeStudentDAOJdbc();
 		GradeStudentBean bean = new GradeStudentBean();
 		bean.setSchoolId(11503);
 		bean.setAnniversary(101);

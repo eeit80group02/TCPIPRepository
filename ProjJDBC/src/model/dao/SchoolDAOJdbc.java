@@ -14,14 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.SchoolBean;
+import model.dao.interfaces.SchoolDAO;
 
-public class SchoolDAOJdbc
+public class SchoolDAOJdbc implements SchoolDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String SELECT_BY_ID = "SELECT schoolId,name,phone,addressDistrict,addressComplete,url,frontCoverName,frontCover,frontCoverLength,aboutMe,managerEmail,projectManager,accountContact,password,accountStatus FROM School WHERE schoolId = ?";
+	@Override
 	public SchoolBean findByPrimaryKey(int schoolId)
 	{
 		SchoolBean result = null;
@@ -74,6 +76,7 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT schoolId,name,phone,addressDistrict,addressComplete,url,frontCoverName,frontCover,frontCoverLength,aboutMe,managerEmail,projectManager,accountContact,password,accountStatus FROM School";
+	@Override
 	public List<SchoolBean> getAll()
 	{
 		List<SchoolBean> result = null;
@@ -121,6 +124,7 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO School (schoolId,name,phone,addressDistrict,addressComplete,url,frontCoverName,frontCover,frontCoverLength,aboutMe,managerEmail,projectManager,accountContact,password,accountStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	@Override
 	public SchoolBean insert(SchoolBean bean)
 	{
 		SchoolBean result = null;
@@ -169,6 +173,7 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE School SET name = ?,phone = ?,addressDistrict = ?,addressComplete = ?, url = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,aboutMe = ?,managerEmail = ?,projectManager = ?,accountContact = ?,password = ?,accountStatus = ? where schoolId = ?";
+	@Override
 	public SchoolBean update(SchoolBean bean)
 	{
 		SchoolBean result = null;
@@ -217,6 +222,7 @@ public class SchoolDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM school WHERE schoolId = ?";
+	@Override
 	public boolean delete(int schoolId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -238,7 +244,7 @@ public class SchoolDAOJdbc
 
 	public static void main(String[] args)
 	{
-		SchoolDAOJdbc dao = new SchoolDAOJdbc();
+		SchoolDAO dao = new SchoolDAOJdbc();
 //		List<SchoolBean> beans = dao.getAll();
 //		System.out.println(beans.size());
 //		SchoolBean bean = dao.findByPrimaryKey(11503);

@@ -11,14 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.TrackProjBean;
+import model.dao.interfaces.TrackProjDAO;
 
-public class TrackProjDAOJdbc
+public class TrackProjDAOJdbc implements TrackProjDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String SELECT_BY_ID = "SELECT trackProjId,fullProjId,memberId FROM TrackProj WHERE trackProjId = ?";
+	@Override
 	public TrackProjBean findByPrimaryKey(int trackProjId)
 	{
 		TrackProjBean result = null;
@@ -51,6 +53,7 @@ public class TrackProjDAOJdbc
 	}
 
 	private static final String SELECT_ALL = "SELECT trackProjId,fullProjId,memberId FROM TrackProj";
+	@Override
 	public List<TrackProjBean> getAll()
 	{
 		List<TrackProjBean> result = null;
@@ -77,6 +80,7 @@ public class TrackProjDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO Trackproj (fullProjId, memberId) values (?, ?)";
+	@Override
 	public TrackProjBean insert(TrackProjBean bean)
 	{
 		TrackProjBean result = null;
@@ -108,6 +112,7 @@ public class TrackProjDAOJdbc
 
 	private static final String UPDATE = "UPDATE Trackproj SET fullProjId = ?, memberId = ? WHERE trackProjId = ?";
 
+	@Override
 	public TrackProjBean update(TrackProjBean bean)
 	{
 		TrackProjBean result = null;
@@ -135,6 +140,7 @@ public class TrackProjDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM Trackproj WHERE trackProjId = ?";
+	@Override
 	public boolean delete(int trackProjId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -156,7 +162,7 @@ public class TrackProjDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		TrackProjDAOJdbc dao = new TrackProjDAOJdbc();
+		TrackProjDAO dao = new TrackProjDAOJdbc();
 		List<TrackProjBean> beans = dao.getAll();
 		System.out.println(beans);
 		TrackProjBean bean = dao.findByPrimaryKey(1);

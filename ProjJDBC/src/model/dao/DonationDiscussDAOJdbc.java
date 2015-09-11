@@ -13,8 +13,9 @@ import java.util.Date;
 import java.util.List;
 
 import model.DonationDiscussBean;
+import model.dao.interfaces.DonationDiscussDAO;
 
-public class DonationDiscussDAOJdbc
+public class DonationDiscussDAOJdbc implements DonationDiscussDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -26,6 +27,7 @@ public class DonationDiscussDAOJdbc
 	private static final String UPDATE = "UPDATE DonationDiscuss SET donationId = ?,memberId = ?,memberMessage = ?,memberMessageTime = ?,schoolId = ?,schoolMessage = ?,schoolMessageTime = ? WHERE donationDiscussId = ?";
 	private static final String DELETE = "DELETE FROM DonationDiscuss WHERE donationDiscussId = ?";
 
+	@Override
 	public DonationDiscussBean findByPrimaryKey(int donationDiscussId)
 	{
 		DonationDiscussBean bean = null;
@@ -70,6 +72,7 @@ public class DonationDiscussDAOJdbc
 		return bean;
 	}
 
+	@Override
 	public List<DonationDiscussBean> getAll()
 	{
 		List<DonationDiscussBean> resultList = new ArrayList<DonationDiscussBean>();
@@ -110,6 +113,7 @@ public class DonationDiscussDAOJdbc
 		return resultList;
 	}
 
+	@Override
 	public DonationDiscussBean insert(DonationDiscussBean bean)
 	{
 		DonationDiscussBean result = null;
@@ -170,6 +174,7 @@ public class DonationDiscussDAOJdbc
 		return result;
 	}
 
+	@Override
 	public DonationDiscussBean update(DonationDiscussBean bean)
 	{
 		DonationDiscussBean result = null;
@@ -229,12 +234,13 @@ public class DonationDiscussDAOJdbc
 		return result;
 	}
 
-	public boolean delete(int donationId)
+	@Override
+	public boolean delete(int donationDiscussId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
 		{
-			pstmt.setInt(1,donationId);
+			pstmt.setInt(1,donationDiscussId);
 			int count = pstmt.executeUpdate();
 			if(count == 1)
 			{
@@ -251,7 +257,7 @@ public class DonationDiscussDAOJdbc
 
 	public static void main(String[] args)
 	{
-		DonationDiscussDAOJdbc daojdbc = new DonationDiscussDAOJdbc();
+		DonationDiscussDAO daojdbc = new DonationDiscussDAOJdbc();
 		/** INSERT OK **/
 		DonationDiscussBean bean1 = new DonationDiscussBean();
 		bean1.setDonationId(1);

@@ -59,7 +59,7 @@ public class GlobalService
 		return result;
 	}
 	
-	public static java.util.Date convertStringToDate(String dateStr)
+	public static java.util.Date convertStringToDate(String dateStr) throws ParseException
 	{
 		java.util.Date result = null;
 		
@@ -70,7 +70,20 @@ public class GlobalService
 		catch(ParseException e)
 		{
 			e.printStackTrace();
+			throw e;
 		}
 		return result; 
 	}
+	
+//	public static String getFileName(Part part)
+//	{
+//		for(String content:part.getHeader("Content-Disposition").split(";"))
+//		{
+//			if(content.trim().startsWith("filename"))
+//			{
+//				return content.substring(content.indexOf('=') + 1).trim().replace("\"","");
+//			}
+//		}
+//		return null;
+//	}
 }

@@ -11,14 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.OffersBean;
+import model.dao.interfaces.OffersDAO;
 
-public class OffersDAOJdbc
+public class OffersDAOJdbc implements OffersDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
 	private static final String SELECT_ALL = "select * from Offers ";
+	@Override
 	public List<OffersBean> getAll()
 	{
 		List<OffersBean> result = null;
@@ -45,6 +47,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT schoolDemandId,room,place,food FROM Offers WHERE schoolDemandId =?";
+	@Override
 	public OffersBean findByPrimaryKey(int schoolDemandId)
 	{
 		OffersBean result = null;
@@ -78,6 +81,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String INSERT = "insert into Offers (schoolDemandId, room, place, food) values (?,?,?,?)";
+	@Override
 	public OffersBean insert(OffersBean bean)
 	{
 		OffersBean result = null;
@@ -106,6 +110,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE Offers SET room = ?,place = ?,food = ? WHERE schoolDemandId = ?";
+	@Override
 	public OffersBean update(OffersBean bean)
 	{
 		OffersBean result = null;
@@ -133,6 +138,7 @@ public class OffersDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM Offers WHERE schoolDemandId = ?";
+	@Override
 	public boolean delete(int schoolDemandId)
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -154,7 +160,7 @@ public class OffersDAOJdbc
 
 	public static void main(String[] args)
 	{
-		OffersDAOJdbc jdbc = new OffersDAOJdbc();
+		OffersDAO jdbc = new OffersDAOJdbc();
 		OffersBean bean = new OffersBean();
 		bean.setSchoolDemandId(2);
 		bean.setRoom(false);

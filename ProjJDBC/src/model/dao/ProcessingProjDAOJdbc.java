@@ -18,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.ProcessingProjBean;
+import model.dao.interfaces.ProcessingProjDAO;
 
-public class ProcessingProjDAOJdbc
+public class ProcessingProjDAOJdbc implements ProcessingProjDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -27,6 +28,7 @@ public class ProcessingProjDAOJdbc
 
 	// Select by ID
 	private static final String SELECT_BY_ID = "SELECT processingProjId,primaryProjId,schoolId,checkTime,checkStatus FROM ProcessingProj WHERE processingProjId = ?";
+	@Override
 	public ProcessingProjBean findByPrimaryKey(int processingProjId)
 	{
 		ProcessingProjBean result = null;
@@ -61,6 +63,7 @@ public class ProcessingProjDAOJdbc
 
 	// Select ALL ----->getAll(){}
 	private static final String SELECT_ALL = "SELECT processingProjId,primaryProjId,schoolId,checkTime,checkStatus FROM ProcessingProj";
+	@Override
 	public List<ProcessingProjBean> getAll()
 	{
 		List<ProcessingProjBean> result = null;
@@ -90,6 +93,7 @@ public class ProcessingProjDAOJdbc
 
 	// 新增 --------> insert(){}
 	private static final String INSERT = "INSERT INTO ProcessingProj (primaryProjId,schoolId,checkTime,checkStatus) VALUES(?,?,?,?)";
+	@Override
 	public ProcessingProjBean insert(ProcessingProjBean bean)
 	{
 		ProcessingProjBean result = null;
@@ -137,6 +141,7 @@ public class ProcessingProjDAOJdbc
 
 	// 修改 -------->update(){}
 	private static final String UPDATE = "UPDATE ProcessingProj SET primaryProjId = ?,schoolId = ?,checkTime = ?,checkStatus = ? WHERE processingProjId = ?";
+	@Override
 	public ProcessingProjBean update(ProcessingProjBean bean)
 	{
 		ProcessingProjBean result = null;
@@ -174,6 +179,7 @@ public class ProcessingProjDAOJdbc
 
 	// 刪除 ------> delete(){}
 	private static final String DELETE = "DELETE FROM ProcessingProj WHERE processingProjId = ?";
+	@Override
 	public boolean delete(int processingProjId) 
 	{
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
@@ -195,7 +201,7 @@ public class ProcessingProjDAOJdbc
 
 	public static void main(String[] args) throws Exception
 	{
-		ProcessingProjDAOJdbc dao = new ProcessingProjDAOJdbc();
+		ProcessingProjDAO dao = new ProcessingProjDAOJdbc();
 		// findByPrimaryKey for Test 查詢單一筆資料
 		ProcessingProjBean bean = dao.findByPrimaryKey(1);
 		System.out.println(bean);

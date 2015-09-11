@@ -8,12 +8,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import model.MissionBean;
+import model.dao.interfaces.MissionDAO;
 
-public class MissionDAOJdbc
+public class MissionDAOJdbc implements MissionDAO
 {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
@@ -21,6 +23,7 @@ public class MissionDAOJdbc
 
 	private static final String INSERT = "INSERT INTO Mission (missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId) VALUES(?,?,?,?,?,?,?,?)";
 
+	@Override
 	public MissionBean insert(MissionBean bean)
 	{
 		MissionBean result = null;
@@ -80,6 +83,7 @@ public class MissionDAOJdbc
 
 	private static final String DELETE = "DELETE FROM Mission WHERE missionId = ?";
 
+	@Override
 	public boolean delete(int id)
 	{
 		boolean result = false;
@@ -104,6 +108,7 @@ public class MissionDAOJdbc
 
 	private static final String UPDATE = "UPDATE Mission SET missionSetId = ?,name = ?,host = ?,endTime = ?,missionPriority = ?,missionPosition = ?,missionStatus = ?,mainMissionSetId = ? WHERE missionId = ?";
 
+	@Override
 	public MissionBean update(MissionBean bean)
 	{
 		MissionBean result = null;
@@ -152,6 +157,7 @@ public class MissionDAOJdbc
 
 	private static final String FIND_BY_PRIMARYKEY = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission WHERE missionId = ?";
 
+	@Override
 	public MissionBean findByPrimaryKey(int id)
 	{
 		MissionBean result = null;
@@ -206,6 +212,7 @@ public class MissionDAOJdbc
 
 	private static final String SELECT_ALL = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission";
 
+	@Override
 	public List<MissionBean> getAll()
 	{
 		List<MissionBean> result = new ArrayList<MissionBean>();
@@ -257,7 +264,7 @@ public class MissionDAOJdbc
 
 	public static void main(String[] args)
 	{
-		MissionDAOJdbc dao = new MissionDAOJdbc();
+		MissionDAO dao = new MissionDAOJdbc();
 
 		// findByPrimaryKey
 		MissionBean findByPKBean;
@@ -275,7 +282,14 @@ public class MissionDAOJdbc
 		insertData.setMissionSetId(1);
 		insertData.setName("體育組");
 		insertData.setHost(null);
-		insertData.setEndTime(GlobalService.convertStringToDate("2015-09-20"));
+		try
+		{
+			insertData.setEndTime(GlobalService.convertStringToDate("2015-09-20"));
+		}
+		catch(ParseException e)
+		{
+			e.printStackTrace();
+		}
 		insertData.setMissionPriority(2);
 		insertData.setMissionPosition(3);
 		insertData.setMissionStatus("進行中");

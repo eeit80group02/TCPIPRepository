@@ -22,8 +22,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.ProcessingMemberBean;
+import model.dao.interfaces.ProcessingMemberDAO;
 
-public class ProcessingMemberDAOJdbc
+public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 {
 	private DataSource datasource;
 
@@ -42,6 +43,7 @@ public class ProcessingMemberDAOJdbc
 	
 	// Select by ID
 	private static final String SELECT_BY_ID = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE processingMemberId = ?";
+	@Override
 	public ProcessingMemberBean findByPrimaryKey(int processingMemberId)
 	{
 		ProcessingMemberBean result = null;
@@ -76,6 +78,7 @@ public class ProcessingMemberDAOJdbc
 
 	// Select ALL ----->getAll(){}
 	private static final String SELECT_ALL = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember";
+	@Override
 	public List<ProcessingMemberBean> getAll()
 	{
 		List<ProcessingMemberBean> result = null;
@@ -106,6 +109,7 @@ public class ProcessingMemberDAOJdbc
 
 	// 新增 --------> insert(){}
 	private static final String INSERT = "INSERT INTO ProcessingMember (schoolDemandId,memberId,checkTime,checkStatus) VALUES (?,?,?,?)";
+	@Override
 	public ProcessingMemberBean insert(ProcessingMemberBean bean)
 	{
 		ProcessingMemberBean result = null;
@@ -145,6 +149,7 @@ public class ProcessingMemberDAOJdbc
 
 	// 修改 -------->update(){}
 	private static final String UPDATE = "UPDATE ProcessingMember SET schoolDemandId = ?,memberId = ?,checkTime = ?,checkStatus = ? WHERE processingMemberId = ?";
+	@Override
 	public ProcessingMemberBean update(ProcessingMemberBean bean)
 	{
 		ProcessingMemberBean result = null;
@@ -183,6 +188,7 @@ public class ProcessingMemberDAOJdbc
 
 	// 刪除 ------> delete(){}
 	private static final String DELETE = "DELETE FROM ProcessingMember WHERE processingMemberId = ?";
+	@Override
 	public boolean delete(int processingMemberId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -205,7 +211,7 @@ public class ProcessingMemberDAOJdbc
 	// 測試
 	public static void main(String[] args)
 	{
-		ProcessingMemberDAOJdbc dao = new ProcessingMemberDAOJdbc();
+		ProcessingMemberDAO dao = new ProcessingMemberDAOJdbc();
 
 		// findByPrimaryKey for Test 查詢單一筆資料
 		ProcessingMemberBean bean = dao.findByPrimaryKey(1);

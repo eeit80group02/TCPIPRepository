@@ -16,8 +16,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.ProjModifyBean;
+import model.dao.interfaces.ProjModifyDAO;
 
-public class ProjModifyDAOJdbc
+public class ProjModifyDAOJdbc implements ProjModifyDAO
 {
 	private DataSource datasource;
 
@@ -35,6 +36,7 @@ public class ProjModifyDAOJdbc
 	}
 	
 	private static final String SELECT_ALL = "SELECT projModifyId,fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime FROM ProjModify";
+	@Override
 	public List<ProjModifyBean> getAll()
 	{
 		List<ProjModifyBean> result = null;
@@ -83,6 +85,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String SELECT_BY_ID = "SELECT projModifyId,fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime FROM ProjModify WHERE projModifyId = ?";
+	@Override
 	public ProjModifyBean findByPrimaryKey(int projModifyId)
 	{
 		ProjModifyBean result = null;
@@ -139,6 +142,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String INSERT = "INSERT INTO ProjModify (fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime) VALUES (?,?,?,?,?,?,?)";
+	@Override
 	public ProjModifyBean insert(ProjModifyBean bean)
 	{
 		ProjModifyBean result = null;
@@ -222,6 +226,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String UPDATE = "UPDATE ProjModify SET fullProjId = ?,schoolId = ?,schoolMessage = ?,schoolMessageTime = ?,memberId = ?,memberMessage = ?,memberMessageTime = ? WHERE projModifyId = ?";
+	@Override
 	public ProjModifyBean update(ProjModifyBean bean)
 	{
 		ProjModifyBean result = null;
@@ -302,6 +307,7 @@ public class ProjModifyDAOJdbc
 	}
 
 	private static final String DELETE = "DELETE FROM ProjModify WHERE projModifyId = ?";
+	@Override
 	public boolean delete(int projModifyId)
 	{
 		try(Connection conn = datasource.getConnection();
@@ -323,7 +329,7 @@ public class ProjModifyDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		ProjModifyDAOJdbc dao = new ProjModifyDAOJdbc();
+		ProjModifyDAO dao = new ProjModifyDAOJdbc();
 		
 		// insert
 //		ProjModifyBean bean1 = new ProjModifyBean();

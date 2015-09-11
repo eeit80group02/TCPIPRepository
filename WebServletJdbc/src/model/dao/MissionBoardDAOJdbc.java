@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.MissionBoardBean;
+import model.dao.interfaces.MissionBoardDAO;
 
-public class MissionBoardDAOJdbc
+public class MissionBoardDAOJdbc implements MissionBoardDAO
 {
 	private DataSource datasource;
 

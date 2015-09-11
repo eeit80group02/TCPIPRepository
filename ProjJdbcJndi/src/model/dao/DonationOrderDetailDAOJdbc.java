@@ -15,8 +15,9 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.DonationOrderDetailBean;
+import model.dao.interfaces.DonationOrderDetailDAO;
 
-public class DonationOrderDetailDAOJdbc
+public class DonationOrderDetailDAOJdbc implements DonationOrderDetailDAO
 {
 	private DataSource datasource;
 
@@ -34,6 +35,7 @@ public class DonationOrderDetailDAOJdbc
 	}
 	
 	private static final String INSERT = "INSERT INTO DonationOederDetail(donationOederId,donationId,supplyName,donationAmount) VALUES (?,?,?,?)";
+	@Override
 	public DonationOrderDetailBean insert(DonationOrderDetailBean bean)
 	{
 		DonationOrderDetailBean result = null;
@@ -73,6 +75,7 @@ public class DonationOrderDetailDAOJdbc
 	}
 	
 	private static final String DELETE = "DELETE FROM DonationOederDetail WHERE donationOrderDetailId = ?"; 
+	@Override
 	public boolean delete(int id)
 	{
 		boolean result = false;
@@ -95,6 +98,7 @@ public class DonationOrderDetailDAOJdbc
 	}
 	
 	private static final String UPDATE = "UPDATE DonationOederDetail SET donationOederId = ?,donationId = ?,supplyName = ?,donationAmount = ? WHERE donationOrderDetailId = ?";
+	@Override
 	public DonationOrderDetailBean update(DonationOrderDetailBean bean)
 	{
 		DonationOrderDetailBean result = null;
@@ -125,6 +129,7 @@ public class DonationOrderDetailDAOJdbc
 	}
 	
 	private static final String FIND_BY_PRIMARYKEY = "SELECT donationOrderDetailId,donationOederId,donationId,supplyName,donationAmount FROM DonationOederDetail WHERE donationOrderDetailId = ?";
+	@Override
 	public DonationOrderDetailBean findByPrimaryKey(int id)
 	{
 		DonationOrderDetailBean result = null;
@@ -158,6 +163,7 @@ public class DonationOrderDetailDAOJdbc
 	}
 	
 	private static final String SELECT_ALL = "SELECT donationOrderDetailId,donationOederId,donationId,supplyName,donationAmount FROM DonationOederDetail";
+	@Override
 	public List<DonationOrderDetailBean> getAll()
 	{
 		List<DonationOrderDetailBean> result = new ArrayList<DonationOrderDetailBean>();
@@ -187,7 +193,7 @@ public class DonationOrderDetailDAOJdbc
 	
 	public static void main(String[] args)
 	{
-		DonationOrderDetailDAOJdbc dao = new DonationOrderDetailDAOJdbc();
+		DonationOrderDetailDAO dao = new DonationOrderDetailDAOJdbc();
 		
 		// Insert
 		DonationOrderDetailBean insertBean = new DonationOrderDetailBean();
