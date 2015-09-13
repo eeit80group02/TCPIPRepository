@@ -22,6 +22,8 @@ public class PrimaryProjBean implements Serializable
 	private java.util.Date createDate;   		// 建立日期
 	private String projStatus;          		// 狀態
 	
+	private String bsae64String;				// 圖片
+	
 	public PrimaryProjBean()
 	{
 	}
@@ -144,6 +146,14 @@ public class PrimaryProjBean implements Serializable
 	public void setProjStatus(String projStatus)
 	{
 		this.projStatus = projStatus;
+	}
+	public String getBsae64String()
+	{
+		return bsae64String;
+	}
+	public void setBsae64String(String bsae64String)
+	{
+		this.bsae64String = bsae64String;
 	}
 	@Override
 	public String toString()

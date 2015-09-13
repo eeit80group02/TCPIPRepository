@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class GlobalService
 {
 	public static final String HOST = "127.0.0.1";
@@ -57,6 +59,13 @@ public class GlobalService
 			}
 		}
 		return result;
+	}
+	
+	public static String convertByteArrayToBase64String(byte[] data)
+	{
+		String result = "data:image/jpeg;base64," + Base64.encodeBase64String(data);
+		
+		return result; 
 	}
 	
 	public static java.util.Date convertStringToDate(String dateStr) throws ParseException

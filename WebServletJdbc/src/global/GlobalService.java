@@ -6,7 +6,10 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import org.apache.commons.codec.binary.Base64;
 
 public class GlobalService
 {
@@ -61,6 +64,24 @@ public class GlobalService
 		return result;
 	}
 	
+	public static String convertByteArrayToBase64String(String name,byte[] data)
+	{
+		// 切出副檔名
+		String mimeType = name.substring(name.lastIndexOf('.') + 1);
+		
+		if(mimeType.equalsIgnoreCase("JPG") || mimeType.equalsIgnoreCase("JPEG"))
+			return "data:image/jpeg;base64," + Base64.encodeBase64String(data);
+		else if(mimeType.equalsIgnoreCase("PNG"))
+			return "data:image/png;base64," + Base64.encodeBase64String(data);
+			
+		return null; 
+	}
+	
+	public static byte[] convertBase64StringToByteArray(String data)
+	{
+		return Base64.decodeBase64(data);
+	}
+	
 	public static java.util.Date convertStringToDate(String dateStr) throws ParseException
 	{
 		java.util.Date result = null;
@@ -75,6 +96,11 @@ public class GlobalService
 			throw e;
 		}
 		return result; 
+	}
+	
+	public static int compareDate(java.util.Date start,java.util.Date end)
+	{
+		return end.compareTo(start);
 	}
 	
 	public static String getFileName(Part part)
