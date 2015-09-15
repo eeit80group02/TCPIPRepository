@@ -12,7 +12,7 @@
 	<c:choose>
 		<c:when test="${empty LoginOK}">
 		<!-- 		沒登入必須看到登入按鈕 -->
-			<a href="login/login.jsp" >登入</a>
+			<a href="<c:url value="/login/login.jsp" />" >登入</a>
 		</c:when>
 		
 		<c:otherwise>
@@ -35,7 +35,9 @@
 	以下單純測試用 所以全開放 <br>
 	<a href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">建立初步計畫[會員登入才能使用]</a><br>
 	<a href="<c:url value="/primaryProj.do?type=displayAll" />">檢視初步計畫[預計只有學校能看見]</a><br>
-	<a href="login/login.jsp" >登入</a>
+	<a href="<c:url value="/login/login.jsp" />" >登入</a>
+	
+	
 	
 	
 </body>

@@ -10,5 +10,7 @@
 <body>
 	${error.errorURL}
 	${error.error}
+	
+	${error}
 </body>
 </html>
