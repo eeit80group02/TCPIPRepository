@@ -27,7 +27,151 @@
 	}
 </style>
 
-</style>
+    <script type="text/javascript">
+    $(function () {
+            for (i = 1; i <= 12; i++) {   //新增月 
+                var month = window.document.createElement("option");
+                month.value = i;
+                month.innerHTML = i;
+                document.getElementById("idSelectMonth").appendChild(month);
+            }
+            document.getElementById("idSelectMonth").value = "0";
+            for (i = 2010; i <= 2020; i++) {   //新增年 
+                var year = window.document.createElement("option");
+                year.value = i;
+                year.innerHTML = i;
+                document.getElementById("idSelectYear").appendChild(year);
+            }
+            document.getElementById("idSelectYear").value = "";
+    });
+
+        function setDay() {
+            //alert(document.getElementById("idSelectDay").lastChild);
+            if (document.getElementById("idSelectDay").lastChild != null) {
+                var parent = document.getElementById("idSelectDay");
+                for (i = parent.lastChild; i != null ; i = parent.lastChild) {
+                    //alert(document.getElementById("idSelectDay").lastChild.value);
+                    parent.removeChild(i);
+                }
+            }
+            switch (document.getElementById("idSelectMonth").value) {
+                case "1":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "2":
+                    for (i = 1; i <= 28; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "3":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "4":
+                    for (i = 1; i <= 30; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "5":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "6":
+                    for (i = 1; i <= 30; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "7":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "8":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "9":
+                    for (i = 1; i <= 30; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "10":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "11":
+                    for (i = 1; i <= 30; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+                case "12":
+                    for (i = 1; i <= 31; i++) {
+                        var day = window.document.createElement("option");
+                        day.value = i;
+                        day.innerHTML = i;
+                        document.getElementById("idSelectDay").appendChild(day);
+                    }
+                    break;
+            }
+            setDayByYear();
+        }
+
+        function setDayByYear() {
+            //document.getElementById("idSelectDay").removeChild(29);
+            if (document.getElementById("idSelectMonth").value == "2" && document.getElementById("idSelectYear").value != "") {
+                //alert(document.getElementById("idSelectDay").lastChild.value);
+                //alert(document.getElementById("idSelectYear").value);
+                if (document.getElementById("idSelectYear").value % 4 == "0" && document.getElementById("idSelectDay").lastChild.value == 28) {
+                    var day = window.document.createElement("option");
+                    day.value = 29;
+                    day.innerHTML = 29;
+                    document.getElementById("idSelectDay").appendChild(day);
+                }
+                else if (document.getElementById("idSelectYear").value % 4 != "0" && document.getElementById("idSelectDay").lastChild.value == 29) {
+                    document.getElementById("idSelectDay").removeChild(document.getElementById("idSelectDay").lastChild);
+                }
+            }
+        }
+    </script>
 
 
 
@@ -316,8 +460,11 @@
 						<!-- 第二列 -->
 						<div class="row yellow lighten-2">
 							<label for="datepicker">發證日期</label>
-							<input type="date" id="datepicker" required><span id="date"></span>
-						</div>
+							<select id="idSelectYear" onchange="setDayByYear();"></select>
+            				<select id="idSelectMonth" onchange="setDay();"></select>
+            				<select id="idSelectDay"></select>
+
+					</div>
 						
 						<!-- 第三列 -->
 						<div class="row yellow lighten-2">
@@ -442,11 +589,12 @@
 	<script
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
+	<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
 	<script>
 	
 			(function($) {
-			
+				
+				
 			//datepicker 初始化
 // 			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
 // 		    var old_get = $.datepicker._get;
