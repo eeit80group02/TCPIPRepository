@@ -98,13 +98,16 @@ public class DonationServlet extends HttpServlet {
 					} else if(fldName.equals("demandContent")) {
 						demandContent = value;
 					} else if(fldName.equals("supplyStatus")) {
-//						if () {
-//							supplyStatus = value;
-//						} else if() {
-//							
-//						} else if() {
-//							
-//						}
+						if (Integer.parseInt(value) == 1) {
+								supplyStatus = "不拘";
+						} else if(Integer.parseInt(value) == 2) {
+							supplyStatus = "全新";
+						} else if(Integer.parseInt(value) == 3) {
+							supplyStatus = "二手";
+						}
+						
+//						System.out.println("value= "+value);
+//						System.out.println("supplyStatus= "+supplyStatus);
 					} else if(fldName.equals("remark")) {
 						remark = value;
 					} 
