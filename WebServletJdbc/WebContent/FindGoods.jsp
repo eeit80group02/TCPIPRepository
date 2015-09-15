@@ -46,8 +46,7 @@
 	<div class="navbar navbar-inverse">
 		<ul class="nav navbar-nav" id="headUl">
 			<li class="active"><a href="#">捐獻牆</a></li>
-			<li class="headList"><a href="index.jsp">首頁</a></li>
-			<li class="headList"><a href="CheckDonationList.jsp">確認捐獻</a></li>
+			<li class="headList"><a href="#">熱門</a></li>
 			<li class="headList"><a href="#">最新發佈</a></li>
 			<li class="headList"><a href="#">即將結束</a></li>
 			<li class="headList"><a href="#">需求數量</a></li>
@@ -57,20 +56,27 @@
 					<li><a href="#">全新</a></li>
 					<li><a href="#">二手</a></li>
 				</ul></li>
+
 		</ul>
 		<form class="navbar-form navbar-left" role="search" id="headSearch">
 			<div class="form-group">
-				<input id="searchText" type="text" class="form-control" placeholder="輸入物品或學校"  autocomplete="off">
+				<input id="searchText" type="text" class="form-control" placeholder="輸入物品或學校" autocomplete="off">
 			</div>
 
-			<button type="submit" class="btn btn-default">
-				<span class="glyphicon glyphicon-search"></span>
+			<button type="submit" class="btn btn-small btn-floating">
+				<i class="small material-icons">search</i>
 			</button>
-			<button type="reset" class="btn btn-default">
-				<span class="glyphicon glyphicon-remove"></span>
+			<button type="reset" class="btn btn-small btn-floating">
+				<i class="small material-icons">clear</i>
 			</button>
 		</form>
 	</div>
+
+	<!-- scrollamount 調整跑馬燈速度 -->
+	<!-- 愛心圖示 + 感謝 + 捐獻者名字 +捐獻+ 捐獻物品 -->
+	<marquee id="headMarquee" scrollamount="5">
+		<img src="images/heart.png" width="20px">感謝 <b> 簡小文 </b>捐獻 <b> 雨傘 </b><img src="images/heart.png" width="20px">感謝 <b> 許阿瑋 </b>捐獻 <b> 50吋 液晶電視 </b><img src="images/heart.png" width="20px">感謝 <b> 彭翔翔 </b>捐獻 <b> A4 影印紙 </b><img src="images/heart.png" width="20px">感謝 <b> 郭豪豪 </b>捐獻 <b> 電風扇 </b>
+	</marquee>
 
 	<center>
 	<!-- Content -->
@@ -83,12 +89,12 @@
 					<div class="fiximg">
 						<!-- h5 標籤不能新增修改，後面設定會用 -->
 						<div class="alert alert-info" role="alert">
-							<h5>延長線 - 屏東縣鹽埔鄉鹽埔國民小學</h5>
+							<h5>${item.supplyName} - ${item.schoolName}</h5>
 						</div>
 						<img class="bigimg" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}" '>
 					</div>
 					<div>
-						<div class="foottext">需求數量 : ${item.demandNumber} ${item.originalDemandUnit}</div>
+						<div class="foottext">需求數量 : ${item.demandNumber}</div>
 							<div class="footIcin">
 								<div id=add${vs.index} >
 								<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin"></a> 
@@ -111,6 +117,7 @@
 									demandTime = "${item.demandTime}";
 									expireTime = "${item.expireTime}";
 									remark = "${item.remark}";
+									toCart="CheckDonationList.jsp";
 									imgLet = "${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}";
 									link = "<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>"
 								});

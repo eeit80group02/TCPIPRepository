@@ -125,7 +125,8 @@
 
 					<!-- 物資狀態(全新/二手/不拘) -->
 					<div class="input-field col m12 s12">
-						<label><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="不拘、全新、二手"><span class="DetailTitle"><span class="glyphicon glyphicon-pencil"></span>&nbsp;物資狀態&nbsp;</span></a></label><br> <br> <select class="browser-default" id="supplyStatus" name="supplyStatus">
+						<label><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="不拘、全新、二手"><span class="DetailTitle"><span class="glyphicon glyphicon-pencil"></span>&nbsp;物資狀態&nbsp;</span></a></label><br> <br>
+						 <select class="browser-default" id="supplyStatus" name="supplyStatus">
 							<option value="1">不拘</option>
 							<option value="2">全新</option>
 							<option value="3">二手</option>
