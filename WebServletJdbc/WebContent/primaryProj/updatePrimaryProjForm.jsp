@@ -27,7 +27,7 @@
 	<input type="hidden" name="memberId" value="${param.memberId}${primaryProj.memberId}" /><br>
 	<input type="hidden" name="primaryProjId" value="${param.primaryProjId}${primaryProj.primaryProjId}" /><br>
 	
-	會員編號:${param.primaryProjId}${primaryProj.primaryProjId}<br>
+	會員編號:${param.primaryProjId}${primaryProj.memberId}<br>
 	計畫編號:${param.primaryProjId}${primaryProj.primaryProjId}<br>
 	計畫名稱<input type="text" name="title" value="${param.title}${primaryProj.title}" /><span class="error">${error.title}</span><br>
 	計畫封面<input type="file" name="imgFile" accept="image/jpeg,image/png" value=""/><span class="error">${error.imgFile}</span><br>

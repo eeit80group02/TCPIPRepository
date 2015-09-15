@@ -29,6 +29,10 @@ public class MemberDAOJdbc implements MemberDAO
 	private static final String UPDATE = "UPDATE Member set lastName = ?,firstName = ?,idNumber = ?,phone = ?,cellPhone = ?,birthday = ?,address = ?,gender = ?,email = ?,pictureName=?, picture = ?,pictureLength = ?,registerTime=?, recommendCount = ?,account = ?,password = ?,accountStatus = ? WHERE memberId = ?";
 	private static final String DELETE = "DELETE FROM Member WHERE memberId = ?";
 	
+	private static final String SELECT_BY_ACCOUNT = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE account = ?";
+	private static final String SELECT_BY_EMAIL = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE email = ?";
+	private static final String SELECT_BY_IDNUMBER = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE idNumber = ?";
+	
 	private DataSource datasource;
 
 	public MemberDAOJdbc()
@@ -286,6 +290,153 @@ public class MemberDAOJdbc implements MemberDAO
 		return result;
 	}
 
+	@Override
+	public MemberBean selectAccount(String account)
+	{
+		MemberBean result = null;
+		
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ACCOUNT);)
+		{
+			pstmt.setString(1,account);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					result = new MemberBean();
+
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public MemberBean selectEmail(String Email)
+	{
+		MemberBean result = null;
+		
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_EMAIL);)
+		{
+			pstmt.setString(1,Email);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					result = new MemberBean();
+
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public MemberBean selectIdNumber(String idNumber)
+	{
+		MemberBean result = null;
+		
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_IDNUMBER);)
+		{
+			pstmt.setString(1,idNumber);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					result = new MemberBean();
+
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		// insert

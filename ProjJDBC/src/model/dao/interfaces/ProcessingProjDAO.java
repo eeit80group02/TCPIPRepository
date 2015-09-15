@@ -17,4 +17,6 @@ public interface ProcessingProjDAO
 
 	public boolean delete(int processingProjId);
 
+	public List<ProcessingProjBean> selectByPrimaryProjIdAndStatus(int primaryProjId,String status);
+
 }

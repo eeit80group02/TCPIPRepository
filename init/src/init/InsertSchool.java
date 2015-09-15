@@ -19,7 +19,7 @@ public class InsertSchool
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 	
-	private static final String INSERT = "INSERT INTO School (schoolId,name,addressDistrict,addressComplete,phone,url) VALUES (?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO School (schoolId,name,addressDistrict,addressComplete,phone,url,password) VALUES (?,?,?,?,?,?,?)";
 	private static final String INSERT_ELEMENTARY_GRADE = "INSERT INTO GradeStudent (schoolId,anniversary,elementaryFirst,elementarySecond,elementaryThird,elementaryFourth,elementaryFifth,elementarySixth) VALUES(?,?,?,?,?,?,?,?)";
 	private static final String INSERT_JUNIOR_GRADE = "INSERT INTO GradeStudent (schoolId,anniversary,juniorFirst,juniorSecond,juniorThird) values(?,?,?,?,?)";
 	
@@ -44,6 +44,7 @@ public class InsertSchool
 //					System.out.println(line);
 					
 					int count = 1;
+					pstmt.setBytes(7,"password".getBytes());
 					for(String str : splitStr)
 					{
 						pstmt.setString(count++,str);
@@ -90,6 +91,7 @@ public class InsertSchool
 //					System.out.println(line);
 					
 					int count = 1;
+					pstmt.setBytes(7,"password".getBytes());
 					for(String str : splitStr)
 					{
 						pstmt.setString(count++,str);

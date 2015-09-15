@@ -6,16 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.PrimaryProjBean;
+import model.ProcessingProjBean;
 import model.dao.PrimaryProjDAOJdbc;
+import model.dao.ProcessingProjDAOJdbc;
 import model.dao.interfaces.PrimaryProjDAO;
+import model.dao.interfaces.ProcessingProjDAO;
 
 public class PrimaryProjService
 {
-	private PrimaryProjDAO dao;
+	private PrimaryProjDAO primaryProjDAO;
+	private ProcessingProjDAO processingProjDAO;
 	
 	public PrimaryProjService()
 	{
-		this.dao = new PrimaryProjDAOJdbc();
+		this.primaryProjDAO = new PrimaryProjDAOJdbc();
+		this.processingProjDAO = new ProcessingProjDAOJdbc();
 	}
 	
 	public PrimaryProjBean createPrimaryProj(PrimaryProjBean bean)
@@ -27,7 +32,7 @@ public class PrimaryProjService
 			// business logic 預設 待洽談 & 建立時間
 			bean.setProjStatus("待洽談");
 			bean.setCreateDate(new java.util.Date(System.currentTimeMillis()));
-			result = dao.insert(bean);
+			result = primaryProjDAO.insert(bean);
 			if(result != null)
 			{
 				result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
@@ -43,7 +48,7 @@ public class PrimaryProjService
 		if (bean != null) 
 		{
 			// 先selete 抓齊所有資料 在對使用者的資料做修改
-			PrimaryProjBean temp = dao.findByPrimaryKey(bean.getPrimaryProjId());
+			PrimaryProjBean temp = primaryProjDAO.findByPrimaryKey(bean.getPrimaryProjId());
 			if(temp != null)
 			{
 				temp.setMemberId(bean.getMemberId());
@@ -64,7 +69,7 @@ public class PrimaryProjService
 					temp.setFrontCoverLength(bean.getFrontCoverLength());
 				}
 				
-				result = dao.update(temp);
+				result = primaryProjDAO.update(temp);
 				if(result != null)
 				{
 					result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
@@ -77,7 +82,7 @@ public class PrimaryProjService
 	public List<PrimaryProjBean> displayPromaryProjAll()
 	{
 		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
-		result = dao.getAll();
+		result = primaryProjDAO.getAll();
 		
 		List<PrimaryProjBean> temp = new ArrayList<PrimaryProjBean>();
 		for(PrimaryProjBean bean : result)
@@ -106,7 +111,7 @@ public class PrimaryProjService
 		
 		if(bean != null)
 		{
-			result = dao.findByPrimaryKey(bean.getPrimaryProjId());
+			result = primaryProjDAO.findByPrimaryKey(bean.getPrimaryProjId());
 			if(result != null)
 			{
 				result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
@@ -114,10 +119,55 @@ public class PrimaryProjService
 		}
 		return result;
 	}
+	
+	public List<PrimaryProjBean> displayPersonalPromaryProj(PrimaryProjBean bean)
+	{
+		List<PrimaryProjBean> result = null;
+		
+		if(bean != null)
+		{
+			result = primaryProjDAO.selectByMemberId(bean.getMemberId());
+		}
+		return result;
+	}
+	
+	// 查詢 個人頁面 有學校申請的 計畫
+	public List<PrimaryProjBean> displayPersonalPromaryProjByPending(PrimaryProjBean bean)
+	{
+		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
+		
+		if(bean != null)
+		{
+			// 先查詢 該會員的所有初步計畫
+			List<PrimaryProjBean> temps = primaryProjDAO.selectByMemberId(bean.getMemberId());
+			for(PrimaryProjBean temp : temps)
+			{
+				if(temp.getProjStatus().equals("洽談中"))
+				{
+					// 有在洽談中的初步計畫編號
+					int primaryProjId = temp.getPrimaryProjId();
+					// 對該計畫去查學所有有申請
+					List<ProcessingProjBean> processing = processingProjDAO.selectByPrimaryProjId(primaryProjId);
+					// 找出該計畫需要待審核的集合
+					List<ProcessingProjBean> pending = new ArrayList<ProcessingProjBean>();
+					for(ProcessingProjBean process:processing)
+					{
+						if(process.getCheckStatus().equals("待審核"))
+						{
+							pending.add(process);
+						}
+					}
+					temp.setProcessingProjBean(pending);
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		PrimaryProjService service = new PrimaryProjService();
-		PrimaryProjDAO dao = new PrimaryProjDAOJdbc();
 //		PrimaryProjBean bean1 = new PrimaryProjBean();
 //		bean1.setMemberId(6);
 //		bean1.setTitle("餐餐都有麥當當");

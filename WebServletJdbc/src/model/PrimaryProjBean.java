@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PrimaryProjBean implements Serializable
 {
@@ -23,6 +24,7 @@ public class PrimaryProjBean implements Serializable
 	private String projStatus;          		// 狀態
 	
 	private String bsae64String;				// 圖片
+	private List<ProcessingProjBean> processingProjBean;	// 存計畫被關聯的 ProcessingProj
 	
 	public PrimaryProjBean()
 	{
@@ -154,6 +156,14 @@ public class PrimaryProjBean implements Serializable
 	public void setBsae64String(String bsae64String)
 	{
 		this.bsae64String = bsae64String;
+	}
+	public List<ProcessingProjBean> getProcessingProjBean()
+	{
+		return processingProjBean;
+	}
+	public void setProcessingProjBean(List<ProcessingProjBean> processingProjBean)
+	{
+		this.processingProjBean = processingProjBean;
 	}
 	@Override
 	public String toString()

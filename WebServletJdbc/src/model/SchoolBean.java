@@ -173,6 +173,11 @@ public class SchoolBean implements Serializable
 		this.accountStatus = accountStatus;
 	}
 
+	public String getBeanName()
+	{
+		return "school";
+	}
+	
 	@Override
 	public String toString()
 	{

@@ -17,4 +17,10 @@ public interface MemberDAO
 
 	public List<MemberBean> select();
 
+	public MemberBean selectAccount(String account);
+
+	public MemberBean selectEmail(String Email);
+
+	public MemberBean selectIdNumber(String idNumber);
+
 }

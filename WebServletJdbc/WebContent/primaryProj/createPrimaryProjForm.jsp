@@ -4,8 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 	<style>
 		.error{
 			color:#FF0000;
@@ -19,7 +17,7 @@
 	<form action="<c:url value="/primaryProj.do" />" method="post" enctype="multipart/form-data">
 	
 <!-- 	隱藏欄位 之後必須從 session 取出會員ID -->
-	<input type="hidden" name="memberId" value="1" /><br>
+	<input type="hidden" name="memberId" value="${LoginOK.memberId}" /><br>
 	計畫名稱<input type="text" name="title" value="${param.title}" /><span class="error">${error.title}</span><br>
 	計畫封面<input type="file" id="pitcture" name="imgFile" accept="image/jpeg,image/png" /><span class="error">${error.imgFile}</span><br>
 	計畫摘要<textarea rows="10" cols="100" name="projAbstract">${param.projAbstract}</textarea><span class="error">${error.projAbstract}</span><br>

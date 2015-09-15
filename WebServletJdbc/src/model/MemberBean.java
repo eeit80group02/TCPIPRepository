@@ -221,6 +221,11 @@ public class MemberBean implements Serializable
 	{
 		this.identityCode = identityCode;
 	}
+	
+	public String getBeanName()
+	{
+		return "member";
+	}
 
 	@Override
 	public String toString()

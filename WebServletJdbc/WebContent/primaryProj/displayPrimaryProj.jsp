@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,8 +42,10 @@
 			<td>${primaryProj.idealPlace}</td>
 		</tr>
 		<tr>
+			<fmt:formatDate var="startTime" value="${primaryProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
+			<fmt:formatDate var="endTime" value="${primaryProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />
 			<td>活動時間</td>
-			<td>${primaryProj.activityStartTime} ~ ${primaryProj.activityEndTime}</td>
+			<td>${startTime} ~ ${endTime}</td>
 		</tr>
 		<tr>
 			<td>活動預計人數</td>
@@ -56,17 +58,47 @@
 	</table>
 	<img src="${primaryProj.bsae64String}" class="frontImg">
 	
+	<hr>
+	
+	<c:set var="deadline" value="900000" />
+	<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 
+
 <!-- 	檢查 發起者ID 跟 session id是否一致  如果是該發起者  才顯示出修改 -->
-	<form action="<c:url value="/primaryProj.do" />" method="post">
-		<input type="hidden" name="type" value="displayUpdate">
-		<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
-		<input type="submit" value="修改">
-	</form>
-	
+	<c:if test="${LoginOK.beanName.equals('member')}">
+		<c:if test="${LoginOK.memberId == primaryProj.memberId && (primaryProj.createDate.time + deadline) - nowDate > 0}">
+			<form action="<c:url value="/primaryProj.do" />" method="post">
+				<input type="hidden" name="type" value="displayUpdate">
+				<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
+				<input type="submit" value="修改">
+			</form>
+		</c:if>
+	</c:if>
+
 <!-- 	檢查 登入者是否學校 -->
-	<input type="submit" value="申請計畫洽談" >
+	<c:if test="${LoginOK.beanName.equals('school')}">
+		<form action="<c:url value="/ProcessingProj.do" />" method="post">
+			<input type="hidden" name="schoolId" value="${LoginOK.schoolId}">
+			<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
+			<input type="hidden" name="type" value="apply">
+			<input type="submit" value="申請計畫洽談" >
+		</form>
+	</c:if>
+	
+	<hr>
+	上面有隱藏按妞，初步計畫發布後15分內能再變更<br>
+<!-- 	下面有隱藏按妞，初步計畫發布後15分內能再變更 -->
+	<c:if test="${LoginOK.beanName.equals('member')}">
+		<c:if test="${LoginOK.memberId == primaryProj.memberId}">
+			<form action="<c:url value="/primaryProj.do" />" method="post">
+				<input type="hidden" name="type" value="displayUpdate">
+				<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
+				<input type="submit" value="修改">
+			</form>
+		</c:if>
+	</c:if>
 	
 	
+
 
 </body>
 </html>

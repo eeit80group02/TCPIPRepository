@@ -17,4 +17,6 @@ public interface PrimaryProjDAO
 
 	public boolean delete(int primaryProjId);
 
+	public List<PrimaryProjBean> selectByMemberId(int memberId);
+
 }

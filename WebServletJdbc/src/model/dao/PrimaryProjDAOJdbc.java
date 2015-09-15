@@ -248,6 +248,55 @@ public class PrimaryProjDAOJdbc implements PrimaryProjDAO
 		return false;
 	}
 
+	// Select by memberId
+	private static final String SELECT_BY_MEMBERID = "SELECT primaryProjId,memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus FROM PrimaryProj WHERE memberId = ?";
+
+	@Override
+	public List<PrimaryProjBean> selectByMemberId(int memberId)
+	{
+		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
+		PrimaryProjBean bean = null;
+		
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_MEMBERID);)
+		{
+			pstmt.setInt(1,memberId);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				while(rset.next())
+				{
+					bean = new PrimaryProjBean();
+					bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					bean.setTitle(rset.getString("title"));
+					bean.setFrontCoverName(rset.getString("frontCoverName"));
+					bean.setFrontCover(rset.getBytes("frontCover"));
+					bean.setFrontCoverLength(rset.getLong("frontCoverLength"));
+					bean.setProjAbstract(rset.getString("projAbstract"));
+					bean.setContent(rset.getString("content"));
+					bean.setIdealPlace(rset.getString("idealPlace"));
+					bean.setActivityStartTime(rset.getTimestamp("activityStartTime"));
+					bean.setActivityEndTime(rset.getTimestamp("activityEndTime"));
+					bean.setDemandNum(rset.getInt("demandNum"));
+					bean.setBudget(rset.getInt("budget"));
+					bean.setCreateDate(rset.getTimestamp("createDate"));
+					bean.setProjStatus(rset.getString("projStatus"));
+					
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		PrimaryProjDAO dao = new PrimaryProjDAOJdbc();

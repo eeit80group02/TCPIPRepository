@@ -192,7 +192,34 @@ public class ProcessingProjDAOJdbc implements ProcessingProjDAO
 		}
 		return result;
 	}
+	private static final String SELECT_BY_PRIMARYPROJID = "SELECT processingProjId,primaryProjId,schoolId,checkTime,checkStatus FROM ProcessingProj WHERE primaryProjId = ?";
+	@Override
+	public List<ProcessingProjBean> selectByPrimaryProjId(int primaryProjId)
+	{
+		List<ProcessingProjBean> result = new ArrayList<ProcessingProjBean>();
 
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_PRIMARYPROJID);)
+		{
+			pstmt.setInt(1,primaryProjId);
+			ResultSet rset = pstmt.executeQuery();
+			while(rset.next())
+			{
+				ProcessingProjBean bean = new ProcessingProjBean();
+				bean.setProcessingProjId(rset.getInt("processingProjId"));
+				bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+				bean.setSchoolId(rset.getInt("schoolId"));
+				bean.setCheckTime(rset.getTimestamp("checkTime"));
+				bean.setCheckStatus(rset.getString("checkStatus"));
+				result.add(bean);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
 	// 刪除 ------> delete(){}
 	private static final String DELETE = "DELETE FROM ProcessingProj WHERE processingProjId = ?";
 	@Override
@@ -217,37 +244,39 @@ public class ProcessingProjDAOJdbc implements ProcessingProjDAO
 
 	public static void main(String[] args) throws Exception
 	{
-		ProcessingProjDAO dao = new ProcessingProjDAOJdbc();
-		// findByPrimaryKey for Test 查詢單一筆資料
-		ProcessingProjBean bean = dao.findByPrimaryKey(1);
-		System.out.println(bean);
-
-//		// select All for Test 查詢全部
-		List<ProcessingProjBean> beans = dao.getAll();
-		System.out.println();
-		for(ProcessingProjBean b : beans)
-		{
-			System.out.println(b);
-		}
+//		ProcessingProjDAO dao = new ProcessingProjDAOJdbc();
+//		// findByPrimaryKey for Test 查詢單一筆資料
+//		ProcessingProjBean bean = dao.findByPrimaryKey(1);
+//		System.out.println(bean);
 //
-//		// insert 新增
-		ProcessingProjBean bean1 = new ProcessingProjBean();
-		bean1.setPrimaryProjId(1);
-		bean1.setSchoolId(11503);
-		bean1.setCheckTime(null);
-		bean1.setCheckStatus("待審核");
-		System.out.println(dao.insert(bean1));
-
-//		// update 更新
-		ProcessingProjBean bean2 = new ProcessingProjBean();
-		bean2.setProcessingProjId(9);
-		bean2.setPrimaryProjId(1);
-		bean2.setSchoolId(11503);
-		bean2.setCheckTime(new java.util.Date(System.currentTimeMillis()));
-		bean2.setCheckStatus("已通過");
-		System.out.println(dao.update(bean2));
+////		// select All for Test 查詢全部
+//		List<ProcessingProjBean> beans = dao.getAll();
+//		System.out.println();
+//		for(ProcessingProjBean b : beans)
+//		{
+//			System.out.println(b);
+//		}
+////
+////		// insert 新增
+//		ProcessingProjBean bean1 = new ProcessingProjBean();
+//		bean1.setPrimaryProjId(1);
+//		bean1.setSchoolId(11503);
+//		bean1.setCheckTime(null);
+//		bean1.setCheckStatus("待審核");
+//		System.out.println(dao.insert(bean1));
 //
-//		// delete 刪除
-		System.out.println(dao.delete(1));
+////		// update 更新
+//		ProcessingProjBean bean2 = new ProcessingProjBean();
+//		bean2.setProcessingProjId(9);
+//		bean2.setPrimaryProjId(1);
+//		bean2.setSchoolId(11503);
+//		bean2.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+//		bean2.setCheckStatus("已通過");
+//		System.out.println(dao.update(bean2));
+////
+////		// delete 刪除
+//		System.out.println(dao.delete(1));
+		
+//		System.out.println(dao.selectByPrimaryProjId(1));
 	}
 }

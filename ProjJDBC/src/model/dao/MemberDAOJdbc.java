@@ -2,15 +2,12 @@ package model.dao;
 
 import global.GlobalService;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +26,10 @@ public class MemberDAOJdbc implements MemberDAO
 	private static final String UPDATE = "UPDATE Member set lastName = ?,firstName = ?,idNumber = ?,phone = ?,cellPhone = ?,birthday = ?,address = ?,gender = ?,email = ?,pictureName=?, picture = ?,pictureLength = ?,registerTime=?, recommendCount = ?,account = ?,password = ?,accountStatus = ? WHERE memberId = ?";
 	private static final String DELETE = "DELETE FROM Member WHERE memberId = ?";
 
+	private static final String SELECT_BY_ACCOUNT = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE account = ?";
+	private static final String SELECT_BY_EMAIL = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE email = ?";
+	private static final String SELECT_BY_IDNUMBER = "SELECT memberId,lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,recommendCount,account,password,accountStatus,identityCode FROM Member WHERE idNumber = ?";
+	
 	@Override
 	public MemberBean insert(MemberBean bean)
 	{
@@ -270,93 +271,245 @@ public class MemberDAOJdbc implements MemberDAO
 		}
 		return result;
 	}
+	
+	@Override
+	public MemberBean selectAccount(String account)
+	{
+		MemberBean result = null;
+		
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ACCOUNT);)
+		{
+			pstmt.setString(1,account);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					result = new MemberBean();
 
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public MemberBean selectEmail(String Email)
+	{
+		MemberBean result = null;
+		
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_EMAIL);)
+		{
+			pstmt.setString(1,Email);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					result = new MemberBean();
+
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	@Override
+	public MemberBean selectIdNumber(String idNumber)
+	{
+		MemberBean result = null;
+		
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_IDNUMBER);)
+		{
+			pstmt.setString(1,idNumber);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				while(rs.next())
+				{
+					result = new MemberBean();
+
+					result.setMemberId(rs.getInt("memberId"));
+					result.setLastName(rs.getString("LastName"));
+					result.setFirstName(rs.getString("FirstName"));
+					result.setIdNumber(rs.getString("IdNumber"));
+					result.setPhone(rs.getString("Phone"));
+					result.setCellPhone(rs.getString("CellPhone"));
+					result.setBirthday(rs.getDate("Birthday"));
+					result.setAddress(rs.getString("Address"));
+					result.setGender(rs.getString("Gender"));
+					result.setEmail(rs.getString("Email"));
+					result.setPictureName(rs.getString("PictureName"));
+					result.setPicture(rs.getBytes("Picture"));
+					result.setPictureLength(rs.getLong("PictureLength"));
+					result.setRegisterTime(rs.getDate("RegisterTime"));
+					result.setRecommendCount(rs.getInt("RecommendCount"));
+					result.setAccount(rs.getString("Account"));
+					result.setPassword(rs.getBytes("Password"));
+					result.setAccountStatus(rs.getString("AccountStatus"));
+					result.setIdentityCode(rs.getString("identityCode"));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
 	public static void main(String[] args) throws Exception
 	{
 		// insert
-		MemberDAO dao = new MemberDAOJdbc();
+//		MemberDAO dao = new MemberDAOJdbc();
 		
-		MemberBean bean1 = new MemberBean();
-//		bean1.setMemberId(null);
-		bean1.setLastName("鋼鐵808080");
-		bean1.setFirstName("人");
-		bean1.setIdNumber("F55667788");
-		bean1.setPhone("66316666");
-		bean1.setCellPhone(null);
-		bean1.setBirthday(new SimpleDateFormat("yyyy/MM/dd").parse("1985/08/08"));
-		bean1.setAddress("台北市大安區復興南路一段390號2樓");
-		bean1.setGender("男");
-		bean1.setEmail("eeit80@orz.tw");
+//		MemberBean bean1 = new MemberBean();
+////		bean1.setMemberId(null);
+//		bean1.setLastName("鋼鐵808080");
+//		bean1.setFirstName("人");
+//		bean1.setIdNumber("F55667788");
+//		bean1.setPhone("66316666");
+//		bean1.setCellPhone(null);
+//		bean1.setBirthday(new SimpleDateFormat("yyyy/MM/dd").parse("1985/08/08"));
+//		bean1.setAddress("台北市大安區復興南路一段390號2樓");
+//		bean1.setGender("男");
+//		bean1.setEmail("eeit80@orz.tw");
+//		
+//		File file = new File("image/member/member01.jpg"); 
+//		try(FileInputStream fis = new FileInputStream(file);)
+//		{
+//			bean1.setPictureName(file.getName());
+//			bean1.setPicture(GlobalService.convertInputStreamToByteArray(fis));
+//			bean1.setPictureLength(file.length());
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		
+//		bean1.setRegisterTime(new java.util.Date(System.currentTimeMillis()));
+//		bean1.setRecommendCount(0);
+//		bean1.setAccount("eeit8080");
+//		bean1.setPassword("eeit8080".getBytes());
+//		bean1.setAccountStatus("啟用");
+//		bean1 = dao.insert(bean1);
+//		System.out.println(bean1);
+//		
+//		System.out.println("----------------------------------------------");
+//
+//		// update
+//		MemberBean bean2 = new MemberBean();
+//		bean2.setMemberId(2);
+//		bean2.setLastName("鋼鐵878787");
+//		bean2.setFirstName("人");
+//		bean2.setIdNumber("F55667788");
+//		bean2.setPhone("66316666");
+//		bean2.setCellPhone("66661366");
+//		bean2.setBirthday(new SimpleDateFormat("yyyy/MM/dd").parse("1985/02/08"));
+//		bean2.setAddress("台北市大安區復興南路一段390號2樓");
+//		bean2.setGender("男");
+//		bean2.setEmail("eeit80@orz.tw");
+//		
+//		file = new File("image/member/member02.jpg"); 
+//		try(FileInputStream fis = new FileInputStream(file);)
+//		{
+//			bean2.setPictureName(file.getName());
+//			bean2.setPicture(GlobalService.convertInputStreamToByteArray(fis));
+//			bean2.setPictureLength(file.length());
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		bean2.setRegisterTime(new java.util.Date(System.currentTimeMillis()));
+//		bean2.setRecommendCount(0);
+//		bean2.setAccount("eeit8080");
+//		bean2.setPassword("eeit8080".getBytes());
+//		bean2.setAccountStatus("停用");
+//		bean2 = dao.update(bean2);
+//		System.out.println(bean2);
+//		
+//		System.out.println("----------------------------------------------");
+//
+//		// delete
+//		boolean count = dao.delete(1);
+//		System.out.println(count);
+//		System.out.println("----------------------------------------------");
+//
+//		// select_pk
+//		MemberBean bean4 = new MemberBean();
+//		bean4 = dao.select(2);
+//		System.out.println(bean4);
+//		System.out.println("----------------------------------------------");
+//
+//		// select_all
+//		List<MemberBean> list = dao.select();
+//		System.out.println(list);
 		
-		File file = new File("image/member/member01.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);)
-		{
-			bean1.setPictureName(file.getName());
-			bean1.setPicture(GlobalService.convertInputStreamToByteArray(fis));
-			bean1.setPictureLength(file.length());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+//		System.out.println(dao.selectAccount("eeit8038"));
+//		System.out.println(dao.selectEmail("eeit8038@org.com"));
+//		System.out.println(dao.selectIdNumber("G121900921"));
 		
-		bean1.setRegisterTime(new java.util.Date(System.currentTimeMillis()));
-		bean1.setRecommendCount(0);
-		bean1.setAccount("eeit8080");
-		bean1.setPassword("eeit8080".getBytes());
-		bean1.setAccountStatus("啟用");
-		bean1 = dao.insert(bean1);
-		System.out.println(bean1);
-		
-		System.out.println("----------------------------------------------");
-
-		// update
-		MemberBean bean2 = new MemberBean();
-		bean2.setMemberId(2);
-		bean2.setLastName("鋼鐵878787");
-		bean2.setFirstName("人");
-		bean2.setIdNumber("F55667788");
-		bean2.setPhone("66316666");
-		bean2.setCellPhone("66661366");
-		bean2.setBirthday(new SimpleDateFormat("yyyy/MM/dd").parse("1985/02/08"));
-		bean2.setAddress("台北市大安區復興南路一段390號2樓");
-		bean2.setGender("男");
-		bean2.setEmail("eeit80@orz.tw");
-		
-		file = new File("image/member/member02.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);)
-		{
-			bean2.setPictureName(file.getName());
-			bean2.setPicture(GlobalService.convertInputStreamToByteArray(fis));
-			bean2.setPictureLength(file.length());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		bean2.setRegisterTime(new java.util.Date(System.currentTimeMillis()));
-		bean2.setRecommendCount(0);
-		bean2.setAccount("eeit8080");
-		bean2.setPassword("eeit8080".getBytes());
-		bean2.setAccountStatus("停用");
-		bean2 = dao.update(bean2);
-		System.out.println(bean2);
-		
-		System.out.println("----------------------------------------------");
-
-		// delete
-		boolean count = dao.delete(1);
-		System.out.println(count);
-		System.out.println("----------------------------------------------");
-
-		// select_pk
-		MemberBean bean4 = new MemberBean();
-		bean4 = dao.select(2);
-		System.out.println(bean4);
-		System.out.println("----------------------------------------------");
-
-		// select_all
-		List<MemberBean> list = dao.select();
-		System.out.println(list);
 	}
 }

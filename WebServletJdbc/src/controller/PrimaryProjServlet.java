@@ -93,6 +93,16 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProj");
 				displayPrimaryProj(request,response);
 			}
+			else if(type.equals("displayPersonal"))
+			{
+				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProj");
+				displayPersonalPrimaryProj(request,response);
+			}
+			else if(type.equals("displayPersonalByPending"))
+			{
+				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProjByPending");
+				displayPersonalPrimaryProjByPending(request,response);
+			}
 			else
 			{
 				errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.83)");
@@ -102,6 +112,126 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 	}
 	
+	private void displayPersonalPrimaryProjByPending(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		// 錯誤訊息 容器
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		// 接收資料
+		String memberId = request.getParameter("memberId");
+		
+		// 驗證資料
+		if(memberId == null || memberId.trim().length() == 0)
+		{
+			errorMsg.put("error","queryString key error");
+		}
+		
+		// 進行必要資料轉換
+		int id = 0;
+		try
+		{
+			id = Integer.parseInt(memberId);
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("error","queryString value error");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			// QueryString 有誤
+			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.134)");
+			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			return;
+		}
+
+		// business logic
+		PrimaryProjBean bean = new PrimaryProjBean();
+		bean.setMemberId(id);
+		List<PrimaryProjBean> result = service.displayPersonalPromaryProjByPending(bean);
+		
+		if(result != null)
+		{
+			// 成功導向
+			System.out.println(result);
+			HttpSession session = request.getSession();
+			session.setAttribute("primaryProj",result);
+			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProjByPending.jsp");
+//			request.setAttribute("primaryProj",bean);
+//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
+			
+		}
+		else
+		{
+			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
+			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			return;
+		}
+	}
+
+	private void displayPersonalPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		// 錯誤訊息 容器
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		// 接收資料
+		String memberId = request.getParameter("memberId");
+		
+		// 驗證資料
+		if(memberId == null || memberId.trim().length() == 0)
+		{
+			errorMsg.put("error","queryString key error");
+		}
+		
+		// 進行必要資料轉換
+		int id = 0;
+		try
+		{
+			id = Integer.parseInt(memberId);
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("error","queryString value error");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			// QueryString 有誤
+			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.134)");
+			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			return;
+		}
+
+		// business logic
+		PrimaryProjBean bean = new PrimaryProjBean();
+		bean.setMemberId(id);
+		List<PrimaryProjBean> result = service.displayPersonalPromaryProj(bean);
+		
+		if(result != null)
+		{
+			// 成功導向
+			System.out.println(result);
+			HttpSession session = request.getSession();
+			session.setAttribute("primaryProj",result);
+			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProj.jsp");
+//			request.setAttribute("primaryProj",bean);
+//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
+			
+		}
+		else
+		{
+			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
+			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			return;
+		}
+	}
+
 	private void displayUpdatePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");

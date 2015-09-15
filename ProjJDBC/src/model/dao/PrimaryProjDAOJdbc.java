@@ -8,8 +8,6 @@ package model.dao;
  */
 import global.GlobalService;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -231,7 +229,53 @@ public class PrimaryProjDAOJdbc implements PrimaryProjDAO
 
 		return false;
 	}
-
+	
+	private static final String SELECT_BY_MEMBERID = "SELECT primaryProjId,memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus FROM PrimaryProj WHERE memberId = ?";
+	@Override
+	public List<PrimaryProjBean> selectByMemberId(int memberId)
+	{
+		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
+		PrimaryProjBean bean = null;
+		
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_MEMBERID);)
+		{
+			pstmt.setInt(1,memberId);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				while(rset.next())
+				{
+					bean = new PrimaryProjBean();
+					bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					bean.setTitle(rset.getString("title"));
+					bean.setFrontCoverName(rset.getString("frontCoverName"));
+					bean.setFrontCover(rset.getBytes("frontCover"));
+					bean.setFrontCoverLength(rset.getLong("frontCoverLength"));
+					bean.setProjAbstract(rset.getString("projAbstract"));
+					bean.setContent(rset.getString("content"));
+					bean.setIdealPlace(rset.getString("idealPlace"));
+					bean.setActivityStartTime(rset.getTimestamp("activityStartTime"));
+					bean.setActivityEndTime(rset.getTimestamp("activityEndTime"));
+					bean.setDemandNum(rset.getInt("demandNum"));
+					bean.setBudget(rset.getInt("budget"));
+					bean.setCreateDate(rset.getTimestamp("createDate"));
+					bean.setProjStatus(rset.getString("projStatus"));
+					
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
 	public static void main(String[] args) throws Exception
 	{
 		PrimaryProjDAO dao = new PrimaryProjDAOJdbc();
@@ -247,60 +291,65 @@ public class PrimaryProjDAOJdbc implements PrimaryProjDAO
 //		}
 
 		// insert 新增
-		PrimaryProjBean bean1 = new PrimaryProjBean();
+//		PrimaryProjBean bean1 = new PrimaryProjBean();
 //		bean1.setPrimaryProjId(2); //資料庫有設計IDENTITY(1,1)所以這行不用加
-		bean1.setMemberId(6);
-		bean1.setTitle("餐餐都有麥當當");
-		File file = new File("image/primaryProj/primaryProj01.jpg");
-		try(FileInputStream fis = new FileInputStream(file);)
-		{
-			bean1.setFrontCoverName(file.getName());
-			bean1.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
-			bean1.setFrontCoverLength(file.length());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		bean1.setProjAbstract("摘要（Abstract）又稱文摘或提要。它是以簡明扼要的文句，將某種文獻的主要內容，正確無誤地摘錄出來，使讀者於最短的時間內，得知原著的大意。");
-		bean1.setContent("初步計畫的內文檔案內容會比摘要多很多.......");
-		bean1.setIdealPlace("新竹尖石鄉");
-		bean1.setActivityStartTime(GlobalService.convertStringToDate("2015-10-10"));
-		bean1.setActivityEndTime(GlobalService.convertStringToDate("2015-10-17"));
-		bean1.setDemandNum(30);
-		bean1.setBudget(20000);
-		bean1.setCreateDate(new java.util.Date(System.currentTimeMillis()));
-		bean1.setProjStatus("洽談失敗");
-		System.out.println(dao.insert(bean1));
-
-		// update 更新
-		PrimaryProjBean bean2 = new PrimaryProjBean();
-		bean2.setPrimaryProjId(2);
-		bean2.setMemberId(6);
-		bean2.setTitle("餐餐都肯德基");
-		file = new File("image/primaryProj/primaryProj01.jpg");
-		try(FileInputStream fis = new FileInputStream(file);)
-		{
-			bean2.setFrontCoverName(file.getName());
-			bean2.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
-			bean2.setFrontCoverLength(file.length());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		bean2.setProjAbstract("摘要（Abstract）又稱文摘或提要。它是以簡明扼要的文句，將某種文獻的主要內容，正確無誤地摘錄出來，使讀者於最短的時間內，得知原著的大意。");
-		bean2.setContent("初步計畫的內文檔案內容會比摘要多很多.......");
-		bean2.setIdealPlace("新竹尖石鄉");
-		bean2.setActivityStartTime(GlobalService.convertStringToDate("2015-10-10"));
-		bean2.setActivityEndTime(GlobalService.convertStringToDate("2015-10-17"));
-		bean2.setDemandNum(30);
-		bean2.setBudget(20000);
-		bean2.setCreateDate(new java.util.Date(System.currentTimeMillis()));
-		bean2.setProjStatus("洽談失敗");
-		System.out.println(dao.update(bean2));
+//		bean1.setMemberId(6);
+//		bean1.setTitle("餐餐都有麥當當");
+//		File file = new File("image/primaryProj/primaryProj01.jpg");
+//		try(FileInputStream fis = new FileInputStream(file);)
+//		{
+//			bean1.setFrontCoverName(file.getName());
+//			bean1.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
+//			bean1.setFrontCoverLength(file.length());
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		bean1.setProjAbstract("摘要（Abstract）又稱文摘或提要。它是以簡明扼要的文句，將某種文獻的主要內容，正確無誤地摘錄出來，使讀者於最短的時間內，得知原著的大意。");
+//		bean1.setContent("初步計畫的內文檔案內容會比摘要多很多.......");
+//		bean1.setIdealPlace("新竹尖石鄉");
+//		bean1.setActivityStartTime(GlobalService.convertStringToDate("2015-10-10"));
+//		bean1.setActivityEndTime(GlobalService.convertStringToDate("2015-10-17"));
+//		bean1.setDemandNum(30);
+//		bean1.setBudget(20000);
+//		bean1.setCreateDate(new java.util.Date(System.currentTimeMillis()));
+//		bean1.setProjStatus("洽談失敗");
+//		System.out.println(dao.insert(bean1));
+//
+//		// update 更新
+//		PrimaryProjBean bean2 = new PrimaryProjBean();
+//		bean2.setPrimaryProjId(2);
+//		bean2.setMemberId(6);
+//		bean2.setTitle("餐餐都肯德基");
+//		file = new File("image/primaryProj/primaryProj01.jpg");
+//		try(FileInputStream fis = new FileInputStream(file);)
+//		{
+//			bean2.setFrontCoverName(file.getName());
+//			bean2.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
+//			bean2.setFrontCoverLength(file.length());
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//		bean2.setProjAbstract("摘要（Abstract）又稱文摘或提要。它是以簡明扼要的文句，將某種文獻的主要內容，正確無誤地摘錄出來，使讀者於最短的時間內，得知原著的大意。");
+//		bean2.setContent("初步計畫的內文檔案內容會比摘要多很多.......");
+//		bean2.setIdealPlace("新竹尖石鄉");
+//		bean2.setActivityStartTime(GlobalService.convertStringToDate("2015-10-10"));
+//		bean2.setActivityEndTime(GlobalService.convertStringToDate("2015-10-17"));
+//		bean2.setDemandNum(30);
+//		bean2.setBudget(20000);
+//		bean2.setCreateDate(new java.util.Date(System.currentTimeMillis()));
+//		bean2.setProjStatus("洽談失敗");
+//		System.out.println(dao.update(bean2));
+//		
+//		System.out.println(dao.delete(4));
 		
-		System.out.println(dao.delete(4));
+		for(PrimaryProjBean bean : dao.selectByMemberId(7))
+		{
+			System.out.println(bean);
+		}
 
 	}
 
