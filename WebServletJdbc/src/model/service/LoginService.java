@@ -46,6 +46,7 @@ public class LoginService
 			SchoolBean bean = schoolDAO.findByPrimaryKey(schoolId);
 			if(bean != null)
 			{
+				
 				byte[] pwd = bean.getPassword();
 				if(Arrays.equals(pwd,password.getBytes()))
 				{
