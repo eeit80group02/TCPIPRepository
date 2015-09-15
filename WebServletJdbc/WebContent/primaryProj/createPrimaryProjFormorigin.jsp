@@ -138,83 +138,58 @@
 								</div>
 						</div>						
 						
-						
-						
-						
-						
-						
-						
 						<!-- 活動時間 -->
+<%-- 						<input type="date" value="${param.startTime}" name="startTime"> --%>
 						<div class="input-field row">
 							<div class="col l6" style="padding:0">
 								<div class="forinput ">3.活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
-								<input type="date" class="datepicker">
+								<input type="date" class="datepicker" name="startTime">
 							</div>	
 							<div class="col l6">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
-								<input type="date" class="datepicker">
+								<input type="date" class="datepicker" name="endTime">
 							</div>	
 						</div>
 
-				
-				<!-- 姓氏 -->
-					<div class="col l4 input-field left">
-						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
-						<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
-					</div>				
-				
-				<!-- 名字 -->
-					<div class="col l4 input-field left">
-						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstname}" >
-						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
-					</div>				
-				
-				<!-- 性別 -->					
-					<div class="col l4 input-field left" id="genderradio">
-						<input type="radio" id="boy" name="gender" value="1" />
-		     			<label for="boy">男</label>
-		     			<input type="radio" id="girl" name="gender" value="2"/>
-		      			<label for="girl">女</label>					
-					</div>				
-				
-				<!-- 電話 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
-						<input id="idNumber" type="text" class="validate" name="idNumber"  value="${param.idNumber}">
-						<label for="idNumber" style="font-size:1.3em;font-weight:600;">室內電話</label>					
-					</div>
-					
-				<!-- 手機 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
-						<input id="phone" type="text" class="validate" name="phone" value="${param.phone}">
-						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
-					</div>
-					
-				<!-- 生日 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
-						<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
-						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>					
-					</div>
+						
+						<!-- 預計人數 -->
+						<div class="row">
+							<div class="forinput">4.預計人數</div>
+							<input id="title" type="text" name="title" required value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
+						</div>						
 
-				<!-- Email -->
-					<div class="row input-field">
-						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
-						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>						
-					</div>
-					
-				<!-- Address -->
-					<div class="row input-field">
-						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
-						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>						
-					</div>
-					
+
+						<!-- 活動預算 -->
+<%-- 						<input type="number" value="${param.budget}" name="budget" /> --%>
+						<div class="row">
+							<div class="forinput">5.活動預算</div>
+							<input id="title" type="text" name="title" required value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
+						</div>						
+						
+						
+						<!-- 計畫摘要 -->
+<%-- 						<textarea rows="10" cols="100" name="projAbstract">${param.projAbstract}</textarea> --%>
+						<div class="row">
+							<div class="forinput">5.活動預算</div>
+							<textarea rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+						</div>
+						
+						<!-- 計畫內容 -->
+						<div class="row">
+							<div class="forinput">5.活動預算</div>
+							<textarea rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
+						</div>
+												
+						<!-- hide -->
+						<input type="hidden" name="type" value="create" />
 				<!-- button -->
-					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
-						</button>
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
-						</button>
+<!-- 					<div class="row" id="btndiv"> -->
+<!-- 						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action"> -->
+<!-- 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span> -->
+<!-- 						</button> -->
+<!-- 						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn"> -->
+<!-- 							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span> -->
+<!-- 						</button> -->
 
 					</div>
 				  </div>	
@@ -250,7 +225,7 @@
 			   format: 'yyyy-mm-dd',
 			   min:true,
 			   max:365,
-			   closeOnSelect: true;
+			   closeOnSelect: true
 		    });
 			
 		    $(".datepicker").change(function(){
