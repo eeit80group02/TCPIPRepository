@@ -28,12 +28,25 @@
 		</c:forEach>
 	</table>
 	
-	<c:forEach var="bean" items="${primaryProj}">
-		<c:forEach var="xx" items="${bean.processingProjBean}">
-			${bean.primaryProjId}
-			${bean.title}
-			${xx.schoolId}<br>
+	<table border=1>
+		<tr>
+			<th>初步計畫編號</th>
+			<th>初步計畫標題</th>
+			<th>學校</th>
+			<th>地方</th>
+		</tr>
+		<c:forEach var="bean" items="${primaryProj}">
+			<c:forEach var="processingProj" items="${bean.processingProjBean}">
+				<tr>
+					<td>${bean.primaryProjId}</td>
+					<td>${bean.title}</td>
+					<td>${processingProj.schoolBean.name}</td>
+					<td>${processingProj.schoolBean.addressDistrict}</td>
+					<td><input type="button" value="同意" /></td>
+					<td><input type="button" value="拒絕" /></td>
+				</tr>
+			</c:forEach>
 		</c:forEach>
-	</c:forEach>
+	</table>
 </body>
 </html>
