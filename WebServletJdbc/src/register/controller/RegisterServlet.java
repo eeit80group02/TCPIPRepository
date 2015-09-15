@@ -78,9 +78,11 @@ public class RegisterServlet extends HttpServlet {
 		String email = "";                         //信箱
 		String address = "";                       //地址
 		//大頭照專區
-		byte[] picture = null;                    //上傳的照片檔案
+		byte[] picture = null;                     //上傳的照片檔案
 		String pictureName = "";                   //照片名稱
 		long pictureLength = 0;                    //照片的長度
+		String idNumber = "";                      //身分證字號
+		
 		//使用者將圖片傳至Server端之inputStream
 		InputStream is = null;                     //InputStream
 		
@@ -110,11 +112,14 @@ public class RegisterServlet extends HttpServlet {
 						gender = value;
 //						System.out.println(gender);
 					} else if (fldName.equals("idNumber")){
-						phone = value;
+						idNumber = value;
 //						System.out.println(idNumber);
 					} else if (fldName.equals("phone")){
 						cellPhone = value;
 //						System.out.println(phone);
+					} else if (fldName.equals("cellPhone")){
+						cellPhone = value;
+//						System.out.println(cellPhone);
 					} else if(fldName.equals("birthday")){
 						birthdayStr = value;
 //						System.out.println(birthdayStr);
@@ -175,11 +180,12 @@ public class RegisterServlet extends HttpServlet {
 			if(gender == null || gender.trim().length() == 0){
 				errMsg.put("errorGenderEmpty", "性別為必填");
 			}
-			//電話(可以Null)
-//			if(phone == null || phone.trim().length() == 0){
-//				errMsg.put("errPhoneEmpty", "電話欄位為必填");
-//			}
-			//手機(可以Null)
+			//電話
+			if((phone == null || phone.trim().length() == 0) && (cellPhone == null || cellPhone.trim().length() == 0)){
+				errMsg.put("errPhoneEmpty", "*");
+				errMsg.put("errCellPhoneEmpty", "手機或電話其中一欄位為必填");
+			}
+			//手機
 //			if(cellPhone == null || cellPhone.trim().length() == 0){
 //				errMsg.put("errCellPhoneEmpty", "手機欄位為必填");
 //			}
@@ -194,6 +200,10 @@ public class RegisterServlet extends HttpServlet {
 			//地址
 			if(address == null || address.trim().length() == 0){
 				errMsg.put("errorAddressEmpty", "地址為必填");
+			}
+			//身分證字號
+			if(idNumber == null || idNumber.trim().length() == 0){
+				errMsg.put("errorIdNumberEmpty", "身分證為必填");
 			}
 			//圖片
 			if(is != null)
@@ -253,8 +263,7 @@ public class RegisterServlet extends HttpServlet {
 			if(!rs.accountExists(account) && !rs.emailExists(email)){
 				//產生會員的註冊時間(insert所需)
 				java.sql.Timestamp registerTime = new java.sql.Timestamp(new java.util.Date().getTime());
-				//身分證字號暫時寫死(insert所需)
-				String idNumber = "A123456789";
+				
 				//被推薦次數(insert所需)
 				int recommendCount = 0;
 				//帳號狀態(insert所需)
@@ -301,11 +310,11 @@ public class RegisterServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
+
+
+
+
+
   
 		// MemberBean 扮演封裝輸入資料的角色
 //		MemberBean mb = new MemberBean(account, name, email, bytePW);
