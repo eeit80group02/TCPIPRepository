@@ -1,0 +1,1 @@
+jssecacerts 必須放入 jdk/jre/lib/security 
