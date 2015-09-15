@@ -20,7 +20,7 @@ body {
 	background-color: white;
 	margin-top: 8px;
 	padding-top: 8px;
-	padding-right : 2%;
+	padding-right: 2%;
 	width: 85%;
 	padding-right: 2%;
 }
@@ -76,4 +76,22 @@ span.glyphicon-ok-sign {
 	float: right;
 	font-size: 0.6em;
 	margin-top: 10px;
+}
+
+.col-md-7 {
+	text-align: left;
+	line-height: 2em;
+}
+
+#remark {
+	border: 1px solid black;
+}
+
+.dataName {
+	display:inline;
+	border: 1px solid red;
+}
+
+.dataValue {
+	border: 1px solid green;
 }

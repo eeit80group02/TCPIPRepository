@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>捐獻明細</title>
+
+<!-- 一定要載入的 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	!window.jQuery && document.write("<script src='scripts/jquery-2.1.4.min.js'><\/script>")
+</script>
+
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<!-- Materialize -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- 自訂 -->
+<link rel="stylesheet" href="styles/DonationBill.css">
+<script type="text/javascript" src="scripts/CheckNumber.js"></script>
+
+</head>
+<body>
+
+
+	<div class="navbar navbar-inverse">
+		<ul class="nav navbar-nav" id="headUl">
+			<li class="active"><a href="#">捐獻明細</a></li>
+			<li class="headList"><a href="#"></a></li>
+		</ul>
+	</div>
+
+
+	<center>
+		<div id="bodyContent">
+			<div class="row">
+				<div class="col s12">
+					<ul class="tabs">
+						<li class="tab col s3"><a href="#test1">確認捐獻明細</a></li>
+						<li class="tab col s3"><a href="#test2" class="active">填寫收件人資料</a></li>
+						<li class="tab col s3"><a href="#test3">產生收據</a></li>
+						<li class="tab col s3"><a href="#test4">完成步驟</a></li>
+					</ul>
+					<br>
+				</div>
+
+				<!-- 第一步驟 -->
+				<div id="test1" class="col s12">
+					<form action="">
+						<table id="donationBill" class="responsive-table">
+							<thead>
+								<tr>
+									<td>捐獻物資</td>
+									<td>物資名稱</td>
+									<td>受捐獻單位</td>
+									<td>物資狀態</td>
+									<td>物資備註</td>
+									<td>數量</td>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><img class="imgBill" src="images/thing01.jpg" alt="延長線" title="延長線"></td>
+									<td>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學</td>
+									<td>不拘</td>
+
+									<td style="word-break: break-all;"><div id="remark">室電風扇插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">navigate_before</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">navigate_next</i>
+										</button> <script type="text/javascript" src="scripts/CheckNumber.js"></script>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+
+
+
+					<!-- 第二步驟 -->
+				</div>
+
+				<div id="test2" class="col s12">
+
+					<form id="drop-a-line" action="#">
+
+						<div id="warnText">
+							<span class="glyphicon glyphicon-star" style="float: left;"></span>&nbsp;<span>符號為必填欄位</span>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-6">
+								<br> <br>
+								<div class="leftTitle">會員基本資料</div>
+								<!-- 上左 -->
+								<div class="input-field col m12 s12">
+									<input type="text" id="schoolName" disabled value="林大揚"><label for="schoolName"><span class="glyphicon glyphicon-pencil"></span><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="會員名稱"><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></a></span></label>
+								</div>
+								<div class="input-field col m12 s12">
+									<input type="text" id="schoolName" disabled value="262宜蘭縣礁溪鄉武暖路159-1號"><label for="schoolName"><span class="glyphicon glyphicon-pencil"></span><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="會員名稱"><span class="DetailTitle">&nbsp;地址&nbsp;</span></a></span></label>
+								</div>
+								<div class="input-field col m12 s12">
+									<input type="text" id="schoolName" disabled value="林大揚"><label for="schoolName"><span class="glyphicon glyphicon-pencil"></span><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="會員名稱"><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></a></span></label>
+								</div>
+								<div class="input-field col m12 s12">
+									<input type="text" id="schoolName" disabled value="林大揚"><label for="schoolName"><span class="glyphicon glyphicon-pencil"></span><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="會員名稱"><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></a></span></label>
+								</div>
+								<div class="input-field col m12 s12">
+									<input type="text" id="schoolName" disabled value="林大揚"><label for="schoolName"><span class="glyphicon glyphicon-pencil"></span><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="會員名稱"><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></a></span></label>
+								</div>
+
+							</div>
+							
+							
+							<div class="col-md-6">
+								<br> <br>
+								<div class="rightTitle"><a class="text tooltipped" data-position="left" data-delay="20" data-tooltip="將會員資料同步到收件人資料"><i class="Medium material-icons">autorenew</i></a>&nbsp;填寫收件人資料</div>
+								<!-- 右上 -->
+
+								<div class="input-field col m12 s12">
+									<input type="text" id="supplyName" length="25" required="required" autofocus="autofocus" autocomplete="off"><label for="supplyName"><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="最多輸入 25 個字"><span class="DetailTitle">&nbsp;物資名稱&nbsp;<span class="glyphicon glyphicon-star"></span></span></a></label>
+								</div>
+
+								<div class="input-field col m12 s12">
+									<input type="number" id="originalDemandNumber" required="required" autofocus="autofocus" autocomplete="off" max="9999" min="1"><label for="originalDemandNumber"><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="輸入數字"><span class="DetailTitle">&nbsp;需求物品數量&nbsp;<span
+												class="glyphicon glyphicon-star"></span></span></a></label>
+								</div>
+
+								<div class="input-field col m12 s12">
+									<input type="text" id="originalDemandUnit" required="required" autofocus="autofocus" autocomplete="off"><label for="originalDemandUnit"><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：包、打、張、隻、箱"><span class="DetailTitle">&nbsp;需求物品單位&nbsp;<span class="glyphicon glyphicon-star"></span></span></a></label>
+								</div>
+
+								<div class="input-field col m12 s12">
+									<input type="text" id="size" autofocus="autofocus" autocomplete="off"><label for="size"><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：物品大小的長.寬.高、電壓 110V 或 220V"><span class="DetailTitle">&nbsp;尺寸規格&nbsp;</span></a></label>
+								</div>
+
+								<div class="input-field col m12 s12">
+									<label><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="不拘、全新、二手"><span class="DetailTitle">&nbsp;物資狀態&nbsp;</span></a></label><br> <br> <select class="browser-default" id="supplyStatus" name="supplyStatus">
+										<option value="1">不拘</option>
+										<option value="2">全新</option>
+										<option value="3">二手</option>
+									</select> <br>
+								</div>
+
+								<div class="input-field col m12 s12">
+									<textarea id="demandContent" class="materialize-textarea" required="required" autofocus="autofocus"></textarea>
+									<label for="demandContent"><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle">&nbsp;需求說明&nbsp;<span class="glyphicon glyphicon-star"></span></span></a></label>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- 備註 -->
+						<div class="input-field col m12 s12">
+							<textarea id="remark" class="materialize-textarea" autofocus="autofocus"></textarea>
+							<label for="remark"><span class="glyphicon glyphicon-pencil"></span><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle">&nbsp;備註&nbsp;</span></a></label>
+						</div>
+
+						<button type="submit" id="send-message" class="btn btn-large btn-success waves-effect waves-light">
+							<i class="large material-icons">done</i>
+						</button>
+
+						<button type="reset" id="cancel-message" class="btn btn-large btn-success waves-effect waves-light">
+							<i class="large material-icons">loop</i>
+						</button>
+					</form>
+
+				</div>
+
+				<!-- 第三步驟 -->
+				<div id="test3" class="col s12">xxTest 3</div>
+
+				<!-- 第四步驟 -->
+				<div id="test4" class="col s12">xxTest 4</div>
+
+
+			</div>
+	</center>
+
+
+
+</body>
+</html>
