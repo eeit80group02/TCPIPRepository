@@ -5,5 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQL Server JDBC Driver"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SQLServer"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Apache Base64"/>
+	<classpathentry kind="lib" path="commons-codec-1.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

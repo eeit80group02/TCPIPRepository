@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="css/materialize.min.css"
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
@@ -52,17 +51,15 @@
 	    </div>
 	    <div class="divider" style="display:block;"></div>
 			    <div style="width:60%;margin:0 auto;">  
-			      <form class="col l6 offset-l3" id="login" action="<c:url value="/LoginServlet.do" />" method="post">
+			      <form class="col l6 offset-l3" id="login">
 			      	<div class="input-field" style="margin-top:10%;">
-			          	<input id="account" name="account" type="text" class="validate">
+			          	<input id="account" type="text" class="validate">
 			          	<label for="account" style="font-size:1.5em;">帳號</label>
 		        	</div>
 		        	<div class="input-field">
-				         <input id="password" name="password" type="password" class="validate">
+				         <input id="password" type="password" class="validate">
 				         <label for="password" style="font-size:1.5em;">密碼</label>
 		        	</div>
-		        		<input type="hidden" name="type" value="member">
-		        		<input type="submit" value="XXX">
 			      </form>
 		    	</div>
     </div>

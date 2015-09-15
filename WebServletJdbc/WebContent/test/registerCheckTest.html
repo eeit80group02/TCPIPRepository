@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>register check</title>
+</head>
+<body>
+	email:<input type="text" id="email" name="email" /><span id="sp1"></span><br>
+	account:<input type="text" id="account" name="account" /><span id="sp2"></span><br>
+	idNumber:<input type="text" id="idNumber" name="idNumber" /><span id="sp3"></span><br>
+	
+	<script>
+		// email check
+		document.getElementById("email").addEventListener("blur",function(){
+			// 建立物件
+			xmlHttp = new XMLHttpRequest();
+			
+			if(xmlHttp != null){
+				// 發出請求
+				var emailValue = document.getElementById("email").value.trim();
+				
+				xmlHttp.addEventListener("readystatechange",function(){
+					// 接收資料
+					if(xmlHttp.readyState == 4){
+						if(xmlHttp.status == 200){
+							var data = xmlHttp.responseText;
+							document.getElementById("sp1").innerHTML = data;
+						}
+						else{
+							document.getElementById("sp1").innerHTML = xmlHttp.status + ":" + xmlHttp.statusText;							
+						}
+					}
+				});
+				xmlHttp.open("get","checkEmail.do?email=" + emailValue,true);
+				xmlHttp.send();
+			}
+			else{
+				alert("不支援Ajax 請更新瀏覽器");
+			}
+		});
+		
+		// account check
+		document.getElementById("account").addEventListener("blur",function(){
+			// 建立物件
+			xmlHttp = new XMLHttpRequest();
+			
+			if(xmlHttp != null){
+				// 發出請求
+				var accountValue = document.getElementById("account").value.trim();
+				
+				xmlHttp.addEventListener("readystatechange",function(){
+					// 接收資料
+					if(xmlHttp.readyState == 4){
+						if(xmlHttp.status == 200){
+							var data = xmlHttp.responseText;
+							document.getElementById("sp2").innerHTML = data;
+						}
+						else{
+							document.getElementById("sp2").innerHTML = xmlHttp.status + ":" + xmlHttp.statusText;							
+						}
+					}
+				});
+				xmlHttp.open("get","checkAccount.do?account=" + accountValue,true);
+				xmlHttp.send();
+			}
+			else{
+				alert("不支援Ajax 請更新瀏覽器");
+			}
+		});
+		
+		// idNumber check
+		document.getElementById("idNumber").addEventListener("blur",function(){
+			// 建立物件
+			xmlHttp = new XMLHttpRequest();
+			
+			if(xmlHttp != null){
+				// 發出請求
+				var idNumberValue = document.getElementById("idNumber").value.trim();
+				
+				xmlHttp.addEventListener("readystatechange",function(){
+					// 接收資料
+					if(xmlHttp.readyState == 4){
+						if(xmlHttp.status == 200){
+							var data = xmlHttp.responseText;
+							document.getElementById("sp3").innerHTML = data;
+						}
+						else{
+							document.getElementById("sp3").innerHTML = xmlHttp.status + ":" + xmlHttp.statusText;							
+						}
+					}
+				});
+				xmlHttp.open("get","checkIdNumber.do?idNumber=" + idNumberValue,true);
+				xmlHttp.send();
+			}
+			else{
+				alert("不支援Ajax 請更新瀏覽器");
+			}
+		});
+	</script>
+</body>
+</html>
