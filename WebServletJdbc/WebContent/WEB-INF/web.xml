@@ -12,4 +12,61 @@
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
+  
+  <servlet>
+    <servlet-name>MemberServlet</servlet-name>
+    <servlet-class>controller.MemberServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MemberServlet</servlet-name>
+    <url-pattern>/member.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DonationServlet</servlet-name>
+    <servlet-class>controller.DonationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonationServlet</servlet-name>
+    <url-pattern>/donate.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DemandSelected</servlet-name>
+    <servlet-class>controller.DemandSelected</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DemandSelected</servlet-name>
+    <url-pattern>/demand.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DonationCartServlet</servlet-name>
+    <servlet-class>controller.DonationCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonationCartServlet</servlet-name>
+    <url-pattern>/cart.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>FinallCheckCartServlet</servlet-name>
+    <servlet-class>controller.FinallCheckCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FinallCheckCartServlet</servlet-name>
+    <url-pattern>/checkOrder.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>OrderAccessServlet</servlet-name>
+    <servlet-class>controller.OrderAccessServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderAccessServlet</servlet-name>
+    <url-pattern>/access.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>MessagesControllServlet</servlet-name>
+    <servlet-class>controller.MessagesControllServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MessagesControllServlet</servlet-name>
+    <url-pattern>/messages.do</url-pattern>
+  </servlet-mapping>
 </web-app>

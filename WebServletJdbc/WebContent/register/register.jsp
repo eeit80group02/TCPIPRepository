@@ -433,7 +433,6 @@
             </div>
           </div>
           </div>
-          
         </footer>
 
 	<script type="text/javascript"
@@ -443,7 +442,6 @@
 	<script
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
 	<script>
 	
 			(function($) {
@@ -1033,7 +1031,7 @@
 				
 				if(check == true) {					
 					$.ajax({
-		    			url:'PostIdCheckerServlet',
+		    			url:'<c:url value="/PostIdCheckerServlet" />',
 		    	   		type:'post',
 		    	   		data:{ "captchaKey" : $("#captchaKey").val() ,
 		    	   		  	   "idnum" : $("#idnum").val() , 
@@ -1092,7 +1090,7 @@
 	};
 
 	$(function () {
-		$.get("GetIdCheckerCaptchaServlet", function(responseJson) {
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
 			console.log(responseJson);
 			$("#captchaKey").val(responseJson.captchaKey);
 			$("#captchaField").text(responseJson.captchaImage);
@@ -1101,7 +1099,7 @@
 	});
 	
  	function refresh() {
-		$.get("GetIdCheckerCaptchaServlet", function(responseJson) {
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
 			console.log(responseJson);
 			$("#captchaKey").val(responseJson.captchaKey);
 			$("#captchaField").text(responseJson.captchaImage);
