@@ -1,0 +1,79 @@
+@CHARSET "UTF-8";
+
+* {
+	font-family: 標楷體;
+}
+
+body {
+	background-image: url("../images/bgimg.jpg");
+	background-repeat: repeat;
+	/* 		margin:上下 左右; */
+	/* 		margin:上 右 下 左; */
+}
+
+#DonationDetail {
+	/* 	上面的 table */
+	width: 850px;
+}
+
+#drop-a-line {
+	background-color: white;
+	margin-top: 8px;
+	padding-top: 8px;
+	padding-right : 2%;
+	width: 85%;
+	padding-right: 2%;
+}
+
+#your-message {
+	width: 70%;
+	font-size: 1.2em;
+}
+
+#messageGO {
+	width: 90px;
+	float: right;
+}
+
+#messageGO button {
+	margin: 5px 0;
+	height: 30px;
+	width: 90px;
+}
+
+#QandA {
+	/* 	問與答 */
+	font-size: 1.1em;
+	text-align: left;
+	width: 85%;
+	background-color: white;
+}
+
+.collapsible-header:HOVER {
+	color: white;
+	background-color: #00AA00;
+}
+
+.collapsible-header {
+	height: auto;
+	background-color: #98F898;
+}
+
+span.glyphicon-ok-sign {
+	/* 	打勾 */
+	/* 	border: 2px solid black; */
+	margin-top: 8px;
+	float: right;
+}
+
+.talkTime {
+	/* 	會員發問顯示時間用 */
+	font-size: 0.6em;
+}
+
+.talkBackTime {
+	/* 	學校回答顯示時間用 */
+	float: right;
+	font-size: 0.6em;
+	margin-top: 10px;
+}

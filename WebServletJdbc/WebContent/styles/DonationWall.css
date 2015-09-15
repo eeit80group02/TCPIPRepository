@@ -1,0 +1,148 @@
+@CHARSET "UTF-8";
+
+* {
+	font-family: 標楷體;
+}
+
+body {
+	background-image: url("../images/bgimg.jpg");
+	background-repeat: repeat;
+	/* 		margin:上下 左右; */
+	/* 		margin:上 右 下 左; */
+}
+
+#headUl {
+	margin: 10px;
+}
+
+.headList {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#headSearch {
+	margin: 15px;
+}
+
+.active {
+	/* 捐獻牆那三個字 */
+	font-weight: 900;
+	font-size: 2em;
+}
+
+#headMarquee {
+	font-size: 1.2em;
+	margin-bottom: 10px;
+}
+
+#donateBody {
+	width: 90%;
+}
+
+#gallery {
+	/*整塊大塊的捐獻牆*/
+	padding: 0px;
+	margin: 0px;
+	width: 55%;
+	min-height: 12em;
+	height: 100%;
+	float: left
+}
+
+.gallery.custom-state-active {
+	/*從背包拉回捐獻牆*/
+	background: #FFE4E1;
+}
+
+.gallery li {
+	/*捐獻磚*/
+	background-image: url("../images/bg03.jpg");
+	background-repeat: repeat;
+	float: left;
+	width: 190px;
+	height: 230px;
+	padding: 0.4em;
+	margin: 0 0.5em 0.5em 0;
+	text-align: center;
+	cursor: pointer;
+}
+
+.gallery li h5 {
+	margin: 0 0 0.5em;
+	font-size: 1em;
+}
+
+.gallery li a.ui-icon-zoomin {
+	/* 放大鏡icon */
+	float: left;
+}
+
+.gallery li a.ui-icon-suitcase {
+	/* 放大鏡icon */
+	float: right;
+}
+
+.fiximg {
+	height: 182px;
+}
+
+.gallery li img {
+	/* 捐獻磚上的商品縮圖 */
+	width: 135px;
+	height: 126px;
+}
+
+.foottext {
+	font-size: 0.8em;
+}
+
+#trash {
+	/* 整塊捐獻包包 */
+	margin: 0px;
+	padding: 1%;
+	background-image: url("../images/bg02.jpg");
+	background-repeat: repeat;
+	border: 1px solid #FFCCCC;
+	float: right;
+	min-height: 400px;
+	width: 38%;
+}
+
+#trash h3 {
+	font-size: 1.7em;
+	line-height: 1.5em;
+	height: 38px;
+	margin: 0 0 0.4em;
+	text-align: center;
+}
+
+#trash h3 .ui-icon {
+	float: right;
+}
+
+#trash .gallery h5 {
+	display: none;
+}
+
+.bigimg {
+	border: 1px solid #33CCFF;
+}
+
+#donateDelete {
+	float: left;
+}
+
+#donateTotal {
+	float: right;
+}
+
+.fiximg div {
+	visibility: hidden;
+	visibility: visible;
+	overflow: hidden;
+	max-height: 40px;
+	color: #0000AA;
+	margin-bottom: 5px;
+	padding: 2px;
+	text-align: left;
+}
