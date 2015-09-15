@@ -240,7 +240,7 @@ public class DonationDAOJdbc implements DonationDAO
 		return bean;
 	}
 	
-	private static final String SBP1 = "SELECT donationId,schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark FROM Donation where donationId = ?";
+	private static final String SBP1 = "select * from Donation where donationId=? and schoolId=?";
 	public DonationBean findByPrimaryKey(int donationId, int schoolId) {
 		DonationBean bean = null;
 		ResultSet rs = null;
