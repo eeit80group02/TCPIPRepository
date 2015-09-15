@@ -316,7 +316,7 @@
 						<!-- 第二列 -->
 						<div class="row yellow lighten-2">
 							<label for="datepicker">發證日期</label>
-							<input type="text" id="datepicker" readonly required ><span id="date"></span>
+							<input type="date" id="datepicker" required><span id="date"></span>
 						</div>
 						
 						<!-- 第三列 -->
@@ -442,9 +442,77 @@
 	<script
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
 	<script>
 	
 			(function($) {
+			
+			//datepicker 初始化
+// 			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+// 		    var old_get = $.datepicker._get;
+// 		    var old_CloseFn = $.datepicker._updateDatepicker;
+// 		    $.extend($.datepicker, {
+// 		        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+// 		            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+// 		            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+// 		                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+// 		                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+// 		                }).end().end().get(0).outerHTML;
+// 		            }
+// 		            return htmlYearMonth;
+// 		        },
+// 		        _get:function (a, b) {
+// 		            a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+// 		            a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+// 		            a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+// 		            return old_get.apply(this, [a, b]);
+// 		        },
+// 		        _updateDatepicker:function (inst) {
+// 		            old_CloseFn.call(this, inst);
+// 		            $(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last")
+// 		                   .click(function (e) {
+// 		                        inst.input.val("");
+// 		                    });
+// 		        },
+// 		        _setDateDatepicker: function (a, b) {
+// 		            if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+// 		        },
+// 		        _widgetDatepicker: function () {
+// 		            return this.dpDiv
+// 		        }
+
+// 		    });
+		    
+// 		    $("#datepicker").datepicker({
+// 		        yearSuffix: "", //將年改為空白
+// 		        yearRange: "2005:2015",
+// 		        changeYear: true, //手動修改年
+// 		        changeMonth: true, //手動修改月
+// 		        firstDay: 1, //0為星期天
+// 		        showButtonPanel: true, //顯示bottom bar
+// 		        closeText: '清除', //將離開改為清除
+// 		        dateFormat: "yy-m-d",
+// 		        onSelect: function (dateText, inst) {
+// 		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+// 		            var reM = /m+/g;
+// 		            var reD = /d+/g;
+// 		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+// 		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+// 		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+// 		            };
+// 		            $.each(objDate, function (k, v) {
+// 		                var re = new RegExp(k + "+");
+// 		                dateFormate = dateFormate.replace(re, v);
+// 		            });
+// 		            inst.input.val(dateFormate);
+		            
+// 		           $("#applyTWY").val(objDate.y);
+// 		           $("#applyMM").val(objDate.m);
+// 		           $("#applyDD").val(objDate.d);
+// 		        }
+// 		    });
+				
+				
 			//mouseover時，單個input元素被舉起
 			$(".input-field").hover(function(){
 				$(this).addClass("hoverable");
@@ -469,14 +537,14 @@
 			$("#pitcture").off("focus");
 				
 			//禁止使用者點擊
-// 				$("#validateform").on({
-// 					"mouseover":function(){
-// 						$(".collapsible-header").prop("disabled",true);
-// 					},
-// 					"mouseout":function(){
-// 						$(".collapsible-header").prop("disabled",false);
-// 					}
-// 				})
+				$("#validateform").on({
+					"mouseover":function(){
+						$(".collapsible-header").prop("disabled",true);
+					},
+					"mouseout":function(){
+						$(".collapsible-header").prop("disabled",false);
+					}
+				})
 				
 				$("#accounts").on("focus",function(){
 					if(!$("#accountinfohead").hasClass("active"))
@@ -926,70 +994,6 @@
 				"font-weight":"900"				
 			})
 			$('select').material_select();
-			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-		    var old_get = $.datepicker._get;
-		    var old_CloseFn = $.datepicker._updateDatepicker;
-		    $.extend($.datepicker, {
-		        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-		            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-		            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-		                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-		                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-		                }).end().end().get(0).outerHTML;
-		            }
-		            return htmlYearMonth;
-		        },
-		        _get:function (a, b) {
-		            a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-		            a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-		            a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-		            return old_get.apply(this, [a, b]);
-		        },
-		        _updateDatepicker:function (inst) {
-		            old_CloseFn.call(this, inst);
-		            $(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last")
-		                   .click(function (e) {
-		                        inst.input.val("");
-		                    });
-		        },
-		        _setDateDatepicker: function (a, b) {
-		            if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-		        },
-		        _widgetDatepicker: function () {
-		            return this.dpDiv
-		        }
-
-		    });
-		    
-		    $("#datepicker").datepicker({
-		        yearSuffix: "", //將年改為空白
-		        yearRange: "2005:2015",
-		        changeYear: true, //手動修改年
-		        changeMonth: true, //手動修改月
-		        firstDay: 1, //0為星期天
-		        showButtonPanel: true, //顯示bottom bar
-		        closeText: '清除', //將離開改為清除
-		        dateFormat: "yy-m-d",
-		        onSelect: function (dateText, inst) {
-		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-		            var reM = /m+/g;
-		            var reD = /d+/g;
-		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-		            };
-		            $.each(objDate, function (k, v) {
-		                var re = new RegExp(k + "+");
-		                dateFormate = dateFormate.replace(re, v);
-		            });
-		            inst.input.val(dateFormate);
-		            
-		           $("#applyTWY").val(objDate.y);
-		           $("#applyMM").val(objDate.m);
-		           $("#applyDD").val(objDate.d);
-		        }
-		    });
-			
 			
 		})(jQuery)
 	</script>
