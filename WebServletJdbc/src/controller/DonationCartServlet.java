@@ -53,6 +53,7 @@ public class DonationCartServlet extends HttpServlet {
 		String originalDemandNumberStr = request.getParameter("originalDemandNumber");
 		int originalDemandNumber = 0;
 		String originalDemandUnit = request.getParameter("originalDemandUnit");
+		System.out.println("originalDemandUnit "+originalDemandUnit);
 		String demandNumberStr = request.getParameter("demandNumber");
 		int demandNumber = 0;
 		String donateAmountStr = request.getParameter("donateAmount");
