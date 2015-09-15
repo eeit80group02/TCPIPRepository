@@ -19,13 +19,7 @@ public class ProcessingProjService
 		processingProjDAO = new ProcessingProjDAOJdbc();
 		primaryProjDAO = new PrimaryProjDAOJdbc();
 	}
-	
-	public List<ProcessingProjBean> displayProcessingProjByStatusPending()
-	{
-		List<ProcessingProjBean> result = null;
-		
-		return result;
-	}
+
 	public boolean applyPrimaryProj(ProcessingProjBean bean)
 	{
 		// 檢查 

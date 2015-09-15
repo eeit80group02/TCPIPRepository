@@ -9,18 +9,22 @@ import model.PrimaryProjBean;
 import model.ProcessingProjBean;
 import model.dao.PrimaryProjDAOJdbc;
 import model.dao.ProcessingProjDAOJdbc;
+import model.dao.SchoolDAOJdbc;
 import model.dao.interfaces.PrimaryProjDAO;
 import model.dao.interfaces.ProcessingProjDAO;
+import model.dao.interfaces.SchoolDAO;
 
 public class PrimaryProjService
 {
 	private PrimaryProjDAO primaryProjDAO;
 	private ProcessingProjDAO processingProjDAO;
+	private SchoolDAO schoolDAO;
 	
 	public PrimaryProjService()
 	{
 		this.primaryProjDAO = new PrimaryProjDAOJdbc();
 		this.processingProjDAO = new ProcessingProjDAOJdbc();
+		this.schoolDAO = new SchoolDAOJdbc();
 	}
 	
 	public PrimaryProjBean createPrimaryProj(PrimaryProjBean bean)
@@ -154,6 +158,8 @@ public class PrimaryProjService
 					{
 						if(process.getCheckStatus().equals("待審核"))
 						{
+							int schoolId = process.getSchoolId();
+							process.setSchoolBean(schoolDAO.findByPrimaryKey(schoolId));
 							pending.add(process);
 						}
 					}

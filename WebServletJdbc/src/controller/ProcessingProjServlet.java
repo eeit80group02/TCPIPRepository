@@ -37,14 +37,28 @@ public class ProcessingProjServlet extends HttpServlet
 		{
 			if(type.equals("apply"))
 			{
-				// 會員登入
+				// 學校提出申請
+				System.out.println("執行 ProcessingProjServlet applyPrimaryProj");
 				applyPrimaryProj(request,response);
+			}
+			
+			if(type.equals("agree"))
+			{
+				// 發起者審核
+				System.out.println("執行 ProcessingProjServlet applyPrimaryProj");
+				agreePrimaryProj(request,response);
 			}
 		}
 		else
 		{
 			System.out.println("error");
 		}
+	}
+
+	private void agreePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		System.out.println("heheo");
+		
 	}
 
 	private void applyPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException

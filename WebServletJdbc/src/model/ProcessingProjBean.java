@@ -12,6 +12,8 @@ public class ProcessingProjBean implements Serializable
 	private java.util.Date checkTime;   // 審核時間 (指活動發起人下決定跟哪個學校接洽的那刻)(允許空值，只有洽談成功的學校有值)
 	private String checkStatus;			// 審核狀態(已通過 未通過 待審核)
 	
+	private SchoolBean schoolBean;		// 學校詳細資料
+	
 	public ProcessingProjBean()
 	{
 	}
@@ -64,6 +66,16 @@ public class ProcessingProjBean implements Serializable
 	public void setCheckStatus(String checkStatus)
 	{
 		this.checkStatus = checkStatus;
+	}
+
+	public SchoolBean getSchoolBean()
+	{
+		return schoolBean;
+	}
+
+	public void setSchoolBean(SchoolBean schoolBean)
+	{
+		this.schoolBean = schoolBean;
 	}
 
 	@Override
