@@ -166,7 +166,7 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 		else
 		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
+			errorMsg.put("errorURL","X請勿做作不正當請求(PrimaryProjServlet line.154)");
 			request.getRequestDispatcher("/error.jsp").forward(request,response);
 			return;
 		}

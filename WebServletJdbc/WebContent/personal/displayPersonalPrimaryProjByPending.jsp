@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,11 @@
 <title>個人頁面查看初步計畫</title>
 </head>
 <body>
+
+<%-- 	<c:if test="${fn:length(primaryProj) == 0}"> --%>
+<!-- 		沒有計劃需要審核 -->
+<%-- 	</c:if> --%>
+
 	<table border="1">
 		<tr>
 			<th>初步計畫編號</th>
@@ -50,7 +56,13 @@
 							<input type="submit" value="同意" />
 						</form>
 					</td>
-					<td><input type="button" value="拒絕" /></td>
+					<td>
+						<form action="<c:url value="/ProcessingProj.do" />" method="post">
+							<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+							<input type="hidden" name="type" value="cancel">
+							<input type="submit" value="拒絕" />
+						</form>
+					</td>
 				</tr>
 			</c:forEach>
 		</c:forEach>
