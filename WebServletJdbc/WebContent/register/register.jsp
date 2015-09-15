@@ -415,7 +415,6 @@
             </div>
           </div>
           </div>
-          
         </footer>
 
 	<script type="text/javascript"
@@ -1015,7 +1014,7 @@
 				
 				if(check == true) {					
 					$.ajax({
-		    			url:'PostIdCheckerServlet',
+		    			url:'<c:url value="/PostIdCheckerServlet" />',
 		    	   		type:'post',
 		    	   		data:{ "captchaKey" : $("#captchaKey").val() ,
 		    	   		  	   "idnum" : $("#idnum").val() , 
@@ -1073,14 +1072,15 @@
 		}
 	};
 
-// 	$(function () {
-// 		$.get("GetIdCheckerCaptchaServlet", function(responseJson) {
-// 			console.log(responseJson);
-// 			$("#captchaKey").val(responseJson.captchaKey);
-// 			$("#captchaField").text(responseJson.captchaImage);
-// 			$("#captchaImage").attr("src",$("#captchaField").val());
-// 		}); 
-// 	});
+	$(function () {
+
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+			console.log(responseJson);
+			$("#captchaKey").val(responseJson.captchaKey);
+			$("#captchaField").text(responseJson.captchaImage);
+			$("#captchaImage").attr("src",$("#captchaField").val());
+		}); 
+	});
 	
  	function refresh() {
 		$.get("GetIdCheckerCaptchaServlet", function(responseJson) {
