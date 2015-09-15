@@ -162,8 +162,8 @@
 		
 		<!-- 切版面開始 -->
 		<div class="col l6 offset-l3">
-			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable green lighten-5" action="#" method="get" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<!-- 表單本體開始 --> 
+			<form class="card-panel hoverable green lighten-5" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
 				<div class="row">
 						<!-- 頭像上傳 -->
@@ -178,22 +178,31 @@
 						</div>
 						<!-- 身分證字號 -->
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
-							<input id="idcardNumber" type="text" class="validate" name="idcardNumber" required readonly="readonly">
+							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly">
+<!-- 							                   		後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}${MsgErr.errorAccountExists}</font>
 							<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
+							
 						</div>
 						<!-- 帳號 -->
 						<div class="input-field row">
 							<input id="accounts" type="text" class="validate" name="account" required>
+<!-- 							                   		後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
 							<label for="accounts" style="font-size:1.3em;font-weight:600;">帳號</label>
 						</div>
 						<!-- 密碼 -->
 						<div class="input-field row">
 							<input id="passwords" type="password" class="validate" name="password" required>
+<!-- 														後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
 							<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
 						</div>						
 						<!-- 密碼確認 -->
 						<div class="input-field row">
 							<input id="check" type="password" class="validate" name="check" required>
+<!-- 														後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
 							<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
 						</div>
 				</div>
@@ -203,12 +212,16 @@
 				<!-- 姓氏 -->
 					<div class="col l4 input-field left">
 						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
+<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
 						<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
 					</div>				
 				
 				<!-- 名字 -->
 					<div class="col l4 input-field left">
 						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstname}" >
+<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorFirstNameEmpty}</font>
 						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
 					</div>				
 				
@@ -217,38 +230,51 @@
 						<input type="radio" id="boy" name="gender" value="1" />
 		     			<label for="boy">男</label>
 		     			<input type="radio" id="girl" name="gender" value="2"/>
-		      			<label for="girl">女</label>					
+		      			<label for="girl">女</label>
+<!-- 		      										後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorGenderEmpty}</font>					
 					</div>				
 				</div>
 				
 				<!-- 電話 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
-						<input id="idNumber" type="text" class="validate" name="idNumber"  value="${param.idNumber}">
-						<label for="idNumber" style="font-size:1.3em;font-weight:600;">室內電話</label>					
+						<input id="idNumber" type="text" class="validate" name="phone"  value="${param.phone}">
+<!-- 							                   		後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
+						<label for="idNumber" style="font-size:1.3em;font-weight:600;">室內電話</label>
+											
 					</div>
 					
 				<!-- 手機 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
-						<input id="phone" type="text" class="validate" name="phone" value="${param.phone}">
+						<input id="phone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
+<!-- 							                   		後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
 						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
 					</div>
 					
 				<!-- 生日 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
 						<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
-						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>					
+<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorBirthdayStrEmpty}${MsgErr.errFormat}</font>				
+						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>	
 					</div>
 
 				<!-- Email -->
 					<div class="row input-field">
 						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
-						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>						
+<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorEmailEmpty}${MsgErr.errorEmailExists}</font>					
+						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>	
 					</div>
 					
 				<!-- Address -->
 					<div class="row input-field">
 						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
-						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>						
+<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
+						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>
 					</div>
 					
 				<!-- button -->
@@ -275,17 +301,9 @@
 
 	</div>
 </main>
-		 <!-- 身分驗證用modal --> 
+<!-- 身分驗證用modal --> 
 		<div id="modal2" class="modal">
 		   <div class="modal-content blue lighten-5" style="height:100%;width:100%;">
-<%-- 		 	<c:import url="/idnumbervalidate.jsp" context="${pageContext.request.contextPath}" charEncoding="UTF-8"></c:import> --%>
-<!-- 		   </div> -->
-<!-- 		   <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;"> -->
-<!-- 		   	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;"> -->
-<!-- 		      <a href="#!" id="backregister" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">回註冊頁</a> -->
-<!-- 		   	</div> -->
-<!-- 		   </div> -->
-<!-- 		 </div> -->
 	<!-- 主要版型 -->
 	<div class="row">
 			<form action="/" id="postForm" class="col l12" style="padding:2em;" >
@@ -298,7 +316,7 @@
 						<!-- 第二列 -->
 						<div class="row yellow lighten-2">
 							<label for="datepicker">發證日期</label>
-							<input type="text" id="datepicker" readonly required ><span id="date"></span>
+							<input type="date" id="datepicker" required><span id="date"></span>
 						</div>
 						
 						<!-- 第三列 -->
@@ -375,7 +393,7 @@
 		
 		
 		</div>
-		<!-- 主要版型 -->	
+	<!-- 主要版型 -->
 		 </div>
 		 <!-- modal footer -->
 		 <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
@@ -384,7 +402,7 @@
 		   	</div>
 		 </div>
 		 </div>
-		<!-- 身分驗證用modal end tag-->  		 
+<!-- 身分驗證用modal end tag-->  		 
 		 
 
 
@@ -424,9 +442,77 @@
 	<script
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
 	<script>
 	
 			(function($) {
+			
+			//datepicker 初始化
+// 			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+// 		    var old_get = $.datepicker._get;
+// 		    var old_CloseFn = $.datepicker._updateDatepicker;
+// 		    $.extend($.datepicker, {
+// 		        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+// 		            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+// 		            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+// 		                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+// 		                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+// 		                }).end().end().get(0).outerHTML;
+// 		            }
+// 		            return htmlYearMonth;
+// 		        },
+// 		        _get:function (a, b) {
+// 		            a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+// 		            a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+// 		            a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+// 		            return old_get.apply(this, [a, b]);
+// 		        },
+// 		        _updateDatepicker:function (inst) {
+// 		            old_CloseFn.call(this, inst);
+// 		            $(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last")
+// 		                   .click(function (e) {
+// 		                        inst.input.val("");
+// 		                    });
+// 		        },
+// 		        _setDateDatepicker: function (a, b) {
+// 		            if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+// 		        },
+// 		        _widgetDatepicker: function () {
+// 		            return this.dpDiv
+// 		        }
+
+// 		    });
+		    
+// 		    $("#datepicker").datepicker({
+// 		        yearSuffix: "", //將年改為空白
+// 		        yearRange: "2005:2015",
+// 		        changeYear: true, //手動修改年
+// 		        changeMonth: true, //手動修改月
+// 		        firstDay: 1, //0為星期天
+// 		        showButtonPanel: true, //顯示bottom bar
+// 		        closeText: '清除', //將離開改為清除
+// 		        dateFormat: "yy-m-d",
+// 		        onSelect: function (dateText, inst) {
+// 		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+// 		            var reM = /m+/g;
+// 		            var reD = /d+/g;
+// 		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+// 		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+// 		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+// 		            };
+// 		            $.each(objDate, function (k, v) {
+// 		                var re = new RegExp(k + "+");
+// 		                dateFormate = dateFormate.replace(re, v);
+// 		            });
+// 		            inst.input.val(dateFormate);
+		            
+// 		           $("#applyTWY").val(objDate.y);
+// 		           $("#applyMM").val(objDate.m);
+// 		           $("#applyDD").val(objDate.d);
+// 		        }
+// 		    });
+				
+				
 			//mouseover時，單個input元素被舉起
 			$(".input-field").hover(function(){
 				$(this).addClass("hoverable");
@@ -451,14 +537,14 @@
 			$("#pitcture").off("focus");
 				
 			//禁止使用者點擊
-// 				$("#validateform").on({
-// 					"mouseover":function(){
-// 						$(".collapsible-header").prop("disabled",true);
-// 					},
-// 					"mouseout":function(){
-// 						$(".collapsible-header").prop("disabled",false);
-// 					}
-// 				})
+				$("#validateform").on({
+					"mouseover":function(){
+						$(".collapsible-header").prop("disabled",true);
+					},
+					"mouseout":function(){
+						$(".collapsible-header").prop("disabled",false);
+					}
+				})
 				
 				$("#accounts").on("focus",function(){
 					if(!$("#accountinfohead").hasClass("active"))
@@ -908,70 +994,6 @@
 				"font-weight":"900"				
 			})
 			$('select').material_select();
-			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-		    var old_get = $.datepicker._get;
-		    var old_CloseFn = $.datepicker._updateDatepicker;
-		    $.extend($.datepicker, {
-		        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-		            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-		            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-		                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-		                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-		                }).end().end().get(0).outerHTML;
-		            }
-		            return htmlYearMonth;
-		        },
-		        _get:function (a, b) {
-		            a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-		            a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-		            a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-		            return old_get.apply(this, [a, b]);
-		        },
-		        _updateDatepicker:function (inst) {
-		            old_CloseFn.call(this, inst);
-		            $(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last")
-		                   .click(function (e) {
-		                        inst.input.val("");
-		                    });
-		        },
-		        _setDateDatepicker: function (a, b) {
-		            if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-		        },
-		        _widgetDatepicker: function () {
-		            return this.dpDiv
-		        }
-
-		    });
-		    
-		    $("#datepicker").datepicker({
-		        yearSuffix: "", //將年改為空白
-		        yearRange: "2005:2015",
-		        changeYear: true, //手動修改年
-		        changeMonth: true, //手動修改月
-		        firstDay: 1, //0為星期天
-		        showButtonPanel: true, //顯示bottom bar
-		        closeText: '清除', //將離開改為清除
-		        dateFormat: "yy-m-d",
-		        onSelect: function (dateText, inst) {
-		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-		            var reM = /m+/g;
-		            var reD = /d+/g;
-		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-		            };
-		            $.each(objDate, function (k, v) {
-		                var re = new RegExp(k + "+");
-		                dateFormate = dateFormate.replace(re, v);
-		            });
-		            inst.input.val(dateFormate);
-		            
-		           $("#applyTWY").val(objDate.y);
-		           $("#applyMM").val(objDate.m);
-		           $("#applyDD").val(objDate.d);
-		        }
-		    });
-			
 			
 		})(jQuery)
 	</script>
@@ -1072,7 +1094,6 @@
 	};
 
 	$(function () {
-
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
 			console.log(responseJson);
 			$("#captchaKey").val(responseJson.captchaKey);
