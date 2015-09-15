@@ -42,13 +42,14 @@
 					<td>${bean.title}</td>
 					<td>${processingProj.schoolBean.name}</td>
 					<td>${processingProj.schoolBean.addressDistrict}</td>
+					<td>${processingProj.processingProjId}</td>
 					<td>
 						<form action="<c:url value="/ProcessingProj.do" />" method="post">
+							<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
 							<input type="hidden" name="type" value="agree">
 							<input type="submit" value="同意" />
 						</form>
 					</td>
-					<td><input type="button" value="同意" /></td>
 					<td><input type="button" value="拒絕" /></td>
 				</tr>
 			</c:forEach>

@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.MemberBean;
 import model.ProcessingProjBean;
 import model.service.ProcessingProjService;
 
@@ -17,6 +19,13 @@ import model.service.ProcessingProjService;
 public class ProcessingProjServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
+	private ProcessingProjService service;
+	
+	@Override
+	public void init() throws ServletException
+	{
+		service = new ProcessingProjService();
+	}
 
 	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
@@ -57,7 +66,62 @@ public class ProcessingProjServlet extends HttpServlet
 
 	private void agreePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
-		System.out.println("heheo");
+		request.setCharacterEncoding("UTF-8");
+		
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		// 接收資料
+		String processingProjId = request.getParameter("processingProjId");
+		
+		// 驗證資料
+		if(processingProjId == null || processingProjId.trim().length() == 0)
+		{
+			errorMsg.put("error","沒有processingProjId");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			return;
+		}
+		
+		// 轉換資料
+		int iProcessingProjId = 0;
+		try
+		{
+			iProcessingProjId = Integer.parseInt(processingProjId);
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("error","參數有錯");
+			e.printStackTrace();
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			return;
+		}
+		
+		// business
+		ProcessingProjBean bean = new ProcessingProjBean();
+		bean.setProcessingProjId(iProcessingProjId);
+		
+		boolean result = service.agreeProcessingProj(bean);
+		if(result)
+		{
+			HttpSession session = request.getSession();
+			MemberBean memberBean = (MemberBean)session.getAttribute("LoginOK");
+			
+			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending&memberId=" + memberBean.getMemberId());
+		}
+		else
+		{
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			return;
+		}
+		
 		
 	}
 
