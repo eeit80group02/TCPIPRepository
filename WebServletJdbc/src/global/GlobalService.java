@@ -3,6 +3,7 @@ package global;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -19,6 +20,8 @@ public class GlobalService
 	public static final String DATABASE = "TCPIP";
 	public static final String URL = "jdbc:sqlserver://" + GlobalService.HOST + ":1433;databaseName=" + GlobalService.DATABASE;
 	public static final String JNDI = "java:comp/env/jdbc/TCPIP";
+	public static final String CONTEXT_PATH = "WebServletJdbc";
+	
 	private static SimpleDateFormat sdf;
 	
 	static
@@ -66,7 +69,7 @@ public class GlobalService
 	
 	public static String convertByteArrayToBase64String(String name,byte[] data)
 	{
-		// 切出副檔名
+		// ���瑼��
 		String mimeType = name.substring(name.lastIndexOf('.') + 1);
 		
 		if(mimeType.equalsIgnoreCase("JPG") || mimeType.equalsIgnoreCase("JPEG"))
@@ -114,4 +117,30 @@ public class GlobalService
 		}
 		return null;
 	}
+	
+	//Base64編碼
+		public static String getBase64Encoded(String param) throws UnsupportedEncodingException{
+			String result = null;
+			
+			if(param != null){
+				java.util.Base64.Encoder encoder = java.util.Base64.getEncoder();
+				byte[] textByte = param.getBytes("UTF-8");
+				String encodeId = encoder.encodeToString(textByte);
+				result = encodeId;
+			}
+			
+			return result;
+		}
+		
+		//Base64解碼
+		public static String getBase64Decoded(String param) throws UnsupportedEncodingException{
+			String result = null;
+			
+			if(param != null){
+				java.util.Base64.Decoder decoder = java.util.Base64.getDecoder();
+				result = new String(decoder.decode(param), "UTF-8");
+			}
+			return result;
+		}
+	
 }
