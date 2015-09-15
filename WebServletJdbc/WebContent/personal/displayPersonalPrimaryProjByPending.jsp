@@ -48,6 +48,7 @@
 							<input type="submit" value="同意" />
 						</form>
 					</td>
+					<td><input type="button" value="同意" /></td>
 					<td><input type="button" value="拒絕" /></td>
 				</tr>
 			</c:forEach>
