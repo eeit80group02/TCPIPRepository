@@ -49,7 +49,7 @@
 					</c:when>
 					
 					<c:otherwise>
-						<li><a href="logout.jsp">登出</a></li>
+						<li><a href="${pageContext.request.contextPath}/login/logout.jsp">登出</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li><a href="#!"><i class="material-icons">search</i></a></li>
