@@ -143,11 +143,11 @@
 						<div class="input-field row">
 							<div class="col l6" style="padding:0">
 								<div class="forinput ">3.活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
-								<input type="date" class="datepicker" name="startTime">
+								<input type="date" name="startTime" id="starttime">
 							</div>	
 							<div class="col l6">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
-								<input type="date" class="datepicker" name="endTime">
+								<input type="date" name="endTime" id="endtime">
 							</div>	
 						</div>
 
@@ -170,13 +170,13 @@
 						<!-- 計畫摘要 -->
 <%-- 						<textarea rows="10" cols="100" name="projAbstract">${param.projAbstract}</textarea> --%>
 						<div class="row">
-							<div class="forinput">5.活動預算</div>
+							<div class="forinput">6.計畫摘要</div>
 							<textarea rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
 						</div>
 						
 						<!-- 計畫內容 -->
 						<div class="row">
-							<div class="forinput">5.活動預算</div>
+							<div class="forinput">7.計畫內容</div>
 							<textarea rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
 						</div>
 												
@@ -218,20 +218,39 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>	
 <script>
 		(function($) {
-			//datepicker初始化(活動時間)
-		    $('.datepicker').pickadate({
+			
+		   //datepicker初始化(活動時間)
+		   var $picker1 =  $('#starttime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 10,
 			   format: 'yyyy-mm-dd',
 			   min:true,
 			   max:365,
-			   closeOnSelect: true
 		    });
+				
+		   var picker1 = $picker1.pickadate('picker');
+		   
+		   picker1.on("set", function(data) {
+			   picker1.close();
+			   var limit = picker1.get();
+			   console.log(limit);
+			   var test = new Date(limit);
+			   console.log(test);
+			   
+			   var $picker2 = $('#endtime').pickadate({
+				   selectMonths: true, // Creates a dropdown to control month
+				   selectYears: 3,
+				   format: 'yyyy-mm-dd',
+			    });
+			    
+			    var picker2 = $picker2.pickadate('picker');
+			    picker2.render(true);
+		   })
 			
-		    $(".datepicker").change(function(){
-		    	console.log($(".datepicker").val());	
-		    })
-			
+			$("body").on("click",function(){
+				console.log(limit);
+			})
+		   
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
