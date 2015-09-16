@@ -45,7 +45,7 @@ public class PrimaryProjService
 		return result ;
 	}
 	
-	public PrimaryProjBean updatePromaryProj(PrimaryProjBean bean)
+	public PrimaryProjBean updatePrimaryProj(PrimaryProjBean bean)
 	{
 		PrimaryProjBean result = null;
 		
@@ -83,7 +83,7 @@ public class PrimaryProjService
 		return result;
 	}
 	
-	public List<PrimaryProjBean> displayPromaryProjAll()
+	public List<PrimaryProjBean> displayPrimaryProjAll()
 	{
 		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
 		result = primaryProjDAO.getAll();
@@ -109,7 +109,7 @@ public class PrimaryProjService
 		return result;
 	}
 	
-	public PrimaryProjBean displayPromaryProj(PrimaryProjBean bean)
+	public PrimaryProjBean displayPrimaryProj(PrimaryProjBean bean)
 	{
 		PrimaryProjBean result = null;
 		
@@ -124,7 +124,7 @@ public class PrimaryProjService
 		return result;
 	}
 	
-	public List<PrimaryProjBean> displayPersonalPromaryProj(PrimaryProjBean bean)
+	public List<PrimaryProjBean> displayPersonalPrimaryProj(PrimaryProjBean bean)
 	{
 		List<PrimaryProjBean> result = null;
 		
@@ -136,7 +136,7 @@ public class PrimaryProjService
 	}
 	
 	// 查詢 個人頁面 有學校申請的 計畫
-	public List<PrimaryProjBean> displayPersonalPromaryProjByPending(PrimaryProjBean bean)
+	public List<PrimaryProjBean> displayPersonalPrimaryProjByPending(PrimaryProjBean bean)
 	{
 		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
 		
@@ -228,7 +228,7 @@ public class PrimaryProjService
 //		
 //		System.out.println(service.updatePromaryProj(bean2));
 		
-		List<PrimaryProjBean> result = service.displayPromaryProjAll();
+		List<PrimaryProjBean> result = service.displayPrimaryProjAll();
 		System.out.println(result.get(1).getBsae64String());
 		
 	}
