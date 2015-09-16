@@ -39,7 +39,7 @@ public class PrimaryProjService
 			result = primaryProjDAO.insert(bean);
 			if(result != null)
 			{
-				result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 			}
 		}
 		return result ;
@@ -76,7 +76,7 @@ public class PrimaryProjService
 				result = primaryProjDAO.update(temp);
 				if(result != null)
 				{
-					result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+					result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 				}
 			}
 		}
@@ -97,7 +97,7 @@ public class PrimaryProjService
 			}
 			else
 			{
-				bean.setBsae64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
+				bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
 			}
 		}
 		
@@ -118,7 +118,7 @@ public class PrimaryProjService
 			result = primaryProjDAO.findByPrimaryKey(bean.getPrimaryProjId());
 			if(result != null)
 			{
-				result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 			}
 		}
 		return result;
@@ -229,7 +229,7 @@ public class PrimaryProjService
 //		System.out.println(service.updatePromaryProj(bean2));
 		
 		List<PrimaryProjBean> result = service.displayPrimaryProjAll();
-		System.out.println(result.get(1).getBsae64String());
+		System.out.println(result.get(1).getBase64String());
 		
 	}
 

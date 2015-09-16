@@ -23,7 +23,7 @@ public class PrimaryProjBean implements Serializable
 	private java.util.Date createDate;   		// 建立日期
 	private String projStatus;          		// 狀態
 	
-	private String bsae64String;				// 圖片
+	private String base64String;				// 圖片
 	private List<ProcessingProjBean> processingProjBean;	// 存計畫被關聯的 ProcessingProj
 	
 	public PrimaryProjBean()
@@ -149,14 +149,16 @@ public class PrimaryProjBean implements Serializable
 	{
 		this.projStatus = projStatus;
 	}
-	public String getBsae64String()
+
+	public String getBase64String()
 	{
-		return bsae64String;
+		return base64String;
 	}
-	public void setBsae64String(String bsae64String)
+	public void setBase64String(String base64String)
 	{
-		this.bsae64String = bsae64String;
+		this.base64String = base64String;
 	}
+	
 	public List<ProcessingProjBean> getProcessingProjBean()
 	{
 		return processingProjBean;
