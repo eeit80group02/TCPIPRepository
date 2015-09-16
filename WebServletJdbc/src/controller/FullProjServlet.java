@@ -161,7 +161,7 @@ public class FullProjServlet extends HttpServlet
 //			System.out.println(result);
 			System.out.println("xx");
 			HttpSession session = request.getSession();
-			session.setAttribute("fullProjProj",result);
+			session.setAttribute("fullProj",result);
 			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalFullProjByChat.jsp");
 //			request.setAttribute("primaryProj",bean);
 //			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
