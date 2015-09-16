@@ -33,6 +33,7 @@ public class FullProjBean implements Serializable
 	private Boolean schoolConfirm;             		// 學校確認狀態(同意、預設null T or F)	
 	private Boolean memberConfirm;               	// 發起人確認狀態(同意、預設null)
 	
+	private String base64String;					// base64字串
 	public FullProjBean()
 	{
 	}
@@ -290,6 +291,16 @@ public class FullProjBean implements Serializable
 	public Boolean getMemberConfirm()
 	{
 		return memberConfirm;
+	}
+
+	public String getBase64String()
+	{
+		return base64String;
+	}
+
+	public void setBase64String(String base64String)
+	{
+		this.base64String = base64String;
 	}
 
 	public void setMemberConfirm(Boolean memberConfirm)

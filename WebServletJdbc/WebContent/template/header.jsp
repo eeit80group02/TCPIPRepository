@@ -22,13 +22,13 @@
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
 		<div class="nav-wrapper grey darken-3">
-			<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+			<a href="${pageContext.request.contextPath}/index.jsp" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
 				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 			</a>
 	
 	
 			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-				<li><a href="sass.html">瀏覽</a></li>
+				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
 				<li><a href="badges.html">捐贈</a></li>
 				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->

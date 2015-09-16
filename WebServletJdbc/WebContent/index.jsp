@@ -74,7 +74,7 @@
 <!--     	</div> -->
 <!--     </div> -->
 <!--   </div> -->
-	<c:import url="/template/loginmodal.jsp" context="${pageContext.request.contextPath}"></c:import>
+<%-- 	<c:import url="/template/loginmodal.jsp" context="${pageContext.request.contextPath}"></c:import> --%>
 
 <!-- 網頁主體 -->
 <main>
