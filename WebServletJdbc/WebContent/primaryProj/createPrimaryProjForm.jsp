@@ -58,13 +58,13 @@
 		<!-- 切版面開始 -->
 		<div class="col l8">
 			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable orange lighten-4" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;" id="primaryform" method="post">
+			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="primaryform" method="post">
 
 				<div class="row">
 						<!-- 計畫封面 -->
 						<div class="file-field input-field row">
 							<div class="col l8">
-								<div class="btn" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
+								<div class="btn blue-grey lighten-2" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 									<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">封面</span>
 									<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile" required>
 	      						</div>
@@ -89,7 +89,7 @@
 						<!-- 理想地點 -->
 <%-- 						<input type="text" value="${param.location}"  name="location"><span class="error">${error.location}</span> --%>
 						<div class="row">
-							<div class="col l3">
+							<div class="col l4">
 									<div id="forlocation" class="forinput">理想地點</div>
 									<select id="locationselect">
 											<option value="10001">台北市</option>
@@ -168,8 +168,8 @@
 <%-- 						<textarea rows="10" cols="100" name="projAbstract">${param.projAbstract}</textarea> --%>
 						<div class="row">
 							<div class="col l8">
-								<div class="forinput">計畫摘要</div>
-								<textarea id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+								<div class="forinput">計畫摘要<span><span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -192,12 +192,14 @@
 <!-- 				button -->
 					
 					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect right yellow lighten-5 black-text" type="reset" name="action">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
-						</button>
-						<button  class="col l2 btn-large waves-effect right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
-						</button>
+						<div class="col l8">
+							<button  class="btn-large yellow lighten-5 black-text right" type="submit" name="action" id="submitbtn">
+								<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
+							</button>
+							<button  class="btn-large yellow lighten-5 black-text right" type="reset" name="action">
+								<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
+							</button>
+						</div>
 					</div>
 					</div>
 				</form>
@@ -227,6 +229,11 @@
 			//指定ckeditor()的skin
 			CKEDITOR.replace("content",{skin:"moono"})
 			
+			//test
+			$("#title").on("focus",function(){
+				
+				console.log($("endtime").val())
+			})
 			
 			//datepicker初始化(活動時間)
 		   var $picker1 =  $('#starttime').pickadate({
@@ -237,7 +244,7 @@
 			   max:365,
 			   today:"今天",
 			   clear:"重選",
-			   close:"關閉"
+			   close:"確定"
 		    });
 		   
 		   var $picker2 = $('#endtime').pickadate({
@@ -280,7 +287,6 @@
 			$("select").change(function(){
 				if($(this).val() !== ""){
 					str = $("#locationselect option:selected").text();
-					console.log(str);
 					$("#location").val(str);
 				}
 			})
