@@ -26,155 +26,6 @@
 		height: 16px;
 	}
 </style>
-
-    <script type="text/javascript">
-    $(function () {
-            for (i = 1; i <= 12; i++) {   //新增月 
-                var month = window.document.createElement("option");
-                month.value = i;
-                month.innerHTML = i;
-                document.getElementById("idSelectMonth").appendChild(month);
-            }
-            document.getElementById("idSelectMonth").value = "0";
-            for (i = 2010; i <= 2020; i++) {   //新增年 
-                var year = window.document.createElement("option");
-                year.value = i;
-                year.innerHTML = i;
-                document.getElementById("idSelectYear").appendChild(year);
-            }
-            document.getElementById("idSelectYear").value = "";
-    });
-
-        function setDay() {
-            //alert(document.getElementById("idSelectDay").lastChild);
-            if (document.getElementById("idSelectDay").lastChild != null) {
-                var parent = document.getElementById("idSelectDay");
-                for (i = parent.lastChild; i != null ; i = parent.lastChild) {
-                    //alert(document.getElementById("idSelectDay").lastChild.value);
-                    parent.removeChild(i);
-                }
-            }
-            switch (document.getElementById("idSelectMonth").value) {
-                case "1":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "2":
-                    for (i = 1; i <= 28; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "3":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "4":
-                    for (i = 1; i <= 30; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "5":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "6":
-                    for (i = 1; i <= 30; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "7":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "8":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "9":
-                    for (i = 1; i <= 30; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "10":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "11":
-                    for (i = 1; i <= 30; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-                case "12":
-                    for (i = 1; i <= 31; i++) {
-                        var day = window.document.createElement("option");
-                        day.value = i;
-                        day.innerHTML = i;
-                        document.getElementById("idSelectDay").appendChild(day);
-                    }
-                    break;
-            }
-            setDayByYear();
-        }
-
-        function setDayByYear() {
-            //document.getElementById("idSelectDay").removeChild(29);
-            if (document.getElementById("idSelectMonth").value == "2" && document.getElementById("idSelectYear").value != "") {
-                //alert(document.getElementById("idSelectDay").lastChild.value);
-                //alert(document.getElementById("idSelectYear").value);
-                if (document.getElementById("idSelectYear").value % 4 == "0" && document.getElementById("idSelectDay").lastChild.value == 28) {
-                    var day = window.document.createElement("option");
-                    day.value = 29;
-                    day.innerHTML = 29;
-                    document.getElementById("idSelectDay").appendChild(day);
-                }
-                else if (document.getElementById("idSelectYear").value % 4 != "0" && document.getElementById("idSelectDay").lastChild.value == 29) {
-                    document.getElementById("idSelectDay").removeChild(document.getElementById("idSelectDay").lastChild);
-                }
-            }
-        }
-    </script>
-
-
-
 </head>
 
 
@@ -460,11 +311,8 @@
 						<!-- 第二列 -->
 						<div class="row yellow lighten-2">
 							<label for="datepicker">發證日期</label>
-							<select id="idSelectYear" onchange="setDayByYear();"></select>
-            				<select id="idSelectMonth" onchange="setDay();"></select>
-            				<select id="idSelectDay"></select>
-
-					</div>
+							<input type="text" id="datepicker" readonly required><span id="date"></span>
+						</div>
 						
 						<!-- 第三列 -->
 						<div class="row yellow lighten-2">
@@ -590,76 +438,106 @@
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
+	<script src="/WebServletJdbc/js/date.format.js"></script>
+	
 	<script>
 	
-			(function($) {
-				
+			(function($) {			
+				var inputDate = $("#datepicker");
+				var changeYearButtons = function() {
+					setTimeout(function() {
+				        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+				        //you can opt to style up these simple buttons tho
+				        var prevYrBtn = $('<button>前年</button>');
+				        prevYrBtn.bind("click", function() {
+				            $.datepicker._adjustDate(inputDate, -1, 'Y');
+				        });
+				        var nextYrBtn = $('<button>次年</button>');
+				        nextYrBtn.bind("click", function() {
+				            $.datepicker._adjustDate(inputDate, +1, 'Y');
+
+				        });
+				        prevYrBtn.appendTo(widgetHeader);
+				        nextYrBtn.appendTo(widgetHeader);
+
+				    }, 1);
+				};
 				
 			//datepicker 初始化
-// 			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-// 		    var old_get = $.datepicker._get;
-// 		    var old_CloseFn = $.datepicker._updateDatepicker;
-// 		    $.extend($.datepicker, {
-// 		        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-// 		            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-// 		            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-// 		                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-// 		                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-// 		                }).end().end().get(0).outerHTML;
-// 		            }
-// 		            return htmlYearMonth;
-// 		        },
-// 		        _get:function (a, b) {
-// 		            a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-// 		            a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-// 		            a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-// 		            return old_get.apply(this, [a, b]);
-// 		        },
-// 		        _updateDatepicker:function (inst) {
-// 		            old_CloseFn.call(this, inst);
-// 		            $(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last")
-// 		                   .click(function (e) {
-// 		                        inst.input.val("");
-// 		                    });
-// 		        },
-// 		        _setDateDatepicker: function (a, b) {
-// 		            if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-// 		        },
-// 		        _widgetDatepicker: function () {
-// 		            return this.dpDiv
-// 		        }
+			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+		    var old_get = $.datepicker._get;
+		    var old_CloseFn = $.datepicker._updateDatepicker;
+		    $.extend($.datepicker, {
+		        _generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+		            var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+		            if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+		                htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+		                    if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+		                }).end().end().get(0).outerHTML;
+		            }
+		            return htmlYearMonth;
+		        },
+		        _get:function (a, b) {
+		            a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+		            a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+		            a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+		            return old_get.apply(this, [a, b]);
+		        },
+		        _updateDatepicker:function (inst) {
+		            old_CloseFn.call(this, inst);
+		            $(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last")
+		                   .click(function (e) {
+		                        inst.input.val("");
+		                    });
+		        },
+		        _setDateDatepicker: function (a, b) {
+		            if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+		        },
+		        _widgetDatepicker: function () {
+		            return this.dpDiv
+		        }
 
-// 		    });
+		    });
 		    
-// 		    $("#datepicker").datepicker({
-// 		        yearSuffix: "", //將年改為空白
-// 		        yearRange: "2005:2015",
-// 		        changeYear: true, //手動修改年
-// 		        changeMonth: true, //手動修改月
-// 		        firstDay: 1, //0為星期天
-// 		        showButtonPanel: true, //顯示bottom bar
-// 		        closeText: '清除', //將離開改為清除
-// 		        dateFormat: "yy-m-d",
-// 		        onSelect: function (dateText, inst) {
-// 		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-// 		            var reM = /m+/g;
-// 		            var reD = /d+/g;
-// 		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-// 		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-// 		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-// 		            };
-// 		            $.each(objDate, function (k, v) {
-// 		                var re = new RegExp(k + "+");
-// 		                dateFormate = dateFormate.replace(re, v);
-// 		            });
-// 		            inst.input.val(dateFormate);
+		    $("#datepicker").datepicker({
+		    	beforeShow: changeYearButtons,
+		    	onChangeMonthYear: changeYearButtons,
+		        yearRange: "2005:2015",
+		        maxDate: "-0Y",
+		        minDate: new Date(2005, 1 - 1, 1),
+		        firstDay: 1, //0為星期天
+		        dateFormat: "yy-m-d",
+		        onSelect: function (dateText, inst) {
+		            var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+		            var reM = /m+/g;
+		            var reD = /d+/g;
+		            var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+		                m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+		                d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+		            };
+		            $.each(objDate, function (k, v) {
+		                var re = new RegExp(k + "+");
+		                dateFormate = dateFormate.replace(re, v);
+		            });
+		            inst.input.val(dateFormate);
 		            
-// 		           $("#applyTWY").val(objDate.y);
-// 		           $("#applyMM").val(objDate.m);
-// 		           $("#applyDD").val(objDate.d);
-// 		        }
-// 		    });
+		           $("#applyTWY").val(objDate.y);
+		           $("#applyMM").val(objDate.m);
+		           $("#applyDD").val(objDate.d);
+		        }
+		    });
 				
+		    $.datepicker.regional['zh-TW'] = {
+		    		prevText: '上月',
+		    		nextText: '次月',
+		    		monthNames: ['一月','二月','三月','四月','五月','六月',
+		    		'七月','八月','九月','十月','十一月','十二月'],
+		    		monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+		    		dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+		    		dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+		    		dayNamesMin: ['日','一','二','三','四','五','六'],
+		    	};
+		    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
 				
 			//mouseover時，單個input元素被舉起
 			$(".input-field").hover(function(){
