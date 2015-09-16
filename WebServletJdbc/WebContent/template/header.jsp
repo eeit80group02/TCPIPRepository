@@ -22,20 +22,20 @@
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
 		<div class="nav-wrapper grey darken-3">
-			<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+			<a href="<c:url value="/index.jsp" />" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
 				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 			</a>
 	
 	
 			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
 				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
-				<li><a href="sass.html">瀏覽</a></li>
-				<li><a href="badges.html">捐贈</a></li>
+				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
+				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>
 				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">
-						<li><a href="#">會員頁面</a></li>
+						<li><a href="${pageContext.request.contextPath}/personal/personal.jsp">會員頁面</a></li>
 					</c:if>
 	
 					<c:if test="${LoginOK.beanName.equals('school')}">

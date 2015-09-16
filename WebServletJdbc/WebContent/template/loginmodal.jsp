@@ -63,7 +63,7 @@
 								         <input id="password" type="password" name="password" class="validate">
 								         <label for="password" style="font-size:1.5em;">學校密碼</label>
 						        	</div>
-						        		<input type="hidden" name="type" value="member">
+						        		<input type="hidden" name="type" value="school">
 							      </form>
 						    	</div>
 				    </div>

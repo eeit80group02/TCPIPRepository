@@ -110,7 +110,7 @@
 		      							<p style="height:55%">${primaryProj.projAbstract}</p>
 		      						<div class="divider"></div>
 		      						<div class="center-align">
-										<a href="#"><h5>more...</h5></a>
+										<a href="${path}"><h5>more...</h5></a>
 									</div>
 		    					</div>
 							</div>

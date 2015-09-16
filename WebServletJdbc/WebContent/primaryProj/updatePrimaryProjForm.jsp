@@ -47,7 +47,7 @@
 	活動預算<input type="number" value="${param.budget}${primaryProj.budget}" name="budget" /><span class="error">${error.budget}</span><br>
 	
 
-	<img src="${primaryProj.bsae64String}" class="frontImg">
+	<img src="${primaryProj.base64String}" class="frontImg">
 
 	
 	<input type="hidden" name="type" value="update" />

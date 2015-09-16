@@ -56,7 +56,7 @@
 			<td>${primaryProj.budget}</td>
 		</tr>
 	</table>
-	<img src="${primaryProj.bsae64String}" class="frontImg">
+	<img src="${primaryProj.base64String}" class="frontImg">
 	
 	<hr>
 	
