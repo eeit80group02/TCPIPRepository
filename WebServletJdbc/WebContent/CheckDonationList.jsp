@@ -27,7 +27,7 @@
 
 <!-- 自訂 -->
 <link rel="stylesheet" href="styles/DonationBill.css">
-<script type="text/javascript" src="scripts/CheckNumber.js"></script>
+<!-- <script type="text/javascript" src="scripts/CheckNumber.js"></script> -->
 
 </head>
 <body>
@@ -67,7 +67,7 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var='item' items='${DonationCart.content}'>
+							<c:forEach var='item' items='${DonationCart.content}'  varStatus='vs'>
 								<tr>
 									<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="延長線" title="延長線"></td>
 									<td>${item.value.supplyName}</td>
@@ -75,17 +75,92 @@
 									<td>${item.value.supplyStatus}</td>
 
 									<td style="word-break: break-all;"><div id="remark">${item.value.demandContent}</div></td>
-									${item.value.originalDemandUnit}
-									${item.value.originalDemandUnit}
 									<td>
-										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+										<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
 											<i class="small material-icons">navigate_before</i>
-										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">${item.value.originalDemandUnit}</label>
-										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+										</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off"> <label for="text" id="textUnit">${item.value.originalDemandUnit}</label>
+										<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
 											<i class="small material-icons">navigate_next</i>
 										</button> <script type="text/javascript" src="scripts/CheckNumber.js"></script>
 									</td>
 								</tr>
+								
+								<script type="text/javascript">
+									(function($) {
+
+										var step${vs.index} = 1; // 默認步長
+										var changeStepTimer${vs.index} = null; // 改變速度計數器
+										var setValueTimer${vs.index} = null; // 設置值計數器
+									
+										/* 改變速度私有方法 */
+										var changeStep${vs.index} = function() {
+											// 每隔 2 秒速度加 5
+											changeStepTimer${vs.index} = setInterval(function() {
+												step += 5
+											}, 2000);
+										}
+									
+										/* 設置值私有方法 */
+										var setAddValue${vs.index} = function() {
+											var input = $("#text${vs.index}").val();
+											$("#text${vs.index}").val(parseInt(input) + step${vs.index});
+											setValueTimer${vs.index} = setTimeout(setAddValue${vs.index}, 200); // 每隔200毫秒更新文本框數值一次
+										}
+									
+										/* 設置值私有方法 */
+										var setSubValue${vs.index} = function() {
+											var input = $("#text${vs.index}").val();
+											$("#text${vs.index}").val(parseInt(input) - step${vs.index});
+											setValueTimer${vs.index} = setTimeout(setSubValue${vs.index}, 200); // 每隔200毫秒更新文本框數值一次
+										}
+									
+										/* 按下鼠標處理函數 */
+										$("#buttonSub${vs.index}").mousedown(function() {
+											var input = $("#text${vs.index}").val();
+											// 正規表示法找整數
+											if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+												changeStep${vs.index}();
+												setSubValue${vs.index}();
+											} else {
+												Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800);
+												$("#text${vs.index}").val(1);
+											}
+									
+										});
+									
+										/* 按下鼠標處理函數 */
+										$("#buttonAdd${vs.index}").mousedown(function() {
+											var input = $("#text${vs.index}").val();
+											// 正規表示法找整數
+											if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+												changeStep${vs.index}();
+												setAddValue${vs.index}();
+											} else {
+												Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800);
+												$("#text${vs.index}").val(1);
+											}
+									
+										});
+									
+										/* 鬆開鼠標處理函數 */
+										$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
+									
+										function checkText() {
+											var input = $("#text${vs.index}").val();
+											if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+											} else {
+												Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800);
+												$("#text${vs.index}").empty();
+												$("#text${vs.index}").val(1);
+											}
+									
+											clearInterval("changeStepTimer${vs.index}");
+											clearTimeout("setValueTimer${vs.index}");
+											step${vs.index} = 1;
+										}
+									}(jQuery));
+								</script>
+								
 							</c:forEach>
 							</tbody>
 						</table>
@@ -255,5 +330,7 @@
 	<input type='submit' name='fillOrder' value='booking'>
 	</form>
 </center>
+
+
 </body>
 </html>
