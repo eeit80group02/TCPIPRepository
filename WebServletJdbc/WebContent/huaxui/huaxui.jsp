@@ -126,17 +126,6 @@
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
-			//觸發卡片翻轉事件
-			$(".touche").each(function() {
-				$(this).mouseover(function() {
-					$(".activator", this).trigger("click");
-				})
-				$(this).mouseout(function() {
-					$(".card-title", this).trigger("click");
-				})
-			})
 			//footer中連結的文字大小
 			$("a").css("font-size", "1.2em");
 			//提示區塊的按鈕

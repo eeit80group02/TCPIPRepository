@@ -169,7 +169,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要</div>
-								<textarea id="projAbstract" class="ckeditor" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+								<textarea id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -223,8 +223,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
-			//指定ckeditor(內容摘要)的skin
-			CKEDITOR.replace("projAbstract",{skin:"moono"})
 		   
 			//指定ckeditor()的skin
 			CKEDITOR.replace("content",{skin:"moono"})
