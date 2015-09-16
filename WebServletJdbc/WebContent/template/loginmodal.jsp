@@ -74,7 +74,6 @@
 					      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a>
 				    	</div>
 				    </div>			    
-			    
 			    </div>
 		  </div>
  <!-- 登入用modal end tag-->  
