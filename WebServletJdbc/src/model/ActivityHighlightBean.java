@@ -11,7 +11,7 @@ public class ActivityHighlightBean implements Serializable
 	private String frontCoverName;		// 封面圖片檔名
 	private byte[] frontCover;			// 圖片(花絮的封面用的圖片)
 	private Long frontCoverLength;		// 封面圖片長度
-	private String vedioURL;			// 影片路徑(嵌入youtube影片的網址-參考flyingV)
+	private String videoURL;			// 影片路徑(嵌入youtube影片的網址-參考flyingV)
 	private String content;				// 文章(花絮的內文 - 用ckeditor編輯)
 	
 	public ActivityHighlightBean()
@@ -68,14 +68,14 @@ public class ActivityHighlightBean implements Serializable
 		this.frontCoverLength = frontCoverLength;
 	}
 
-	public String getVedioURL()
+	public String getVideoURL()
 	{
-		return vedioURL;
+		return videoURL;
 	}
 
-	public void setVedioURL(String vedioURL)
+	public void setVideoURL(String videoURL)
 	{
-		this.vedioURL = vedioURL;
+		this.videoURL = videoURL;
 	}
 
 	public String getContent()
@@ -91,7 +91,7 @@ public class ActivityHighlightBean implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ActivityHighlightBean [fullProjId=" + fullProjId + ", memberId=" + memberId + ", frontCoverName=" + frontCoverName + ", frontCoverLength=" + frontCoverLength + ", vedioURL=" + vedioURL + ", content=" + content + "]";
+		return "ActivityHighlightBean [fullProjId=" + fullProjId + ", memberId=" + memberId + ", frontCoverName=" + frontCoverName + ", frontCoverLength=" + frontCoverLength + ", videoURL=" + videoURL + ", content=" + content + "]";
 	}
 	
 }
