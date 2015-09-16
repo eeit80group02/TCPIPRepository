@@ -15,10 +15,10 @@
 </head>
 <body class="deep-orange lighten-5">
 	<!-- 頁首 -->
-<header> <!-- 頁首 --> <nav>
+<header><nav>
 	<div class="nav-wrapper grey darken-3">
 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-			src="picture/LOGO.PNG" />
+			src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 		</a>
 
 
@@ -30,43 +30,17 @@
 		</ul>
 	</div>
 	</nav>
+	<c:import url="/template/loginmodal.jsp" context="${pageContext.request.contextPath}" />
 </header>
   
- <!-- 登入用modal --> 
-  <div id="modal1" class="modal modal-fixed-footer" style="height:800px;">
-    <div class="modal-content blue lighten-5" style="width:100%;">
-    	<div class="row" style="margin-top:0px;">
-	      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4>
-	    </div>
-	    <div class="divider"></div>
-			    <div style="width:60%;margin:0 auto;">  
-			      <form class="col l6 offset-l3">
-			      	<div class="input-field" style="margin-top:10%;">
-			          	<input id="account" type="text" class="validate">
-			          	<label for="account" style="font-size:1.5em;">帳號</label>
-		        	</div>
-		        	<div class="input-field">
-				         <input id="password" type="password" class="validate">
-				         <label for="password" style="font-size:1.5em;">密碼</label>
-		        	</div>
-			      </form>
-		    	</div>
-    </div>
-    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;">
-    	<div class="row valign">
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn ">登入</a>
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn ">忘記密碼</a>
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn ">註冊帳號</a>
-    	</div>
-    </div>
-  </div>
+
 
 	
 	
 	<!-- 頁面主題提示 -->
 	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${primaryprojbean.title}初步計畫名稱</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">初步計畫</h1>
 	</div>
 	
 	
@@ -106,16 +80,12 @@
 			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
 			<!-- 初步計畫列表 -->
 			<div class="col l8 offset-l4" id="projlist">
+				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
 						<c:param name="type" value="display" />
 						<c:param name="primaryProjId" value="${primaryProj.primaryProjId}" />
 					</c:url>
-					
-					<!-- 置中每列用的div -->
-					<c:if test="${varStatus.first  || (varStatus.count % 4 == 0) }">
-						<c:out value="<div class='centerdiv'>" escapeXml="false"/>
-					</c:if>				
 					
 					<!-- 卡片開始 -->
 						<div class="touche">
@@ -147,12 +117,9 @@
 						</div>
 					<!-- 卡片結束 -->
 
-					<!-- 置中每列用的div -->
-					<c:if test="${varStatus.last || (varStatus.count % 3) == 0 }">
-						<c:out value="</div>" escapeXml="false"/>
-					</c:if>					
 					
-				</c:forEach>				
+				</c:forEach>
+				</div>				
 			</div>
 		</div>
 	</main>
@@ -194,11 +161,8 @@
 	<!-- script -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript"
-		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
 			//固定側邊欄所在位置

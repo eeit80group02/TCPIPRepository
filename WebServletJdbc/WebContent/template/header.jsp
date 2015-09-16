@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -21,14 +22,14 @@
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
 		<div class="nav-wrapper grey darken-3">
-			<a href="${pageContext.request.contextPath}/index.jsp" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+			<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
 				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 			</a>
 	
 	
 			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
 				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
-				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
+				<li><a href="sass.html">瀏覽</a></li>
 				<li><a href="badges.html">捐贈</a></li>
 				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
@@ -49,7 +50,7 @@
 					</c:when>
 					
 					<c:otherwise>
-						<li><a href="logout.jsp">登出</a></li>
+						<li><a href="${pageContext.request.contextPath}/login/logout.jsp">登出</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li><a href="#!"><i class="material-icons">search</i></a></li>
@@ -113,5 +114,7 @@
 			
 		})(jQuery)
 	</script>
+
+
 </body>
 </html>
