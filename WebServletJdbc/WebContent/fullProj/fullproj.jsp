@@ -9,8 +9,6 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="deep-orange lighten-5">
@@ -18,7 +16,7 @@
 <header> <!-- 頁首 --> <nav>
 	<div class="nav-wrapper grey darken-3">
 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-			src="picture/LOGO.PNG" />
+			src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 		</a>
 
 
@@ -113,7 +111,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">上學真好，部落孩子攜手教學計劃</p>
@@ -143,7 +141,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj2.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj2.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">讓醫院充滿笑聲:紅鼻子醫生計畫</p>
@@ -172,7 +170,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj3.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj3.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">歡迎回家【小花門裏門外家寫真】</p>
@@ -208,7 +206,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj4.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj4.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">「來自小漁村的台灣代表隊」-國際參賽</p>
@@ -238,7 +236,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj5.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj5.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">【一趟重量不減的旅程 -
@@ -268,8 +266,8 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj6.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-							<!-- 						<img src="picture/DEMO_Proj3.PNG"> -->
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj6.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							<!-- 						<img src="${pageContext.request.contextPath}/picture/DEMO_Proj3.PNG"> -->
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">悅讀晨光－與一群孩子的午後約定</p>
@@ -301,7 +299,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">上學真好，部落孩子攜手教學計劃</p>
@@ -331,7 +329,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj2.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj2.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">讓醫院充滿笑聲:紅鼻子醫生計畫</p>
@@ -360,7 +358,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj3.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj3.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">歡迎回家【小花門裏門外家寫真】</p>
@@ -396,7 +394,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj4.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj4.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">「來自小漁村的台灣代表隊」-國際參賽</p>
@@ -426,7 +424,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj5.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj5.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">【一趟重量不減的旅程 -
@@ -456,8 +454,8 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj6.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-							<!-- 						<img src="picture/DEMO_Proj3.PNG"> -->
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj6.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							<!-- 						<img src="${pageContext.request.contextPath}/picture/DEMO_Proj3.PNG"> -->
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">悅讀晨光－與一群孩子的午後約定</p>
@@ -489,7 +487,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">上學真好，部落孩子攜手教學計劃</p>
@@ -519,7 +517,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj2.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj2.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">讓醫院充滿笑聲:紅鼻子醫生計畫</p>
@@ -548,7 +546,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj3.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj3.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">歡迎回家【小花門裏門外家寫真】</p>
@@ -584,7 +582,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj4.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj4.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">「來自小漁村的台灣代表隊」-國際參賽</p>
@@ -614,7 +612,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj5.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj5.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">【一趟重量不減的旅程 -
@@ -644,8 +642,8 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('picture/DEMO_Proj6.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-							<!-- 						<img src="picture/DEMO_Proj3.PNG"> -->
+							style="background-image: url('${pageContext.request.contextPath}/picture/DEMO_Proj6.PNG'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							<!-- 						<img src="${pageContext.request.contextPath}/picture/DEMO_Proj3.PNG"> -->
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">悅讀晨光－與一群孩子的午後約定</p>
@@ -714,7 +712,7 @@
 	<!-- script -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script type="text/javascript"
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script
