@@ -1,9 +1,6 @@
 package model.service;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 
 import model.PrimaryProjBean;
 import model.ProcessingProjBean;
@@ -86,15 +83,51 @@ public class ProcessingProjService
 						temp.setCheckTime(new java.util.Date(System.currentTimeMillis()));
 						temp.setCheckStatus("不同意");
 						processingProjDAO.update(temp);
-						
-						// 對該計畫改成 洽談完成
-						PrimaryProjBean primaryProjBean = primaryProjDAO.findByPrimaryKey(primaryProjId);
-						primaryProjBean.setProjStatus("洽談完成");
-						primaryProjDAO.update(primaryProjBean);
-						
-						// 建立完整計畫囉...
 					}
 				}
+				
+				// 對該計畫改成 洽談完成
+				PrimaryProjBean primaryProjBean = primaryProjDAO.findByPrimaryKey(primaryProjId);
+				primaryProjBean.setProjStatus("洽談完成");
+				primaryProjDAO.update(primaryProjBean);
+				
+				// 建立完整計畫囉...
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean cancelProcessingProj(ProcessingProjBean bean)
+	{
+		if(bean != null)
+		{
+			int processingProjId = bean.getProcessingProjId();
+			
+			// 先對該 處理計畫 select
+			ProcessingProjBean processingProjBean = processingProjDAO.findByPrimaryKey(processingProjId);
+			processingProjBean.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+			processingProjBean.setCheckStatus("未通過");
+			processingProjBean = processingProjDAO.update(processingProjBean);
+			
+			if(processingProjBean != null)
+			{
+				int primaryProjId = processingProjBean.getPrimaryProjId();
+				// 如果沒學校申請 把計劃狀態 更改為 待洽談
+				List<ProcessingProjBean> temps = processingProjDAO.selectByPrimaryProjId(primaryProjId);
+				
+				for(ProcessingProjBean temp:temps)
+				{
+					if(temp.getCheckStatus().equals("待審核"))
+					{
+						return true;
+					}
+				}
+				
+				// 改待洽談
+				PrimaryProjBean primaryProjBean = primaryProjDAO.findByPrimaryKey(primaryProjId);
+				primaryProjBean.setProjStatus("待洽談");
+				primaryProjDAO.update(primaryProjBean);
 				return true;
 			}
 		}
