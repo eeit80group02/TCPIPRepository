@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -26,52 +27,54 @@
 
 
 <body class="deep-orange lighten-5">
-<header> <!-- 頁首 --> <nav>
-	<div class="nav-wrapper grey darken-3">
-		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-			src="picture/LOGO.PNG" />
-		</a>
+<header> <!-- 頁首 --> 
+	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
+<!-- <nav> -->
+<!-- 	<div class="nav-wrapper grey darken-3"> -->
+<!-- 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP" -->
+<!-- 			src="picture/LOGO.PNG" /> -->
+<!-- 		</a> -->
 
 
-		<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-			<li><a href="sass.html">瀏覽</a></li>
-			<li><a href="badges.html">捐贈</a></li>
-			<li><a href="#modal1" class="modal-trigger">登入</a></li>
-			<li><a href="#!"><i class="material-icons">search</i></a></li>
-		</ul>
-	</div>
-	</nav>
+<!-- 		<ul class="right hide-on-med-and-down" style="font-size:1.5em;"> -->
+<!-- 			<li><a href="sass.html">瀏覽</a></li> -->
+<!-- 			<li><a href="badges.html">捐贈</a></li> -->
+<!-- 			<li><a href="#modal1" class="modal-trigger">登入</a></li> -->
+<!-- 			<li><a href="#!"><i class="material-icons">search</i></a></li> -->
+<!-- 		</ul> -->
+<!-- 	</div> -->
+<!-- </nav> -->
 </header>
   
  <!-- 登入用modal --> 
-  <div id="modal1" class="modal">
-    <div class="modal-content blue lighten-5" style="height:80%;width:100%;">
-    	<div class="row" style="margin-top:0px;">
-	      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4>
-	    </div>
-	    <div class="divider" style="display:block;"></div>
-			    <div style="width:60%;margin:0 auto;">  
-			      <form class="col l6 offset-l3" id="login">
-			      	<div class="input-field" style="margin-top:10%;">
-			          	<input id="account" type="text" class="validate">
-			          	<label for="account" style="font-size:1.5em;">帳號</label>
-		        	</div>
-		        	<div class="input-field">
-				         <input id="password" type="password" class="validate">
-				         <label for="password" style="font-size:1.5em;">密碼</label>
-		        	</div>
-			      </form>
-		    	</div>
-    </div>
-    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
-    	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a>
-		  <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	      
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a>
-    	</div>
-    </div>
-  </div>
-
+<!--   <div id="modal1" class="modal"> -->
+<!--     <div class="modal-content blue lighten-5" style="height:80%;width:100%;"> -->
+<!--     	<div class="row" style="margin-top:0px;"> -->
+<!-- 	      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4> -->
+<!-- 	    </div> -->
+<!-- 	    <div class="divider" style="display:block;"></div> -->
+<!-- 			    <div style="width:60%;margin:0 auto;">   -->
+<!-- 			      <form class="col l6 offset-l3" id="login"> -->
+<!-- 			      	<div class="input-field" style="margin-top:10%;"> -->
+<!-- 			          	<input id="account" type="text" class="validate"> -->
+<!-- 			          	<label for="account" style="font-size:1.5em;">帳號</label> -->
+<!-- 		        	</div> -->
+<!-- 		        	<div class="input-field"> -->
+<!-- 				         <input id="password" type="password" class="validate"> -->
+<!-- 				         <label for="password" style="font-size:1.5em;">密碼</label> -->
+<!-- 		        	</div> -->
+<!-- 			      </form> -->
+<!-- 		    	</div> -->
+<!--     </div> -->
+<!--     <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;"> -->
+<!--     	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;"> -->
+<!-- 	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a> -->
+<!-- 		  <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	       -->
+<!-- 	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a> -->
+<!--     	</div> -->
+<!--     </div> -->
+<!--   </div> -->
+	<c:import url="/template/loginmodal.jsp" context="${pageContext.request.contextPath}"></c:import>
 
 <!-- 網頁主體 -->
 <main>
@@ -334,32 +337,33 @@
 		<!-- 活動花絮區塊的conytainer -->
 	</div>
 </main>
-
-        <footer class="page-footer grey darken-4" style="margin:0">
-          <div class="container">
-            <!-- footer上半部的container -->
-			<!-- footer左半邊 -->
-			<div>
-                <h2 class="blue-text text-darken-2 left" style="display:inline;margin:0 10px 0 5px;">TCPIP</h2>
-              	<div class="left" id="taiwan">
-              		<p class="grey-text text-lighten-4 ">Taiwan Camp’s Project Innovation Platform </p>
-              	</div>
-            </div>
-			  <div class="right" style="color:white;">
-				<h2 class="blue-text text-darken-2 left" style="display:inline;margin:0 10px 0 5px;">LINKS</h2>
-              	<div class="left">
-              	  <a class="grey-text text-lighten-3" href="https://www.flyingv.cc/">FlingV</a><br/>
-                  <a class="grey-text text-lighten-3" href="http://www.indievox.com/">iNDIEVOX</a><br/>
-                  <a class="grey-text text-lighten-3" href="http://www.elivtw.com/">以立國際服務</a>
-			  </div>
-          </div>
-          <!-- footer下半部的container -->
-          <div class="footer-copyright valign-wrapper" style="clear:both;">
-            <div class="container center-align">
-          		 台灣志願服務營隊計畫創新平台 © 2015 Copyright 
-            </div>
-          </div>
-          </div>
+		<footer>
+			<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
+<!--         <footer class="page-footer grey darken-4" style="margin:0"> -->
+<!--           <div class="container"> -->
+<!--             footer上半部的container -->
+<!-- 			<!-- footer左半邊 --> -->
+<!-- 			<div> -->
+<!--                 <h2 class="blue-text text-darken-2 left" style="display:inline;margin:0 10px 0 5px;">TCPIP</h2> -->
+<!--               	<div class="left" id="taiwan"> -->
+<!--               		<p class="grey-text text-lighten-4 ">Taiwan Camp’s Project Innovation Platform </p> -->
+<!--               	</div> -->
+<!--             </div> -->
+<!-- 			  <div class="right" style="color:white;"> -->
+<!-- 				<h2 class="blue-text text-darken-2 left" style="display:inline;margin:0 10px 0 5px;">LINKS</h2> -->
+<!--               	<div class="left"> -->
+<!--               	  <a class="grey-text text-lighten-3" href="https://www.flyingv.cc/">FlingV</a><br/> -->
+<!--                   <a class="grey-text text-lighten-3" href="http://www.indievox.com/">iNDIEVOX</a><br/> -->
+<!--                   <a class="grey-text text-lighten-3" href="http://www.elivtw.com/">以立國際服務</a> -->
+<!-- 			  </div> -->
+<!--           </div> -->
+<!--           footer下半部的container -->
+<!--           <div class="footer-copyright valign-wrapper" style="clear:both;"> -->
+<!--             <div class="container center-align"> -->
+<!--           		 台灣志願服務營隊計畫創新平台 © 2015 Copyright  -->
+<!--             </div> -->
+<!--           </div> -->
+<!--           </div> -->
           
         </footer>
 
