@@ -10,5 +10,7 @@
 <body>
 你好，感謝你的使用 已經登出
 <% session.invalidate();%>
+
+<a href="${pageContext.request.contextPath}/index.jsp">回首頁</a>
 </body>
 </html>
