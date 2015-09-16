@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet
 	protected void doPost(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		
+		System.out.println("LoginServlet");
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
@@ -165,7 +165,7 @@ public class LoginServlet extends HttpServlet
 			HttpSession session = request.getSession();
 			session.setAttribute("LoginOK",bean);
 			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/test/indexold.jsp"));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
 		}
 		else
 		{
@@ -175,5 +175,4 @@ public class LoginServlet extends HttpServlet
 		}
 		
 	}
-
 }

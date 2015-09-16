@@ -25,12 +25,25 @@
 				<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
 					src="picture/LOGO.PNG" />
 				</a>
+
+		
 		
 		
 				<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
 					<li><a href="sass.html">瀏覽</a></li>
 					<li><a href="badges.html">捐贈</a></li>
-					<li><a href="#modal1" class="modal-trigger">登入</a></li>
+					
+					<!-- 沒登入時，必須看到登入按鈕 -->
+					<c:choose>
+						<c:when test="${empty LoginOK}">
+							<li><a href="#modal1" class="modal-trigger">登入</a></li>
+						</c:when>
+						
+						<c:otherwise>
+							<li><a href="logout.jsp" class="modal-trigger">登出</a></li>
+						</c:otherwise>
+					</c:choose>
+					
 					<li><a href="#!"><i class="material-icons">search</i></a></li>
 				</ul>
 			</div>
