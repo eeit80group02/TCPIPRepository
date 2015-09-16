@@ -8,6 +8,7 @@
       	maxActive="3"
       	maxIdle="2"
       	maxWait="5000" />
+
 <!-- 	<Resource name="jdbc/TCPIP" type="javax.sql.DataSource" -->
 <!-- 		username="eeit80group02@qjtxi3tofr" password="p@ssw0rd" -->
 <!-- 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
