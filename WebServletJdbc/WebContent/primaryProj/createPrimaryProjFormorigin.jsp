@@ -12,6 +12,14 @@
 		.error{
 			color:#FF0000;
 		}
+		
+		.forinput {
+			font-size:1.4em;
+			font-weight:600;
+			color:black;
+			font-family:微軟正黑體;		
+		}
+		
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>createPrimaryProj</title>
@@ -80,12 +88,6 @@
 
 				<div class="row">
 						<!-- 計畫名稱 -->
-<%-- 						<input type="text" name="title" value="${param.title}" /><span class="error">${error.title}</span>--%>
-						<div class="input-field row">
-							<input id="title" type="text" name="title" required value="${param.title}">
-							<label for="title" style="font-size:1.3em;font-weight:600;">計畫名稱</label>
-						</div>
-<%-- 						<input type="file" id="pitcture" name="imgFile" accept="image/jpeg,image/png" /><span class="error">${error.imgFile}</span> --%>
 						<!-- 計畫封面 -->
 						<div class="file-field input-field row">
 							<div class="btn" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
@@ -93,108 +95,101 @@
 								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile">
       						</div>
 						</div>
+						
+						<!--計畫名稱  -->
+<%-- 						<input type="text" name="title" value="${param.title}" /><span class="error">${error.title}</span>--%>
+						<div class="row">
+							<div class="forinput">1.計畫名稱</div>
+							<input id="title" type="text" name="title" required value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
+						</div>
+						
 						<!-- 理想地點 -->
 <%-- 						<input type="text" value="${param.location}"  name="location"><span class="error">${error.location}</span> --%>
 						<div class="row">
-						<div class="input-field">
-							<label for="siteId">理想地點</label>
-							<select id="siteId" name="siteId" required >
-									<option value="" disabled>請選擇</option>
-									<option value="10001">北縣</option>
-									<option value="10002">宜縣</option>
-									<option value="10003">桃縣</option>
-									<option value="10004">竹縣</option>
-									<option value="10005">苗縣</option>
-									<option value="10006">中縣</option>
-									<option value="10007">彰縣</option>
-									<option value="10008">投縣</option>
-									<option value="10009">雲縣</option>
-									<option value="10010">嘉縣</option>
-									<option value="10011">南縣</option>
-									<option value="10012">高縣</option>
-									<option value="10013">屏縣</option>
-									<option value="10014">東縣</option>
-									<option value="10015">花縣</option>
-									<option value="10016">澎縣</option>
-									<option value="10017">基市</option>
-									<option value="10018">竹市</option>
-									<option value="10020">嘉市</option>
-									<option value="09007">連江</option>
-									<option value="09020">金門</option>
-									<option value="63000">北市</option>
-									<option value="64000">高市</option>
-									<option value="65000">新北市</option>
-									<option value="66000">中市</option>
-									<option value="67000">南市</option>
-									<option value="68000">桃市</option>
-							</select>
-						</div>
+							<div class="col l3" style="padding:0">
+									<div id="forlocation" class="forinput">2.理想地點</div>
+									<select id="locationselect">
+											<option value="10001">台北市</option>
+											<option value="10002">新北市</option>
+											<option value="10003">桃園市</option>
+											<option value="10004">台中市</option>
+											<option value="10005">台南市</option>
+											<option value="10006">高雄市</option>
+											<option value="10007">基隆市</option>
+											<option value="10008">新竹市</option>
+											<option value="10009">嘉義市</option>
+											<option value="10010">新竹縣</option>
+											<option value="10011">苗栗縣</option>
+											<option value="10012">彰化縣</option>
+											<option value="10013">南投縣</option>
+											<option value="10014">雲林縣</option>
+											<option value="10015">嘉義縣</option>
+											<option value="10016">屏東縣</option>
+											<option value="10017">宜蘭縣</option>
+											<option value="10018">花蓮縣</option>
+											<option value="10020">台東縣</option>
+											<option value="09007">澎湖縣</option>
+											<option value="09020">金門縣</option>
+											<option value="63000">連江縣</option>
+									</select>
+							</div>
+								<div class="col l3 input-field valign-wrapper">
+									<input class="center-align forvalue" id="location" type="text" required readonly="readonly" value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;">
+								</div>
 						</div>						
-						<!-- 密碼確認 -->
+						
+						<!-- 活動時間 -->
+<%-- 						<input type="date" value="${param.startTime}" name="startTime"> --%>
 						<div class="input-field row">
-							<input id="check" type="password" class="validate" name="check" required>
-							<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
+							<div class="col l6" style="padding:0">
+								<div class="forinput ">3.活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
+								<input type="date" class="datepicker" name="startTime">
+							</div>	
+							<div class="col l6">
+								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
+								<input type="date" class="datepicker" name="endTime">
+							</div>	
 						</div>
 
-				
-				<!-- 姓氏 -->
-					<div class="col l4 input-field left">
-						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
-						<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
-					</div>				
-				
-				<!-- 名字 -->
-					<div class="col l4 input-field left">
-						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstname}" >
-						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
-					</div>				
-				
-				<!-- 性別 -->					
-					<div class="col l4 input-field left" id="genderradio">
-						<input type="radio" id="boy" name="gender" value="1" />
-		     			<label for="boy">男</label>
-		     			<input type="radio" id="girl" name="gender" value="2"/>
-		      			<label for="girl">女</label>					
-					</div>				
-				
-				<!-- 電話 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
-						<input id="idNumber" type="text" class="validate" name="idNumber"  value="${param.idNumber}">
-						<label for="idNumber" style="font-size:1.3em;font-weight:600;">室內電話</label>					
-					</div>
-					
-				<!-- 手機 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
-						<input id="phone" type="text" class="validate" name="phone" value="${param.phone}">
-						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
-					</div>
-					
-				<!-- 生日 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
-						<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
-						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>					
-					</div>
+						
+						<!-- 預計人數 -->
+						<div class="row">
+							<div class="forinput">4.預計人數</div>
+							<input id="title" type="text" name="title" required value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
+						</div>						
 
-				<!-- Email -->
-					<div class="row input-field">
-						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
-						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>						
-					</div>
-					
-				<!-- Address -->
-					<div class="row input-field">
-						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
-						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>						
-					</div>
-					
+
+						<!-- 活動預算 -->
+<%-- 						<input type="number" value="${param.budget}" name="budget" /> --%>
+						<div class="row">
+							<div class="forinput">5.活動預算</div>
+							<input id="title" type="text" name="title" required value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
+						</div>						
+						
+						
+						<!-- 計畫摘要 -->
+<%-- 						<textarea rows="10" cols="100" name="projAbstract">${param.projAbstract}</textarea> --%>
+						<div class="row">
+							<div class="forinput">5.活動預算</div>
+							<textarea rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+						</div>
+						
+						<!-- 計畫內容 -->
+						<div class="row">
+							<div class="forinput">5.活動預算</div>
+							<textarea rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
+						</div>
+												
+						<!-- hide -->
+						<input type="hidden" name="type" value="create" />
 				<!-- button -->
-					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
-						</button>
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
-						</button>
+<!-- 					<div class="row" id="btndiv"> -->
+<!-- 						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action"> -->
+<!-- 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span> -->
+<!-- 						</button> -->
+<!-- 						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn"> -->
+<!-- 							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span> -->
+<!-- 						</button> -->
 
 					</div>
 				  </div>	
@@ -220,16 +215,23 @@
 	
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>	
-
-</body>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script>
-		$(function() {
-			//初始化理想地點
-			$("select").material_select();
+<script>
+		(function($) {
+			//datepicker初始化(活動時間)
+		    $('.datepicker').pickadate({
+			   selectMonths: true, // Creates a dropdown to control month
+			   selectYears: 10,
+			   format: 'yyyy-mm-dd',
+			   min:true,
+			   max:365,
+			   closeOnSelect: true
+		    });
+			
+		    $(".datepicker").change(function(){
+		    	console.log($(".datepicker").val());	
+		    })
+			
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
@@ -246,8 +248,19 @@
 					reader.readAsDataURL(file);
 				}
 			})
-		})
+			//把理想地點的值丟到input裡
+			//初始化理想地點
+			$('select').material_select();
+			$("select").change(function(){
+				if($(this).val() !== ""){
+					str = $("#locationselect option:selected").text();
+					console.log(str);
+					$("#location").val(str);
+				}
+			})
+		})(jQuery)
 	</script>
+</body>
 
 		
 </html>

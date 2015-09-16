@@ -57,11 +57,78 @@ public class ProcessingProjServlet extends HttpServlet
 				System.out.println("執行 ProcessingProjServlet applyPrimaryProj");
 				agreePrimaryProj(request,response);
 			}
+			
+			if(type.equals("cancel"))
+			{
+				// 發起者取消
+				System.out.println("執行 ProcessingProjServlet cancelPrimaryProj");
+				cancelPrimaryProj(request,response);
+			}
 		}
 		else
 		{
 			System.out.println("error");
 		}
+	}
+
+	private void cancelPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		// 接收資料
+		String processingProjId = request.getParameter("processingProjId");
+		
+		// 驗證資料
+		if(processingProjId == null || processingProjId.trim().length() == 0)
+		{
+			errorMsg.put("error","沒有processingProjId");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			return;
+		}
+		
+		// 轉換資料
+		int iProcessingProjId = 0;
+		try
+		{
+			iProcessingProjId = Integer.parseInt(processingProjId);
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("error","參數有錯");
+			e.printStackTrace();
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			return;
+		}
+		
+		// business
+		ProcessingProjBean bean = new ProcessingProjBean();
+		bean.setProcessingProjId(iProcessingProjId);
+		
+		boolean result = service.cancelProcessingProj(bean);
+		if(result)
+		{
+			HttpSession session = request.getSession();
+			MemberBean memberBean = (MemberBean)session.getAttribute("LoginOK");
+			
+			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending&memberId=" + memberBean.getMemberId());
+		}
+		else
+		{
+			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			return;
+		}
+		
 	}
 
 	private void agreePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -121,8 +188,6 @@ public class ProcessingProjServlet extends HttpServlet
 			response.sendRedirect(request.getContextPath() + "/error.jsp");
 			return;
 		}
-		
-		
 	}
 
 	private void applyPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
