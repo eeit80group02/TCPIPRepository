@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.FullProjBean;
+import model.PrimaryProjBean;
+import model.ProcessingProjBean;
 import model.dao.FullProjDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
 
@@ -42,10 +44,40 @@ public class FullProjService
 		
 		return result;
 	}
+	
+	public List<FullProjBean> displayPersonalFullProj(FullProjBean bean)
+	{
+		List<FullProjBean> result = null;
+		
+		if(bean != null)
+		{
+			result = fullProjDAO.selectByMemberId(bean.getMemberId());
+		}
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		FullProjService service = new FullProjService();
 		System.out.println(service.displayFullProjAll());
 	}
 
+	public List<FullProjBean> displayPersonalFullProjProjByChat(FullProjBean bean)
+	{
+		List<FullProjBean> result = new ArrayList<FullProjBean>();
+		
+		if(bean != null)
+		{
+			// 先查詢 該會員的所有初步計畫
+			List<FullProjBean> temps = fullProjDAO.selectByMemberId(bean.getMemberId());
+			for(FullProjBean temp : temps)
+			{
+				if(temp.getProjStatus().equals("洽談中"))
+				{
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
 }
