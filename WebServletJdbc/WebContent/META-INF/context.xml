@@ -2,7 +2,7 @@
 
 <Context>
 	<Resource name="jdbc/TCPIP" type="javax.sql.DataSource"
-		username="sa" password="sa123456"
+		username="sasa" password="passw0rd"
 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
       	url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=TCPIP"
       	maxActive="3"

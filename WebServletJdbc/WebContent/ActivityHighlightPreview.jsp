@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -67,58 +67,38 @@
 	<div class="row">
 		<div class="col s12"><h2 style="text-align:center;">活動花絮</h2></div>
 		<div class="col s12 m4 l8">
-			<h4>花絮編輯</h4>
 			<div class="input-field col s12">
-				<input placeholder="" id="projName" type="text" class="validate" name="projName" readonly >
-				<label for="projName" class="active">完整計畫名稱</label>
-			</div>
-			<div class="input-field col s12">
-				<input placeholder="" id="memberName" type="text" class="validate" name="memberName" readonly >
-				<label for="memberName" class="active">活動發起人</label>
-			</div>
-			<div class="input-field col s12">
-				<input id="videoURL" type="text" class="validate" name="videoURL" >
-				<label for="videoURL" class="active">影片網址(請輸入YouTube完整網址)</label>
-			</div>
-			<div class="col s12" >
-						<div class="file-field input-field">
-							<div class="btn">
-								<span>封面上傳</span> <input type="file" id="picture">
-							</div>
-							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" placeholder="請上傳封面圖片..." id="frontCoverName">
-							</div>
-						</div>
-					</div>
-			<div class="input-field col s12">
-				<textarea class="ckeditor" name="content" id="content"></textarea>
-			</div>
-			<div class="input-field col s12">
-				<input id="fullProjId" type="hidden">
-				<input id="memberId" type="hidden">
-				<button class="btn waves-effect waves-light" type="submit" name="action">
-					送出 <i class="material-icons right">send</i>
-				</button>
-				<a class="waves-effect waves-light btn" id="preview">預覽</a>
-			</div>
-			
-			<div class="input-field col s12">
-				<div id="result"></div>
+				<div class="input-field col s12">
+					<div id="error"></div>
+				</div>
+				<div class="input-field col s6">
+					<h4>
+					<span id="projName" type="text" class="validate" ></span>
+					<label for="projName" class="active">完整計畫名稱</label>
+					</h4>
+				</div>
+				<div class="input-field col s6">
+					<h4>
+						<span id="memberName" type="text" class="validate"></span>
+						<label for="memberName" class="active">活動發起人</label>
+					</h4>
+				</div>
+				<div class="input-field col s12">
+					<div class="video-container">
+        				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
+      				</div>	
+      			</div>
+      			<div class="input-field col s12">
+      				<div class="divider" ></div>
+					<div id="content"></div>
+				</div>
 			</div>
 		</div>
 		<div class="col s12 m4 l4">
-			<div class="input-field col s12">
-				<h4>花絮封面預覽</h4>
+			<div>
+				<h4>花絮封面</h4>
 				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
-			</div>
-			<div class="input-field col s12">
-				<h4>影片預覽</h4>
-			</div>
-			<div class="input-field col s12">
-				<div class="video-container">
-        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
-      			</div>	
-      		</div>		
+			</div>			
 		</div>
 	</div>
 	</form>
@@ -181,74 +161,15 @@
 			$(".centerdiv").css("height", "385px");
 			$(".card").css("width", "310px");
 			
-			// upload picture
-			$("#picture").change(function(){
-				var file = $("#picture")[0].files[0];
-				var reader  = new FileReader();
-				reader.onloadend = function () {
-					console.log(reader.result);
-					$("#frontCover").attr("src", reader.result);
-				}
-				if(file){
-					reader.readAsDataURL(file);
-				}
-			})
 			
-			$("#videoURL").on("focusout",function(){
-				var offset = $("#videoURL").val().indexOf("watch?v=")+8;
-				console.log(offset);
-				$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+$("#videoURL").val().substring(offset, offset+11));
-				console.log($("#YouTubeURL").attr("src"));
-			});
-				
-			
-			
-			
-			
-			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
-				console.log(responseJson);
-				$("#projName").val(responseJson.projName);	
-				$("#memberName").val(responseJson.memberName);
-				$("#fullProjId").val(responseJson.fullProjId);
-				$("#memberId").val(responseJson.memberId);
-			}); 
-			
-			
-			$( "#postForm" ).submit(function( event ) {
-				event.preventDefault();
-				var check = false;
-				if($("#content").val() != "" && $("#frontCover").attr("src") != "" && $("#videoURL").val() != "" ) {
-					check = true;
-				}
-				if(check){
-					$.ajax({
-    					url:'<c:url value="/ActivityHighlightPostServlet" />',
-    	   				type:'post',
-    	   				data:{	"content" : $("#content").val(),
-    	   		  	   	    	"frontCover" : $("#frontCover").attr("src"), 
-    	   		  	   	    	"fullProjId" : $("#fullProjId").val(),
-    	   		  	   	    	"memberId" : $("#memberId").val(),
-    	   		  	   	    	"frontCoverName" : $("#frontCoverName").val(),
-    	   		  	   	    	"videoURL" : $("#videoURL").val() },
-    	   				dataType:'text',
-    	   				success:function(result){
-    						$("#result").text(result);
-    	   				}
-    	   
-       				});
-				} else {
-					$("#result").text("欄位需填齊!");
-				}
-			});
-			
-			$("#preview").on("click",function(){
-				var newWindow = window.open('<c:url value="/ActivityHighlightPreview.jsp" />');
-				newWindow.window.content = $("#content").val();
-				newWindow.window.frontCover = $("#frontCover").attr("src");
-				newWindow.window.fullProjName = $("#projName").val();
-				newWindow.window.memberName = $("#memberName").val();
-				newWindow.window.videoURL = $("#videoURL").val();			
-			});
+			//Get data from parent window (ActivityHighlightCreate.jsp) window.open
+			$("#content").html(content)
+			$("#frontCover").attr("src",frontCover);
+			$("#projName").text(fullProjName);
+			$("#memberName").text(memberName);			
+			var offset = videoURL.indexOf("watch?v=")+8;
+			$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+videoURL.substring(offset, offset+11));
+						
 			
 		})
 	</script>

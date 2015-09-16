@@ -28,6 +28,7 @@
 	
 	
 			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
+				<li><a href="!#">提案</a></li>
 				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
 				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
 				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>

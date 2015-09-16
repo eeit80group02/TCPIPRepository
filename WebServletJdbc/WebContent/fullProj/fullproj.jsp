@@ -13,55 +13,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="deep-orange lighten-5">
-	<!-- 頁首 -->
- <header> 
+ 
+ 	<!--頁首  -->
  	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
- <!--頁首  -->
-<!-- <nav> -->
-<!-- 	<div class="nav-wrapper grey darken-3"> -->
-<!-- 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP" -->
-<%-- 			src="${pageContext.request.contextPath}/picture/LOGO.PNG" /> --%>
-<!-- 		</a> -->
 
-
-<!-- 		<ul class="right hide-on-med-and-down" style="font-size:1.5em;"> -->
-<!-- 			<li><a href="sass.html">瀏覽</a></li> -->
-<!-- 			<li><a href="badges.html">捐贈</a></li> -->
-<!-- 			<li><a href="#modal1" class="modal-trigger">登入</a></li> -->
-<!-- 			<li><a href="#!"><i class="material-icons">search</i></a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
-<!-- 	</nav> -->
-</header>
-  
- <!-- 登入用modal --> 
-<!--   <div id="modal1" class="modal modal-fixed-footer" style="height:800px;"> -->
-<!--     <div class="modal-content blue lighten-5" style="width:100%;"> -->
-<!--     	<div class="row" style="margin-top:0px;"> -->
-<!-- 	      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4> -->
-<!-- 	    </div> -->
-<!-- 	    <div class="divider"></div> -->
-<!-- 			    <div style="width:60%;margin:0 auto;">   -->
-<!-- 			      <form class="col l6 offset-l3"> -->
-<!-- 			      	<div class="input-field" style="margin-top:10%;"> -->
-<!-- 			          	<input id="account" type="text" class="validate"> -->
-<!-- 			          	<label for="account" style="font-size:1.5em;">帳號</label> -->
-<!-- 		        	</div> -->
-<!-- 		        	<div class="input-field"> -->
-<!-- 				         <input id="password" type="password" class="validate"> -->
-<!-- 				         <label for="password" style="font-size:1.5em;">密碼</label> -->
-<!-- 		        	</div> -->
-<!-- 			      </form> -->
-<!-- 		    	</div> -->
-<!--     </div> -->
-<!--     <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;"> -->
-<!--     	<div class="row valign"> -->
-<!-- 	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn ">登入</a> -->
-<!-- 	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn ">忘記密碼</a> -->
-<!-- 	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn ">註冊帳號</a> -->
-<!--     	</div> -->
-<!--     </div> -->
-<!--   </div> -->
 
 	
 	
@@ -683,9 +638,7 @@
 
 
 	<!-- 頁尾 -->
-	<footer>
-		<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
-	</footer>
+	<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
 <!-- 	<footer class="page-footer grey darken-4" -->
 <!-- 		style="clear:both;margin:100px 0 0 0;"> -->
 <!-- 	<div class="container"> -->
