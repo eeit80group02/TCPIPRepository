@@ -15,29 +15,16 @@
 </head>
 <body class="deep-orange lighten-5">
 	<!-- 頁首 -->
-<header> <!-- 頁首 --> <nav>
-<!-- 	<div class="nav-wrapper grey darken-3"> -->
-<!-- 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP" -->
-<!-- 			src="picture/LOGO.PNG" /> -->
-<!-- 		</a> -->
+	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
+  
 
 
-<!-- 		<ul class="right hide-on-med-and-down" style="font-size:1.5em;"> -->
-<!-- 			<li><a href="sass.html">瀏覽</a></li> -->
-<!-- 			<li><a href="badges.html">捐贈</a></li> -->
-<!-- 			<li><a href="#modal1" class="modal-trigger">登入</a></li> -->
-<!-- 			<li><a href="#!"><i class="material-icons">search</i></a></li> -->
-<!-- 		</ul> -->
-<!-- 	</div> -->
-<!-- 	</nav> -->
-	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
-</header>
-
+	
 	
 	<!-- 頁面主題提示 -->
 	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${primaryprojbean.title}初步計畫名稱</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">活動花絮</h1>
 	</div>
 	
 	
@@ -77,96 +64,49 @@
 			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
 			<!-- 初步計畫列表 -->
 			<div class="col l8 offset-l4" id="projlist">
+				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
 						<c:param name="type" value="display" />
 						<c:param name="primaryProjId" value="${primaryProj.primaryProjId}" />
 					</c:url>
 					
-					<!-- 置中每列用的div -->
-					<c:if test="${varStatus.first  || (varStatus.count % 4 == 0) }">
-						<c:out value="<div class='centerdiv'>" escapeXml="false"/>
-					</c:if>				
-					
 					<!-- 卡片開始 -->
 						<div class="touche">
 							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
+								<!-- 花絮封面圖片 -->
 								<div class="card-image activator"
 									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
 								</div>
+								<!-- 花絮的名稱(完整計畫的名稱) -->
 								<div class="card-content">
 									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
 								</div>
+								<!-- 連結到花絮的收看頁面 -->
 								<div class="card-action right-align">
-									<span>需求人數:${primaryProj.demandNum}</span>
+									<a href="#">take a look</a>
 								</div>
-								<div class="card-reveal lime lighten-5" style="height:100%">
-		      						<span class="card-title grey-text text-darken-4" style="height:15%">
-		      						計畫摘要
-			      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-			      						Follow
-			      						</span>
-		      						</span>
-		      						<div class="divider"></div>
-		      							<p style="height:55%">${primaryProj.projAbstract}</p>
-		      						<div class="divider"></div>
-		      						<div class="center-align">
-										<a href="#"><h5>more...</h5></a>
-									</div>
-		    					</div>
 							</div>
 						</div>
 					<!-- 卡片結束 -->
 
-					<!-- 置中每列用的div -->
-					<c:if test="${varStatus.last || (varStatus.count % 3) == 0 }">
-						<c:out value="</div>" escapeXml="false"/>
-					</c:if>					
 					
-				</c:forEach>				
+				</c:forEach>
+				</div>				
 			</div>
 		</div>
 	</main>
 
 
 	<!-- 頁尾 -->
-	<footer class="page-footer grey darken-4"
-		style="clear:both;margin:100px 0 0 0;">
-	<div class="container">
-		<!-- footer上半部的container -->
-		<!-- footer左半邊 -->
-		<div>
-			<h2 class="blue-text text-darken-2 left"
-				style="display: inline; margin: 0 10px 0 5px;">TCPIP</h2>
-			<div class="left" id="taiwan">
-				<p class="grey-text text-lighten-4 ">Taiwan Camp’s Project
-					Innovation Platform</p>
-			</div>
-		</div>
-		<div class="right" style="color: white;">
-			<h2 class="blue-text text-darken-2 left"
-				style="display: inline; margin: 0 10px 0 5px;">LINKS</h2>
-			<div class="left">
-				<a class="grey-text text-lighten-3" href="https://www.flyingv.cc/">FlingV</a><br />
-				<a class="grey-text text-lighten-3" href="http://www.indievox.com/">iNDIEVOX</a><br />
-				<a class="grey-text text-lighten-3" href="http://www.elivtw.com/">以立國際服務</a>
-			</div>
-		</div>
-		<!-- footer下半部的container -->
-		<div class="footer-copyright valign-wrapper" style="clear: both;">
-			<div class="container center-align">台灣志願服務營隊計畫創新平台 © 2015
-				Copyright</div>
-		</div>
-	</div>
-	</footer>
-
+	<c:import  url="/template/footer.jsp" context="${pageContext.request.contextPath}"/>
 
 
 	<!-- script -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
 			//固定側邊欄所在位置
