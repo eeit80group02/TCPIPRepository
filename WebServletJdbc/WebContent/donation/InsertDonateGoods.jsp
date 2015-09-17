@@ -9,7 +9,7 @@
 <!-- 一定要載入的 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-	!window.jQuery && document.write("<script src='scripts/jquery-2.1.4.min.js'>_$tag_____")
+	!window.jQuery && document.write("<script type='text/javascript' src='../donationScripts/jquery-2.1.4.min.js'><\/script>")
 </script>
 
 <!-- bootstrap -->
@@ -25,13 +25,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- 自訂 -->
-<link rel="stylesheet" href="styles/DonationSchool.css">
-<script type="text/javascript" src="scripts/DonationSchool.js"></script>
+<link rel="stylesheet" href="../styles/DonationSchool.css">
+<script type="text/javascript" src="../scripts/DonationSchool.js"></script>
 
 <!-- 上傳圖片用 -->
 <script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
-<link rel="stylesheet" type="text/css" href="styles/UpLoadPicture.css">
-<script type="text/javascript" src="scripts/UpLoadPicture.js"></script>
+<link rel="stylesheet" type="text/css" href="../styles/UpLoadPicture.css">
+<script type="text/javascript" src="../scripts/UpLoadPicture.js"></script>
 </head>
 <body>
 <center>
