@@ -108,6 +108,7 @@ public class DonationService {
 		dbdc.setOriginalDemandNumber(odb.getOriginalDemandNumber());
 		dbdc.setOriginalDemandUnit(odb.getOriginalDemandUnit());
 		dbdc.setDemandNumber(odb.getDemandNumber());
+		// 預設為 1
 		dbdc.setDonateAmount(1);
 		dbdc.setSize(odb.getSize());
 		dbdc.setDemandContent(odb.getDemandContent());

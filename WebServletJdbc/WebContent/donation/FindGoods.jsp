@@ -51,9 +51,9 @@
 			<li class="headList"><a href="#">需求數量</a></li>
 			<li class="headList"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">物資狀態<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">不拘</a></li>
-					<li><a href="#">全新</a></li>
-					<li><a href="#">二手</a></li>
+					<li><a href="<c:url value='search.do?supplyStatus=1'/>">不拘</a></li>
+					<li><a href="<c:url value='search.do?supplyStatus=2'/>">全新</a></li>
+					<li><a href="<c:url value='search.do?supplyStatus=3'/>">二手</a></li>
 				</ul></li>
 
 		</ul>
