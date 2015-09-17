@@ -27,9 +27,9 @@ public class DonationSearchServlet extends HttpServlet {
 		
 		// 1.接收資料
 		String supplyStatus = request.getParameter("supplyStatus");
+		String type = request.getParameter("type");
 		
 		if (supplyStatus != null) {
-			System.out.println("supplyStatus"+supplyStatus);
 			DonationSearchService donationSearchService = new DonationSearchService();
 			
 			List<DonationBeanDuplicate> dbdList = donationSearchService.searchByStatus(supplyStatus);
@@ -40,8 +40,39 @@ public class DonationSearchServlet extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		
+		} else if(type != null) {
+			if (type.equals("byAmount")){
+				DonationSearchService donationSearchService = new DonationSearchService();
+				List<DonationBeanDuplicate> dbdList = donationSearchService.searchByOriginalDemandNumber();
+				
+				request.setAttribute("AllDemands", dbdList);
+				
+				// 4.轉至適當畫面
+				RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+				rd.forward(request, response);
+				return;
+			} else if (type.equals("byExpiretime")) {
+				DonationSearchService donationSearchService = new DonationSearchService();
+				List<DonationBeanDuplicate> dbdList = donationSearchService.searchByExpiretime();
+				
+				request.setAttribute("AllDemands", dbdList);
+				
+				// 4.轉至適當畫面
+				RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+				rd.forward(request, response);
+				return;
+			} else if (type.equals("byDemandtime")) {
+				DonationSearchService donationSearchService = new DonationSearchService();
+				List<DonationBeanDuplicate> dbdList = donationSearchService.searchByDemandtime();
+				
+				request.setAttribute("AllDemands", dbdList);
+				
+				// 4.轉至適當畫面
+				RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+				rd.forward(request, response);
+				return;
+			}
 		}
-		
 	}
 
 }

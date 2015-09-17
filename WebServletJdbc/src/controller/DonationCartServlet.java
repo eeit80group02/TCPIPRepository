@@ -43,7 +43,8 @@ public class DonationCartServlet extends HttpServlet {
 		
 		// 1.接收資料
 		String toCart = request.getParameter("toCart");
-		System.out.println("toCart "+toCart);
+		String dialog = request.getParameter("dialog");
+
 		if (toCart == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("ExpressDelivery.jsp");
 			rd.forward(request, response);
@@ -73,7 +74,7 @@ public class DonationCartServlet extends HttpServlet {
 		
 		if (toCart.equals("insert")) {
 			DonationService donationService = new DonationService();
-			
+			System.out.println("@@0");
 			// 2.資料驗證
 			if(donationIdStr != null || donationIdStr.trim().length() != 0) {
 			donationId = Integer.parseInt(donationIdStr);
@@ -88,15 +89,22 @@ public class DonationCartServlet extends HttpServlet {
 //				demandNumber = Integer.parseInt(demandNumberStr);
 //			} 
 			DonationBeanDuplicate donationBeanDuplicate = donationService.findOneDemand(donationId);
-	
+			System.out.println("@@1");
 			// 3.呼叫Model
 			boolean b = dCart.insertDonationToCart(donationBeanDuplicate);
 			System.out.println("0752新增至購物車: " + b);
 			
 			// 4.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
-			rd.forward(request, response);
-			return;
+			if (dialog != null) {
+				RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
+				rd.forward(request, response);
+				return;
+				
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
+				rd.forward(request, response);
+				return;
+			}
 			
 		} else if(toCart.equals("update")) {
 			// 2.資料驗證

@@ -76,7 +76,7 @@ body {
 				<td style="text-align: right; width: 150px;">需求單位：</td>
 				<td style="width: 350px;">${OneDemand.schoolName}
 				<button type="button" class="btn btn-small btn-floating" id="leftBtn">
-					<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}&donationId=${OneDemand.donationId}&schoolName=${OneDemand.schoolName}'/>" class="text tooltipped" data-position="right" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="small material-icons">search</i></a>
+					<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="right" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="small material-icons">search</i></a>
 				</button>
 				</td>
 			</tr>
