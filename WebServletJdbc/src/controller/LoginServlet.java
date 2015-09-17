@@ -76,7 +76,8 @@ public class LoginServlet extends HttpServlet
 		// 接收資料
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-		
+		System.out.println("account = " + account);
+		System.out.println("password = " + password);
 		// 驗證資料
 		if(account == null || account.trim().length() == 0)
 		{

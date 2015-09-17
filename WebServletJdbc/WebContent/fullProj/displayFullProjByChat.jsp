@@ -29,6 +29,7 @@
 
 			成員架構${fullProj.orgArchitecture}<br>
 			
+			<input type="button" value="補全完整計畫">
 			<input type="button" value="學校同意">
 			<input type="button" value="發起者發布">
 
