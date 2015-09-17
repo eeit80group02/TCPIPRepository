@@ -59,7 +59,7 @@
 		<div class="col l8">
 			<!-- 表單本體開始 -->
 			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="primaryform" method="post">
-
+					<input type="hidden" name="memberId" value="${LoginOK.memberId}">
 				<div class="row">
 						<!-- 計畫封面 -->
 						<div class="file-field input-field row">
