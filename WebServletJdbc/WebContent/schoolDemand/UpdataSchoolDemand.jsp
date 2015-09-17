@@ -7,14 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="SchoolDemandServlet.do?type=create" method="post">
-預計參與的學生人數:<input type="text" name="participant">${error.participant}<br>
-活動主題:<input type="text" name="activityTopic">${error.activityTopic}<br>
-活動地點:<input type="text" name="activityLocation">${error.activityLocation}<br>
-活動適合對象:<input type="text" name="activitySuitable">${error.activitySuitable}<br>
-活動負責人:<input type="text" name="activityHost">${error.activityHost}<br>
-負責人聯絡方式:<input type="text" name="activityContact">${error.activityContact}<br>
-需求內容:<textarea name="content" style="width: 300px;height: 200px"></textarea>${error.content}
+<form action="SchoolDemandServlet.do?type=Uptata" method="post">
+預計參與的學生人數:<input type="text" name="participant" value="${bean.participant}">${error.participant}<br>
+活動主題:<input type="text" name="activityTopic" value="${bean.activityTopic}">${error.activityTopic}<br>
+活動地點:<input type="text" name="activityLocation" value="${bean.activityLocation}">${error.activityLocation}<br>
+活動適合對象:<input type="text" name="activitySuitable" value="${bean.activitySuitable}">${error.activitySuitable}<br>
+活動負責人:<input type="text" name="activityHost" value="${bean.activityHost}">${error.activityHost}<br>
+負責人聯絡方式:<input type="text" name="activityContact" value="${bean.activityContact}">${error.activityContact}<br>
+提供需求:住宿<input type="checkbox" name="room" >活動場地<input type="checkbox" name="place">伙食<input type="checkbox" name="food"><br>
+需求內容:<textarea name="content" style="width: 300px;height: 200px">${bean.content}</textarea>${error.content}
 <input type="submit">
 </form>
 </body>
