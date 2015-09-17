@@ -73,7 +73,7 @@ public class OrderAccessServlet extends HttpServlet {
 		// 清空 cart
 		dCart.remove();
 
-		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("DonationIndex.jsp");
 		rd.forward(request, response);
 		
 	}
