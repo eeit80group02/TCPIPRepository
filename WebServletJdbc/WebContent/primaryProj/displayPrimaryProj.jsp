@@ -55,7 +55,7 @@
 			<!-- 板向左偏離兩格 -->
 			<div class="col l8 offset-l2">
 				<!-- 圖跟摘要在同一列 -->
-				<div class="row card-panel hoverable" style="background-color:#F4F3DE;">
+				<div class="row card-panel hoverable" style="background-color:#FFFCEC;">
 					<!-- 摘要 -->
 					<div class="col l8 card-panel hoverable offset-l2" style="background-color:#D1F0E5;font-family:微軟正黑體;font-size:1.2em;font-weight:300;">
 							感謝大家的支持，讓我們在3天內即達成目標接下來我們也開放大家加購鏡頭跟手工皮革手腕繩（黑／淺駝）請想要加購的朋友們直接在右邊的贊助選項中點選你想加購的品項我們會連同您原本贊助的品項一同寄出！
@@ -64,7 +64,7 @@
 				</div>
 				
 				<!-- 計畫內容單獨一列 -->
-				<div class="card-panel hoverable row" style="background-color:#F4F3DE">
+				<div class="card-panel hoverable row" style="background-color:#FFFCEC">
 					<!-- 計畫內容 -->
 					<div class="row">
 						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white"  style="background-color:#D1F0E5;font-size:2em;font-weight:900;font-family:微軟正黑體">
@@ -83,7 +83,7 @@
 				</div>
 				
 				<!-- 雜項資訊 -->
-				<div class="card-panel hoverable row" style="background-color:#F4F3DE">
+				<div class="card-panel hoverable row" style="background-color:#FFFCEC">
 					
 					<!-- 理想地點 -->
 					<div class="row">

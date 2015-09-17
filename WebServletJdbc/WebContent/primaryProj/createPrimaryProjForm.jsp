@@ -131,10 +131,16 @@
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
 								<input type="date" name="startTime" id="starttime">
 							</div>	
+							<div class="col l2">
+								<span class="error">${error.startTime}</span>
+							</div>								
 							<div class="col l4">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
 								<input type="date" name="endTime" id="endtime" >
 							</div>	
+							<div class="col l2">
+								<span class="error">${error.endTime}</span>
+							</div>								
 						</div>
 
 						
@@ -168,7 +174,7 @@
 <%-- 						<textarea rows="10" cols="100" name="projAbstract">${param.projAbstract}</textarea> --%>
 						<div class="row">
 							<div class="col l8">
-								<div class="forinput">計畫摘要<span><span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
+								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
 								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
 							</div>
 							<div class="col l4">	
