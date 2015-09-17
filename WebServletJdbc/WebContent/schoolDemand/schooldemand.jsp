@@ -47,8 +47,8 @@
 				<div class="row card-panel hoverable">
 					<form action="SchoolDemandServlet.do?type=create" method="post">
 						<div class="row">
-							<div class="col l2 inputhead valign-wrapper" style="border:2px solid blue;">
-								<span class="valign" style="border:2px solid blue">活動主題</span>
+							<div class="col l2 center-align" style="border:2px solid blue;font-size:1.4em;">
+								活動主題
 							</div>
 							<input class="col l8" type="text" id="activityTopic"/>
 						</div>
@@ -87,8 +87,8 @@
 			//指定ckeditor()的skin
 // 			CKEDITOR.replace("content",{skin:"moono"})
 			
-// 			var title = $("#activityTopic").height();
-// 			$(".inputhead").height(title);
+			var title = $("#activityTopic").height();
+			$(".center-align").height(title);
 				
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
