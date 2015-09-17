@@ -35,7 +35,7 @@ public class ForgotPasswordServlet extends HttpServlet{
 		if(bean != null){
 			//確認該會員是否已經通過驗證
 			String dbAccountStatus = bean.getAccountStatus();
-			if(dbAccountStatus.trim().equals("已審核".trim())){
+			if(dbAccountStatus.trim().equals("啟用".trim())){
 //				System.out.println("可從DB中取出該會員的資訊");
 				
 				String dbFirstName = bean.getFirstName();
@@ -51,7 +51,7 @@ public class ForgotPasswordServlet extends HttpServlet{
 				}
 				
 			} else {
-				System.out.println("該帳號尚未通過審核");
+				System.out.println("該帳號尚未通過驗證(未啟用)");
 			}
 		}
 		else if(bean == null){
