@@ -17,4 +17,6 @@ public interface FullProjDAO
 
 	public boolean delete(int fullProjId);
 
+	public List<FullProjBean> selectByMemberId(int memberId);
+
 }

@@ -39,13 +39,13 @@ public class PrimaryProjService
 			result = primaryProjDAO.insert(bean);
 			if(result != null)
 			{
-				result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 			}
 		}
 		return result ;
 	}
 	
-	public PrimaryProjBean updatePromaryProj(PrimaryProjBean bean)
+	public PrimaryProjBean updatePrimaryProj(PrimaryProjBean bean)
 	{
 		PrimaryProjBean result = null;
 		
@@ -76,14 +76,14 @@ public class PrimaryProjService
 				result = primaryProjDAO.update(temp);
 				if(result != null)
 				{
-					result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+					result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 				}
 			}
 		}
 		return result;
 	}
 	
-	public List<PrimaryProjBean> displayPromaryProjAll()
+	public List<PrimaryProjBean> displayPrimaryProjAll()
 	{
 		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
 		result = primaryProjDAO.getAll();
@@ -97,7 +97,7 @@ public class PrimaryProjService
 			}
 			else
 			{
-				bean.setBsae64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
+				bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
 			}
 		}
 		
@@ -109,7 +109,7 @@ public class PrimaryProjService
 		return result;
 	}
 	
-	public PrimaryProjBean displayPromaryProj(PrimaryProjBean bean)
+	public PrimaryProjBean displayPrimaryProj(PrimaryProjBean bean)
 	{
 		PrimaryProjBean result = null;
 		
@@ -118,13 +118,13 @@ public class PrimaryProjService
 			result = primaryProjDAO.findByPrimaryKey(bean.getPrimaryProjId());
 			if(result != null)
 			{
-				result.setBsae64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 			}
 		}
 		return result;
 	}
 	
-	public List<PrimaryProjBean> displayPersonalPromaryProj(PrimaryProjBean bean)
+	public List<PrimaryProjBean> displayPersonalPrimaryProj(PrimaryProjBean bean)
 	{
 		List<PrimaryProjBean> result = null;
 		
@@ -136,7 +136,7 @@ public class PrimaryProjService
 	}
 	
 	// 查詢 個人頁面 有學校申請的 計畫
-	public List<PrimaryProjBean> displayPersonalPromaryProjByPending(PrimaryProjBean bean)
+	public List<PrimaryProjBean> displayPersonalPrimaryProjByPending(PrimaryProjBean bean)
 	{
 		List<PrimaryProjBean> result = new ArrayList<PrimaryProjBean>();
 		
@@ -228,8 +228,8 @@ public class PrimaryProjService
 //		
 //		System.out.println(service.updatePromaryProj(bean2));
 		
-		List<PrimaryProjBean> result = service.displayPromaryProjAll();
-		System.out.println(result.get(1).getBsae64String());
+		List<PrimaryProjBean> result = service.displayPrimaryProjAll();
+		System.out.println(result.get(1).getBase64String());
 		
 	}
 

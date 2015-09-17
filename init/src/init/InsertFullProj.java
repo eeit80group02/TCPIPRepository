@@ -24,6 +24,7 @@ public class InsertFullProj
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 		{
+			//
 			pstmt.setInt(1,1);					// primaryProjId
 			pstmt.setNull(2,Types.INTEGER);  	// schoolDemandId
 			pstmt.setInt(3,7);					// memberId
@@ -61,6 +62,7 @@ public class InsertFullProj
 				pstmt.setNull(25,Types.NVARCHAR);				// memberConfirm
 				
 				pstmt.executeUpdate();
+				//
 			}
 			catch(Exception e)
 			{

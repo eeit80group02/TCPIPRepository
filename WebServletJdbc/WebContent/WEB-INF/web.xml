@@ -12,14 +12,13 @@
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
     <servlet-name>MemberServlet</servlet-name>
     <servlet-class>controller.MemberServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MemberServlet</servlet-name>
-    <url-pattern>/member.do</url-pattern>
+    <url-pattern>/donation/member.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>DonationServlet</servlet-name>
@@ -27,7 +26,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DonationServlet</servlet-name>
-    <url-pattern>/donate.do</url-pattern>
+    <url-pattern>/donation/donate.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>DemandSelected</servlet-name>
@@ -35,7 +34,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DemandSelected</servlet-name>
-    <url-pattern>/demand.do</url-pattern>
+    <url-pattern>/donation/demand.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>DonationCartServlet</servlet-name>
@@ -43,7 +42,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>DonationCartServlet</servlet-name>
-    <url-pattern>/cart.do</url-pattern>
+    <url-pattern>/donation/cart.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>FinallCheckCartServlet</servlet-name>
@@ -51,7 +50,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>FinallCheckCartServlet</servlet-name>
-    <url-pattern>/checkOrder.do</url-pattern>
+    <url-pattern>/donation/checkOrder.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>OrderAccessServlet</servlet-name>
@@ -59,7 +58,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>OrderAccessServlet</servlet-name>
-    <url-pattern>/access.do</url-pattern>
+    <url-pattern>/donation/access.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>MessagesControllServlet</servlet-name>
@@ -67,6 +66,14 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MessagesControllServlet</servlet-name>
-    <url-pattern>/messages.do</url-pattern>
+    <url-pattern>/donation/messages.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>DonationSearchServlet</servlet-name>
+    <servlet-class>controller.DonationSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonationSearchServlet</servlet-name>
+    <url-pattern>/donation/search.do</url-pattern>
   </servlet-mapping>
 </web-app>

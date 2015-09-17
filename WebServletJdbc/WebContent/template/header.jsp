@@ -21,49 +21,73 @@
 
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
-			<div class="nav-wrapper grey darken-3">
-				<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-					src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
-				</a>
-		
-		
-				<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-					<li><a href="sass.html">瀏覽</a></li>
-					<li><a href="badges.html">捐贈</a></li>
-					<li><a href="#modal1" class="modal-trigger">登入</a></li>
-					<li><a href="#!"><i class="material-icons">search</i></a></li>
-				</ul>
-			</div>
+		<div class="nav-wrapper grey darken-3">
+			<a href="<c:url value="/index.jsp" />" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
+			</a>
+	
+	
+			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
+				<li><a href="!#">提案</a></li>
+				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
+				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
+				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>
+				
+				<!-- 有登入時，會有學校頁面或者個人頁面 -->
+				<c:if test="${not empty LoginOK}">
+					<c:if test="${LoginOK.beanName.equals('member')}">
+						<li><a href="${pageContext.request.contextPath}/personal/personal.jsp">會員頁面</a></li>
+					</c:if>
+	
+					<c:if test="${LoginOK.beanName.equals('school')}">
+						<li><a href="#">學校頁面</a></li>
+					</c:if>
+				</c:if>
+					
+				<!-- 沒登入時，必須看到登入按鈕 -->
+				<c:choose>
+					<c:when test="${empty LoginOK}">
+						<li><a href="#modal1" class="modal-trigger">登入</a></li>
+					</c:when>
+					
+					<c:otherwise>
+						<li><a href="${pageContext.request.contextPath}/login/logout.jsp">登出</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li><a href="#!"><i class="material-icons">search</i></a></li>
+			</ul>
+		</div>
 	</nav>
 </header>
  <!-- 登入用modal --> 
-		  <div id="modal1" class="modal">
-		    <div class="modal-content blue lighten-5" style="height:80%;width:100%;">
-		    	<div class="row" style="margin-top:0px;">
-			      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4>
-			    </div>
-			    <div class="divider" style="display:block;"></div>
-					    <div style="width:60%;margin:0 auto;">  
-					      <form class="col l6 offset-l3" id="login">
-					      	<div class="input-field" style="margin-top:10%;">
-					          	<input id="account" type="text" class="validate">
-					          	<label for="account" style="font-size:1.5em;">帳號</label>
-				        	</div>
-				        	<div class="input-field">
-						         <input id="password" type="password" class="validate">
-						         <label for="password" style="font-size:1.5em;">密碼</label>
-				        	</div>
-					      </form>
-				    	</div>
-		    </div>
-		    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
-		    	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-			      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a>
-				  <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	      
-			      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a>
-		    	</div>
-		    </div>
-		  </div>
+<!-- 		  <div id="modal1" class="modal"> -->
+<!-- 		    <div class="modal-content blue lighten-5" style="height:80%;width:100%;"> -->
+<!-- 		    	<div class="row" style="margin-top:0px;"> -->
+<!-- 			      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4> -->
+<!-- 			    </div> -->
+<!-- 			    <div class="divider" style="display:block;"></div> -->
+<!-- 					    <div style="width:60%;margin:0 auto;">   -->
+<!-- 					      <form class="col l6 offset-l3" id="login"> -->
+<!-- 					      	<div class="input-field" style="margin-top:10%;"> -->
+<!-- 					          	<input id="account" type="text" class="validate"> -->
+<!-- 					          	<label for="account" style="font-size:1.5em;">帳號</label> -->
+<!-- 				        	</div> -->
+<!-- 				        	<div class="input-field"> -->
+<!-- 						         <input id="password" type="password" class="validate"> -->
+<!-- 						         <label for="password" style="font-size:1.5em;">密碼</label> -->
+<!-- 				        	</div> -->
+<!-- 					      </form> -->
+<!-- 				    	</div> -->
+<!-- 		    </div> -->
+<!-- 		    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;"> -->
+<!-- 		    	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;"> -->
+<!-- 			      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a> -->
+<!-- 				  <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	       -->
+<!-- 			      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a> -->
+<!-- 		    	</div> -->
+<!-- 		    </div> -->
+<!-- 		  </div> -->
+	<c:import url="/template/loginmodal.jsp" context="${pageContext.request.contextPath}"></c:import>
  <!-- 登入用modal end tag-->  
 
 

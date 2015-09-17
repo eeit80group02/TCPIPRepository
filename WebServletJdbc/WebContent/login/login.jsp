@@ -21,6 +21,7 @@
 			<input type="submit" value="登入"><br>
 	</form>
 	
+	下面為學校登入
 	<form action="<c:url value="/LoginServlet.do" />" method="post">
 		帳號<input type="text" name="account"  value="${param.account}" /><span class="error">${error.account}</span><br>
 		密碼<input type="text" name="password" value="${param.password}" /><span class="error">${error.password}</span><br>

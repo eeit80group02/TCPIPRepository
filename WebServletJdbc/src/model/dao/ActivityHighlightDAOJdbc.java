@@ -22,10 +22,10 @@ import model.dao.interfaces.ActivityHighlightDAO;
 
 public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 {
-	private static final String SELECT_BY_PRYMARY_KEY = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,vedioURL,content FROM ActivityHighlight WHERE fullProjId = ?";
-	private static final String GET_ALL = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,vedioURL,content FROM ActivityHighlight";
-	private static final String INSERT = "INSERT INTO ActivityHighlight (fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,vedioURL,content) values (?,?,?,?,?,?,?)";
-	private static final String UPDATE = "UPDATE ActivityHighlight SET memberId = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,vedioURL = ?,content = ? WHERE fullProjId = ?";
+	private static final String SELECT_BY_PRYMARY_KEY = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,videoURL,content FROM ActivityHighlight WHERE fullProjId = ?";
+	private static final String GET_ALL = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,videoURL,content FROM ActivityHighlight";
+	private static final String INSERT = "INSERT INTO ActivityHighlight (fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,videoURL,content) values (?,?,?,?,?,?,?)";
+	private static final String UPDATE = "UPDATE ActivityHighlight SET memberId = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,videoURL = ?,content = ? WHERE fullProjId = ?";
 	private static final String DELETE = "DELETE FROM ActivityHighlight WHERE fullProjId = ?";
 
 	private DataSource datasource;
@@ -62,7 +62,7 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 					result.setFrontCoverName(rs.getString("frontCoverName"));
 					result.setFrontCover(rs.getBytes("frontCover"));
 					result.setFrontCoverLength(rs.getLong("frontCoverLength"));
-					result.setVedioURL(rs.getString("VedioURL"));
+					result.setVideoURL(rs.getString("VideoURL"));
 					result.setContent(rs.getString("Content"));
 				}
 			}
@@ -96,7 +96,7 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 				bean.setFrontCoverName(rs.getString("frontCoverName"));
 				bean.setFrontCover(rs.getBytes("frontCover"));
 				bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
-				bean.setVedioURL(rs.getString("VedioURL"));
+				bean.setVideoURL(rs.getString("VideoURL"));
 				bean.setContent(rs.getString("Content"));
 				result.add(bean);
 			}
@@ -125,9 +125,9 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 				pstmt.setBytes(4,bean.getFrontCover());
 				pstmt.setLong(5,bean.getFrontCoverLength());
 
-				if(bean.getVedioURL() != null)
+				if(bean.getVideoURL() != null)
 				{
-					pstmt.setString(6,bean.getVedioURL());
+					pstmt.setString(6,bean.getVideoURL());
 				}
 				else
 				{
@@ -167,9 +167,9 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 				pstmt.setBytes(3,bean.getFrontCover());
 				pstmt.setLong(4,bean.getFrontCoverLength());
 
-				if(bean.getVedioURL() != null)
+				if(bean.getVideoURL() != null)
 				{
-					pstmt.setString(5,bean.getVedioURL());
+					pstmt.setString(5,bean.getVideoURL());
 				}
 				else
 				{
@@ -235,7 +235,7 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 			e.printStackTrace();
 		}
 
-		bean1.setVedioURL("http://tw.yahoo.com");
+		bean1.setVideoURL("http://tw.yahoo.com");
 		bean1.setContent("測試.......");
 		bean1 = dao.insert(bean1);
 		System.out.println(bean1);
@@ -257,7 +257,7 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 			e.printStackTrace();
 		}
 
-		bean2.setVedioURL("http://www.google.com");
+		bean2.setVideoURL("http://www.google.com");
 		bean2.setContent("測試.......測試.......");
 		bean2 = dao.update(bean2);
 		System.out.println(bean2);

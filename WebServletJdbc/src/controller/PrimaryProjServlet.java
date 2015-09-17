@@ -151,7 +151,7 @@ public class PrimaryProjServlet extends HttpServlet
 		// business logic
 		PrimaryProjBean bean = new PrimaryProjBean();
 		bean.setMemberId(id);
-		List<PrimaryProjBean> result = service.displayPersonalPromaryProjByPending(bean);
+		List<PrimaryProjBean> result = service.displayPersonalPrimaryProjByPending(bean);
 		
 		if(result != null)
 		{
@@ -211,7 +211,7 @@ public class PrimaryProjServlet extends HttpServlet
 		// business logic
 		PrimaryProjBean bean = new PrimaryProjBean();
 		bean.setMemberId(id);
-		List<PrimaryProjBean> result = service.displayPersonalPromaryProj(bean);
+		List<PrimaryProjBean> result = service.displayPersonalPrimaryProj(bean);
 		
 		if(result != null)
 		{
@@ -271,7 +271,7 @@ public class PrimaryProjServlet extends HttpServlet
 		// business logic
 		PrimaryProjBean bean = new PrimaryProjBean();
 		bean.setPrimaryProjId(id);
-		bean = service.displayPromaryProj(bean);
+		bean = service.displayPrimaryProj(bean);
 		
 		if(bean != null)
 		{
@@ -550,7 +550,7 @@ public class PrimaryProjServlet extends HttpServlet
 		bean.setFrontCoverLength(fileLength);
 
 		// 進行 Business
-		bean = service.updatePromaryProj(bean);
+		bean = service.updatePrimaryProj(bean);
 		
 		if(bean != null)
 		{
@@ -612,7 +612,7 @@ public class PrimaryProjServlet extends HttpServlet
 		// business logic
 		PrimaryProjBean bean = new PrimaryProjBean();
 		bean.setPrimaryProjId(id);
-		bean = service.displayPromaryProj(bean);
+		bean = service.displayPrimaryProj(bean);
 		
 		if(bean != null)
 		{
@@ -638,7 +638,7 @@ public class PrimaryProjServlet extends HttpServlet
 		System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 		System.out.println("======================================================");
 		
-		List<PrimaryProjBean> beans = service.displayPromaryProjAll();
+		List<PrimaryProjBean> beans = service.displayPrimaryProjAll();
 		request.setAttribute("primaryProjAll",beans);
 		request.getRequestDispatcher("/primaryProj/displayPrimaryProjAll.jsp").forward(request,response);
 		return;			
