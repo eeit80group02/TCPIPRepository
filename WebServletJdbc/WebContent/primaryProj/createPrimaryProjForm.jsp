@@ -26,7 +26,7 @@
 </head>
 
 
-<body class="light-blue lighten-5">
+<body class="light-green accent-4">
 
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
