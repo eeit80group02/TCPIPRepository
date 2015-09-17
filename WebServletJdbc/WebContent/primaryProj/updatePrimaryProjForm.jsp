@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -58,7 +59,7 @@
 		<!-- 切版面開始 -->
 		<div class="col l8">
 			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="updateForm" method="post">
+			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="updateForm" method="post">
 					
 					<!-- 不確定還要不要這項 -->
 <%-- 					<input type="hidden" name="memberId" value="${LoginOK.memberId}"> --%>
@@ -91,7 +92,7 @@
 								<div class="btn blue-grey lighten-2" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 									<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">封面</span>
 									<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;
-										cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile" required value="">
+										cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile" value="">
 	      						</div>
 							</div>
 							<div class="col l4">
@@ -151,6 +152,8 @@
 						
 						<!-- 活動時間 -->
 <%-- 						<input type="date" value="${param.startTime}" name="startTime"> --%>
+							<fmt:formatDate var="startTime" value="${primaryProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
+							<fmt:formatDate var="endTime" value="${primaryProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />
 						<div class="input-field row">
 							<div class="col l4">
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>

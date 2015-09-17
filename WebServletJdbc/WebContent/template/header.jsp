@@ -28,19 +28,31 @@
 	
 	
 			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-				<li><a href="!#">提案</a></li>
-				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
+			
+<!-- 				根據登入顯示不同選項 -->
+				<c:if test="${not empty LoginOK}">
+					<c:if test="${LoginOK.beanName.equals('member')}">
+						<li><a href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提案</a></li>
+					</c:if>
+	
+					<c:if test="${LoginOK.beanName.equals('school')}">
+						<li><a href="#">提需求</a></li>
+						<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
+					</c:if>
+				</c:if>
+				
+<!-- 				公開&相同 -->
 				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
 				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>
 				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">
-						<li><a href="${pageContext.request.contextPath}/personal/personal.jsp">會員頁面</a></li>
+						<li><a href="<c:url value="/personal/personal.jsp" />">會員頁面</a></li>
 					</c:if>
 	
 					<c:if test="${LoginOK.beanName.equals('school')}">
-						<li><a href="#">學校頁面</a></li>
+						<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 					</c:if>
 				</c:if>
 					
@@ -51,7 +63,7 @@
 					</c:when>
 					
 					<c:otherwise>
-						<li><a href="${pageContext.request.contextPath}/login/logout.jsp">登出</a></li>
+						<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li><a href="#!"><i class="material-icons">search</i></a></li>
