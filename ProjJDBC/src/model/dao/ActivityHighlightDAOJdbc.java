@@ -208,7 +208,7 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 		bean1.setFullProjId(1);
 		bean1.setMemberId(1);
 		
-		File file = new File("image/member/member01.jpg"); 
+		File file = new File("C:/Users/Student/Desktop/frontcover.png"); 
 		try(FileInputStream fis = new FileInputStream(file);)
 		{
 			bean1.setFrontCoverName(file.getName());
@@ -226,37 +226,37 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 		System.out.println(bean1);
 		
 		// update
-		ActivityHighlightBean bean2 = new ActivityHighlightBean();
-		bean2.setFullProjId(2);
-		bean2.setMemberId(2);
-		
-		file = new File("image/member/member02.jpg"); 
-		try(FileInputStream fis = new FileInputStream(file);)
-		{
-			bean2.setFrontCoverName(file.getName());
-			bean2.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
-			bean2.setFrontCoverLength(file.length());
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-
-		bean2.setVedioURL("http://www.google.com");
-		bean2.setContent("測試.......測試.......");
-		bean2 = dao.update(bean2);
-		System.out.println(bean2);
-
-		// delete
-		boolean count = dao.delete(0);
-		System.out.println(count);
-		
-		// select_FK
-		ActivityHighlightBean bean4 = dao.findByPrimaryKey(1);
-		System.out.println(bean4);
-
-		// select_all
-		List<ActivityHighlightBean> bean5 = dao.getAll();
-		System.out.println(bean5);
+//		ActivityHighlightBean bean2 = new ActivityHighlightBean();
+//		bean2.setFullProjId(2);
+//		bean2.setMemberId(2);
+//		
+//		file = new File("image/member/member02.jpg"); 
+//		try(FileInputStream fis = new FileInputStream(file);)
+//		{
+//			bean2.setFrontCoverName(file.getName());
+//			bean2.setFrontCover(GlobalService.convertInputStreamToByteArray(fis));
+//			bean2.setFrontCoverLength(file.length());
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+//
+//		bean2.setVedioURL("http://www.google.com");
+//		bean2.setContent("測試.......測試.......");
+//		bean2 = dao.update(bean2);
+//		System.out.println(bean2);
+//
+//		// delete
+//		boolean count = dao.delete(0);
+//		System.out.println(count);
+//		
+//		// select_FK
+//		ActivityHighlightBean bean4 = dao.findByPrimaryKey(1);
+//		System.out.println(bean4);
+//
+//		// select_all
+//		List<ActivityHighlightBean> bean5 = dao.getAll();
+//		System.out.println(bean5);
 	}
 }

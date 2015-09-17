@@ -21,40 +21,42 @@
 
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
-			<div class="nav-wrapper grey darken-3">
-				<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-					src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
-				</a>
-		
-		
-				<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-					<li><a href="sass.html">瀏覽</a></li>
-					<li><a href="badges.html">捐贈</a></li>
-					
-					<!-- 有登入時，會有學校頁面或者個人頁面 -->
-					<c:if test="${not empty LoginOK}">
-						<c:if test="${LoginOK.beanName.equals('member')}">
-							<li><a href="#">會員頁面</a></li>
-						</c:if>
-		
-						<c:if test="${LoginOK.beanName.equals('school')}">
-							<li><a href="#">學校頁面</a></li>
-						</c:if>
+		<div class="nav-wrapper grey darken-3">
+			<a href="<c:url value="/index.jsp" />" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
+			</a>
+	
+	
+			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
+				<li><a href="!#">提案</a></li>
+				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
+				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
+				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>
+				
+				<!-- 有登入時，會有學校頁面或者個人頁面 -->
+				<c:if test="${not empty LoginOK}">
+					<c:if test="${LoginOK.beanName.equals('member')}">
+						<li><a href="${pageContext.request.contextPath}/personal/personal.jsp">會員頁面</a></li>
 					</c:if>
-						
-					<!-- 沒登入時，必須看到登入按鈕 -->
-					<c:choose>
-						<c:when test="${empty LoginOK}">
-							<li><a href="#modal1" class="modal-trigger">登入</a></li>
-						</c:when>
-						
-						<c:otherwise>
-							<li><a href="logout.jsp">登出</a></li>
-						</c:otherwise>
-					</c:choose>
-					<li><a href="#!"><i class="material-icons">search</i></a></li>
-				</ul>
-			</div>
+	
+					<c:if test="${LoginOK.beanName.equals('school')}">
+						<li><a href="#">學校頁面</a></li>
+					</c:if>
+				</c:if>
+					
+				<!-- 沒登入時，必須看到登入按鈕 -->
+				<c:choose>
+					<c:when test="${empty LoginOK}">
+						<li><a href="#modal1" class="modal-trigger">登入</a></li>
+					</c:when>
+					
+					<c:otherwise>
+						<li><a href="${pageContext.request.contextPath}/login/logout.jsp">登出</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li><a href="#!"><i class="material-icons">search</i></a></li>
+			</ul>
+		</div>
 	</nav>
 </header>
  <!-- 登入用modal --> 

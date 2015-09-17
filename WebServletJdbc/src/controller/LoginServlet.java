@@ -118,7 +118,7 @@ public class LoginServlet extends HttpServlet
 			HttpSession session = request.getSession();
 			session.setAttribute("LoginOK",bean);
 			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/test/indexold.jsp"));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
 		}
 		else
 		{

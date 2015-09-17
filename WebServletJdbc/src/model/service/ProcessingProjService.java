@@ -2,10 +2,16 @@ package model.service;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+import javax.transaction.Transaction;
+
+import model.FullProjBean;
 import model.PrimaryProjBean;
 import model.ProcessingProjBean;
+import model.dao.FullProjDAOJdbc;
 import model.dao.PrimaryProjDAOJdbc;
 import model.dao.ProcessingProjDAOJdbc;
+import model.dao.interfaces.FullProjDAO;
 import model.dao.interfaces.PrimaryProjDAO;
 import model.dao.interfaces.ProcessingProjDAO;
 
@@ -13,11 +19,13 @@ public class ProcessingProjService
 {
 	private ProcessingProjDAO processingProjDAO = null;
 	private PrimaryProjDAO primaryProjDAO = null;
+	private FullProjDAO fullProjDAO = null;
 	
 	public ProcessingProjService()
 	{
 		processingProjDAO = new ProcessingProjDAOJdbc();
 		primaryProjDAO = new PrimaryProjDAOJdbc();
+		fullProjDAO = new FullProjDAOJdbc();
 	}
 
 	public boolean applyPrimaryProj(ProcessingProjBean bean)
@@ -89,9 +97,36 @@ public class ProcessingProjService
 				// 對該計畫改成 洽談完成
 				PrimaryProjBean primaryProjBean = primaryProjDAO.findByPrimaryKey(primaryProjId);
 				primaryProjBean.setProjStatus("洽談完成");
-				primaryProjDAO.update(primaryProjBean);
+				primaryProjBean = primaryProjDAO.update(primaryProjBean);
 				
 				// 建立完整計畫囉...
+				FullProjBean fullProjBean = new FullProjBean();
+				fullProjBean.setPrimaryProjId(primaryProjBean.getPrimaryProjId());
+				fullProjBean.setSchoolDemandId(null);
+				fullProjBean.setMemberId(primaryProjBean.getMemberId());
+				fullProjBean.setSchoolId(schoolId);
+				fullProjBean.setTitle(primaryProjBean.getTitle());
+				fullProjBean.setFrontCoverName(primaryProjBean.getFrontCoverName());
+				fullProjBean.setFrontCover(primaryProjBean.getFrontCover());
+				fullProjBean.setFrontCoverLength(primaryProjBean.getFrontCoverLength());
+				fullProjBean.setProjAbstract(primaryProjBean.getProjAbstract());
+				fullProjBean.setContent(primaryProjBean.getContent());
+				fullProjBean.setLocation(primaryProjBean.getIdealPlace());
+				fullProjBean.setActivityStartTime(primaryProjBean.getActivityEndTime());
+				fullProjBean.setActivityEndTime(primaryProjBean.getActivityEndTime());
+				fullProjBean.setEstMember(primaryProjBean.getDemandNum());
+				fullProjBean.setBudget(primaryProjBean.getBudget());
+				fullProjBean.setCreateDate(null);
+				fullProjBean.setProjStatus("洽談中");
+				fullProjBean.setOrgArchitecture(null);
+				fullProjBean.setProjFileName(null);
+				fullProjBean.setProjFile(null);
+				fullProjBean.setProjFileLength(null);
+				fullProjBean.setReviews(null);
+				fullProjBean.setReviewsContent(null);
+				fullProjBean.setSchoolConfirm(null);
+				fullProjBean.setMemberConfirm(null);
+				fullProjDAO.insert(fullProjBean);
 				return true;
 			}
 		}
