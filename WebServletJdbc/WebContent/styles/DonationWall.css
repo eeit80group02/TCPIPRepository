@@ -5,6 +5,9 @@
 }
 
 body {
+	
+	min-height: 600px;
+	min-width: 1000px;
 	background-image: url("../images/bgimg.jpg");
 	background-repeat: repeat;
 	/* 		margin:上下 左右; */
@@ -30,12 +33,18 @@ body {
 	font-size: 2em;
 }
 
+#searchText {
+	
+}
+
 #headMarquee {
+	/* 跑馬燈 */
 	font-size: 1.2em;
 	margin-bottom: 10px;
 }
 
 #donateBody {
+	min-height: 100%;
 	width: 90%;
 }
 
@@ -104,8 +113,13 @@ body {
 	background-repeat: repeat;
 	border: 1px solid #FFCCCC;
 	float: right;
-	min-height: 400px;
+	min-height: 300px;
+	height : expression( this.height < 300 ? "300px" : this.height);
 	width: 38%;
+	position: fixed;
+	top:150px;
+	bottom: 10px;
+	right: 5%;
 }
 
 #trash h3 {

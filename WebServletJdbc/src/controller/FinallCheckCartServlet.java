@@ -35,6 +35,7 @@ public class FinallCheckCartServlet extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("ExpressDelivery.jsp");
 		rd.forward(request, response);
+		
 	}
 
 }

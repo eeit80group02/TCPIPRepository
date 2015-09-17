@@ -26,19 +26,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!-- 預設 （本機）-->
-<link rel="stylesheet" href="styles/jquery-ui.css">
-<script type="text/javascript" src="scripts/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+<link rel="stylesheet" href="../styles/jquery-ui.css">
+<script type="text/javascript" src="../scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="../scripts/jquery-ui.js"></script>
 
 <!-- 預設（遠端） -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 <!-- 自訂 -->
-<script type="text/javascript" src="scripts/Donation.js"></script>
-<script type="text/javascript" src="scripts/picture-big.js"></script>
-<link rel="stylesheet" href="styles/DonationWall.css">
+<script type="text/javascript" src="../scripts/Donation.js"></script>
+<script type="text/javascript" src="../scripts/picture-big.js"></script>
+<link rel="stylesheet" href="../styles/DonationWall.css">
 <!-- 在多加載一次picture-big，比較保險 -->
-<script type="text/javascript" src="scripts/picture-big.js"></script>
+<script type="text/javascript" src="../scripts/picture-big.js"></script>
 
 </head>
 <body>
@@ -75,7 +75,7 @@
 	<!-- scrollamount 調整跑馬燈速度 -->
 	<!-- 愛心圖示 + 感謝 + 捐獻者名字 +捐獻+ 捐獻物品 -->
 	<marquee id="headMarquee" scrollamount="5">
-		<img src="images/heart.png" width="20px">感謝 <b> 簡小文 </b>捐獻 <b> 雨傘 </b><img src="images/heart.png" width="20px">感謝 <b> 許阿瑋 </b>捐獻 <b> 50吋 液晶電視 </b><img src="images/heart.png" width="20px">感謝 <b> 彭翔翔 </b>捐獻 <b> A4 影印紙 </b><img src="images/heart.png" width="20px">感謝 <b> 郭豪豪 </b>捐獻 <b> 電風扇 </b>
+		<img src="../images/heart.png" width="20px">感謝 <b> 簡小文 </b>捐獻 <b> 雨傘 </b><img src="../images/heart.png" width="20px">感謝 <b> 許阿瑋 </b>捐獻 <b> 50吋 液晶電視 </b><img src="../images/heart.png" width="20px">感謝 <b> 彭翔翔 </b>捐獻 <b> A4 影印紙 </b><img src="../images/heart.png" width="20px">感謝 <b> 郭豪豪 </b>捐獻 <b> 電風扇 </b>
 	</marquee>
 
 	<center>
@@ -118,6 +118,7 @@
 									expireTime = "${item.expireTime}";
 									remark = "${item.remark}";
 									toCart="CheckDonationList.jsp";
+									otherDemands = "<c:url value='demand.do?type=AllDeamndByMember&schoolId=${item.schoolId}&donationId=${item.donationId}&schoolName=${item.schoolName}'/>";
 									imgLet = "${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}";
 									link = "<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>"
 								});

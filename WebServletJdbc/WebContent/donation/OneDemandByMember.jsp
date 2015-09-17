@@ -21,8 +21,16 @@ body {
 <script>
 	!window.jQuery
 			&& document
-					.write("<script src='scripts/jquery-2.1.4.min.js'><\/script>")
+					.write("<script src='../scripts/jquery-2.1.4.min.js'><\/script>")
 </script>
+
+<!-- bootstrap -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
 <!-- Materialize -->
 <link rel="stylesheet"
@@ -35,21 +43,13 @@ body {
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 
-<!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
-
 <!-- 自訂 -->
-<link rel="stylesheet" href="styles/DonationQA.css">
+<link rel="stylesheet" href="../styles/DonationQA.css">
 </head>
 <body>
 
 	<center>
+		<h1>問與答</h1>
 		<!-- 表格基本資料 -->
 		<table id="DonationDetail">
 			<tr>
@@ -73,6 +73,14 @@ body {
 				<td style="width: 350px;">${OneDemand.supplyStatus}</td>
 			</tr>
 			<tr>
+				<td style="text-align: right; width: 150px;">需求單位：</td>
+				<td style="width: 350px;">${OneDemand.schoolName}
+				<button type="button" class="btn btn-small btn-floating" id="leftBtn">
+					<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}&donationId=${OneDemand.donationId}&schoolName=${OneDemand.schoolName}'/>" class="text tooltipped" data-position="right" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="small material-icons">search</i></a>
+				</button>
+				</td>
+			</tr>
+			<tr>
 				<td style="text-align: right; width: 150px;">募集起始時間：</td>
 				<td style="width: 350px;">${OneDemand.demandTime}</td>
 			</tr>
@@ -85,68 +93,70 @@ body {
 				<td style="width: 350px; word-break: break-all;">${OneDemand.demandContent}</td>
 			</tr>
 
-			<tr>
-				<td><a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}&donationId=${OneDemand.donationId}&schoolName=${OneDemand.schoolName}'/>">${OneDemand.schoolName}全部需求</td>
-			</tr>
-
-			<form action='<c:url value="cart.do"/>' method='POST' target="hidden_frame">
-				<tr>
-					<td><input type='submit' name='toCart' value='insert'></td>
-				</tr>
-				<input type='hidden' name='donationId'
-					value='${OneDemand.donationId}'> <input type='hidden'
-					name='schoolId' value='${OneDemand.schoolId}'> <input
-					type='hidden' name='schoolName' value='${OneDemand.schoolName}'>
-				<input type='hidden' name='donationStatus'
-					value='${OneDemand.donationStatus}'> <input type='hidden'
-					name='supplyName' value='${OneDemand.supplyName}'> <input
-					type='hidden' name='originalDemandNumber'
-					value='${OneDemand.originalDemandNumber}'> <input
-					type='hidden' name='originalDemandUnit'
-					value='${OneDemand.originalDemandUnit}'> <input
-					type='hidden' name='demandNumber' value='${OneDemand.demandNumber}'>
-				<input type='hidden' name='size' value='${OneDemand.size}'>
-				<input type='hidden' name='demandContent'
-					value='${OneDemand.demandContent}'> <input type='hidden'
-					name='supplyStatus' value='${OneDemand.supplyStatus}'> <input
-					type='hidden' name='demandTime' value='${OneDemand.demandTime}'>
-				<input type='hidden' name='expireTime'
-					value='${OneDemand.expireTime}'> <input type='hidden'
-					name='imageName' value='${OneDemand.imageName}'> <input
-					type='hidden' name='imageFile' value='${OneDemand.imageFile}'>
-				<input type='hidden' name='imageLength'
-					value='${OneDemand.imageLength}'> <input type='hidden'
-					name='remark' value='${OneDemand.remark}'>
-			</form>
+			
+			
 			<tfoot>
-				<tr>
-					<td
-						style="text-align: center; vertical-align: text-top; padding-top: 20px;"></td>
-					<td
-						style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
-					<td
-						style="border: 1px solid black; padding: 5px; word-break: break-all;"><div
-							style="width: 350px; height: 120px; overflow: auto;">${OneDemand.remark}</div></td>
-				</tr>
-			</tfoot>
+					<tr>
+						
+						<td id="addToBag">
+							<button type="submit" name='toCart' value='insert' class="btn btn-large btn-floating">
+								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="medium material-icons">card_giftcard</i></a>
+							</button>
+						</td>
+						
+						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
+						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
+						<script>
+							var addToBag = document.getElementById("addToBag");
+							addToBag.addEventListener("click", insertDeamnd);
+							
+							function insertDeamnd(){
+								var xhr = new XMLHttpRequest();
+								if (xhr != null) {
+										xhr.addEventListener("readystatechange", function(){
+											if (xhr.readyState == 4) {
+												if (xhr.status == 200) {
+													 lists = xhr.responseText;
+// 													  alert("新增購物車品項一");
+												} else {
+													alert("something is wrong!");
+												}
+											} 
+										});
+									xhr.open("POST", "cart.do", true);
+									xhr.setRequestHeader("Content-Type", 
+									"application/x-www-form-urlencoded")
+									xhr.send("toCart=insert&donationId="+"${OneDemand.donationId}"+"&schoolId="+"${OneDemand.schoolId}"+"&schoolName="+"${OneDemand.schoolName}"+"&donationStatus="+"${OneDemand.donationStatus}"+"&supplyName="+"${OneDemand.supplyName}"+"&originalDemandNumber="+"${OneDemand.originalDemandNumber}"+"&originalDemandUnit="+"${OneDemand.originalDemandUnit}"+"&demandNumber="+"${OneDemand.demandNumber}"+"&size="+"${OneDemand.size}"+"&demandContent="+"${OneDemand.demandContent}"+"&supplyStatus="+"${OneDemand.supplyStatus}"+"&demandTime="+"${OneDemand.demandTime}"+"&expireTime="+"${OneDemand.expireTime}"+"&remark="+"${OneDemand.remark}");
+								}
+								
+							}
+							
+						</script>
+					
+					</tr>
+				</tfoot>
 		</table>
 
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
-			<div class="input-field col m12 s12">
-				<textarea id="your-message" class="materialize-textarea"
-					name="textarea"></textarea>
-				<label for="your-message" class=""><i
-					class="large material-icons">comment</i></label>
-				<div id="messageGO">
-					<button type="reset" id="cancel-message"
-						class="btn btn-large btn-success waves-effect waves-light">
-						<i class="large material-icons">loop</i>
-					</button>
-					<button type="button" id="send-message"
-						class="btn btn-large btn-success waves-effect waves-light">
-						<i class="large material-icons">done</i>
-					</button>
+			<div class="row">
+				<div class="col-md-10">
+					<div class="input-field col m12 s12">
+						<textarea id="your-message" class="materialize-textarea"></textarea>
+						<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
+
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="messageGO">
+						<button type="reset" class="btn btn-small btn-floating" id="send-message">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
+						</button>
+						<button type="reset" class="btn btn-small btn-floating" id="cancel-message">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+						</button>
+					</div>
+
 				</div>
 			</div>
 		</form>

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import model.DonationBean;
 import model.DonationBeanDuplicate;
 import model.DonationCart;
+import model.DonationService;
 
 //@WebServlet("/DonationCartServlet")
 public class DonationCartServlet extends HttpServlet {
@@ -41,53 +43,55 @@ public class DonationCartServlet extends HttpServlet {
 		
 		// 1.接收資料
 		String toCart = request.getParameter("toCart");
-		
+		System.out.println("toCart "+toCart);
+		if (toCart == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("ExpressDelivery.jsp");
+			rd.forward(request, response);
+			return;
+		}
 		String donationIdStr = request.getParameter("donationId");
+		System.out.println("donationIdStr "+donationIdStr);
 		int donationId = 0;
-		String schoolIdStr = request.getParameter("schoolId");
-		int schoolId = 0;
+//		String schoolIdStr = request.getParameter("schoolId");
+//		System.out.println("schoolIdStr "+schoolIdStr);
+//		int schoolId = 0;
 		// new
-		String schoolName = request.getParameter("schoolName");
-		String donationStatus = request.getParameter("donationStatus");
-		String supplyName = request.getParameter("supplyName");
-		String originalDemandNumberStr = request.getParameter("originalDemandNumber");
-		int originalDemandNumber = 0;
-		String originalDemandUnit = request.getParameter("originalDemandUnit");
-		System.out.println("originalDemandUnit "+originalDemandUnit);
-		String demandNumberStr = request.getParameter("demandNumber");
-		int demandNumber = 0;
+//		String schoolName = request.getParameter("schoolName");
+//		String donationStatus = request.getParameter("donationStatus");
+//		String supplyName = request.getParameter("supplyName");
+//		String originalDemandNumberStr = request.getParameter("originalDemandNumber");
+//		int originalDemandNumber = 0;
+//		String originalDemandUnit = request.getParameter("originalDemandUnit");
+//		String demandNumberStr = request.getParameter("demandNumber");
+//		int demandNumber = 0;
 		String donateAmountStr = request.getParameter("donateAmount");
 		int donateAmount = 0;
-		String size = request.getParameter("size");
-		String demandContent = request.getParameter("demandContent");
-		String supplyStatus = request.getParameter("supplyStatus");
-		String remark = request.getParameter("remark");
+//		String size = request.getParameter("size");
+//		String demandContent = request.getParameter("demandContent");
+//		String supplyStatus = request.getParameter("supplyStatus");
+//		String remark = request.getParameter("remark");
 		
 		if (toCart.equals("insert")) {
+			DonationService donationService = new DonationService();
+			
 			// 2.資料驗證
 			if(donationIdStr != null || donationIdStr.trim().length() != 0) {
 			donationId = Integer.parseInt(donationIdStr);
 			} 
-			if(schoolIdStr != null || schoolIdStr.trim().length() != 0) {
-				schoolId = Integer.parseInt(schoolIdStr);
-			}
-			if(originalDemandNumberStr != null || originalDemandNumberStr.trim().length() != 0) {
-				originalDemandNumber = Integer.parseInt(originalDemandNumberStr);
-			}
-			if(demandNumberStr != null || demandNumberStr.trim().length() != 0) {
-				demandNumber = Integer.parseInt(demandNumberStr);
-			} 
-			
-			// 新增schoolName, 新增donateAmount預設為1
-			DonationBeanDuplicate donationBeanDuplicate = 
-					new DonationBeanDuplicate(donationId, schoolId,
-							 schoolName, donationStatus, supplyName,				
-							 originalDemandNumber, originalDemandUnit, demandNumber, 1, size,
-							 demandContent, supplyStatus, null, null, null, null, 0, remark);
-		
+//			if(schoolIdStr != null || schoolIdStr.trim().length() != 0) {
+//				schoolId = Integer.parseInt(schoolIdStr);
+//			}
+//			if(originalDemandNumberStr != null || originalDemandNumberStr.trim().length() != 0) {
+//				originalDemandNumber = Integer.parseInt(originalDemandNumberStr);
+//			}
+//			if(demandNumberStr != null || demandNumberStr.trim().length() != 0) {
+//				demandNumber = Integer.parseInt(demandNumberStr);
+//			} 
+			DonationBeanDuplicate donationBeanDuplicate = donationService.findOneDemand(donationId);
+	
 			// 3.呼叫Model
 			boolean b = dCart.insertDonationToCart(donationBeanDuplicate);
-			System.out.println("新增至購物車: " + b);
+			System.out.println("0752新增至購物車: " + b);
 			
 			// 4.挑選適當畫面
 			RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
@@ -108,9 +112,8 @@ public class DonationCartServlet extends HttpServlet {
 			System.out.println("更新購物車欄位: " + b);
 			
 			// 4.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
-			rd.forward(request, response);
-			return;
+			PrintWriter out = response.getWriter();
+			out.print("更新購物車欄位: " + b);
 			
 		} else if (toCart.equals("delete")) {
 			// 2.資料驗證
