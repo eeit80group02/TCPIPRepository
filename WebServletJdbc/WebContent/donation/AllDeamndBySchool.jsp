@@ -5,14 +5,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style>
-
-</style>
 <title>UpdateDonation</title>
 </head>
 <body>
 <center>
-<h3>單一學校之物資需求</h3>
+<h3>${LoginOK.name}學校之物資需求</h3>
 <a href='DonationIndex.jsp'>回首頁</a>|
 <c:forEach var='item' items='${OneAllDemands}'>
 	<table style="width:200px;height:60px;float:left;background-color:#00FF00;">

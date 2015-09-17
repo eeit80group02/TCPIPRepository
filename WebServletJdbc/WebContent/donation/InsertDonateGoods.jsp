@@ -34,10 +34,6 @@
 <script type="text/javascript" src="../scripts/UpLoadPicture.js"></script>
 </head>
 <body>
-<script>
-alert("schoolName"+"${LoginOK.name}");
-</script>
-
 <center>
 	<div class="navbar navbar-inverse">
 			<ul class="nav navbar-nav" id="headUl">

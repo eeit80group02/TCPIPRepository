@@ -48,6 +48,7 @@ public class LoginServlet extends HttpServlet
 			if(type.equals("member"))
 			{
 				// 會員登入
+				System.out.println("member");
 				memberLogin(request,response);
 			}
 			
@@ -113,7 +114,6 @@ public class LoginServlet extends HttpServlet
 		
 		// 進行 business logic
 		SchoolBean bean = service.schoolLogin(schoolId,password);
-		
 		if(bean != null)
 		{
 			HttpSession session = request.getSession();
