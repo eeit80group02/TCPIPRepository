@@ -158,7 +158,7 @@
 				</div>
 			</div>
 			<div class="col l2">
-				<c:set var="deadline" value="900000" />
+				<c:set var="deadline" value="9000000" />
 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 
 				<!-- 	檢查 登入者是否學校 -->
 					<c:if test="${LoginOK.beanName.equals('school')}">

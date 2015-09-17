@@ -54,6 +54,7 @@ public class LoginServlet extends HttpServlet
 			if(type.equals("school"))
 			{
 				// 學校登入
+				System.out.println("school");
 				schoolLogin(request,response);
 			}
 		}

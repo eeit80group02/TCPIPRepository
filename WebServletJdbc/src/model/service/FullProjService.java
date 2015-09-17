@@ -55,12 +55,6 @@ public class FullProjService
 		}
 		return result;
 	}
-	
-	public static void main(String[] args)
-	{
-		FullProjService service = new FullProjService();
-		System.out.println(service.displayFullProjAll());
-	}
 
 	public List<FullProjBean> displayPersonalFullProjProjByChat(FullProjBean bean)
 	{
@@ -68,7 +62,7 @@ public class FullProjService
 		
 		if(bean != null)
 		{
-			// 先查詢 該會員的所有初步計畫
+			// 先查詢 該會員的所有完整計畫
 			List<FullProjBean> temps = fullProjDAO.selectByMemberId(bean.getMemberId());
 			for(FullProjBean temp : temps)
 			{
@@ -80,4 +74,24 @@ public class FullProjService
 		}
 		return result;
 	}
+	
+	// 顯示單一完整計畫 
+	public FullProjBean displayFullProj(FullProjBean bean)
+	{
+		FullProjBean result = null;
+		if(bean != null)
+		{
+			int fullProjId = bean.getFullProjId();
+			result = fullProjDAO.findByPrimaryKey(fullProjId);
+		}
+		
+		return result;
+	}
+	
+	public static void main(String[] args)
+	{
+		FullProjService service = new FullProjService();
+		System.out.println(service.displayFullProjAll());
+	}
+
 }

@@ -58,7 +58,7 @@
 		<!-- 切版面開始 -->
 		<div class="col l8">
 			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="primaryform" method="post">
+			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="primaryform">
 					<input type="hidden" name="memberId" value="${LoginOK.memberId}">
 				<div class="row">
 						<!-- 計畫封面 -->
@@ -129,14 +129,14 @@
 						<div class="input-field row">
 							<div class="col l4">
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
-								<input type="date" name="startTime" id="starttime">
+								<input type="date" name="startTime" id="starttime" value="${param.startTime}">
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.startTime}</span>
 							</div>								
 							<div class="col l4">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
-								<input type="date" name="endTime" id="endtime" >
+								<input type="date" name="endTime" id="endtime" value="${param.endTime}">
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.endTime}</span>

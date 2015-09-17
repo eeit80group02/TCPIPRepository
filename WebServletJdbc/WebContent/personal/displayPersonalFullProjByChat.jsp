@@ -20,11 +20,11 @@
 				<th>${bean.fullProjId}</th>
 				<th>${bean.title}</th>
 				
-<%-- 				<c:url value="/primaryProj.do" var="path"> --%>
-<%-- 					<c:param name="type" value="display" /> --%>
-<%-- 					<c:param name="primaryProjId" value="${bean.primaryProjId}" /> --%>
-<%-- 				</c:url> --%>
-<%-- 				<th><a href="${path}">查看</a></th> --%>
+				<c:url value="/fullProj.do" var="path">
+					<c:param name="type" value="displayUpdate" />
+					<c:param name="fullProjId" value="${bean.fullProjId}" />
+				</c:url>
+				<th><a href="${path}">洽談</a></th>
 			</tr>
 		</c:forEach>
 	</table>

@@ -8,6 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	進入洽談頁面
+	學校個人頁面
 </body>
 </html>
