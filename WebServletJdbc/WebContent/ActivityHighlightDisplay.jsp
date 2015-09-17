@@ -14,7 +14,8 @@
 </head>
 <body class="deep-orange lighten-5">
 	<!-- 頁首 -->
-	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"/>
+	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
+	<!-- 頁首 -->
 	
 	<!-- 內容 -->
 	<main>
@@ -63,8 +64,8 @@
 
 
 	<!-- 頁尾 -->
-<%-- 	<c:import url="" context=""/> --%>
-	
+	<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
+	<!-- 頁尾 -->
 
 
 	<!-- script -->

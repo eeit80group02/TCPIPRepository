@@ -15,6 +15,11 @@
 <title>displayPrimaryProj</title>
 </head>
 <body>
+
+	<!-- 頁首 -->
+	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
+	<!-- 頁首 -->
+	
 	<h3>初步計畫查看</h3>
 	<table>
 		<tr>
@@ -96,6 +101,10 @@
 			</form>
 		</c:if>
 	</c:if>
+	
+	<!-- 頁尾 -->
+	<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
+	<!-- 頁尾 -->
 	
 	
 
