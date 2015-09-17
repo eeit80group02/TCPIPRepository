@@ -15,7 +15,7 @@
 <body>
 <center>
 <h3>更新刊登內容</h3>
-<a href='index.jsp'>回首頁</a>|
+<a href='DonationIndex.jsp'>回首頁</a>|
 <input type='text' name='schoolId' value='${param.schoolId}'>
 <input type='submit' name='findOne' value='app'>
 <hr>
