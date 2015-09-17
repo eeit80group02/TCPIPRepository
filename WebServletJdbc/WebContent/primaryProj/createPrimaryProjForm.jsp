@@ -33,10 +33,10 @@
 	<!-- 頁首 -->
 
 	<!-- 頁面主題提示 -->
-	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
+	<div class="row  light-blue darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
 			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">建立初步計畫</h1>
-	</div>
+	</div>	
 
 
 <!-- 主要版面 -->
