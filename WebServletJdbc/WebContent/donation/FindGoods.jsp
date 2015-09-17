@@ -46,9 +46,9 @@
 		<ul class="nav navbar-nav" id="headUl">
 			<li class="active"><a href="#">捐獻牆</a></li>
 			<li class="headList"><a href="#">熱門</a></li>
-			<li class="headList"><a href="#">最新發佈</a></li>
-			<li class="headList"><a href="#">即將結束</a></li>
-			<li class="headList"><a href="#">需求數量</a></li>
+			<li class="headList"><a href="search.do?type=byDemandtime">最新發佈</a></li>
+			<li class="headList"><a href="search.do?type=byExpiretime">即將結束</a></li>
+			<li class="headList"><a href="search.do?type=byAmount">需求數量</a></li>
 			<li class="headList"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">物資狀態<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="<c:url value='search.do?supplyStatus=1'/>">不拘</a></li>
