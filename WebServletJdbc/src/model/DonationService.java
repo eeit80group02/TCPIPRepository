@@ -10,6 +10,7 @@ import model.dao.DonationDAOJdbc;
 import model.dao.DonationDiscussDAOJdbc;
 import model.dao.DonationOrderDAOJdbc;
 import model.dao.DonationOrderDetailDAOJdbc;
+import model.dao.SchoolDAOJdbc;
 
 public class DonationService {
 	private DonationDAOJdbc donationDAOJdbc;
@@ -84,6 +85,44 @@ public class DonationService {
 		}
 		return false;
 	}
+	
+	// 待修
+	/**
+	 * @param donationId
+	 * @return
+	 */
+	public DonationBeanDuplicate findOneDemand(int donationId){
+		donationDAOJdbc = new DonationDAOJdbc();
+		DonationBean odb = donationDAOJdbc.findByPrimaryKey(donationId);
+		
+		SchoolDAOJdbc schoolDAO = new SchoolDAOJdbc();
+		SchoolBean sBean = schoolDAO.findByPrimaryKey(odb.getSchoolId());
+		String schoolName = sBean.getName();
+		
+		DonationBeanDuplicate dbdc = new DonationBeanDuplicate();
+		dbdc.setDonationId(odb.getDonationId());
+		dbdc.setSchoolId(odb.getSchoolId());
+		dbdc.setSchoolName(schoolName);
+		dbdc.setDonationStatus(odb.getDonationStatus());
+		dbdc.setSupplyName(odb.getSupplyName());
+		dbdc.setOriginalDemandNumber(odb.getOriginalDemandNumber());
+		dbdc.setOriginalDemandUnit(odb.getOriginalDemandUnit());
+		dbdc.setDemandNumber(odb.getDemandNumber());
+		dbdc.setDonateAmount(1);
+		dbdc.setSize(odb.getSize());
+		dbdc.setDemandContent(odb.getDemandContent());
+		dbdc.setSupplyStatus(odb.getSupplyStatus());
+		dbdc.setRemark(odb.getRemark());
+		
+		// 新增schoolName, 新增donateAmount預設為1
+//		DonationBeanDuplicate donationBeanDuplicate = 
+//				new DonationBeanDuplicate(donationId, schoolId,
+//						 schoolName, donationStatus, supplyName,				
+//						 originalDemandNumber, originalDemandUnit, demandNumber, 1, size,
+//						 demandContent, supplyStatus, null, null, null, null, 0, remark);
+		return dbdc;
+	}
+	
 	// 待修
 	public DonationBeanDuplicate findOneDemand(int donationId, int schoolId) {
 		DonationBeanDuplicate donationBeanDuplicate;

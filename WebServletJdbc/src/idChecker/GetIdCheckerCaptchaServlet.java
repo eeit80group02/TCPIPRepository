@@ -23,7 +23,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Encoder;
 
 @WebServlet("/GetIdCheckerCaptchaServlet")
 public class GetIdCheckerCaptchaServlet extends HttpServlet {
@@ -105,7 +105,7 @@ public class GetIdCheckerCaptchaServlet extends HttpServlet {
 		}
 		bytes = baos.toByteArray();
 
-		captchaImage = "data:image/png;base64," + new BASE64Encoder().encode(bytes);
+//		captchaImage = "data:image/png;base64," + new BASE64Encoder().encode(bytes);
 		// show captchaImage of base64 code
 		// System.out.println(captchaImage);
 		EntityUtils.consume(entity);

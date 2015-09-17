@@ -40,13 +40,9 @@ input[type="text"]:disabled {
 	width: 85%;
 }
 
-#donationBill {
+#donationBill tr td{
 	border: 1px solid black;
-}
-
-#donationBill td {
 	text-align: center;
-	border: 1px solid black;
 }
 
 .imgBill {
