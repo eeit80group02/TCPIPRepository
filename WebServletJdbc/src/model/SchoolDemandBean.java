@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class SchoolDemandBean implements Serializable
 {
@@ -18,6 +19,7 @@ public class SchoolDemandBean implements Serializable
 	private java.util.Date createDate; 	// 建立日期(計畫需求發佈的日期)- 可以算出媒合期截止時間
 	private String content; 			// 需求內容(1000字?)
 	private String demandStatus;		// 計畫狀態(待洽談、洽談中、洽談完成、洽談失敗)
+	private OffersBean offerBean; // 對應提供項目
 	
 	public SchoolDemandBean()
 	{
@@ -132,12 +134,19 @@ public class SchoolDemandBean implements Serializable
 	{
 		this.demandStatus = demandStatus;
 	}
+	public OffersBean getOfferBean() {
+		return offerBean;
+	}
+
+	public void setOfferBean(OffersBean offerBean) {
+		this.offerBean = offerBean;
+	}
 
 	@Override
 	public String toString()
 	{
 		return "SchoolDemandBean [schoolDemandId=" + schoolDemandId + ", schoolId=" + schoolId + ", participant=" + participant + ", activityTopic=" + activityTopic + ", activityLocation=" + activityLocation + ", activitySuitable=" + activitySuitable
-				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + "]";
+				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + "]";
 	}
 
 }

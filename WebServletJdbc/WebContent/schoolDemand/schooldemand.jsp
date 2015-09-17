@@ -26,72 +26,45 @@
 </head>
 
 
-<body class="light-blue lighten-5">
+<body class="pink lighten-5">
 
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 	<!-- 頁首 -->
 
 	<!-- 頁面主題提示 -->
-	<div class="row  light-blue darken-4 valign-wrapper" id="pagetitle">
+	<div class="row amber darken-2 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">編輯初步計畫</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">建立需求計畫</h1>
 	</div>	
 
 
 <!-- 主要版面 -->
 <main>
 	
-<!-- 	form   [primaryProj.do]  id=primaryform -->
-<!-- 	計畫封面  id=picture,name=imgFile -->
-<!-- 	計畫名稱  id=title,name=title -->
-<!-- 	理想地點  id=location,name=location -->
-<!-- 	活動時間  id=starttime,name=starttime -->
-<!-- 		   id=endtime,name=endtime -->
-<!-- 	預計人數  id=demandNum,name=demandNum -->
-<!-- 	活動預算  id=budget,name=budget -->
-<!-- 	活動摘要  id=projAbstract,name=projAbstract -->
-<!-- 	活動內容  id=content,name=content -->
+<!-- 	form   [SchoolDemandServlet.do?type=create]  id=primaryform -->
+<!-- 	活動主題  id=title,name=activityTopic -->
+<!-- 	活動地點  id=location,name=activityLocation -->
+<!-- 	需求內容  id=starttime,name=content -->
+<!-- 	預計參與的學生人數  id=demandNum,name=participant -->
+<!-- 	活動適合對象  id=budget,name=activitySuitable -->
+<!-- 	活動負責人  id=projAbstract,name=activityHost -->
+<!-- 	負責人聯絡方式  id=content,name=activityContact -->
 
 	<div class="row">
 		
 		<!-- 切版面開始 -->
 		<div class="col l8">
 			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="updateForm" method="post">
-					
-					<!-- 不確定還要不要這項 -->
-<%-- 					<input type="hidden" name="memberId" value="${LoginOK.memberId}"> --%>
-					<!-- 不確定還要不要這項 -->
-					<input type="hidden" name="memberId" value="${param.memberId}${primaryProj.memberId}" /><br>
-					<input type="hidden" name="primaryProjId" value="${param.primaryProjId}${primaryProj.primaryProjId}" /><br>
-				
-				
+			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#F2F2F2;" id="primaryform" method="post">
+					<input type="hidden" name="memberId" value="${LoginOK.memberId}">
 				<div class="row">
-						<div class="row orange accent-3">
-							<!-- 計畫編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">計畫編號:${param.primaryProjId}${primaryProj.primaryProjId}</div>
-								</div>
-							</div>
-	
-	
-							<!-- 會員編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">會員編號:${param.primaryProjId}${primaryProj.memberId}</div>
-								</div>
-							</div>						
-						</div>
-						
 						<!-- 計畫封面 -->
 						<div class="file-field input-field row">
 							<div class="col l8">
 								<div class="btn blue-grey lighten-2" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 									<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">封面</span>
-									<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;
-										cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile" required value="">
+									<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile" required>
 	      						</div>
 							</div>
 							<div class="col l4">
@@ -104,7 +77,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫名稱</div>
-								<input id="title" type="text" name="title" required value="${param.title}${primaryProj.title}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="title" type="text" name="title" required value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.title}</span>
@@ -142,7 +115,7 @@
 									</select>
 							</div>
 								<div class="col l3 input-field valign-wrapper">
-									<input class="center-align forvalue" id="location" type="text" required readonly="readonly" value="${param.location}${primaryProj.idealPlace}" name="location" style="font-size:1.2em;color:black;font-weight:600;">
+									<input class="center-align forvalue" id="location" type="text" required readonly="readonly" value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;">
 								</div>
 							<div class="col l4">	
 								<span class="error">${error.location}</span>
@@ -154,18 +127,18 @@
 						<div class="input-field row">
 							<div class="col l4">
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
-								<input type="date" name="startTime" id="starttime" value="${param.startTime}${startTime}">
-							</div>
+								<input type="date" name="startTime" id="starttime">
+							</div>	
 							<div class="col l2">
 								<span class="error">${error.startTime}</span>
-							</div>	
+							</div>								
 							<div class="col l4">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
-								<input type="date" name="endTime" id="endtime" value="${param.endTime}${endTime}" >
-							</div>
+								<input type="date" name="endTime" id="endtime" >
+							</div>	
 							<div class="col l2">
 								<span class="error">${error.endTime}</span>
-							</div>		
+							</div>								
 						</div>
 
 						
@@ -174,7 +147,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">預計人數</div>
-								<input id="demandNum" type="number" name="demandNum" required value="${param.demandNum}${primaryProj.demandNum}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="demandNum" type="number" name="demandNum" required value="${param.demandNum}" style="font-size:1.2em;color:black;font-weight:600;">
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.demandNum}</span>
@@ -187,7 +160,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">活動預算</div>
-								<input id="budget" type="number" name="budget" required value="${param.budget}${primaryProj.budget}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="budget" type="number" name="budget" required value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;">
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.budget}</span>
@@ -200,8 +173,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100"
-									 name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;">${param.projAbstract}${primaryProj.projAbstract}</textarea>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -212,35 +184,33 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
-								<textarea class="ckeditor" id="content" rows="10" cols="100"
-									 name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}${primaryProj.content}</textarea>
+								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
 							</div>	
 							<div class="col l4">	
 								<span class="error">${error.content}</span>
 							</div>
 						</div>
 												
+						<!-- hide -->
+						<input type="hidden" name="type" value="create" />
 <!-- 				button -->
-						<!-- hidden -->
-						<input type="hidden" name="type" value="update" />
-						
-						<div class="row" id="btndiv">
-							<div class="col l8">
-								<!-- 留意!!這邊有name=action -->
-								<button  class="btn-large yellow lighten-5 black-text right" type="submit" name="action" id="submitbtn">
-									<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
-								</button>
-								<button  class="btn-large yellow lighten-5 black-text right" type="reset" name="action">
-									<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
-								</button>
-							</div>
+					
+					<div class="row" id="btndiv">
+						<div class="col l8">
+							<button  class="btn-large yellow lighten-5 black-text right" type="submit" name="action" id="submitbtn">
+								<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
+							</button>
+							<button  class="btn-large yellow lighten-5 black-text right" type="reset" name="action">
+								<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
+							</button>
 						</div>
+					</div>
 					</div>
 				</form>
 			  </div>	
 				<!-- 圖片預覽版面  col l2-->
 				<div class="col l2">
-					<img class="card-panel hoverable" id="view" src="${primaryProj.base64String}" style="height: 250px; width: 310px;border:5px solid black;padding:0;" >
+					<img class="card-panel hoverable" id="view" src="" style="height: 250px; width: 310px;border:5px solid black;padding:0;" >
 				</div>				
 				
 		</div>
