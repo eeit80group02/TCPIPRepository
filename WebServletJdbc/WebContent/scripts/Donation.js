@@ -44,7 +44,6 @@ $(function() {
 	function deleteImage($item) {
 		var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='取消選取' class='ui-icon ui-icon-refresh' value=" + $item.attr("value") + " style='float: right'></a>";
 		var donationId = $item.attr("value");
-		// alert(donationId);
 		addToCart(donationId);
 		$item.find(".fiximg div").css('visibility', 'hidden');
 		$item.fadeOut(function() {
@@ -136,7 +135,6 @@ $(function() {
 			});
 			xhr.open("POST", "cart.do", true);
 			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			alert("++" + donationId);
 			xhr.send("toCart=insert&donationId=" + donationId);
 		}
 	}
@@ -148,7 +146,7 @@ $(function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
-						alert("刪除購物車品項一");
+//						alert("刪除購物車品項一");
 					} else {
 						alert("something is wrong!");
 					}

@@ -43,7 +43,7 @@
 				
 <!-- 				公開&相同 -->
 				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
-				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />">捐贈</a></li>
 				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
 				<c:if test="${not empty LoginOK}">

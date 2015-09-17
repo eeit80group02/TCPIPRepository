@@ -39,9 +39,9 @@ public class RegisterVerificationServlet extends HttpServlet {
 			String str1 = bean.getAccountStatus();
 			System.out.println("RegisterMailSendServlet: " + str1);
 			//判斷該會員連結是否已經認證
-			if(!str1.trim().equals("已審核".trim())){
-				System.out.println(str1.trim().equals("已審核".trim()));
-				bean.setAccountStatus("已審核");
+			if(!str1.trim().equals("啟用".trim())){
+				System.out.println(str1.trim().equals("啟用".trim()));
+				bean.setAccountStatus("啟用");
 				dao.update(bean);
 				HttpSession session = request.getSession();
 				session.setAttribute("LoginOK", bean);

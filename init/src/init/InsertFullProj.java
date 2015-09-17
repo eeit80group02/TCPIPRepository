@@ -25,26 +25,26 @@ public class InsertFullProj
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 		{
 			//
-			pstmt.setInt(1,1);					// primaryProjId
-			pstmt.setNull(2,Types.INTEGER);  	// schoolDemandId
-			pstmt.setInt(3,7);					// memberId
-			pstmt.setInt(4,11601);				// schoolId
-			pstmt.setString(5,"造神計畫");			// title
+			pstmt.setInt(1,1);					// primaryProjId 初步計畫編號
+			pstmt.setNull(2,Types.INTEGER);  	// schoolDemandId 學校需求編號
+			pstmt.setInt(3,7);					// memberId 會員編號
+			pstmt.setInt(4,11601);				// schoolId 學校編號
+			pstmt.setString(5,"造神計畫");			// title 計畫名稱
 			File file = new File("image/primaryProj/primaryProj01.jpg");
 			try(FileInputStream fis = new FileInputStream(file);)
 			{
-				pstmt.setString(6,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(7,fis,file.length());	// frontCover
-				pstmt.setLong(8,file.length());		// frontCoverLength
+				pstmt.setString(6,file.getName());	// frontCoverName 計畫封面檔名
+				pstmt.setBinaryStream(7,fis,file.length());	// frontCover 計畫封面檔案大小
+				pstmt.setLong(8,file.length());		// frontCoverLength 計畫封面檔案長度
 				
-				pstmt.setString(9,"幫助偏遠學校使用辦公室軟體應用");		// projAbstract
-				pstmt.setString(10,"Word...Office軟體應用");		// content
-				pstmt.setNull(11,Types.NVARCHAR);				// location
+				pstmt.setString(9,"幫助偏遠學校使用辦公室軟體應用");		// projAbstract 計畫摘要
+				pstmt.setString(10,"Word...Office軟體應用");		// content 計畫內容
+				pstmt.setNull(11,Types.NVARCHAR);				// location 活動確定地點
 				
-				pstmt.setString(12,"2015/08/08");				//activityStartTime
-				pstmt.setString(13,"2015/08/15");				//activityEndTime
+				pstmt.setString(12,"2015/08/08");				//activityStartTime 活動開始時間
+				pstmt.setString(13,"2015/08/15");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,20);							// estMember
+				pstmt.setInt(14,20);							// estMember  
 				pstmt.setInt(15,200000);						// budget
 		
 				pstmt.setNull(16,Types.TIMESTAMP);				// createDate
