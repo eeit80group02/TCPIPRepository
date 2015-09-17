@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<!-- 志工方看的，所有的計畫需求 -->
 	<form action="SchoolDemandServlet.do?type=displayAll" method="post">
 	<input type="submit">
 	</form>

@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<form action="SchoolDemandServlet.do?type=displayPersonalEnd" method="post">
 	<input type="submit">
 	</form>

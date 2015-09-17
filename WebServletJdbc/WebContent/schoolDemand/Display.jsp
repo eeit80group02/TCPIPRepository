@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 學校查詢單筆 -->
 	<form action="SchoolDemandServlet.do?type=display&schoolDemandId=${bean.schoolDemandId}" method="post">
 	<input type="submit">
 	</form>

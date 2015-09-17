@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<!-- 學校自己看自己寫了多少計畫 -->
 	<form action="SchoolDemandServlet.do?type=displayPersonalAll" method="post">
 	<input type="submit">
 	</form>
