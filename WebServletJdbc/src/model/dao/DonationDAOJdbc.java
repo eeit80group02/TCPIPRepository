@@ -217,7 +217,7 @@ public class DonationDAOJdbc implements DonationDAO
 					bean.setDonationStatus(rs.getString("donationStatus"));
 					bean.setSupplyName(rs.getString("supplyName"));
 					bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
-					bean.setOriginalDemandUnit("originalDemandUnit");
+					bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
 					bean.setDemandNumber(rs.getInt("demandNumber"));
 					bean.setSize(rs.getString("size"));
 					bean.setDemandContent(rs.getString("demandContent"));
