@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="SchoolDemandServlet.do?type=create" method="post">
+<form action="<c:url value="SchoolDemandServlet.do?type=create"/>" method="post">
 預計參與的學生人數:<input type="text" name="participant" value="${param.participant}">${error.participant}<br>
 活動主題:<input type="text" name="activityTopic" value="${param.activityTopic}">${error.activityTopic}<br>
 活動地點:<input type="text" name="activityLocation" value="${param.activityLocation}">${error.activityLocation}<br>
