@@ -114,7 +114,7 @@
 							<i class="small material-icons">delete</i>
 						</button>
 						</a>
-				捐獻背包 <a href="CheckDonationList.jsp">
+				捐獻背包 <a href="checkOrder.do?linkto=checkList">
 							<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
 								<i class="small material-icons">card_giftcard</i>
 							</button>

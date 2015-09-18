@@ -27,6 +27,7 @@ import javax.servlet.http.HttpSession;
 				@WebInitParam(name = "mustLogin5", value = "/fullProj/fullproj.jsp"),
 				@WebInitParam(name = "mustLogin6", value = "/fullProj.do?type=displayAll"),
 				@WebInitParam(name = "mustLogin7", value = "/primaryProj/updatePrimaryProjForm.jsp"),
+				@WebInitParam(name = "mustLogin8", value = "/donation/CheckDonationList.jsp"),
 		})
 public class LoginFilter implements Filter
 {
@@ -61,9 +62,11 @@ public class LoginFilter implements Filter
 			HttpServletRequest req = (HttpServletRequest)request;
 			HttpServletResponse resp = (HttpServletResponse)response;
 			servletPath = req.getServletPath();
+			System.out.println("servletPath: "+servletPath);
 			contextPath = req.getContextPath();
 			requestURI = req.getRequestURI();
 			queryString = req.getQueryString();
+			System.out.println("queryString: "+queryString);
 			isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 			
 //			System.out.println("servletPath = " + servletPath);
@@ -122,7 +125,7 @@ public class LoginFilter implements Filter
 	private boolean mustLogin()
 	{
 		boolean login = false;
-		
+
 		for(String sURL : url)
 		{
 			if(servletPath.endsWith(".do"))
@@ -143,6 +146,7 @@ public class LoginFilter implements Filter
 					login = true;
 					break;
 				}
+
 			}
 		}
 		System.out.println(servletPath + " => 不用登入，就能使用");

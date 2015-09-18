@@ -42,6 +42,7 @@ public class DonationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		// 必須學校登入會員才可使用
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			// 導向登入畫面
