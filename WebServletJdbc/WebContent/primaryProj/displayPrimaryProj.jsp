@@ -35,7 +35,7 @@
 	<div class="row  light-blue darken-4 valign-wrapper" id="pagetitle">
 		
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">初步計畫名稱${primaryProj.title}</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${primaryProj.title}</h1>
 	</div>	
 	
 	
@@ -47,7 +47,8 @@
 		<!-- 第一列 -->
 		<div class="row">
 			<div class="col l2 btn yellow lighten-3 black-text offset-l2">
-				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:${primaryProj.memberId}</span>			
+				<fmt:formatNumber var="mid" value="${primaryProj.memberId}" pattern="0000"/>
+				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:${primaryProj.memberBean.lastName}${primaryProj.memberBean.firstName}[No.${mid}]</span>			
 			</div>		
 		</div>
 		<!-- 第二列 -->

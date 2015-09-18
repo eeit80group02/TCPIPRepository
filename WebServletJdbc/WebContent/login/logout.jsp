@@ -14,6 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="deep-orange lighten-5">
+	<% session.invalidate();
+	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+	%>
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp"
 		context="${pageContext.request.contextPath}" />
@@ -22,8 +25,7 @@
 	<!-- 內容 -->
 	<main>
 		你好，感謝你的使用 已經登出
-		<% session.invalidate();%>
-		
+
 		<a href="${pageContext.request.contextPath}/index.jsp">回首頁</a>
 	</main>
 
