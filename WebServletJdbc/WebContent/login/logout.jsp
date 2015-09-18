@@ -22,7 +22,9 @@
 	<!-- 內容 -->
 	<main>
 		你好，感謝你的使用 已經登出
-		<% session.invalidate();%>
+		<% session.invalidate();
+		   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+		%>
 		
 		<a href="${pageContext.request.contextPath}/index.jsp">回首頁</a>
 	</main>
