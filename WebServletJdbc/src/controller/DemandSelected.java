@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DonationBean;
 import model.DonationBeanDuplicate;
@@ -28,6 +29,10 @@ public class DemandSelected extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			// ...
+		}
 //		Map<String, String> errorMsgs = new HashMap<>();
 		
 		// 1.接收資料
@@ -40,11 +45,15 @@ public class DemandSelected extends HttpServlet {
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
 			
-			request.setAttribute("AllDemands", listDuplivate);
+//			request.setAttribute("AllDemands", listDuplivate);
+			session.setAttribute("AllDemands", listDuplivate);
 			
 			// 4.轉至適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/FindGoods.jsp"));
 			return;
 			
 		} else if (type.equals("AllDeamndByMember")) {
@@ -55,10 +64,14 @@ public class DemandSelected extends HttpServlet {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> list = service.findOneAllDemands(schoolId);
-			request.setAttribute("OneAllDemands", list);
+//			request.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDemands", list);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndByMember.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndByMember.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/AllDeamndByMember.jsp"));
 			return;
 			
 		} else if (type.equals("OneDemandByMember")) {
@@ -75,10 +88,15 @@ public class DemandSelected extends HttpServlet {
 			DonationDiscussService donationDiscussService = new DonationDiscussService();
 			List<DonationDiscussBeanDuplicate> discussList = donationDiscussService.getOneDonationAllMessages(donationId);
 			
-			request.setAttribute("AllMessages", discussList);
-			request.setAttribute("OneDemand", donationBeanDuplicate);
-			RequestDispatcher rd = request.getRequestDispatcher("OneDemandByMember.jsp");
-			rd.forward(request, response);
+//			request.setAttribute("AllMessages", discussList);
+//			request.setAttribute("OneDemand", donationBeanDuplicate);
+			session.setAttribute("AllMessages", discussList);
+			session.setAttribute("OneDemand", donationBeanDuplicate);
+//			RequestDispatcher rd = request.getRequestDispatcher("OneDemandByMember.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/OneDemandByMember.jsp"));
 			return;
 			
 		}else if (type.equals("AllDeamndBySchool")) {
@@ -89,10 +107,13 @@ public class DemandSelected extends HttpServlet {
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> list = service.findOneAllDemands(schoolId);
 			
-			request.setAttribute("OneAllDemands", list);
-			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
-			rd.forward(request, response);
-			return;
+//			request.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDemands", list);
+//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 			
 		} else if (type.equals("OneDeamndBySchool")) {
 			// 2.資料轉換
@@ -111,11 +132,15 @@ public class DemandSelected extends HttpServlet {
 			/* 捐獻會員*/
 			
 			
-			request.setAttribute("AllMessages", discussList);
-			request.setAttribute("OneDemand", donationBeanDuplicate);
-			RequestDispatcher rd = request.getRequestDispatcher("OneDeamndBySchool.jsp");
-			rd.forward(request, response);
-			return;
+//			request.setAttribute("AllMessages", discussList);
+//			request.setAttribute("OneDemand", donationBeanDuplicate);
+			session.setAttribute("AllMessages", discussList);
+			session.setAttribute("OneDemand", donationBeanDuplicate);
+//			RequestDispatcher rd = request.getRequestDispatcher("OneDeamndBySchool.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/OneDeamndBySchool.jsp"));
 			
 		} else if (type.equals("UpdateOneDemand")) {
 			int donationId = Integer.parseInt(donationIdStr);
@@ -124,10 +149,14 @@ public class DemandSelected extends HttpServlet {
 			DonationBean donationBean = new DonationBean();
 			DonationService service = new DonationService();
 			DonationBeanDuplicate donationBeanDuplicate = service.findOneDemand(donationId);
-			request.setAttribute("OneDemand", donationBeanDuplicate);
-			RequestDispatcher rd = request.getRequestDispatcher("UpdateOneDemand.jsp");
-			rd.forward(request, response);
-			return;
+//			request.setAttribute("OneDemand", donationBeanDuplicate);
+			session.setAttribute("OneDemand", donationBeanDuplicate);
+//			RequestDispatcher rd = request.getRequestDispatcher("UpdateOneDemand.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/UpdateOneDemand.jsp"));
+			
 		}
 	}
 }

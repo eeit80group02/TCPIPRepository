@@ -41,14 +41,16 @@ public class DonationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		// 1.接收資料
-		int donationId = 0; 						// 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
-		String donationIdStr = null; 		
 		
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			// 導向登入畫面
 		}
+		
+		// 1.接收資料
+		int donationId = 0; 						// 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
+		String donationIdStr = null; 		
+
 		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
 		int schoolId = sBean.getSchoolId();
 		System.out.println("schoolId: "+schoolId);
@@ -94,6 +96,7 @@ public class DonationServlet extends HttpServlet {
 						if(!choice.equals("insert")){
 							donationIdStr = value;
 						}
+						
 					} else if(fldName.equals("supplyName")) {
 						supplyName = value;
 					} else if(fldName.equals("originalDemandNumber")) {
@@ -126,11 +129,9 @@ public class DonationServlet extends HttpServlet {
 					imageName = GlobalService.getFileName(p);
 					imageLength = p.getSize();
 					is = p.getInputStream();
-					if (choice.equals("insert")) {
-						if (imageLength == 0) {
-							errorMsgs.put("errorImageFile", "新增需求時，請上傳一張圖片");
-							System.out.println("請上傳一張圖片");
-						}
+					if (choice.equals("insert") && imageLength == 0) {
+						errorMsgs.put("errorImageFile", "新增需求時，請上傳一張圖片");
+						System.out.println("請上傳一張圖片");
 					}
 				}
 			}
@@ -160,7 +161,6 @@ public class DonationServlet extends HttpServlet {
 				errorMsgs.put("errorSupplyStatus", "物資狀態(全新/二手/不拘)");
 			} 
 		}
-		
 		if(!choice.equals("insert")) {
 			if(donationIdStr == null || donationIdStr.trim().length() == 0) {
 				errorMsgs.put("errorDonationIdStr", "系統須帶入donationId");
