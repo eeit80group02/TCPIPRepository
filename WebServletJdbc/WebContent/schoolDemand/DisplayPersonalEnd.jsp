@@ -9,9 +9,18 @@
 </head>
 <body>
 
+<!-- ­¶­º -->
+<c:import context="${pageContext.request.contextPath}" url="/template/header.jsp"/>
+<!-- ­¶­º -->
+	
+	
+	
 	<form action="SchoolDemandServlet.do?type=displayPersonalEnd" method="post">
 	<input type="submit">
 	</form>
+	
+	
+	
 	<c:forEach var="bean" items="${list}">
 		${bean.participant}<br>
 		${bean.activityTopic}<br>
@@ -26,5 +35,12 @@
 		${bean.offerBean.place}<br>
 		${bean.offerBean.food}<hr>
 	</c:forEach>
+	
+	
+	
+<!-- ­¶§À -->	
+<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>	
+<!-- ­¶§À -->
+
 </body>
 </html>
