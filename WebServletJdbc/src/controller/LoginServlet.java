@@ -126,12 +126,9 @@ public class LoginServlet extends HttpServlet
 		{
 			session = request.getSession();
 			session.setAttribute("LoginOK",bean);
-			String requestURI = (String)session.getAttribute("requestURI");
-			if(requestURI != null)
-			{
-				requestURI = (requestURI.length() == 0) ? request.getContextPath() : requestURI;
-			}	
-			response.sendRedirect(response.encodeRedirectURL(requestURI));
+
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+			return;
 		}
 		else
 		{
@@ -183,12 +180,9 @@ public class LoginServlet extends HttpServlet
 		{
 			session = request.getSession();
 			session.setAttribute("LoginOK",bean);
-			String requestURI = (String)session.getAttribute("requestURI");
-			if(requestURI != null)
-			{
-				requestURI = (requestURI.length() == 0) ? request.getContextPath() : requestURI;
-			}	
-			response.sendRedirect(response.encodeRedirectURL(requestURI));
+
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath()));
+			return;
 		}
 		else
 		{

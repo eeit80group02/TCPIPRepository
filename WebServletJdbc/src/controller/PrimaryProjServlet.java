@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import model.MemberBean;
 import model.PrimaryProjBean;
 import model.service.PrimaryProjService;
 
@@ -180,8 +181,17 @@ public class PrimaryProjServlet extends HttpServlet
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
 		
+		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("LoginOK").getClass());
+		if(session.getAttribute("LoginOK").getClass().equals("class model.SchoolBean"))
+		{
+			System.out.println("hoho");
+		}
+//		System.out.println("loginOK" + loginOK);
+		
 		// 接收資料
-		String memberId = request.getParameter("memberId");
+//		String memberId = request.getParameter("memberId");
+		String memberId = "1";
 		
 		// 驗證資料
 		if(memberId == null || memberId.trim().length() == 0)
@@ -217,7 +227,7 @@ public class PrimaryProjServlet extends HttpServlet
 		{
 			// 成功導向
 			System.out.println(result);
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("primaryProj",result);
 			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProj.jsp");
 //			request.setAttribute("primaryProj",bean);
