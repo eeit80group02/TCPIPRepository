@@ -14,7 +14,7 @@
 <body>
 
 <!-- 頁尾 -->	
-<footer class="page-footer grey darken-4">
+<footer class="page-footer grey darken-4" id="foooooooter">
 	<div class="container">
             <!-- footer上半部的container -->
             <div class="row">
