@@ -7,20 +7,25 @@ import java.util.List;
 
 import model.OffersBean;
 import model.PrimaryProjBean;
+import model.ProcessingMemberBean;
 import model.SchoolDemandBean;
 import model.dao.OffersDAOJdbc;
+import model.dao.ProcessingMemberDAOJdbc;
 import model.dao.SchoolDemandDAOJdbc;
 import model.dao.interfaces.OffersDAO;
+import model.dao.interfaces.ProcessingMemberDAO;
 import model.dao.interfaces.SchoolDemandDAO;
 
 public class SchoolDemandService {
 	
 	private SchoolDemandDAO schoolDemandDao;
 	private OffersDAO offersDao;
+	private ProcessingMemberDAO processingMember ;
 	
 	public SchoolDemandService(){
 		this.schoolDemandDao = new SchoolDemandDAOJdbc();
 		this.offersDao = new OffersDAOJdbc();
+		this.processingMember = new ProcessingMemberDAOJdbc();
 	}
 	
 	public SchoolDemandBean creatSchoolDemand(SchoolDemandBean bean){
@@ -118,18 +123,24 @@ public class SchoolDemandService {
 	public List<SchoolDemandBean> displayPersonalUnrender(SchoolDemandBean bean){
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		List<SchoolDemandBean> list = null;
+		List<ProcessingMemberBean> pMlist = null;
 		List<OffersBean> olist = null;
 		list = schoolDemandDao.getAll();
 		olist = offersDao.getAll();
+		pMlist = processingMember.getAll();
 		for(SchoolDemandBean temp : list){
 			for(OffersBean obean : olist){
 				if(temp.getDemandStatus().equals("洽談中") && bean.getSchoolId().equals(temp.getSchoolId()) && temp.getSchoolDemandId().equals(obean.getSchoolDemandId())){		
 					temp.setOfferBean(obean);
+				}
+			}
+			for(ProcessingMemberBean pMbean:pMlist){
+				if(temp.getSchoolDemandId() == pMbean.getSchoolDemandId() && pMbean.getCheckStatus().equals("待審核")){
+					temp.setProcessingMemberBean(pMbean);
 					result.add(temp);
 				}
 			}
-		}for(SchoolDemandBean temp : result){
-			list.remove(temp);
+			
 		}
 		list.clear();
 		olist.clear();

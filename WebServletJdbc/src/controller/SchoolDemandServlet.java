@@ -88,10 +88,8 @@ public class SchoolDemandServlet extends HttpServlet {
 						.println("執行 SchoolDemandServlet displayPersonalFail");
 				displayPersonalFail(request, response);
 			} else {
-				errorMsg.put("errorURL",
-						"請勿做作不正當請求(PrimaryProjServlet line.83)");
-				request.getRequestDispatcher("/error.jsp").forward(request,
-						response);
+				errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.83)");
+				request.getRequestDispatcher("/error.jsp").forward(request,response);
 				return;
 			}
 		}
@@ -106,7 +104,6 @@ public class SchoolDemandServlet extends HttpServlet {
 		System.out.println("----------------------------------Star CreatSchoolDemand----------------------------------");
 
 		// 取值
-
 		String schoolId = (String)session.getAttribute("schoolId");
 		String participant = request.getParameter("participant");
 		String activityTopic = request.getParameter("activityTopic");
@@ -227,29 +224,27 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		if (bean != null) {
 			System.out.println("建立成功bean=" + bean);
-			request.getRequestDispatcher("test.jsp").forward(request, response);
+			response.sendRedirect("test.jsp");
+			//request.getRequestDispatcher("test.jsp").forward(request, response);
+			return;
 		} else {
-			System.out.println("建立失敗");
+			errorMsg.put("Error","計畫需求建立失敗");
+			request.getRequestDispatcher("/error.jsp").forward(request,response);
 		}
 	}
-
 	public void updateSchoolDemand(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("----------------------------------Star UpdateSchoolDemand----------------------------------");
 
 		SchoolDemandBean bean = new SchoolDemandBean();
 		OffersBean obean = new OffersBean();
 		Map<String, String> errorMsg = new HashMap<String, String>();
+		HttpSession session = request.getSession();
 		
 		// 取值
-		String schoolDemandId = request.getParameter("schoolDemandId");
-		bean.setSchoolDemandId(27);
-		bean = service.display(bean);
-		request.setAttribute("bean", bean);
-		if(bean!=null){
-			request.getRequestDispatcher("UpdataSchoolDemand.jsp").forward(request, response);
-			return;
-		}
-		String schoolId = request.getParameter("schoolId");
+		//String schoolDemandId = request.getParameter("schoolDemandId");
+		//String schoolId = request.getParameter("schoolId");
+		String schoolDemandId = (String)session.getAttribute("schoolDemandId");
+		String schoolId = (String)session.getAttribute("schoolId");
 		String participant = request.getParameter("participant");
 		String activityTopic = request.getParameter("activityTopic");
 		String activityLocation = request.getParameter("activityLocation");
@@ -369,8 +364,8 @@ public class SchoolDemandServlet extends HttpServlet {
 
 			if (bean != null) {
 				System.out.println("更新成功bean=" + bean);
-				request.getRequestDispatcher("UpdataSchoolDemand.jsp").forward(
-						request, response);
+				response.sendRedirect("test.jsp");
+				//request.getRequestDispatcher("UpdataSchoolDemand.jsp").forward(request, response);
 			} else {
 				System.out.println("更新失敗");
 			}
@@ -449,7 +444,8 @@ public class SchoolDemandServlet extends HttpServlet {
 		}
 		bean.setSchoolId(sId);
 		result = service.displayPersonalAll(bean);
-		request.setAttribute("list", result);
+//		request.setAttribute("list", result);
+		session.setAttribute("list", result);
 		if (!result.isEmpty()) {
 			System.out.println("成功查詢list=" + result);
 			request.getRequestDispatcher("DisplayAllPersonal.jsp").forward(
