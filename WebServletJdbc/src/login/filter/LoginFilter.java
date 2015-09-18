@@ -24,6 +24,8 @@ import javax.servlet.http.HttpSession;
 				@WebInitParam(name = "mustLogin2", value = "/fullProj/fullproj.jsp"),
 				@WebInitParam(name = "mustLogin3", value = "/fullProj.do?type=displayAll"),
 				@WebInitParam(name = "mustLogin4", value = "/personal/personal.jsp"),
+				@WebInitParam(name = "mustLogin5", value = "/primaryProj.do?type=displayPersonal"),
+				@WebInitParam(name = "mustLogin5", value = "/personal/displayPersonalPrimaryProj.jsp"),
 		})
 public class LoginFilter implements Filter
 {
