@@ -5,6 +5,7 @@ import global.GlobalService;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.MemberBean;
 import model.PrimaryProjBean;
 import model.ProcessingProjBean;
 import model.dao.MemberDAOJdbc;
@@ -44,6 +45,7 @@ public class PrimaryProjService
 			if(result != null)
 			{
 				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+				result.setMemberBean(memberDAO.select(result.getMemberId()));
 			}
 		}
 		return result ;
