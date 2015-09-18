@@ -919,43 +919,43 @@
 						}
 					})
 			//送出表單前的驗證
-			$("#btndiv").on({
-				"mouseover":function(){
-				if(
-				$("#registerform").data().accountresults &&
-				$("#registerform").data().passwordresults &&
-				$("#registerform").data().passwordresults2 &&
-				$("#registerform").data().contactresult &&
-				$("#registerform").data().emailresult &&
-				$("#registerform").data().birthdayresult &&
-				$("#lastName").val().trim() !== "" &&
-				$("#firstName").val().trim() !== "" &&
-				$("#address").val().trim() !== "" 
-				){
-					$("#submitbtn").prop("disabled",false);
-				}else{
-					$("#submitbtn").prop("disabled",true);
-				}
-			},"mouseout":function(){
+// 			$("#btndiv").on({
+// 				"mouseover":function(){
+// 				if(
+// 				$("#registerform").data().accountresults &&
+// 				$("#registerform").data().passwordresults &&
+// 				$("#registerform").data().passwordresults2 &&
+// 				$("#registerform").data().contactresult &&
+// 				$("#registerform").data().emailresult &&
+// 				$("#registerform").data().birthdayresult &&
+// 				$("#lastName").val().trim() !== "" &&
+// 				$("#firstName").val().trim() !== "" &&
+// 				$("#address").val().trim() !== "" 
+// 				){
+// 					$("#submitbtn").prop("disabled",false);
+// 				}else{
+// 					$("#submitbtn").prop("disabled",true);
+// 				}
+// 			},"mouseout":function(){
 
-				if(
-					$("#registerform").data().accountresults &&
-					$("#registerform").data().passwordresults &&
-					$("#registerform").data().passwordresults2 &&
-					$("#registerform").data().contactresult &&
-					$("#registerform").data().emailresult &&
-					$("#registerform").data().birthdayresult &&
-					$("#lastName").val().trim() !== "" &&
-					$("#firstName").val().trim() !== "" &&
-					$("#address").val().trim() !== "" 
+// 				if(
+// 					$("#registerform").data().accountresults &&
+// 					$("#registerform").data().passwordresults &&
+// 					$("#registerform").data().passwordresults2 &&
+// 					$("#registerform").data().contactresult &&
+// 					$("#registerform").data().emailresult &&
+// 					$("#registerform").data().birthdayresult &&
+// 					$("#lastName").val().trim() !== "" &&
+// 					$("#firstName").val().trim() !== "" &&
+// 					$("#address").val().trim() !== "" 
 					
-				){
-					$("#submitbtn").prop("disabled",false);
-				}else{
-					$("#submitbtn").prop("disabled",true);
-				}
-			}
-			});
+// 				){
+// 					$("#submitbtn").prop("disabled",false);
+// 				}else{
+// 					$("#submitbtn").prop("disabled",true);
+// 				}
+// 			}
+// 			});
 			
 			//固定表單測試表的位置
 			$(window).on("scroll", function() {
@@ -1117,14 +1117,14 @@
 		}
 	};
 
-	$(function () {
-		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
-			console.log(responseJson);
-			$("#captchaKey").val(responseJson.captchaKey);
-			$("#captchaField").text(responseJson.captchaImage);
-			$("#captchaImage").attr("src",$("#captchaField").val());
-		}); 
-	});
+// 	$(function () {
+// 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+// 			console.log(responseJson);
+// 			$("#captchaKey").val(responseJson.captchaKey);
+// 			$("#captchaField").text(responseJson.captchaImage);
+// 			$("#captchaImage").attr("src",$("#captchaField").val());
+// 		}); 
+// 	});
 	
  	function refresh() {
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
