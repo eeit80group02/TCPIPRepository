@@ -166,7 +166,7 @@
 						<div class="row">
 							<div class="col l2 btn yellow lighten-5 black-text tooltipped" data-position="right" data-delay="50"  data-tooltip="圖檔僅接受jpg、png格式，檔案大小請勿超過2M" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 								<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">頭像</span>
-								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="pitcture" accept="image/x-png, image/jpeg" name="pitcture">
+								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture">
 							</div>									
 							<!-- 身分證驗證按鈕 -->
 							 <button data-target="modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
@@ -557,8 +557,14 @@
 						$("~ label",this).css("opacity","0");
 					}
 			})
-			//取消註冊pitcture的focus特效
-			$("#pitcture").off("focus");
+			//取消註冊picture的focus特效
+			$("#picture").off("focus")
+			
+			
+			$("#view").on("click",function(){
+				$("#picture").trigger("click");
+			});
+			
 				
 			//禁止使用者點擊
 				$("#validateform").on({
@@ -990,8 +996,8 @@
 					$(this).removeClass("cyan lighten-4");
 				}})
 			})
-			$("#pitcture").change(function(){
-				var file = $("#pitcture")[0].files[0];
+			$("#picture").change(function(){
+				var file = $("#picture")[0].files[0];
 				var reader  = new FileReader();
 				reader.onloadend = function () {
 					console.log(reader.result);
