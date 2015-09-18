@@ -97,8 +97,8 @@ public class InsertFullProj
 				pstmt.setInt(15,150000);						// budget 活動預算
 		
 //				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
-				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015-05-10").getTime()));				// createDate  建立日期
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/05/10").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
 				
@@ -144,7 +144,7 @@ public class InsertFullProj
 				pstmt.setInt(15,50000);						// budget 活動預算
 		
 //							pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2014/08/28").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動組-企畫組-隊輔組-總務組-美宣組");		// orgArchitecture  成員架構
@@ -192,7 +192,7 @@ public class InsertFullProj
 				pstmt.setInt(15,300000);						// budget 活動預算
 		
 //										pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/07/01").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -239,7 +239,7 @@ public class InsertFullProj
 				pstmt.setInt(15,100000);						// budget 活動預算
 		
 //													pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/08/21").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"洽談中");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"總召-活動紀錄組-募款行政組-教案課程組-隊輔組-活動策畫組");		// orgArchitecture  成員架構
@@ -287,7 +287,7 @@ public class InsertFullProj
 				pstmt.setInt(15,7700000);						// budget 活動預算
 		
 //																pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/10/04").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"洽談中");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -335,7 +335,7 @@ public class InsertFullProj
 				pstmt.setInt(15,90000);						// budget 活動預算
 		
 //																			pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2014/12/20").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -382,7 +382,7 @@ public class InsertFullProj
 				pstmt.setInt(15,50000);		// budget 活動預算
 		
 //																						pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/09/20").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -430,7 +430,7 @@ public class InsertFullProj
 				pstmt.setInt(15,50000);		// budget 活動預算
 		
 //																									pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/02/11").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -478,7 +478,7 @@ public class InsertFullProj
 				pstmt.setInt(15,50000);		// budget 活動預算
 		
 //																												pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/10/05").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -525,7 +525,7 @@ public class InsertFullProj
 				pstmt.setInt(15,100000);		// budget 活動預算
 		
 //																															pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2014/06/13").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"洽談中");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -573,7 +573,7 @@ public class InsertFullProj
 				pstmt.setInt(15,500000);		// budget 活動預算
 		
 //																																		pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/05/14").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -621,7 +621,7 @@ public class InsertFullProj
 				pstmt.setInt(15,40000);		// budget 活動預算
 		
 //																																					pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/05/12").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"招募中");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -669,7 +669,7 @@ public class InsertFullProj
 				pstmt.setInt(15,50000);		// budget 活動預算
 		
 //																																					pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2014/03/11").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
@@ -809,7 +809,7 @@ public class InsertFullProj
 				pstmt.setInt(15,100000);		// budget 活動預算
 		
 	//																																								pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				SimpleDateFormat sdf = new SimpleDateFormat();
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2015/03/01").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-總務組");		// orgArchitecture  成員架構
@@ -836,7 +836,9 @@ public class InsertFullProj
 		catch(Exception e)
 		{
 			e.printStackTrace();
-		}	
+		}
+		
+		System.out.println("完整計畫新增完成");
 	}
 	
 	

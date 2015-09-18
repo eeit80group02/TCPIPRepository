@@ -30,7 +30,7 @@
 
 
 <body class="deep-orange lighten-5">
-<header> <!-- 頁首 --> <nav>
+<header> 頁首 <nav>
 	<div class="nav-wrapper grey darken-3">
 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
 			src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
@@ -46,6 +46,7 @@
 	</div>
 	</nav>
 </header>
+
 	 
  <!-- 登入用modal --> 
   <div id="modal1" class="modal">
@@ -88,7 +89,7 @@
 	<div class="row">
 	<!-- 檢查表單填寫情況 -->
 		<div class="col l3" id="validateform" style="position:absolute;">
-	        <div class="card-panel" style="padding:0;margin:0;">
+	        <div class="card-panel hoverable" style="padding:0;margin:0;">
 			  <ul id="formul" class="collapsible" data-collapsible="accordion" style="font-family:微軟正黑體;font-weight:600;margin:0;">
 			    <li style="margin:0;">
 			      <button class="collapsible-header deep-orange lighten-4 left-align" id="accountinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;" autofocus><i class="material-icons">play_arrow</i>帳號</button>
@@ -175,7 +176,7 @@
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly">
 <!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}${MsgErr.errorAccountExists}</font>
+							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
 							<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
 							
 						</div>
@@ -205,7 +206,7 @@
 				
 				<div class="row">
 				<!-- 姓氏 -->
-					<div class="col l4 input-field left">
+					<div class="col l4 input-field left" style="padding-left:0;">
 						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
@@ -437,8 +438,8 @@
 	<script
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
-	<script src="/WebServletJdbc/js/date.format.js"></script>
+<!-- 	<script type="text/javascript" src="js/idnumberchk.js"></script>	 -->
+<!-- 	<script src="/WebServletJdbc/js/date.format.js"></script> -->
 	
 	<script>
 	
@@ -540,13 +541,10 @@
 		    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
 				
 			//mouseover時，單個input元素被舉起
-			$(".input-field").hover(function(){
-				$(this).addClass("hoverable");
-			},function(){
-				$(this).removeClass("hoverable");
-			})
+			$(".input-field").addClass("hoverable");
+
 			//取消註冊gender的hover特效
-			$("#genderradio").unbind("mouseenter mouseleave");
+			$("#genderradio").removeClass("hoverable");
 			//開始填寫 input元素時 背景轉為白色
 			$("#registerform input").focus(function(){
 				$(this).parent().css("background-color","white");
