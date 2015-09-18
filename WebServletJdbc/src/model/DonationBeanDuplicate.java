@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class DonationBeanDuplicate {
+public class DonationBeanDuplicate implements Serializable {
 	private int donationId; // 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK*
 	private int schoolId; // 學校編號 FK
 	// add

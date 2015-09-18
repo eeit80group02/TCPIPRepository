@@ -67,7 +67,6 @@ public class DonationDAOJdbc implements DonationDAO
 				pstmt.setString(7,bean.getSize());
 				pstmt.setString(8,bean.getDemandContent());
 				pstmt.setString(9,bean.getSupplyStatus());
-				System.out.println("bean.getDemandTime().getTime()"+bean.getDemandTime().getTime());
 
 				pstmt.setTimestamp(10,new java.sql.Timestamp(bean.getDemandTime().getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(bean.getExpireTime().getTime()));
@@ -124,7 +123,7 @@ public class DonationDAOJdbc implements DonationDAO
 				pstmt.setString(7,bean.getSize());
 				pstmt.setString(8,bean.getDemandContent());
 				pstmt.setString(9,bean.getSupplyStatus());
-				System.out.println("bean.getDemandTime().getTime()"+bean.getDemandTime().getTime());
+
 				pstmt.setTimestamp(10,new java.sql.Timestamp(bean.getDemandTime().getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(bean.getExpireTime().getTime()));
 				pstmt.setString(12,bean.getImageName());

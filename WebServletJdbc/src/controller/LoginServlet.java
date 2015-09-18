@@ -150,6 +150,7 @@ public class LoginServlet extends HttpServlet
 		if(session.getAttribute("timeOut") != null)
 		{
 			session.removeAttribute("timeOut");
+			System.out.println("產生新session");
 		}
 		
 		// 接收資料
