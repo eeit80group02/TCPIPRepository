@@ -29,6 +29,7 @@ public class DemandSelected extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
+		// 此網頁要學校需登入後才能使用
 		HttpSession session = request.getSession(false);
 		if (session == null) {
 			// ...

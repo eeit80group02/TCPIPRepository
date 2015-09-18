@@ -10,7 +10,7 @@
 <body>
 <center>
 <h3>Express delivery</h3>
-<a href='index.jsp'>回首頁</a>|
+<a href='DonationIndex.jsp'>回首頁</a>|
 	<table style="width:1000px;height:60px;background-color:#66FFFF;border:1px solid black;">
 		<form action='<c:url value="access.do"/>' method='POST'>
 		<tr>

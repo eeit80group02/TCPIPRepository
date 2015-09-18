@@ -84,6 +84,5 @@ public class OrderAccessServlet extends HttpServlet {
 
 		RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
 		rd.forward(request, response);
-		
 	}
 }

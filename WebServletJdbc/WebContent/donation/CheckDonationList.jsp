@@ -272,7 +272,7 @@
 		</center>
 		
 		<!-- 訂單送出 -->
-		<form action='<c:url value="cart.do"/>' method='POST' target='#drop-a-line'>
+		<form action='<c:url value="checkOrder.do"/>' method='POST' target='#drop-a-line'>
 			<input type='submit' name='fillOrder' value='booking' id='booking'>
 		</form>
 		
