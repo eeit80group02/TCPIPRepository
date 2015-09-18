@@ -98,16 +98,20 @@ public class DonationServlet extends HttpServlet {
 					} else if(fldName.equals("demandContent")) {
 						demandContent = value;
 					} else if(fldName.equals("supplyStatus")) {
-						if (Integer.parseInt(value) == 1) {
-								supplyStatus = "不拘";
-						} else if(Integer.parseInt(value) == 2) {
-							supplyStatus = "全新";
-						} else if(Integer.parseInt(value) == 3) {
-							supplyStatus = "二手";
+						System.out.println("value "+value);
+						if (choice.equals("insert")) {
+							if (Integer.parseInt(value) == 1) {
+							supplyStatus = "不拘";
+							} else if(Integer.parseInt(value) == 2) {
+								supplyStatus = "全新";
+								System.out.println("@1");
+							} else if(Integer.parseInt(value) == 3) {
+								supplyStatus = "二手";
+							} 
+						} else if(choice.equals("update")) {
+							supplyStatus = value;
 						}
 						
-//						System.out.println("value= "+value);
-//						System.out.println("supplyStatus= "+supplyStatus);
 					} else if(fldName.equals("remark")) {
 						remark = value;
 					} 
@@ -185,6 +189,7 @@ public class DonationServlet extends HttpServlet {
 		donationBean.setSize(size);
 		donationBean.setDemandContent(demandContent);
 		donationBean.setSupplyStatus(supplyStatus);
+		System.out.println("@@1"+supplyStatus);
 		
 		// 系統設定時間
 		if (!choice.equals("delete")) {
@@ -249,7 +254,7 @@ public class DonationServlet extends HttpServlet {
 			// 4.永續層存取
 			DonationService service = new DonationService();
 			DonationBean donationBeanUpdate = service.UpdateOneDemandBySchool(donationBean);
-
+			System.out.println("@@2"+supplyStatus);
 			if (donationBeanUpdate == null) {
 				errorMsgs.put("Fail", "物資需求更新失敗");
 				System.out.println("物資需求更新失敗");
