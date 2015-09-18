@@ -176,7 +176,7 @@
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly">
 <!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}${MsgErr.errorAccountExists}</font>
+							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
 							<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
 							
 						</div>
@@ -1117,14 +1117,14 @@
 		}
 	};
 
-// 	$(function () {
-// 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
-// 			console.log(responseJson);
-// 			$("#captchaKey").val(responseJson.captchaKey);
-// 			$("#captchaField").text(responseJson.captchaImage);
-// 			$("#captchaImage").attr("src",$("#captchaField").val());
-// 		}); 
-// 	});
+	$(function () {
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+			console.log(responseJson);
+			$("#captchaKey").val(responseJson.captchaKey);
+			$("#captchaField").text(responseJson.captchaImage);
+			$("#captchaImage").attr("src",$("#captchaField").val());
+		}); 
+	});
 	
  	function refresh() {
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {

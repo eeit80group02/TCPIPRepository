@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("register2.jsp---->ProcessMemberServlet.java,Success!!");
+		System.out.println("register.jsp---->ProcessMemberServlet.java,Success!!");
 		request.setCharacterEncoding("utf-8");//說明傳送到本程式資料的內碼
 		// 準備存放錯誤訊息的Map物件
 		Map<String, String> errMsg = new HashMap<String, String>();
@@ -237,7 +237,7 @@ public class RegisterServlet extends HttpServlet {
 		// 如果有一個以上的必填欄位有錯誤
 		if (!errMsg.isEmpty()) {
 			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
-			RequestDispatcher rd = request.getRequestDispatcher("register2.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("register.jsp");
 			rd.forward(request, response);
 			//若以上有任一欄位錯誤則return,停止以下的程式執行
 			return;
@@ -302,7 +302,7 @@ public class RegisterServlet extends HttpServlet {
 			if (!errMsg.isEmpty()) {
 				// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
 				RequestDispatcher rd = request
-						.getRequestDispatcher("register2.jsp");
+						.getRequestDispatcher("register.jsp");
 				rd.forward(request, response);
 				return;
 			}
