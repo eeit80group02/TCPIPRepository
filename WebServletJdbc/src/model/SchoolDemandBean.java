@@ -20,6 +20,7 @@ public class SchoolDemandBean implements Serializable
 	private String content; 			// 需求內容(1000字?)
 	private String demandStatus;		// 計畫狀態(待洽談、洽談中、洽談完成、洽談失敗)
 	private OffersBean offerBean; // 對應提供項目
+	private ProcessingMemberBean processingMemberBean;
 	
 	public SchoolDemandBean()
 	{
@@ -142,11 +143,19 @@ public class SchoolDemandBean implements Serializable
 		this.offerBean = offerBean;
 	}
 
+	public ProcessingMemberBean getProcessingMemberBean() {
+		return processingMemberBean;
+	}
+
+	public void setProcessingMemberBean(ProcessingMemberBean processingMemberBean) {
+		this.processingMemberBean = processingMemberBean;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "SchoolDemandBean [schoolDemandId=" + schoolDemandId + ", schoolId=" + schoolId + ", participant=" + participant + ", activityTopic=" + activityTopic + ", activityLocation=" + activityLocation + ", activitySuitable=" + activitySuitable
-				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + "]";
+				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + ", ProcessingMemberBean=" + processingMemberBean + "]";
 	}
 
 }

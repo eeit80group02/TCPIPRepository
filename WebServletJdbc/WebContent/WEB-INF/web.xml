@@ -7,6 +7,11 @@
     <res-auth>Container</res-auth>
     <res-sharing-scope>Shareable</res-sharing-scope>
   </resource-ref>
+  
+  <session-config>
+  	<session-timeout>1</session-timeout>
+  </session-config>
+
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -68,7 +73,7 @@
     <servlet-name>MessagesControllServlet</servlet-name>
     <url-pattern>/donation/messages.do</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>DonationSearchServlet</servlet-name>
     <servlet-class>controller.DonationSearchServlet</servlet-class>
   </servlet>

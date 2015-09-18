@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("LoginServlet");
+		
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
@@ -72,6 +73,12 @@ public class LoginServlet extends HttpServlet
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("timeOut") != null)
+		{
+			session.removeAttribute("timeOut");
+		}
 		
 		// 接收資料
 		String account = request.getParameter("account");
@@ -117,10 +124,14 @@ public class LoginServlet extends HttpServlet
 		SchoolBean bean = service.schoolLogin(schoolId,password);
 		if(bean != null)
 		{
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("LoginOK",bean);
-			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
+			String requestURI = (String)session.getAttribute("requestURI");
+			if(requestURI != null)
+			{
+				requestURI = (requestURI.length() == 0) ? request.getContextPath() : requestURI;
+			}	
+			response.sendRedirect(response.encodeRedirectURL(requestURI));
 		}
 		else
 		{
@@ -137,6 +148,12 @@ public class LoginServlet extends HttpServlet
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("timeOut") != null)
+		{
+			session.removeAttribute("timeOut");
+		}
 		
 		// 接收資料
 		String account = request.getParameter("account");
@@ -164,10 +181,14 @@ public class LoginServlet extends HttpServlet
 		
 		if(bean != null)
 		{
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("LoginOK",bean);
-			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
+			String requestURI = (String)session.getAttribute("requestURI");
+			if(requestURI != null)
+			{
+				requestURI = (requestURI.length() == 0) ? request.getContextPath() : requestURI;
+			}	
+			response.sendRedirect(response.encodeRedirectURL(requestURI));
 		}
 		else
 		{

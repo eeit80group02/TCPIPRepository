@@ -111,7 +111,7 @@ public class FullProjServlet extends HttpServlet
 
 				displayPersonalFullProj(request,response);
 			}
-			// 在個人頁面顯示  需跟學校洽談的計劃[type=displayPersonalByChat&memberId=?]
+			// 在個人頁面顯示  需跟學校洽談補齊的計劃[type=displayPersonalByChat&memberId=?]
 			else if(type.equals("displayPersonalByChat"))
 			{
 				System.out.println("執行 FullProjServlet displayPersonalFullProjByChat[需洽談的完整計劃列表]");
@@ -177,12 +177,12 @@ public class FullProjServlet extends HttpServlet
 			session.setAttribute("fullProj",result);
 			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalFullProjByChat.jsp");
 //			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
+//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);
 			
 		}
 		else
 		{
-			errorMsg.put("errorURL","X請勿做作不正當請求(PrimaryProjServlet line.154)");
+			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
 			request.getRequestDispatcher("/error.jsp").forward(request,response);
 			return;
 		}
@@ -652,12 +652,17 @@ public class FullProjServlet extends HttpServlet
 	private void displayFullProjAll(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+		
 		System.out.println("======================================================");
 		
 		List<FullProjBean> beans = service.displayFullProjAll();
 		request.setAttribute("fullProjAll",beans);
 		request.getRequestDispatcher("/fullProj/fullproj.jsp").forward(request,response);
+//		HttpSession session = request.getSession();
+//		session.setAttribute("fullProjAll",beans);
+//		response.sendRedirect(request.getContextPath() + "/fullProj/fullproj.jsp");
+		
+		
 		return;			
 	}
 

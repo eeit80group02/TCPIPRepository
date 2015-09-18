@@ -42,25 +42,25 @@
 
 </head>
 <body>
-<!-- Header -->
+	<!-- Header -->
 	<div class="navbar navbar-inverse">
 		<ul class="nav navbar-nav" id="headUl">
 			<li class="active"><a href="#">捐獻牆</a></li>
 			<li class="headList"><a href="#">熱門</a></li>
-			<li class="headList"><a href="#">最新發佈</a></li>
-			<li class="headList"><a href="#">即將結束</a></li>
-			<li class="headList"><a href="#">需求數量</a></li>
+			<li class="headList"><a href="search.do?type=byDemandtime">最新發佈</a></li>
+			<li class="headList"><a href="search.do?type=byExpiretime">即將結束</a></li>
+			<li class="headList"><a href="search.do?type=byAmount">需求數量</a></li>
 			<li class="headList"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">物資狀態<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
-					<li><a href="#">不拘</a></li>
-					<li><a href="#">全新</a></li>
-					<li><a href="#">二手</a></li>
+					<li><a href="<c:url value='search.do?supplyStatus=1'/>">不拘</a></li>
+					<li><a href="<c:url value='search.do?supplyStatus=2'/>">全新</a></li>
+					<li><a href="<c:url value='search.do?supplyStatus=3'/>">二手</a></li>
 				</ul></li>
 
 		</ul>
 		<form class="navbar-form navbar-left" role="search" id="headSearch">
 			<div class="form-group">
-				<input id="searchText" type="text" class="form-control" placeholder="${OneAllDemands[0].schoolName}" autocomplete="off">
+				<input id="searchText" type="text" class="form-control" placeholder="輸入物品或學校" autocomplete="off">
 			</div>
 
 			<button type="submit" class="btn btn-small btn-floating">

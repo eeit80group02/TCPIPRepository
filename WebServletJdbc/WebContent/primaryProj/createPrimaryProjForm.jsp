@@ -175,7 +175,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;">${param.projAbstract}</textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -186,7 +186,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
-								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
 							</div>	
 							<div class="col l4">	
 								<span class="error">${error.content}</span>
@@ -262,7 +262,7 @@
 			   format: 'yyyy-mm-dd',
 			   today:"今天",
 			   clear:"重選",
-			   close:"關閉"
+			   close:"確定"
 		    });
 
 		   var picker1 = $picker1.pickadate('picker');

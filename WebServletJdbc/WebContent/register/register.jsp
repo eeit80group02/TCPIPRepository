@@ -176,7 +176,7 @@
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly">
 <!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}${MsgErr.errorAccountExists}</font>
+							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
 							<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
 							
 						</div>
@@ -925,43 +925,43 @@
 						}
 					})
 			//送出表單前的驗證
-			$("#btndiv").on({
-				"mouseover":function(){
-				if(
-				$("#registerform").data().accountresults &&
-				$("#registerform").data().passwordresults &&
-				$("#registerform").data().passwordresults2 &&
-				$("#registerform").data().contactresult &&
-				$("#registerform").data().emailresult &&
-				$("#registerform").data().birthdayresult &&
-				$("#lastName").val().trim() !== "" &&
-				$("#firstName").val().trim() !== "" &&
-				$("#address").val().trim() !== "" 
-				){
-					$("#submitbtn").prop("disabled",false);
-				}else{
-					$("#submitbtn").prop("disabled",true);
-				}
-			},"mouseout":function(){
+// 			$("#btndiv").on({
+// 				"mouseover":function(){
+// 				if(
+// 				$("#registerform").data().accountresults &&
+// 				$("#registerform").data().passwordresults &&
+// 				$("#registerform").data().passwordresults2 &&
+// 				$("#registerform").data().contactresult &&
+// 				$("#registerform").data().emailresult &&
+// 				$("#registerform").data().birthdayresult &&
+// 				$("#lastName").val().trim() !== "" &&
+// 				$("#firstName").val().trim() !== "" &&
+// 				$("#address").val().trim() !== "" 
+// 				){
+// 					$("#submitbtn").prop("disabled",false);
+// 				}else{
+// 					$("#submitbtn").prop("disabled",true);
+// 				}
+// 			},"mouseout":function(){
 
-				if(
-					$("#registerform").data().accountresults &&
-					$("#registerform").data().passwordresults &&
-					$("#registerform").data().passwordresults2 &&
-					$("#registerform").data().contactresult &&
-					$("#registerform").data().emailresult &&
-					$("#registerform").data().birthdayresult &&
-					$("#lastName").val().trim() !== "" &&
-					$("#firstName").val().trim() !== "" &&
-					$("#address").val().trim() !== "" 
+// 				if(
+// 					$("#registerform").data().accountresults &&
+// 					$("#registerform").data().passwordresults &&
+// 					$("#registerform").data().passwordresults2 &&
+// 					$("#registerform").data().contactresult &&
+// 					$("#registerform").data().emailresult &&
+// 					$("#registerform").data().birthdayresult &&
+// 					$("#lastName").val().trim() !== "" &&
+// 					$("#firstName").val().trim() !== "" &&
+// 					$("#address").val().trim() !== "" 
 					
-				){
-					$("#submitbtn").prop("disabled",false);
-				}else{
-					$("#submitbtn").prop("disabled",true);
-				}
-			}
-			});
+// 				){
+// 					$("#submitbtn").prop("disabled",false);
+// 				}else{
+// 					$("#submitbtn").prop("disabled",true);
+// 				}
+// 			}
+// 			});
 			
 			//固定表單測試表的位置
 			$(window).on("scroll", function() {

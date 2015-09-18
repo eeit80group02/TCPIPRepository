@@ -24,6 +24,7 @@
 		${bean.offerBean.room}<br>
 		${bean.offerBean.place}<br>
 		${bean.offerBean.food}<hr>
+		${bean.ProcessingMemberBean. }
 	</c:forEach>
 </body>
 </html>

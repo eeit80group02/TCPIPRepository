@@ -19,7 +19,7 @@ body {
 <center>
 <center>
 <h3>${OneDemand.schoolName}單一需求</h3>
-<a href='index.jsp'>回首頁</a>|
+<a href='DonationIndex.jsp'>回首頁</a>|
 <!-- <form action='demand.do' method='GET'> -->
 <%-- 	<input type='text' name='schoolId' value='${param.schoolId}'> --%>
 <!-- 	<input type='submit' name='findOne' value='app'> -->

@@ -10,8 +10,9 @@
 <body>
 	<h3>首頁</h3>
 	<hr>
+	<a href='../index.jsp'>TCPIP入口</a>|
 	<a href='InsertDonateGoods.jsp'>學校新增物資需求</a>|
-	<a href="<c:url value='demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>">學校查詢所刊登的需求</a>|
+<%-- 	<a href="<c:url value='demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>">學校查詢所刊登的需求</a>| --%>
 	<a href="<c:url value='demand.do?type=FindGoods'/>">會員查詢捐獻頁面</a>|
 	
 </body>
