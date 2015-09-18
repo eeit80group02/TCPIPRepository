@@ -114,6 +114,7 @@ public class DemandSelected extends HttpServlet {
 //			return;
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
+			return;
 			
 		} else if (type.equals("OneDeamndBySchool")) {
 			// 2.資料轉換
@@ -141,7 +142,7 @@ public class DemandSelected extends HttpServlet {
 //			return;
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/OneDeamndBySchool.jsp"));
-			
+			return;
 		} else if (type.equals("UpdateOneDemand")) {
 			int donationId = Integer.parseInt(donationIdStr);
 			int schoolId = Integer.parseInt(schoolIdStr);
@@ -156,7 +157,7 @@ public class DemandSelected extends HttpServlet {
 //			return;
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/UpdateOneDemand.jsp"));
-			
+			return;
 		}
 	}
 }
