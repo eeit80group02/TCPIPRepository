@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		System.out.println("LoginServlet");
+		
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
@@ -48,12 +49,14 @@ public class LoginServlet extends HttpServlet
 			if(type.equals("member"))
 			{
 				// 會員登入
+				System.out.println("member");
 				memberLogin(request,response);
 			}
 			
 			if(type.equals("school"))
 			{
 				// 學校登入
+				System.out.println("school");
 				schoolLogin(request,response);
 			}
 		}
@@ -71,10 +74,17 @@ public class LoginServlet extends HttpServlet
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
 		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("timeOut") != null)
+		{
+			session.removeAttribute("timeOut");
+		}
+		
 		// 接收資料
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
-		
+		System.out.println("account = " + account);
+		System.out.println("password = " + password);
 		// 驗證資料
 		if(account == null || account.trim().length() == 0)
 		{
@@ -112,13 +122,16 @@ public class LoginServlet extends HttpServlet
 		
 		// 進行 business logic
 		SchoolBean bean = service.schoolLogin(schoolId,password);
-		
 		if(bean != null)
 		{
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("LoginOK",bean);
-			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
+			String requestURI = (String)session.getAttribute("requestURI");
+			if(requestURI != null)
+			{
+				requestURI = (requestURI.length() == 0) ? request.getContextPath() : requestURI;
+			}	
+			response.sendRedirect(response.encodeRedirectURL(requestURI));
 		}
 		else
 		{
@@ -135,6 +148,12 @@ public class LoginServlet extends HttpServlet
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("timeOut") != null)
+		{
+			session.removeAttribute("timeOut");
+		}
 		
 		// 接收資料
 		String account = request.getParameter("account");
@@ -162,10 +181,14 @@ public class LoginServlet extends HttpServlet
 		
 		if(bean != null)
 		{
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("LoginOK",bean);
-			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/index.jsp"));
+			String requestURI = (String)session.getAttribute("requestURI");
+			if(requestURI != null)
+			{
+				requestURI = (requestURI.length() == 0) ? request.getContextPath() : requestURI;
+			}	
+			response.sendRedirect(response.encodeRedirectURL(requestURI));
 		}
 		else
 		{

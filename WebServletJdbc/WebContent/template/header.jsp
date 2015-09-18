@@ -22,25 +22,38 @@
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
 		<div class="nav-wrapper grey darken-3">
-			<a href="<c:url value="/index.jsp" />" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+			<a href="<c:url value="/index.jsp" />" class="brand-logo">
+			 <img alt="TCPIP" title="TCPIP"
 				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 			</a>
 	
 	
 			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-				<li><a href="!#">提案</a></li>
-				<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
+			
+<!-- 				根據登入顯示不同選項 -->
+				<c:if test="${not empty LoginOK}">
+					<c:if test="${LoginOK.beanName.equals('member')}">
+						<li><a href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提案</a></li>
+					</c:if>
+	
+					<c:if test="${LoginOK.beanName.equals('school')}">
+						<li><a href="#">提需求</a></li>
+						<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
+					</c:if>
+				</c:if>
+				
+<!-- 				公開&相同 -->
 				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
-				<li><a href="<c:url value="/donation/DonationIndex.jsp" />">捐贈</a></li>
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />">捐贈</a></li>
 				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">
-						<li><a href="${pageContext.request.contextPath}/personal/personal.jsp">會員頁面</a></li>
+						<li><a href="<c:url value="/personal/personal.jsp" />">會員頁面</a></li>
 					</c:if>
 	
 					<c:if test="${LoginOK.beanName.equals('school')}">
-						<li><a href="#">學校頁面</a></li>
+						<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 					</c:if>
 				</c:if>
 					
@@ -51,7 +64,7 @@
 					</c:when>
 					
 					<c:otherwise>
-						<li><a href="${pageContext.request.contextPath}/login/logout.jsp">登出</a></li>
+						<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
 					</c:otherwise>
 				</c:choose>
 				<li><a href="#!"><i class="material-icons">search</i></a></li>
@@ -98,10 +111,12 @@
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		(function($) {
-			//footer header字的大小
-			$("a").css("font-size","1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
+			//包裹logo的a高度
+			$("a.brand-logo").css("height",$("img[title='TCPIP']").height());
+			//footer header字的大小
+			$("a").css("font-size","1.2em");
 			//註冊modal事件
 			$(".modal-trigger").leanModal();
 			//帳號、密碼欄focus的背景色變化

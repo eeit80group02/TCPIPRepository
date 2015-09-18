@@ -58,7 +58,6 @@
 				<div class="row card-panel hoverable" style="background-color:#FFFCEC;">
 					<!-- 摘要 -->
 					<div class="col l8 card-panel hoverable offset-l2" style="background-color:#D1F0E5;font-family:微軟正黑體;font-size:1.2em;font-weight:300;">
-							感謝大家的支持，讓我們在3天內即達成目標接下來我們也開放大家加購鏡頭跟手工皮革手腕繩（黑／淺駝）請想要加購的朋友們直接在右邊的贊助選項中點選你想加購的品項我們會連同您原本贊助的品項一同寄出！
 							${primaryProj.projAbstract}
 					</div>
 				</div>
@@ -75,7 +74,6 @@
 					<div class="row">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
-							我們是社團法人台灣防止虐待動物協會 TSPCA，今年三月初接獲民眾通報，台中后里區有一隻被囚禁 30 多年的保育類動物馬來熊，我們赴當地調查後並將牠帶出，提供最適合牠的生活環境及專業照護讓牠可以安心養老，但由於這筆照護費用高達新台幣十萬元將由協會完全負擔，在資金缺乏的情況下，希望可由此專案透過大家的力量知道馬來熊小黑的故事，一起幫助這條無辜的生命，讓牠感受自己生命的價值。
 							${primaryProj.content}
 							</p>
 						</div>
@@ -158,7 +156,7 @@
 				</div>
 			</div>
 			<div class="col l2">
-				<c:set var="deadline" value="900000" />
+				<c:set var="deadline" value="9000000" />
 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 
 				<!-- 	檢查 登入者是否學校 -->
 					<c:if test="${LoginOK.beanName.equals('school')}">

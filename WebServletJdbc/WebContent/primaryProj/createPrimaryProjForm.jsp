@@ -25,6 +25,7 @@
 	<title>createPrimaryProj</title>
 </head>
 
+
 <body class="light-blue lighten-5">
 
 	<!-- 頁首 -->
@@ -57,7 +58,7 @@
 		<!-- 切版面開始 -->
 		<div class="col l8">
 			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="get" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="primaryform" method="post">
+			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="primaryform">
 					<input type="hidden" name="memberId" value="${LoginOK.memberId}">
 				<div class="row">
 						<!-- 計畫封面 -->
@@ -65,7 +66,7 @@
 							<div class="col l8">
 								<div class="btn blue-grey lighten-2" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 									<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">封面</span>
-									<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="pitcture" accept="image/jpeg,image/png" name="imgFile" required>
+									<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/jpeg,image/png" name="imgFile" required>
 	      						</div>
 							</div>
 							<div class="col l4">
@@ -128,14 +129,14 @@
 						<div class="input-field row">
 							<div class="col l4">
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
-								<input type="date" name="startTime" id="starttime">
+								<input type="date" name="startTime" id="starttime" value="${param.startTime}">
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.startTime}</span>
 							</div>								
 							<div class="col l4">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">預計活動結束時間</span></div>
-								<input type="date" name="endTime" id="endtime" >
+								<input type="date" name="endTime" id="endtime" value="${param.endTime}">
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.endTime}</span>
@@ -174,7 +175,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;">${param.projAbstract}</textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -185,7 +186,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
-								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;"></textarea>
+								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
 							</div>	
 							<div class="col l4">	
 								<span class="error">${error.content}</span>
@@ -230,6 +231,9 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
+		   $("#view").on("click",function(){
+			$("#picture").trigger("click");   
+		   })
 		   
 			//指定ckeditor()的skin
 			CKEDITOR.replace("content",{skin:"moono"})
@@ -258,7 +262,7 @@
 			   format: 'yyyy-mm-dd',
 			   today:"今天",
 			   clear:"重選",
-			   close:"關閉"
+			   close:"確定"
 		    });
 
 		   var picker1 = $picker1.pickadate('picker');
@@ -275,8 +279,8 @@
 			$("#pagetitle").css("height", pagetitleheight);
 			
 			//
-			$("#pitcture").change(function(){
-				var file = $("#pitcture")[0].files[0];
+			$("#picture").change(function(){
+				var file = $("#picture")[0].files[0];
 				var reader  = new FileReader();
 				reader.onloadend = function () {
 					console.log(reader.result);

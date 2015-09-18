@@ -64,7 +64,7 @@
 			</form>
 		</div>
 		<br>
-
+		
 
 	<form id="drop-a-line" enctype='multipart/form-data' action='donate.do' method='POST'>
 			
@@ -77,11 +77,10 @@
 				<div class="col-md-6">
 					<!-- 上左 -->
 					<br> <br>
-					<!-- 額外 -->
- 					<input type='text' name='schoolId' value='${param.schoolId}'>
- 					
+					<!-- schoolId -->
+<%--  					<input type='hidden' name='schoolId' value='${LoginOK.schoolId}'> --%>
 					<div class="input-field col m12 s12">
-						<input type="text" id="schoolName"  name='schoolName' disabled value='${param.schoolName}'><label for="schoolName"><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="學校名稱"><span class="DetailTitle"><span class="glyphicon glyphicon-pencil"></span>&nbsp;申請單位&nbsp;</span></a></span></label>
+						<input type="text" id="schoolName"  name='schoolName' disabled value='${LoginOK.name}'><label for="schoolName"><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="學校名稱"><span class="DetailTitle"><span class="glyphicon glyphicon-pencil"></span>&nbsp;申請單位&nbsp;</span></a></span></label>
 					</div>
 					<!-- 上傳圖片 -->
 					<div id="basicDataHead">

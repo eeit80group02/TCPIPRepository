@@ -8,6 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	進入洽談頁面
+	學校個人頁面
+	
+	瀏覽計畫需求挑選發起者
+	
+	瀏覽參予過的初步計畫
 </body>
 </html>

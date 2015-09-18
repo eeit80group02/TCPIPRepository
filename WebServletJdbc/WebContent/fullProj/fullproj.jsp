@@ -62,13 +62,15 @@
 		<!-- </div> -->
 
 		
-			
-		
 		<!-- 募集活動列表 -->
 		<div class="col l8 offset-l4" id="projlist">
 			<!-- 卡片列區塊的container -->
 			<div class="centerdiv">
 			<c:forEach var="fullProj" items="${fullProjAll}">
+				<c:url var="path" value="/fullProj.do">
+					<c:param name="type" value="display" />
+					<c:param name="fullProjId" value="${fullProj.fullProjId}" />
+				</c:url>
 				<!-- 卡片1 -->
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
@@ -92,7 +94,7 @@
       							<p style="height:55%">${fullProj.projAbstract}</p>
       						<div class="divider"></div>
       						<div class="center-align">
-								<a href="#"><h5>more...</h5></a>
+								<a href="${path}"><h5>more...</h5></a>
 							</div>
     					</div>
 					</div>

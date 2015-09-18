@@ -32,7 +32,7 @@ public class DonationCartServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession(false);
 		if (session == null) {
-			session = request.getSession();
+			// 導向登入畫面
 		}
 		
 		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
@@ -43,60 +43,42 @@ public class DonationCartServlet extends HttpServlet {
 		
 		// 1.接收資料
 		String toCart = request.getParameter("toCart");
-		System.out.println("toCart "+toCart);
+		String dialog = request.getParameter("dialog");
+
 		if (toCart == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("ExpressDelivery.jsp");
 			rd.forward(request, response);
 			return;
 		}
 		String donationIdStr = request.getParameter("donationId");
-		System.out.println("donationIdStr "+donationIdStr);
 		int donationId = 0;
-//		String schoolIdStr = request.getParameter("schoolId");
-//		System.out.println("schoolIdStr "+schoolIdStr);
-//		int schoolId = 0;
-		// new
-//		String schoolName = request.getParameter("schoolName");
-//		String donationStatus = request.getParameter("donationStatus");
-//		String supplyName = request.getParameter("supplyName");
-//		String originalDemandNumberStr = request.getParameter("originalDemandNumber");
-//		int originalDemandNumber = 0;
-//		String originalDemandUnit = request.getParameter("originalDemandUnit");
-//		String demandNumberStr = request.getParameter("demandNumber");
-//		int demandNumber = 0;
+
 		String donateAmountStr = request.getParameter("donateAmount");
 		int donateAmount = 0;
-//		String size = request.getParameter("size");
-//		String demandContent = request.getParameter("demandContent");
-//		String supplyStatus = request.getParameter("supplyStatus");
-//		String remark = request.getParameter("remark");
 		
 		if (toCart.equals("insert")) {
 			DonationService donationService = new DonationService();
-			
 			// 2.資料驗證
 			if(donationIdStr != null || donationIdStr.trim().length() != 0) {
 			donationId = Integer.parseInt(donationIdStr);
 			} 
-//			if(schoolIdStr != null || schoolIdStr.trim().length() != 0) {
-//				schoolId = Integer.parseInt(schoolIdStr);
-//			}
-//			if(originalDemandNumberStr != null || originalDemandNumberStr.trim().length() != 0) {
-//				originalDemandNumber = Integer.parseInt(originalDemandNumberStr);
-//			}
-//			if(demandNumberStr != null || demandNumberStr.trim().length() != 0) {
-//				demandNumber = Integer.parseInt(demandNumberStr);
-//			} 
+
 			DonationBeanDuplicate donationBeanDuplicate = donationService.findOneDemand(donationId);
-	
 			// 3.呼叫Model
 			boolean b = dCart.insertDonationToCart(donationBeanDuplicate);
-			System.out.println("0752新增至購物車: " + b);
+			System.out.println("新增至購物車: " + b);
 			
 			// 4.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
-			rd.forward(request, response);
-			return;
+			if (dialog != null) {
+				RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
+				rd.forward(request, response);
+				return;
+				
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
+				rd.forward(request, response);
+				return;
+			}
 			
 		} else if(toCart.equals("update")) {
 			// 2.資料驗證
@@ -129,12 +111,13 @@ public class DonationCartServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
 			rd.forward(request, response);
 			return;
+		} else if (toCart.equals("deleteAll")) {
+			// 清空 cart
+			dCart.remove();
+			// 4.挑選適當畫面
+			RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
+			rd.forward(request, response);
+			return;
 		}
-
-		
-		
-		
-		
 	}
-
 }

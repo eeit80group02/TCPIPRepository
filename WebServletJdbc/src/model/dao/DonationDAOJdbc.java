@@ -24,6 +24,9 @@ import model.dao.interfaces.DonationDAO;
 public class DonationDAOJdbc implements DonationDAO
 {
 	private static final String SELECT_BY_PRYMARY_KEY = "SELECT donationId,schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark FROM Donation where donationId = ?";
+	private static final String GET_ALL_BY_ODN = "SELECT * FROM donation order by originalDemandNumber DESC";
+	private static final String GET_ALL_BY_EXP = "SELECT * FROM donation order by expiretime";
+	private static final String GET_ALL_BY_DET = "SELECT * FROM donation order by demandtime desc";
 	private static final String GET_ALL = "SELECT donationId,schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark FROM Donation";
 	private static final String INSERT = "INSERT INTO Donation (schoolId,donationStatus,supplyName,originalDemandNumber,originalDemandUnit,demandNumber,size,demandContent,supplyStatus,demandTime,expireTime,imageName,imageFile,imageLength,remark) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE Donation SET schoolId = ?,donationStatus = ?,supplyName = ?,originalDemandNumber = ?,originalDemandUnit = ?,demandNumber = ?,size = ?,demandContent=?,supplyStatus = ?,demandTime = ?,expireTime = ?,imageName = ?,imageFile = ?,imageLength = ?,remark = ? where donationId = ?";
@@ -64,6 +67,8 @@ public class DonationDAOJdbc implements DonationDAO
 				pstmt.setString(7,bean.getSize());
 				pstmt.setString(8,bean.getDemandContent());
 				pstmt.setString(9,bean.getSupplyStatus());
+				System.out.println("bean.getDemandTime().getTime()"+bean.getDemandTime().getTime());
+
 				pstmt.setTimestamp(10,new java.sql.Timestamp(bean.getDemandTime().getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(bean.getExpireTime().getTime()));
 				pstmt.setString(12,bean.getImageName());
@@ -119,6 +124,7 @@ public class DonationDAOJdbc implements DonationDAO
 				pstmt.setString(7,bean.getSize());
 				pstmt.setString(8,bean.getDemandContent());
 				pstmt.setString(9,bean.getSupplyStatus());
+				System.out.println("bean.getDemandTime().getTime()"+bean.getDemandTime().getTime());
 				pstmt.setTimestamp(10,new java.sql.Timestamp(bean.getDemandTime().getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(bean.getExpireTime().getTime()));
 				pstmt.setString(12,bean.getImageName());
@@ -214,13 +220,13 @@ public class DonationDAOJdbc implements DonationDAO
 					bean.setDonationStatus(rs.getString("donationStatus"));
 					bean.setSupplyName(rs.getString("supplyName"));
 					bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
-					bean.setOriginalDemandUnit("originalDemandUnit");
+					bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
 					bean.setDemandNumber(rs.getInt("demandNumber"));
 					bean.setSize(rs.getString("size"));
 					bean.setDemandContent(rs.getString("demandContent"));
 					bean.setSupplyStatus(rs.getString("supplyStatus"));
-					bean.setDemandTime(rs.getDate("demandTime"));
-					bean.setExpireTime(rs.getDate("expireTime"));
+					bean.setDemandTime(rs.getTimestamp("demandTime"));
+					bean.setExpireTime(rs.getTimestamp("expireTime"));
 					bean.setImageName(rs.getString("imageName"));
 					bean.setImageFile(rs.getBytes("imageFile"));
 					bean.setImageLength(rs.getLong("imageLength"));
@@ -241,50 +247,50 @@ public class DonationDAOJdbc implements DonationDAO
 	}
 	
 	private static final String SBP1 = "select * from Donation where donationId=? and schoolId=?";
-	public DonationBean findByPrimaryKey(int donationId, int schoolId) {
-		DonationBean bean = null;
-		ResultSet rs = null;
-
-		try (	Connection conn = datasource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(SBP1);) {
-
-			pstmt.setInt(1, donationId);
-			pstmt.setInt(2, schoolId);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				bean = new DonationBean();
-
-				bean.setDonationId(rs.getInt("donationId"));
-				bean.setSchoolId(rs.getInt("schoolId"));
-				bean.setDonationStatus(rs.getString("donationStatus"));
-				bean.setSupplyName(rs.getString("supplyName"));
-				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
-				bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
-				bean.setDemandNumber(rs.getInt("demandNumber"));
-				bean.setSize(rs.getString("size"));
-				bean.setDemandContent(rs.getString("demandContent"));
-				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
-				bean.setImageName(rs.getString("imageName"));
-				bean.setImageFile(rs.getBytes("imageFile"));
-				bean.setImageLength(rs.getLong("imageLength"));
-				bean.setRemark(rs.getString("remark"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		return bean;
-	}
+//	public DonationBean findByPrimaryKey(int donationId, int schoolId) {
+//		DonationBean bean = null;
+//		ResultSet rs = null;
+//
+//		try (	Connection conn = datasource.getConnection();
+//				PreparedStatement pstmt = conn.prepareStatement(SBP1);) {
+//
+//			pstmt.setInt(1, donationId);
+//			pstmt.setInt(2, schoolId);
+//			rs = pstmt.executeQuery();
+//			while (rs.next()) {
+//				bean = new DonationBean();
+//
+//				bean.setDonationId(rs.getInt("donationId"));
+//				bean.setSchoolId(rs.getInt("schoolId"));
+//				bean.setDonationStatus(rs.getString("donationStatus"));
+//				bean.setSupplyName(rs.getString("supplyName"));
+//				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
+//				bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
+//				bean.setDemandNumber(rs.getInt("demandNumber"));
+//				bean.setSize(rs.getString("size"));
+//				bean.setDemandContent(rs.getString("demandContent"));
+//				bean.setSupplyStatus(rs.getString("supplyStatus"));
+//				bean.setDemandTime(rs.getDate("demandTime"));
+//				bean.setExpireTime(rs.getDate("expireTime"));
+//				bean.setImageName(rs.getString("imageName"));
+//				bean.setImageFile(rs.getBytes("imageFile"));
+//				bean.setImageLength(rs.getLong("imageLength"));
+//				bean.setRemark(rs.getString("remark"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			if (rs != null) {
+//				try {
+//					rs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//
+//		return bean;
+//	}
 
 	@Override
 	public List<DonationBean> getAll()
@@ -328,6 +334,129 @@ public class DonationDAOJdbc implements DonationDAO
 		return list;
 	}
 
+	public List<DonationBean> getAllByODNumber()
+	{
+		List<DonationBean> list = new ArrayList<DonationBean>();
+		DonationBean bean = null;
+
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(GET_ALL_BY_ODN);
+			ResultSet rs = pstmt.executeQuery();)
+		{
+			while(rs.next())
+			{
+				bean = new DonationBean();
+				
+				bean.setDonationId(rs.getInt("donationId"));
+				bean.setSchoolId(rs.getInt("schoolId"));
+				bean.setDonationStatus(rs.getString("donationStatus"));
+				bean.setSupplyName(rs.getString("supplyName"));
+				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
+				bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
+				bean.setDemandNumber(rs.getInt("demandNumber"));
+				bean.setSize(rs.getString("size"));
+				bean.setDemandContent(rs.getString("demandContent"));
+				bean.setSupplyStatus(rs.getString("supplyStatus"));
+				bean.setDemandTime(rs.getDate("demandTime"));
+				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setImageName(rs.getString("imageName"));
+				bean.setImageFile(rs.getBytes("imageFile"));
+				bean.setImageLength(rs.getLong("imageLength"));
+				bean.setRemark(rs.getString("remark"));
+				
+				list.add(bean);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	public List<DonationBean> getAllByExpiretime()
+	{
+		List<DonationBean> list = new ArrayList<DonationBean>();
+		DonationBean bean = null;
+
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(GET_ALL_BY_EXP);
+			ResultSet rs = pstmt.executeQuery();)
+		{
+			while(rs.next())
+			{
+				bean = new DonationBean();
+				
+				bean.setDonationId(rs.getInt("donationId"));
+				bean.setSchoolId(rs.getInt("schoolId"));
+				bean.setDonationStatus(rs.getString("donationStatus"));
+				bean.setSupplyName(rs.getString("supplyName"));
+				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
+				bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
+				bean.setDemandNumber(rs.getInt("demandNumber"));
+				bean.setSize(rs.getString("size"));
+				bean.setDemandContent(rs.getString("demandContent"));
+				bean.setSupplyStatus(rs.getString("supplyStatus"));
+				bean.setDemandTime(rs.getDate("demandTime"));
+				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setImageName(rs.getString("imageName"));
+				bean.setImageFile(rs.getBytes("imageFile"));
+				bean.setImageLength(rs.getLong("imageLength"));
+				bean.setRemark(rs.getString("remark"));
+				
+				list.add(bean);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
+	public List<DonationBean> getAllByDemandtime()
+	{
+		List<DonationBean> list = new ArrayList<DonationBean>();
+		DonationBean bean = null;
+
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(GET_ALL_BY_DET);
+			ResultSet rs = pstmt.executeQuery();)
+		{
+			while(rs.next())
+			{
+				bean = new DonationBean();
+				
+				bean.setDonationId(rs.getInt("donationId"));
+				bean.setSchoolId(rs.getInt("schoolId"));
+				bean.setDonationStatus(rs.getString("donationStatus"));
+				bean.setSupplyName(rs.getString("supplyName"));
+				bean.setOriginalDemandNumber(rs.getInt("originalDemandNumber"));
+				bean.setOriginalDemandUnit(rs.getString("originalDemandUnit"));
+				bean.setDemandNumber(rs.getInt("demandNumber"));
+				bean.setSize(rs.getString("size"));
+				bean.setDemandContent(rs.getString("demandContent"));
+				bean.setSupplyStatus(rs.getString("supplyStatus"));
+				bean.setDemandTime(rs.getDate("demandTime"));
+				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setImageName(rs.getString("imageName"));
+				bean.setImageFile(rs.getBytes("imageFile"));
+				bean.setImageLength(rs.getLong("imageLength"));
+				bean.setRemark(rs.getString("remark"));
+				
+				list.add(bean);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return list;
+	}
+	
 	public static void main(String[] args)
 	{
 		DonationDAO daojdbc = new DonationDAOJdbc();

@@ -18,11 +18,13 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import model.DonationBean;
 import model.DonationBeanDuplicate;
 import model.DonationService;
+import model.SchoolBean;
 
 @MultipartConfig(
 		location="",
@@ -39,12 +41,20 @@ public class DonationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			// 導向登入畫面
+		}
+		
 		// 1.接收資料
 		int donationId = 0; 						// 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
 		String donationIdStr = null; 		
+
+		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
+		int schoolId = sBean.getSchoolId();
+		System.out.println("schoolId: "+schoolId);
 		
-		int schoolId = 0; 							// 學校編號 FK
-		String schoolIdStr = null; 					
 		// 預設為否
 		String donationStatus = "否"; 				// 捐獻是否完成
 		String supplyName = null; 					// 物資名稱
@@ -68,6 +78,7 @@ public class DonationServlet extends HttpServlet {
 		String remark = null; 						// 備註(可以填寫額外的訊息)
 		
 		String choice = request.getParameter("hidden");
+		
 		InputStream is = null;
 		String mimeType = null;
 		Map<String,String> errorMsgs = new HashMap<>();
@@ -85,8 +96,7 @@ public class DonationServlet extends HttpServlet {
 						if(!choice.equals("insert")){
 							donationIdStr = value;
 						}
-					} else if(fldName.equals("schoolId")) {
-						schoolIdStr = value;
+						
 					} else if(fldName.equals("supplyName")) {
 						supplyName = value;
 					} else if(fldName.equals("originalDemandNumber")) {
@@ -98,16 +108,18 @@ public class DonationServlet extends HttpServlet {
 					} else if(fldName.equals("demandContent")) {
 						demandContent = value;
 					} else if(fldName.equals("supplyStatus")) {
-						if (Integer.parseInt(value) == 1) {
-								supplyStatus = "不拘";
-						} else if(Integer.parseInt(value) == 2) {
-							supplyStatus = "全新";
-						} else if(Integer.parseInt(value) == 3) {
-							supplyStatus = "二手";
+						if (choice.equals("insert")) {
+							if (Integer.parseInt(value) == 1) {
+							supplyStatus = "不拘";
+							} else if(Integer.parseInt(value) == 2) {
+								supplyStatus = "全新";
+							} else if(Integer.parseInt(value) == 3) {
+								supplyStatus = "二手";
+							} 
+						} else if(choice.equals("update")) {
+							supplyStatus = value;
 						}
 						
-//						System.out.println("value= "+value);
-//						System.out.println("supplyStatus= "+supplyStatus);
 					} else if(fldName.equals("remark")) {
 						remark = value;
 					} 
@@ -117,18 +129,16 @@ public class DonationServlet extends HttpServlet {
 					imageName = GlobalService.getFileName(p);
 					imageLength = p.getSize();
 					is = p.getInputStream();
-					if (choice.equals("insert")) {
-						if (imageLength == 0) {
-							errorMsgs.put("errorImageFile", "新增需求時，請上傳一張圖片");
-							System.out.println("請上傳一張圖片");
-						}
+					if (choice.equals("insert") && imageLength == 0) {
+						errorMsgs.put("errorImageFile", "新增需求時，請上傳一張圖片");
+						System.out.println("請上傳一張圖片");
 					}
 				}
 			}
 		}
 
 		// 2.驗證資料
-		if (schoolIdStr == null || schoolIdStr.trim().length() == 0) {
+		if (schoolId == 0) {
 			errorMsgs.put("errorSchoolId", "系統須帶入schoolId");
 		}
 		if (!choice.equals("delete")) {
@@ -151,7 +161,6 @@ public class DonationServlet extends HttpServlet {
 				errorMsgs.put("errorSupplyStatus", "物資狀態(全新/二手/不拘)");
 			} 
 		}
-		
 		if(!choice.equals("insert")) {
 			if(donationIdStr == null || donationIdStr.trim().length() == 0) {
 				errorMsgs.put("errorDonationIdStr", "系統須帶入donationId");
@@ -165,7 +174,6 @@ public class DonationServlet extends HttpServlet {
 		}
 
 		// 3.資料轉換
-		schoolId = Integer.parseInt(schoolIdStr);
 		if (!choice.equals("delete")) {
 			originalDemandNumber = Integer.parseInt(originalDemandNumberStr);
 		}
@@ -190,11 +198,13 @@ public class DonationServlet extends HttpServlet {
 		if (!choice.equals("delete")) {
 			if (choice.equals("insert")){
 				demandTime = new Date(System.currentTimeMillis());
+				System.out.println("demandTime: "+demandTime);
 				donationBean.setDemandTime(demandTime);
 				// 時間運算，預計三個月後截止
 				Calendar cDate = Calendar.getInstance();
 				cDate.add(Calendar.MONTH, 3);
 				expireTime = cDate.getTime();
+				System.out.println("expireTime: "+expireTime);
 				donationBean.setExpireTime(expireTime);
 				// 圖片處理
 				byte[] image = GlobalService.convertInputStreamToByteArray(is);
@@ -237,19 +247,22 @@ public class DonationServlet extends HttpServlet {
 			}
 				 	
 			List<DonationBeanDuplicate> list = service.findOneAllDemands(donationBean.getSchoolId());
-			request.setAttribute("OneAllDemands", list);
+//			request.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDemands", list);
 			
 			is.close();
 			// 5.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 			return;
 			
 		} else if(choice.equals("update")) {
 			// 4.永續層存取
 			DonationService service = new DonationService();
 			DonationBean donationBeanUpdate = service.UpdateOneDemandBySchool(donationBean);
-
 			if (donationBeanUpdate == null) {
 				errorMsgs.put("Fail", "物資需求更新失敗");
 				System.out.println("物資需求更新失敗");

@@ -46,9 +46,9 @@
 		<ul class="nav navbar-nav" id="headUl">
 			<li class="active"><a href="#">捐獻牆</a></li>
 			<li class="headList"><a href="#">熱門</a></li>
-			<li class="headList"><a href="#">最新發佈</a></li>
-			<li class="headList"><a href="#">即將結束</a></li>
-			<li class="headList"><a href="#">需求數量</a></li>
+			<li class="headList"><a href="search.do?type=byDemandtime">最新發佈</a></li>
+			<li class="headList"><a href="search.do?type=byExpiretime">即將結束</a></li>
+			<li class="headList"><a href="search.do?type=byAmount">需求數量</a></li>
 			<li class="headList"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">物資狀態<span class="caret"></span></a>
 				<ul class="dropdown-menu" role="menu">
 					<li><a href="<c:url value='search.do?supplyStatus=1'/>">不拘</a></li>
@@ -96,8 +96,8 @@
 								<div class="foottext">需求數量 : ${item.demandNumber}</div>
 								<div class="footIcin">
 									<div id="add${vs.index}">
-										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.donationStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
-<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.donationStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
+										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
+<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
 									</div>		
 								</div>
 							</div>
@@ -109,10 +109,12 @@
 			<div id="trash" class="ui-widget-content ui-state-default">
 				<div class="alert alert-success" role="alert">
 					<h3 id="trashHead">
+						<a href="cart.do?toCart=deleteAll">
 						<button type="reset" id="donateDelete" class="btn btn-small btn-floating">
 							<i class="small material-icons">delete</i>
 						</button>
-						捐獻背包 <a href="CheckDonationList.jsp">
+						</a>
+				捐獻背包 <a href="CheckDonationList.jsp">
 							<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
 								<i class="small material-icons">card_giftcard</i>
 							</button>
