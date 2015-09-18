@@ -22,11 +22,11 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">郭文豪${LoginOK.lastName}${LoginOK.firstName}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}</h3>
 	</div>	
 
 <main>
-<a href="<c:url value="/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}" />" >看我發布過的初步計畫</a><br>
+<%-- <a href="<c:url value="/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}" />" >看我發布過的初步計畫</a><br> --%>
 <%-- <a href="<c:url value="/primaryProj.do?type=displayPersonalByPending&memberId=${LoginOK.memberId}" />" >看我需要審核的初步計畫</a><br> --%>
 <%-- <a href="<c:url value="/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}" />">看我發布過的完整計畫</a><br> --%>
 <%-- <a href="<c:url value="/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}" />" >洽談中的完整計畫</a><br> --%>
