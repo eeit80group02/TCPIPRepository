@@ -175,8 +175,11 @@
 		<!-- 計畫資訊 -->
 		<div class="col l10" id="projinfos">
 		
-		
-		
+		<a href="<c:url value="/primaryProj.do?type=displayPersonal" />" >看我發布過的初步計畫</a><br>
+		<a href="<c:url value="/primaryProj.do?type=displayPersonalByPending" />" >看我需要審核的初步計畫</a><br>
+		<a href="<c:url value="/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}" />">看我發布過的完整計畫</a><br>
+		<a href="<c:url value="/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}" />" >洽談中的完整計畫</a><br>
+			
 		
 		
 		</div>

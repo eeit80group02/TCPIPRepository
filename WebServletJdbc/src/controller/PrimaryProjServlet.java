@@ -449,6 +449,17 @@ public class PrimaryProjServlet extends HttpServlet
 			e.printStackTrace();
 		}
 		
+//		Object object = session.getAttribute("LoginOK");
+//		if(object instanceof MemberBean)
+//		{
+//			MemberBean memberBean = (MemberBean)object;
+//			if(memberBean.getMemberId() != mId)
+//			{
+//				String contextPath = request.getContextPath();
+//				response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+//				return;
+//			}
+//		}
 		java.util.Date sTime = null;
 		try
 		{

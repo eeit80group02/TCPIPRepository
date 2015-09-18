@@ -143,12 +143,9 @@ public class LoginFilter implements Filter
 					login = true;
 					break;
 				}
-				else
-				{
-					System.out.println(servletPath + " => 不用登入，就能使用");
-				}
 			}
 		}
+		System.out.println(servletPath + " => 不用登入，就能使用");
 		return login;
 	}
 }
