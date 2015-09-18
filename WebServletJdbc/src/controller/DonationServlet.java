@@ -247,12 +247,16 @@ public class DonationServlet extends HttpServlet {
 			}
 				 	
 			List<DonationBeanDuplicate> list = service.findOneAllDemands(donationBean.getSchoolId());
-			request.setAttribute("OneAllDemands", list);
+//			request.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDemands", list);
 			
 			is.close();
 			// 5.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 			return;
 			
 		} else if(choice.equals("update")) {
@@ -278,8 +282,11 @@ public class DonationServlet extends HttpServlet {
 
 			is.close();
 			// 5.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 			return;
 			
 		} else if (choice.equals("delete")) {

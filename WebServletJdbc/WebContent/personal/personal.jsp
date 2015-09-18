@@ -36,7 +36,7 @@
 	<div class="col l10 offset-l1">
 		<div class="col l12" >
 	      <ul class="tabs">
-	        <li class="tab col s3 brown lighten-3 black-text"><a class="active white-text" href="#registerform">帳號管理</a></li>
+	        <li class="tab col s3 brown lighten-3 black-text"><a class="active white-text" href="#accountmanager">帳號管理</a></li>
 	        <li class="tab col s3 brown lighten-3 black-text"><a class="white-text" href="#projinfos">計畫資訊</a></li>
 	        <li class="tab col s3 brown lighten-3 black-text"><a class="white-text" href="#follow">追蹤</a></li>
 	        <!-- 自行繼續新增 -->
@@ -47,25 +47,55 @@
 		
 		
 		<!-- 帳號管理 -->
-		<div class="col l10 offset-l1">
+		<div class="col l12" id="accountmanager">
+			<!-- 圖片 -->
+			<div class="col l2">
+				<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
+			</div>	
 			<!-- 表單本體開始 --> 
-			<form class="card-panel hoverable green lighten-5" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
 				<div class="row">
 						<!-- 頭像上傳 -->
 						<div class="row">
-							<div class="col l2 btn yellow lighten-5 black-text tooltipped" data-position="right" data-delay="50"  data-tooltip="圖檔僅接受jpg、png格式，檔案大小請勿超過2M" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
+							<div class="col l2 btn yellow lighten-5 black-text tooltipped" data-position="bottom" data-delay="50"  data-tooltip="圖檔僅接受jpg、png格式，檔案大小請勿超過2M" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 								<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">頭像</span>
-								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="pitcture" accept="image/x-png, image/jpeg" name="pitcture">
-							</div>									
+								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture">
+							</div>
+							<a id="changepassworda" href="#!" class="btn yellow lighten-5 black-text" 
+								onclick="Materialize.showStaggeredList('#changepassword')"><span  style="font-family:微軟正黑體;font-size:1.2em;">修改密碼</span></a>
 <!-- 							 <a href="#modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</a> -->
 						</div>
 				</div>
-
-				
-				<div class="row">
+					
+					
+					
+						<ul id="changepassword" style="display:none;">
+							<li style="opacity:0;">	
+								<!-- 密碼 -->
+								<div class="input-field row">
+									<input id="passwords" type="password" class="validate" name="password" required>
+				<!-- 														後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
+									<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
+								</div>
+							</li>
+							<li style="opacity:0;">							
+								<!-- 密碼確認 -->
+								<div class="input-field row">
+									<input id="check" type="password" class="validate" name="check" required>
+				<!-- 														後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
+									<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
+								</div>
+							</li>	
+						</ul>		
+					
+					
+					
+				<div class="row" style="clear:both;">
 				<!-- 姓氏 -->
-					<div class="col l4 input-field left">
+					<div class="col l6 input-field left" style="padding-left:0;">
 						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
@@ -73,15 +103,12 @@
 					</div>				
 				
 				<!-- 名字 -->
-					<div class="col l4 input-field left">
+					<div class="col l6 input-field left">
 						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstname}" >
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorFirstNameEmpty}</font>
 						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
 					</div>
-					<div class="col l2">
-						<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
-					</div>				
 				</div>
 				
 				<!-- 電話 -->
@@ -182,6 +209,41 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
+			//點擊預覽圖片也能上傳檔案
+			$("#changepassworda").on("click",function(){
+				$("#changepassword").css("display","block");	
+			})
+			
+			//預覽圖片
+			$("#picture").change(function(){
+				var file = $("#picture")[0].files[0];
+				var reader  = new FileReader();
+				reader.onloadend = function () {
+					console.log(reader.result);
+					$("#view").attr("src", reader.result);
+			}
+				if(file){
+					reader.readAsDataURL(file);
+				}
+			})
+			//點擊圖片也能上傳頭像
+			$("#view").on("click",function(){
+				$("#picture").trigger("click");
+			})
+			//blur
+			$("input").each(function(){
+				$(this).on("blur",function(){
+					if($(this).val() !== "" || $(this).val().length !== 0){
+						$(this).addClass("yellow lighten-4");
+					}else{
+						if($(this).hasClass("yellow lighten-4")){
+							$(this).removeClass("yellow lighten-4")
+						}
+					}
+				})
+			})
+			
+			
 			//初始化tab
 			$('ul.tabs').tabs();
 			//提示頁面主題欄的高度
@@ -418,23 +480,37 @@
 		//送出表單前的驗證
 		$("#btndiv").on({
 			"mouseover":function(){
-			if(
-			$("#registerform").data().accountresults &&
-			$("#registerform").data().passwordresults &&
-			$("#registerform").data().passwordresults2 &&
-			$("#registerform").data().contactresult &&
-			$("#registerform").data().emailresult &&
-			$("#registerform").data().birthdayresult &&
-			$("#lastName").val().trim() !== "" &&
-			$("#firstName").val().trim() !== "" &&
-			$("#address").val().trim() !== "" 
-			){
-				$("#submitbtn").prop("disabled",false);
+			if($("#passwords").val() !== "" || $("#check").val() !== ""){
+				if(
+						$("#registerform").data().passwordresults &&
+						$("#registerform").data().passwordresults2 &&
+						$("#registerform").data().contactresult &&
+						$("#registerform").data().emailresult &&
+						$("#registerform").data().birthdayresult &&
+						$("#lastName").val().trim() !== "" &&
+						$("#firstName").val().trim() !== "" &&
+						$("#address").val().trim() !== "" 
+						){
+							$("#submitbtn").prop("disabled",false);
+						}else{
+							$("#submitbtn").prop("disabled",true);
+						}				
 			}else{
-				$("#submitbtn").prop("disabled",true);
+				if(
+						$("#registerform").data().contactresult &&
+						$("#registerform").data().emailresult &&
+						$("#registerform").data().birthdayresult &&
+						$("#lastName").val().trim() !== "" &&
+						$("#firstName").val().trim() !== "" &&
+						$("#address").val().trim() !== "" 
+				){
+						$("#submitbtn").prop("disabled",false);
+				}else{
+						$("#submitbtn").prop("disabled",true);
+					}						
 			}
-		},"mouseout":function(){
 
+		},"mouseout":function(){
 			if(
 				$("#registerform").data().accountresults &&
 				$("#registerform").data().passwordresults &&
