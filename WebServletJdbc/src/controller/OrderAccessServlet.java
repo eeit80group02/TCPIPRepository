@@ -21,6 +21,7 @@ import model.DonationCart;
 import model.DonationOrderBean;
 import model.DonationOrderDetailBean;
 import model.DonationService;
+import model.MemberBean;
 
 //@WebServlet("/OrderAccess")
 public class OrderAccessServlet extends HttpServlet {
@@ -33,14 +34,21 @@ public class OrderAccessServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		// session...
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			// 導向登入頁面
+		}
 		
 		// member
-		int memberId = 5;
+		MemberBean member = (MemberBean) session.getAttribute("LoginOK");
+		int memberId = member.getMemberId();
+		System.out.println("memberId: "+member.getMemberId());
+		
+		
 		// cart...
-		HttpSession session = request.getSession();
-		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+		DonationCart dCart = 
+				(DonationCart) session.getAttribute("DonationCart");
 		if (dCart == null) {
-			//...
 			dCart = new DonationCart();
 			session.setAttribute("DonationCart", dCart);
 		}
@@ -56,6 +64,7 @@ public class OrderAccessServlet extends HttpServlet {
 		// 封裝訂單主檔
 		DonationOrderBean donationOrderBean = new DonationOrderBean();
 		donationOrderBean.setMemberId(memberId);
+		System.out.println("memberId"+memberId);
 		donationOrderBean.setName(name);
 		donationOrderBean.setAddress(address);
 		donationOrderBean.setPhone(phone);
@@ -73,7 +82,7 @@ public class OrderAccessServlet extends HttpServlet {
 		// 清空 cart
 		dCart.remove();
 
-		RequestDispatcher rd = request.getRequestDispatcher("DonationIndex.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
 		rd.forward(request, response);
 		
 	}
