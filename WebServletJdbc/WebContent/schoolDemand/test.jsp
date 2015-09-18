@@ -10,8 +10,8 @@
 	${schoolId}<br>
 	<a href="test.do">登入</a><br>
 	<a href="CreatSchoolDemand.jsp">新增</a><br>
-	<a href="<c:url value="SchoolDemandServlet.do?type=update" />">修改</a><br>
-
+	
+	<a href="SchoolDemandServlet.do?type=update">修改</a><br>
 	<a href="<c:url value="SchoolDemandServlet.do?type=displayAll" />">顯示所有需求</a> <br>
 	<a href="SchoolDemandServlet.do?type=displayAll">顯示所有需求</a><br>
 	
@@ -20,5 +20,18 @@
 	<a href="SchoolDemandServlet.do?type=displayPersonalUnrender">洽談中</a><br>
 	<a href="SchoolDemandServlet.do?type=displayPersonalEnd">洽談完成</a><br>
 	<a href="SchoolDemandServlet.do?type=displayPersonalFail">洽談失敗</a><br>
+
+	<form action="Status.do?type=application" method="post">
+		<input type="submit" value="申請">
+	</form>
+		<form action="Status.do?type=agree" method="post">
+		<input type="submit" value="同意">
+	</form>
+		<form action="Status.do?type=disagree" method="post">
+		<input type="submit" value="不同意">
+	</form>
+		<form action="Status.do?type=cancel" method="post">
+		<input type="submit" value="取消">
+	</form>
 </body>
 </html>
