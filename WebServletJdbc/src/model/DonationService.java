@@ -87,10 +87,6 @@ public class DonationService {
 	}
 	
 	// 待修
-	/**
-	 * @param donationId
-	 * @return
-	 */
 	public DonationBeanDuplicate findOneDemand(int donationId){
 		donationDAOJdbc = new DonationDAOJdbc();
 		DonationBean odb = donationDAOJdbc.findByPrimaryKey(donationId);
@@ -115,68 +111,19 @@ public class DonationService {
 		dbdc.setSupplyStatus(odb.getSupplyStatus());
 		dbdc.setRemark(odb.getRemark());
 		
-		// 新增schoolName, 新增donateAmount預設為1
-//		DonationBeanDuplicate donationBeanDuplicate = 
-//				new DonationBeanDuplicate(donationId, schoolId,
-//						 schoolName, donationStatus, supplyName,				
-//						 originalDemandNumber, originalDemandUnit, demandNumber, 1, size,
-//						 demandContent, supplyStatus, null, null, null, null, 0, remark);
 		return dbdc;
 	}
 	
-	// 待修
-	public DonationBeanDuplicate findOneDemand(int donationId, int schoolId) {
-		DonationBeanDuplicate donationBeanDuplicate;
-
-		donationDAOJdbc  = new DonationDAOJdbc();
-		donationBean = donationDAOJdbc.findByPrimaryKey(donationId, schoolId);
-		
-		donationBeanDuplicate = new DonationBeanDuplicate();
-		
-		donationBeanDuplicate.setDonationId(donationBean.getDonationId());
-		donationBeanDuplicate.setSchoolId(donationBean.getSchoolId());
-		// USE SERVICE
-		SchoolService schoolService = new SchoolService();
-		// 驗證
-		SchoolBean schoolBean = schoolService.getSchoolData(donationBean.getSchoolId());
-		if (schoolBean != null) {
-			donationBeanDuplicate.setSchoolName(schoolBean.getName());
-		} else {
-			System.out.println("系統錯誤");
-			return null;
-		}
-		donationBeanDuplicate.setDonationStatus(donationBean.getDonationStatus());
-		donationBeanDuplicate.setSupplyName(donationBean.getSupplyName());
-		donationBeanDuplicate.setOriginalDemandNumber(donationBean.getOriginalDemandNumber());
-		donationBeanDuplicate.setOriginalDemandUnit(donationBean.getOriginalDemandUnit());
-		donationBeanDuplicate.setDemandNumber(donationBean.getDemandNumber());
-		// NEW 預設為1
-		donationBeanDuplicate.setDonateAmount(1);
-		donationBeanDuplicate.setSize(donationBean.getSize());
-		donationBeanDuplicate.setDemandContent(donationBean.getDemandContent());
-		donationBeanDuplicate.setSupplyStatus(donationBean.getSupplyStatus());
-		// ADD
-		donationBeanDuplicate.setDemandTime(donationBean.getDemandTime());
-		donationBeanDuplicate.setExpireTime(donationBean.getExpireTime());
-		donationBeanDuplicate.setImageName(donationBean.getImageName());
-		donationBeanDuplicate.setImageFile(donationBean.getImageFile());
-		donationBeanDuplicate.setImageLength(donationBean.getImageLength());
-		donationBeanDuplicate.setRemark(donationBean.getRemark());// 16->18
-			
-		return donationBeanDuplicate;
-	}
 	// 包裝資料
 	public DonationBean UpdateOneDemandBySchool(DonationBean donationBeanInput) {
 		
 		if (donationBeanInput.getDonationId() != 0 && donationBeanInput.getSchoolId() != 0) {
 			donationDAOJdbc  = new DonationDAOJdbc();
-			donationBean = donationDAOJdbc.findByPrimaryKey(donationBeanInput.getDonationId(), donationBeanInput.getSchoolId());
+			donationBean = donationDAOJdbc.findByPrimaryKey(donationBeanInput.getDonationId());
 			
 			// 資料包裝
 			donationBean.setDonationId(donationBean.getDonationId());
-//			donationBeanUpdate.setSchoolId(schoolId);
 			// 捐獻是否完成由捐贈系統設定，預設在新增時為否
-//			donationBeanUpdate.setSupplyStatus(supplyStatus);
 			donationBean.setOriginalDemandUnit(donationBeanInput.getOriginalDemandUnit());
 			donationBean.setSupplyName(donationBeanInput.getSupplyName());
 			int i;
@@ -242,8 +189,6 @@ public class DonationService {
 				return null;
 			}
 			
-//			String schoolName = request.getParameter("schoolName");
-//			donationBeanDuplicate.setSchoolName(schoolName);
 			donationBeanDuplicate.setDonationStatus(d.getDonationStatus());
 			donationBeanDuplicate.setSupplyName(d.getSupplyName());
 			donationBeanDuplicate.setOriginalDemandNumber(d.getOriginalDemandNumber());

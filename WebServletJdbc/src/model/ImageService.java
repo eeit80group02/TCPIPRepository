@@ -23,7 +23,7 @@ public class ImageService {
 		DonationBean donationBean = new DonationBean();
 			// select one
 			donationDAO = new DonationDAOJdbc();
-			donationBean = donationDAO.findByPrimaryKey(donationId, schoolId);
+			donationBean = donationDAO.findByPrimaryKey(donationId);
 //			System.out.println(donationBean.getDonationId()+"@"+donationBean.getSchoolId());
 			result.setContent(donationBean.getImageFile());
 			result.setName(donationBean.getImageName());
