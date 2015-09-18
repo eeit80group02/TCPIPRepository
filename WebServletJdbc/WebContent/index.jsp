@@ -302,8 +302,6 @@
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript"
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
-	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		$(function() {
 			//觸發卡片翻轉事件
