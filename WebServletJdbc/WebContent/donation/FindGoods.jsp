@@ -109,10 +109,12 @@
 			<div id="trash" class="ui-widget-content ui-state-default">
 				<div class="alert alert-success" role="alert">
 					<h3 id="trashHead">
+						<a href="cart.do?toCart=deleteAll">
 						<button type="reset" id="donateDelete" class="btn btn-small btn-floating">
 							<i class="small material-icons">delete</i>
 						</button>
-						捐獻背包 <a href="CheckDonationList.jsp">
+						</a>
+				捐獻背包 <a href="CheckDonationList.jsp">
 							<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
 								<i class="small material-icons">card_giftcard</i>
 							</button>

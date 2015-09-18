@@ -39,6 +39,7 @@ public class DemandSelected extends HttpServlet {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+			
 			request.setAttribute("AllDemands", listDuplivate);
 			
 			// 4.轉至適當畫面
@@ -47,7 +48,6 @@ public class DemandSelected extends HttpServlet {
 			return;
 			
 		} else if (type.equals("AllDeamndByMember")) {
-			
 			
 			// 2.資料轉換
 			int schoolId = Integer.parseInt(schoolIdStr);
@@ -69,7 +69,7 @@ public class DemandSelected extends HttpServlet {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			/* 單一需求內容 */
-			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId, schoolId);
+			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId);
 			
 			/* 留言處理 */
 			DonationDiscussService donationDiscussService = new DonationDiscussService();
@@ -102,7 +102,7 @@ public class DemandSelected extends HttpServlet {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			/* 需求內容 */
-			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId, schoolId);
+			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId);
 			
 			/* 留言內容*/
 			DonationDiscussService donationDiscussService = new DonationDiscussService();
@@ -123,7 +123,7 @@ public class DemandSelected extends HttpServlet {
 			
 			DonationBean donationBean = new DonationBean();
 			DonationService service = new DonationService();
-			DonationBeanDuplicate donationBeanDuplicate = service.findOneDemand(donationId, schoolId);
+			DonationBeanDuplicate donationBeanDuplicate = service.findOneDemand(donationId);
 			request.setAttribute("OneDemand", donationBeanDuplicate);
 			RequestDispatcher rd = request.getRequestDispatcher("UpdateOneDemand.jsp");
 			rd.forward(request, response);
