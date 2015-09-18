@@ -157,7 +157,7 @@
 			$("#pagetitle").css("height", pagetitleheight);
 			
 		})(jQuery)
-	</script>
+</script>
 </body>
 
 		

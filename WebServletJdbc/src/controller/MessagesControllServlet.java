@@ -8,9 +8,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import model.DonationDiscussBean;
 import model.DonationDiscussService;
+import model.MemberBean;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,12 +27,17 @@ public class MessagesControllServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		
-		// 驗證 
-		
-		// 假設會員編號為5
 		// 1.接收資料
-		int memberId = 5;
+		// session...
+		HttpSession session = request.getSession(false);
+		if (session == null) {
+			// 導向登入頁面
+		}
+		
+		// member
+		MemberBean member = (MemberBean) session.getAttribute("LoginOK");
+		int memberId = member.getMemberId();
+		
 		String reporter = request.getParameter("reporter");
 		String textarea = request.getParameter("textarea");
 		String donationIdStr = request.getParameter("donationId");

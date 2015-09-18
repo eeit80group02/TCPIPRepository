@@ -1,8 +1,8 @@
 package init;
 /*
- * 作用:新增幾筆資料庫內的"初步計畫"之資料
+ * 本程式作用:新增數筆"初步計畫"之資料於資料庫
  * 
- * */
+ */
 import global.GlobalService;
 
 import java.io.File;
@@ -24,7 +24,7 @@ public class InsertPrimaryProj
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 		{
-			// 第二筆資料  ======================================================================
+			// 第一筆資料  ======================================================================
 			pstmt.setInt(1,7);				// memberId 發起者
 			pstmt.setString(2,"造神計畫");		// title    計畫名稱
 			
@@ -114,7 +114,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,12);  		// demandNum 志工人數
 				pstmt.setInt(12,150000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015/04/28").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -137,7 +138,7 @@ public class InsertPrimaryProj
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
 				pstmt.setString(6,"2014年新化龍燈農藥廠事件的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？我們相信，在這塊土地上，一定還有堅持對環境友善的農民，以及默默為綠色環境努力的人們，我們期望，透過小農徵文比賽，讓這些友善環境的故事被看見，為這片土地帶來美好的滋養。更期盼，藉由小農徵文比賽、友善環境人文講座、友善綠藝市集、農事體驗小旅行…的舉辦，為這片土地盡一份心力。現在，想邀請你，支持我們的理念與行動，和我們共同邁向夢想中的友善環境。"); // projAbstract 計畫摘要
-				pstmt.setString(7,"美麗的家園大目降(TAVOCAN)意為\"山林之地\"，為平埔族語，我們的祖先說，這是一個擁有山林之美的地方。在被隔絕的深山中，一個人沒有辦法輕易放棄。除了靠自己的雙腳走出去，沒有一個辦法可以立刻讓人回到溫暖的被窩或舒適的家。\n2014年4月，龍燈農藥廠事件對台南新化、關廟地區的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？\n");		// content 計畫內容
+				pstmt.setString(7,"美麗的家園大目降(TAVOCAN)意為\"山林之地\"，為平埔族語，我們的祖先說，這是一個擁有山林之美的地方。在被隔絕的深山中，一個人沒有辦法輕易放棄。除了靠自己的雙腳走出去，沒有一個辦法可以立刻讓人回到溫暖的被窩或舒適的家。\n2014年4月，龍燈農藥廠事件對台南新化、關廟地區的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？");		// content 計畫內容
 				pstmt.setString(8,"台南市");						// idealPlace
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
@@ -147,7 +148,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,28);  		// demandNum 志工人數
 				pstmt.setInt(12,50000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2014/07/28").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -180,7 +182,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,18);  		// demandNum 志工人數
 				pstmt.setInt(12,300000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015/05/20").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -213,7 +216,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,25);  		// demandNum 志工人數
 				pstmt.setInt(12,100000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015/05/07").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -246,7 +250,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,30);  		// demandNum 志工人數
 				pstmt.setInt(12,7700000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2013/08/04").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -279,7 +284,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,40);  		// demandNum 志工人數
 				pstmt.setInt(12,90000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2014/11/16").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -312,7 +318,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,20);  		// demandNum 志工人數
 				pstmt.setInt(12,850000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2013/11/28").getTime()));
 				pstmt.setString(14,"洽談中");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -345,7 +352,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,10);  		// demandNum 志工人數
 				pstmt.setInt(12,50000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2013/11/10").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -379,7 +387,8 @@ public class InsertPrimaryProj
 				pstmt.setInt(11,31);  		// demandNum 志工人數
 				pstmt.setInt(12,150000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2013/11/10").getTime()));
 				pstmt.setString(14,"下架");  // projStatus
 				
 				pstmt.executeUpdate();
@@ -406,13 +415,14 @@ public class InsertPrimaryProj
 				pstmt.setString(8,"新竹縣");						// idealPlace
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-				pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2014/05/08").getTime()));  // activityStartTime
-				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2014/09/14").getTime())); // activityEndTime
+				pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015/02/20").getTime()));  // activityStartTime
+				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015/04/17").getTime())); // activityEndTime
 				
 				pstmt.setInt(11,10);  		// demandNum 志工人數
 				pstmt.setInt(12,50000);   	// budget
 				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+//				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015/01/03").getTime()));
 				pstmt.setString(14,"洽談完成");  // projStatus
 				
 				pstmt.executeUpdate();
