@@ -13,18 +13,18 @@
 	<input type="submit">
 	</form>
 	<c:forEach var="bean" items="${list}">
-		${bean.participant}<br>
-		${bean.activityTopic}<br>
-		${bean.activityLocation}<br>
-		${bean.activitySuitable}<br>
-		${bean.activityHost}<br>
-		${bean.activityContact}<br>
-		${bean.createDate}<br>
-		${bean.content}<br>
-		${bean.demandStatus}<br>
-		${bean.offerBean.room}<br>
-		${bean.offerBean.place}<br>
-		${bean.offerBean.food}<hr>
+		${bean.participant}<br>      <%-- 預計參與的學生人數 --%>
+		${bean.activityTopic}<br>    <%-- 活動主題(指學校希望志工規劃的主題)--%>
+		${bean.activityLocation}<br> <%-- 活動地點(非必填) --%>
+		${bean.activitySuitable}<br> <%-- 活動適合對象(指學校希望志工來帶領的人的程度) --%>
+		${bean.activityHost}<br>     <%-- 活動負責人(學校方負責此項計畫的聯絡人) --%>
+		${bean.activityContact}<br>  <%-- 負責人聯絡方式(市話、手機皆可，前端提醒使用者依照輸入的格式) --%>
+		${bean.createDate}<br>       <%-- 建立日期(計畫需求發佈的日期)- 可以算出媒合期截止時間 --%>
+		${bean.content}<br>          <%-- 需求內容(1000字?) --%>
+		${bean.demandStatus}<br>     <%-- 計畫狀態(待洽談、洽談中、洽談完成、洽談失敗) --%>
+		${bean.offerBean.room}<br>   <%-- 住宿(1表示提供 0 表示不提供) --%>
+		${bean.offerBean.place}<br>  <%-- 活動場地(1表示提供 0 表示不提供) --%>
+		${bean.offerBean.food}<hr>   <%-- 伙食(1表示提供 0 表示不提供) --%>
 	</c:forEach>
 </body>
 </html>

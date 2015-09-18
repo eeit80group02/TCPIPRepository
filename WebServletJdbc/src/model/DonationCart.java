@@ -5,18 +5,21 @@ import java.util.Map;
 import java.util.Set;
 
 public class DonationCart {
-	private Map<Integer,DonationBeanDuplicate> cart = new LinkedHashMap<>();
+	private Map<Integer,DonationBeanDuplicate> cart;
 	
 	public DonationCart() {
+		cart = new LinkedHashMap<>();
 	}
 
 	public Map<Integer,DonationBeanDuplicate> getContent() {
 		return cart;
 	}
 	
-	public void remove() {
-		cart = null;
-		cart = new LinkedHashMap<>();
+	public boolean remove() {
+		cart.clear();
+//		cart = new LinkedHashMap<>();
+		System.out.println("清除購物車所有品項");
+		return true;
 	}
 	
 	// insert

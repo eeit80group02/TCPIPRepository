@@ -1,38 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Logout</title>
-<link type="text/css" rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
+<title>Insert title here</title>
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="deep-orange lighten-5">
-	<% session.invalidate();
-	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
-	%>
 	<!-- 頁首 -->
-	<c:import url="/template/header.jsp"
-		context="${pageContext.request.contextPath}" />
+	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁首 -->
-
+	
 	<!-- 內容 -->
 	<main>
-		你好，感謝你的使用 已經登出
-
-		<a href="${pageContext.request.contextPath}/index.jsp">回首頁</a>
+		<div class="row" style="margin-top: 100px">
+			<div class="container" style="height: 500px;border: 2px solid black;">
+				<div style="margin: 150px">
+				
+				</div>
+			</div>
+		</div>
 	</main>
 
 
 	<!-- 頁尾 -->
-	<c:import url="/template/footer.jsp"
-		context="${pageContext.request.contextPath}" />
+	<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁尾 -->
 
 
@@ -46,6 +44,8 @@
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			//註冊modal事件
+			$(".modal-trigger").leanModal();
 			//footer中連結的文字大小
 			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度

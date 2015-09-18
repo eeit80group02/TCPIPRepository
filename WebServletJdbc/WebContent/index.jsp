@@ -1,4 +1,4 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -302,8 +302,6 @@
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 	<script type="text/javascript"
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
-	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		$(function() {
 			//觸發卡片翻轉事件

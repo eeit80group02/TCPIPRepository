@@ -23,6 +23,10 @@ import javax.servlet.http.HttpSession;
 				@WebInitParam(name = "mustLogin1", value = "/primaryProj/createPrimaryProjForm.jsp"),
 				@WebInitParam(name = "mustLogin2", value = "/fullProj/fullproj.jsp"),
 				@WebInitParam(name = "mustLogin3", value = "/fullProj.do?type=displayAll"),
+				@WebInitParam(name = "mustLogin4", value = "/personal/personal.jsp"),
+				@WebInitParam(name = "mustLogin6", value = "/donation/CheckDonationList.jsp"),
+				@WebInitParam(name = "mustLogin5", value = "/primaryProj.do?type=displayPersonal"),
+				@WebInitParam(name = "mustLogin5", value = "/personal/displayPersonalPrimaryProj.jsp"),
 		})
 public class LoginFilter implements Filter
 {
@@ -57,9 +61,11 @@ public class LoginFilter implements Filter
 			HttpServletRequest req = (HttpServletRequest)request;
 			HttpServletResponse resp = (HttpServletResponse)response;
 			servletPath = req.getServletPath();
+			System.out.println("servletPath: "+servletPath);
 			contextPath = req.getContextPath();
 			requestURI = req.getRequestURI();
 			queryString = req.getQueryString();
+			System.out.println("queryString: "+queryString);
 			isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 			
 //			System.out.println("servletPath = " + servletPath);
@@ -125,7 +131,7 @@ public class LoginFilter implements Filter
 			{
 				if((servletPath + "?" + queryString).equals(sURL))
 				{
-					System.out.println(servletPath + "?" + queryString + " => 要登入，才能使用");
+//					System.out.println(servletPath + "?" + queryString + " => 要登入，才能使用");
 					requestURI += "?" + queryString;
 					login = true;
 					break;
@@ -135,13 +141,13 @@ public class LoginFilter implements Filter
 			{
 				if(servletPath.equals(sURL))
 				{
-					System.out.println(servletPath + " => 要登入，才能使用");
+//					System.out.println(servletPath + " => 要登入，才能使用");
 					login = true;
 					break;
 				}
 				else
 				{
-					System.out.println(servletPath + " => 不用登入，就能使用");
+//					System.out.println(servletPath + " => 不用登入，就能使用");
 				}
 			}
 		}

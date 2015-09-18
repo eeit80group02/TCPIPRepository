@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>login</title>
+<title>permission</title>
 <link type="text/css" rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
@@ -21,27 +21,12 @@
 
 	<!-- 內容 -->
 	<main>
-		<c:if test="${not empty sessionScope.timeOut}">
-			${sessionScope.timeOut}
-		</c:if>
-		
-		<form action="<c:url value="/LoginServlet.do" />" method="post">
-			帳號<input type="text" name="account"  value="${param.account}" /><span class="error">${error.account}</span><br>
-			密碼<input type="text" name="password" value="${param.password}" /><span class="error">${error.password}</span><br>
-				<input type="hidden" name="type" value="member"><br>
-				<input type="submit" value="登入"><br>
-		</form>
-		<hr>
-		下面為學校登入<br>
-		<c:if test="${not empty sessionScope.timeOut}">
-			${sessionScope.timeOut}
-		</c:if>
-		<form action="<c:url value="/LoginServlet.do" />" method="post">
-			帳號<input type="text" name="account"  value="${param.account}" /><span class="error">${error.account}</span><br>
-			密碼<input type="text" name="password" value="${param.password}" /><span class="error">${error.password}</span><br>
-				<input type="hidden" name="type" value="school"><br>
-				<input type="submit" value="登入"><br>
-		</form>
+	<% 	
+		response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+	%>
+	你沒有權限操作此頁面，3秒後導回首頁。<br>
+
+	<a href="<c:url value="/index.jsp" />">回首頁</a>
 	</main>
 
 

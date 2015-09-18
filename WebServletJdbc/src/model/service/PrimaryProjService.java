@@ -7,9 +7,11 @@ import java.util.List;
 
 import model.PrimaryProjBean;
 import model.ProcessingProjBean;
+import model.dao.MemberDAOJdbc;
 import model.dao.PrimaryProjDAOJdbc;
 import model.dao.ProcessingProjDAOJdbc;
 import model.dao.SchoolDAOJdbc;
+import model.dao.interfaces.MemberDAO;
 import model.dao.interfaces.PrimaryProjDAO;
 import model.dao.interfaces.ProcessingProjDAO;
 import model.dao.interfaces.SchoolDAO;
@@ -19,12 +21,14 @@ public class PrimaryProjService
 	private PrimaryProjDAO primaryProjDAO;
 	private ProcessingProjDAO processingProjDAO;
 	private SchoolDAO schoolDAO;
+	private MemberDAO memberDAO;
 	
 	public PrimaryProjService()
 	{
 		this.primaryProjDAO = new PrimaryProjDAOJdbc();
 		this.processingProjDAO = new ProcessingProjDAOJdbc();
 		this.schoolDAO = new SchoolDAOJdbc();
+		this.memberDAO = new MemberDAOJdbc();
 	}
 	
 	public PrimaryProjBean createPrimaryProj(PrimaryProjBean bean)
@@ -119,6 +123,7 @@ public class PrimaryProjService
 			if(result != null)
 			{
 				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+				result.setMemberBean(memberDAO.select(result.getMemberId()));
 			}
 		}
 		return result;
