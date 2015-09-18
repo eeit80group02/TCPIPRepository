@@ -22,7 +22,8 @@
 <body class="deep-orange lighten-5">
 <header> <!-- 頁首 --> <nav>
 		<div class="nav-wrapper grey darken-3">
-			<a href="<c:url value="/index.jsp" />" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
+			<a href="<c:url value="/index.jsp" />" class="brand-logo">
+			 <img alt="TCPIP" title="TCPIP"
 				src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
 			</a>
 	
@@ -110,10 +111,12 @@
 		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		(function($) {
-			//footer header字的大小
-			$("a").css("font-size","1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
+			//包裹logo的a高度
+			$("a.brand-logo").css("height",$("img[title='TCPIP']").height());
+			//footer header字的大小
+			$("a").css("font-size","1.2em");
 			//註冊modal事件
 			$(".modal-trigger").leanModal();
 			//帳號、密碼欄focus的背景色變化
