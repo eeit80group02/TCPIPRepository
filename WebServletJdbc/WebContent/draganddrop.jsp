@@ -165,11 +165,98 @@
 			$(document).on('click','.addMission',function() {
 				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>Mission"+ missionCount +"</div>" +
 						  "<div id='dataRow"+ missionCount + "' style='display:none'>" +
-						  "<input type='text' class='missionExecutor' placeholder='執行人...' >" +
+						  "<input type='text' class='missionExecutor' value='待認領'>" +
 						  "<input type='text' class='missionDate'>" +
 						  "<input type='text' class='missionPriority'></div>");
 				missionCount++;
 				$li.appendTo($(event.target).parent().siblings( "ul" ));
+			});
+			
+			
+			//Assign Executor
+			$(document).on('click', '.missionExecutor', function(){
+				var pos =  $(this).position();
+				$('.popupParticipatorWindow').dialog("option", "position", {
+                    my: "top",
+                    at: "center",
+                    of: event,
+                });
+				$('.popupParticipatorWindow').dialog( "open" );
+				$(".ui-dialog-titlebar").hide();
+				$('.popupParticipatorWindow ul').empty();
+				
+				//ajax get all participator
+				var participatorName = 'member';
+				var memberID= "member" +1;
+				
+				var $li1 = $('<li class="participator"></li>').html('<div class='+ memberID +'>' + 'Paker' + '</div>');
+				var $li2 = $('<li class="participator"></li>').html('<div class=' + 'member2' + '>' + 'John' + '</div>');
+				var $li3 = $('<li class="participator"></li>').html('<div class=' + 'member3' + '>' + 'Anna' + '</div>');
+				$('.popupParticipatorWindow ul').append($li1);
+				$('.popupParticipatorWindow ul').append($li2);
+				$('.popupParticipatorWindow ul').append($li3);
+				
+				$('.popupParticipatorWindow ul li').mouseenter(function(){
+					$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
+								 'font-weight':'bold',
+								 'cursor':'pointer'});
+				}).mouseleave(function(){
+					$(this).css({'background-color':'',
+						 		 'font-weight':'normal'});
+				});
+				
+				$('.participator').on('click',function(){
+					$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id'));
+					$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id') + '').remove();
+					
+					$('.dialog .missionExecutor').text($(this).children('div').text());
+					$('.dialog .missionExecutor').addClass($(this).children('div').attr('class'));
+					
+					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val( $(this).children('div').text());
+					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id',$(this).children('div').attr('class'));
+					
+					$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+					$('.popupParticipatorWindow').dialog( "close" );
+				});
+				
+			});
+			
+			//Add participator
+			$(document).on('click', '.addParticipator', function(){
+				var pos =  $(this).position();
+				$('.popupParticipatorWindow').dialog("option", "position", {
+                    my: "top",
+                    at: "center",
+                    of: event,
+                });
+				$('.popupParticipatorWindow').dialog( "open" );
+				$(".ui-dialog-titlebar").hide();
+				$('.popupParticipatorWindow ul').empty();
+				
+				//ajax get all participator
+				var participatorName = 'member';
+				
+				
+				var $li1 = $('<li class="participator"></li>').html('<div>' + 'Paker' + '</div>');
+				var $li2 = $('<li class="participator"></li>').html('<div>' + 'John' + '</div>');
+				var $li3 = $('<li class="participator"></li>').html('<div>' + 'Anna' + '</div>');
+				$('.popupParticipatorWindow ul').append($li1);
+				$('.popupParticipatorWindow ul').append($li2);
+				$('.popupParticipatorWindow ul').append($li3);
+				
+				$('.popupParticipatorWindow ul li').mouseenter(function(){
+					$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
+								 'font-weight':'bold',
+								 'cursor':'pointer'});
+				}).mouseleave(function(){
+					$(this).css({'background-color':'',
+						 		 'font-weight':'normal'});
+				});
+				
+				$('.participator').on('click',function(){
+					$('.missionParticipator ul').prepend('<div style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+				});
+				
 			});
 			
 			
@@ -226,7 +313,7 @@
 				
 				var temp = $(div).siblings("div").attr('id');
 				$('.dialog .missionName').val(dataName);
-				$('.dialog .missionExecutor').val(dataExecutor);
+				$('.dialog .missionExecutor').text(dataExecutor);
 				$('.dialog .missionDate').val(dataDate);
 				
 				
@@ -261,9 +348,6 @@
 			});			
 			$('.dialog .missionName').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).siblings("div").text($(this).val());
-			});
-			$('.dialog .missionExecutor').on('change',function(){
-				$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val($(this).val());
 			});
 			$('.dialog .missionPriority').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).find('.missionPriority').val($(this).val());
@@ -321,6 +405,29 @@
 			});
 			
 			
+			//Set Participator dialog
+			$('.popupParticipatorWindow').dialog({
+				autoOpen: false,
+				modal: true,
+				height: 200,
+				width: 170,
+				show: {
+					effect: "slide",
+					direction: "right",
+					duration: 300
+				},
+				hide: {
+			    	effect: "slide",
+			    	direction: "right",
+			    	duration: 300
+				},
+				open: function(){
+		            $('.ui-widget-overlay').bind('click',function(){
+		                $('.popupParticipatorWindow').dialog('close');
+		            })
+		        }
+			});
+			
 		});
 	</script>
 
@@ -369,9 +476,14 @@
 		</div>
 	</div>
 	
+	<div class="popupParticipatorWindow">
+		<ul style="list-style:url('images/memberIcon.png') none inside;">
+		</ul>
+	</div>
+	
 	
 	<div class="dialog">
-				<div class="row">
+				<div class="row" style="border:1px dotted gray;">
 					<div class="input-field col l1">
 						<input type="checkbox" class="missionStatus filled-in" id="filled-in-box" >
       					<label for="filled-in-box"></label>
@@ -380,10 +492,12 @@
 						<input type="text" class="missionName validate" placeholder="任務名稱..." >
 					</div>
 				</div>
-				<div class="row"> 
-					<div class="input-field col l4">
+				<div class="row" style="border:1px dotted gray;"> 
+					<div class="col l4">
 						<label for="missionExecutor">執行者 </label>
-						<input type="text" class="missionExecutor validate" placeholder="執行人...">
+						<ul style="list-style:url('images/memberIcon.png') none inside;">
+							<li class="missionExecutor" style="cursor:pointer"></li>
+						</ul>
 					</div>
 					<div class="col l4">
 						<label for="datepicker">截止日期 </label>
@@ -398,19 +512,14 @@
 						</select>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="border:1px dotted gray;">
 					<div class="col l12">
-						<label for="MissionParticipator">參與者 </label>
-						<select multiple="multiple" class="MissionParticipator browser-default" placeholder="">
-        					<option value="1">January</option>
-        					<option value="12">December</option>
-    					</select>
-    					<script src="js/jquery.multiple.select.js"></script>
-    					<script>
-    						$(function() {
-        						$('.MissionParticipator').multiSelect();
-        					});
-    					</script>
+						<label for="missionParticipator">參與者 </label>
+						<div class="missionParticipator">
+							<ul class="col l12" style="column-count:4;column-gap:0;">
+								<div class="addParticipator btn-floating btn waves-effect waves-light #2196f3 blue"><i class="material-icons">add</i></div>
+							</ul>
+						</div>
 					</div>
 				</div>
 		<input type="hidden" class="dataRowLocation" value="">
