@@ -58,6 +58,12 @@
 				<!-- 圖跟摘要在同一列 -->
 				<div class="row card-panel hoverable" style="background-color:#FFFCEC;">
 					<!-- 摘要 -->
+					<div class="row">
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white"  style="background-color:#D1F0E5;font-size:2em;font-weight:900;font-family:微軟正黑體">
+							初步計畫摘要
+						</div>
+					</div>					
+					<!-- 摘要 -->
 					<div class="col l8 card-panel hoverable offset-l2" style="background-color:#D1F0E5;font-family:微軟正黑體;font-size:1.2em;font-weight:300;">
 							${primaryProj.projAbstract}
 					</div>
@@ -92,7 +98,7 @@
 									<span class="itemheader">理想地點</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									${primaryProj.idealPlace}							
 									</div>
 								</div>
@@ -109,7 +115,7 @@
 									<span class="itemheader">活動時間</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									<fmt:formatDate var="startTime" value="${primaryProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
 									<fmt:formatDate var="endTime" value="${primaryProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />									
 									${startTime} ~ ${endTime}							
@@ -128,7 +134,7 @@
 									<span class="itemheader">活動預計人數</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									${primaryProj.demandNum}							
 									</div>
 								</div>
@@ -145,7 +151,7 @@
 									<span class="itemheader">活動預算</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									${primaryProj.budget}							
 									</div>
 								</div>
