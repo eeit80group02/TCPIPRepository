@@ -378,6 +378,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		result = service.displayAll();
 		System.out.println(result.size());
 		request.setAttribute("list", result);
+		
 		if (!result.isEmpty()) {
 			System.out.println("成功查詢list=" + result);
 			request.getRequestDispatcher("DisplayAll.jsp").forward(request,response);
@@ -435,7 +436,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		HttpSession session = request.getSession();
-		String schoolId = (String) session.getAttribute("schoolId");
+		String schoolId = (String) session.getAttribute("schoolId"); 
 		int sId = 0;
 		try {
 			sId = Integer.parseInt(schoolId);

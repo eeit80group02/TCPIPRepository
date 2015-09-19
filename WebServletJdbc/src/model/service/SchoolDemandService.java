@@ -59,6 +59,7 @@ public class SchoolDemandService {
 		List<OffersBean> olist = null;
 		list = schoolDemandDao.getAll();
 		olist = offersDao.getAll();
+
 		for(SchoolDemandBean bean : list){
 			for(OffersBean obean:olist){
 				if(bean.getDemandStatus().equals("待洽談") && bean.getSchoolDemandId().equals(obean.getSchoolDemandId()))
