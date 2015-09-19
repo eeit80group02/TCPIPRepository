@@ -48,38 +48,17 @@
 						<div class="row">
 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									
+									瀏覽初步計畫
 								</span>
 							</a>
 						</div>					
 						<div class="row">
 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text"> 
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									洽談中
+									審核初步計畫
 								</span>
 							</a>
 						</div>					
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										待洽談
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談完成
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談失敗
-								</span>
-							</a>											
-						</div>
 					</div>				
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
@@ -93,21 +72,14 @@
 						<div class="row">
 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										全部物資需求
+										瀏覽完整計畫
 								</span>
 							</a>											
 						</div>											
 						<div class="row">
 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										已獲得物資
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										募集中物資
+										洽談中
 								</span>
 							</a>											
 						</div>											
@@ -142,6 +114,9 @@
 				"padding":"30px 0",
 				
 			});
+			//提示頁面主題欄的高度
+			var pagetitleheight = ($(window).height() * 0.25);
+			$("#pagetitle").css("height", pagetitleheight);
 			
 			$("#secondboard>div").css({
 				"width":(bodyw * 0.20),
@@ -155,9 +130,6 @@
 			//body的最小高度
 			$("#mainboard").css("min-height","100vh");
 			
-			//提示頁面主題欄的高度
-			var pagetitleheight = ($(window).height() * 0.25);
-			$("#pagetitle").css("height", pagetitleheight);
 		})(jQuery)
 	</script>
 	<script>
