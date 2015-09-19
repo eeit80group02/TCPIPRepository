@@ -69,7 +69,7 @@
 				<div style="margin: 150px">
 					<span></span>
 					<h3>親愛的會員您密碼已重設成功,本網頁將於數秒後跳轉回主頁面</h3>
-					<a href="index.jsp">如果未自動轉移轉移請點</a>
+					<a href="<c:url value='../index.jsp'/>">如果未自動轉移轉移請點</a>
 				</div>
 			</div>
 		</div>

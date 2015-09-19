@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +19,7 @@
 <header> <!-- 頁首 --> <nav>
 	<div class="nav-wrapper grey darken-3">
 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-			src="picture/LOGO.PNG" />
+			src="../picture/LOGO.PNG" />
 		</a>
 
 
@@ -68,7 +69,7 @@
 				<div style="margin: 150px">
 					<span></span>
 					<h3>親愛的會員${LoginOK.firstName} 您好，恭喜您已通過驗證，數秒後自動轉移請稍候片刻......</h3>
-					<a href="index.jsp">如果未自動轉移轉移請點</a>
+					<a href="<c:url value='../index.jsp'/>">如果未自動轉移轉移請點</a>
 				</div>
 			</div>
 		</div>
