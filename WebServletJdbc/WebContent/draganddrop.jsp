@@ -66,7 +66,6 @@
 	width:130px;
 }
 
-
 </style>
 
 
@@ -75,6 +74,28 @@
 	<script type="text/javascript">
 		$(function() {
 			$('.nested_with_switc').height($(window).height()*0.7);
+			
+			
+			$(document).on('keypress', '#nameTitle', function(e) {
+			    if(e.which == 13) {
+			    	var title = $('#nameTitle').val();
+					if(title==""){
+						title = "MissionSet";
+					}
+					var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
+							  '" class="missionTitle #ff5722 deep-orange" style="height:50px;font-size:22px;line-height:250%;">'+ title +
+							  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
+							  '<i class="large material-icons">add</i></div>');
+					missionSetCount++;
+					$('#nameTitle').val("");
+					$('.nested_with_switc').append($li);
+					var width = $('div > div > ul').width() + 310;
+					$('.nested_with_switc').css('width', width);
+					
+			    }
+			});
+			
+			
 			
 			$("ul.nested_with_switc").sortable({
 				cursor : 'move',
@@ -87,19 +108,6 @@
 
 			}).droppable();
 			
-
-			$("ul.nested_with_switc > li > ul").sortable({
-				cursor : 'move',
-				toleranceElement : '> div',
-				item : 'li', //Specifies which items inside the element should be sortable.
-				handle : 'div',
-				connectWith : 'ul.nested_with_switc > li > ul', //A selector of other sortable elements that the items from this list should be connected to.
-				placeholder : "ui-state-default",
-// 				update : function(event, ui) {
-
-// 				}
-			})
-
 			$("#trash-can").droppable({
 				hoverClass : "droppable-hover",
 				drop : function(event, ui) {
@@ -125,7 +133,8 @@
 				if(title==""){
 					title = "MissionSet";
 				}
-				var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + '" class="missionTitle #ff5722 deep-orange">'+ title +
+				var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
+						  '" class="missionTitle #ff5722 deep-orange" style="height:50px;font-size:22px;line-height:250%;">'+ title +
 						  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
 						  '<i class="large material-icons">add</i></div>');
 				missionSetCount++;
@@ -133,6 +142,21 @@
 				$('.nested_with_switc').append($li);
 				var width = $('div > div > ul').width() + 310;
 				$('.nested_with_switc').css('width', width);
+				
+				$("ul.nested_with_switc > li > ul").sortable({
+					cursor : 'move',
+					toleranceElement : '> div',
+					item : 'li', //Specifies which items inside the element should be sortable.
+					handle : 'div',
+					connectWith : 'ul.nested_with_switc > li > ul', //A selector of other sortable elements that the items from this list should be connected to.
+					placeholder : "ui-state-highlight",
+					start: function(e, ui){
+				        ui.placeholder.height(ui.helper.outerHeight());
+				    }
+//	 				update : function(event, ui) {
+
+//	 				}
+				})
 			});
 			
 			
