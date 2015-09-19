@@ -26,6 +26,8 @@ public class MemberBean implements Serializable
 	private byte[] password;				// 密碼（英文字母'數字）（不允許底線跟英文句點）
 	private String accountStatus;			// 帳號狀態(啟用/停用/待認證[預設])
 	private String identityCode;			// 激活碼
+	
+	private String base64String;			// 圖片base64
 
 	public MemberBean()
 	{
@@ -225,6 +227,16 @@ public class MemberBean implements Serializable
 	public String getBeanName()
 	{
 		return "member";
+	}
+
+	public String getBase64String()
+	{
+		return base64String;
+	}
+
+	public void setBase64String(String base64String)
+	{
+		this.base64String = base64String;
 	}
 
 	@Override
