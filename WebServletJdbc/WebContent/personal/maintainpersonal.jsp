@@ -28,15 +28,6 @@
 <div class="row" id="mainboard">
 	<!-- center -->
 	<div class="col l10 offset-l1">
-		<div class="col l12" >
-	      <ul class="tabs" id="tabsul">
-	        <li class="tab col s3 yellow accent-1"><a class="black-text" href="#accountmanager" style="font-family:微軟正黑體;font-weight:600;">帳號管理</a></li>
-	        <li class="tab col s3 "><a class="black-text" href="#projinfos" style="font-family:微軟正黑體;font-weight:600;">計畫資訊</a></li>
-	        <li class="tab col s3 "><a class="black-text" href="#follow" style="font-family:微軟正黑體;font-weight:600;">追蹤</a></li>
-	        <!-- 自行繼續新增 -->
-<!-- 	        <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
-	      </ul>		
-		</div>
 		
 		
 		
@@ -44,7 +35,16 @@
 		<div class="col l12" id="accountmanager">
 			<!-- 圖片 -->
 			<div class="col l2">
-				<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
+				<div class="row">
+					<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
+				</div>
+				<div class="row">
+					<a href="<c:url value='personmanager.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" style="width: 5.25cm;">
+						<span  style="font-family:微軟正黑體;font-size:1.2em;">
+							回會員中心
+						</span>
+					</a>
+				</div>				
 			</div>	
 			<!-- 表單本體開始 --> 
 			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
@@ -158,60 +158,12 @@
 					</div>
 				</form>
 				
-		
-		
-		
-		
-		
 		</div>
-		
-		
-		<!-- 計畫資訊 -->
-		<div class="col l10" id="projinfos">
-		
-		<a href="<c:url value="/primaryProj.do?type=displayPersonal" />" >看我發布過的初步計畫</a><br>
-		<a href="<c:url value="/primaryProj.do?type=displayPersonalByPending" />" >看我需要審核的初步計畫</a><br>
-		<a href="<c:url value="/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}" />">看我發布過的完整計畫</a><br>
-		<a href="<c:url value="/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}" />" >洽談中的完整計畫</a><br>
-			
-			<div class="row">
-				<a class="btn-large purple lighten-5 black-text" 
-					href="<c:url value='/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />" >
-						<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的初步計畫</span>
-					</a>
-			</div>
-			<div class="row">	
-				<a class="btn-large purple lighten-5 black-text"
-					href="<c:url value='/primaryProj.do?type=displayPersonalByPending&memberId=${LoginOK.memberId}' />" >
-					<span style="font-family:微軟正黑體;font-size:1.5em;">待審核的初步計畫</span>
-					</a>
-			</div>
-			<div class="row">
-				<a class="btn-large purple lighten-5 black-text"
-				 	href="<c:url value='/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />">
-				 	<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的完整計畫</span>
-				 	</a>
-			</div>
-			<div class="row">
-				<a class="btn-large purple lighten-5 black-text"
-					href="<c:url value='/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}' />" >
-					<span style="font-family:微軟正黑體;font-size:1.5em;">洽談中的完整計畫</span>
-					</a>
-			</div>			
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
-		</div>
-		
-		
-		<!-- 追蹤 -->
-		<div class="col l10" id="follow">
-		
-		
 		
 		
 		
 		</div>
 	</div>
-</div>
 <!-- 主要版面 -->
 
 </main>
@@ -229,22 +181,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
-			//tabs中li的點擊變色
-			$("#tabsul>li").each(function(){
-				$(this).on("click",function(){
-					$("#tabsul>li").removeClass("yellow accent-1");
-					$(this).addClass("yellow accent-1");
-				})
-			})
-			
 			
 			//body的最小高度
 			$("#mainboard").css("min-height","100vh");
-			//點擊預覽圖片也能上傳檔案
+			//show出修改密碼
 			$("#changepassworda").on("click",function(){
 				$("#changepassword").css("display","block");	
 			})
-			
 			//預覽圖片
 			$("#picture").change(function(){
 				var file = $("#picture")[0].files[0];
@@ -274,9 +217,6 @@
 				})
 			})
 			
-			
-			//初始化tab
-			$('ul.tabs').tabs();
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
