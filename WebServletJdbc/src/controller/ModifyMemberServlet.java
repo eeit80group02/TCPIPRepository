@@ -8,7 +8,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +19,20 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import global.GlobalService;
-
+import model.service.ModifyMemberService;
+@MultipartConfig(
+location="",
+fileSizeThreshold = 1024 * 1024,
+maxFileSize = 1024 * 1024 * 500, 
+maxRequestSize = 1024 * 1024 * 500 * 5)
 @WebServlet("/personal/modifyMember.do")
 public class ModifyMemberServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("/personal/modifyMember.do call ModifyMember success!!");
+		System.out.println("/personal.jsp call ModifyMemberServlet success!!");
 		request.setCharacterEncoding("utf-8");
 		// 準備存放錯誤訊息的Map物件
 		Map<String, String> errMsg = new HashMap<String, String>();
@@ -51,8 +60,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		byte[] picture = null; // 上傳的照片檔案
 		String pictureName = ""; // 照片名稱
 		long pictureLength = 0; // 照片的長度
-		String idNumber = ""; // 身分證字號
-
+	
 		// 使用者將圖片傳至Server端之inputStream
 		InputStream is = null; // InputStream
 
@@ -65,60 +73,52 @@ public class ModifyMemberServlet extends HttpServlet {
 				if (p.getContentType() == null) {
 					if (fldName.equals("password")) {
 						passwordStr = value;
-						// System.out.println(passwordStr);
+						 System.out.println(passwordStr);
 					} else if (fldName.equals("check")) {
 						checkStr = value;
-						// System.out.println(checkStr);
+						 System.out.println(checkStr);
 					} else if (fldName.equals("lastName")) {
 						lastName = value;
-						// System.out.println(lastName);
+						 System.out.println(lastName);
 					} else if (fldName.equals("firstName")) {
 						firstName = value;
-						// System.out.println(firstName);
+						 System.out.println(firstName);
 					} else if (fldName.equals("phone")) {
 						cellPhone = value;
-						// System.out.println(phone);
+						 System.out.println(phone);
 					} else if (fldName.equals("cellPhone")) {
 						cellPhone = value;
-						// System.out.println(cellPhone);
+						 System.out.println(cellPhone);
 					} else if (fldName.equals("birthday")) {
 						birthdayStr = value;
-						// System.out.println(birthdayStr);
+						 System.out.println(birthdayStr);
 					} else if (fldName.equals("email")) {
 						email = value;
-						// System.out.println(email);
+						 System.out.println(email);
 					} else if (fldName.equals("address")) {
 						address = value;
-						// System.out.println(address);
+						 System.out.println(address);
 					}
 				} else {
 					pictureName = GlobalService.getFileName(p); // 此為圖片檔的檔名
+					System.out.println("pictureName:" + pictureName);
 					if (pictureName != null && pictureName.trim().length() > 0) {
-						if (p.getContentType().equals("image/png") || p.getContentType().equals("image/jpeg")) // file
-																												// 資料
-						{
+						if (p.getContentType().equals("image/png") || p.getContentType().equals("image/jpeg")){ // file 資料
 							pictureName = GlobalService.getFileName(p); // 此為圖片檔的檔名
 							pictureLength = p.getSize();
 							is = p.getInputStream();
 						} else {
-							errMsg.put("errorPictureType", "請上傳格式為.jpeg, .png之圖檔");
-							// System.out.println("請選擇正確格式");
+//							errMsg.put("errorPictureType", "請上傳格式為.jpeg, .png之圖檔");
+//							 System.out.println("請選擇正確格式");
 						}
 					} else {
-						errMsg.put("errorPicture", "圖片為必填");
+//						errMsg.put("errorPicture", "圖片為必填");
+//						System.out.println("圖片為必填");
 					}
 				}
 			}
 
-			// 2.檢查使用者輸入的資料
-			// 密碼
-			if (passwordStr == null || passwordStr.trim().length() == 0) {
-				errMsg.put("errorPasswordEmpty", "密碼為必填");
-			}
-			// 密碼確認
-			if (checkStr == null || checkStr.trim().length() == 0) {
-				errMsg.put("errorCheckEmpty", "密碼確認為必填");
-			}
+//			 2.檢查使用者輸入的資料
 			// 判斷兩密碼是否相等
 			if (passwordStr.trim().length() > 0 && checkStr.trim().length() > 0) {
 				if (!passwordStr.trim().equals(checkStr.trim())) {
@@ -156,10 +156,6 @@ public class ModifyMemberServlet extends HttpServlet {
 			if (address == null || address.trim().length() == 0) {
 				errMsg.put("errorAddressEmpty", "地址為必填");
 			}
-			// 身分證字號
-			if (idNumber == null || idNumber.trim().length() == 0) {
-				errMsg.put("errorIdNumberEmpty", "身分證為必填");
-			}
 			// 圖片
 			if (is != null) {
 				picture = GlobalService.convertInputStreamToByteArray(is);
@@ -182,10 +178,28 @@ public class ModifyMemberServlet extends HttpServlet {
 				password = passwordStr.getBytes();
 				check = checkStr.getBytes();
 			}
+			
+			
 		} else {
 			errMsg.put("errorTitle", "此表單不是上傳檔案的表單");
 		}
-
+		
+		// 如果有一個以上的必填欄位有錯誤
+		if (!errMsg.isEmpty()) {
+			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
+			RequestDispatcher rd = request.getRequestDispatcher("personal.jsp");
+			rd.forward(request, response);
+			//若以上有任一欄位錯誤則return,停止以下的程式執行
+			return;
+		}
+		
+		//4.進行Business Logic 運算  (呼叫其它Service)
+		ModifyMemberService service = new ModifyMemberService();
+		int result = service.isModified(password, lastName, firstName, phone, cellPhone,	birthday, email, address, picture, pictureName, pictureLength);
+		if (result == 1){
+			System.out.println("資料修改成功");
+		}
+		
 	}
 
 	public static void main(String[] args) {

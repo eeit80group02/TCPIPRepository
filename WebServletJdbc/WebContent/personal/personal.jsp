@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +46,7 @@
 				<img class="card-panel hoverable" id="view" src="${LoginOK.base64String}" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
 			</div>	
 			<!-- 表單本體開始 --> 
-			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='modifyMember.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='modifyMember.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform" name="registerform">
 
 				<div class="row">
 						<!-- 頭像上傳 -->
@@ -68,7 +67,7 @@
 							<li style="opacity:0;">	
 								<!-- 密碼 -->
 								<div class="input-field row">
-									<input id="passwords" type="password" class="validate" name="password" required>
+									<input id="passwords" type="password" class="validate" name="password">
 				<!-- 														後端錯誤訊息顯示 -->
 									<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
 									<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
@@ -77,7 +76,7 @@
 							<li style="opacity:0;">							
 								<!-- 密碼確認 -->
 								<div class="input-field row">
-									<input id="check" type="password" class="validate" name="check" required>
+									<input id="check" type="password" class="validate" name="check">
 				<!-- 														後端錯誤訊息顯示 -->
 									<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
 									<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
@@ -508,57 +507,7 @@
 					}
 				})
 		//送出表單前的驗證
-		$("#btndiv").on({
-			"mouseover":function(){
-			if($("#passwords").val() !== "" || $("#check").val() !== ""){
-				if(
-						$("#registerform").data().passwordresults &&
-						$("#registerform").data().passwordresults2 &&
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-						){
-							$("#submitbtn").prop("disabled",false);
-						}else{
-							$("#submitbtn").prop("disabled",true);
-						}				
-			}else{
-				if(
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-				){
-						$("#submitbtn").prop("disabled",false);
-				}else{
-						$("#submitbtn").prop("disabled",true);
-					}						
-			}
 
-		},"mouseout":function(){
-			if(
-				$("#registerform").data().accountresults &&
-				$("#registerform").data().passwordresults &&
-				$("#registerform").data().passwordresults2 &&
-				$("#registerform").data().contactresult &&
-				$("#registerform").data().emailresult &&
-				$("#registerform").data().birthdayresult &&
-				$("#lastName").val().trim() !== "" &&
-				$("#firstName").val().trim() !== "" &&
-				$("#address").val().trim() !== "" 
-				
-			){
-				$("#submitbtn").prop("disabled",false);
-			}else{
-				$("#submitbtn").prop("disabled",true);
-			}
-		}
-		});
 		})(jQuery)
 	</script>
 	<script>
