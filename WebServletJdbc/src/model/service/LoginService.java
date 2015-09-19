@@ -1,5 +1,7 @@
 package model.service;
 
+import global.GlobalService;
+
 import java.util.Arrays;
 
 import model.MemberBean;
@@ -31,6 +33,7 @@ public class LoginService
 				byte[] pwd = bean.getPassword();
 				if(Arrays.equals(pwd,password.getBytes()))
 				{
+					bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getPictureName(),bean.getPicture()));
 					return bean;
 				}
 			}

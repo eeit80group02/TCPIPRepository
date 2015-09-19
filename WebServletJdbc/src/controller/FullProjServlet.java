@@ -1,11 +1,6 @@
 package controller;
 
-import global.GlobalService;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.ParseException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,12 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import model.FullProjBean;
-import model.PrimaryProjBean;
+import model.MemberBean;
 import model.service.FullProjService;
-import model.service.PrimaryProjService;
 
 @WebServlet("/fullProj.do")
 @MultipartConfig(location = "",
@@ -60,34 +53,20 @@ public class FullProjServlet extends HttpServlet
 		}
 		else
 		{
-			if(type.equals("create"))
-			{
-				// 因為表單必須 post 
-				if(request.getMethod().equals("POST"))
-				{
-					System.out.println("執行 PrimaryProjServlet createPrimaryProj");
-//					createPrimaryProj(request,response);
-				}
-				else
-				{
-					errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.70(必須post))");
-					request.getRequestDispatcher("/error.jsp").forward(request,response);
-					return;
-				}
-			}
-			else if(type.equals("update"))
+			if(type.equals("update"))
 			{
 				System.out.println("執行 PrimaryProjServlet updatePrimaryProj");
 //				updatePrimaryProj(request,response);
 			}
-			// 顯示 完整計畫修改 [type=displayUpdate&fullId=?]
-			else if(type.equals("displayUpdate"))
+			// 欲 補齊完整計畫頁面
+			else if(type.equals("displayFullProjByChat"))
 			{
-				System.out.println("執行FullProjServlet displayUpdateFullProj[顯示欲修改單一計畫]");
+				System.out.println("執行FullProjServlet displayFullProjByChat[補齊完整計畫]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
-				displayUpdateFullProj(request,response);
+				displayFullProjByChat(request,response);
 			}
+			// 瀏覽所有招募中的完整計畫[type=displayAll]
 			else if(type.equals("displayAll"))
 			{
 				System.out.println("執行 FullProjServlet displayFullProjAll");
@@ -103,7 +82,7 @@ public class FullProjServlet extends HttpServlet
 				
 				displayFullProj(request,response);
 			}
-			// 在個人頁面 顯示 發起過的所有完整計畫[type=displayPersonal&memberId=?]
+			// 個人專區，查詢發布過的全部完整計畫
 			else if(type.equals("displayPersonal"))
 			{
 				System.out.println("執行 FullProjServlet displayPersonalFullProj[個人完整計畫列表]");
@@ -111,13 +90,21 @@ public class FullProjServlet extends HttpServlet
 
 				displayPersonalFullProj(request,response);
 			}
-			// 在個人頁面顯示  需跟學校洽談補齊的計劃[type=displayPersonalByChat&memberId=?]
+			// 在個人頁面顯示  需跟學校洽談補齊的計劃[type=displayPersonalByChat]
 			else if(type.equals("displayPersonalByChat"))
 			{
 				System.out.println("執行 FullProjServlet displayPersonalFullProjByChat[需洽談的完整計劃列表]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayPersonalFullProjByChat(request,response);
+			}
+			// 補齊計畫頁面
+			else if(type.equals("displayUpdateForm"))
+			{
+				System.out.println("執行 FullProjServlet displayUpdateForm[補齊計畫頁面]");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				displayUpdateForm(request,response);
 			}
 			else
 			{
@@ -128,129 +115,89 @@ public class FullProjServlet extends HttpServlet
 		}
 	}
 	
+	private void displayUpdateForm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+	}
+
 	private void displayPersonalFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
+		HttpSession session = request.getSession();
+		MemberBean memberBean = null;
 		
-		// 接收資料
-		String memberId = request.getParameter("memberId");
-		
-		// 驗證資料
-		if(memberId == null || memberId.trim().length() == 0)
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
 		{
-			errorMsg.put("error","queryString key error");
-		}
-		
-		// 進行必要資料轉換
-		int id = 0;
-		try
-		{
-			id = Integer.parseInt(memberId);
-		}
-		catch(NumberFormatException e)
-		{
-			errorMsg.put("error","queryString value error");
-		}
-		
-		if(!errorMsg.isEmpty())
-		{
-			// QueryString 有誤
-			errorMsg.put("errorURL","請勿做作不正當請求(FullyProjServlet line.134)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
-
-		// business logic
-		FullProjBean bean = new FullProjBean();
-		bean.setMemberId(id);
-		List<FullProjBean> result = service.displayPersonalFullProjProjByChat(bean);
-		
-		if(result != null)
-		{
-			// 成功導向
-			System.out.println(result);
-			HttpSession session = request.getSession();
-			session.setAttribute("fullProj",result);
-			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalFullProjByChat.jsp");
-//			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);
-			
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
 		}
 		else
 		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
+		}
+		
+		if(memberBean != null)
+		{
+			// business logic
+			FullProjBean fullProjBean = new FullProjBean();
+			fullProjBean.setMemberId(memberBean.getMemberId());
+			List<FullProjBean> result = service.displayPersonalFullProjProjByChat(fullProjBean);
+			
+			if(result != null)
+			{
+				// 成功導向
+				System.out.println(result);
+				System.out.println("==================================================");
+				request.setAttribute("fullProj",result);
+				request.getRequestDispatcher("/personal/displayPersonalFullProjByChat.jsp").forward(request,response);
+			}
 		}
 	}
 	
-
-
 	private void displayPersonalFullProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
+		HttpSession session = request.getSession();
 		
-		// 接收資料
-		String memberId = request.getParameter("memberId");
-		
-		// 驗證資料
-		if(memberId == null || memberId.trim().length() == 0)
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		MemberBean memberBean = null;
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
 		{
-			errorMsg.put("error","queryString key error");
-		}
-		
-		// 進行必要資料轉換
-		int id = 0;
-		try
-		{
-			id = Integer.parseInt(memberId);
-		}
-		catch(NumberFormatException e)
-		{
-			errorMsg.put("error","queryString value error");
-		}
-		
-		if(!errorMsg.isEmpty())
-		{
-			// QueryString 有誤
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.134)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
-
-		// business logic
-		FullProjBean bean = new FullProjBean();
-		bean.setMemberId(id);
-		List<FullProjBean> result = service.displayPersonalFullProj(bean);
-		
-		if(result != null)
-		{
-			// 成功導向
-			System.out.println(result);
-			HttpSession session = request.getSession();
-			session.setAttribute("fullProj",result);
-			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalFullProj.jsp");
-//			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
-			
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
 		}
 		else
 		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
+		}
+		
+		// 接收資料 從 session LoginOK 抓取
+		if(memberBean != null)
+		{
+			// business logic
+			FullProjBean fullProjBean = new FullProjBean();
+			fullProjBean.setMemberId(memberBean.getMemberId());
+			List<FullProjBean> result = service.displayPersonalFullProj(fullProjBean);
+		
+			if(result != null)
+			{
+				// 成功導向
+				System.out.println(result);
+				System.out.println("==================================================");
+				request.setAttribute("fullProj",result);
+				request.getRequestDispatcher("/personal/displayPersonalFullProj.jsp").forward(request,response);;
+				return;
+			}
 		}
 	}
 
-	private void displayUpdateFullProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	private void displayFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
 		
@@ -295,17 +242,9 @@ public class FullProjServlet extends HttpServlet
 		{
 			// 成功導向
 			System.out.println(bean);
-			HttpSession session = request.getSession();
-			session.setAttribute("fullProj",bean);
-			response.sendRedirect(request.getContextPath() + "/fullProj/displayFullProjByChat.jsp");
-//			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
-			return;
-		}
-		else
-		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			System.out.println("==============================");
+			request.setAttribute("fullProj",bean);
+			request.getRequestDispatcher("/fullProj/displayFullProjByChat.jsp").forward(request,response);;
 			return;
 		}
 	}
@@ -658,11 +597,7 @@ public class FullProjServlet extends HttpServlet
 		List<FullProjBean> beans = service.displayFullProjAll();
 		request.setAttribute("fullProjAll",beans);
 		request.getRequestDispatcher("/fullProj/fullproj.jsp").forward(request,response);
-//		HttpSession session = request.getSession();
-//		session.setAttribute("fullProjAll",beans);
-//		response.sendRedirect(request.getContextPath() + "/fullProj/fullproj.jsp");
-		
-		
+
 		return;			
 	}
 

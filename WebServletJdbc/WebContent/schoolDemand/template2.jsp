@@ -19,12 +19,11 @@
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row" style="margin-top: 100px">
-			<div class="container" style="height: 500px;border: 2px solid black;">
-				<div style="margin: 150px">
-				
-				</div>
-			</div>
+		<div class="row" id="mainrow">
+		
+		
+		
+		
 		</div>
 	</main>
 
@@ -44,8 +43,7 @@
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script>
 		$(function() {
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
+			$("#mainrow").css("min-height","100vh");
 			//footer中連結的文字大小
 			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度

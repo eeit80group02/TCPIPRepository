@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.FullProjBean;
-import model.PrimaryProjBean;
-import model.ProcessingProjBean;
 import model.dao.FullProjDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
 
@@ -27,22 +25,14 @@ public class FullProjService
 		List<FullProjBean> temp = new ArrayList<FullProjBean>();
 		for(FullProjBean bean : result)
 		{
-			if(bean.getProjStatus().equals("洽談完成"))
-			{
-				temp.add(bean);
-			}
-			else
+			if(bean.getProjStatus().equals("招募中"))
 			{
 				bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
+				temp.add(bean);
 			}
 		}
 		
-		for(FullProjBean bean : temp)
-		{
-			result.remove(bean);
-		}
-		
-		return result;
+		return temp;
 	}
 	
 	public List<FullProjBean> displayPersonalFullProj(FullProjBean bean)

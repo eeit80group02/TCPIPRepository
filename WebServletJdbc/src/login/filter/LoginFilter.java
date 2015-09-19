@@ -62,16 +62,15 @@ public class LoginFilter implements Filter
 			HttpServletRequest req = (HttpServletRequest)request;
 			HttpServletResponse resp = (HttpServletResponse)response;
 			servletPath = req.getServletPath();
-			System.out.println("servletPath: "+servletPath);
 			contextPath = req.getContextPath();
 			requestURI = req.getRequestURI();
 			queryString = req.getQueryString();
-			System.out.println("queryString: "+queryString);
 			isRequestedSessionIdValid = req.isRequestedSessionIdValid();
 			
 //			System.out.println("servletPath = " + servletPath);
 //			System.out.println("contextPath = " + contextPath);
 //			System.out.println("requestURI = " + requestURI);
+//			System.out.println("queryString: "+queryString);
 			
 			// 檢查登入
 			if(mustLogin())
