@@ -44,7 +44,7 @@
 		<div class="col l12" id="accountmanager">
 			<!-- 圖片 -->
 			<div class="col l2">
-				<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
+				<img class="card-panel hoverable" id="view" src="${LoginOK.base64String}" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
 			</div>	
 			<!-- 表單本體開始 --> 
 			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='modifyMember.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
@@ -54,7 +54,7 @@
 						<div class="row">
 							<div class="col l2 btn yellow lighten-5 black-text tooltipped" data-position="bottom" data-delay="50"  data-tooltip="圖檔僅接受jpg、png格式，檔案大小請勿超過2M" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
 								<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">頭像</span>
-								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture" value="${LoginOK.picture}">
+								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture">
 							</div>
 							<a id="changepassworda" href="#!" class="btn yellow lighten-5 black-text" 
 								onclick="Materialize.showStaggeredList('#changepassword')"><span  style="font-family:微軟正黑體;font-size:1.2em;">修改密碼</span></a>
