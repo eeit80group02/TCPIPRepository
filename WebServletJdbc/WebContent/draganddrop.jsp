@@ -214,6 +214,15 @@
 				$('.dialog .missionDate').val(dataDate);
 				
 				
+				if($(event.target).hasClass('disable')){
+					$('.dialog .missionStatus').prop('checked', true);
+					$('.dialog .missionName').addClass('disable');
+				} else {
+					$('.dialog .missionStatus').prop('checked', false);
+					if($('.dialog .missionName').hasClass('disable')) {
+						$('.dialog .missionName').removeClass('disable');
+					}
+				}
 				if(dataPriority == "普通" || dataPriority == "緊急" || dataPriority == "非常緊急" ){
 					$('.dialog .missionPriority option[value=' + dataPriority + ']').prop('selected', true);
 				} else {
@@ -276,8 +285,9 @@
 			$('.dialog').dialog({
 				autoOpen: false,
 				modal: true,
+				autoResize:true,
 				height: $(window).height(),
-				width: $(window).width() - 1000,
+				width: $(window).width()*0.5,
 				position: { my: "right top", at: "right bottom", of: window },
 				show: {
 					effect: "slide",
@@ -484,7 +494,17 @@
 	
 	<script type="text/javascript">
 		$('.dialog .missionStatus').on('click',function() {
-			$('.dialog .missionName').toggleClass('disable');
+			if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
+				$('.dialog .missionName').removeClass('disable');
+				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
+				$(event.target).prop('checked',false);
+				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
+			} else {
+				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
+				$('.dialog .missionName').addClass('disable');
+				$(event.target).prop('checked',true);
+				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
+			}
 		});
 	</script>
 	
