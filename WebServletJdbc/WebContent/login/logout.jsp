@@ -14,7 +14,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="deep-orange lighten-5">
-	<% session.invalidate();
+	<% 
+		session.removeAttribute("LoginOK");
+		session.invalidate();
 // 	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
 	%>
 	<!-- 頁首 -->
