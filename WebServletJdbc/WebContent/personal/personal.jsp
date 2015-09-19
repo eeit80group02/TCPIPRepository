@@ -169,36 +169,35 @@
 		<!-- 計畫資訊 -->
 		<div class="col l10" id="projinfos">
 		
-		<a href="<c:url value="/primaryProj.do?type=displayPersonal" />" >看我發布過的初步計畫</a><br>
-		<a href="<c:url value="/primaryProj.do?type=displayPersonalByPending" />" >看我需要審核的初步計畫</a><br>
-		<a href="<c:url value="/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}" />">看我發布過的完整計畫</a><br>
-		<a href="<c:url value="/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}" />" >洽談中的完整計畫</a><br>
+<%-- 		<a href="<c:url value="/primaryProj.do?type=displayPersonal" />" >看我發布過的初步計畫</a><br> --%>
+<%-- 		<a href="<c:url value="/primaryProj.do?type=displayPersonalByPending" />" >看我需要審核的初步計畫</a><br> --%>
+<%-- 		<a href="<c:url value="/fullProj.do?type=displayPersonal" />">看我發布過的完整計畫</a><br> --%>
+<%-- 		<a href="<c:url value="/fullProj.do?type=displayPersonalByChat" />" >洽談中的完整計畫</a><br> --%>
 			
 			<div class="row">
 				<a class="btn-large purple lighten-5 black-text" 
-					href="<c:url value='/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />" >
+					href="<c:url value='/primaryProj.do?type=displayPersonal' />" >
 						<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的初步計畫</span>
 					</a>
 			</div>
 			<div class="row">	
 				<a class="btn-large purple lighten-5 black-text"
-					href="<c:url value='/primaryProj.do?type=displayPersonalByPending&memberId=${LoginOK.memberId}' />" >
+					href="<c:url value='/primaryProj.do?type=displayPersonalByPending' />" >
 					<span style="font-family:微軟正黑體;font-size:1.5em;">待審核的初步計畫</span>
 					</a>
 			</div>
 			<div class="row">
 				<a class="btn-large purple lighten-5 black-text"
-				 	href="<c:url value='/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />">
+				 	href="<c:url value='/fullProj.do?type=displayPersonal' />">
 				 	<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的完整計畫</span>
 				 	</a>
 			</div>
 			<div class="row">
 				<a class="btn-large purple lighten-5 black-text"
-					href="<c:url value='/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}' />" >
+					href="<c:url value='/fullProj.do?type=displayPersonalByChat' />" >
 					<span style="font-family:微軟正黑體;font-size:1.5em;">洽談中的完整計畫</span>
 					</a>
 			</div>			
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 		</div>
 		
 		
