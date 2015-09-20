@@ -38,7 +38,7 @@
 		<tr>
 			<th>初步計畫編號</th>
 			<th>初步計畫標題</th>
-			<th>學校</th>
+			<th>接洽學校</th>
 			<th>地方</th>
 		</tr>
 		<c:forEach var="bean" items="${primaryProj}">

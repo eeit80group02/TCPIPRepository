@@ -64,7 +64,7 @@
 						<div class="row">
 							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										建立完整計畫
+										編輯完整計畫
 								</span>
 							</a>											
 						</div>					
