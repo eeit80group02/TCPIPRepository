@@ -64,7 +64,7 @@
 								<div class="col l3" style="font-size:1.4em;">
 									<div class="btn cyan lighten-5 black-text left-align" style="width:100%;">需求計畫編號</div>
 								</div>
-								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${param.activityTopic}" disabled/>
+								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${param.activityTopic}" readonly="readonly"/>
 								<div class="col l2">
 									<span>${error.activityTopic}</span>
 								</div>
@@ -73,7 +73,7 @@
 								<div class="col l3" style="font-size:1.4em;">
 									<div class="btn cyan lighten-5 black-text left-align" style="width:100%;">建立日期</div>
 								</div>
-								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${param.activityTopic}" disabled/>
+								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${param.activityTopic}" readonly="readonly"/>
 								<div class="col l2">
 									<span>${error.activityTopic}</span>
 								</div>
@@ -82,7 +82,7 @@
 								<div class="col l3" style="font-size:1.4em;">
 									<div class="btn cyan lighten-5 black-text left-align" style="width:100%;">學校編號</div>
 								</div>
-								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${param.activityTopic}" disabled/>
+								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${param.activityTopic}" readonly="readonly"/>
 								<div class="col l2">
 									<span>${error.activityTopic}</span>
 								</div>

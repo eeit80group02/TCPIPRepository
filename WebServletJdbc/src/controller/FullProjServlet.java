@@ -1,6 +1,11 @@
 package controller;
 
+import global.GlobalService;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +17,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import model.FullProjBean;
 import model.MemberBean;
+import model.PrimaryProjBean;
 import model.service.FullProjService;
 
 @WebServlet("/fullProj.do")
@@ -55,13 +62,15 @@ public class FullProjServlet extends HttpServlet
 		{
 			if(type.equals("update"))
 			{
-				System.out.println("執行 PrimaryProjServlet updatePrimaryProj");
-//				updatePrimaryProj(request,response);
+				System.out.println("執行 FullProjServlet updateFullProj");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				updateFullProj(request,response);
 			}
 			// 欲 補齊完整計畫頁面
 			else if(type.equals("displayFullProjByChat"))
 			{
-				System.out.println("執行FullProjServlet displayFullProjByChat[補齊完整計畫]");
+				System.out.println("執行FullProjServlet displayFullProjByChat[欲補齊完整計畫]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayFullProjByChat(request,response);
@@ -99,13 +108,13 @@ public class FullProjServlet extends HttpServlet
 				displayPersonalFullProjByChat(request,response);
 			}
 			// 補齊計畫頁面
-			else if(type.equals("displayUpdateForm"))
-			{
-				System.out.println("執行 FullProjServlet displayUpdateForm[補齊計畫頁面]");
-				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
-				
-				displayUpdateForm(request,response);
-			}
+//			else if(type.equals("displayUpdateForm"))
+//			{
+//				System.out.println("執行 FullProjServlet displayUpdateForm[補齊計畫頁面]");
+//				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+//				
+//				displayUpdateForm(request,response);
+//			}
 			else
 			{
 				errorMsg.put("errorURL","請勿做作不正當請求( line.83)");
@@ -115,11 +124,39 @@ public class FullProjServlet extends HttpServlet
 		}
 	}
 	
-	private void displayUpdateForm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
-	{
-		request.setCharacterEncoding("UTF-8");
-		
-	}
+//	private void displayUpdateForm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+//	{
+//		request.setCharacterEncoding("UTF-8");
+//		
+//		HttpSession session = request.getSession();
+//		MemberBean memberBean = null;
+//		
+//		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
+//		{
+//			memberBean = (MemberBean)session.getAttribute("LoginOK");
+//		}
+//		else
+//		{
+//			String context = request.getContextPath();
+//			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
+//			return;
+//		}
+//		
+//		String fullProjId = request.getParameter("fullProjId");
+//		int fullId = Integer.parseInt(fullProjId);
+//		
+//		FullProjBean fullProjBean = new FullProjBean();
+//		fullProjBean.setFullProjId(fullId);
+//		
+//		FullProjBean result = service.displayFullProj(fullProjBean);
+//		if(result != null)
+//		{
+//			System.out.println(result);
+//			request.setAttribute("fullProj",result);
+//			request.getRequestDispatcher("/fullProj/updateFullProjForm.jsp").forward(request,response);
+//			return;
+//		}
+//	}
 
 	private void displayPersonalFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
@@ -249,247 +286,244 @@ public class FullProjServlet extends HttpServlet
 		}
 	}
 
-//	private void updatePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
-//	{
-//		request.setCharacterEncoding("UTF-8");
-//		HttpSession session = request.getSession();
-//		session.removeAttribute("primaryProj");
-//		
-//		// 錯誤訊息 容器
-//		Map<String,String> errorMsg = new HashMap<String,String>();
-//		request.setAttribute("error",errorMsg);
-//		
-//		String primaryProjId = null;
-//		String memberId = null;
-//		String title = null;
-//		String projAbstract = null;
-//		String content = null;
-//		String location = null;
-//		String startTime = null;
-//		String endTime = null;
-//		String demandNum = null;
-//		String budget = null;
-//		byte[] img = null;
-//		String fileName = null;
-//		long fileLength = 0;
-//		InputStream is = null;
-//		
-//		// 接收前端使用者資料，表單必須 method="post" enctype="multipart/form-data"
-//		Collection<Part> parts = request.getParts();
-//		if(parts != null)
-//		{
-//			for(Part part : parts)
-//			{
-//				String name = part.getName();	  // form input 的 name
-//				String value = request.getParameter(name);
-//				if(part.getContentType() == null) // 普通 文字資料
-//				{
-//					if(name.equals("primaryProjId"))
+	private void updateFullProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("fullProj");
+		
+		// 錯誤訊息 容器
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		String fullProjId = null;
+		String memberId = null;
+		String title = null;
+		String projAbstract = null;
+		String content = null;
+		String location = null;
+		String startTime = null;
+		String endTime = null;
+		String estMember = null;
+		String budget = null;
+		String orgArchitecture = null;
+		byte[] img = null;
+		String fileName = null;
+		long fileLength = 0;
+		InputStream is = null;
+		
+		// 接收前端使用者資料，表單必須 method="post" enctype="multipart/form-data"
+		Collection<Part> parts = request.getParts();
+		if(parts != null)
+		{
+			for(Part part : parts)
+			{
+				String name = part.getName();	  // form input 的 name
+				String value = request.getParameter(name);
+				if(part.getContentType() == null) // 普通 文字資料
+				{
+					if(name.equals("fullProjId"))
+					{
+						fullProjId = value;
+					}
+					if(name.equals("title"))
+					{
+						title = value;
+					}
+					if(name.equals("projAbstract"))
+					{
+						projAbstract = value;
+					}
+					if(name.equals("content"))
+					{
+						content = value;
+					}
+					if(name.equals("location"))
+					{
+						location = value;
+					}
+					if(name.equals("activityStartTime"))
+					{
+						startTime = value;
+					}
+					if(name.equals("activityEndTime"))
+					{
+						endTime = value;
+					}
+					if(name.equals("estMember"))
+					{
+						estMember = value;
+					}
+					if(name.equals("budget"))
+					{
+						budget = value;
+					}
+					if(name.equals("orgArchitecture"))
+					{
+						orgArchitecture = value;
+					}
+				}
+				else if(part.getContentType().equals("image/png") || part.getContentType().equals("image/jpeg")) // file 資料
+				{
+					if(name.equals("imgFile"))
+					{
+						fileName = GlobalService.getFileName(part);
+						fileLength = part.getSize();
+						is = part.getInputStream();
+					}
+				}
+				else
+				{
+					fileName = GlobalService.getFileName(part);
+					if(fileName != null && fileName.trim().length() > 0)
+					{
+						errorMsg.put("imgFile","檔案格式不正確");
+						System.out.println("請選擇正確格式");
+					}
+//					else
 //					{
-//						primaryProjId = value;
+//						修改 不強制輸入，不輸入=原先圖檔
+//						errorMsg.put("imgFile","計畫封面是必須的");
+//						System.out.println("沒檔案，計畫封面是必須的");
 //					}
-//					if(name.equals("memberId"))
-//					{
-//						memberId = value;
-//					}
-//					if(name.equals("title"))
-//					{
-//						title = value;
-//					}
-//					if(name.equals("projAbstract"))
-//					{
-//						projAbstract = value;
-//					}
-//					if(name.equals("content"))
-//					{
-//						content = value;
-//					}
-//					if(name.equals("location"))
-//					{
-//						location = value;
-//					}
-//					if(name.equals("startTime"))
-//					{
-//						startTime = value;
-//					}
-//					if(name.equals("endTime"))
-//					{
-//						endTime = value;
-//					}
-//					if(name.equals("demandNum"))
-//					{
-//						demandNum = value;
-//					}
-//					if(name.equals("budget"))
-//					{
-//						budget = value;
-//					}
-//				}
-//				else if(part.getContentType().equals("image/png") || part.getContentType().equals("image/jpeg")) // file 資料
-//				{
-//					if(name.equals("imgFile"))
-//					{
-//						fileName = GlobalService.getFileName(part);
-//						fileLength = part.getSize();
-//						is = part.getInputStream();
-//					}
-//				}
-//				else
-//				{
-//					fileName = GlobalService.getFileName(part);
-//					if(fileName != null && fileName.trim().length() > 0)
-//					{
-//						errorMsg.put("imgFile","檔案格式不正確");
-//						System.out.println("請選擇正確格式");
-//					}
-////					else
-////					{
-////						修改 不強制輸入，不輸入=原先圖檔
-////						errorMsg.put("imgFile","計畫封面是必須的");
-////						System.out.println("沒檔案，計畫封面是必須的");
-////					}
-//				}
-//			}
-//		}
-//		
-//		// 檢查使用者輸入資料
-//		if(title == null || title.trim().length() == 0)
+				}
+			}
+		}
+		
+		// 檢查使用者輸入資料
+		if(title == null || title.trim().length() == 0)
+		{
+			errorMsg.put("title","計畫名稱為必填欄位");
+		}
+		
+		if(projAbstract == null || projAbstract.trim().length() == 0)
+		{
+			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		}
+		
+		if(content == null || content.trim().length() == 0)
+		{
+			errorMsg.put("content","計畫內容為必填欄位");
+		}
+		
+		if(location == null || location.trim().length() == 0)
+		{
+			errorMsg.put("location","理想地點為必填欄位");
+		}
+		
+		if(startTime == null || startTime.trim().length() == 0)
+		{
+			errorMsg.put("activityStartTime","活動時間(起)為必填欄位");
+		}
+		
+		if(endTime == null || endTime.trim().length() == 0)
+		{
+			errorMsg.put("activityEndTime","活動時間(汔)為必填欄位");
+		}
+		
+		if(estMember == null || estMember.trim().length() == 0)
+		{
+			errorMsg.put("estMember","活動人數為必填欄位");
+		}
+		
+		if(budget == null || budget.trim().length() == 0)
+		{
+			errorMsg.put("budget","活動預算為必填欄位");
+		}
+		
+		if(budget == null || budget.trim().length() == 0)
+		{
+			errorMsg.put("orgArchitecture","成員架構為必填欄位");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			request.getRequestDispatcher("/fullProj/updateFullProjForm.jsp").forward(request,response);
+			return;
+		}
+		
+		// 進行必要的資料轉換
+		int fId = 0;
+		try
+		{
+			fId = Integer.parseInt(fullProjId);
+		}
+		catch(NumberFormatException e)
+		{
+			e.printStackTrace();
+		}
+
+		java.util.Date sTime = null;
+		try
+		{
+			sTime = GlobalService.convertStringToDate(startTime);
+		}
+		catch(ParseException e)
+		{
+			errorMsg.put("activityStartTime","活動時間(起)格式有誤");
+			e.printStackTrace();
+		}
+		
+		java.util.Date eTime = null;
+		try
+		{
+			eTime = GlobalService.convertStringToDate(endTime);
+		}
+		catch(ParseException e)
+		{
+			errorMsg.put("activityEndTime","活動時間(迄)格式有誤");
+			e.printStackTrace();
+		}
+		
+		// 如果 <= 0 代表 日期起訖相同 或者 迄比起 早
+		if(GlobalService.compareDate(sTime,eTime) < 0)
+		{
+			errorMsg.put("activityEndTime","活動時間(迄) 不能比 活動時間(起)早");
+		}
+		
+		int dNum = 0;
+		try
+		{
+			dNum = Integer.parseInt(estMember);
+			if(dNum < 0)
+				errorMsg.put("demandNum","人數必須為大於0");
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("demandNum","人數必須為數字");
+			e.printStackTrace();
+		}
+		
+		int bget = 0;
+		try
+		{
+			bget = Integer.parseInt(budget);
+			if(bget < 0)
+				errorMsg.put("budget","預算必須為大於0");
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("budget","預算必須為數字");
+			e.printStackTrace();
+		}
+		
+		if(is != null)
+		{
+			img = GlobalService.convertInputStreamToByteArray(is);
+			is.close();
+		}
+//		else
 //		{
-//			errorMsg.put("title","計畫名稱為必填欄位");
+//			img = GlobalService.convertBase64StringToByteArray(request.getParameter("bsae64String"));
 //		}
-//		
-//		if(projAbstract == null || projAbstract.trim().length() == 0)
-//		{
-//			errorMsg.put("projAbstract","計畫摘要為必填欄位");
-//		}
-//		
-//		if(content == null || content.trim().length() == 0)
-//		{
-//			errorMsg.put("content","計畫內容為必填欄位");
-//		}
-//		
-//		if(location == null || location.trim().length() == 0)
-//		{
-//			errorMsg.put("location","理想地點為必填欄位");
-//		}
-//		
-//		if(startTime == null || startTime.trim().length() == 0)
-//		{
-//			errorMsg.put("startTime","活動時間(起)為必填欄位");
-//		}
-//		
-//		if(endTime == null || endTime.trim().length() == 0)
-//		{
-//			errorMsg.put("endTime","活動時間(汔)為必填欄位");
-//		}
-//		
-//		if(demandNum == null || demandNum.trim().length() == 0)
-//		{
-//			errorMsg.put("demandNum","活動人數為必填欄位");
-//		}
-//		
-//		if(budget == null || budget.trim().length() == 0)
-//		{
-//			errorMsg.put("budget","活動預算為必填欄位");
-//		}
-//		
-//		if(!errorMsg.isEmpty())
-//		{
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);
-//			return;
-//		}
-//		
-//		// 進行必要的資料轉換
-//		int pId = 0;
-//		try
-//		{
-//			pId = Integer.parseInt(primaryProjId);
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		int mId = 0;
-//		try
-//		{
-//			mId = Integer.parseInt(memberId);
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		
-//		java.util.Date sTime = null;
-//		try
-//		{
-//			sTime = GlobalService.convertStringToDate(startTime);
-//		}
-//		catch(ParseException e)
-//		{
-//			errorMsg.put("startTime","活動時間(起)格式有誤");
-//			e.printStackTrace();
-//		}
-//		
-//		java.util.Date eTime = null;
-//		try
-//		{
-//			eTime = GlobalService.convertStringToDate(endTime);
-//		}
-//		catch(ParseException e)
-//		{
-//			errorMsg.put("endTime","活動時間(迄)格式有誤");
-//			e.printStackTrace();
-//		}
-//		
-//		// 如果 <= 0 代表 日期起訖相同 或者 迄比起 早
-//		if(GlobalService.compareDate(sTime,eTime) <= 0)
-//		{
-//			errorMsg.put("endTime","活動時間(迄) 不能比 活動時間(起)早");
-//		}
-//		
-//		int dNum = 0;
-//		try
-//		{
-//			dNum = Integer.parseInt(demandNum);
-//			if(dNum < 0)
-//				errorMsg.put("demandNum","人數必須為大於0");
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			errorMsg.put("demandNum","人數必須為數字");
-//			e.printStackTrace();
-//		}
-//		
-//		int bget = 0;
-//		try
-//		{
-//			bget = Integer.parseInt(budget);
-//			if(bget < 0)
-//				errorMsg.put("budget","預算必須為大於0");
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			errorMsg.put("budget","預算必須為數字");
-//			e.printStackTrace();
-//		}
-//		
-//		if(is != null)
-//		{
-//			img = GlobalService.convertInputStreamToByteArray(is);
-//			is.close();
-//		}
-////		else
-////		{
-////			img = GlobalService.convertBase64StringToByteArray(request.getParameter("bsae64String"));
-////		}
-//		
-//		if(!errorMsg.isEmpty())
-//		{
-//			request.removeAttribute("primaryProj");
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);
-//			return;
-//		}
-//		
+		
+		if(!errorMsg.isEmpty())
+		{
+			request.getRequestDispatcher("/fullProj/updateFullProjForm.jsp").forward(request,response);
+			return;
+		}
+		
 //		// 將必要資料 包成Bean 導向 Business Logic
 //		PrimaryProjBean bean = new PrimaryProjBean();
 //		bean.setPrimaryProjId(pId);
@@ -527,8 +561,8 @@ public class FullProjServlet extends HttpServlet
 //			request.getRequestDispatcher("/error.jsp").forward(request,response);
 //			return;
 //		}
-//	}
-//
+	}
+
 	private void displayFullProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
