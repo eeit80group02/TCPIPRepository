@@ -58,8 +58,8 @@
 }
 
 #trash-can {
-	height:130px;
-	width:130px;
+	height: 130px;
+	width: 130px;
 }
 
 </style>
@@ -71,6 +71,17 @@
 		$(function() {
 			//Set mission board container height fit with window
 			$('.nested_with_switc').height($(window).height()*0.7);
+			
+			//Set datepicker icon position
+			$('.missionDate').siblings('.ui-datepicker-trigger').css({'position':'relative',
+												'top':'-45px',
+												'left':'150px',
+												'cursor':'pointer'});
+			
+			$('.subMission .ui-datepicker-trigger').css({'position':'relative',
+														 'top':'20px',
+														 'left':'-20px',
+														 'cursor':'pointer'});
 			
 			
 			//Define container for mission board
@@ -206,16 +217,18 @@
 				});
 				
 				$('.participator').on('click',function(){
-					$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id'));
-					$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id') + '').remove();
+					$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name'));
+					$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name') + '').remove();
 					
 					$('.dialog .missionExecutor').text($(this).children('div').text());
 					$('.dialog .missionExecutor').addClass($(this).children('div').attr('class'));
 					
 					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val( $(this).children('div').text());
-					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id',$(this).children('div').attr('class'));
+					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name',$(this).children('div').attr('class'));
 					
-					$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+					if(!$('.missionParticipator ul div').hasClass($(this).children('div').attr('class'))){
+						$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');						
+					}
 					$('.popupParticipatorWindow').dialog( "close" );
 				});
 				
@@ -235,14 +248,20 @@
 				
 				//ajax get all participator
 				var participatorName = 'member';
+				var memberID= "member" +1;
 				
-				
-				var $li1 = $('<li class="participator"></li>').html('<div>' + 'Paker' + '</div>');
-				var $li2 = $('<li class="participator"></li>').html('<div>' + 'John' + '</div>');
-				var $li3 = $('<li class="participator"></li>').html('<div>' + 'Anna' + '</div>');
+				var $li1 = $('<li class="participator"></li>').html('<div class='+ memberID +'>' + 'Paker' + '</div>');
+				var $li2 = $('<li class="participator"></li>').html('<div class=' + 'member2' + '>' + 'John' + '</div>');
+				var $li3 = $('<li class="participator"></li>').html('<div class=' + 'member3' + '>' + 'Anna' + '</div>');
 				$('.popupParticipatorWindow ul').append($li1);
 				$('.popupParticipatorWindow ul').append($li2);
 				$('.popupParticipatorWindow ul').append($li3);
+				
+				//need to find executor,and remove out of list
+				var executor = $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name');
+				console.log(executor);
+				$('.popupParticipatorWindow ul .'+ executor +'').parent().remove();
+				
 				
 				$('.popupParticipatorWindow ul li').mouseenter(function(){
 					$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
@@ -254,10 +273,29 @@
 				});
 				
 				$('.participator').on('click',function(){
-					$('.missionParticipator ul').prepend('<div style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+					$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
 				});
 				
 			});
+			
+			//Add subMission
+			$('.addSubMission').mouseenter(function(){
+					$(this).css({'font-weight':'bold',
+								 'cursor':'pointer',
+								 'color':'#0d47a1 blue darken-4'});
+				}).mouseleave(function(){
+					$(this).css({'font-weight':'normal',
+						 		 'color':'black'});
+				});
+			$('.addSubMission').on('click',function(){
+				var parent = $(this).parent();
+				$(this).remove();
+				$('.subMission').show();
+				
+				
+			})
+			
+			
 			
 			
 			
@@ -522,6 +560,23 @@
 						</div>
 					</div>
 				</div>
+				<div class="row" style="border:1px dotted gray;">
+					<div class="col l12">
+						<label for="subMissionContainer">子任務 </label>
+						<div class="subMissionContainer">
+							<ul class="col l12" style="column-count:4;column-gap:0;">
+								<div class="addSubMission">添加子任務</div>
+								<div class="subMission" style="display:none">
+									<textarea class="col l8" placeholder="請輸入子任務內容"></textarea> 
+							    	<input type="text" id="subDatepicker" class="validate col l3" readonly>
+							   		<img class="col l1" src="images/memberIcon.png">
+							   		<div class="btn waves-effect waves-light #2196f3 blue">新增</div>
+							   		<div class="btn waves-effect waves-light #2196f3 blue">取消</div>
+							   </div>
+							</ul>
+						</div>
+					</div>
+				</div>
 		<input type="hidden" class="dataRowLocation" value="">
 	</div>
 	
@@ -545,7 +600,7 @@
 	
 	<script type="text/javascript">
 		//JQuery datepicker
-		var inputDate = $("#datepicker");
+		var inputDate = $("#datepicker,#subDatepicker");
 		var changeYearButtons = function() {
 		setTimeout(function() {
 	        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
@@ -595,12 +650,15 @@
     		}
 		});
 
-		$("#datepicker").datepicker({
+		$("#datepicker,#subDatepicker").datepicker({
 			beforeShow: changeYearButtons,
 			onChangeMonthYear: changeYearButtons,
     		minDate: new Date(),
     		firstDay: 1, 
     		dateFormat: "yy-m-d",
+    		showOn: "button",
+    	    buttonImage: "images/calendar.png",
+    	    buttonImageOnly: true,
     		onSelect: function (dateText, inst) {
         		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
         		var reM = /m+/g;
@@ -630,6 +688,8 @@
 				dayNamesMin: ['日','一','二','三','四','五','六'],
 		};
 		$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+		
+		
 	</script>
 </body>
 </html>
