@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import model.DonationBean;
 import model.DonationBeanDuplicate;
+import model.DonationCart;
 import model.DonationDiscussBeanDuplicate;
 import model.DonationDiscussService;
 import model.DonationService;
@@ -34,46 +35,55 @@ public class DemandSelected extends HttpServlet {
 		if (session == null) {
 			// ...
 		}
-//		Map<String, String> errorMsgs = new HashMap<>();
+
+		// 驗證購物車
+		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+		if (dCart == null) {
+			dCart = new DonationCart();
+			session.setAttribute("DonationCart", dCart);
+		}
 		
 		// 1.接收資料
 		String type = request.getParameter("type");
 		String schoolIdStr = request.getParameter("schoolId");
 		String donationIdStr = request.getParameter("donationId");
-		
 		if (type.equals("FindGoods")) {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+			List<String> list = dCart.getDonationIds();
 			
 //			request.setAttribute("AllDemands", listDuplivate);
 			session.setAttribute("AllDemands", listDuplivate);
+			session.setAttribute("cartItems", list);
 			
 			// 4.轉至適當畫面
-//			RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
-//			rd.forward(request, response);
-//			return;
-			response.sendRedirect(response.encodeRedirectURL(request
-					.getContextPath()+"/donation/FindGoods.jsp"));
+			RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+			rd.forward(request, response);
 			return;
+//			response.sendRedirect(response.encodeRedirectURL(request
+//					.getContextPath()+"/donation/FindGoods.jsp"));
+//			return;
 			
 		} else if (type.equals("AllDeamndByMember")) {
-			
 			// 2.資料轉換
 			int schoolId = Integer.parseInt(schoolIdStr);
 			
 			// 3.呼叫Model
 			DonationService service = new DonationService();
-			List<DonationBeanDuplicate> list = service.findOneAllDemands(schoolId);
-//			request.setAttribute("OneAllDemands", list);
-			session.setAttribute("OneAllDemands", list);
+			List<DonationBeanDuplicate> listdbd = service.findOneAllDeamndByMember(schoolId);
+			List<String> list = dCart.getDonationIds();
 			
-//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndByMember.jsp");
-//			rd.forward(request, response);
-//			return;
-			response.sendRedirect(response.encodeRedirectURL(request
-					.getContextPath()+"/donation/AllDeamndByMember.jsp"));
+//			request.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDemands", listdbd);
+			session.setAttribute("cartItems", list);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndByMember.jsp");
+			rd.forward(request, response);
 			return;
+//			response.sendRedirect(response.encodeRedirectURL(request
+//					.getContextPath()+"/donation/AllDeamndByMember.jsp"));
+//			return;
 			
 		} else if (type.equals("OneDemandByMember")) {
 			// 2.資料轉換
@@ -93,12 +103,12 @@ public class DemandSelected extends HttpServlet {
 //			request.setAttribute("OneDemand", donationBeanDuplicate);
 			session.setAttribute("AllMessages", discussList);
 			session.setAttribute("OneDemand", donationBeanDuplicate);
-//			RequestDispatcher rd = request.getRequestDispatcher("OneDemandByMember.jsp");
-//			rd.forward(request, response);
-//			return;
-			response.sendRedirect(response.encodeRedirectURL(request
-					.getContextPath()+"/donation/OneDemandByMember.jsp"));
+			RequestDispatcher rd = request.getRequestDispatcher("OneDemandByMember.jsp");
+			rd.forward(request, response);
 			return;
+//			response.sendRedirect(response.encodeRedirectURL(request
+//					.getContextPath()+"/donation/OneDemandByMember.jsp"));
+//			return;
 			
 		}else if (type.equals("AllDeamndBySchool")) {
 			// 2.資料轉換
@@ -106,7 +116,7 @@ public class DemandSelected extends HttpServlet {
 			
 			// 3.呼叫Model
 			DonationService service = new DonationService();
-			List<DonationBeanDuplicate> list = service.findOneAllDemands(schoolId);
+			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(schoolId);
 			
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", list);

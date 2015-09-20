@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+
+* {
+	font-family: 標楷體;
+}
+
+body {
+	background-color: #FFEBEB;
+}
+
+#TCPIP ,#DonationWallIcon{
+	max-height: 64px;
+}
+
+.nav-wrapper ul li, .brand-logo {
+	
+	text-align: center;
+	padding: 0px;
+}
+
+.nav-wrapper ul li a{
+	font-weight: bold;
+/* 	font-size:1.2em; */
+}
+
+
+#dropdownList01, #dropdownList02 {
+	width: 130px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	opacity: 1;
+	display: none;
+}
+
+.input-field {
+	width: 200px;
+}
+
+.DetailTitle {
+	/* 	各輸入項的名稱 */
+	color: #3CB371;
+	font-size: 1.2em;
+}

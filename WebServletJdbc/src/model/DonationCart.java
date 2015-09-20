@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,6 +11,17 @@ public class DonationCart {
 	
 	public DonationCart() {
 		cart = new LinkedHashMap<>();
+	}
+	
+	public List<String> getDonationIds() {
+		List<String> itemList = new ArrayList<>();
+		Set<Integer> s = cart.keySet();
+		for(Integer i : s) {
+//			itemList.add("$('#"+i+"')");
+			itemList.add(i.toString());
+//			System.out.println("$('#"+i+"')");
+		}
+		return itemList;
 	}
 
 	public Map<Integer,DonationBeanDuplicate> getContent() {
@@ -45,7 +58,15 @@ public class DonationCart {
 	// delete
 	public boolean deleteDonation(int donationId) {
 		if (cart.get(donationId) != null) {
+			System.out.println("remove donationId= "+donationId);
 			cart.remove(donationId);
+			
+			Set<Integer> i = cart.keySet();
+			System.out.println("i="+i);
+			for (Integer s : i) {
+				System.out.println("@@@in delete's cart= "+ s);
+			}
+			
 			return true;
 		}
 		return false;

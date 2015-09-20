@@ -82,7 +82,10 @@ public class OrderAccessServlet extends HttpServlet {
 		// 清空 cart
 		dCart.remove();
 
-		RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
-		rd.forward(request, response);
+//		RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
+//		rd.forward(request, response);
+		response.sendRedirect(response.encodeRedirectURL(request
+				.getContextPath()+"/donation/demand.do?type=FindGoods"));
+		return;
 	}
 }
