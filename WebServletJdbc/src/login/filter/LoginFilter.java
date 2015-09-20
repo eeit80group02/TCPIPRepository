@@ -17,18 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(
-		urlPatterns={"/*"},
-			initParams = {
-				@WebInitParam(name = "mustLogin1", value = "/primaryProj/createPrimaryProjForm.jsp"),
-				@WebInitParam(name = "mustLogin2", value = "/primaryProj.do?type=displayPersonal"),
-				@WebInitParam(name = "mustLogin3", value = "/personal/personal.jsp"),
-				@WebInitParam(name = "mustLogin4", value = "/personal/displayPersonalPrimaryProj.jsp"),
-				@WebInitParam(name = "mustLogin5", value = "/fullProj/fullproj.jsp"),
-				@WebInitParam(name = "mustLogin6", value = "/fullProj.do?type=displayAll"),
-				@WebInitParam(name = "mustLogin7", value = "/primaryProj/updatePrimaryProjForm.jsp"),
-				@WebInitParam(name = "mustLogin8", value = "/donation/CheckDonationList.jsp"),
-		})
+//@WebFilter(
+//		urlPatterns={"/*"},
+//			initParams = {
+//				@WebInitParam(name = "mustLogin1", value = "/primaryProj/createPrimaryProjForm.jsp"),
+//				@WebInitParam(name = "mustLogin2", value = "/primaryProj.do?type=displayPersonal"),
+//				@WebInitParam(name = "mustLogin3", value = "/personal/personal.jsp"),
+//				@WebInitParam(name = "mustLogin4", value = "/personal/displayPersonalPrimaryProj.jsp"),
+//				@WebInitParam(name = "mustLogin5", value = "/fullProj/fullproj.jsp"),
+//				@WebInitParam(name = "mustLogin6", value = "/fullProj.do?type=displayAll"),
+//				@WebInitParam(name = "mustLogin7", value = "/primaryProj/updatePrimaryProjForm.jsp"),
+//				@WebInitParam(name = "mustLogin8", value = "/donation/CheckDonationList.jsp"),
+//		})
 public class LoginFilter implements Filter
 {
 	private FilterConfig fConfig;

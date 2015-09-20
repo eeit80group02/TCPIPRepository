@@ -47,7 +47,7 @@
 				</div>				
 			</div>	
 			<!-- 表單本體開始 --> 
-			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<form class="card-panel hoverable indigo lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
 				<div class="row">
 						<!-- 頭像上傳 -->

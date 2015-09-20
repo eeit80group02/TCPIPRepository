@@ -62,7 +62,7 @@
 					<input type="hidden" name="memberId" value="${LoginOK.memberId}">
 				<div class="row">
 						<!-- 印出來、不能更動 -->
-						<div class="row orange accent-3">
+						<div class="row orange accent-3 z-depth-2">
 							<!-- 計畫編號 -->
 							<div class="row">
 								<div class="col l8">
@@ -223,8 +223,27 @@
 				</form>
 			  </div>	
 				<!-- 圖片預覽版面  col l2-->
-				<div class="col l2">
-					<img class="card-panel hoverable" id="view" src="" style="height: 250px; width: 310px;border:5px solid black;padding:0;" >
+				<div class="col l4">
+					<div class="row">
+						<img class="col l8 offset-l2 card-panel hoverable" id="view" src="" style="height: 250px; width: 310px;border:5px solid black;padding:0;" >
+					</div>
+					<form class="row" action="/fullProj.do" method="post">
+						<input type="hidden" name="type" value="displayUpdateForm">
+						<input class="offset-l2 col l8 btn-large black-text red accent-1" style="width: 310px;font-size:2em;font-weight:600" type="submit" value="補齊完整計畫">
+					</form>					
+					<form class="row"  action="/fullProj.do" method="post">
+						<input type="hidden" name="type" value="schoolConfirm">
+						<input class="offset-l2 col l8 btn-large black-text red accent-1" style="width: 310px;font-size:2em;font-weight:600" type="submit" value="學校同意">
+					</form>
+					<form class="row"  action="/fullProj.do" method="post">
+						<input type="hidden" name="type" value="memberConfirm">
+						<input class="offset-l2 col l8 btn-large black-text red accent-1" style="width: 310px;font-size:2em;font-weight:600"  type="submit" value="完整計畫發布">
+					</form>
+<%-- 					<a href="<c:url value='personmanager.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" style="width: 5.25cm;"> --%>
+<!-- 						<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 							回會員中心 -->
+<!-- 						</span> -->
+<!-- 					</a>					 -->
 				</div>				
 				
 		</div>
@@ -243,21 +262,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
-		   $("#view").on("click",function(){
+		   //點圖也能上傳圖片
+			$("#view").on("click",function(){
 			$("#picture").trigger("click");   
 		   })
 		   
 			//指定ckeditor()的skin
 			CKEDITOR.replace("content",{skin:"moono"})
 			
-			//test
-			$("#title").on("focus",function(){
-				
-				console.log($("endtime").val())
-			})
 			
 			//datepicker初始化(活動時間)
-		   var $picker1 =  $('#starttime').pickadate({
+		   var $picker1 =  $('#activityStartTime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 10,
 			   format: 'yyyy-mm-dd',
@@ -268,7 +283,7 @@
 			   close:"確定"
 		    });
 		   
-		   var $picker2 = $('#endtime').pickadate({
+		   var $picker2 = $('#activityEndTime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 3,
 			   format: 'yyyy-mm-dd',

@@ -233,18 +233,14 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
-		   $("#view").on("click",function(){
+		   //點圖也能上傳圖片
+			$("#view").on("click",function(){
 			$("#picture").trigger("click");   
 		   })
 		   
 			//指定ckeditor()的skin
 			CKEDITOR.replace("content",{skin:"moono"})
 			
-			//test
-			$("#title").on("focus",function(){
-				
-				console.log($("endtime").val())
-			})
 			
 			//datepicker初始化(活動時間)
 		   var $picker1 =  $('#starttime').pickadate({
