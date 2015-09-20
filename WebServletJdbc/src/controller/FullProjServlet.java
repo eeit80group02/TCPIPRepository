@@ -21,7 +21,6 @@ import javax.servlet.http.Part;
 
 import model.FullProjBean;
 import model.MemberBean;
-import model.PrimaryProjBean;
 import model.service.FullProjService;
 
 @WebServlet("/fullProj.do")
@@ -551,7 +550,7 @@ public class FullProjServlet extends HttpServlet
 //			session = request.getSession();
 //			session.setAttribute("fullProj",fullProjBean);
 			
-			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=display&fullProjId=" + fullProjBean.getFullProjId());
+			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fullProjBean.getFullProjId());
 		}
 		else
 		{
