@@ -34,6 +34,7 @@ public class FullProjBean implements Serializable
 	private Boolean memberConfirm;               	// 發起人確認狀態(同意、預設null)
 	
 	private String base64String;					// base64字串
+	private MemberBean memberBean;					// 會員資料
 	public FullProjBean()
 	{
 	}
@@ -306,6 +307,16 @@ public class FullProjBean implements Serializable
 	public void setMemberConfirm(Boolean memberConfirm)
 	{
 		this.memberConfirm = memberConfirm;
+	}
+
+	public MemberBean getMemberBean()
+	{
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean)
+	{
+		this.memberBean = memberBean;
 	}
 
 	@Override

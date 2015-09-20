@@ -6,15 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.FullProjBean;
+import model.MemberBean;
 import model.dao.FullProjDAOJdbc;
+import model.dao.MemberDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
+import model.dao.interfaces.MemberDAO;
 
 public class FullProjService
 {
 	private FullProjDAO fullProjDAO = null;
+	private MemberDAO memberDAO = null;
 	public FullProjService()
 	{
 		fullProjDAO = new FullProjDAOJdbc();
+		memberDAO = new MemberDAOJdbc();
 	}
 
 	public List<FullProjBean> displayFullProjAll()
@@ -27,6 +32,8 @@ public class FullProjService
 		{
 			if(bean.getProjStatus().equals("招募中"))
 			{
+				MemberBean memberBean = memberDAO.select(bean.getMemberId());
+				bean.setMemberBean(memberBean);
 				bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
 				temp.add(bean);
 			}
@@ -73,8 +80,46 @@ public class FullProjService
 		{
 			int fullProjId = bean.getFullProjId();
 			result = fullProjDAO.findByPrimaryKey(fullProjId);
+			if(result != null)
+			{
+				MemberBean memberBean = memberDAO.select(result.getMemberId());
+				result.setMemberBean(memberBean);
+				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+			}
 		}
+		return result;
+	}
+	public FullProjBean updateFullProj(FullProjBean bean)
+	{
+		FullProjBean result = null;
 		
+		if (bean != null) 
+		{
+			// 先selete 抓齊所有資料 在對使用者的資料做修改
+			FullProjBean temp = fullProjDAO.findByPrimaryKey(bean.getFullProjId());
+			if(temp != null)
+			{
+				temp.setTitle(bean.getTitle());
+				temp.setProjAbstract(bean.getProjAbstract());
+				temp.setContent(bean.getContent());
+				temp.setLocation(bean.getLocation());
+				temp.setActivityStartTime(bean.getActivityStartTime());
+				temp.setActivityEndTime(bean.getActivityEndTime());
+				temp.setEstMember(bean.getEstMember());
+				temp.setBudget(bean.getBudget());
+				temp.setOrgArchitecture(bean.getOrgArchitecture());
+				
+				// 前端使用者有做更圖，才修改，否則沿用舊的
+				if(bean.getFrontCover() != null)
+				{
+					temp.setFrontCoverName(bean.getFrontCoverName());
+					temp.setFrontCover(bean.getFrontCover());
+					temp.setFrontCoverLength(bean.getFrontCoverLength());
+				}
+				
+				result = fullProjDAO.update(temp);
+			}
+		}
 		return result;
 	}
 	
@@ -83,5 +128,6 @@ public class FullProjService
 		FullProjService service = new FullProjService();
 		System.out.println(service.displayFullProjAll());
 	}
+
 
 }

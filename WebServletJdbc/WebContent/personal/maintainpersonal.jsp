@@ -20,7 +20,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">郭文豪${LoginOK.lastName}${LoginOK.firstName}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}</h3>
 	</div>	
 
 <main>
@@ -47,7 +47,7 @@
 				</div>				
 			</div>	
 			<!-- 表單本體開始 --> 
-			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<form class="card-panel hoverable indigo lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
 				<div class="row">
 						<!-- 頭像上傳 -->

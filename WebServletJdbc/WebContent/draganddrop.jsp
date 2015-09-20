@@ -28,6 +28,7 @@
 
 .nested_with_switc {
 	width: 100%;
+	min-height:600px;
 }
 
 .nested_with_switc>li {
@@ -36,12 +37,7 @@
 	height: 100%;
 	text-align: center;
 	margin: 5px;
-}
-
-.nested_with_switc>li>div {
-	width: 300px;
-	height: 30px;
-	text-align: center;
+	padding:0px;
 }
 
 .nested_with_switc>li>ul {
@@ -66,7 +62,6 @@
 	width:130px;
 }
 
-
 </style>
 
 
@@ -74,8 +69,11 @@
 <body>
 	<script type="text/javascript">
 		$(function() {
+			//Set mission board container height fit with window
 			$('.nested_with_switc').height($(window).height()*0.7);
 			
+			
+			//Define container for mission board
 			$("ul.nested_with_switc").sortable({
 				cursor : 'move',
 				toleranceElement : '> div',
@@ -83,23 +81,10 @@
 				connectWith : 'ul.nested_with_switc', //A selector of other sortable elements that the items from this list should be connected to.
 				handle : 'div',
 				placeholder : 'ui-state-highlight',
-
-
-			}).droppable();
-			
-
-			$("ul.nested_with_switc > li > ul").sortable({
-				cursor : 'move',
-				toleranceElement : '> div',
-				item : 'li', //Specifies which items inside the element should be sortable.
-				handle : 'div',
-				connectWith : 'ul.nested_with_switc > li > ul', //A selector of other sortable elements that the items from this list should be connected to.
-				placeholder : "ui-state-default",
-// 				update : function(event, ui) {
-
-// 				}
 			})
-
+			
+			
+			//Set trash can
 			$("#trash-can").droppable({
 				hoverClass : "droppable-hover",
 				drop : function(event, ui) {
@@ -119,13 +104,16 @@
 
 			});
 			
+			
+			//Add missionSet
 			var missionSetCount = 1;
-			$('.addBoard').on('click', function(){
+			$(document).on('click', '.addBoard', function(){
 				var title = $('#nameTitle').val();
 				if(title==""){
 					title = "MissionSet";
 				}
-				var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + '" class="missionTitle #ff5722 deep-orange">'+ title +
+				var $li = $('<li class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + missionSetCount + 
+						  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
 						  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
 						  '<i class="large material-icons">add</i></div>');
 				missionSetCount++;
@@ -133,47 +121,162 @@
 				$('.nested_with_switc').append($li);
 				var width = $('div > div > ul').width() + 310;
 				$('.nested_with_switc').css('width', width);
-			});
-			
-			
-			
-			var missionCount = 1;
-			$(document).on('click','.addMission',function() {
-				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>Mission"+ missionCount +"</div>" +
-						  "<div id='dataRow"+ missionCount + "' style='display:none'>" +
-						  "<input type='text' class='missionExecutor' placeholder='執行人...' >" +
-						  "<input type='text' class='missionDate'>" +
-						  "<input type='text' class='missionPriority'></div>");
-				missionCount++;
-				$li.appendTo($(event.target).parent().siblings( "ul" ));
+				
 				$("ul.nested_with_switc > li > ul").sortable({
 					cursor : 'move',
 					toleranceElement : '> div',
 					item : 'li', //Specifies which items inside the element should be sortable.
 					handle : 'div',
 					connectWith : 'ul.nested_with_switc > li > ul', //A selector of other sortable elements that the items from this list should be connected to.
-					placeholder : "ui-state-default",
-					update : function(event, ui) {
-
-					}
+					placeholder : "placeholder",
+					forcePlaceholderSize: true,
+					start: function(e, ui){
+				        ui.placeholder.height(ui.helper.outerHeight());
+				        $('.placeholder').css('background-color','#afb42b lime darken-2');
+				    }
 				})
-
 				
 			});
 			
+			//Accept add missionSet with enter pressed at input field 
+			$(document).on('keypress', '#nameTitle', function(e) {
+			    if(e.which == 13) {
+			    	var title = $('#nameTitle').val();
+					if(title==""){
+						title = "MissionSet";
+					}
+					var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
+							  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
+							  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
+							  '<i class="large material-icons">add</i></div>');
+					missionSetCount++;
+					$('#nameTitle').val("");
+					$('.nested_with_switc').append($li);
+					var width = $('div > div > ul').width() + 310;
+					$('.nested_with_switc').css('width', width);
+					
+			    }
+			});
+			
+			
+			
+			//Add mission
+			var missionCount = 1;
+			$(document).on('click','.addMission',function() {
+				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>Mission"+ missionCount +"</div>" +
+						  "<div id='dataRow"+ missionCount + "' style='display:none'>" +
+						  "<input type='text' class='missionExecutor' value='待認領'>" +
+						  "<input type='text' class='missionDate'>" +
+						  "<input type='text' class='missionPriority'></div>");
+				missionCount++;
+				$li.appendTo($(event.target).parent().siblings( "ul" ));
+			});
+			
+			
+			//Assign Executor
+			$(document).on('click', '.missionExecutor', function(){
+				var pos =  $(this).position();
+				$('.popupParticipatorWindow').dialog("option", "position", {
+                    my: "top",
+                    at: "center",
+                    of: event,
+                });
+				$('.popupParticipatorWindow').dialog( "open" );
+				$(".ui-dialog-titlebar").hide();
+				$('.popupParticipatorWindow ul').empty();
+				
+				//ajax get all participator
+				var participatorName = 'member';
+				var memberID= "member" +1;
+				
+				var $li1 = $('<li class="participator"></li>').html('<div class='+ memberID +'>' + 'Paker' + '</div>');
+				var $li2 = $('<li class="participator"></li>').html('<div class=' + 'member2' + '>' + 'John' + '</div>');
+				var $li3 = $('<li class="participator"></li>').html('<div class=' + 'member3' + '>' + 'Anna' + '</div>');
+				$('.popupParticipatorWindow ul').append($li1);
+				$('.popupParticipatorWindow ul').append($li2);
+				$('.popupParticipatorWindow ul').append($li3);
+				
+				$('.popupParticipatorWindow ul li').mouseenter(function(){
+					$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
+								 'font-weight':'bold',
+								 'cursor':'pointer'});
+				}).mouseleave(function(){
+					$(this).css({'background-color':'',
+						 		 'font-weight':'normal'});
+				});
+				
+				$('.participator').on('click',function(){
+					$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id'));
+					$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id') + '').remove();
+					
+					$('.dialog .missionExecutor').text($(this).children('div').text());
+					$('.dialog .missionExecutor').addClass($(this).children('div').attr('class'));
+					
+					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val( $(this).children('div').text());
+					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id',$(this).children('div').attr('class'));
+					
+					$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+					$('.popupParticipatorWindow').dialog( "close" );
+				});
+				
+			});
+			
+			//Add participator
+			$(document).on('click', '.addParticipator', function(){
+				var pos =  $(this).position();
+				$('.popupParticipatorWindow').dialog("option", "position", {
+                    my: "top",
+                    at: "center",
+                    of: event,
+                });
+				$('.popupParticipatorWindow').dialog( "open" );
+				$(".ui-dialog-titlebar").hide();
+				$('.popupParticipatorWindow ul').empty();
+				
+				//ajax get all participator
+				var participatorName = 'member';
+				
+				
+				var $li1 = $('<li class="participator"></li>').html('<div>' + 'Paker' + '</div>');
+				var $li2 = $('<li class="participator"></li>').html('<div>' + 'John' + '</div>');
+				var $li3 = $('<li class="participator"></li>').html('<div>' + 'Anna' + '</div>');
+				$('.popupParticipatorWindow ul').append($li1);
+				$('.popupParticipatorWindow ul').append($li2);
+				$('.popupParticipatorWindow ul').append($li3);
+				
+				$('.popupParticipatorWindow ul li').mouseenter(function(){
+					$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
+								 'font-weight':'bold',
+								 'cursor':'pointer'});
+				}).mouseleave(function(){
+					$(this).css({'background-color':'',
+						 		 'font-weight':'normal'});
+				});
+				
+				$('.participator').on('click',function(){
+					$('.missionParticipator ul').prepend('<div style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+				});
+				
+			});
+			
+			
+			
+			//Set popup dialog close condition
 			$('#commit').click(function(){
 				$('.popupWindow').dialog( "close" );
-			});
-			
+			});			
 			$('#delete').click(function(){
-// 				$('#'+$('.titleLocation').val()).parent().remove();
 				$('#'+$('.titleLocation').val()).parent().hide('slow', function(){ $(this).remove(); });
 				$('.popupWindow').dialog( "close" );			
+			});			
+			$(document).on('keypress', '.missionTitle', function(e) {
+				if(e.which == 13) {
+					$('.popupWindow').dialog( "close" );
+				}
 			});
 			
 			
-			
-			
+			//Change missionTitle, define popup dialog position
 			$(document).on('dblclick','.missionTitle',function() {
 				if($('.popupWindow').dialog( "isOpen" )){
 					$('.popupWindow').dialog( "close" );
@@ -197,7 +300,7 @@
 			});
 			
 			
-			
+			//Get initial mission information and set to dialog
 			$(document).on('click','.li_edit',function() {
 				if($('.dialog').dialog( "isOpen" )){
 					$('.dialog').dialog( "close" );
@@ -210,10 +313,19 @@
 				
 				var temp = $(div).siblings("div").attr('id');
 				$('.dialog .missionName').val(dataName);
-				$('.dialog .missionExecutor').val(dataExecutor);
+				$('.dialog .missionExecutor').text(dataExecutor);
 				$('.dialog .missionDate').val(dataDate);
 				
 				
+				if($(event.target).hasClass('disable')){
+					$('.dialog .missionStatus').prop('checked', true);
+					$('.dialog .missionName').addClass('disable');
+				} else {
+					$('.dialog .missionStatus').prop('checked', false);
+					if($('.dialog .missionName').hasClass('disable')) {
+						$('.dialog .missionName').removeClass('disable');
+					}
+				}
 				if(dataPriority == "普通" || dataPriority == "緊急" || dataPriority == "非常緊急" ){
 					$('.dialog .missionPriority option[value=' + dataPriority + ']').prop('selected', true);
 				} else {
@@ -229,17 +341,13 @@
 			});
 			
 			
+			//Set dialog change to dataRow
 			$('.popupWindow .missionTitle').on('change',function(){
 				console.log($('.titleLocation').val());
 				$('#'+$('.titleLocation').val()).text($(this).val());
-			});
-			
-			
+			});			
 			$('.dialog .missionName').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).siblings("div").text($(this).val());
-			});
-			$('.dialog .missionExecutor').on('change',function(){
-				$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val($(this).val());
 			});
 			$('.dialog .missionPriority').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).find('.missionPriority').val($(this).val());
@@ -247,8 +355,7 @@
 			
 			
 			
-			
-			
+			//Set popup dialog
 			$('.popupWindow').dialog({
 				autoOpen: false,
 				modal: true,
@@ -272,12 +379,13 @@
 			});
 			
 	
-			
+			//Set mission dialog		
 			$('.dialog').dialog({
 				autoOpen: false,
 				modal: true,
+				autoResize:true,
 				height: $(window).height(),
-				width: $(window).width() - 1000,
+				width: $(window).width()*0.5,
 				position: { my: "right top", at: "right bottom", of: window },
 				show: {
 					effect: "slide",
@@ -296,6 +404,29 @@
 		        }
 			});
 			
+			
+			//Set Participator dialog
+			$('.popupParticipatorWindow').dialog({
+				autoOpen: false,
+				modal: true,
+				height: 200,
+				width: 170,
+				show: {
+					effect: "slide",
+					direction: "right",
+					duration: 300
+				},
+				hide: {
+			    	effect: "slide",
+			    	direction: "right",
+			    	duration: 300
+				},
+				open: function(){
+		            $('.ui-widget-overlay').bind('click',function(){
+		                $('.popupParticipatorWindow').dialog('close');
+		            })
+		        }
+			});
 			
 		});
 	</script>
@@ -321,100 +452,12 @@
 				</div>
 			</div>
 			<ul class="nested_with_switc #81d4fa light-blue lighten-3">
-<!-- 				<li class="#cddc39 lime"> -->
-<!-- 					<div id="missionSet1" class="missionTitle #ff5722 deep-orange">Section1</div> -->
-<!-- 					<ul> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn" >Item 1</div>							 -->
-<!-- 							<div id="dataRow1" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="緊急">	 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 2</div> -->
-<!-- 							<div id="dataRow2" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">							 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 3</div> -->
-<!-- 							<div id="dataRow3" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate"> -->
-<!-- 								<input type="text" class="missionPriority" value="普通">								 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 					</ul> -->
-<!-- 					<div  -->
-<!-- 						class="addMission sortable btn-floating btn-large waves-effect waves-light red"> -->
-<!-- 						<i class="large material-icons">add</i> -->
-<!-- 					</div></li> -->
-
-<!-- 				<li class="#cddc39 lime"><div class="#ff5722 deep-orange">Section -->
-<!-- 						2</div> -->
-<!-- 					<ul> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 4</div> -->
-<!-- 							<div id="dataRow4" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">	 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 5</div> -->
-<!-- 							<div id="dataRow5" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">							 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 6</div> -->
-<!-- 							<div id="dataRow6" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">							 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 					</ul> -->
-<!-- 					<div -->
-<!-- 						class="addMission sortable btn-floating btn-large waves-effect waves-light red"> -->
-<!-- 						<i class="large material-icons">add</i> -->
-<!-- 					</div></li> -->
-<!-- 				<li class="#cddc39 lime"><div class="#ff5722 deep-orange">Section -->
-<!-- 						3</div> -->
-<!-- 					<ul> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 7</div> -->
-<!-- 							<div id="dataRow7" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">								 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 8</div> -->
-<!-- 							<div id="dataRow8" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">							 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 						<li><div class="li_edit waves-effect waves-light btn">Item 9</div> -->
-<!-- 							<div id="dataRow9" style="display:none"> -->
-<!-- 								<input type="text" class="missionExecutor">	 -->
-<!-- 								<input type="text" class="missionDate">	 -->
-<!-- 								<input type="text" class="missionPriority" value="普通">							 -->
-<!-- 							</div> -->
-<!-- 						</li> -->
-<!-- 					</ul> -->
-<!-- 					<div -->
-<!-- 						class="addMission sortable btn-floating btn-large waves-effect waves-light red"> -->
-<!-- 						<i class="large material-icons">add</i> -->
-<!-- 					</div></li> -->
+				<!-- Mission Board here!! -->
 			</ul>
-			
-			
 		</div>
 
 	</div>
+	
 	
 	<div class="popupWindow">
 		<div class="row">
@@ -433,9 +476,14 @@
 		</div>
 	</div>
 	
+	<div class="popupParticipatorWindow">
+		<ul style="list-style:url('images/memberIcon.png') none inside;">
+		</ul>
+	</div>
+	
 	
 	<div class="dialog">
-				<div class="row">
+				<div class="row" style="border:1px dotted gray;">
 					<div class="input-field col l1">
 						<input type="checkbox" class="missionStatus filled-in" id="filled-in-box" >
       					<label for="filled-in-box"></label>
@@ -444,10 +492,12 @@
 						<input type="text" class="missionName validate" placeholder="任務名稱..." >
 					</div>
 				</div>
-				<div class="row"> 
-					<div class="input-field col l4">
+				<div class="row" style="border:1px dotted gray;"> 
+					<div class="col l4">
 						<label for="missionExecutor">執行者 </label>
-						<input type="text" class="missionExecutor validate" placeholder="執行人...">
+						<ul style="list-style:url('images/memberIcon.png') none inside;">
+							<li class="missionExecutor" style="cursor:pointer"></li>
+						</ul>
 					</div>
 					<div class="col l4">
 						<label for="datepicker">截止日期 </label>
@@ -462,39 +512,43 @@
 						</select>
 					</div>
 				</div>
-				<div class="row">
+				<div class="row" style="border:1px dotted gray;">
 					<div class="col l12">
-						<label for="MissionParticipator">參與者 </label>
-						<select multiple="multiple" class="MissionParticipator browser-default" placeholder="">
-        					<option value="1">January</option>
-        					<option value="12">December</option>
-    					</select>
-    					<script src="js/jquery.multiple.select.js"></script>
-    					<script>
-    						$(function() {
-        						$('.MissionParticipator').multiSelect();
-        					});
-    					</script>
+						<label for="missionParticipator">參與者 </label>
+						<div class="missionParticipator">
+							<ul class="col l12" style="column-count:4;column-gap:0;">
+								<div class="addParticipator btn-floating btn waves-effect waves-light #2196f3 blue"><i class="material-icons">add</i></div>
+							</ul>
+						</div>
 					</div>
 				</div>
-				
-
 		<input type="hidden" class="dataRowLocation" value="">
 	</div>
 	
 	<script type="text/javascript">
+		//Set checkbox status, define add line-through to missionTitle or not
 		$('.dialog .missionStatus').on('click',function() {
-			$('.dialog .missionName').toggleClass('disable');
+			if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
+				$('.dialog .missionName').removeClass('disable');
+				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
+				$(event.target).prop('checked',false);
+				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
+			} else {
+				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
+				$('.dialog .missionName').addClass('disable');
+				$(event.target).prop('checked',true);
+				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
+			}
 		});
 	</script>
 	
 	
 	<script type="text/javascript">
+		//JQuery datepicker
 		var inputDate = $("#datepicker");
 		var changeYearButtons = function() {
 		setTimeout(function() {
 	        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
-	        //you can opt to style up these simple buttons tho
 	        var prevYrBtn = $('<button>前年</button>');
 	        prevYrBtn.bind("click", function() {
 	            $.datepicker._adjustDate(inputDate, -1, 'Y');
@@ -502,15 +556,12 @@
 	        var nextYrBtn = $('<button>次年</button>');
 	        nextYrBtn.bind("click", function() {
 	            $.datepicker._adjustDate(inputDate, +1, 'Y');
-
 	        });
 	        prevYrBtn.appendTo(widgetHeader);
 	        nextYrBtn.appendTo(widgetHeader);
-
 	    	}, 1);
 		};
 	
-		//datepicker 初始化
 		var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
 		var old_get = $.datepicker._get;
 		var old_CloseFn = $.datepicker._updateDatepicker;
@@ -542,14 +593,13 @@
     		_widgetDatepicker: function () {
         		return this.dpDiv
     		}
-
 		});
 
 		$("#datepicker").datepicker({
 			beforeShow: changeYearButtons,
 			onChangeMonthYear: changeYearButtons,
     		minDate: new Date(),
-    		firstDay: 1, //0為星期天
+    		firstDay: 1, 
     		dateFormat: "yy-m-d",
     		onSelect: function (dateText, inst) {
         		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
