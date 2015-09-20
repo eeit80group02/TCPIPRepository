@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import global.GlobalService;
+import model.MemberBean;
 import model.service.ModifyMemberService;
 @MultipartConfig(
 location="",
@@ -43,8 +44,15 @@ public class ModifyMemberServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setAttribute("MsgErr", errMsg); // 顯示錯誤訊息
 		session.setAttribute("MsgOk", okMsg); // 顯示正常訊息
-		// 對應資料庫的資料型態
-		String passwordStr = ""; // 密碼
+		MemberBean bean = (MemberBean)session.getAttribute("LoginOK");
+		String account = null;                       //帳號
+		String gender = null;                        //性別
+        String idNumber = null;						 //身分證字號
+		java.util.Date registerTime = null;          //註冊日期
+		String accountStatus = null;                 //帳戶狀態
+		Integer recommendCount = null;               //被推薦次數
+		Integer memberId = null;
+		String passwordStr = null; // 密碼
 		byte[] password = null;
 		String checkStr = ""; // 密碼確認
 		byte[] check = null;
@@ -101,19 +109,19 @@ public class ModifyMemberServlet extends HttpServlet {
 					}
 				} else {
 					pictureName = GlobalService.getFileName(p); // 此為圖片檔的檔名
-					System.out.println("pictureName:" + pictureName);
 					if (pictureName != null && pictureName.trim().length() > 0) {
 						if (p.getContentType().equals("image/png") || p.getContentType().equals("image/jpeg")){ // file 資料
 							pictureName = GlobalService.getFileName(p); // 此為圖片檔的檔名
 							pictureLength = p.getSize();
 							is = p.getInputStream();
 						} else {
-//							errMsg.put("errorPictureType", "請上傳格式為.jpeg, .png之圖檔");
-//							 System.out.println("請選擇正確格式");
+							errMsg.put("errorPictureType", "請上傳格式為.jpeg, .png之圖檔");
+							System.out.println("請選擇正確格式");
 						}
 					} else {
-//						errMsg.put("errorPicture", "圖片為必填");
-//						System.out.println("圖片為必填");
+						pictureName = bean.getPictureName();
+						picture = bean.getPicture();
+						pictureLength = bean.getPictureLength();
 					}
 				}
 			}
@@ -195,9 +203,31 @@ public class ModifyMemberServlet extends HttpServlet {
 		
 		//4.進行Business Logic 運算  (呼叫其它Service)
 		ModifyMemberService service = new ModifyMemberService();
-		int result = service.isModified(password, lastName, firstName, phone, cellPhone,	birthday, email, address, picture, pictureName, pictureLength);
+		memberId = bean.getMemberId();
+		idNumber = bean.getIdNumber();
+		gender = bean.getGender();
+		recommendCount = bean.getRecommendCount();
+		account = bean.getAccount();
+		accountStatus = bean.getAccountStatus();
+		registerTime = bean.getRegisterTime();
+		int result = service.isModified(memberId, idNumber, gender, recommendCount, account, accountStatus,  registerTime, password, lastName, firstName, phone, cellPhone,birthday, email, address, picture, pictureName, pictureLength);
 		if (result == 1){
 			System.out.println("資料修改成功");
+			//資料修改成功導向
+			response.sendRedirect("../register/template.jsp");
+			return;
+		} else {
+			//該會員修改資料至資料庫失敗
+			errMsg.put("InsertError", "新增此筆資料有誤(RegisterServlet)");
+		}
+		
+		// 5.依照 Business Logic 運算結果來挑選適當的畫面
+		if (!errMsg.isEmpty()) {
+			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
+			RequestDispatcher rd = request
+					.getRequestDispatcher("register.jsp");
+			rd.forward(request, response);
+			return;
 		}
 		
 	}
