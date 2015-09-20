@@ -89,9 +89,28 @@
 							</li>	
 						</ul>		
 					
-					
-					
 				<div class="row" style="clear:both;">
+				
+						<!-- 印出來、不能更動 -->
+						<div class="row orange accent-3">
+							<!-- (教育部學校代碼)(帳號) -->
+							<div class="row">
+								<div class="col l8">
+									<div class="forinput">學校編號:</div>
+									<input type="hidden" name="schoolId" value="">
+								</div>
+							</div>						
+							<!-- 學校名稱 -->
+							<div class="row">
+								<div class="col l8">
+									<div class="forinput">計畫編號:${param.fullProjId}</div>
+									<input type="hidden" name="fullProjId" value="${param.fullProjId}">
+								</div>
+							</div>
+						</div>						
+				
+				
+				
 				<!-- 學校地址(縣市) -->
 					<div class="col l6 input-field left" style="padding-left:0;">
 						<input id="addressDistrict" type="text" class="validate" name="addressDistrict" required value="${param.addressDistrict}">
@@ -110,7 +129,7 @@
 				</div>
 				
 				<!-- 學校網址 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
+					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="" >
 						<input id="url" type="text" class="validate" name="url"  value="${param.url}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.url}${MsgErr.url}</font>
@@ -118,36 +137,43 @@
 											
 					</div>
 					
-				<!-- 手機 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
+				<!-- 學校行政電話總機 -->
+					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631">
 						<input id="phone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
 						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
 					</div>
 					
-				<!-- 生日 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
-						<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
-<!-- 													後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorBirthdayStrEmpty}${MsgErr.errFormat}</font>				
-						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>	
+				<!-- 關於我 -->
+					
+					<div class="input-field row">
+						<div>關於我</div>
+						<textarea class="ckeditor" name="content" id="content"></textarea>
 					</div>
 
-				<!-- Email -->
+				<!-- 聯絡人姓名 -->
 					<div class="row input-field">
 						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorEmailEmpty}${MsgErr.errorEmailExists}</font>					
-						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>	
+						<label for="email" style="font-size:1.3em;font-weight:600;">聯絡人姓名</label>	
 					</div>
 					
-				<!-- Address -->
+				<!-- 聯絡人電話(留學校完整電話+分機) -->
 					<div class="row input-field">
 						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
-						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>
+						<label for="address" style="font-size:1.3em;font-weight:600;">聯絡人電話</label>
+					</div>
+
+				<!-- 聯絡人email -->
+					<div class="row input-field">
+						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
+<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
+						<label for="address" style="font-size:1.3em;font-weight:600;">email</label>
 					</div>
 					
 				<!-- button -->
