@@ -12,7 +12,7 @@
 <title>personal</title>
 </head>
 <body>
-<!-- //////////////////////////////發布過的完整計畫//////////////////////// -->
+
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 	<!-- 頁首 -->
@@ -27,28 +27,74 @@
 <!-- 主要版面 -->
 <div class="row" id="mainboard">
 	<div class="col l8 offset-l2 indigo lighten-5">
-		<div class="row center-align card-panel blue-text" style="font-size:4em;">瀏覽完整計畫</div>
+		<div class="row center-align card-panel blue-text" style="font-size:4em;">審核初步計畫</div>
+		
+		<!-- 查看初步計畫 -->
+<!-- 		<div class="row card-panel" > -->
+<!-- 			<table class="bordered highlight"> -->
+<!-- 				<thead style="font-size:2em;"> -->
+<!-- 					<tr> -->
+<!-- 						<th>初步計畫編號</th> -->
+<!-- 						<th>初步計畫標題</th> -->
+<!-- 						<th>link</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody> -->
+<%-- 					<c:forEach var="bean" items="${primaryProj}"> --%>
+<!-- 						<tr> -->
+<%-- 							<td>${bean.primaryProjId}</td> --%>
+<%-- 							<td>${bean.title}</td> --%>
+<%-- 								<c:url value="/primaryProj.do" var="path"> --%>
+<%-- 									<c:param name="type" value="display" /> --%>
+<%-- 									<c:param name="primaryProjId" value="${bean.primaryProjId}" /> --%>
+<%-- 								</c:url> --%>
+<%-- 							<th><a href="${path}" class="btn-large yellow lighten-5 black-text">查看</a></th> --%>
+<!-- 						</tr> -->
+<%-- 					</c:forEach>			 --%>
+<!-- 				</tbody> -->
+<!-- 			</table>			 -->
+<!-- 		</div> -->
+		
+		
+		<!-- 同意或拒絕 -->
 		<div class="row card-panel" >
 			<table class="bordered highlight">
 				<thead style="font-size:2em;">
 					<tr>
-						<th>完整計畫編號</th>
-						<th>完整計畫標題</th>
-						<th>link</th>
+						<th>初步計畫編號</th>
+						<th>初步計畫標題</th>
+						<th>接洽學校</th>
+						<th>所在縣市</th>
+						<th>是否同意</th>
 					</tr>
 				</thead>
-				<tbody>
-					<c:forEach var="bean" items="${fullProj}">
-						<tr>
-							<td>${bean.fullProjId}</td>
-							<td>${bean.title}</td>
-								<c:url value="/primaryProj.do" var="path">
-									<c:param name="type" value="display" />
-									<c:param name="primaryProjId" value="${bean.primaryProjId}" />
-								</c:url>
-							<td><a href="${path}" class="btn-large yellow lighten-5 black-text">查看</a></td>
-						</tr>
-					</c:forEach>			
+				<tbody style="font-size:1em;">
+<%-- 					<c:forEach var="bean" items="${primaryProj}"> --%>
+<%-- 						<c:forEach var="processingProj" items="${bean.processingProjBean}"> --%>
+							<tr>
+								<!-- 初步計畫編號 -->
+								<td>${bean.primaryProjId}</td>
+								<!-- 初步計畫標題 -->
+								<td>${bean.title}</td>
+								<!-- 有意接洽的學校 -->
+								<td>${processingProj.schoolBean.name}</td>
+								<!-- 該學校的所在縣市 -->
+								<td>${processingProj.schoolBean.addressDistrict}</td>
+								<td>
+									<form action="<c:url value="/ProcessingProj.do" />" method="post">
+										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+										<input type="hidden" name="type" value="agree">
+										<button class="btn yellow lighten-5 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">同意</button>
+									</form>
+									<form action="<c:url value="/ProcessingProj.do" />" method="post">
+										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+										<input type="hidden" name="type" value="cancel">
+										<button class="btn red lighten-4 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">拒絕</button>
+									</form>								
+								</td>
+							</tr>
+<%-- 						</c:forEach> --%>
+<%-- 					</c:forEach>				 --%>
 				</tbody>
 			</table>			
 		</div>
