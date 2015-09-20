@@ -11,6 +11,8 @@ public class ProcessingMemberBean implements Serializable
 	private Integer memberId; 			// 會員編號 FK
 	private java.util.Date checkTime; 	// 審核時間(指活動發起人下決定跟哪個學校接洽的那刻)(允許空值，只有洽談成功的學校有值)
 	private String checkStatus;			// 審核狀態(已通過 未通過 待審核)
+	private MemberBean memberBean;
+	
 	
 	public ProcessingMemberBean()
 	{
@@ -66,9 +68,17 @@ public class ProcessingMemberBean implements Serializable
 		this.checkStatus = checkStatus;
 	}
 
+	public MemberBean getMemberBean() {
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean) {
+		this.memberBean = memberBean;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "ProcessingMemberBean [processingMemberId=" + processingMemberId + ", schoolDemandId=" + schoolDemandId + ", memberId=" + memberId + ", checkTime=" + checkTime + ", checkStatus=" + checkStatus + "]";
+		return "ProcessingMemberBean [processingMemberId=" + processingMemberId + ", schoolDemandId=" + schoolDemandId + ", memberId=" + memberId + ", checkTime=" + checkTime + ", checkStatus=" + checkStatus + ", memberBean="+ memberBean + "]";
 	}
 }

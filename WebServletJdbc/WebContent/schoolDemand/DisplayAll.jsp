@@ -10,10 +10,8 @@
 <body>
 
 <!-- 志工方看的，所有的計畫需求 -->
-	<form action="SchoolDemandServlet.do?type=displayAll" method="post">
-	<input type="submit">
-	</form>
 	<c:forEach var="bean" items="${list}">
+		${bean.schoolBean.name}<br>
 		${bean.participant}<br>
 		${bean.activityTopic}<br>
 		${bean.activityLocation}<br>

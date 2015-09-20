@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="SchoolDemandServlet.do?type=Uptata" method="post">
+<form action="SchoolDemandServlet.do?type=update" method="post">
 預計參與的學生人數:<input type="text" name="participant" value="${bean.participant}">${error.participant}<br>
 活動主題:<input type="text" name="activityTopic" value="${bean.activityTopic}">${error.activityTopic}<br>
 活動地點:<input type="text" name="activityLocation" value="${bean.activityLocation}">${error.activityLocation}<br>
