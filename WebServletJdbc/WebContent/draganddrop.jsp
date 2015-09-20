@@ -52,8 +52,8 @@
 }
 
 #trash-can {
-	height:130px;
-	width:130px;
+	height: 130px;
+	width: 130px;
 }
 
 </style>
@@ -323,6 +323,17 @@
 			//Set mission board container height fit with window
 			$('.nested_with_switc').height($(window).height()*0.7);
 			
+			//Set datepicker icon position
+			$('.missionDate').siblings('.ui-datepicker-trigger').css({'position':'relative',
+												'top':'-45px',
+												'left':'150px',
+												'cursor':'pointer'});
+			
+			$('.subMission .ui-datepicker-trigger').css({'position':'relative',
+														 'top':'20px',
+														 'left':'-20px',
+														 'cursor':'pointer'});
+			
 			
 			//Define container for mission board
 			$("ul.nested_with_switc").sortable({
@@ -457,16 +468,18 @@
 				});
 				
 				$('.participator').on('click',function(){
-					$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id'));
-					$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id') + '').remove();
+					$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name'));
+					$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name') + '').remove();
 					
 					$('.dialog .missionExecutor').text($(this).children('div').text());
 					$('.dialog .missionExecutor').addClass($(this).children('div').attr('class'));
 					
 					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val( $(this).children('div').text());
-					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('id',$(this).children('div').attr('class'));
+					$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name',$(this).children('div').attr('class'));
 					
-					$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+					if(!$('.missionParticipator ul div').hasClass($(this).children('div').attr('class'))){
+						$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');						
+					}
 					$('.popupParticipatorWindow').dialog( "close" );
 				});
 				
@@ -486,14 +499,20 @@
 				
 				//ajax get all participator
 				var participatorName = 'member';
+				var memberID= "member" +1;
 				
-				
-				var $li1 = $('<li class="participator"></li>').html('<div>' + 'Paker' + '</div>');
-				var $li2 = $('<li class="participator"></li>').html('<div>' + 'John' + '</div>');
-				var $li3 = $('<li class="participator"></li>').html('<div>' + 'Anna' + '</div>');
+				var $li1 = $('<li class="participator"></li>').html('<div class='+ memberID +'>' + 'Paker' + '</div>');
+				var $li2 = $('<li class="participator"></li>').html('<div class=' + 'member2' + '>' + 'John' + '</div>');
+				var $li3 = $('<li class="participator"></li>').html('<div class=' + 'member3' + '>' + 'Anna' + '</div>');
 				$('.popupParticipatorWindow ul').append($li1);
 				$('.popupParticipatorWindow ul').append($li2);
 				$('.popupParticipatorWindow ul').append($li3);
+				
+				//need to find executor,and remove out of list
+				var executor = $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name');
+				console.log(executor);
+				$('.popupParticipatorWindow ul .'+ executor +'').parent().remove();
+				
 				
 				$('.popupParticipatorWindow ul li').mouseenter(function(){
 					$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
@@ -505,10 +524,29 @@
 				});
 				
 				$('.participator').on('click',function(){
-					$('.missionParticipator ul').prepend('<div style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
+					$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
 				});
 				
 			});
+			
+			//Add subMission
+			$('.addSubMission').mouseenter(function(){
+					$(this).css({'font-weight':'bold',
+								 'cursor':'pointer',
+								 'color':'#0d47a1 blue darken-4'});
+				}).mouseleave(function(){
+					$(this).css({'font-weight':'normal',
+						 		 'color':'black'});
+				});
+			$('.addSubMission').on('click',function(){
+				var parent = $(this).parent();
+				$(this).remove();
+				$('.subMission').show();
+				
+				
+			})
+			
+			
 			
 			
 			
@@ -681,5 +719,229 @@
 			
 		});
 	</script>	
+
+	<div class="">
+		<div class="">
+			<div class="row">
+				<div class="col l2">
+					<div class="input-field">
+						<input id="nameTitle" type="text" class="validate">
+					</div>
+				</div>
+				<div class="col l1">
+					<div
+						class="addBoard btn-large waves-effect waves-light red">
+						<i class="large material-icons">add</i>
+					</div>
+				</div>
+				<div class="col l1">
+					<div id="trash-can">
+						<img src="images/trash_can.png" style="height:100px; width:100px;">
+					</div>
+				</div>
+			</div>
+			<ul class="nested_with_switc #81d4fa light-blue lighten-3">
+				<!-- Mission Board here!! -->
+			</ul>
+		</div>
+
+	</div>
+	
+	
+	<div class="popupWindow">
+		<div class="row">
+			<div class="input-field">
+				<input type="text" class="missionTitle validate">
+				<input type="hidden" class="titleLocation" value="">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col l6">
+				<div id="commit" class="waves-effect waves-light btn"><h6>完成</h6></div>
+			</div>
+			<div class="col l6">
+				<div id="delete" class="waves-effect waves-light btn"><h6>刪除</h6></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="popupParticipatorWindow">
+		<ul style="list-style:url('images/memberIcon.png') none inside;">
+		</ul>
+	</div>
+	
+	
+	<div class="dialog">
+				<div class="row" style="border:1px dotted gray;">
+					<div class="input-field col l1">
+						<input type="checkbox" class="missionStatus filled-in" id="filled-in-box" >
+      					<label for="filled-in-box"></label>
+      				</div>
+					<div class="input-field col l11">
+						<input type="text" class="missionName validate" placeholder="任務名稱..." >
+					</div>
+				</div>
+				<div class="row" style="border:1px dotted gray;"> 
+					<div class="col l4">
+						<label for="missionExecutor">執行者 </label>
+						<ul style="list-style:url('images/memberIcon.png') none inside;">
+							<li class="missionExecutor" style="cursor:pointer"></li>
+						</ul>
+					</div>
+					<div class="col l4">
+						<label for="datepicker">截止日期 </label>
+						<input type="text" id="datepicker" class="missionDate validate" readonly>
+					</div>
+					<div class="col l4">
+						<label for="missionPriority">優先次序</label>
+						<select class="missionPriority browser-default" placeholder="">
+							<option value="普通">普通</option>
+							<option value="緊急">緊急</option>
+							<option value="非常緊急">非常緊急</option>
+						</select>
+					</div>
+				</div>
+				<div class="row" style="border:1px dotted gray;">
+					<div class="col l12">
+						<label for="missionParticipator">參與者 </label>
+						<div class="missionParticipator">
+							<ul class="col l12" style="column-count:4;column-gap:0;">
+								<div class="addParticipator btn-floating btn waves-effect waves-light #2196f3 blue"><i class="material-icons">add</i></div>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="border:1px dotted gray;">
+					<div class="col l12">
+						<label for="subMissionContainer">子任務 </label>
+						<div class="subMissionContainer">
+							<ul class="col l12" style="column-count:4;column-gap:0;">
+								<div class="addSubMission">添加子任務</div>
+								<div class="subMission" style="display:none">
+									<textarea class="col l8" placeholder="請輸入子任務內容"></textarea> 
+							    	<input type="text" id="subDatepicker" class="validate col l3" readonly>
+							   		<img class="col l1" src="images/memberIcon.png">
+							   		<div class="btn waves-effect waves-light #2196f3 blue">新增</div>
+							   		<div class="btn waves-effect waves-light #2196f3 blue">取消</div>
+							   </div>
+							</ul>
+						</div>
+					</div>
+				</div>
+		<input type="hidden" class="dataRowLocation" value="">
+	</div>
+	
+	<script type="text/javascript">
+		//Set checkbox status, define add line-through to missionTitle or not
+		$('.dialog .missionStatus').on('click',function() {
+			if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
+				$('.dialog .missionName').removeClass('disable');
+				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
+				$(event.target).prop('checked',false);
+				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
+			} else {
+				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
+				$('.dialog .missionName').addClass('disable');
+				$(event.target).prop('checked',true);
+				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
+			}
+		});
+	</script>
+	
+	
+	<script type="text/javascript">
+		//JQuery datepicker
+		var inputDate = $("#datepicker,#subDatepicker");
+		var changeYearButtons = function() {
+		setTimeout(function() {
+	        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+	        var prevYrBtn = $('<button>前年</button>');
+	        prevYrBtn.bind("click", function() {
+	            $.datepicker._adjustDate(inputDate, -1, 'Y');
+	        });
+	        var nextYrBtn = $('<button>次年</button>');
+	        nextYrBtn.bind("click", function() {
+	            $.datepicker._adjustDate(inputDate, +1, 'Y');
+	        });
+	        prevYrBtn.appendTo(widgetHeader);
+	        nextYrBtn.appendTo(widgetHeader);
+	    	}, 1);
+		};
+	
+		var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+		var old_get = $.datepicker._get;
+		var old_CloseFn = $.datepicker._updateDatepicker;
+		$.extend($.datepicker, {
+    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+            	}).end().end().get(0).outerHTML;
+        	}
+        	return htmlYearMonth;
+    		},
+    		_get:function (a, b) {
+        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+        		return old_get.apply(this, [a, b]);
+    		},
+    		_updateDatepicker:function (inst) {
+        		old_CloseFn.call(this, inst);
+        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
+                    inst.input.val("");
+            	});
+    		},
+    		_setDateDatepicker: function (a, b) {
+    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+    		},
+    		_widgetDatepicker: function () {
+        		return this.dpDiv
+    		}
+		});
+
+		$("#datepicker,#subDatepicker").datepicker({
+			beforeShow: changeYearButtons,
+			onChangeMonthYear: changeYearButtons,
+    		minDate: new Date(),
+    		firstDay: 1, 
+    		dateFormat: "yy-m-d",
+    		showOn: "button",
+    	    buttonImage: "images/calendar.png",
+    	    buttonImageOnly: true,
+    		onSelect: function (dateText, inst) {
+        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+        		var reM = /m+/g;
+        		var reD = /d+/g;
+        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+        		};
+        		$.each(objDate, function (k, v) {
+            		var re = new RegExp(k + "+");
+            		dateFormate = dateFormate.replace(re, v);
+        		});
+        		inst.input.val(dateFormate);
+        		
+        		$('#'+$('.dataRowLocation').val()).find('.missionDate').val( dateFormate );
+    		}
+		});
+	
+		$.datepicker.regional['zh-TW'] = {
+				prevText: '上月',
+				nextText: '次月',
+				monthNames: ['一月','二月','三月','四月','五月','六月',
+				'七月','八月','九月','十月','十一月','十二月'],
+				monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+				dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+				dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+				dayNamesMin: ['日','一','二','三','四','五','六'],
+		};
+		$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+		
+		
+	</script>
+>>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 </body>
 </html>
