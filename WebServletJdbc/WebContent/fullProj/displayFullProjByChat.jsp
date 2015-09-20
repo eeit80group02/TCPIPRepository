@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>udateFullProj</title>
+<title>displayFullProjByChat</title>
 </head>
 <body>
 
@@ -23,7 +23,7 @@
 			
 			地點${fullProj.location}<br>
 			
-			時間${fullProj.activityStartTime}~${fullProj.activityEndTime}<br>
+			時間<br>
 			<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>
 			<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>
 			

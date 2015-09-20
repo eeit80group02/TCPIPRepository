@@ -24,7 +24,7 @@
 	<div class="row black valign-wrapper" id="pagetitle">
 		
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">完整計畫名稱${fullProj.title}</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${fullProj.title}</h1>
 	</div>	
 
 <!-- 內容 -->
@@ -35,8 +35,8 @@
 		<!-- 第一列 -->
 		<div class="row">
 			<div class="col l2 btn yellow lighten-3 black-text offset-l2">
-				<fmt:formatNumber var="mid" value="${primaryProj.memberId}" pattern="0000"/>
-				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:[No.${mid}]</span>			
+				<fmt:formatNumber var="mid" value="${fullProj.memberId}" pattern="0000"/>
+				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:${fullProj.memberBean.lastName}${fullProj.memberBean.firstName}[No.${mid}]</span>			
 			</div>		
 		</div>
 		<!-- 第二列 -->
@@ -82,7 +82,7 @@
 									<div>
 									<fmt:formatDate var="startTime" value="${fullProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
 									<fmt:formatDate var="endTime" value="${fullProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />									
-									${fullProj.activityStartTime} ~ ${fullProj.activityEndTime}							
+									${startTime} ~ ${endTime}							
 									</div>
 								</div>
 							</div>	
@@ -137,7 +137,7 @@
 					<div class="row">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
-							${fullProj.orgArchitecture}
+<%-- 							${fullProj.orgArchitecture} --%>
 							</p>
 						</div>
 					</div>
@@ -180,17 +180,17 @@
 
 
 				<div class="card-panel hoverable row" style="background-color:#FFFCEC">
-					<!-- 計畫內容 -->
+					<!-- 問與答 -->
 					<div class="row">
 						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white"  style="background-color:#D1F0E5;font-size:2em;font-weight:900;font-family:微軟正黑體">
 							問與答
 						</div>
 					</div>
-					<!-- 計畫內容 -->
+					<!-- 問與答 -->
 					<div class="row">
 						<div class="col l12 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
-							${fullProj.content}
+<%-- 							${fullProj.content} --%>
 							</p>
 						</div>
 					</div>

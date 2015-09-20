@@ -105,7 +105,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫名稱</div>
-								<input id="title" type="text" name="title"  value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="title" type="text" name="title"  value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.title}</span>
@@ -117,7 +117,7 @@
 						<div class="row">
 							<div class="col l4">
 									<div id="forlocation" class="forinput">活動地點</div>
-									<input class="center-align forvalue" id="location" type="text"  value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;">	
+									<input class="center-align forvalue" id="location" type="text"  value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;" required>	
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.location}</span>
@@ -129,14 +129,14 @@
 						<div class="input-field row">
 							<div class="col l4">
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">活動開始時間</span></div>
-								<input type="date" name="activityStartTime" id="activityStartTime" value="${param.activityStartTime}" />
+								<input type="date" name="activityStartTime" id="activityStartTime" value="${param.activityStartTime}" required />
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.activityStartTime}</span>
 							</div>								
 							<div class="col l4">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">活動結束時間</span></div>
-								<input type="date" name="activityEndTime" id="activityEndTime" value="${param.activityEndTime}" />
+								<input type="date" name="activityEndTime" id="activityEndTime" value="${param.activityEndTime}" required />
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.activityEndTime}</span>
@@ -149,7 +149,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">招募人數</div>
-								<input id="estMember" type="number" name="estMember"  value="${param.estMember}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="estMember" type="number" name="estMember"  value="${param.estMember}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.estMember}</span>
@@ -162,7 +162,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">活動預算</div>
-								<input id="budget" type="number" name="budget"  value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="budget" type="number" name="budget"  value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.budget}</span>
@@ -175,7 +175,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">成員架構<span style="font-size:0.8em;font-weight:300;"></span></div>
-								<input id="orgArchitecture" name="orgArchitecture" type="text"  value="${param.orgArchitecture}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="orgArchitecture" name="orgArchitecture" type="text"  value="${param.orgArchitecture}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.orgArchitecture}</span>
@@ -188,7 +188,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;">${param.projAbstract}</textarea>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;" required>${param.projAbstract}</textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -199,7 +199,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
-								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
+								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;" required>${param.content}</textarea>
 							</div>	
 							<div class="col l4">	
 								<span class="error">${error.content}</span>

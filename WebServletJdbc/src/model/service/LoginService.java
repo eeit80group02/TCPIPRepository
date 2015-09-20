@@ -51,6 +51,8 @@ public class LoginService
 			{
 				
 				byte[] pwd = bean.getPassword();
+				String pwdStr = new String(pwd);
+				System.out.println(pwdStr);
 				if(Arrays.equals(pwd,password.getBytes()))
 				{
 					return bean;

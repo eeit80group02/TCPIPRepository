@@ -21,7 +21,6 @@ import javax.servlet.http.Part;
 
 import model.FullProjBean;
 import model.MemberBean;
-import model.PrimaryProjBean;
 import model.service.FullProjService;
 
 @WebServlet("/fullProj.do")
@@ -432,7 +431,7 @@ public class FullProjServlet extends HttpServlet
 			errorMsg.put("budget","活動預算為必填欄位");
 		}
 		
-		if(budget == null || budget.trim().length() == 0)
+		if(orgArchitecture == null || orgArchitecture.trim().length() == 0)
 		{
 			errorMsg.put("orgArchitecture","成員架構為必填欄位");
 		}
@@ -524,43 +523,42 @@ public class FullProjServlet extends HttpServlet
 			return;
 		}
 		
-//		// 將必要資料 包成Bean 導向 Business Logic
-//		PrimaryProjBean bean = new PrimaryProjBean();
-//		bean.setPrimaryProjId(pId);
-//		bean.setMemberId(mId);
-//		bean.setTitle(title);
-//		bean.setProjAbstract(projAbstract);
-//		bean.setContent(content);
-//		bean.setIdealPlace(location);
-//		bean.setActivityStartTime(sTime);
-//		bean.setActivityEndTime(eTime);
-//		bean.setDemandNum(dNum);
-//		bean.setBudget(bget);
-//		bean.setFrontCoverName(fileName);
-//		bean.setFrontCover(img);
-//		bean.setFrontCoverLength(fileLength);
-//
-//		// 進行 Business
-//		bean = service.updatePrimaryProj(bean);
-//		
-//		if(bean != null)
-//		{
-//			// 成功導向
-//			System.out.println(bean);
-//			
-////			displayPrimaryProj(request,response);
-////			session = request.getSession();
-////			session.setAttribute("primaryProj",bean);
-//			
-//			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=display&primaryProjId=" + bean.getPrimaryProjId());
-//		}
-//		else
-//		{
-//			// 失敗導向
-//			errorMsg.put("error","編輯計畫建立失敗");
-//			request.getRequestDispatcher("/error.jsp").forward(request,response);
-//			return;
-//		}
+		// 將必要資料 包成Bean 導向 Business Logic
+		FullProjBean fullProjBean = new FullProjBean();
+		fullProjBean.setFullProjId(fId);
+		fullProjBean.setTitle(title);
+		fullProjBean.setProjAbstract(projAbstract);
+		fullProjBean.setContent(content);
+		fullProjBean.setLocation(location);
+		fullProjBean.setActivityStartTime(sTime);
+		fullProjBean.setActivityEndTime(eTime);
+		fullProjBean.setEstMember(dNum);
+		fullProjBean.setBudget(bget);
+		fullProjBean.setOrgArchitecture(orgArchitecture);
+		fullProjBean.setFrontCoverName(fileName);
+		fullProjBean.setFrontCover(img);
+		fullProjBean.setFrontCoverLength(fileLength);
+
+		// 進行 Business
+		fullProjBean = service.updateFullProj(fullProjBean);
+		
+		if(fullProjBean != null)
+		{
+			// 成功導向
+			System.out.println(fullProjBean);
+			
+//			session = request.getSession();
+//			session.setAttribute("fullProj",fullProjBean);
+			
+			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fullProjBean.getFullProjId());
+		}
+		else
+		{
+			// 失敗導向
+			errorMsg.put("error","編輯計畫建立失敗");
+			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			return;
+		}
 	}
 
 	private void displayFullProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
