@@ -34,6 +34,7 @@
 					<tr>
 						<th>完整計畫編號</th>
 						<th>完整計畫標題</th>
+						<th>狀態</th>
 						<th>link</th>
 					</tr>
 				</thead>
@@ -42,11 +43,14 @@
 						<tr>
 							<td>${bean.fullProjId}</td>
 							<td>${bean.title}</td>
-								<c:url value="/primaryProj.do" var="path">
+							<td>${bean.projStatus}
+							<td>
+								<c:url value="/fullProj.do" var="path">
 									<c:param name="type" value="display" />
-									<c:param name="primaryProjId" value="${bean.primaryProjId}" />
+									<c:param name="fullProjId" value="${bean.fullProjId}" />
 								</c:url>
-							<td><a href="${path}" class="btn-large yellow lighten-5 black-text">查看</a></td>
+								<a href="${path}" class="btn-large yellow lighten-5 black-text">查看</a>
+							</td>
 						</tr>
 					</c:forEach>			
 				</tbody>
