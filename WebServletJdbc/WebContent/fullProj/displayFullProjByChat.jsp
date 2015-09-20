@@ -23,7 +23,7 @@
 			
 			地點${fullProj.location}<br>
 			
-			時間${fullProj.activityStartTime}~${fullProj.activityEndTime}<br>
+			時間<br>
 			<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>
 			<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>
 			
