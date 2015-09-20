@@ -3,6 +3,7 @@ package model.service;
 import global.GlobalService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import model.FullProjBean;
@@ -123,11 +124,43 @@ public class FullProjService
 		return result;
 	}
 	
+	public boolean schoolConfirm(FullProjBean bean)
+	{
+		if(bean != null)
+		{
+			FullProjBean fullProjBean = fullProjDAO.findByPrimaryKey(bean.getFullProjId());
+			
+			if(fullProjBean != null)
+			{
+				fullProjBean.setSchoolConfirm(true);
+				fullProjDAO.update(fullProjBean);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean memberConfirm(FullProjBean bean)
+	{
+		if(bean != null)
+		{
+			FullProjBean fullProjBean = fullProjDAO.findByPrimaryKey(bean.getFullProjId());
+			
+			if(fullProjBean != null)
+			{
+				fullProjBean.setCreateDate(new java.util.Date(System.currentTimeMillis()));
+				fullProjBean.setMemberConfirm(true);
+				fullProjBean.setProjStatus("招募中");
+				fullProjDAO.update(fullProjBean);
+				return true;
+			}
+		}
+		return false;
+	}
 	public static void main(String[] args)
 	{
 		FullProjService service = new FullProjService();
 		System.out.println(service.displayFullProjAll());
 	}
-
 
 }

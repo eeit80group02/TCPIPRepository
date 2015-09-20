@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+
 import model.FullProjBean;
 import model.MemberBean;
 import model.service.FullProjService;
@@ -106,14 +107,22 @@ public class FullProjServlet extends HttpServlet
 				
 				displayPersonalFullProjByChat(request,response);
 			}
-			// 補齊計畫頁面
-//			else if(type.equals("displayUpdateForm"))
-//			{
-//				System.out.println("執行 FullProjServlet displayUpdateForm[補齊計畫頁面]");
-//				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
-//				
-//				displayUpdateForm(request,response);
-//			}
+			// 學校同意此計畫
+			else if(type.equals("schoolConfirm"))
+			{
+				System.out.println("執行 FullProjServlet schoolConfirm");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				schoolConfirm(request,response);
+			}
+			// 發起者發布
+			else if(type.equals("memberConfirm"))
+			{
+				System.out.println("執行 FullProjServlet memberConfirm");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				memberConfirm(request,response);
+			}
 			else
 			{
 				errorMsg.put("errorURL","請勿做作不正當請求( line.83)");
@@ -123,39 +132,84 @@ public class FullProjServlet extends HttpServlet
 		}
 	}
 	
-//	private void displayUpdateForm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
-//	{
-//		request.setCharacterEncoding("UTF-8");
-//		
-//		HttpSession session = request.getSession();
-//		MemberBean memberBean = null;
-//		
-//		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
-//		{
-//			memberBean = (MemberBean)session.getAttribute("LoginOK");
-//		}
-//		else
-//		{
-//			String context = request.getContextPath();
-//			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
-//			return;
-//		}
-//		
-//		String fullProjId = request.getParameter("fullProjId");
-//		int fullId = Integer.parseInt(fullProjId);
-//		
-//		FullProjBean fullProjBean = new FullProjBean();
-//		fullProjBean.setFullProjId(fullId);
-//		
-//		FullProjBean result = service.displayFullProj(fullProjBean);
-//		if(result != null)
-//		{
-//			System.out.println(result);
-//			request.setAttribute("fullProj",result);
-//			request.getRequestDispatcher("/fullProj/updateFullProjForm.jsp").forward(request,response);
-//			return;
-//		}
-//	}
+	private void memberConfirm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		String fullProjId = request.getParameter("fullProjId");
+		int fId = Integer.parseInt(fullProjId);
+		
+		// 必要資料轉換 無 
+		
+		// 將必要資料 包成Bean 導向 Business Logic
+		FullProjBean fullProjBean = new FullProjBean();
+		fullProjBean.setFullProjId(fId);
+
+		// 進行 Business
+		boolean result = service.memberConfirm(fullProjBean);
+		
+		if(result)
+		{
+			// 成功導向
+			System.out.println(fullProjBean);
+			System.out.println("==================================================");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fId));
+			return;
+		}
+	}
+
+	private void schoolConfirm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		session.removeAttribute("schoolConfirm");
+		
+		String fullProjId = request.getParameter("fullProjId");
+		String location = request.getParameter("location");
+		String orgArchitecture = request.getParameter("orgArchitecture");
+
+		int fId = Integer.parseInt(fullProjId);
+		
+		// 檢查使用者輸入資料
+		if(location == null || location.trim().length() == 0)
+		{
+			session.setAttribute("schoolConfirm","發起者必須補齊資料");
+		}
+		
+		if(orgArchitecture == null || orgArchitecture.trim().length() == 0)
+		{
+			session.setAttribute("schoolConfirm","發起者必須補齊資料");
+		}
+		
+		if(session.getAttribute("schoolConfirm") != null)
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fId));
+			return;
+		}
+		
+		// 必要資料轉換 無 
+		
+		
+		// 將必要資料 包成Bean 導向 Business Logic
+		FullProjBean fullProjBean = new FullProjBean();
+		fullProjBean.setFullProjId(fId);
+
+		// 進行 Business
+		boolean result = service.schoolConfirm(fullProjBean);
+		
+		if(result)
+		{
+			// 成功導向
+			System.out.println(fullProjBean);
+			System.out.println("==================================================");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId="+fId));
+			return;
+		}
+	}
 
 	private void displayPersonalFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
@@ -288,9 +342,6 @@ public class FullProjServlet extends HttpServlet
 	private void updateFullProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		
-		HttpSession session = request.getSession();
-		session.removeAttribute("fullProj");
 		
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
@@ -547,9 +598,7 @@ public class FullProjServlet extends HttpServlet
 			// 成功導向
 			System.out.println(fullProjBean);
 			
-//			session = request.getSession();
-//			session.setAttribute("fullProj",fullProjBean);
-			
+			// 直接導向 在查詢一次
 			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fullProjBean.getFullProjId());
 		}
 		else
@@ -628,263 +677,8 @@ public class FullProjServlet extends HttpServlet
 		
 		List<FullProjBean> beans = service.displayFullProjAll();
 		request.setAttribute("fullProjAll",beans);
-		request.getRequestDispatcher("/fullProj/fullproj.jsp").forward(request,response);
+		request.getRequestDispatcher("/fullProj/displayFullProjAll.jsp").forward(request,response);
 
 		return;			
 	}
-
-//	private void createPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
-//	{
-//		request.setCharacterEncoding("UTF-8");
-//		
-//		// 錯誤訊息 容器
-//		Map<String,String> errorMsg = new HashMap<String,String>();
-//		request.setAttribute("error",errorMsg);
-//		
-//		String memberId = null;
-//		String title = null;
-//		String projAbstract = null;
-//		String content = null;
-//		String location = null;
-//		String startTime = null;
-//		String endTime = null;
-//		String demandNum = null;
-//		String budget = null;
-//		byte[] img = null;
-//		String fileName = null;
-//		long fileLength = 0;
-//		InputStream is = null;
-//		
-//		// 接收前端使用者資料，表單必須 method="post" enctype="multipart/form-data"
-//		Collection<Part> parts = request.getParts();
-//		if(parts != null)
-//		{
-//			for(Part part : parts)
-//			{
-//				String name = part.getName();	  // form input 的 name
-//				String value = request.getParameter(name);
-//				if(part.getContentType() == null) // 普通 文字資料
-//				{
-//					if(name.equals("memberId"))
-//					{
-//						memberId = value;
-//					}
-//					if(name.equals("title"))
-//					{
-//						title = value;
-//					}
-//					if(name.equals("projAbstract"))
-//					{
-//						projAbstract = value;
-//					}
-//					if(name.equals("content"))
-//					{
-//						content = value;
-//					}
-//					if(name.equals("location"))
-//					{
-//						location = value;
-//					}
-//					if(name.equals("startTime"))
-//					{
-//						startTime = value;
-//					}
-//					if(name.equals("endTime"))
-//					{
-//						endTime = value;
-//					}
-//					if(name.equals("demandNum"))
-//					{
-//						demandNum = value;
-//					}
-//					if(name.equals("budget"))
-//					{
-//						budget = value;
-//					}
-//				}
-//				else if(part.getContentType().equals("image/png") || part.getContentType().equals("image/jpeg")) // file 資料
-//				{
-//					if(name.equals("imgFile"))
-//					{
-//						fileName = GlobalService.getFileName(part);
-//						fileLength = part.getSize();
-//						is = part.getInputStream();
-//					}
-//				}
-//				else
-//				{
-//					fileName = GlobalService.getFileName(part);
-//					if(fileName != null && fileName.trim().length() > 0)
-//					{
-//						errorMsg.put("imgFile","檔案格式不正確");
-//						System.out.println("請選擇正確格式");
-//					}
-//					else
-//					{
-//						errorMsg.put("imgFile","計畫封面是必須的");
-//						System.out.println("沒檔案，計畫封面是必須的");
-//					}
-//				}
-//			}
-//		}
-//		
-//		// 檢查使用者輸入資料
-//		if(title == null || title.trim().length() == 0)
-//		{
-//			errorMsg.put("title","計畫名稱為必填欄位");
-//		}
-//		
-//		if(projAbstract == null || projAbstract.trim().length() == 0)
-//		{
-//			errorMsg.put("projAbstract","計畫摘要為必填欄位");
-//		}
-//		
-//		if(content == null || content.trim().length() == 0)
-//		{
-//			errorMsg.put("content","計畫內容為必填欄位");
-//		}
-//		
-//		if(location == null || location.trim().length() == 0)
-//		{
-//			errorMsg.put("location","理想地點為必填欄位");
-//		}
-//		
-//		if(startTime == null || startTime.trim().length() == 0)
-//		{
-//			errorMsg.put("startTime","活動時間(起)為必填欄位");
-//		}
-//		
-//		if(endTime == null || endTime.trim().length() == 0)
-//		{
-//			errorMsg.put("endTime","活動時間(汔)為必填欄位");
-//		}
-//		
-//		if(demandNum == null || demandNum.trim().length() == 0)
-//		{
-//			errorMsg.put("demandNum","活動人數為必填欄位");
-//		}
-//		
-//		if(budget == null || budget.trim().length() == 0)
-//		{
-//			errorMsg.put("budget","活動預算為必填欄位");
-//		}
-//		
-//		if(!errorMsg.isEmpty())
-//		{
-//			request.getRequestDispatcher("/primaryProj/createPrimaryProjForm.jsp").forward(request,response);
-//			return;
-//		}
-//		
-//		// 進行必要的資料轉換
-//		int mid = 0;
-//		try
-//		{
-//			mid = Integer.parseInt(memberId);
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			e.printStackTrace();
-//		}
-//		
-//		java.util.Date sTime = null;
-//		try
-//		{
-//			sTime = GlobalService.convertStringToDate(startTime);
-//		}
-//		catch(ParseException e)
-//		{
-//			errorMsg.put("startTime","活動時間(起)格式有誤");
-//			e.printStackTrace();
-//		}
-//		
-//		java.util.Date eTime = null;
-//		try
-//		{
-//			eTime = GlobalService.convertStringToDate(endTime);
-//		}
-//		catch(ParseException e)
-//		{
-//			errorMsg.put("endTime","活動時間(迄)格式有誤");
-//			e.printStackTrace();
-//		}
-//		
-//		// 如果 <= 0 代表 日期起訖相同 或者 迄比起 早
-//		if(GlobalService.compareDate(sTime,eTime) <= 0)
-//		{
-//			errorMsg.put("endTime","活動時間(迄) 不能比 活動時間(起)早");
-//		}
-//		
-//		int dNum = 0;
-//		try
-//		{
-//			dNum = Integer.parseInt(demandNum);
-//			if(dNum < 0)
-//				errorMsg.put("demandNum","人數必須為大於0");
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			errorMsg.put("demandNum","人數必須為數字");
-//			e.printStackTrace();
-//		}
-//		
-//		int bget = 0;
-//		try
-//		{
-//			bget = Integer.parseInt(budget);
-//			if(bget < 0)
-//				errorMsg.put("budget","預算必須為大於0");
-//		}
-//		catch(NumberFormatException e)
-//		{
-//			errorMsg.put("budget","預算必須為數字");
-//			e.printStackTrace();
-//		}
-//		
-//		if(is != null)
-//		{
-//			img = GlobalService.convertInputStreamToByteArray(is);
-//			is.close();
-//		}
-//		
-//		if(!errorMsg.isEmpty())
-//		{
-//			request.getRequestDispatcher("/primaryProj/createPrimaryProjForm.jsp").forward(request,response);
-//			return;
-//		}
-//		
-//		// 將必要資料 包成Bean 導向 Business Logic
-//		PrimaryProjBean bean = new PrimaryProjBean();
-//		bean.setMemberId(mid);
-//		bean.setTitle(title);
-//		bean.setProjAbstract(projAbstract);
-//		bean.setContent(content);
-//		bean.setIdealPlace(location);
-//		bean.setActivityStartTime(sTime);
-//		bean.setActivityEndTime(eTime);
-//		bean.setDemandNum(dNum);
-//		bean.setBudget(bget);
-//		bean.setFrontCoverName(fileName);
-//		bean.setFrontCover(img);
-//		bean.setFrontCoverLength(fileLength);
-//
-//		// 進行 Business
-//		bean = service.createPrimaryProj(bean);
-//		
-//		if(bean != null)
-//		{
-//			// 成功導向
-//			System.out.println(bean);
-//			HttpSession session = request.getSession();
-//			session.setAttribute("primaryProj",bean);
-//			response.sendRedirect(request.getContextPath() + "/primaryProj/displayPrimaryProj.jsp");
-//		}
-//		else
-//		{
-//			// 失敗導向
-//			errorMsg.put("error","初步計畫建立失敗");
-//			request.getRequestDispatcher("/error.jsp").forward(request,response);
-//			return;
-//		}
-//	}
-
 }
