@@ -247,7 +247,7 @@ public class DonationServlet extends HttpServlet {
 				return;
 			}
 				 	
-			List<DonationBeanDuplicate> list = service.findOneAllDemands(donationBean.getSchoolId());
+			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(donationBean.getSchoolId());
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", list);
 			
@@ -278,7 +278,7 @@ public class DonationServlet extends HttpServlet {
 				return;
 			}
 				 	
-			List<DonationBeanDuplicate> list = service.findOneAllDemands(donationBeanUpdate.getSchoolId());
+			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(donationBeanUpdate.getSchoolId());
 			request.setAttribute("OneAllDemands", list);
 
 			is.close();
@@ -309,7 +309,7 @@ public class DonationServlet extends HttpServlet {
 				return;
 			}
 			
-			List<DonationBeanDuplicate> list = service.findOneAllDemands(donationBean.getSchoolId());
+			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(donationBean.getSchoolId());
 			request.setAttribute("OneAllDemands", list);
 			
 			// 5.挑選適當畫面

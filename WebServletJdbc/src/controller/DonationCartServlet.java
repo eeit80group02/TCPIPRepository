@@ -33,7 +33,6 @@ public class DonationCartServlet extends HttpServlet {
 		// 若尚未登入會員則自己產生一個 session，負責傳遞資料
 		HttpSession session = request.getSession(false);
 		String sId = session.getId();
-		System.out.println("sId: "+sId);
 		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
 		if (dCart == null) {
 			dCart = new DonationCart();
@@ -115,8 +114,11 @@ public class DonationCartServlet extends HttpServlet {
 			boolean b = dCart.remove();
 			// 4.挑選適當畫面
 			System.out.println("刪除購物車全部欄位: " + b);
-			RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
+//			rd.forward(request, response);
+//			return;
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/donation/demand.do?type=FindGoods"));
 			return;
 		}
 	}

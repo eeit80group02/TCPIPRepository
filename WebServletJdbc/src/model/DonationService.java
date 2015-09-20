@@ -157,7 +157,7 @@ public class DonationService {
 		}
 		return donationBean;
 	}
-	public List<DonationBeanDuplicate> findOneAllDemands(int schoolId) {
+	public List<DonationBeanDuplicate> findOneAllDeamndByMember(int schoolId) {
 		// 比對schoolId後得到一間學校所有捐獻
 		List<DonationBean> resultDisplay = new ArrayList<>();
 		
@@ -165,7 +165,60 @@ public class DonationService {
 		List<DonationBean> result = new ArrayList<>();
 		result = donationDAOJdbc.getAll();
 		for (DonationBean d : result) {
-			if (schoolId == d.getSchoolId()) {
+			if (schoolId == d.getSchoolId() && d.getDonationStatus().equals("否")) {
+				resultDisplay.add(d);
+			}
+		}
+		
+		// 包裝一間學校所有捐獻
+		List<DonationBeanDuplicate> listDuplivate = new ArrayList<>();
+		DonationBeanDuplicate donationBeanDuplicate;
+		
+		SchoolService schoolService = new SchoolService();
+		SchoolBean schoolBean;
+		for (DonationBean d : resultDisplay) {
+			donationBeanDuplicate = new DonationBeanDuplicate();
+			donationBeanDuplicate.setDonationId(d.getDonationId());
+			donationBeanDuplicate.setSchoolId(d.getSchoolId());
+			// 取出 schoolName
+			schoolBean = schoolService.getSchoolData(d.getSchoolId());
+			if (schoolBean != null) {
+				donationBeanDuplicate.setSchoolName(schoolBean.getName());
+			} else {
+				System.out.println("系統錯誤");
+				return null;
+			}
+			
+			donationBeanDuplicate.setDonationStatus(d.getDonationStatus());
+			donationBeanDuplicate.setSupplyName(d.getSupplyName());
+			donationBeanDuplicate.setOriginalDemandNumber(d.getOriginalDemandNumber());
+			donationBeanDuplicate.setOriginalDemandUnit(d.getOriginalDemandUnit());
+			donationBeanDuplicate.setDemandNumber(d.getDemandNumber());
+			// NEW 預設為1
+			donationBeanDuplicate.setDonateAmount(1);
+			donationBeanDuplicate.setSize(d.getSize());
+			donationBeanDuplicate.setDemandContent(d.getDemandContent());
+			donationBeanDuplicate.setSupplyStatus(d.getSupplyStatus());
+			// ADD
+			donationBeanDuplicate.setDemandTime(d.getDemandTime());
+			donationBeanDuplicate.setExpireTime(d.getExpireTime());
+			donationBeanDuplicate.setImageName(d.getImageName());
+			donationBeanDuplicate.setImageFile(d.getImageFile());
+			donationBeanDuplicate.setImageLength(d.getImageLength());
+			donationBeanDuplicate.setRemark(d.getRemark());
+			listDuplivate.add(donationBeanDuplicate);
+		}
+		return listDuplivate;
+	}
+	public List<DonationBeanDuplicate> findOneAllDeamndBySchool(int schoolId) {
+		// 比對schoolId後得到一間學校所有捐獻
+		List<DonationBean> resultDisplay = new ArrayList<>();
+		
+		donationDAOJdbc  = new DonationDAOJdbc();
+		List<DonationBean> result = new ArrayList<>();
+		result = donationDAOJdbc.getAll();
+		for (DonationBean d : result) {
+			if (schoolId == d.getSchoolId() && d.getDonationStatus().equals("否")) {
 				resultDisplay.add(d);
 			}
 		}
