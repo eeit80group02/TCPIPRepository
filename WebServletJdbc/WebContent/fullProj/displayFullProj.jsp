@@ -24,7 +24,7 @@
 	<div class="row black valign-wrapper" id="pagetitle">
 		
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">完整計畫名稱${fullProj.title}</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${fullProj.title}</h1>
 	</div>	
 
 <!-- 內容 -->

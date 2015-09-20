@@ -432,7 +432,7 @@ public class FullProjServlet extends HttpServlet
 			errorMsg.put("budget","活動預算為必填欄位");
 		}
 		
-		if(budget == null || budget.trim().length() == 0)
+		if(orgArchitecture == null || orgArchitecture.trim().length() == 0)
 		{
 			errorMsg.put("orgArchitecture","成員架構為必填欄位");
 		}
