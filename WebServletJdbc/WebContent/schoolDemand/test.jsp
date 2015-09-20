@@ -7,19 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>學校</h1>
 	${schoolId}<br>
-	<a href="test.do">登入</a><br>
+	<a href="test.do?type=s">登入</a><br>
 	<a href="CreatSchoolDemand.jsp">新增</a><br>
-	
-	<a href="SchoolDemandServlet.do?type=update">修改</a><br>
-	<a href="<c:url value="SchoolDemandServlet.do?type=displayAll" />">顯示所有需求</a> <br>
-	<a href="SchoolDemandServlet.do?type=displayAll">顯示所有需求</a><br>
-	
-	<a href="SchoolDemandServlet.do?type=displayPersonalAll">顯示需求</a><br>
-	<a href="SchoolDemandServlet.do?type=displayPersonalRender">待洽談</a><br>
-	<a href="SchoolDemandServlet.do?type=displayPersonalUnrender">洽談中</a><br>
-	<a href="SchoolDemandServlet.do?type=displayPersonalEnd">洽談完成</a><br>
-	<a href="SchoolDemandServlet.do?type=displayPersonalFail">洽談失敗</a><br>
+	<a href="SchoolDemandServlet.do?type=displays">顯示需求</a><br>
+	<a href="SchoolDemandServlet.do?type=displayPersonalRender">顯示待洽談</a><br>
+	<a href="SchoolDemandServlet.do?type=displayPersonalUnrender">顯示洽談中</a><br>
+	<h1>會員</h1>
+	${memberId}<br>
+	<a href="test.do?type=m">登入</a><br>
+	<a href="<c:url value="SchoolDemandServlet.do?type=mdisplays" />">顯示學校需求</a> <br>
+
 
 	<form action="Status.do?type=application" method="post">
 		<input type="submit" value="申請">

@@ -23,8 +23,11 @@
 		${bean.demandStatus}<br>
 		${bean.offerBean.room}<br>
 		${bean.offerBean.place}<br>
-		${bean.offerBean.food}<hr>
-		${bean.ProcessingMemberBean. }
+		${bean.offerBean.food}<br>
+		${bean.processingMemberBean.memberBean.lastName}
+		${bean.processingMemberBean.memberBean.firstName}<hr>
+		<button><a href="">同意</a></button>
+		<button><a href="">不同意</a></button>
 	</c:forEach>
 </body>
 </html>

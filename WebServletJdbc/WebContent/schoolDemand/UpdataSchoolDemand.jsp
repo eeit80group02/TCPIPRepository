@@ -24,6 +24,20 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>createPrimaryProj</title>
 </head>
+<<<<<<< HEAD
+<body>
+<form action="SchoolDemandServlet.do?type=update" method="post">
+預計參與的學生人數:<input type="text" name="participant" value="${bean.participant}">${error.participant}<br>
+活動主題:<input type="text" name="activityTopic" value="${bean.activityTopic}">${error.activityTopic}<br>
+活動地點:<input type="text" name="activityLocation" value="${bean.activityLocation}">${error.activityLocation}<br>
+活動適合對象:<input type="text" name="activitySuitable" value="${bean.activitySuitable}">${error.activitySuitable}<br>
+活動負責人:<input type="text" name="activityHost" value="${bean.activityHost}">${error.activityHost}<br>
+負責人聯絡方式:<input type="text" name="activityContact" value="${bean.activityContact}">${error.activityContact}<br>
+提供需求:住宿<input type="checkbox" name="room" >活動場地<input type="checkbox" name="place">伙食<input type="checkbox" name="food"><br>
+需求內容:<textarea name="content" style="width: 300px;height: 200px">${bean.content}</textarea>${error.content}
+<input type="submit">
+</form>
+=======
 
 
 <body class="pink lighten-5">
@@ -215,6 +229,7 @@
 			
 		})(jQuery)
 </script>
+>>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 </body>
 
 		
