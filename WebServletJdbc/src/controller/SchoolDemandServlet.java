@@ -63,6 +63,9 @@ public class SchoolDemandServlet extends HttpServlet {
 			} else if (type.equals("update")) {
 				System.out.println("update");
 				update(request, response);
+			} else if (type.equals("updateDisplay")) {
+				System.out.println("updateDisplay");
+				updateDisplay(request, response);
 			} else if (type.equals("display")) {
 				System.out.println("display");
 				display(request, response);
@@ -416,7 +419,31 @@ public class SchoolDemandServlet extends HttpServlet {
 		}
 
 	}
-
+	public void updateDisplay(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("----------------------------------更新前顯示----------------------------------");
+		SchoolDemandBean bean =  new SchoolDemandBean();
+		SchoolBean sbean = null;
+		HttpSession session = request.getSession();
+		sbean = (SchoolBean)session.getAttribute("LoginOK");
+		if(sbean==null){
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
+		}
+		bean = (SchoolDemandBean)session.getAttribute("bean");
+		if(bean==null){
+			response.sendRedirect(request.getServletPath());
+			return;
+		}
+		int schoolDemandId = bean.getSchoolDemandId();
+		bean.setSchoolDemandId(schoolDemandId);
+		bean = service.updateDisplay(bean);
+		if(bean!=null){
+			System.out.println("查詢成功");
+		}else{
+			System.out.println("查詢失敗");
+		}
+		
+	}
 	public void mdisplays(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("----------------------------------會員顯示待洽談----------------------------------");
 		List<SchoolDemandBean> result = null;

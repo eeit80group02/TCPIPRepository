@@ -62,6 +62,16 @@ public class SchoolDemandService {
 			result.setOfferBean(temp);
 		}
 		return result;
+	}
+	public SchoolDemandBean updateDisplay(SchoolDemandBean bean){
+		SchoolDemandBean result = null;
+		OffersBean temp = null;
+		if(bean!=null){
+			temp = offersDao.findByPrimaryKey(bean.getSchoolDemandId());
+			result = schoolDemandDao.findByPrimaryKey(bean.getSchoolDemandId());
+			result.setOfferBean(temp);
+		}
+		return result;
 	}	
 	public List<SchoolDemandBean> mdisplays(){
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
