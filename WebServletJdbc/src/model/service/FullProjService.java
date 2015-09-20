@@ -73,6 +73,7 @@ public class FullProjService
 		{
 			int fullProjId = bean.getFullProjId();
 			result = fullProjDAO.findByPrimaryKey(fullProjId);
+			result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 		}
 		
 		return result;

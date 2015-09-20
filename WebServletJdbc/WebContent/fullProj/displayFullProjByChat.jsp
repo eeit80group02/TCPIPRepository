@@ -16,45 +16,46 @@
 			學校編號:${fullProj.schoolId}<br>
 
 			標題 ${fullProj.title}<br>
-			<input type="text" value="${fullProj.title}"><hr>
 			
 			摘要${fullProj.projAbstract}<br>
-			<input type="text" value="${fullProj.projAbstract}"><hr>
 			
 			內容${fullProj.content}<br>
-			<input type="text" value="${fullProj.content}"><hr>
 			
 			地點${fullProj.location}<br>
-			<input type="text" value="${fullProj.location}"><hr>
 			
 			時間${fullProj.activityStartTime}~${fullProj.activityEndTime}<br>
-			<fmt:formatDate var="sTime" value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>
-			<fmt:formatDate var="eTime" value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>
-			<input type="text" value="${sTime}"><input type="text" value="${eTime}"><hr>
+			<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>
+			<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>
 			
 			招募人數${fullProj.estMember}<br>
-			<input type="text" value="${fullProj.estMember}"><hr>
 			
 			預算${fullProj.budget}<br>
-			<input type="text" value="${fullProj.budget}"><hr>
 			成員架構${fullProj.orgArchitecture}<br>
-			<input type="text" value="${fullProj.orgArchitecture}"><hr>
 			
-			<form action=""	method="post">
-				<input type="hidden" value="${fullProj.fullProjId}">
-			
-			</form>
-			<form action="/fullProj.do" method="post">
-				<input type="hidden" name="type" value="displayUpdateForm">
+			<!-- 導向修改頁面，並且把這頁資料傳送過去 -->
+			<form action="<c:url value="/fullProj/updateFullProjForm.jsp" />" method="post" accept-charset="UTF-8">
+				<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+				<input type="hidden" name="memberId" value="${fullProj.memberId}">
+				<input type="hidden" name="schoolId" value="${fullProj.schoolId}">
+				<input type="hidden" name="title" value="${fullProj.title}">
+				<input type="hidden" name="projAbstract" value="${fullProj.projAbstract}">
+				<input type="hidden" name="content" value="${fullProj.content}">
+				<input type="hidden" name="location" value="${fullProj.location}">
+				<input type="hidden" name="activityStartTime" value="<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
+				<input type="hidden" name="activityEndTime" value="<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
+				<input type="hidden" name="estMember" value="${fullProj.estMember}">
+				<input type="hidden" name="budget" value="${fullProj.budget}">
+				<input type="hidden" name="orgArchitecture" value="${fullProj.orgArchitecture}">
+				<input type="hidden" name="base64String" value="${fullProj.base64String}">
 				<input type="submit" value="補齊完整計畫">
 			</form>
 			
-			<form action="/fullProj.do" method="post">
+			<form action="<c:url value="/fullProj.do" />" method="post">
 				<input type="hidden" name="type" value="schoolConfirm">
 				<input type="submit" value="學校同意">
 			</form>
 			
-			<form action="/fullProj.do" method="post">
+			<form action="<c:url value="/fullProj.do" />" method="post">
 				<input type="hidden" name="type" value="memberConfirm">
 				<input type="submit" value="完整計畫發布">
 			</form>
