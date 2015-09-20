@@ -19,7 +19,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">郭文豪${LoginOK.lastName}${LoginOK.firstName}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">會員 ${LoginOK.lastName}${LoginOK.firstName}</h3>
 	</div>	
 
 <main>

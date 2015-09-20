@@ -81,31 +81,31 @@ public class ModifyMemberServlet extends HttpServlet {
 				if (p.getContentType() == null) {
 					if (fldName.equals("password")) {
 						passwordStr = value;
-						 System.out.println(passwordStr);
+//						 System.out.println(passwordStr);
 					} else if (fldName.equals("check")) {
 						checkStr = value;
-						 System.out.println(checkStr);
+//						 System.out.println(checkStr);
 					} else if (fldName.equals("lastName")) {
 						lastName = value;
-						 System.out.println(lastName);
+//						 System.out.println(lastName);
 					} else if (fldName.equals("firstName")) {
 						firstName = value;
-						 System.out.println(firstName);
+//						 System.out.println(firstName);
 					} else if (fldName.equals("phone")) {
 						cellPhone = value;
-						 System.out.println(phone);
+//						 System.out.println(phone);
 					} else if (fldName.equals("cellPhone")) {
 						cellPhone = value;
-						 System.out.println(cellPhone);
+//						 System.out.println(cellPhone);
 					} else if (fldName.equals("birthday")) {
 						birthdayStr = value;
-						 System.out.println(birthdayStr);
+//						 System.out.println(birthdayStr);
 					} else if (fldName.equals("email")) {
 						email = value;
-						 System.out.println(email);
+//						 System.out.println(email);
 					} else if (fldName.equals("address")) {
 						address = value;
-						 System.out.println(address);
+//						 System.out.println(address);
 					}
 				} else {
 					pictureName = GlobalService.getFileName(p); // 此為圖片檔的檔名
@@ -214,7 +214,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		if (result == 1){
 			System.out.println("資料修改成功");
 			//資料修改成功導向
-			response.sendRedirect("../register/template.jsp");
+			response.sendRedirect("../personal/template.jsp");
 			return;
 		} else {
 			//該會員修改資料至資料庫失敗
@@ -225,7 +225,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		if (!errMsg.isEmpty()) {
 			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
 			RequestDispatcher rd = request
-					.getRequestDispatcher("register.jsp");
+					.getRequestDispatcher("personal.jsp");
 			rd.forward(request, response);
 			return;
 		}
