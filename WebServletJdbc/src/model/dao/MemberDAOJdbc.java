@@ -120,7 +120,6 @@ public class MemberDAOJdbc implements MemberDAO
 	public MemberBean update(MemberBean bean)
 	{
 		MemberBean result = null;
-
 		if(bean != null)
 		{
 			try(Connection conn = datasource.getConnection();
@@ -161,12 +160,13 @@ public class MemberDAOJdbc implements MemberDAO
 				pstmt.setBytes(16,bean.getPassword());
 				pstmt.setString(17,bean.getAccountStatus());
 				pstmt.setInt(18,bean.getMemberId());
-
+				
 				int num = pstmt.executeUpdate();
 				if(num == 1)
 				{
 					result = select(bean.getMemberId());
 				}
+				System.out.println(num);
 			}
 			catch(SQLException e)
 			{
