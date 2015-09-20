@@ -21,7 +21,7 @@
 				<th>${bean.title}</th>
 				
 				<c:url value="/fullProj.do" var="path">
-					<c:param name="type" value="displayUpdate" />
+					<c:param name="type" value="displayFullProjByChat" />
 					<c:param name="fullProjId" value="${bean.fullProjId}" />
 				</c:url>
 				<th><a href="${path}">洽談</a></th>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.MemberBean;
 import model.OffersBean;
 import model.SchoolBean;
 import model.SchoolDemandBean;
@@ -52,7 +53,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			if (type.equals("create")) {
 				// 因為表單必須 post
 				if (request.getMethod().equals("POST")) {
-					System.out.println("creat");
+					System.out.println("create");
 					creat(request, response);
 				} else {
 					errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.70(必須post))");
@@ -86,22 +87,23 @@ public class SchoolDemandServlet extends HttpServlet {
 		}
 	}
 
-	public void creat(HttpServletRequest request,
-		HttpServletResponse response) throws ServletException, IOException {
+	public void creat(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> errorMsg = new HashMap<String, String>();
+		Map<String, String> data = new HashMap<String, String>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		OffersBean oBean = new OffersBean();
 		HttpSession session = request.getSession();
-		request.setAttribute("error", errorMsg);
 		System.out.println("----------------------------------Star CreatSchoolDemand----------------------------------");
-
+		session.removeAttribute("error");
+		session.removeAttribute("data");
 		//取得Session
 		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
-		Integer schoolId = sBean.getSchoolId();
-		if(schoolId ==null){
+		if(sBean == null){
 			//導入登入頁面
 			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
+		Integer schoolId = sBean.getSchoolId();	
 		//取值
 		String participant = request.getParameter("participant");
 		String activityTopic = request.getParameter("activityTopic");
@@ -113,6 +115,38 @@ public class SchoolDemandServlet extends HttpServlet {
 		String room = request.getParameter("room");
 		String place = request.getParameter("place");
 		String food = request.getParameter("food");
+		
+		data.put("participant", participant);
+		data.put("activityTopic", activityTopic);
+		data.put("activityLocation", activityLocation);
+		data.put("activitySuitable", activitySuitable);
+		data.put("activityHost", activityHost);
+		data.put("activityContact", activityContact);
+		data.put("content", content);
+		
+		if(room !=null){
+			if(room.equals("on")){
+				room = "true";
+				data.put("room", room);
+			}
+		}
+		data.put("room", room);
+		if(place !=null){
+			if(place.equals("on")){
+				place = "true";
+				data.put("place", place);
+			}
+		}
+		data.put("place", place);
+		
+		if(food !=null){
+			if(food.equals("on")){
+				food = "true";
+				data.put("food", food);
+			}
+		}
+		data.put("food", food);
+		
 		// 檢查使用者是否輸入
 		if (participant == null || participant.trim().length() == 0) {
 			errorMsg.put("participant", "必填");
@@ -135,36 +169,49 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (content == null || content.trim().length() == 0) {
 			errorMsg.put("content", "必填");
 		}
-
+		
 		// 資料轉換格式判斷
 		int people = 0;
-		try {
-			people = Integer.parseInt(participant);
-			if (people <= 0) {
-				errorMsg.put("participant", "人數要大於零");
+		if(!errorMsg.containsKey("participant")){
+			try {
+				people = Integer.parseInt(participant);
+				if (people <= 0) {
+					errorMsg.put("participant", "人數要大於零");
+				}
+			} catch (Exception e) {
+				errorMsg.put("participant", "資料有誤");
 			}
-		} catch (Exception e) {
-			errorMsg.put("participant", "資料有誤");
 		}
-		if (activityTopic.length() > 30) {
-			errorMsg.put("activityTopic", "輸入長度有問題");
+		if(!errorMsg.containsKey("activityTopic")){
+			if (activityTopic.length() > 30) {
+				errorMsg.put("activityTopic", "輸入長度有問題");
+			}
 		}
-		if (activityLocation.length() > 30) {
-			errorMsg.put("activityLocation", "輸入長度有問題");
+		if(!errorMsg.containsKey("activityLocation")){
+			if (activityLocation.length() > 30) {
+				errorMsg.put("activityLocation", "輸入長度有問題");
+			}
 		}
-		if (activitySuitable.length() > 30) {
-			errorMsg.put("activitySuitable", "輸入長度有問題");
+		if(!errorMsg.containsKey("activitySuitable")){
+			if (activitySuitable.length() > 30) {
+				errorMsg.put("activitySuitable", "輸入長度有問題");
+			}
 		}
-		if (activityHost.length() > 30) {
-			errorMsg.put("activityHost", "輸入長度有問題");
+		if(!errorMsg.containsKey("activityHost")){
+			if (activityHost.length() > 30) {
+				errorMsg.put("activityHost", "輸入長度有問題");
+			}
 		}
-		if (activityContact.length() > 20) {
-			errorMsg.put("activityContact", "輸入長度有問題");
+		if(!errorMsg.containsKey("activityContact")){
+			if (activityContact.length() > 20) {
+				errorMsg.put("activityContact", "輸入長度有問題");
+			}
 		}
-		if (content.length() > 20) {
-			errorMsg.put("content", "輸入長度有問題");
+		if(!errorMsg.containsKey("content")){
+			if (content.length() > 20) {
+				errorMsg.put("content", "輸入長度有問題");
+			}
 		}
-
 		boolean checkRoom = false;
 		if (room == null) {
 			checkRoom = false;
@@ -183,12 +230,15 @@ public class SchoolDemandServlet extends HttpServlet {
 		} else if (food.equals("on")) {
 			checkFood = true;
 		}
-
 		if (!errorMsg.isEmpty()) {
-			request.getRequestDispatcher(request.getContextPath() + "/schoolDemand/CreatSchoolDemand.jsp").forward(request, response);
+			session.setAttribute("error", errorMsg);
+			session.setAttribute("data", data);
+			System.out.println(data);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
 			return;
 		}
-
+		session.removeAttribute("error");
+		session.setAttribute("data", data);
 		// 存值進入Bean
 		oBean.setFood(checkFood);
 		oBean.setPlace(checkPlace);
@@ -210,7 +260,8 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		if (bean != null) {
 			System.out.println("建立成功bean=" + bean);
-			response.sendRedirect("test.jsp");
+			session.setAttribute("Demand", bean);
+			response.sendRedirect("SchoolDemandServlet.do?type=display");
 			return;
 		} else {
 			errorMsg.put("Error", "計畫需求建立失敗");
@@ -359,7 +410,7 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		if (bean != null) {
 			System.out.println("更新成功bean=" + bean);
-			response.sendRedirect("test.jsp");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=display");
 		} else {
 			System.out.println("更新失敗");
 		}
@@ -370,18 +421,19 @@ public class SchoolDemandServlet extends HttpServlet {
 		System.out.println("----------------------------------會員顯示待洽談----------------------------------");
 		List<SchoolDemandBean> result = null;
 		HttpSession session = request.getSession();
-		String memberId = (String)session.getAttribute("memberId");
-		if(memberId == null || memberId.trim().length() == 0 ){
-			System.out.println("導向燈入頁面");
-			response.sendRedirect("");
+		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
+		if(mbean!=null){
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
 		result = service.mdisplays();
 		System.out.println(result.size());
-		request.setAttribute("list", result);
+		
 		if (!result.isEmpty()) {
 			System.out.println("成功查詢list=" + result);
-			request.getRequestDispatcher("DisplayAll.jsp").forward(request,response);
+			session.setAttribute("render", result);
+			response.sendRedirect("");
+			
 		} else {
 			System.out.println("查詢失敗   導向登入頁面");
 		}
@@ -389,46 +441,37 @@ public class SchoolDemandServlet extends HttpServlet {
 
 	public void display(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		System.out.println("----------------------------------查詢單筆----------------------------------");
-		
-		Map<String, String> errorMsg = new HashMap<String, String>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		HttpSession session = request.getSession();
-		
+		String sId = "";
+		int schoolDemandId = 0;
 		// 取值
-		String schoolId = (String) session.getAttribute("schoolId");
-		// String schoolDemandId = request.getParameter("schoolDemandId");
-		String schoolDemandId = "17";
-		// 格式轉換判斷
-		if (schoolDemandId == null || schoolDemandId.trim().length() == 0) {
-			errorMsg.put("", "錯誤");
-		}
-		int sDId = 0;
-		try {
-			sDId = Integer.parseInt(schoolDemandId);
-		} catch (Exception e) {
-			errorMsg.put("", "錯誤");
-		}
-		int sId = 0;
-		try {
-			sId = Integer.parseInt(schoolId);
-		} catch (Exception e) {
-			errorMsg.put("", "錯誤");
-		}
-		if (!errorMsg.isEmpty()) {
-			request.getRequestDispatcher("test.jsp").forward(request, response);
+		SchoolBean sbean = (SchoolBean) session.getAttribute("LoginOK");
+		if(sbean == null){
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
+		}
+		int schoolId = sbean.getSchoolId();
+		bean = (SchoolDemandBean) session.getAttribute("Demand");
+		session.removeAttribute("Demand");
+		
+		if(bean==null){
+			sId = request.getParameter("schoolDemandId");
+			schoolDemandId = Integer.parseInt(sId);
+		}else{
+			schoolDemandId = bean.getSchoolDemandId();
 		}
 
 		// 存入Bean
-		bean.setSchoolDemandId(sDId);
-		bean.setSchoolId(sId);
+		bean.setSchoolDemandId(schoolDemandId);
+		bean.setSchoolId(schoolId);
 
 		// 呼叫Service方法
 		bean = service.display(bean);
 		session.setAttribute("bean", bean);
 		if (bean != null) {
 			System.out.println("成功查詢bean=" + bean);
-			response.sendRedirect("UpdataSchoolDemand.jsp");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/Display.jsp");
 		} else {
 			System.out.println("查詢失敗");
 		}
@@ -439,24 +482,20 @@ public class SchoolDemandServlet extends HttpServlet {
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		HttpSession session = request.getSession();
-		String schoolId = (String) session.getAttribute("schoolId");
-		if(schoolId ==null || schoolId.trim().length()==0){
-			System.out.println("導入燈入頁面");
-			response.sendRedirect("");
+
+		SchoolBean sbean = (SchoolBean) session.getAttribute("LoginOK");
+		if(sbean == null){
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
-		int sId = 0;
-		try {
-			sId = Integer.parseInt(schoolId);
-		} catch (Exception e) {
-			System.out.println("錯誤");
-		}
-		bean.setSchoolId(sId);
+		int schoolId = sbean.getSchoolId();
+
+		bean.setSchoolId(schoolId);
 		result = service.displays(bean);
 		session.setAttribute("list", result);
 		if (!result.isEmpty()) {
 			System.out.println("成功查詢list=" + result);
-			request.getRequestDispatcher("DisplayAllPersonal.jsp").forward(
+			request.getRequestDispatcher(request.getContextPath()+"/schoolDemand/DisplayAllPersonal.jsp").forward(
 					request, response);
 		} else {
 			System.out.println("查詢失敗");
@@ -515,6 +554,23 @@ public class SchoolDemandServlet extends HttpServlet {
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public void displayPersonalEnd(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		System.out

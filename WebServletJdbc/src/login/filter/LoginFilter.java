@@ -17,13 +17,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(
-		urlPatterns={"/*"},
-			initParams = {
-				@WebInitParam(name = "mustLogin1", value = "/primaryProj/createPrimaryProjForm.jsp"),
-				@WebInitParam(name = "mustLogin2", value = "/fullProj/fullproj.jsp"),
-				@WebInitParam(name = "mustLogin3", value = "/fullProj.do?type=displayAll"),
-		})
+//@WebFilter(
+//		urlPatterns={"/*"},
+//			initParams = {
+//				@WebInitParam(name = "mustLogin1", value = "/primaryProj/createPrimaryProjForm.jsp"),
+//				@WebInitParam(name = "mustLogin2", value = "/primaryProj.do?type=displayPersonal"),
+//				@WebInitParam(name = "mustLogin3", value = "/personal/personal.jsp"),
+//				@WebInitParam(name = "mustLogin4", value = "/personal/displayPersonalPrimaryProj.jsp"),
+//				@WebInitParam(name = "mustLogin5", value = "/fullProj/fullproj.jsp"),
+//				@WebInitParam(name = "mustLogin6", value = "/fullProj.do?type=displayAll"),
+//				@WebInitParam(name = "mustLogin7", value = "/primaryProj/updatePrimaryProjForm.jsp"),
+//				@WebInitParam(name = "mustLogin8", value = "/donation/CheckDonationList.jsp"),
+//		})
 public class LoginFilter implements Filter
 {
 	private FilterConfig fConfig;
@@ -65,6 +70,7 @@ public class LoginFilter implements Filter
 //			System.out.println("servletPath = " + servletPath);
 //			System.out.println("contextPath = " + contextPath);
 //			System.out.println("requestURI = " + requestURI);
+//			System.out.println("queryString: "+queryString);
 			
 			// 檢查登入
 			if(mustLogin())
@@ -118,7 +124,7 @@ public class LoginFilter implements Filter
 	private boolean mustLogin()
 	{
 		boolean login = false;
-		
+
 		for(String sURL : url)
 		{
 			if(servletPath.endsWith(".do"))
@@ -139,12 +145,10 @@ public class LoginFilter implements Filter
 					login = true;
 					break;
 				}
-				else
-				{
-					System.out.println(servletPath + " => 不用登入，就能使用");
-				}
+
 			}
 		}
+		System.out.println(servletPath + " => 不用登入，就能使用");
 		return login;
 	}
 }

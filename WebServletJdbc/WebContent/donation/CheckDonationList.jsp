@@ -30,6 +30,11 @@
 
 </head>
 <body>
+	<!-- 驗證是否為會員 -->
+	<c:if test="${LoginOK.beanName.equals('school') }">
+		<c:redirect url="/error/permission.jsp" />
+	</c:if>
+
 	<center>
 		<div class="navbar navbar-inverse">
 			<ul class="nav navbar-nav" id="headUl">
@@ -272,12 +277,12 @@
 		</center>
 		
 		<!-- 訂單送出 -->
-		<form action='<c:url value="cart.do"/>' method='POST' target='#drop-a-line'>
+		<form action='<c:url value="checkOrder.do?linkto=checkBooking"/>' method='POST' target='#drop-a-line'>
 			<input type='submit' name='fillOrder' value='booking' id='booking'>
 		</form>
 		
 		<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
-			<form action='<c:url value="checkOrder.do"/>' method='POST'>
+			<form action='<c:url value="checkOrder.do?linkto=checkBooking"/>' method='POST'>
 			<script type="text/javascript">
 				(function($) {
 					$("#booking").click(function() {
@@ -298,12 +303,8 @@
 							xhr.open("POST", "cart.do", true);
 							xhr.setRequestHeader("Content-Type",
 									"application/x-www-form-urlencoded")
-							// 假設會員id為5
 							xhr.send("toCart=update&donationId="+"${item.value.donationId}"+"&donateAmount="+donateAmount);
 						}
-// 						$("#page01").removeAttr("class");
-// 						$(":active").removeAttr("class");
-// 						$("#page02").attr("class","active");
 					});
 				}(jQuery));
 			</script>

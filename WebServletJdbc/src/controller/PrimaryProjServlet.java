@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import model.MemberBean;
 import model.PrimaryProjBean;
 import model.service.PrimaryProjService;
 
@@ -120,34 +121,27 @@ public class PrimaryProjServlet extends HttpServlet
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
 		
-		// 接收資料
-		String memberId = request.getParameter("memberId");
+		HttpSession session = request.getSession();
 		
-		// 驗證資料
-		if(memberId == null || memberId.trim().length() == 0)
+		Object object = session.getAttribute("LoginOK");
+		MemberBean memberBean = null;
+		if(object instanceof MemberBean)
 		{
-			errorMsg.put("error","queryString key error");
+			memberBean = (MemberBean)object;
 		}
-		
-		// 進行必要資料轉換
-		int id = 0;
-		try
+		else
 		{
-			id = Integer.parseInt(memberId);
-		}
-		catch(NumberFormatException e)
-		{
-			errorMsg.put("error","queryString value error");
-		}
-		
-		if(!errorMsg.isEmpty())
-		{
-			// QueryString 有誤
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.134)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
-
+		
+		int id = 0;
+		if(memberBean != null)
+		{
+			id = memberBean.getMemberId();
+		}
+		
 		// business logic
 		PrimaryProjBean bean = new PrimaryProjBean();
 		bean.setMemberId(id);
@@ -157,7 +151,7 @@ public class PrimaryProjServlet extends HttpServlet
 		{
 			// 成功導向
 			System.out.println(result);
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("primaryProj",result);
 			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProjByPending.jsp");
 //			request.setAttribute("primaryProj",bean);
@@ -166,7 +160,7 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 		else
 		{
-			errorMsg.put("errorURL","X請勿做作不正當請求(PrimaryProjServlet line.154)");
+			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
 			request.getRequestDispatcher("/error.jsp").forward(request,response);
 			return;
 		}
@@ -180,32 +174,25 @@ public class PrimaryProjServlet extends HttpServlet
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
 		
-		// 接收資料
-		String memberId = request.getParameter("memberId");
+		HttpSession session = request.getSession();
 		
-		// 驗證資料
-		if(memberId == null || memberId.trim().length() == 0)
+		Object object = session.getAttribute("LoginOK");
+		MemberBean memberBean = null;
+		if(object instanceof MemberBean)
 		{
-			errorMsg.put("error","queryString key error");
+			memberBean = (MemberBean)object;
 		}
-		
-		// 進行必要資料轉換
-		int id = 0;
-		try
+		else
 		{
-			id = Integer.parseInt(memberId);
-		}
-		catch(NumberFormatException e)
-		{
-			errorMsg.put("error","queryString value error");
-		}
-		
-		if(!errorMsg.isEmpty())
-		{
-			// QueryString 有誤
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.134)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
+		}
+		
+		int id = 0;
+		if(memberBean != null)
+		{
+			id = memberBean.getMemberId();
 		}
 
 		// business logic
@@ -217,7 +204,7 @@ public class PrimaryProjServlet extends HttpServlet
 		{
 			// 成功導向
 			System.out.println(result);
-			HttpSession session = request.getSession();
+			session = request.getSession();
 			session.setAttribute("primaryProj",result);
 			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProj.jsp");
 //			request.setAttribute("primaryProj",bean);
@@ -462,6 +449,17 @@ public class PrimaryProjServlet extends HttpServlet
 			e.printStackTrace();
 		}
 		
+//		Object object = session.getAttribute("LoginOK");
+//		if(object instanceof MemberBean)
+//		{
+//			MemberBean memberBean = (MemberBean)object;
+//			if(memberBean.getMemberId() != mId)
+//			{
+//				String contextPath = request.getContextPath();
+//				response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+//				return;
+//			}
+//		}
 		java.util.Date sTime = null;
 		try
 		{
@@ -820,7 +818,7 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 		
 		// 如果 <= 0 代表 日期起訖相同 或者 迄比起 早
-		if(GlobalService.compareDate(sTime,eTime) <= 0)
+		if(GlobalService.compareDate(sTime,eTime) < 0)
 		{
 			errorMsg.put("endTime","活動時間(迄) 不能比 活動時間(起)早");
 		}

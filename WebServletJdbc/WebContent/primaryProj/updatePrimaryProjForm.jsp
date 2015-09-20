@@ -28,7 +28,9 @@
 
 
 <body class="light-blue lighten-5">
-
+	<c:if test="${LoginOK.beanName.equals('school') }">
+		<c:redirect url="/error/permission.jsp" />
+	</c:if>
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 	<!-- 頁首 -->

@@ -35,7 +35,7 @@
 	<div class="row  light-blue darken-4 valign-wrapper" id="pagetitle">
 		
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">初步計畫名稱${primaryProj.title}</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${primaryProj.title}</h1>
 	</div>	
 	
 	
@@ -47,7 +47,8 @@
 		<!-- 第一列 -->
 		<div class="row">
 			<div class="col l2 btn yellow lighten-3 black-text offset-l2">
-				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:${primaryProj.memberId}</span>			
+				<fmt:formatNumber var="mid" value="${primaryProj.memberId}" pattern="0000"/>
+				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:${primaryProj.memberBean.lastName}${primaryProj.memberBean.firstName}[No.${mid}]</span>			
 			</div>		
 		</div>
 		<!-- 第二列 -->
@@ -56,6 +57,12 @@
 			<div class="col l8 offset-l2">
 				<!-- 圖跟摘要在同一列 -->
 				<div class="row card-panel hoverable" style="background-color:#FFFCEC;">
+					<!-- 摘要 -->
+					<div class="row">
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white"  style="background-color:#D1F0E5;font-size:2em;font-weight:900;font-family:微軟正黑體">
+							初步計畫摘要
+						</div>
+					</div>					
 					<!-- 摘要 -->
 					<div class="col l8 card-panel hoverable offset-l2" style="background-color:#D1F0E5;font-family:微軟正黑體;font-size:1.2em;font-weight:300;">
 							${primaryProj.projAbstract}
@@ -91,7 +98,7 @@
 									<span class="itemheader">理想地點</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									${primaryProj.idealPlace}							
 									</div>
 								</div>
@@ -108,7 +115,7 @@
 									<span class="itemheader">活動時間</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									<fmt:formatDate var="startTime" value="${primaryProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
 									<fmt:formatDate var="endTime" value="${primaryProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />									
 									${startTime} ~ ${endTime}							
@@ -127,7 +134,7 @@
 									<span class="itemheader">活動預計人數</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									${primaryProj.demandNum}							
 									</div>
 								</div>
@@ -144,7 +151,7 @@
 									<span class="itemheader">活動預算</span>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1">
-									<div>
+									<div class="black-text">
 									${primaryProj.budget}							
 									</div>
 								</div>
@@ -156,7 +163,7 @@
 				</div>
 			</div>
 			<div class="col l2">
-				<c:set var="deadline" value="9000000" />
+				<c:set var="deadline" value="90000000" />
 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 
 				<!-- 	檢查 登入者是否學校 -->
 					<c:if test="${LoginOK.beanName.equals('school')}">

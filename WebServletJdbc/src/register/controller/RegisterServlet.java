@@ -267,7 +267,7 @@ public class RegisterServlet extends HttpServlet {
 				//被推薦次數(insert所需)
 				int recommendCount = 0;
 				//帳號狀態(insert所需)
-				String accountStatus = "待審核";
+				String accountStatus = "待認證";
 				
 				int result = rs.saveMember(account, password, lastName, firstName, idNumber, gender, phone, cellPhone,
 						birthday, email, registerTime, recommendCount, address, picture, pictureName, pictureLength,accountStatus);

@@ -55,6 +55,7 @@ public class RegisterVerificationServlet extends HttpServlet {
 				out.print("<p>您所點選的連結已經失效</p>");
 				out.print("</body>");
 				out.print("</html>");
+				out.close();
 			}
 		}
 	}

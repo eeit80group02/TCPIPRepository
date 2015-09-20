@@ -25,6 +25,7 @@ public class PrimaryProjBean implements Serializable
 	
 	private String base64String;				// 圖片
 	private List<ProcessingProjBean> processingProjBean;	// 存計畫被關聯的 ProcessingProj
+	private MemberBean memberBean;				// 會員詳細資料
 	
 	public PrimaryProjBean()
 	{
@@ -166,6 +167,14 @@ public class PrimaryProjBean implements Serializable
 	public void setProcessingProjBean(List<ProcessingProjBean> processingProjBean)
 	{
 		this.processingProjBean = processingProjBean;
+	}
+	public MemberBean getMemberBean()
+	{
+		return memberBean;
+	}
+	public void setMemberBean(MemberBean memberBean)
+	{
+		this.memberBean = memberBean;
 	}
 	@Override
 	public String toString()

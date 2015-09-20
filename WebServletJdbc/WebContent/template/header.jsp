@@ -37,7 +37,7 @@
 					</c:if>
 	
 					<c:if test="${LoginOK.beanName.equals('school')}">
-						<li><a href="#">提需求</a></li>
+						<li><a href="<c:url value="/schoolDemand\CreatSchoolDemand.jsp" />">提需求</a></li>
 						<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
 					</c:if>
 				</c:if>

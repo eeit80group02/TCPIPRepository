@@ -70,7 +70,9 @@ public class SchoolDemandService {
 		List<SchoolBean> slist = null;
 		list = schoolDemandDao.getAll();
 		olist = offersDao.getAll();
+
 		slist = schoolDao.getAll();
+
 		for(SchoolDemandBean bean : list){
 			for(SchoolBean sbean : slist){
 				if(bean.getSchoolId().equals(sbean.getSchoolId())){
