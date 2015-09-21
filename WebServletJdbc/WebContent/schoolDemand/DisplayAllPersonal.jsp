@@ -41,6 +41,7 @@
 						<li class="collection-header collection-item center-align"
 							style="padding: 0;"><h5 class="teal accent-2"
 								style="margin: 0; display: block; padding: 15px 0 15px 0;">排序</h5></li>
+						<li><a href="<c:url value='SchoolDemandServlet.do?type=displays' />" class="collection-item">查詢全部</a></li>
 						<li><a href="#!" class="collection-item">待洽談</a></li>
 						<li><a href="#!" class="collection-item">待審核</a></li>
 						<li><a href="#!" class="collection-item">需求人數</a></li>
