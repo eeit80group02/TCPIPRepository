@@ -577,6 +577,13 @@
 			});
 			
 			
+			
+			$('.cancelSubMission').on('click',function(){
+				$('.subMission').hide();
+			})
+			
+			
+			
 			//Set dialog change to dataRow
 			$('.popupWindow .missionTitle').on('change',function(){
 				console.log($('.titleLocation').val());
