@@ -570,7 +570,7 @@
 								<div class="subMission" style="display:none">
 									<textarea class="col l8" placeholder="請輸入子任務內容"></textarea> 
 							    	<input type="text" id="subDatepicker" class="validate col l3" readonly>
-							   		<img class="col l1" src="images/memberIcon.png">
+							   		<img class=" col l1" src="images/memberIcon.png">
 							   		<div class="btn waves-effect waves-light #2196f3 blue">新增</div>
 							   		<div class="btn waves-effect waves-light #2196f3 blue">取消</div>
 							   </div>
