@@ -130,7 +130,7 @@ public class SchoolDemandService {
 		olist.clear();
 		return result;
 	}
-	public List<SchoolDemandBean> displayPersonalRender(SchoolDemandBean bean){
+	public List<SchoolDemandBean> displayPersonalRender(SchoolBean bean){
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		List<SchoolDemandBean> list = null;
 		List<OffersBean> olist = null;
@@ -138,13 +138,11 @@ public class SchoolDemandService {
 		olist = offersDao.getAll();
 		for(SchoolDemandBean temp : list){
 			for(OffersBean obean : olist){
-				if(temp.getDemandStatus().equals("待洽談") && bean.getSchoolId().equals(temp.getSchoolId()) && temp.getSchoolDemandId().equals(obean.getSchoolDemandId())){		
+				if(bean.getSchoolId().equals(temp.getSchoolId()) && temp.getDemandStatus().equals("待洽談") && temp.getSchoolDemandId().equals(obean.getSchoolDemandId())){		
 					temp.setOfferBean(obean);
 					result.add(temp);
 				}
 			}
-		}for(SchoolDemandBean temp : result){
-			list.remove(temp);
 		}
 		list.clear();
 		olist.clear();

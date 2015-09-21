@@ -536,8 +536,8 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		// 呼叫Service方法
 		bean = service.display(bean);
-		session.setAttribute("Demand", bean);
 		if (bean != null) {
+			session.setAttribute("Demand", bean);
 			System.out.println("成功查詢bean=" + bean);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/Display.jsp");
 		} else {
@@ -550,9 +550,8 @@ public class SchoolDemandServlet extends HttpServlet {
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		HttpSession session = request.getSession();
-
 		session.removeAttribute("Demand");
-
+		session.removeAttribute("list");
 		SchoolBean sbean = (SchoolBean) session.getAttribute("LoginOK");
 		if(sbean == null){
 			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
@@ -562,8 +561,8 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		bean.setSchoolId(schoolId);
 		result = service.displays(bean);
-		session.setAttribute("list", result);
 		if (!result.isEmpty()) {
+			session.setAttribute("list", result);
 			System.out.println("成功查詢list=" + result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAllPersonal.jsp");
 		} else {
@@ -572,52 +571,47 @@ public class SchoolDemandServlet extends HttpServlet {
 	}
 
 	public void displayPersonalRender(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		System.out
-				.println("----------------------------------Star displayPersonalRender----------------------------------");
+		HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("----------------------------------Star displayPersonalRender----------------------------------");
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
-		SchoolDemandBean bean = new SchoolDemandBean();
+		SchoolBean bean = null;
 		HttpSession session = request.getSession();
-		String schoolId = (String) session.getAttribute("schoolId");
-		int sId = 0;
-		try {
-			sId = Integer.parseInt(schoolId);
-		} catch (Exception e) {
-			System.out.println("錯誤");
+		session.removeAttribute("list");
+		bean = (SchoolBean)session.getAttribute("LoginOK");
+		if(bean == null){
+			response.sendRedirect("login.jsp");
 		}
-		bean.setSchoolId(sId);
 		result = service.displayPersonalRender(bean);
 		request.setAttribute("list", result);
+		System.out.println(result.size());
 		if (!result.isEmpty()) {
+			session.setAttribute("list", result);
 			System.out.println("成功查詢list=" + result);
-			request.getRequestDispatcher("DisplayPersonalRender.jsp").forward(
-					request, response);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalRender.jsp");
 		} else {
 			System.out.println("查詢失敗");
 		}
 	}
 
-	public void displayPersonalUnrender(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		System.out
-				.println("----------------------------------Star displayPersonalUnrender----------------------------------");
+	public void displayPersonalUnrender(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("----------------------------------Star displayPersonalUnrender----------------------------------");
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
+		SchoolBean sbean= null;
 		HttpSession session = request.getSession();
-		String schoolId = (String) session.getAttribute("schoolId");
-		int sId = 0;
-		try {
-			sId = Integer.parseInt(schoolId);
-		} catch (Exception e) {
-			System.out.println("錯誤");
+		session.removeAttribute("list");
+		sbean = (SchoolBean)session.getAttribute("LoginOK");
+		if(sbean == null){
+			response.sendRedirect("login.jsp");
+			return;
 		}
-		bean.setSchoolId(sId);
+		int schoolId = sbean.getSchoolId();
+		bean.setSchoolId(schoolId);
 		result = service.displayPersonalUnrender(bean);
-		request.setAttribute("list", result);
 		if (!result.isEmpty()) {
+			session.setAttribute("list", result);
 			System.out.println("成功查詢list=" + result);
-			request.getRequestDispatcher("DisplayPersonalUnrender.jsp")
-					.forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
 		} else {
 			System.out.println("查詢失敗");
 		}
