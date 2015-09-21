@@ -47,7 +47,7 @@
 		<nav>
 			<div class="nav-wrapper">
 				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
 				</ul>
 
 				<ul id="nav-mobile2" class="">
@@ -55,7 +55,7 @@
 				</ul>
 				<ul id="nav-mobile3" class="right hide-on-med-and-down">
 					<li>
-						<form action="#">
+						<form action="<c:url value="/donation/demand.do?type=FindGoods" />">
 							<div class="input-field">
 								<input id="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
 							</div>

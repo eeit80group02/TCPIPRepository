@@ -42,6 +42,7 @@ public class DonationCartServlet extends HttpServlet {
 		// 1.接收資料
 		String toCart = request.getParameter("toCart");
 		String dialog = request.getParameter("dialog");
+		String returnJson = request.getParameter("returnJson");
 
 		if (toCart == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("ExpressDelivery.jsp");
@@ -66,12 +67,18 @@ public class DonationCartServlet extends HttpServlet {
 			boolean b = dCart.insertDonationToCart(donationBeanDuplicate);
 			System.out.println("新增至購物車: " + b);
 			
+			String idString = dCart.getDonationIdString();
+			
 			// 4.挑選適當畫面
 			if (dialog != null) {
 				RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
 				rd.forward(request, response);
 				return;
 				
+			} else if("true".equals(returnJson)) {
+				PrintWriter out = response.getWriter();
+				out.print(idString);
+				return;
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("demand.do?type=FindGoods");
 				rd.forward(request, response);
@@ -105,10 +112,20 @@ public class DonationCartServlet extends HttpServlet {
 			boolean b = dCart.deleteDonation(donationId);
 			System.out.println("刪除購物車欄位: " + b);
 			
+			String idString = dCart.getDonationIdString();
+			
 			// 4.挑選適當畫面
-			RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
-			rd.forward(request, response);
-			return;
+			if ("true".equals(returnJson)) {
+				PrintWriter out = response.getWriter();
+				out.print(idString);
+				return;
+				
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
+				rd.forward(request, response);
+				return;
+			}
+			
 		} else if (toCart.equals("deleteAll")) {
 			// 清空 cart
 			boolean b = dCart.remove();
