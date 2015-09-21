@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>displayFullProj</title>
 <link type="text/css" rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
@@ -196,6 +196,12 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- 任務板連結 -->
+			<c:url var="missionBoard" value="/draganddrop.jsp">
+				<c:param name="fullProjId" value="${fullProj.fullProjId}" />
+			</c:url>
+			<a href="${missionBoard}">任務板</a>
 			
 			<!-- 加入活動的按鈕 -->
 			  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">

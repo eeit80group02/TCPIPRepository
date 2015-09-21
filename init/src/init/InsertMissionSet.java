@@ -40,7 +40,7 @@ public class InsertMissionSet {
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setInt(1, 1);
-			pstmt.setString(2, "活動組");
+			pstmt.setString(2, "美宣組");
 			pstmt.setInt(3, 3);
 
 			pstmt.executeUpdate();
@@ -52,7 +52,7 @@ public class InsertMissionSet {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
 				pstmt.setInt(1,1);   						
-				pstmt.setString(2,"美宣組");				
+				pstmt.setString(2,"活動組");				
 				pstmt.setInt(3,4);					
 				
 				pstmt.executeUpdate();
