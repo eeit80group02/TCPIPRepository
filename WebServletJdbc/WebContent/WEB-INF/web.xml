@@ -7,11 +7,9 @@
     <res-auth>Container</res-auth>
     <res-sharing-scope>Shareable</res-sharing-scope>
   </resource-ref>
-  
   <session-config>
-  	<session-timeout>30</session-timeout>
+    <session-timeout>30</session-timeout>
   </session-config>
-
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -80,5 +78,13 @@
   <servlet-mapping>
     <servlet-name>DonationSearchServlet</servlet-name>
     <url-pattern>/donation/search.do</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>DonationJsonSimpleDemo</servlet-name>
+    <servlet-class>controller.DonationJsonSimpleDemo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonationJsonSimpleDemo</servlet-name>
+    <url-pattern>/donation/jsimple.do</url-pattern>
   </servlet-mapping>
 </web-app>
