@@ -7,9 +7,14 @@ public class init
 	{
 		InsertMember.start();
 		InsertSchool.start();
+		InsertSchoolDemandId.start();
 		InsertPrimaryProj.start();
 		InsertProcessingProj.start();
 		InsertFullProj.start();
+		InsertParticipator.start();
+		InsertMissionBoard.start();
+		InsertMissionSet.start();
+		InsertMission.start();
 		System.out.println("資料全部已新增");
 	}
 }
