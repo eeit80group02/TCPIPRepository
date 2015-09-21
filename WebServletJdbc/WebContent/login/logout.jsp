@@ -26,6 +26,10 @@
 
 	<!-- 內容 -->
 	<main>
+		<div class="row" id="mainboard">
+		
+		
+		</div>
 		你好，感謝你的使用 已經登出
 
 		<a href="${pageContext.request.contextPath}/index.jsp">回首頁</a>
@@ -48,6 +52,8 @@
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			//mainboard最小高度
+			$("#mainboard").css("min-height","100vh");
 			//footer中連結的文字大小
 			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
