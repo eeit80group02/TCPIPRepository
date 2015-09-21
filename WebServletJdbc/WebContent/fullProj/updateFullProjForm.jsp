@@ -43,16 +43,6 @@
 <!-- 主要版面 -->
 <main>
 	
-<!-- 	form   [fullProj.do]  id=fullform -->
-<!-- 	計畫封面  id=picture,name=imgFile -->
-<!-- 	計畫名稱  id=title,name=title -->
-<!-- 	理想地點  id=location,name=location -->
-<!-- 	活動時間  id=starttime,name=starttime -->
-<!-- 		   id=endtime,name=endtime -->
-<!-- 	預計人數  id=demandNum,name=demandNum -->
-<!-- 	活動預算  id=budget,name=budget -->
-<!-- 	活動摘要  id=projAbstract,name=projAbstract -->
-<!-- 	活動內容  id=content,name=content -->
 
 	<div class="row">
 		
@@ -66,22 +56,22 @@
 							<!-- 計畫編號 -->
 							<div class="row">
 								<div class="col l8">
-									<div class="forinput">計畫編號:${param.fullProjId}</div>
-									<input type="hidden" name="fullProjId" value="${param.fullProjId}">
+									<div class="forinput">計畫編號:</div>
+									<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
 								</div>
 							</div>
 							<!-- 會員編號 -->
 							<div class="row">
 								<div class="col l8">
-									<div class="forinput">會員編號:${param.memberId}</div>
-									<input type="hidden" name="memberId" value="${param.memberId}">
+									<div class="forinput">會員編號:</div>
+									<input type="hidden" name="memberId" value="${fullProj.memberId}">
 								</div>
 							</div>						
 							<!-- 學校編號 -->
 							<div class="row">
 								<div class="col l8">
-									<div class="forinput">學校編號:${param.schoolId}</div>
-									<input type="hidden" name="schoolId" value="${param.schoolId}">
+									<div class="forinput">學校編號:</div>
+									<input type="hidden" name="schoolId" value="${fullProj.schoolId}">
 								</div>
 							</div>						
 						</div>				
@@ -105,7 +95,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫名稱</div>
-								<input id="title" type="text" name="title"  value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="title" type="text" name="title"  value="${fullProj.title}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.title}</span>
@@ -117,7 +107,7 @@
 						<div class="row">
 							<div class="col l4">
 									<div id="forlocation" class="forinput">活動地點</div>
-									<input class="center-align forvalue" id="location" type="text"  value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;" required>	
+									<input class="center-align forvalue" id="location" type="text"  value="${fullProj.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;" required>	
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.location}</span>
@@ -129,14 +119,14 @@
 						<div class="input-field row">
 							<div class="col l4">
 								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">活動開始時間</span></div>
-								<input type="date" name="activityStartTime" id="activityStartTime" value="${param.activityStartTime}" required />
+								<input type="date" name="activityStartTime" id="activityStartTime" value="${fullProj.activityStartTime}" required />
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.activityStartTime}</span>
 							</div>								
 							<div class="col l4">
 								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">活動結束時間</span></div>
-								<input type="date" name="activityEndTime" id="activityEndTime" value="${param.activityEndTime}" required />
+								<input type="date" name="activityEndTime" id="activityEndTime" value="${fullProj.activityEndTime}" required />
 							</div>	
 							<div class="col l2">
 								<span class="error">${error.activityEndTime}</span>
@@ -149,7 +139,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">招募人數</div>
-								<input id="estMember" type="number" name="estMember"  value="${param.estMember}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="estMember" type="number" name="estMember"  value="${fullProj.estMember}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.estMember}</span>
@@ -162,7 +152,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">活動預算</div>
-								<input id="budget" type="number" name="budget"  value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="budget" type="number" name="budget"  value="${fullProj.budget}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.budget}</span>
@@ -175,7 +165,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">成員架構<span style="font-size:0.8em;font-weight:300;"></span></div>
-								<input id="orgArchitecture" name="orgArchitecture" type="text"  value="${param.orgArchitecture}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="orgArchitecture" name="orgArchitecture" type="text"  value="${fullProj.orgArchitecture}" style="font-size:1.2em;color:black;font-weight:600;" required>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.orgArchitecture}</span>
@@ -188,7 +178,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;" required>${param.projAbstract}</textarea>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;" required>${fullProj.projAbstract}</textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -199,7 +189,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
-								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;" required>${param.content}</textarea>
+								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;" required>${fullProj.content}</textarea>
 							</div>	
 							<div class="col l4">	
 								<span class="error">${error.content}</span>
@@ -260,7 +250,7 @@
 			})
 			
 			//datepicker初始化(活動時間)
-		   var $picker1 =  $('#starttime').pickadate({
+		   var $picker1 =  $('#activityStartTime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 10,
 			   format: 'yyyy-mm-dd',
@@ -271,7 +261,7 @@
 			   close:"確定"
 		    });
 		   
-		   var $picker2 = $('#endtime').pickadate({
+		   var $picker2 = $('#activityEndTime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 3,
 			   format: 'yyyy-mm-dd',

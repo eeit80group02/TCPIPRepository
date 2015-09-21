@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,8 +10,16 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
+	
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<script
+	src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 <link href="css/multiple-select.css" rel="stylesheet"/>
 
 <style type="text/css">
@@ -61,263 +68,6 @@
 
 </head>
 <body>
-	<!-- 頁首 -->
-	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
-	<!-- 頁首 -->
-	
-	
-	<!-- 主要工作列 -->
-	
-	<div class="row black">
-		<div class="row center-align white-text" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">
-				任務板
-		</div>
-	</div>
-
-
-		<!-- 垃圾桶 -->
-		<div class="fixed-action-btn tooltipped"  data-position="right" data-delay="50" data-tooltip="把小任務拖過來給我吧！" style="top: 55px; left: 24px;height:100px; width:100px;">
-			<div id="trash-can">
-				<img src="images/trash_can.png" style="height:100px; width:100px;">
-			</div>
-		</div>
-
-
-		<!-- 固定的產生、刪除按鈕 -->
-		<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-		    <a class="modal-trigger btn-floating btn-large red tooltipped"  data-position="left" data-delay="50" data-tooltip="點我來新增任務集"  id="hahaha" href="#modal5455">
-		      <i class="large material-icons">note_add</i>
-		    </a>
-		</div>
-
-
-	<div>
-		<div>
-			<ul class="nested_with_switc #81d4fa light-blue lighten-3">
-				<!-- Mission Board here!! -->
-			</ul>
-		</div>
-
-	</div>
-	
-	
-	<div class="popupWindow">
-		<div class="row">
-			<div class="input-field">
-				<input type="text" class="missionTitle validate">
-				<input type="hidden" class="titleLocation" value="">
-			</div>
-		</div>
-		<div class="row">
-			<div class="col l6">
-				<div id="commit" class="btn"><h6>完成</h6></div>
-			</div>
-			<div class="col l6">
-				<div id="delete" class="btn"><h6>刪除</h6></div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="popupParticipatorWindow">
-		<ul style="list-style:url('images/memberIcon.png') none inside;">
-		</ul>
-	</div>
-	
-	
-	<div class="dialog">
-				<div class="row" style="border:1px dotted gray;">
-					<div class="input-field col l1">
-						<input type="checkbox" class="missionStatus filled-in" id="filled-in-box" >
-      					<label for="filled-in-box"></label>
-      				</div>
-					<div class="input-field col l11">
-						<input type="text" class="missionName validate" placeholder="任務名稱..." >
-					</div>
-				</div>
-				<div class="row" style="border:1px dotted gray;"> 
-					<div class="col l4">
-						<label for="missionExecutor">執行者 </label>
-						<ul style="list-style:url('images/memberIcon.png') none inside;">
-							<li class="missionExecutor" style="cursor:pointer"></li>
-						</ul>
-					</div>
-					<div class="col l4">
-						<label for="datepicker">截止日期 </label>
-						<input type="text" id="datepicker" class="missionDate validate" readonly>
-					</div>
-					<div class="col l4">
-						<label for="missionPriority">優先次序</label>
-						<select class="missionPriority browser-default" placeholder="">
-							<option value="普通">普通</option>
-							<option value="緊急">緊急</option>
-							<option value="非常緊急">非常緊急</option>
-						</select>
-					</div>
-				</div>
-				<div class="row" style="border:1px dotted gray;">
-					<div class="col l12">
-						<label for="missionParticipator">參與者 </label>
-						<div class="missionParticipator">
-							<ul class="col l12" style="column-count:4;column-gap:0;">
-								<div class="addParticipator btn-floating btn #2196f3 blue"><i class="material-icons">add</i></div>
-							</ul>
-						</div>
-					</div>
-				</div>
-		<input type="hidden" class="dataRowLocation" value="">
-	</div>
-	
-
-	
-  <div id="modal5455" class="modal bottom-sheet">
-    <div class="modal-content">
-	    <div class="row">
-	      	<h4 style="display:inline-block;" class="col l4 right-align">任務板名稱：</h4>
-		    <div class="col l6">
-				<input class="black-text" id="nameTitle" type="text" style="font-size:1.5em;">
-			</div>
-		</div>	
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close btn addBoard  
-      	red accent-1 black-text" style="font-size:2em;font-family:微軟正黑體;font-weight:600">
-      	新增任務集
-      </a>
-    </div>
-  </div>
-  
-  
-  
-	<!-- 頁尾 -->
-	<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
-	<!-- 頁尾 -->
-
-<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<script type="text/javascript"
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-<script
-	src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
-
-	<script type="text/javascript">
-		 $(function(){
-			 //註冊新增任務集事件
-			 $("#hahaha").leanModal();
-			 
-			 //顯示隱藏的垃圾桶
-			 $("#showcan").on("click",function(){
-				 
-			 })
-		 })
-	</script>
-	
-	<script type="text/javascript">
-		//Set checkbox status, define add line-through to missionTitle or not
-		$('.dialog .missionStatus').on('click',function() {
-			if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
-				$('.dialog .missionName').removeClass('disable');
-				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
-				$(event.target).prop('checked',false);
-				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
-			} else {
-				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
-				$('.dialog .missionName').addClass('disable');
-				$(event.target).prop('checked',true);
-				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
-			}
-		});
-	</script>
-	
-	
-	<script type="text/javascript">
-		//JQuery datepicker
-		var inputDate = $("#datepicker");
-		var changeYearButtons = function() {
-		setTimeout(function() {
-	        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
-	        var prevYrBtn = $('<button>前年</button>');
-	        prevYrBtn.bind("click", function() {
-	            $.datepicker._adjustDate(inputDate, -1, 'Y');
-	        });
-	        var nextYrBtn = $('<button>次年</button>');
-	        nextYrBtn.bind("click", function() {
-	            $.datepicker._adjustDate(inputDate, +1, 'Y');
-	        });
-	        prevYrBtn.appendTo(widgetHeader);
-	        nextYrBtn.appendTo(widgetHeader);
-	    	}, 1);
-		};
-	
-		var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-		var old_get = $.datepicker._get;
-		var old_CloseFn = $.datepicker._updateDatepicker;
-		$.extend($.datepicker, {
-    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-            	}).end().end().get(0).outerHTML;
-        	}
-        	return htmlYearMonth;
-    		},
-    		_get:function (a, b) {
-        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-        		return old_get.apply(this, [a, b]);
-    		},
-    		_updateDatepicker:function (inst) {
-        		old_CloseFn.call(this, inst);
-        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
-                    inst.input.val("");
-            	});
-    		},
-    		_setDateDatepicker: function (a, b) {
-    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-    		},
-    		_widgetDatepicker: function () {
-        		return this.dpDiv
-    		}
-		});
-
-		$("#datepicker").datepicker({
-			beforeShow: changeYearButtons,
-			onChangeMonthYear: changeYearButtons,
-    		minDate: new Date(),
-    		firstDay: 1, 
-    		dateFormat: "yy-m-d",
-    		onSelect: function (dateText, inst) {
-        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-        		var reM = /m+/g;
-        		var reD = /d+/g;
-        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-        		};
-        		$.each(objDate, function (k, v) {
-            		var re = new RegExp(k + "+");
-            		dateFormate = dateFormate.replace(re, v);
-        		});
-        		inst.input.val(dateFormate);
-        		
-        		$('#'+$('.dataRowLocation').val()).find('.missionDate').val( dateFormate );
-    		}
-		});
-	
-		$.datepicker.regional['zh-TW'] = {
-				prevText: '上月',
-				nextText: '次月',
-				monthNames: ['一月','二月','三月','四月','五月','六月',
-				'七月','八月','九月','十月','十一月','十二月'],
-				monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
-				dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
-				dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
-				dayNamesMin: ['日','一','二','三','四','五','六'],
-		};
-		$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-	</script>
 	<script type="text/javascript">
 		$(function() {
 			//Set mission board container height fit with window
@@ -371,12 +121,12 @@
 			var missionSetCount = 1;
 			$(document).on('click', '.addBoard', function(){
 				var title = $('#nameTitle').val();
-				if(title == ""){
+				if(title==""){
 					title = "MissionSet";
 				}
 				var $li = $('<li class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + missionSetCount + 
 						  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
-						  '</div><ul></ul><div class="addMission sortable btn-floating btn-large red">' +
+						  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
 						  '<i class="large material-icons">add</i></div>');
 				missionSetCount++;
 				$('#nameTitle').val("");
@@ -409,7 +159,7 @@
 					}
 					var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
 							  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
-							  '</div><ul></ul><div class="addMission sortable btn-floating btn-large red">' +
+							  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
 							  '<i class="large material-icons">add</i></div>');
 					missionSetCount++;
 					$('#nameTitle').val("");
@@ -425,7 +175,7 @@
 			//Add mission
 			var missionCount = 1;
 			$(document).on('click','.addMission',function() {
-				var $li = $("<li></li>").html("<div class='li_edit btn'>Mission"+ missionCount +"</div>" +
+				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>Mission"+ missionCount +"</div>" +
 						  "<div id='dataRow"+ missionCount + "' style='display:none'>" +
 						  "<input type='text' class='missionExecutor' value='待認領'>" +
 						  "<input type='text' class='missionDate'>" +
@@ -718,7 +468,7 @@
 			});
 			
 		});
-	</script>	
+	</script>
 
 	<div class="">
 		<div class="">
@@ -820,7 +570,7 @@
 								<div class="subMission" style="display:none">
 									<textarea class="col l8" placeholder="請輸入子任務內容"></textarea> 
 							    	<input type="text" id="subDatepicker" class="validate col l3" readonly>
-							   		<img class="col l1" src="images/memberIcon.png">
+							   		<img class=" col l1" src="images/memberIcon.png">
 							   		<div class="btn waves-effect waves-light #2196f3 blue">新增</div>
 							   		<div class="btn waves-effect waves-light #2196f3 blue">取消</div>
 							   </div>
@@ -942,6 +692,5 @@
 		
 		
 	</script>
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 </body>
 </html>
