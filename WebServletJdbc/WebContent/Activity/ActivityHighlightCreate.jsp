@@ -4,80 +4,223 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>建立活動花絮</title>
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 </head>
-<body class="deep-orange lighten-5">
+<body class="amber lighten-5">
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁首 -->
 	
+	<!-- 頁面主題提示 -->
+	<div class="row black valign-wrapper" id="pagetitle">
+		
+		<h1 class="valign center-align white-text"
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">建立活動花絮</h1>
+	</div>	
+	
 	<!-- 內容 -->
-	<main>
-	<div class="contaniner">
-	<form action="/" id="postForm">
-	<div class="row">
-		<div class="col s12"><h2 style="text-align:center;">活動花絮</h2></div>
-		<div class="col s12 m4 l8">
-			<h4>花絮編輯</h4>
-			<div class="input-field col s12">
-				<input placeholder="" id="projName" type="text" class="validate" name="projName" readonly >
-				<label for="projName" class="active">完整計畫名稱</label>
-			</div>
-			<div class="input-field col s12">
-				<input placeholder="" id="memberName" type="text" class="validate" name="memberName" readonly >
-				<label for="memberName" class="active">活動發起人</label>
-			</div>
-			<div class="input-field col s12">
-				<input id="videoURL" type="text" class="validate" name="videoURL" >
-				<label for="videoURL" class="active">影片網址(請輸入YouTube完整網址)</label>
-			</div>
-			<div class="col s12" >
-						<div class="file-field input-field">
-							<div class="btn">
-								<span>封面上傳</span> <input type="file" id="picture">
-							</div>
-							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" placeholder="請上傳封面圖片..." id="frontCoverName">
-							</div>
-						</div>
-					</div>
-			<div class="input-field col s12">
-				<textarea class="ckeditor" name="content" id="content"></textarea>
-			</div>
-			<div class="input-field col s12">
-				<input id="fullProjId" type="hidden">
-				<input id="memberId" type="hidden">
-				<button class="btn waves-effect waves-light" type="submit" name="action">
-					送出 <i class="material-icons right">send</i>
-				</button>
-				<a class="waves-effect waves-light btn" id="preview">預覽</a>
-			</div>
+<main>
+	<div class="row" id="mainboard">
+		<div class="col l8">
+			<div class="row">
 			
-			<div class="input-field col s12">
-				<div id="result"></div>
+			
+			
+			</div>
+			<div class="row">
+				<form action="/" id="postForm">
+				
+				
+				
+				
+				
+				
+				</form>
 			</div>
 		</div>
-		<div class="col s12 m4 l4">
-			<div class="input-field col s12">
-				<h4>花絮封面預覽</h4>
-				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
-			</div>
-			<div class="input-field col s12">
-				<h4>影片預覽</h4>
-			</div>
-			<div class="input-field col s12">
-				<div class="video-container">
-        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
-      			</div>	
-      		</div>		
+		<div class="col l4">
+		
+		
 		</div>
 	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="row">
+		
+		<form action="/" id="postForm">
+
+		<div class="row" style="padding:10px;">
+		
+				<!-- 印出來、不能更動 -->
+				<div class="col l8">
+					<div class="col l6 offset-l3 orange accent-3 card-panel hoverable ">
+						<!-- 計畫編號 -->
+						<div class="row">
+							<div class="col l8">
+								<div class="forinput">需求計畫編號:</div>
+								<input type="hidden" name="fullProjId" value="${Demand.fullProjId}">
+							</div>
+						</div>
+						<!-- 會員編號 -->
+						<div class="row">
+							<div class="col l8">
+								<div class="forinput">會員編號:</div>
+								<input type="hidden" name="memberId" value="${Demand.memberId}">
+							</div>
+						</div>						
+						<!-- 學校編號 -->
+						<div class="row">
+							<div class="col l8">
+								<div class="forinput">學校編號:</div>
+								<input type="hidden" name="schoolId" value="${Demand.schoolId}">
+							</div>
+						</div>						
+					</div>
+				</div>						
+		
+			<!-- 左半邊填資料處 -->
+			<div class="col s12 m4 l8 deep-purple lighten-5" style="padding:2em;">
+				
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<input placeholder="" id="projName" type="text" class="validate" name="projName" readonly > -->
+<!-- 					<label for="projName" class="active">完整計畫名稱</label> -->
+<!-- 				</div> -->
+				<div class="row">
+					<div class="" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600;">
+						完整計畫名稱					
+					</div>
+					<input id="projName" type="text" class="validate" name="projName" readonly >					
+				</div>
+				
+
+				
+				
+				<div class="input-field col s12">
+					<input placeholder="" id="memberName" type="text" class="validate" name="memberName" readonly >
+					<label for="memberName" class="active">活動發起人</label>
+				</div>
+				<div class="input-field col s12">
+					<input id="videoURL" type="text" class="validate" name="videoURL" >
+					<label for="videoURL" class="active">影片網址(請輸入YouTube完整網址)</label>
+				</div>
+				<div class="col s12" >
+							<div class="file-field input-field">
+								<div class="btn">
+									<span>封面上傳</span> <input type="file" id="picture">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" placeholder="請上傳封面圖片..." id="frontCoverName">
+								</div>
+							</div>
+						</div>
+				<div class="input-field col s12">
+					<textarea class="ckeditor" name="content" id="content"></textarea>
+				</div>
+				<div class="input-field col s12">
+					<input id="fullProjId" type="hidden">
+					<input id="memberId" type="hidden">
+					<button class="btn waves-effect waves-light" type="submit" name="action">
+						送出 <i class="material-icons right">send</i>
+					</button>
+					<a class="waves-effect waves-light btn" id="preview">預覽</a>
+				</div>
+				
+				<div class="input-field col s12">
+					<div id="result"></div>
+				</div>
+			
+			</div>
+			
+			
+			<!-- 右半邊預覽處 -->
+			<div class="col s12 m4 l4">
+				<div class="input-field col s12">
+					<h4>花絮封面預覽</h4>
+					<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
+				</div>
+				<div class="input-field col s12">
+					<h4>影片預覽</h4>
+				</div>
+				<div class="input-field col s12">
+					<div class="video-container">
+	        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
+	      			</div>	
+	      		</div>		
+			</div>
+		</div>
 	</form>
 	</div>
 	</main>
@@ -93,15 +236,14 @@
 	<script src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-	<script type="text/javascript"
-		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
-	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		$(function() {
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
+			
+			//提示頁面主題欄的高度
+			var pagetitleheight = ($(window).height() * 0.25);
+			$("#pagetitle").css("height", pagetitleheight);
 			//footer中連結的文字大小
 			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
@@ -135,13 +277,13 @@
 			
 			
 			
-			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
-				console.log(responseJson);
-				$("#projName").val(responseJson.projName);	
-				$("#memberName").val(responseJson.memberName);
-				$("#fullProjId").val(responseJson.fullProjId);
-				$("#memberId").val(responseJson.memberId);
-			}); 
+// 			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
+// 				console.log(responseJson);
+// 				$("#projName").val(responseJson.projName);	
+// 				$("#memberName").val(responseJson.memberName);
+// 				$("#fullProjId").val(responseJson.fullProjId);
+// 				$("#memberId").val(responseJson.memberId);
+// 			}); 
 			
 			
 			$( "#postForm" ).submit(function( event ) {

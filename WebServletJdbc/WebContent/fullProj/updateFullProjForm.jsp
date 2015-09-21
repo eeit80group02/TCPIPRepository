@@ -216,7 +216,8 @@
 				</form>
 			  </div>	
 				<!-- 圖片預覽版面  col l2-->
-				<div class="col l2">
+				<div class="col l4">
+					<h4 class="left-align blue-text" style="font-weight:600;">完整計畫封面預覽</h4>
 					<img class="card-panel hoverable" id="view" src="${param.base64String}" style="height: 250px; width: 310px;border:5px solid black;padding:0;" >
 				</div>				
 				
