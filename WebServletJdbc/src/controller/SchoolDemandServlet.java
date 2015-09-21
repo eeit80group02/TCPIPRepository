@@ -550,7 +550,9 @@ public class SchoolDemandServlet extends HttpServlet {
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		HttpSession session = request.getSession();
+
 		session.removeAttribute("Demand");
+
 		SchoolBean sbean = (SchoolBean) session.getAttribute("LoginOK");
 		if(sbean == null){
 			response.sendRedirect(request.getContextPath()+"/login/login.jsp");

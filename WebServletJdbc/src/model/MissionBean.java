@@ -11,10 +11,10 @@ public class MissionBean implements Serializable
 	private String name;            	// 任務名稱
 	private Integer	host;               // 執行者(主要負責執行的人) FK 會員編號	
 	private java.util.Date endTime; 	// 執行任務的截止時間
-	private	Integer missionPriority;    // 執行任務的優先次序
+	private	String missionPriority;    // 執行任務的優先次序
 	private	Integer missionPosition;    // 擺在哪個指定的位置(任務順序上下)
 	private	String missionStatus;   	// 任務進行狀態(進行中,已完成)
-	private	Integer mainMissionSetId;   // 主任務編號(「有值」的時候就是子任務) FK
+	private	Integer mainMissionId;   // 主任務編號(「有值」的時候就是子任務) FK
 	
 	public MissionBean()
 	{
@@ -70,12 +70,12 @@ public class MissionBean implements Serializable
 		this.endTime = endTime;
 	}
 
-	public Integer getMissionPriority()
+	public String getMissionPriority()
 	{
 		return missionPriority;
 	}
 
-	public void setMissionPriority(Integer missionPriority)
+	public void setMissionPriority(String missionPriority)
 	{
 		this.missionPriority = missionPriority;
 	}
@@ -100,21 +100,21 @@ public class MissionBean implements Serializable
 		this.missionStatus = missionStatus;
 	}
 
-	public Integer getMainMissionSetId()
+	public Integer getMainMissionId()
 	{
-		return mainMissionSetId;
+		return mainMissionId;
 	}
 
-	public void setMainMissionSetId(Integer mainMissionSetId)
+	public void setMainMissionId(Integer mainMissionId)
 	{
-		this.mainMissionSetId = mainMissionSetId;
+		this.mainMissionId = mainMissionId;
 	}
 
 	@Override
 	public String toString()
 	{
 		return "MissionBean [missionId=" + missionId + ", missionSetId=" + missionSetId + ", name=" + name + ", host=" + host + ", endTime=" + endTime + ", missionPriority=" + missionPriority + ", missionPosition=" + missionPosition + ", missionStatus="
-				+ missionStatus + ", mainMissionSetId=" + mainMissionSetId + "]";
+				+ missionStatus + ", mainMissionId=" + mainMissionId + "]";
 	}
 
 }

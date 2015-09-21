@@ -16,8 +16,8 @@
  <!-- 登入用modal --> 
 		  <div id="modal1" class="modal">
 		  	<ul class="tabs" id="tabs">
-		        <li class="tab col l3"><a href="#test1" id="member">一般會員</a></li>
-		        <li class="tab col l3"><a href="#test2" id="school">學校會員</a></li>
+		        <li class="tab col l3"><a href="#test1" id="member" class="black-text" style="font-family:微軟正黑體;font-weight:600">一般會員</a></li>
+		        <li class="tab col l3"><a href="#test2" id="school" class="black-text" style="font-family:微軟正黑體;font-weight:600">學校會員</a></li>
 	      	</ul>
 	      		<div id="test1">
 				    <div class="modal-content blue lighten-5" style="height:80%;width:100%;">
@@ -69,9 +69,9 @@
 				    </div>
 				    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
 				    	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-					      <a href="#!" id="schoolloginSubmit" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a>
-						  <a href="<c:url value="/forgotPassword/forgotPassword.jsp" />" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	      
-					      <a href="<c:url value="/register/register.jsp" />" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a>
+					      <a href="#!" id="schoolloginSubmit" class="modal-action modal-close btn-large amber darken-2">登入</a>
+						  <a href="<c:url value="/forgotPassword/forgotPassword.jsp" />" class="modal-action modal-close btn-large amber darken-2">忘記密碼</a>	      
+					      <a href="<c:url value="/register/register.jsp" />" class="modal-action modal-close btn-large amber darken-2">註冊帳號</a>
 				    	</div>
 				    </div>			    
 			    </div>
