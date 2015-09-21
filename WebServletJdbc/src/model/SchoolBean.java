@@ -23,6 +23,16 @@ public class SchoolBean implements Serializable
 	private byte[] password; 			// 密碼(英文+數字(不分大小寫)不給特殊字元)
 	private String accountStatus; 		// 帳號狀態(已啟用/待認證/預設)(前台只顯示預設；待認證及已啟用者不顯示)
 	
+	private String base64String;			// 圖片base64
+	
+	public String getBase64String() {
+		return base64String;
+	}
+
+	public void setBase64String(String base64String) {
+		this.base64String = base64String;
+	}
+
 	public Integer getSchoolId()
 	{
 		return schoolId;

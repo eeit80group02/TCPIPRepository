@@ -996,6 +996,7 @@
 					$(this).removeClass("cyan lighten-4");
 				}})
 			})
+// 			圖片預覽
 			$("#picture").change(function(){
 				var file = $("#picture")[0].files[0];
 				var reader  = new FileReader();

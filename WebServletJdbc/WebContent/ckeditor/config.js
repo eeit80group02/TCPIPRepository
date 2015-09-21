@@ -10,6 +10,7 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
 	config.height = 500;
+	config.charLimit = 1;
 	config.toolbar = 'TabToolbar'
 	config.toolbar_TabToolbar =
 	[

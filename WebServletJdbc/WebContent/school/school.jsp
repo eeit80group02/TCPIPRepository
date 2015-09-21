@@ -20,7 +20,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">學校名稱${school.name}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">學校名稱${LoginOK.name}</h3>
 	</div>	
 
 	<main>
@@ -29,7 +29,7 @@
 				<div class="row" id="secondboard">
 					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
 						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
+							<a id="changepassworda" href="<c:url value='showSchoolData.do' />" class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 									修改資料
 								</span>
