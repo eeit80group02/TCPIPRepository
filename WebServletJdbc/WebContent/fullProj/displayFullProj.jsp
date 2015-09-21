@@ -197,6 +197,12 @@
 				</div>
 			</div>
 			
+			<!-- 任務板連結 -->
+			<c:url var="missionBoard" value="/draganddrop.jsp">
+				<c:param name="fullProjId" value="${fullProj.fullProjId}" />
+			</c:url>
+			<a href="${missionBoard}">任務板</a>
+			
 			<!-- 加入活動的按鈕 -->
 			  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
 			    <a class="btn-large red">
