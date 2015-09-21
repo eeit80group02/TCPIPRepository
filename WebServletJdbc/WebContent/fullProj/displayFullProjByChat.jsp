@@ -15,6 +15,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body class="deep-orange lighten-5">
+	<c:if test="${LoginOK.beanName.equals('member')}">
+		<c:if test="${LoginOK.memberId != fullProj.memberId}">
+			<c:redirect url="/error/permission.jsp" />
+		</c:if>
+	</c:if>
+	
+	<c:if test="${LoginOK.beanName.equals('school')}">
+		<c:if test="${LoginOK.schoolId != fullProj.schoolId}">
+			<c:redirect url="/error/permission.jsp" />
+		</c:if>
+	</c:if>
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp"
 		context="${pageContext.request.contextPath}" />
@@ -341,17 +352,18 @@
 		</div>		
 		<div id="myDiv">
 		</div>	
+
+	<c:if test="${LoginOK.beanName.equals('member') && empty fullProj.createDate}">	
+		會員留言：<br>
+		<textarea id="memberContent"></textarea><sapn id="memberError"></sapn><br>
+		<input type="button" id="memberButton" value="傳送"><br>
+	</c:if>
 	
-	
-	
-	會員
-	<textarea id="memberContent"></textarea><sapn id="memberError"></sapn><br>
-	<input type="button" id="memberButton" value="傳送"><br>
-	<hr>
-	學校
-	<textarea id="schoolContent"></textarea><sapn id="schoolError"></sapn><br>
-	<input type="button" id="schoolButton" value="傳送"><br>
-	
+	<c:if test="${LoginOK.beanName.equals('school') && empty fullProj.createDate}">	
+		學校留言：<br>
+		<textarea id="schoolContent"></textarea><sapn id="schoolError"></sapn><br>
+		<input type="button" id="schoolButton" value="傳送"><br>
+	</c:if>
 </main>
 
 
