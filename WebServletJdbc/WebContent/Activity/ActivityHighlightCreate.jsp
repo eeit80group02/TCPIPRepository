@@ -4,82 +4,185 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>建立活動花絮</title>
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+	.error{
+		color:#FF0000;
+	}
+	
+	.forinput {
+		font-size:1.6em;
+		font-weight:600;
+		color:black;
+		font-family:微軟正黑體;		
+	}
+	
+</style>
 </head>
-<body class="deep-orange lighten-5">
+<body class="amber lighten-5">
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁首 -->
 	
+	<!-- 頁面主題提示 -->
+	<div class="row black valign-wrapper" id="pagetitle">
+		
+		<h1 class="valign center-align white-text"
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">建立活動花絮</h1>
+	</div>	
+	
 	<!-- 內容 -->
-	<main>
-	<div class="contaniner">
-	<form action="/" id="postForm">
-	<div class="row">
-		<div class="col s12"><h2 style="text-align:center;">活動花絮</h2></div>
-		<div class="col s12 m4 l8">
-			<h4>花絮編輯</h4>
-			<div class="input-field col s12">
-				<input placeholder="" id="projName" type="text" class="validate" name="projName" readonly >
-				<label for="projName" class="active">完整計畫名稱</label>
-			</div>
-			<div class="input-field col s12">
-				<input placeholder="" id="memberName" type="text" class="validate" name="memberName" readonly >
-				<label for="memberName" class="active">活動發起人</label>
-			</div>
-			<div class="input-field col s12">
-				<input id="videoURL" type="text" class="validate" name="videoURL" >
-				<label for="videoURL" class="active">影片網址(請輸入YouTube完整網址)</label>
-			</div>
-			<div class="col s12" >
-						<div class="file-field input-field">
-							<div class="btn">
-								<span>封面上傳</span> <input type="file" id="picture">
-							</div>
-							<div class="file-path-wrapper">
-								<input class="file-path validate" type="text" placeholder="請上傳封面圖片..." id="frontCoverName">
-							</div>
+<main>
+	<div class="row" id="mainboard">
+		<!-- 填資料的區塊 -->
+		<div class="col l8">
+			<div class="row">
+				<!-- 印出來、不能更動 -->
+					<div class="orange lighten-2 card-panel hoverable ">
+						<!-- 完整計畫名稱 -->
+						<div class="row">
+								<div class="forinput col l3 right-align">完整計畫名稱:</div>
+								<input class="col l7" name=" projName" id="projName" type="text" readonly="readonly">
+						</div>
+						<!-- 計畫編號 -->
+						<div class="row">
+								<div class="forinput col l3 right-align">活動發起人:</div>
+								<input class="col l7"name="memberName" id="memberName" type="text" readonly="readonly">
 						</div>
 					</div>
-			<div class="input-field col s12">
-				<textarea class="ckeditor" name="content" id="content"></textarea>
-			</div>
-			<div class="input-field col s12">
-				<input id="fullProjId" type="hidden">
-				<input id="memberId" type="hidden">
-				<button class="btn waves-effect waves-light" type="submit" name="action">
-					送出 <i class="material-icons right">send</i>
-				</button>
-				<a class="waves-effect waves-light btn" id="preview">預覽</a>
 			</div>
 			
-			<div class="input-field col s12">
-				<div id="result"></div>
+			<div class="row deep-purple lighten-5 hoverable" style="padding:2em;">
+				<form action="/" id="postForm">
+					<div class="row">
+						<div class="forinput">影片網址(請輸入YouTube完整網址)</div>
+						<input id="videoURL" type="text" class="validate col l8" name="videoURL" style="padding:0"/>
+					</div>				
+					
+					
+					<div class="row file-field">
+						<div class="forinput">
+							<div>
+								封面上傳
+								<input type="file" id="picture">
+								<i class="material-icons blue-text">search</i>
+							</div>
+						</div>						
+						<div class="col l4 file-path-wrapper" style="padding:0">
+							<input class="file-path validate" id="frontCoverName"  type="text">
+						</div>
+					</div>				
+					
+					<div class="row">
+						<div class="forinput">
+							花絮內容
+						</div>
+						<div class="input-field">
+							<textarea name="content" id="content" style="min-height:50vh;"></textarea>
+						</div>
+					</div>
+									
+					
+					<div class="row">
+						<input id="fullProjId" type="hidden">
+						<input id="memberId" type="hidden">
+						<button class="btn-large red right" type="submit" name="action">
+							<span style="font-size:1.5em;font-weight:600">
+								送出
+							</span>
+							<i class="material-icons right">
+								send
+							</i>
+						</button>
+						<a class="btn-large red right" id="preview" style="font-size:1.5em;font-weight:600">預覽</a>
+					</div>				
+				</form>
 			</div>
 		</div>
-		<div class="col s12 m4 l4">
-			<div class="input-field col s12">
-				<h4>花絮封面預覽</h4>
-				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
-			</div>
-			<div class="input-field col s12">
-				<h4>影片預覽</h4>
-			</div>
-			<div class="input-field col s12">
-				<div class="video-container">
-        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
-      			</div>	
-      		</div>		
+		<!-- 預覽的區塊 -->
+		<div class="col l4">
+				<div class="input-field col s12">
+					<h4>花絮封面預覽</h4>
+					<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
+				</div>
+				<div class="input-field col s12">
+					<h4>影片預覽</h4>
+				</div>
+				<div class="input-field col s12">
+					<div class="video-container">
+	        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
+	      			</div>	
+	      		</div>				
+		
 		</div>
 	</div>
-	</form>
-	</div>
+
+
+<!-- 	<div class="row"> -->
+		
+<!-- 		<form action="/" id="postForm"> -->
+
+<!-- 		<div class="row" style="padding:10px;"> -->
+		
+		
+<!-- 			<!-- 左半邊填資料處 --> -->
+<!-- 			<div class="col s12 m4 l8 deep-purple lighten-5" style="padding:2em;"> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<input id="videoURL" type="text" class="validate" name="videoURL" > -->
+<!-- 					<label for="videoURL" class="active">影片網址(請輸入YouTube完整網址)</label> -->
+<!-- 				</div> -->
+<!-- 				<div class="col s12" > -->
+<!-- 							<div class="file-field input-field"> -->
+<!-- 								<div class="btn"> -->
+<!-- 									<span>封面上傳</span> -->
+<!-- 									<input type="file" id="picture"> -->
+<!-- 								</div> -->
+<!-- 								<div class="file-path-wrapper"> -->
+<!-- 									<input class="file-path validate" type="text" placeholder="請上傳封面圖片..." id="frontCoverName"> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- <!-- 				<div class="input-field col s12"> --> -->
+<!-- <!-- 					<textarea class="ckeditor" name="content" id="content"></textarea> --> -->
+<!-- <!-- 				</div> --> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<input id="fullProjId" type="hidden"> -->
+<!-- 					<input id="memberId" type="hidden"> -->
+<!-- 					<button class="btn waves-effect waves-light" type="submit" name="action"> -->
+<!-- 						送出 <i class="material-icons right">send</i> -->
+<!-- 					</button> -->
+<!-- 					<a class="waves-effect waves-light btn" id="preview">預覽</a> -->
+<!-- 				</div> -->
+				
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<div id="result"></div> -->
+<!-- 				</div> -->
+			
+<!-- 			</div> -->
+			
+			
+<!-- 			<!-- 右半邊預覽處 --> -->
+<!-- 			<div class="col s12 m4 l4"> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<h4>花絮封面預覽</h4> -->
+<!-- 					<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" > -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<h4>影片預覽</h4> -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<div class="video-container"> -->
+<!-- 	        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe> -->
+<!-- 	      			</div>	 -->
+<!-- 	      		</div>		 -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</form> -->
+<!-- 	</div> -->
 	</main>
 
 
@@ -90,20 +193,23 @@
 
 
 	<!-- script -->
-	<script src="../ckeditor/ckeditor.js"></script>
+
+	<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-	<script type="text/javascript"
-		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
-	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		$(function() {
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
+			//初始化ckeditor
+			CKEDITOR.replace( 'content', {
+		    	customConfig: 'config.js'
+			} );
+			
+			
+			//提示頁面主題欄的高度
+			var pagetitleheight = ($(window).height() * 0.25);
+			$("#pagetitle").css("height", pagetitleheight);
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
@@ -135,13 +241,13 @@
 			
 			
 			
-			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
-				console.log(responseJson);
-				$("#projName").val(responseJson.projName);	
-				$("#memberName").val(responseJson.memberName);
-				$("#fullProjId").val(responseJson.fullProjId);
-				$("#memberId").val(responseJson.memberId);
-			}); 
+// 			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
+// 				console.log(responseJson);
+// 				$("#projName").val(responseJson.projName);	
+// 				$("#memberName").val(responseJson.memberName);
+// 				$("#fullProjId").val(responseJson.fullProjId);
+// 				$("#memberId").val(responseJson.memberId);
+// 			}); 
 			
 			
 			$( "#postForm" ).submit(function( event ) {

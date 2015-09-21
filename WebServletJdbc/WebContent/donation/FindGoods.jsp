@@ -40,6 +40,70 @@
 
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
+	<script>
+	  //將資料存到陣列中
+	  var datas = ["a"];
+	  var show;
+	  window.addEventListener("load",init);
+	  var txt; // 物件
+	  var xhr = null;
+	  var lists = null;
+	  
+	  function init(){
+		  txt = document.getElementById("searchDonation");
+		  txt.addEventListener("keyup",getData,false);
+		  show = document.getElementById("div1");
+		  
+	  }
+	  
+	  function getData(){
+		  xhr = new XMLHttpRequest();
+		  if (xhr != null) {
+			  xhr.addEventListener("readystatechange", function() {
+				  if (xhr.readyState == 4 && xhr.status == 200) {
+					 lists = xhr.responseText;
+					 datas = JSON.parse(lists);
+					 
+				     show.style.display="block";
+				     if(show.childNodes.length > 0){
+				    	 show.removeChild(show.childNodes[0]);
+				     }
+				     var eleUl = document.createElement("ul");
+				     for(var j=0;j<datas.length;j++){
+				  	    var txtLi = document.createTextNode(datas[j]);
+				  	    var eleLi = document.createElement("li");
+				  	    eleLi.appendChild(txtLi);
+				  	    eleLi.addEventListener("mouseover",function(){this.className='s1'},false)
+				  	    eleLi.addEventListener("mouseout",function(){this.className='s2'},false)
+				  	    eleLi.addEventListener("click",function(){
+				  	    	 document.myData.keyword.value = this.firstChild.nodeValue;  		  	  
+				  		  	 show.style.display="none";
+				  	    },false)
+				  	    eleUl.appendChild(eleLi);
+				     }
+				     if (datas.length != 0) {
+					     show.appendChild(eleUl);
+				     } else {
+				    	 
+				     }
+				     
+				  } else {
+					  console.log(xhr.status + ":" + xhr.statusText);			  }
+				  
+			  });
+			  
+			  var input = txt.value;
+			  if (input.length != 0) {
+				  xhr.open("get", "jsimple.do?term="+input, true);
+			  } else {
+				  input = "cmaxxx";
+				  xhr.open("get", "jsimple.do?term="+input, true);
+			  }
+			  xhr.send();
+		  }	
+	  }
+	</script>
+
 </head>
 <body>
 	<!-- 我就是標頭 start -->
@@ -56,8 +120,9 @@
 				<ul id="nav-mobile3" class="right hide-on-med-and-down">
 					<li>
 						<form action="#">
-							<div class="input-field">
-								<input id="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
+							<div class="input-field">														  
+								<input id="searchDonation" type="search" required placeholder="輸入物品或學校"> <label for="searchDonation"><i class="large material-icons" id="searchIcon">search</i></label>
+								<div id="div1" style="background-color: white;"></div>
 							</div>
 						</form>
 					</li>
@@ -142,12 +207,40 @@
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
 	<!-- 標頭專用 bottom end -->
-	<c:forEach var='item' items='${cartItems}'>
+	
 	<script>
+	// deleteAll
+	$('#donateDelete').click(function(){
+		// 設定cookie值
+		var now = new Date();
+		now.setTime(now.getTime()-1);
+		document.cookie="Items=;expire="+now.toUTCString();
+	});
+	
+	// 取出指定name的value
+	var objName = "Items";
+	var tempvalue = getCookie(objName);
+	console.log("!   "+tempvalue);
+	var value = tempvalue.match(/[0-9]+/g);
+	for(var c=0;c<value.length; c++) {
+		console.log(value[c]);
+		// 傳入已加入購物車的清單
+		var i = value[c];
+		var data = $("#"+i+"");
+		deleteImage(data);
+	}
+	//獲取指定名稱的cookie的值 
+	function getCookie(objName){
+		var arrStr = document.cookie.split("; "); 
+		for(var i = 0;i < arrStr.length;i ++){ 
+		var temp = arrStr[i].split("="); 
+		if(temp[0] == objName) 
+		return unescape(temp[1]); 
+		} 
+	}
 	// 傳入已加入購物車的清單
 	var i = "${item}";
 	var data = $("#"+i+"");
-// 	alert(data);
 	deleteImage(data);
 	
 	// there's the gallery and the trash
@@ -183,9 +276,18 @@
 		});
 	}
 	</script>
-	</c:forEach>
+	
 	<script type="text/javascript" src="../donationScripts/Maquee.js"></script>
 	<script type="text/javascript" src="../donationScripts/ScreenSize.js"></script>
 	</center>
+	
+	<script type="text/javascript">
+	
+	  $("#div1 ul li .s2").css("border","2px solid blue");
+	  $("#div1").css("border","2px solid blue");
+	  $("#div1").click(function () {
+		alert($(this).val());
+	});
+	</script>
 </body>
 </html>

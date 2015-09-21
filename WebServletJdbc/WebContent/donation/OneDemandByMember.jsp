@@ -221,6 +221,7 @@ body {
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
 						datas = JSON.parse(lists);
+						alert("ms "+datas);
 						var memberId = datas[0];
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];

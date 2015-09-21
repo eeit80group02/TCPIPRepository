@@ -25,38 +25,30 @@ import javax.sql.DataSource;
 import model.ParticipatorBean;
 import model.dao.interfaces.ParticipatorDAO;
 
-public class ParticipatorDAOJdbc implements ParticipatorDAO
-{
+public class ParticipatorDAOJdbc implements ParticipatorDAO {
 	private DataSource datasource;
 
-	public ParticipatorDAOJdbc()
-	{
-		try
-		{
+	public ParticipatorDAOJdbc() {
+		try {
 			Context context = new InitialContext();
-			datasource = (DataSource)context.lookup(GlobalService.JNDI);
-		}
-		catch(NamingException e)
-		{
+			datasource = (DataSource) context.lookup(GlobalService.JNDI);
+		} catch (NamingException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	// SQL 指令
 	// Select by ID
 	private static final String SELECT_BY_ID = "SELECT participatorId,fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate FROM Participator WHERE participatorId = ?";
+
 	@Override
-	public ParticipatorBean findByPrimaryKey(int participatorId)
-	{
+	public ParticipatorBean findByPrimaryKey(int participatorId) {
 		ParticipatorBean result = null;
-		try(Connection conn = datasource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
-		{
-			pstmt.setInt(1,participatorId);
-			try(ResultSet rset = pstmt.executeQuery();)
-			{
-				if(rset.next())
-				{
+		try (Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);) {
+			pstmt.setInt(1, participatorId);
+			try (ResultSet rset = pstmt.executeQuery();) {
+				if (rset.next()) {
 					result = new ParticipatorBean();
 					result.setParticipatorId(rset.getInt("participatorId"));
 					result.setFullProjId(rset.getInt("fullProjId"));
@@ -67,14 +59,10 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 					result.setCheckTime(rset.getTimestamp("checkTime"));
 					result.setIsParticipate(rset.getString("isParticipate"));
 				}
-			}
-			catch(SQLException e)
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		}
-		catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
@@ -84,17 +72,14 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 	private static final String SELECT_ALL = "SELECT participatorId,fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate FROM Participator";
 
 	@Override
-	public List<ParticipatorBean> getAll()
-	{
+	public List<ParticipatorBean> getAll() {
 		List<ParticipatorBean> result = null;
 
-		try(Connection conn = datasource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
-			ResultSet rset = pstmt.executeQuery();)
-		{
+		try (Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
+				ResultSet rset = pstmt.executeQuery();) {
 			result = new ArrayList<ParticipatorBean>();
-			while(rset.next())
-			{
+			while (rset.next()) {
 				ParticipatorBean bean = new ParticipatorBean();
 				bean.setParticipatorId(rset.getInt("participatorId"));
 				bean.setFullProjId(rset.getInt("fullProjId"));
@@ -107,9 +92,7 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 
 				result.add(bean);
 			}
-		}
-		catch(SQLException e)
-		{
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return result;
@@ -117,57 +100,42 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 
 	// 新增 --------> insert(){}
 	private static final String INSERT = "INSERT INTO Participator(fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate) VALUES (?,?,?,?,?,?,?)";
-	@Override
-	public ParticipatorBean insert(ParticipatorBean bean)
-	{
-		ParticipatorBean result = null;
-		if(bean != null)
-		{
-			try(Connection conn = datasource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(INSERT,PreparedStatement.RETURN_GENERATED_KEYS);)
-			{
-				pstmt.setInt(1,bean.getFullProjId());
-				pstmt.setInt(2,bean.getMemberId());
-				pstmt.setTimestamp(3,new java.sql.Timestamp(bean.getActivityStartTime().getTime()));
-				pstmt.setTimestamp(4,new java.sql.Timestamp(bean.getActivityEndTime().getTime()));
-				pstmt.setString(5,bean.getParticipateStatus());
 
-				if(bean.getCheckTime() != null)
-				{
-					pstmt.setTimestamp(6,new java.sql.Timestamp(bean.getCheckTime().getTime()));
+	@Override
+	public ParticipatorBean insert(ParticipatorBean bean) {
+		ParticipatorBean result = null;
+		if (bean != null) {
+			try (Connection conn = datasource.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
+				pstmt.setInt(1, bean.getFullProjId());
+				pstmt.setInt(2, bean.getMemberId());
+				pstmt.setTimestamp(3, new java.sql.Timestamp(bean.getActivityStartTime().getTime()));
+				pstmt.setTimestamp(4, new java.sql.Timestamp(bean.getActivityEndTime().getTime()));
+				pstmt.setString(5, bean.getParticipateStatus());
+
+				if (bean.getCheckTime() != null) {
+					pstmt.setTimestamp(6, new java.sql.Timestamp(bean.getCheckTime().getTime()));
+				} else {
+					pstmt.setNull(6, Types.TIMESTAMP);
 				}
-				else
-				{
-					pstmt.setNull(6,Types.TIMESTAMP);
+
+				if (bean.getIsParticipate() != null) {
+					pstmt.setString(7, bean.getIsParticipate());
+				} else {
+					pstmt.setNull(7, Types.NVARCHAR);
 				}
-				
-				if(bean.getIsParticipate() != null)
-				{
-					pstmt.setString(7,bean.getIsParticipate());
-				}
-				else
-				{
-					pstmt.setNull(7,Types.NVARCHAR);
-				}
-				
+
 				int i = pstmt.executeUpdate();
-				if(i == 1)
-				{
-					try(ResultSet key = pstmt.getGeneratedKeys();)
-					{
-						if(key.next())
-						{
+				if (i == 1) {
+					try (ResultSet key = pstmt.getGeneratedKeys();) {
+						if (key.next()) {
 							result = findByPrimaryKey(key.getInt(1));
 						}
-					}
-					catch(SQLException e)
-					{
+					} catch (SQLException e) {
 						e.printStackTrace();
 					}
 				}
-			}
-			catch(SQLException e)
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
@@ -176,50 +144,39 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 
 	// 修改 -------->update(){}
 	private static final String UPDATE = "UPDATE Participator SET fullProjId = ?,memberId = ?,activityStartTime = ?,activityEndTime = ?,participateStatus = ?,checkTime = ?,isParticipate = ? WHERE participatorId = ?";
+
 	@Override
-	public ParticipatorBean update(ParticipatorBean bean)
-	{
+	public ParticipatorBean update(ParticipatorBean bean) {
 		ParticipatorBean result = null;
-		
-		if(bean != null)
-		{
-			try(Connection conn = datasource.getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(UPDATE);)
-			{
-				pstmt.setInt(1,bean.getFullProjId());
-				pstmt.setInt(2,bean.getMemberId());
-				pstmt.setTimestamp(3,new java.sql.Timestamp(bean.getActivityStartTime().getTime()));
-				pstmt.setTimestamp(4,new java.sql.Timestamp(bean.getActivityEndTime().getTime()));
-				pstmt.setString(5,bean.getParticipateStatus());
 
-				if(bean.getCheckTime() != null)
-				{
-					pstmt.setTimestamp(6,new java.sql.Timestamp(bean.getCheckTime().getTime()));
-				}
-				else
-				{
-					pstmt.setNull(6,Types.TIMESTAMP);
+		if (bean != null) {
+			try (Connection conn = datasource.getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(UPDATE);) {
+				pstmt.setInt(1, bean.getFullProjId());
+				pstmt.setInt(2, bean.getMemberId());
+				pstmt.setTimestamp(3, new java.sql.Timestamp(bean.getActivityStartTime().getTime()));
+				pstmt.setTimestamp(4, new java.sql.Timestamp(bean.getActivityEndTime().getTime()));
+				pstmt.setString(5, bean.getParticipateStatus());
+
+				if (bean.getCheckTime() != null) {
+					pstmt.setTimestamp(6, new java.sql.Timestamp(bean.getCheckTime().getTime()));
+				} else {
+					pstmt.setNull(6, Types.TIMESTAMP);
 				}
 
-				if(bean.getIsParticipate() != null)
-				{
-					pstmt.setString(7,bean.getIsParticipate());
-				}
-				else
-				{
-					pstmt.setNull(7,Types.NVARCHAR);
+				if (bean.getIsParticipate() != null) {
+					pstmt.setString(7, bean.getIsParticipate());
+				} else {
+					pstmt.setNull(7, Types.NVARCHAR);
 				}
 
-				pstmt.setInt(8,bean.getParticipatorId());
+				pstmt.setInt(8, bean.getParticipatorId());
 
 				int i = pstmt.executeUpdate();
-				if(i == 1)
-				{
+				if (i == 1) {
 					result = this.findByPrimaryKey(bean.getParticipatorId());
 				}
-			}
-			catch(SQLException e)
-			{
+			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
@@ -230,53 +187,78 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 	private static final String DELETE = "DELETE FROM Participator WHERE participatorId = ?";
 
 	@Override
-	public boolean delete(int participatorId)
-	{
-		try(Connection conn = datasource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(DELETE);)
-		{
-			pstmt.setInt(1,participatorId);
+	public boolean delete(int participatorId) {
+		try (Connection conn = datasource.getConnection(); PreparedStatement pstmt = conn.prepareStatement(DELETE);) {
+			pstmt.setInt(1, participatorId);
 			int i = pstmt.executeUpdate();
-			if(i == 1)
-			{
+			if (i == 1) {
 				return true;
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
 
+	private static final String FIND_BY_FULLPROJID = "SELECT participatorId,fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate FROM Participator WHERE fullProjId=?";
+
+	public List<ParticipatorBean> findByFullProjId(int participatorId) {
+		List<ParticipatorBean> result = new ArrayList<ParticipatorBean>();
+
+		try (Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(FIND_BY_FULLPROJID);) {
+			
+			pstmt.setInt(1, participatorId);
+			
+			try (ResultSet rset = pstmt.executeQuery();) {
+				while (rset.next()) {
+					ParticipatorBean bean = new ParticipatorBean();
+					bean.setParticipatorId(rset.getInt("participatorId"));
+					bean.setFullProjId(rset.getInt("fullProjId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					bean.setActivityStartTime(rset.getTimestamp("activityStartTime"));
+					bean.setActivityEndTime(rset.getTimestamp("activityEndTime"));
+					bean.setParticipateStatus(rset.getString("participateStatus"));
+					bean.setCheckTime(rset.getTimestamp("checkTime"));
+					bean.setIsParticipate(rset.getString("isParticipate"));
+
+					result.add(bean);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	// 測試檔
-	public static void main(String[] args) throws Exception
-	{
+	public static void main(String[] args) throws Exception {
 		ParticipatorDAO dao = new ParticipatorDAOJdbc();
-		
+
 		// findByPrimaryKey for Test 查詢單一筆資料
 		ParticipatorBean bean = dao.findByPrimaryKey(1);
 		System.out.println(bean);
 
 		// select All for Test 查詢全部
 		List<ParticipatorBean> beans = dao.getAll();
-		for(ParticipatorBean b : beans)
-		{
+		for (ParticipatorBean b : beans) {
 			System.out.println(b);
 		}
 
-		// insert 新增 
-//		ParticipatorBean bean1 = new ParticipatorBean();
-//		bean1.setFullProjId(1);
-//		bean1.setMemberId(4);
-//		bean1.setActivityStartTime(GlobalService.convertStringToDate("2015-08-09"));
-//		bean1.setActivityEndTime(GlobalService.convertStringToDate("2015-08-12"));
-//		bean1.setParticipateStatus("待審核");
-//		bean1.setCheckTime(null);
-//		bean1.setIsParticipate(null);
-//		System.out.println(dao.insert(bean1));
+		// insert 新增
+		// ParticipatorBean bean1 = new ParticipatorBean();
+		// bean1.setFullProjId(1);
+		// bean1.setMemberId(4);
+		// bean1.setActivityStartTime(GlobalService.convertStringToDate("2015-08-09"));
+		// bean1.setActivityEndTime(GlobalService.convertStringToDate("2015-08-12"));
+		// bean1.setParticipateStatus("待審核");
+		// bean1.setCheckTime(null);
+		// bean1.setIsParticipate(null);
+		// System.out.println(dao.insert(bean1));
 
-		// update 更新 
+		// update 更新
 		ParticipatorBean bean2 = new ParticipatorBean();
 		bean2.setParticipatorId(3);
 		bean2.setFullProjId(1);
@@ -291,6 +273,6 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO
 
 		// delete 刪除
 		System.out.println(dao.delete(1));
-		
+
 	}
 }

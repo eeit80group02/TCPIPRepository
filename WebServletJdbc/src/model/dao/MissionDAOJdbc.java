@@ -35,7 +35,7 @@ public class MissionDAOJdbc implements MissionDAO
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT = "INSERT INTO Mission (missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO Mission (missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionId) VALUES(?,?,?,?,?,?,?,?)";
 
 	@Override
 	public MissionBean insert(MissionBean bean)
@@ -58,13 +58,13 @@ public class MissionDAOJdbc implements MissionDAO
 			}
 			
 			pstmt.setTimestamp(4,new java.sql.Timestamp(bean.getEndTime().getTime()));
-			pstmt.setInt(5,bean.getMissionPriority());
+			pstmt.setString(5,bean.getMissionPriority());
 			pstmt.setInt(6,bean.getMissionPosition());
 			pstmt.setString(7,bean.getMissionStatus());
 			
-			if(bean.getMainMissionSetId() != null)
+			if(bean.getMainMissionId() != null)
 			{
-				pstmt.setInt(8,bean.getMainMissionSetId());
+				pstmt.setInt(8,bean.getMainMissionId());
 			}
 			else
 			{
@@ -120,7 +120,7 @@ public class MissionDAOJdbc implements MissionDAO
 		return result;
 	}
 
-	private static final String UPDATE = "UPDATE Mission SET missionSetId = ?,name = ?,host = ?,endTime = ?,missionPriority = ?,missionPosition = ?,missionStatus = ?,mainMissionSetId = ? WHERE missionId = ?";
+	private static final String UPDATE = "UPDATE Mission SET missionSetId = ?,name = ?,host = ?,endTime = ?,missionPriority = ?,missionPosition = ?,missionStatus = ?,mainMissionId = ? WHERE missionId = ?";
 
 	@Override
 	public MissionBean update(MissionBean bean)
@@ -143,13 +143,13 @@ public class MissionDAOJdbc implements MissionDAO
 			}
 			
 			pstmt.setTimestamp(4,new java.sql.Timestamp(bean.getEndTime().getTime()));
-			pstmt.setInt(5,bean.getMissionPriority());
+			pstmt.setString(5,bean.getMissionPriority());
 			pstmt.setInt(6,bean.getMissionPosition());
 			pstmt.setString(7,bean.getMissionStatus());
 			
-			if(bean.getMainMissionSetId() != null)
+			if(bean.getMainMissionId() != null)
 			{
-				pstmt.setInt(8,bean.getMainMissionSetId());
+				pstmt.setInt(8,bean.getMainMissionId());
 			}
 			else
 			{
@@ -170,7 +170,7 @@ public class MissionDAOJdbc implements MissionDAO
 		return result;
 	}
 
-	private static final String FIND_BY_PRIMARYKEY = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission WHERE missionId = ?";
+	private static final String FIND_BY_PRIMARYKEY = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionId FROM Mission WHERE missionId = ?";
 
 	@Override
 	public MissionBean findByPrimaryKey(int id)
@@ -200,17 +200,17 @@ public class MissionDAOJdbc implements MissionDAO
 					}
 					
 					result.setEndTime(rs.getDate(5));
-					result.setMissionPriority(rs.getInt(6));
+					result.setMissionPriority(rs.getString(6));
 					result.setMissionPosition(rs.getInt(7));
 					result.setMissionStatus(rs.getString(8));
 					
 					if(rs.getObject(9) != null)
 					{
-						result.setMainMissionSetId(rs.getInt(9));
+						result.setMainMissionId(rs.getInt(9));
 					}
 					else
 					{
-						result.setMainMissionSetId((Integer)rs.getObject(9));
+						result.setMainMissionId((Integer)rs.getObject(9));
 					}
 				}
 			}
@@ -226,7 +226,7 @@ public class MissionDAOJdbc implements MissionDAO
 		return result;
 	}
 
-	private static final String SELECT_ALL = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission";
+	private static final String SELECT_ALL = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionId FROM Mission";
 
 	@Override
 	public List<MissionBean> getAll()
@@ -255,17 +255,17 @@ public class MissionDAOJdbc implements MissionDAO
 				}
 
 				bean.setEndTime(rs.getDate(5));
-				bean.setMissionPriority(rs.getInt(6));
+				bean.setMissionPriority(rs.getString(6));
 				bean.setMissionPosition(rs.getInt(7));
 				bean.setMissionStatus(rs.getString(8));
 
 				if(rs.getObject(9) != null)
 				{
-					bean.setMainMissionSetId(rs.getInt(9));
+					bean.setMainMissionId(rs.getInt(9));
 				}
 				else
 				{
-					bean.setMainMissionSetId((Integer)rs.getObject(9));
+					bean.setMainMissionId((Integer)rs.getObject(9));
 				}
 				result.add(bean);
 			}
@@ -306,10 +306,10 @@ public class MissionDAOJdbc implements MissionDAO
 		{
 			e.printStackTrace();
 		}
-		insertData.setMissionPriority(2);
+		insertData.setMissionPriority("普通");
 		insertData.setMissionPosition(3);
 		insertData.setMissionStatus("進行中");
-		insertData.setMainMissionSetId(null);
+		insertData.setMainMissionId(null);
 		insertBean = dao.insert(insertData);
 		System.out.println(insertBean);
 
@@ -325,10 +325,10 @@ public class MissionDAOJdbc implements MissionDAO
 		updateData.setName("體育組");
 		updateData.setHost(5);
 		updateData.setEndTime(new java.util.Date());
-		updateData.setMissionPriority(1);
+		updateData.setMissionPriority("緊急");
 		updateData.setMissionPosition(2);
 		updateData.setMissionStatus("進行中");
-		updateData.setMainMissionSetId(null);
+		updateData.setMainMissionId(null);
 		updateBean = dao.update(updateData);
 		System.out.println(updateBean);
 	}

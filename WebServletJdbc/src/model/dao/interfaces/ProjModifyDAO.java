@@ -17,4 +17,6 @@ public interface ProjModifyDAO
 
 	public boolean delete(int projModifyId);
 
+	public List<ProjModifyBean> selectByFullProjId(int fullProjId);
+
 }

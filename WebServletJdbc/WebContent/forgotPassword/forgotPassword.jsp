@@ -6,12 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="../css/materialize.min.css"
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.css" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 <body>
@@ -53,11 +51,14 @@
 		
 		</div>
 	</div>	
-	
-
-
-
 	<!-- 主要版面 -->
+
+
+
+
+
+
+
 <!-- 		<div class="row" style="margin-top: 100px"> -->
 <!-- 			<div class="container" style="height: 500px;border: 2px solid black; "> -->
 <!-- 				<div class="container"> -->
@@ -82,11 +83,7 @@
 	<!-- script -->
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/materialize.min.js"></script>
-	<script type="text/javascript"
-		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
-	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
 			//mainboard最小高度

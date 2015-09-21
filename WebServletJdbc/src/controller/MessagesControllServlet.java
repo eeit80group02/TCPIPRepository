@@ -26,6 +26,7 @@ public class MessagesControllServlet extends HttpServlet {
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		
 		// 1.接收資料
 		// session...
