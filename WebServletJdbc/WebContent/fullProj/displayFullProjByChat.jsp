@@ -344,7 +344,6 @@
 	<textarea id="schoolContent"></textarea><sapn id="schoolError"></sapn><br>
 	<input type="button" id="schoolButton" value="傳送"><br>
 	
-	<input type="button" id="btn" value="test"><br>
 </main>
 
 
