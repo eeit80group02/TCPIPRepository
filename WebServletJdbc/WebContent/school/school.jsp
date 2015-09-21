@@ -83,7 +83,7 @@
 					</div>				
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
+							<a id="changepassworda" href="../donation/InsertDonateGoods.jsp" class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 										建立物資需求
 								</span>

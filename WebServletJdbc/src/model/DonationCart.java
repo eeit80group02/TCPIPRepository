@@ -13,7 +13,7 @@ public class DonationCart {
 		cart = new LinkedHashMap<>();
 	}
 	
-	public List<String> getDonationIds() {
+	public List<String> getDonationIdList() {
 		List<String> itemList = new ArrayList<>();
 		Set<Integer> s = cart.keySet();
 		for(Integer i : s) {
@@ -22,6 +22,16 @@ public class DonationCart {
 //			System.out.println("$('#"+i+"')");
 		}
 		return itemList;
+	}
+	
+	public String getDonationIdString() {
+		String idString = "";
+		Set<Integer> s = cart.keySet();
+		for(Integer i : s) {
+			idString += i+"@";
+		}
+		System.out.println("idString= "+idString);
+		return idString;
 	}
 
 	public Map<Integer,DonationBeanDuplicate> getContent() {
