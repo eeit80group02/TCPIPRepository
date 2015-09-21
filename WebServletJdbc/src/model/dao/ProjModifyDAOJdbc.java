@@ -141,6 +141,61 @@ public class ProjModifyDAOJdbc implements ProjModifyDAO
 		return result;
 	}
 
+	private static final String SELECT_BY_FULLPROJID = "SELECT projModifyId,fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime FROM ProjModify WHERE fullProjId = ?";
+	@Override
+	public List<ProjModifyBean> selectByFullProjId(int fullProjId)
+	{
+		List<ProjModifyBean> result = new ArrayList<ProjModifyBean>();
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_FULLPROJID);)
+		{
+			pstmt.setInt(1,fullProjId);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				while(rset.next())
+				{
+					ProjModifyBean bean = new ProjModifyBean();
+					bean.setProjModifyId(rset.getInt("projModifyId"));
+					bean.setFullProjId(rset.getInt("fullProjId"));
+					
+					if(rset.getObject("schoolId") != null)
+					{
+						bean.setSchoolId(rset.getInt("schoolId"));
+					}
+					else
+					{
+						bean.setSchoolId((Integer)rset.getObject("schoolId"));
+					}
+					
+					bean.setSchoolMessage(rset.getString("schoolMessage"));
+					bean.setSchoolMessageTime(rset.getTimestamp("schoolMessageTime"));
+					
+					if(rset.getObject("memberId") != null)
+					{
+						bean.setMemberId(rset.getInt("memberId"));
+					}
+					else
+					{
+						bean.setMemberId((Integer)rset.getObject("memberId"));
+					}
+					
+					bean.setMemberMessage(rset.getString("memberMessage"));
+					bean.setMemberMessageTime(rset.getTimestamp("memberMessageTime"));
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	private static final String INSERT = "INSERT INTO ProjModify (fullProjId,schoolId,schoolMessage,schoolMessageTime,memberId,memberMessage,memberMessageTime) VALUES (?,?,?,?,?,?,?)";
 	@Override
 	public ProjModifyBean insert(ProjModifyBean bean)
