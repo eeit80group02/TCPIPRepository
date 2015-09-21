@@ -151,7 +151,7 @@
 							<div class="col l3 center-align" style="font-size:1.4em;">
 								<div class="btn cyan lighten-5 black-text" style="width:100%;">需求內容</div>
 							</div>
-							<textarea class="col l7" id="content" name="content">${data.content}</textarea>
+							<textarea wrap="physical" class="col l7" id="content" name="content">${data.content}</textarea>
 							<div class="col l2">
 								<span>${error.content}</span>
 							</div>

@@ -27,7 +27,7 @@
 		  	
 		  	<div class="col l8 offset-l2" style="margin-top:5em;">
 			  	<ul class="tabs" id="tabs2">
-			        <li class="tab col l3"><a href="#test3" id="member2" class="black-text" style="font-family:微軟正黑體;font-weight:600">一般會員</a></li>
+			        <li class="tab col l3"><a href="#test3" id="member2" class="blue lighten-5 black-text active" style="font-family:微軟正黑體;font-weight:600">一般會員</a></li>
 			        <li class="tab col l3"><a href="#test4" id="school2" class="black-text" style="font-family:微軟正黑體;font-weight:600">學校會員</a></li>
 		      	</ul>
 			</div>
@@ -110,13 +110,8 @@
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
-	<!-- script -->
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-	<script type="text/javascript" src="../js/materialize.min.js"></script>
-	
 	
 	
 	<script>
@@ -146,7 +141,16 @@
 						$("#member2").removeClass("blue lighten-5")
 					}
 				}
-			})			
+			})
+			
+			//另個變色
+			$("#school2").on("click",function(){
+				if($("#member2").hasClass("blue lighten-5")){
+					console.log("hahaha")
+					$("#member2").removeClass("blue lighten-5");
+				}
+			})
+			
 		})
 	</script>
 </body>
