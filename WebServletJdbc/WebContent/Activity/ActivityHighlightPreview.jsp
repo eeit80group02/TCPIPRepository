@@ -7,12 +7,11 @@
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 </head>
-<body class="deep-orange lighten-5">
+<body class="cyan lighten-5">
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁首 -->
@@ -73,11 +72,8 @@
 	<script src="ckeditor/ckeditor.js"></script>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-	<script type="text/javascript"
-		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
-	<script
-		src="https://storage.googleapis.com/code.getmdl.io/1.0.4/material.min.js"></script>
 	<script>
 		$(function() {
 			//註冊modal事件

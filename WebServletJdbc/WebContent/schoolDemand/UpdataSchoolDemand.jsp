@@ -36,125 +36,155 @@
 	</div>	
 <!-- 內容 -->
 <main>
+		
+
 <!-- 主要版面 -->
 		<div class="row">
 			<div class="col l10 offset-l1">
-				<div class="row card-panel hoverable grey lighten-4">
-					<form action="<c:url value='SchoolDemandServlet.do?type=update' />" method="post" style="font-family:微軟正黑體;font-weight:600;">
+				<!-- 印出來、不能更動 -->
+				<div class="row">
+					<div class="col l6 offset-l3 orange accent-3 card-panel hoverable ">
+						<!-- 計畫編號 -->
 						<div class="row">
-							<div class="col l3" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text left-align" style="width:100%;">活動主題</div>
-							</div>
-							<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${Demand.activityTopic}"/>
-							<div class="col l2">
-								<span>${error.activityTopic}</span>
+							<div class="col l8">
+								<div class="forinput">需求計畫編號:</div>
+								<input type="hidden" name="fullProjId" value="${Demand.fullProjId}">
 							</div>
 						</div>
+						<!-- 會員編號 -->
 						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">活動地點</div>
+							<div class="col l8">
+								<div class="forinput">會員編號:</div>
+								<input type="hidden" name="memberId" value="${Demand.memberId}">
 							</div>
-							<input class="col l7" type="text" id="activityLocation" name="activityLocation" value="${Demand.activityLocation}"/>
-							<div class="col l2">
-								<span>${error.activityLocation}</span>
-							</div>						
-						</div>					
+						</div>						
+						<!-- 學校編號 -->
 						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">活動適合對象</div>
+							<div class="col l8">
+								<div class="forinput">學校編號:</div>
+								<input type="hidden" name="schoolId" value="${Demand.schoolId}">
 							</div>
-							<input class="col l7" type="text" id="activitySuitable" name="activitySuitable" value="${Demand.activitySuitable}"/>
-							<div class="col l2">
-								<span>${error.activitySuitable}</span>
-							</div>							
-						</div>					
-						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">預計參與學生人數</div>
-							</div>
-							<input class="col l7" type="number" id="participant" name="participant" value="${Demand.participant}"/>
-							<div class="col l2">
-								<span>${error.participant}</span>
-							</div>
-						</div>					
-						<!-- 可提供資源 -->
-						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">可提供資源</div>
-							</div>
-							<div class="col l7">
-								<div class="col l2">
-									<c:choose>
-										<c:when test="${Demand.offerBean.room}">
-											<input type="checkbox" name="room" id="room" checked="checked"/>
-											<label for="room">住宿</label>
-										</c:when>
-										<c:otherwise>
-											<input type="checkbox" name="room" id="room"/>
-											<label for="room">住宿</label>
-										</c:otherwise>
-									</c:choose>
+						</div>						
+					</div>
+				</div>					
+				<div class="row">
+					<div class="row card-panel hoverable grey lighten-4">
+						<form action="<c:url value='SchoolDemandServlet.do?type=update' />" method="post" style="font-family:微軟正黑體;font-weight:600;">
+							<div class="row">
+								<div class="col l3" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text left-align" style="width:100%;">活動主題</div>
 								</div>
+								<input class="col l7" type="text" id="activityTopic" name="activityTopic" value="${Demand.activityTopic}"/>
 								<div class="col l2">
-									<c:choose>
-										<c:when test="${Demand.offerBean.place}">
-											<input type="checkbox" name="place" id="place" checked="checked"/>
-											<label for="place">場地</label>
-										</c:when>
-										<c:otherwise>
-											<input type="checkbox" name="place" id="place"/>
-											<label for="place">住宿</label>
-										</c:otherwise>
-									</c:choose>
+									<span>${error.activityTopic}</span>
 								</div>
+							</div>
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">活動地點</div>
+								</div>
+								<input class="col l7" type="text" id="activityLocation" name="activityLocation" value="${Demand.activityLocation}"/>
 								<div class="col l2">
-									<c:choose>
-										<c:when test="${Demand.offerBean.food}">
-											<input type="checkbox" name="food" id="food" checked="checked"/>
-											<label for="food">場地</label>
-										</c:when>
-										<c:otherwise>
-											<input type="checkbox" name="food" id="food"/>
-											<label for="food">住宿</label>
-										</c:otherwise>
-									</c:choose>
+									<span>${error.activityLocation}</span>
+								</div>						
+							</div>					
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">活動適合對象</div>
 								</div>
-							</div>	
-						</div>					
+								<input class="col l7" type="text" id="activitySuitable" name="activitySuitable" value="${Demand.activitySuitable}"/>
+								<div class="col l2">
+									<span>${error.activitySuitable}</span>
+								</div>							
+							</div>					
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">預計參與學生人數</div>
+								</div>
+								<input class="col l7" type="number" id="participant" name="participant" value="${Demand.participant}"/>
+								<div class="col l2">
+									<span>${error.participant}</span>
+								</div>
+							</div>					
+							<!-- 可提供資源 -->
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">可提供資源</div>
+								</div>
+								<div class="col l7">
+									<div class="col l2">
+										<c:choose>
+											<c:when test="${Demand.offerBean.room}">
+												<input type="checkbox" name="room" id="room" checked="checked"/>
+												<label for="room">住宿</label>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" name="room" id="room"/>
+												<label for="room">住宿</label>
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div class="col l2">
+										<c:choose>
+											<c:when test="${Demand.offerBean.place}">
+												<input type="checkbox" name="place" id="place" checked="checked"/>
+												<label for="place">場地</label>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" name="place" id="place"/>
+												<label for="place">住宿</label>
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div class="col l2">
+										<c:choose>
+											<c:when test="${Demand.offerBean.food}">
+												<input type="checkbox" name="food" id="food" checked="checked"/>
+												<label for="food">場地</label>
+											</c:when>
+											<c:otherwise>
+												<input type="checkbox" name="food" id="food"/>
+												<label for="food">住宿</label>
+											</c:otherwise>
+										</c:choose>
+									</div>
+								</div>	
+							</div>					
+							
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">活動負責人</div>
+								</div>
+								<input class="col l7" type="text" id="activityHost" name="activityHost" value="${Demand.activityHost}"/>
+								<div class="col l2">
+									<span>${error.activityHost}</span>
+								</div>
+							</div>					
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">負責人聯絡方式</div>
+								</div>
+								<input class="col l7 tooltipped" type="text" id="activityContact" name="activityContact" value="${Demand.activityContact}"
+								 data-position="bottom" data-delay="50" data-tooltip="建議輸入email"	/>
+								<div class="col l2">
+									<span>${error.activityContact}</span>
+								</div>
+							</div>					
+							<div class="row">
+								<div class="col l3 center-align" style="font-size:1.4em;">
+									<div class="btn cyan lighten-5 black-text" style="width:100%;">需求內容</div>
+								</div>
+								<textarea wrap="physical" class="col l7" id="content" name="content">${Demand.content}</textarea>
+								<div class="col l2">
+									<span>${error.content}</span>
+								</div>
+							</div>					
+							<div class="row">
+								<button class="btn-large right  blue accent-2" type="submit" style="font-size:1.5em;">送出</button>
+							</div>					
 						
-						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">活動負責人</div>
-							</div>
-							<input class="col l7" type="text" id="activityHost" name="activityHost" value="${Demand.activityHost}"/>
-							<div class="col l2">
-								<span>${error.activityHost}</span>
-							</div>
-						</div>					
-						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">負責人聯絡方式</div>
-							</div>
-							<input class="col l7 tooltipped" type="text" id="activityContact" name="activityContact" value="${Demand.activityContact}"
-							 data-position="bottom" data-delay="50" data-tooltip="建議輸入email"	/>
-							<div class="col l2">
-								<span>${error.activityContact}</span>
-							</div>
-						</div>					
-						<div class="row">
-							<div class="col l3 center-align" style="font-size:1.4em;">
-								<div class="btn cyan lighten-5 black-text" style="width:100%;">需求內容</div>
-							</div>
-							<textarea class="col l7" id="content" name="content">${Demand.content}</textarea>
-							<div class="col l2">
-								<span>${error.content}</span>
-							</div>
-						</div>					
-						<div class="row">
-							<button class="btn-large right  blue accent-2" type="submit" style="font-size:1.5em;">送出</button>
-						</div>					
-					
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
