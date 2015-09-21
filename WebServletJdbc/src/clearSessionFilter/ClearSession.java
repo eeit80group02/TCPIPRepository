@@ -27,11 +27,13 @@ public class ClearSession implements Filter{
 			request = (HttpServletRequest)req;
 			response = (HttpServletResponse)resp;
 		}
-		System.out.println(request.getServletPath());
+		HttpSession session = request.getSession();
 		if(!request.getServletPath().equals("/schoolDemand/CreatSchoolDemand.jsp")){
-			HttpSession session = request.getSession();
 			session.removeAttribute("error");
 			session.removeAttribute("data");
+		}
+		if(!request.getServletPath().equals("/schoolDemand/SchoolDemandServlet.do")&&!request.getServletPath().equals("/schoolDemand/Display.jsp")&&!request.getServletPath().equals("/schoolDemand/UpdataSchoolDemand.jsp") ){
+			session.removeAttribute("Demand");
 		}
 		chain.doFilter(request, response);
 	}
