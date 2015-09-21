@@ -1,30 +1,159 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>		
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=BIG5">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>displayPrimaryProjAll</title>
+<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
+	media="screen,projection" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<body>
-<!-- ¾Ç®Õ¦Û¤v¬İ¦Û¤v¼g¤F¦h¤Ö­pµe -->
-	<form action="SchoolDemandServlet.do?type=displayPersonalAll" method="post">
-	<input type="submit">
-	</form>
-	<c:forEach var="bean" items="${list}">
-		${bean.participant}<br>      <%-- ¹w­p°Ñ»Pªº¾Ç¥Í¤H¼Æ --%>
-		${bean.activityTopic}<br>    <%-- ¬¡°Ê¥DÃD(«ü¾Ç®Õ§Æ±æ§Ó¤u³W¹ºªº¥DÃD)--%>
-		${bean.activityLocation}<br> <%-- ¬¡°Ê¦aÂI(«D¥²¶ñ) --%>
-		${bean.activitySuitable}<br> <%-- ¬¡°Ê¾A¦X¹ï¶H(«ü¾Ç®Õ§Æ±æ§Ó¤u¨Ó±a»âªº¤Hªºµ{«×) --%>
-		${bean.activityHost}<br>     <%-- ¬¡°Ê­t³d¤H(¾Ç®Õ¤è­t³d¦¹¶µ­pµeªºÁpµ¸¤H) --%>
-		${bean.activityContact}<br>  <%-- ­t³d¤HÁpµ¸¤è¦¡(¥«¸Ü¡B¤â¾÷¬Ò¥i¡A«eºİ´£¿ô¨Ï¥ÎªÌ¨Ì·Ó¿é¤Jªº®æ¦¡) --%>
-		${bean.createDate}<br>       <%-- «Ø¥ß¤é´Á(­pµe»İ¨Dµo§Gªº¤é´Á)- ¥i¥Hºâ¥X´C¦X´ÁºI¤î®É¶¡ --%>
-		${bean.content}<br>          <%-- »İ¨D¤º®e(1000¦r?) --%>
-		${bean.demandStatus}<br>     <%-- ­pµeª¬ºA(«İ¬¢½Í¡B¬¢½Í¤¤¡B¬¢½Í§¹¦¨¡B¬¢½Í¥¢±Ñ) --%>
-		${bean.offerBean.room}<br>   <%-- ¦í±J(1ªí¥Ü´£¨Ñ 0 ªí¥Ü¤£´£¨Ñ) --%>
-		${bean.offerBean.place}<br>  <%-- ¬¡°Ê³õ¦a(1ªí¥Ü´£¨Ñ 0 ªí¥Ü¤£´£¨Ñ) --%>
-		${bean.offerBean.food}<hr>   <%-- ¥ë­¹(1ªí¥Ü´£¨Ñ 0 ªí¥Ü¤£´£¨Ñ) --%>
-	</c:forEach>
+<body class="deep-orange lighten-5">
+	
+	<!-- é é¦– -->
+		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
+	<!-- é é¦– -->  
+
+
+	
+	
+	<!-- é é¢ä¸»é¡Œæç¤º -->
+	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
+		<h1 class="valign center-align white-text"
+			style="font-family: å¾®è»Ÿæ­£é»‘é«”; margin: 0 auto; font-size: 5em;">éœ€æ±‚è¨ˆç•«</h1>
+	</div>
+	
+	
+	<!-- å…§å®¹ -->
+	<main>
+		<div class="row">
+		<!-- å´é‚Šç¯©é¸æ¢ä»¶æ¬„ -->
+			<div class="col l3 offset-l1 z-depth-3 hide-on-med-and-down"
+				style="position: absolute; top: 166; padding: 0" id="sidebar">
+				<div class="collection"
+					style="margin: 0 auto; font-family: å¾®è»Ÿæ­£é»‘é«”; font-weight: 900;">
+					<ul style="margin: 0;">
+						<li class="collection-header collection-item center-align"
+							style="padding: 0;"><h5 class="teal accent-2"
+								style="margin: 0; display: block; padding: 15px 0 15px 0;">æ’åº</h5></li>
+						<li><a href="<c:url value='SchoolDemandServlet.do?type=displays' />" class="collection-item">æŸ¥è©¢å…¨éƒ¨</a></li>
+						<li><a href="<c:url value='SchoolDemandServlet.do?type=displayPersonalRender' />" class="collection-item">å¾…æ´½è«‡</a></li>
+						<li><a href="<c:url value='SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="collection-item">å¾…å¯©æ ¸</a></li>
+						<li><a href="#!" class="collection-item">éœ€æ±‚äººæ•¸</a></li>
+						<li><a href="#!" class="collection-item">å·²å‹Ÿé›†äººæ•¸</a></li>
+					</ul>
+				</div>
+				<div class="collection"
+					style="margin: 0 auto; font-family: å¾®è»Ÿæ­£é»‘é«”; font-weight: 900;">
+					<ul style="margin: 0;">
+						<!-- æç¤º[ç¯©é¸] -->
+						<li class="collection-header collection-item center-align"
+							style="padding: 0;"><h5 class="teal accent-2"
+								style="margin: 0; display: block; padding: 15px 0 15px 0;">ç¯©é¸</h5></li>
+						<li><a href="#!" class="collection-item">åŒ—éƒ¨åœ°å€</a></li>
+						<li><a href="#!" class="collection-item">ä¸­éƒ¨åœ°å€</a></li>
+						<li><a href="#!" class="collection-item">å—éƒ¨åœ°å€</a></li>
+						<li><a href="#!" class="collection-item">æ±éƒ¨åœ°å€</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			<c:set var="listlength" value="${fn:length(list)}" />
+			<!-- åˆæ­¥è¨ˆç•«åˆ—è¡¨ -->
+			<div class="col l8 offset-l4" id="projlist">
+				<div class="centerdiv">
+				<c:forEach  var="demand" items="${list}" varStatus="varStatus" >
+					<c:url value="/SchoolDemandServlet.do" var="path">
+						<c:param name="type" value="display" />
+						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" />
+					</c:url>
+					
+					<!-- å¡ç‰‡é–‹å§‹ -->
+					      <div class="row">
+					        <div class="col s12 m6">
+					          <div class="card blue-grey darken-1">
+					            <div class="card-content white-text">
+					              <span class="card-title">${demand.activityTopic}</span>
+					              <p>${demand.activityLocation}</p>
+					              <p>${demand.activitySuitable}</p>
+					            </div>
+					            <div class="card-action">
+					              <p>${demand.demandStatus}</p>
+					              <a href="#">æŸ¥çœ‹</a>
+					            </div>
+					          </div>
+					        </div>
+					      </div>
+					<!-- å¡ç‰‡çµæŸ -->
+				</c:forEach>
+				</div>				
+			</div>
+		</div>
+	</main>
+
+
+	<!-- é å°¾ -->
+		<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
+	<!-- é å°¾ -->  
+
+	<!-- script -->
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+	<script>
+		$(function() {
+			//å›ºå®šå´é‚Šæ¬„æ‰€åœ¨ä½ç½®
+			$(window).on("scroll", function() {
+				if ($(this).scrollTop() <= $("#projlist").position().top) {
+					$("#sidebar").css({
+						"position" : "absolute",
+						"top" : $("#projlist").position().top
+					});
+				} else {
+					$("#sidebar").css({
+						"position" : "fixed",
+						"top" : 0
+					});
+				}
+			})
+			//æç¤ºé é¢ä¸»é¡Œæ¬„çš„é«˜åº¦
+			var pagetitleheight = ($(window).height() * 0.25);
+			$("#pagetitle").css("height", pagetitleheight);
+			//è¨»å†Šmodaläº‹ä»¶
+			$(".modal-trigger").leanModal();
+			//è§¸ç™¼å¡ç‰‡ç¿»è½‰äº‹ä»¶
+			$(".touche").each(function() {
+				$(this).mouseover(function() {
+					$(".activator", this).trigger("click");
+				})
+				$(this).mouseout(function() {
+					$(".card-title", this).trigger("click");
+				})
+			})
+			//footerä¸­é€£çµçš„æ–‡å­—å¤§å°
+			$("a").css("font-size", "1.2em");
+			//æç¤ºå€å¡Šçš„æŒ‰éˆ•
+			$(".projinfos").css("margin", "0px auto");
+			//navagationä¸Šlogoçš„é«˜åº¦
+			$("img[title='TCPIP']").attr("height", "70");
+			//è¨­å®šbodyå¯¬åº¦ç‚º100%
+			$("body").css("width", "100%").css("height", "100%");
+			$(".centerdiv").css("height", "385px");
+			$(".card").css("width", "310px");
+		})
+	</script>
+	<script>
+		//å“æ‡‰å¼é«˜åº¦
+		$(window).on("resize", function() {
+			var pagetitleheight2 = ($(window).height() * 0.25);
+			$("#pagetitle").css("height", pagetitleheight2);
+		});
+	</script>
 </body>
 </html>

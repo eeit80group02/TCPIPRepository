@@ -51,7 +51,7 @@ public class DemandSelected extends HttpServlet {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
-			List<String> list = dCart.getDonationIds();
+			List<String> list = dCart.getDonationIdList();
 			
 //			request.setAttribute("AllDemands", listDuplivate);
 			session.setAttribute("AllDemands", listDuplivate);
@@ -72,7 +72,7 @@ public class DemandSelected extends HttpServlet {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listdbd = service.findOneAllDeamndByMember(schoolId);
-			List<String> list = dCart.getDonationIds();
+			List<String> list = dCart.getDonationIdList();
 			
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", listdbd);

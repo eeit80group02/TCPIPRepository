@@ -42,18 +42,6 @@
 
 <!-- 主要版面 -->
 <main>
-	
-<!-- 	form   [fullProj.do]  id=fullform -->
-<!-- 	計畫封面  id=picture,name=imgFile -->
-<!-- 	計畫名稱  id=title,name=title -->
-<!-- 	理想地點  id=location,name=location -->
-<!-- 	活動時間  id=starttime,name=starttime -->
-<!-- 		   id=endtime,name=endtime -->
-<!-- 	預計人數  id=demandNum,name=demandNum -->
-<!-- 	活動預算  id=budget,name=budget -->
-<!-- 	活動摘要  id=projAbstract,name=projAbstract -->
-<!-- 	活動內容  id=content,name=content -->
-
 	<div class="row">
 		
 		<!-- 切版面開始 -->
@@ -105,7 +93,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫名稱</div>
-								<input id="title" type="text" name="title"  value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="title" type="text" name="title"  value="${param.title}" style="font-size:1.2em;color:black;font-weight:600;" required />
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.title}</span>
@@ -117,7 +105,7 @@
 						<div class="row">
 							<div class="col l4">
 									<div id="forlocation" class="forinput">活動地點</div>
-									<input class="center-align forvalue" id="location" type="text"  value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;" required>	
+									<input class="center-align forvalue" id="location" type="text"  value="${param.location}" name="location" style="font-size:1.2em;color:black;font-weight:600;" required />	
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.location}</span>
@@ -149,7 +137,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">招募人數</div>
-								<input id="estMember" type="number" name="estMember"  value="${param.estMember}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="estMember" type="number" name="estMember"  value="${param.estMember}" style="font-size:1.2em;color:black;font-weight:600;" required />
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.estMember}</span>
@@ -162,7 +150,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">活動預算</div>
-								<input id="budget" type="number" name="budget"  value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<input id="budget" type="number" name="budget"  value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;" required />
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.budget}</span>
@@ -226,7 +214,8 @@
 				</form>
 			  </div>	
 				<!-- 圖片預覽版面  col l2-->
-				<div class="col l2">
+				<div class="col l4">
+					<h4 class="left-align blue-text" style="font-weight:600;">完整計畫封面預覽</h4>
 					<img class="card-panel hoverable" id="view" src="${param.base64String}" style="height: 250px; width: 310px;border:5px solid black;padding:0;" >
 				</div>				
 				
@@ -260,7 +249,7 @@
 			})
 			
 			//datepicker初始化(活動時間)
-		   var $picker1 =  $('#starttime').pickadate({
+		   var $picker1 =  $('#activityStartTime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 10,
 			   format: 'yyyy-mm-dd',
@@ -271,7 +260,7 @@
 			   close:"確定"
 		    });
 		   
-		   var $picker2 = $('#endtime').pickadate({
+		   var $picker2 = $('#activityEndTime').pickadate({
 			   selectMonths: true, // Creates a dropdown to control month
 			   selectYears: 3,
 			   format: 'yyyy-mm-dd',
