@@ -59,7 +59,7 @@ public class ProcessingMemberService {
 				bean.setCheckStatus("未通過");
 				result = processingMemberDAO.update(bean);
 				if(result != null){
-					sBean.setDemandStatus("洽談完成");
+					sBean.setDemandStatus("洽談失敗");
 					schoolDemandDAO.update(sBean);
 				}
 			}
