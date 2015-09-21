@@ -284,10 +284,10 @@
 	
 			<!-- 按鈕版面 -->
 			<div class="col l2">
-				<div class="card-panel white">
-					<!-- 學校同意按鈕 -->
-					<c:if test="${LoginOK.beanName.equals('school')}">
-						<c:if test="${empty fullProj.schoolConfirm}">
+				<!-- 學校同意按鈕 -->
+				<c:if test="${LoginOK.beanName.equals('school')}">
+					<c:if test="${empty fullProj.schoolConfirm}">
+						<div class="card-panel white">
 							<form action="<c:url value="/fullProj.do" />" method="post">
 								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}" />
 								<input type="hidden" name="location" value="${fullProj.location}">
@@ -295,21 +295,29 @@
 								<input type="hidden" name="type" value="schoolConfirm">
 								<button type="submit" class="btn-large white-text red" style="width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;">學校同意</button>
 							</form>
-						</c:if>
-					</c:if>				
-					<!-- 發起者發布按鈕 -->
-					<c:if test="${LoginOK.beanName.equals('member')}">
-						<c:if test="${empty fullProj.memberConfirm && fullProj.schoolConfirm == true}">
+							${sessionScope.schoolConfirm}
+						</div>
+					</c:if>
+				</c:if>		
+						
+				<!-- 發起者發布按鈕 -->
+				<c:if test="${LoginOK.beanName.equals('member')}">
+					<c:if test="${empty fullProj.memberConfirm && fullProj.schoolConfirm == true}">
+						<div class="card-panel white">
 							<form action="<c:url value="/fullProj.do" />" method="post">
 								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}" />
 								<input type="hidden" name="type" value="memberConfirm">
 								<button type="submit" class="btn-large white-text red" style="width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;" >完整計畫發布</button>
 							</form>
-						</c:if>
-					</c:if>					
-					<!-- 導向修改頁面，並且把這頁資料傳送過去 -->
-					<c:if test="${LoginOK.beanName.equals('member')}">
-						<c:if test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中')}">
+						</div>
+					</c:if>
+				</c:if>		
+				
+							
+				<!-- 導向修改頁面，並且把這頁資料傳送過去 -->
+				<c:if test="${LoginOK.beanName.equals('member')}">
+					<c:if test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中') && empty fullProj.schoolConfirm}">
+						<div class="card-panel white">
 							<form action="<c:url value="/fullProj/updateFullProjForm.jsp" />" method="post" accept-charset="UTF-8">
 								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
 								<input type="hidden" name="memberId" value="${fullProj.memberId}">
@@ -326,9 +334,9 @@
 								<input type="hidden" name="base64String" value="${fullProj.base64String}">
 								<button type="submit" class="btn-large white-text red" style="width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;">補齊完整計畫</button>
 							</form>
-						</c:if>
+						</div>
 					</c:if>
-				</div>
+				</c:if>
 			</div>
 		</div>		
 		<div id="myDiv">
