@@ -82,15 +82,106 @@
 	以下Q&A<br>
 			
 	<div id="myDiv">
-	
 	</div>
-	<textarea></textarea>
-	<input type="button">
 	
+	會員
+	<textarea id="memberContent"></textarea><sapn id="memberError"></sapn><br>
+	<input type="button" id="memberButton" value="傳送"><br>
+	<hr>
+	學校
+	<textarea id="schoolContent"></textarea><sapn id="schoolError"></sapn><br>
+	<input type="button" id="schoolButton" value="傳送"><br>
+	
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	
+	<input type="button" id="btn" value="test"><br>
 	<script>
+		// jQuery
 		$(function(){
+			displayMessage();
+			var timer = setInterval(displayMessage,60000);
+	        
+			$("#memberButton").on("click",function(){
+				if($("#memberContent").val().length < 10) {
+					$("#memberError").html("留言必須大於10個字");
+				}
+				else{
+					$("#memberError").empty();
+					addMemberMessage();
+					$("#memberContent").val("");
+				}
+			});
 			
+			$("#schoolButton").on("click",function(){
+				if($("#schoolContent").val().length < 10) {
+					$("#schoolError").html("留言必須大於10個字");
+				}
+				else{
+					$("#schoolError").empty();
+					addSchoolMessage();
+					$("#schoolContent").val("");
+				}
+			});
+		
+			function addMemberMessage(){
+				$.ajax({
+					"url": "<c:url value='/ProjModifyServlet.do' />",
+					"type":"POST",
+					"data":{"type":"addMember","fullProjId":"${fullProj.fullProjId}","memberId":"${fullProj.memberId}","content":$("#memberContent").val()},
+					"dataType" :"json",
+					"success":function(data){
+						displayMessage();
+					}
+				});
+			}
+			
+			function addSchoolMessage(){
+				$.ajax({
+					"url": "<c:url value='/ProjModifyServlet.do' />",
+					"type":"POST",
+					"data":{"type":"addSchool","fullProjId":"${fullProj.fullProjId}","schoolId":"${fullProj.schoolId}","content":$("#schoolContent").val()},
+					"dataType" :"json",
+					"success":function(data){
+						displayMessage();
+					}
+				});
+			}
+			
+			function displayMessage(){
+				$.ajax({
+					"url": "<c:url value='/ProjModifyServlet.do' />",
+					"type":"POST",
+					"data":{"type":"display","fullProjId":"${fullProj.fullProjId}"},
+					"dataType" :"json",
+					"success":function(data){
+						// data => Object
+						// console.log(data);
+						$("#myDiv > div").remove();
+						$.each(data.result,function(index,value){
+							// data.result => Array[]
+							// Array[index] => Object
+							if(value.schoolId == "null"){
+		 						var memberContent = "會員ID:" + value.memberId + "<br>" + 
+			 										"留言:" + value.memberMessage + "<br>" +
+			  										"時間:" + value.memberMessageTime + "<br>" + 
+													"--------------------------------";	
+		 						var contentDiv = $("<div></div>").html(memberContent);
+		 						$("#myDiv").append(contentDiv);
+							}
+							if(value.memberId == "null"){
+								var schoolContent = "學校ID:" + value.schoolId + "<br>" + 
+	 												"留言:" + value.schoolMessage + "<br>" +
+	  												"時間:" + value.schoolMessageTime + "<br>" + 
+	  												"--------------------------------";
+								var contentDiv = $("<div></div>").html(schoolContent);
+								$("#myDiv").append(contentDiv);
+							}
+						});
+					}
+				});
+			}
 		})
+
 	</script>
 			
 			
