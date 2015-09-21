@@ -180,6 +180,45 @@ public class MissionSetDAOJdbc implements MissionSetDAO
 		
 		return result;
 	}
+	
+	private static final String FIND_BY_MISSIONBOARDID = "SELECT missionSetId,missionBoardId,name,missionSetOrder FROM MissionSet WHERE missionBoardId = ?";
+	public List<MissionSetBean> findByMissionBoardID(int id)
+	{
+		List<MissionSetBean> result = new ArrayList<MissionSetBean>();
+		MissionSetBean bean;
+		
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(FIND_BY_MISSIONBOARDID);)
+		{
+			pstmt.setInt(1,id);
+			try(ResultSet rs = pstmt.executeQuery())
+			{			
+				while(rs.next())
+				{
+					bean = new MissionSetBean();
+					bean.setMissionSetId(rs.getInt(1));
+					bean.setMissionBoardId(rs.getInt(2));
+					bean.setName(rs.getString(3));
+					bean.setMissionSetOrder(rs.getInt(4));
+					
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
 	public static void main(String[] args)
 	{
 		MissionSetDAOJdbc dao = new MissionSetDAOJdbc();

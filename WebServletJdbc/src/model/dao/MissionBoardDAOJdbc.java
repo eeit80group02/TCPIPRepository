@@ -181,6 +181,39 @@ public class MissionBoardDAOJdbc implements MissionBoardDAO
 		}
 		return result;
 	}
+	
+	private static final String FIND_BY_FULLPROJID = "SELECT missionBoardId,fullProjId,name,missionSetNum FROM MissionBoard WHERE fullProjId = ?";
+	public MissionBoardBean findByFullProjId(int id)
+	{
+		MissionBoardBean result = null;
+
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(FIND_BY_FULLPROJID);)
+		{
+			pstmt.setInt(1,id);
+			try(ResultSet rs = pstmt.executeQuery();)
+			{
+				if(rs.next())
+				{
+					result = new MissionBoardBean();
+					result.setMissionBoardId(rs.getInt(1));
+					result.setFullProjId(rs.getInt(2));
+					result.setName(rs.getString(3));
+					result.setMissionSetNum(rs.getInt(4));
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		MissionBoardDAOJdbc dao = new MissionBoardDAOJdbc();
