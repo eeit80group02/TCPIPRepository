@@ -53,12 +53,13 @@
 	</div>	
 
 <!-- 內容 -->
+
 <main>
 <!-- 主要版面 -->
 		<div class="row">
 			<div class="col l10 offset-l1">
 				<div class="row card-panel hoverable grey lighten-4">
-					<form action="SchoolDemandServlet.do?type=create" method="post" style="font-family:微軟正黑體;font-weight:600;">
+					<form action="<c:url value='SchoolDemandServlet.do?type=create' />" method="post" style="font-family:微軟正黑體;font-weight:600;">
 						<div class="row">
 							<div class="col l3" style="font-size:1.4em;">
 								<div class="btn cyan lighten-5 black-text left-align" style="width:100%;">活動主題</div>
