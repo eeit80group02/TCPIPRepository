@@ -129,7 +129,7 @@
 <!-- 		<div class="row" style="padding:10px;"> -->
 		
 		
-<!-- 			<!-- 左半邊填資料處 --> -->
+<!-- 			<!-- 左半邊填資料處 --> 
 <!-- 			<div class="col s12 m4 l8 deep-purple lighten-5" style="padding:2em;"> -->
 <!-- 				<div class="input-field col s12"> -->
 <!-- 					<input id="videoURL" type="text" class="validate" name="videoURL" > -->
@@ -146,9 +146,9 @@
 <!-- 								</div> -->
 <!-- 							</div> -->
 <!-- 						</div> -->
-<!-- <!-- 				<div class="input-field col s12"> --> -->
-<!-- <!-- 					<textarea class="ckeditor" name="content" id="content"></textarea> --> -->
-<!-- <!-- 				</div> --> -->
+<!-- <!-- 				<div class="input-field col s12"> --> 
+<!-- <!-- 					<textarea class="ckeditor" name="content" id="content"></textarea> --> 
+<!-- <!-- 				</div> --> 
 <!-- 				<div class="input-field col s12"> -->
 <!-- 					<input id="fullProjId" type="hidden"> -->
 <!-- 					<input id="memberId" type="hidden"> -->
@@ -165,7 +165,7 @@
 <!-- 			</div> -->
 			
 			
-<!-- 			<!-- 右半邊預覽處 --> -->
+<!-- 			<!-- 右半邊預覽處 --> 
 <!-- 			<div class="col s12 m4 l4"> -->
 <!-- 				<div class="input-field col s12"> -->
 <!-- 					<h4>花絮封面預覽</h4> -->
