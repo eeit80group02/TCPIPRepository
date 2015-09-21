@@ -377,11 +377,16 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
+	
 	<script>
 		// jQuery
 		$(function(){
 			displayMessage();
-			var timer = setInterval(displayMessage,60000);
+			var closeTimer = <fmt:formatDate value="${fullProj.createDate}" pattern="yyyy-MM-dd" />
+			
+			if(typeof(closeTimer) == "undefined"){
+				var timer = setInterval(displayMessage,60000);
+			}
 	        
 			$("#memberButton").on("click",function(){
 				if($("#memberContent").val().length < 10) {
