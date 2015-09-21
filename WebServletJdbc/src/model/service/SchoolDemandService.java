@@ -138,7 +138,7 @@ public class SchoolDemandService {
 		olist = offersDao.getAll();
 		for(SchoolDemandBean temp : list){
 			for(OffersBean obean : olist){
-				if(temp.getDemandStatus().equals("待洽談") && bean.getSchoolId().equals(temp.getSchoolId())){		
+				if(bean.getSchoolId().equals(temp.getSchoolId()) && temp.getDemandStatus().equals("待洽談") && temp.getSchoolDemandId().equals(obean.getSchoolDemandId())){		
 					temp.setOfferBean(obean);
 					result.add(temp);
 				}
