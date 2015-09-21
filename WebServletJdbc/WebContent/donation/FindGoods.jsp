@@ -142,7 +142,16 @@
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
 	<!-- 標頭專用 bottom end -->
+	
 	<script>
+	// deleteAll
+	$('#donateDelete').click(function(){
+		// 設定cookie值
+		var now = new Date();
+		now.setTime(now.getTime()-1);
+		document.cookie="Items=;expire="+now.toUTCString();
+	});
+	
 	// 取出指定name的value
 	var objName = "Items";
 	var tempvalue = getCookie(objName);
