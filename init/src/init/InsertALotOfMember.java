@@ -4,16 +4,18 @@ package init;
  * 圖片為預設圖片
  * 密碼為: passw0rd
  */
+
+import global.GlobalService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
-
-import global.GlobalService;
 
 public class InsertALotOfMember {
 	private static final String URL = GlobalService.URL;
@@ -23,11 +25,11 @@ public class InsertALotOfMember {
 	private static final String INSERT = "INSERT INTO Member(lastName,firstName,idNumber,phone,cellPhone,birthday,address,gender,email,pictureName,picture,pictureLength,registerTime,RecommendCount,account,password,accountStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	public static void start() {
-		
+		BufferedReader br = null;
 		try {
 			File fr = new File("schoolData\\member.txt");
 //			new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));)
-			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF-8"));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF-8"));
 			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);
 			while (br.ready()) {
@@ -61,6 +63,20 @@ public class InsertALotOfMember {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally
+		{
+			if(br != null)
+			{
+				try
+				{
+					br.close();
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
 		System.out.println("好多筆會員資料新增成功");
 	}

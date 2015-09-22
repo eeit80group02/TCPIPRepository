@@ -5,7 +5,6 @@ import global.GlobalService;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MemberBean;
 import model.PrimaryProjBean;
 import model.ProcessingProjBean;
 import model.dao.MemberDAOJdbc;
@@ -61,7 +60,6 @@ public class PrimaryProjService
 			PrimaryProjBean temp = primaryProjDAO.findByPrimaryKey(bean.getPrimaryProjId());
 			if(temp != null)
 			{
-				temp.setMemberId(bean.getMemberId());
 				temp.setTitle(bean.getTitle());
 				temp.setProjAbstract(bean.getProjAbstract());
 				temp.setContent(bean.getContent());

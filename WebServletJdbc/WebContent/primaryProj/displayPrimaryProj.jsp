@@ -163,7 +163,7 @@
 				</div>
 			</div>
 			<div class="col l2">
-				<c:set var="deadline" value="90000000" />
+				<c:set var="deadline" value="900000000000" />
 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 
 				<!-- 	檢查 登入者是否學校 -->
 					<c:if test="${LoginOK.beanName.equals('school')}">
@@ -183,11 +183,22 @@
 						</c:if>
 					</c:if>
 					
+					<!-- 修改按鈕 -->
 					<c:if test="${LoginOK.beanName.equals('member')}">
 						<c:if test="${LoginOK.memberId == primaryProj.memberId && (primaryProj.createDate.time + deadline) - nowDate > 0}">
-							<form action="<c:url value="/primaryProj.do" />" method="post">
+							<form action="<c:url value="/primaryProj/updatePrimaryProjForm.jsp" />" method="post" accept-charset="UTF-8">
 								<input type="hidden" name="type" value="displayUpdate">
 								<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
+								<input type="hidden" name="memberId" value="${primaryProj.memberId}">
+								<input type="hidden" name="title" value="${primaryProj.title}">
+								<input type="hidden" name="location" value="${primaryProj.idealPlace}">
+								<input type="hidden" name="startTime" value="<fmt:formatDate value="${primaryProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
+								<input type="hidden" name="endTime" value="<fmt:formatDate value="${primaryProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
+								<input type="hidden" name="demandNum" value="${primaryProj.demandNum}">
+								<input type="hidden" name="budget" value="${primaryProj.budget}">
+								<input type="hidden" name="projAbstract" value="${primaryProj.projAbstract}">
+								<input type="hidden" name="content" value='${primaryProj.content}'>
+								<input type="hidden" name="base64String" value="${primaryProj.base64String}">
 								<input class="btn-large white-text red accent-2" type="submit" value="修改" style="font-family:微軟正黑體;font-size:1.5em;width:100%;">
 							</form>
 						</c:if>

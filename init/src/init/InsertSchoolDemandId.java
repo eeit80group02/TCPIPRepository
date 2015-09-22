@@ -3,15 +3,12 @@ package init;
  * 本程式作用:新增數筆"學校需求"之資料於資料庫
  * 
  */
-import java.io.File;
-import java.io.FileInputStream;
+import global.GlobalService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Types;
 import java.text.SimpleDateFormat;
-
-import global.GlobalService;
 
 public class InsertSchoolDemandId {
 	private static final String URL = GlobalService.URL;
