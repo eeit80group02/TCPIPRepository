@@ -45,8 +45,11 @@ public class DemandSelected extends HttpServlet {
 		
 		// 1.接收資料
 		String type = request.getParameter("type");
+		System.out.println("type= "+type);
 		String schoolIdStr = request.getParameter("schoolId");
+		System.out.println("%1 "+schoolIdStr);
 		String donationIdStr = request.getParameter("donationId");
+		System.out.println("%2 "+donationIdStr);
 		if (type.equals("FindGoods")) {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
@@ -88,13 +91,15 @@ public class DemandSelected extends HttpServlet {
 		} else if (type.equals("OneDemandByMember")) {
 			// 2.資料轉換
 			int donationId = Integer.parseInt(donationIdStr);
+			System.out.println("++donationId "+donationId);
 			int schoolId = Integer.parseInt(schoolIdStr);
-			
+			System.out.println("++@schoolId "+schoolId);
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			/* 單一需求內容 */
 			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId);
-			
+			System.out.println("time1 "+donationBeanDuplicate.getDemandTime());
+			System.out.println("time2 "+donationBeanDuplicate.getExpireTime());
 			/* 留言處理 */
 			DonationDiscussService donationDiscussService = new DonationDiscussService();
 			List<DonationDiscussBeanDuplicate> discussList = donationDiscussService.getOneDonationAllMessages(donationId);

@@ -130,7 +130,6 @@ $(function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
-						alert("aa"+lists);
 						
 						// 設定cookie值
 						var now = new Date();
@@ -138,7 +137,7 @@ $(function() {
 						document.cookie="Items="+lists+";expire="+now.toUTCString();
 						
 					} else {
-						alert("something is wrong!");
+//						alert("something is wrong!");
 					}
 				}
 			});
@@ -155,7 +154,6 @@ $(function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
-						alert("bb"+lists);
 						
 						// 設定cookie值
 						var now = new Date();
@@ -164,7 +162,7 @@ $(function() {
 
 //						alert("刪除購物車品項一");
 					} else {
-						alert("something is wrong!");
+//						alert("something is wrong!");
 					}
 				}
 			});

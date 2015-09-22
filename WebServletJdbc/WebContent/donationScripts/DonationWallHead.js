@@ -8,7 +8,7 @@ $(function() {
 		var input = $("#searchDonation").val();
 		if (input != null && input.trim().length != 0) {
 			$("#searchDonation").val("" + input);
-			alert("按 Icon 搜尋 " + input);
+//			alert("按 Icon 搜尋 " + input);
 		}
 	});
 
@@ -28,7 +28,7 @@ $(function() {
 			var input = $("#searchDonation").val();
 			if (input != null && input.trim().length != 0) {
 				$("#searchDonation").val("" + input);
-				alert("按Enter 搜尋 " + input);
+//				alert("按Enter 搜尋 " + input);
 			}
 		}
 	});
@@ -39,7 +39,7 @@ $(function() {
 	
 	function getPressValue(){
 		var input = $(this).attr("value");
-		alert("以 " + input + " 排序");
+//		alert("以 " + input + " 排序");
 	}
 	
 	
