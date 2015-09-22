@@ -86,7 +86,7 @@
 					              <p>${demand.processingMemberBean.memberBean.lastName}${demand.processingMemberBean.memberBean.firstName}</p>
 					              <p>推薦數${demand.processingMemberBean.memberBean.recommendCount}</p>
 					              <p>${demand.demandStatus}</p>
-					              <a class="waves-effect waves-light btn">同意</a>
+					              <a class="waves-effect waves-light btn" href="<c:url value='Status.do?type=agree'/>">同意</a>
 					              <a class="waves-effect waves-light btn">不同意</a>
 					            </div>
 					          </div>

@@ -109,7 +109,7 @@
 										</c:when>
 										<c:otherwise>
 											<input type="checkbox" name="place" id="place"/>
-											<label for="place">住宿</label>
+											<label for="place">場地</label>
 										</c:otherwise>
 									</c:choose>
 								</div>
@@ -117,11 +117,11 @@
 									<c:choose>
 										<c:when test="${data.food}">
 											<input type="checkbox" name="food" id="food" checked="checked"/>
-											<label for="food">場地</label>
+											<label for="food">伙食</label>
 										</c:when>
 										<c:otherwise>
 											<input type="checkbox" name="food" id="food"/>
-											<label for="food">住宿</label>
+											<label for="food">伙食</label>
 										</c:otherwise>
 									</c:choose>
 								</div>

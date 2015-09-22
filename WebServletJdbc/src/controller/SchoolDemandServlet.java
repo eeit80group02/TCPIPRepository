@@ -473,6 +473,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			return;
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
+		System.out.println(bean);
 		session.removeAttribute("Demand");
 		int schoolDemandId = bean.getSchoolDemandId();
 		bean.setSchoolDemandId(schoolDemandId);
@@ -505,7 +506,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect("");
 			
 		} else {
-			System.out.println("查詢失敗   導向登入頁面");
+			System.out.println("查詢失敗   導向登入頁面");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 		}
 	}
 

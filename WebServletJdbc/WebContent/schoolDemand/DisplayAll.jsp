@@ -44,7 +44,7 @@
           		<!-- 放卡片 -->
           		<div class="row">
           			<!-- 卡 -->
-          			<c:if test="${not empty list }">
+          			<c:if test="${not empty list}">
           				<c:forEach items="${list}" var="bean">
 				          	<div class="col l5 white offset-l1 card-panel hoverable" style="padding:5px;">
 										<div class="row">
