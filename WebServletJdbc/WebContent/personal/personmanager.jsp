@@ -46,14 +46,14 @@
 						</div>
 						<div class="row divider" style="height:10px;"></div>					
 						<div class="row">
-							<a id="changepassworda" href="<c:url value='../primaryProj/displayPrimaryProjAll.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />">
+							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonal' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 									瀏覽初步計畫
 								</span>
 							</a>
 						</div>					
 						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonalByPending&memberId=${LoginOK.memberId}' />"> 
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonalByPending' />"> 
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 									審核初步計畫
 								</span>
@@ -82,7 +82,8 @@
 										洽談中
 								</span>
 							</a>											
-						</div>											
+						</div>
+						<a href='<c:url value='/schoolDemand/SchoolDemandServlet.do?type=mdisplays'/>'>111111</a>											
 					</div>				
 				</div>
 

@@ -73,21 +73,10 @@
 			//Set mission board container height fit with window
 			$('.nested_with_switc').height($(window).height()*0.7);
 			
-			//Set datepicker icon position
-			$('.missionDate').siblings('.ui-datepicker-trigger').css({'position':'relative',
-												'top':'-45px',
-												'left':'150px',
-												'cursor':'pointer'});
-			
-			$('.subMission .ui-datepicker-trigger').css({'position':'relative',
-														 'top':'20px',
-														 'left':'-20px',
-														 'cursor':'pointer'});
 			//Set mouseenter event
-			$('.addSubMissionExecutor').mouseenter(function(){
+			$(document).on('mouseenter','.addSubMissionExecutor', function(){
 				$(this).css({'cursor':'pointer'});
-			})
-			
+			});
 			
 			
 			//Define container for mission board
@@ -108,15 +97,6 @@
 					 var element = ui.draggable;
 			         $(this).append(element);
 					$(ui.draggable).fadeOut(300);
-
-					
-					/*
-					
-					            var element = $(ui.draggable).clone();
-					            $(this).append(element);
-					            element.fadeOut(1000);
-					            $(ui.draggable).remove();
-					 */
 				}
 
 			});
@@ -200,7 +180,7 @@
 				if(title==""){
 					title = "MissionSet";
 				}
-				var $li = $('<li class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + missionSetCount + 
+				var $li = $('<li class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
 						  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
 						  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
 						  '<i class="large material-icons">add</i></div>');
@@ -325,12 +305,13 @@
     	   			}
     	   
        			});
-				
-				
+								
 			});
 			
 			//Assign subMission Executor
 			$(document).on('click', '.addSubMissionExecutor', function(){
+				
+				var target = event.target;
 				var pos =  $(this).position();
 				$('.popupParticipatorWindow').dialog("option", "position", {
                     my: "top",
@@ -349,7 +330,7 @@
     	   				  'fullProjId':$('.fullProjId').val() },
     	   			dataType:'json',
     	   			success:function(result){
-    	   				console.log(result);
+//     	   				console.log(result);
     	   				$.each(result.members, function(){
     	   					
     	   					var participatorName = this.memberName;
@@ -358,6 +339,22 @@
         					var $li = $('<li class="participator"></li>').html('<div class='+ memberID +'>' + participatorName + '</div>');
         					$('.popupParticipatorWindow ul').append($li);
     	   					
+        					$('.participator').unbind().click(function(){
+        						var subDataRowId = $(target).parent().parent().attr('id');
+        						console.log("subDataRowId="+$(target).parent().parent().attr('id'));
+								if(subDataRowId!= undefined){
+									console.log('this is not subMission!');
+									$('#'+subDataRowId+' .addSubMissionExecutor').empty();
+									$('#'+subDataRowId+' .addSubMissionExecutor').append('<div class="subMissionExecutor">'+ $(this).text() +'</div>');
+								} else {
+									console.log("remove subMissionExecutor!");
+        							$('.subMission .addSubMissionExecutor').empty();
+        							$('.subMission .addSubMissionExecutor').append('<div class="subMissionExecutor">'+ $(this).text() +'</div>');
+								}        						
+        						$('.popupParticipatorWindow').dialog( "close" );
+        						
+        					});
+        					
         					$('.popupParticipatorWindow ul li').mouseenter(function(){
         						$(this).css({'background-color':'#cfd8dc blue-grey lighten-4',
         									 'font-weight':'bold',
@@ -369,26 +366,7 @@
         					
         					
         					
-        					$('.participator').on('click',function(){
-        						
-        						$('.addSubMissionExecutor').empty();
-        						$('.addSubMissionExecutor').append('<div>'+ $(this).text() +'</div>');
-//         						$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name'));
-//         						$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name') + '').remove();
-        						
-//         						$('.dialog .missionExecutor').text($(this).children('div').text());
-//         						$('.dialog .missionExecutor').addClass($(this).children('div').attr('class'));
-        						
-//         						$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val( $(this).children('div').text());
-//         						$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name',$(this).children('div').attr('class'));
-        						
-//         						if(!$('.missionParticipator ul div').hasClass($(this).children('div').attr('class'))){
-//         							$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');						
-//         						}
-        						
-        						
-        						$('.popupParticipatorWindow').dialog( "close" );
-        					});
+        					
     	   				});
     	   				
     	   			},
@@ -449,13 +427,14 @@
     					console.log(executor);
     					$('.popupParticipatorWindow ul .'+ executor +'').parent().remove();
     					
+    					
     					$('.participator').on('click',function(){
     						console.log($(event.target).attr('class'));
+    						
     						if($('.missionParticipator ul div').hasClass($(event.target).attr('class'))){
     							console.log("hasClass! remove");
     							$('.missionParticipator ul .'+ $(event.target).attr('class') +'').remove();
     						} else {
-//     							$('.missionParticipator ul').prepend($(this));
     							$('.missionParticipator ul').prepend('<div class="' + $(this).children('div').attr('class') + '" style="width:100px;display:inline-block;">' + $(this).children('div').text() + '</div>');
     						}
     					});
@@ -472,7 +451,8 @@
 			});
 			
 			//Add subMission
-			$('.addSubMission').mouseenter(function(){
+			var subMissionCount = 1;
+			$('.openSubMissionWindow').mouseenter(function(){
 					$(this).css({'font-weight':'bold',
 								 'cursor':'pointer',
 								 'color':'#0d47a1 blue darken-4'});
@@ -480,14 +460,160 @@
 					$(this).css({'font-weight':'normal',
 						 		 'color':'black'});
 				});
-			$('.addSubMission').on('click',function(){
+			$('.openSubMissionWindow').on('click',function(){
 				var parent = $(this).parent();
-				$(this).remove();
+				$(this).css('display','none');
+// 				console.log($(event.target).siblings('div').find('.subMissionName').val() );
+				$(event.target).siblings('div').find('.subMissionName').val('');
+				$(event.target).siblings('div').find('.subMissionDate').val('');
+				$(event.target).siblings('div').find('.addSubMissionExecutor').html('<img src="images/memberIcon.png">');
+
 				$('.subMission').show();
-				
-				
 			})
+			$('.addSubMission').on('click',function(){
+				var subMissionName = $('.subMission .subMissionName').val();
+				console.log(subMissionName);
+				var subMissionDate = $('.subMission .subMissionDate').val();
+				var subMissionExecutor = $('.subMission .subMissionExecutor').text();
+				if(subMissionExecutor==""){
+					subMissionExecutor = "待認領"
+				}
+				//*****************************************************************************
+				//*****************************************************************************
+				var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + subMissionCount + '" class="row" style="width:585.906px;height:60px;">' + 
+														'<textarea class="subMissionName col l5 materialize-textarea" placeholder="請輸入子任務內容" style="max-height:45px;">'+ subMissionName +'</textarea>' +
+														'<div class="subMissionDateContainer col l3"><input type="text" class="subMissionDate subDatepicker col l10" value="'+ subMissionDate +'" readonly>' +
+														'</div>' +
+														'<div class="addSubMissionExecutor col l2"><div class="subMissionExecutor">'+
+														subMissionExecutor +'</div></div><div class="col l1">text</div>' +
+														'<input type="hidden" class="ifShow" value="'+ $('.dataRowLocation').val() +'"></div>');
+				$('.subMissionContainer ul').prepend($subMission);
+				$('.subMission').hide();
+				$('.openSubMissionWindow').css('display','block');
+				
+				//Set subMission sortable
+				$(".subMissionContainer ul").sortable({
+					cursor : 'move',
+					toleranceElement : '> div',
+					item : 'li', //Specifies which items inside the element should be sortable.
+					handle : 'div',
+					placeholder : "placeholder",
+					forcePlaceholderSize: true,
+					start: function(e, ui){
+				        ui.placeholder.height(ui.helper.outerHeight());
+				        $('.placeholder').css('background-color','#3f51b5 indigo');
+				    }
+				})
+				
+				
+				
+				
+				
+				
+				//JQuery datepicker
+				var inputDate = $(".subDatepicker");
+				var changeYearButtons = function() {
+					setTimeout(function() {
+				        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+				        var prevYrBtn = $('<button>前年</button>');
+				        prevYrBtn.bind("click", function() {
+				            $.datepicker._adjustDate(inputDate, -1, 'Y');
+				    });
+				    var nextYrBtn = $('<button>次年</button>');
+				    nextYrBtn.bind("click", function() {
+				        $.datepicker._adjustDate(inputDate, +1, 'Y');
+				    });
+				    prevYrBtn.appendTo(widgetHeader);
+				    nextYrBtn.appendTo(widgetHeader);
+				   }, 1);
+				};
+		
+				var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+				var old_get = $.datepicker._get;
+				var old_CloseFn = $.datepicker._updateDatepicker;
+				$.extend($.datepicker, {
+		    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+		        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+		        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+		            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+		                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+		            	}).end().end().get(0).outerHTML;
+		        	}
+		        	return htmlYearMonth;
+		    		},
+		    		_get:function (a, b) {
+		        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+		        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+		        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+		        		return old_get.apply(this, [a, b]);
+		    		},
+		    		_updateDatepicker:function (inst) {
+		        		old_CloseFn.call(this, inst);
+		        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
+		                    inst.input.val("");
+		            	});
+		    		},
+		    		_setDateDatepicker: function (a, b) {
+		    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+		    		},
+		    		_widgetDatepicker: function () {
+		        		return this.dpDiv
+		    		}
+				});
+				
+				
+				$(".subDatepicker").datepicker({
+					beforeShow: changeYearButtons,
+					onChangeMonthYear: changeYearButtons,
+		    		minDate: new Date(),
+		    		firstDay: 1, 
+		    		dateFormat: "yy-m-d",
+		    		showOn: "button",
+		    	    buttonImage: "images/calendar.png",
+		    	    buttonImageOnly: true,
+		    		onSelect: function (dateText, inst) {
+		        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+		        		var reM = /m+/g;
+		        		var reD = /d+/g;
+		        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+		            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+		            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+		        		};
+		        		$.each(objDate, function (k, v) {
+		            		var re = new RegExp(k + "+");
+		            		dateFormate = dateFormate.replace(re, v);
+		        		});
+		        		inst.input.val(dateFormate);
+		        		
+		        		
+		    		}
+				});
 			
+				$.datepicker.regional['zh-TW'] = {
+						prevText: '上月',
+						nextText: '次月',
+						monthNames: ['一月','二月','三月','四月','五月','六月',
+						'七月','八月','九月','十月','十一月','十二月'],
+						monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+						dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+						dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+						dayNamesMin: ['日','一','二','三','四','五','六'],
+				};
+				$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+				
+				//Set datapicker icon position
+// 				$('.subMissionDate').siblings('.ui-datepicker-trigger').addClass('col l1').css({'display':'block',
+// 																								'z-index':'1'});
+				$('.subMissionDateContainer').siblings('.ui-datepicker-trigger').appendTo('.subMissionDateContainer')
+				
+				$('.subMissionDateContainer img').css({'padding':'15px 0px',
+					  'cursor':'pointer'}).addClass('col l2');
+				
+				
+				
+				
+				subMissionCount++;
+			});
 			
 			
 			
@@ -569,6 +695,21 @@
 				}
 				$('.dialog .dataRowLocation').val(temp);
 				
+				
+				
+				$.each($('.subMissionContainer ul li') ,function(){
+					if( $(this).children('div').children('input[class="ifShow"]').val() == temp ){
+						$(this).css('display','block');						
+					} else if( $(this).children('div').children('input[class="ifShow"]').val() != void 0 ) {
+						$(this).css('display','none');
+					} else {
+						console.log('this is creater!');
+					}
+				});
+
+				
+				
+				
 				$('.dialog').dialog( "open" );
 				$(".ui-dialog-titlebar").hide();
 				
@@ -580,6 +721,7 @@
 			
 			$('.cancelSubMission').on('click',function(){
 				$('.subMission').hide();
+				$('.openSubMissionWindow').css('display','block');
 			})
 			
 			
@@ -670,6 +812,134 @@
 		            })
 		        }
 			});
+			
+			
+			//Set checkbox status, define add line-through to missionTitle or not
+			$('.dialog .missionStatus').on('click',function() {
+				if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
+					$('.dialog .missionName').removeClass('disable');
+					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
+					$(event.target).prop('checked',false);
+					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
+				} else {
+					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
+					$('.dialog .missionName').addClass('disable');
+					$(event.target).prop('checked',true);
+					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
+				}
+			});
+			
+			
+			
+			//JQuery datepicker
+			var inputDate = $("#datepicker, .subDatepicker");
+			var changeYearButtons = function() {
+			setTimeout(function() {
+		        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+		        var prevYrBtn = $('<button>前年</button>');
+		        prevYrBtn.bind("click", function() {
+		            $.datepicker._adjustDate(inputDate, -1, 'Y');
+		        });
+		        var nextYrBtn = $('<button>次年</button>');
+		        nextYrBtn.bind("click", function() {
+		            $.datepicker._adjustDate(inputDate, +1, 'Y');
+		        });
+		        prevYrBtn.appendTo(widgetHeader);
+		        nextYrBtn.appendTo(widgetHeader);
+		    	}, 1);
+			};
+		
+			var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+			var old_get = $.datepicker._get;
+			var old_CloseFn = $.datepicker._updateDatepicker;
+			$.extend($.datepicker, {
+	    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+	        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+	        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+	            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+	                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+	            	}).end().end().get(0).outerHTML;
+	        	}
+	        	return htmlYearMonth;
+	    		},
+	    		_get:function (a, b) {
+	        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+	        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+	        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+	        		return old_get.apply(this, [a, b]);
+	    		},
+	    		_updateDatepicker:function (inst) {
+	        		old_CloseFn.call(this, inst);
+	        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
+	                    inst.input.val("");
+	            	});
+	    		},
+	    		_setDateDatepicker: function (a, b) {
+	    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+	    		},
+	    		_widgetDatepicker: function () {
+	        		return this.dpDiv
+	    		}
+			});
+			
+			
+			$("#datepicker, .subDatepicker").datepicker({
+				beforeShow: changeYearButtons,
+				onChangeMonthYear: changeYearButtons,
+	    		minDate: new Date(),
+	    		firstDay: 1, 
+	    		dateFormat: "yy-m-d",
+	    		showOn: "button",
+	    	    buttonImage: "images/calendar.png",
+	    	    buttonImageOnly: true,
+	    		onSelect: function (dateText, inst) {
+	        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+	        		var reM = /m+/g;
+	        		var reD = /d+/g;
+	        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+	            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+	            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+	        		};
+	        		$.each(objDate, function (k, v) {
+	            		var re = new RegExp(k + "+");
+	            		dateFormate = dateFormate.replace(re, v);
+	        		});
+	        		inst.input.val(dateFormate);
+	        		
+	        		if($(this).hasClass('subDatepicker')){
+	        			//.subDatepicker
+	        			
+	        		} else {
+	        			//#datepicker
+	        			$('#'+$('.dataRowLocation').val()).find('.missionDate').val( dateFormate );
+	        		}
+	    		}
+			});
+		
+			$.datepicker.regional['zh-TW'] = {
+					prevText: '上月',
+					nextText: '次月',
+					monthNames: ['一月','二月','三月','四月','五月','六月',
+					'七月','八月','九月','十月','十一月','十二月'],
+					monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+					dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+					dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+					dayNamesMin: ['日','一','二','三','四','五','六'],
+			};
+			$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+			
+			
+			//Set datepicker icon position
+			$('.missionDate').siblings('.ui-datepicker-trigger').css({'position':'relative',
+												'top':'-45px',
+												'left':'150px',
+												'cursor':'pointer'});
+			
+			$('.subMissionDate').siblings('.ui-datepicker-trigger').css({'position':'relative',
+														 'top':'15px',
+														 'left':'-20px',
+														 'cursor':'pointer'});
+			
 			
 		});
 	</script>
@@ -773,19 +1043,19 @@
 						<label for="subMissionContainer">子任務 </label>
 						<div class="subMissionContainer">
 							<ul class="col l12" style="column-count:4;column-gap:0;">
-								<li>
-									<div class="addSubMission">添加子任務</div>
+								<li class="notSortable">
+									<div class="openSubMissionWindow">添加子任務</div>
 									<div class="subMission row" style="display:none">
-										<div class="row">
-											<textarea class="col l7" placeholder="請輸入子任務內容"></textarea> 
-							    			<input type="text" id="subDatepicker" class="col l3" readonly>
+										<div class="row input-field">
+											<textarea class="subMissionName col l7 materialize-textarea" placeholder="請輸入子任務內容" style="max-height:45px;"></textarea> 
+							    			<input type="text" class="subMissionDate subDatepicker col l3" readonly>
 							    			<div class="addSubMissionExecutor col l2">
 							   					<img src="images/memberIcon.png">
 							   				</div>
 							   			</div>
 							   			<div class="row">
-							   			<div class="btn waves-effect waves-light #2196f3 blue" >新增</div>
-										<div class="cancelSubMission btn waves-effect waves-light #2196f3 blue" >取消</div>
+							   				<div class="addSubMission btn waves-effect waves-light #2196f3 blue" >新增</div>
+											<div class="cancelSubMission btn waves-effect waves-light #2196f3 blue" >取消</div>
 										</div>
 							   		</div>
 							   	</li>
@@ -795,119 +1065,5 @@
 				</div>
 		<input type="hidden" class="dataRowLocation" value="">
 	</div>
-	
-	<script type="text/javascript">
-		//Set checkbox status, define add line-through to missionTitle or not
-		$('.dialog .missionStatus').on('click',function() {
-			if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
-				$('.dialog .missionName').removeClass('disable');
-				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
-				$(event.target).prop('checked',false);
-				$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
-			} else {
-				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
-				$('.dialog .missionName').addClass('disable');
-				$(event.target).prop('checked',true);
-				$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
-			}
-		});
-	</script>
-	
-	
-	<script type="text/javascript">
-		//JQuery datepicker
-		var inputDate = $("#datepicker,#subDatepicker");
-		var changeYearButtons = function() {
-		setTimeout(function() {
-	        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
-	        var prevYrBtn = $('<button>前年</button>');
-	        prevYrBtn.bind("click", function() {
-	            $.datepicker._adjustDate(inputDate, -1, 'Y');
-	        });
-	        var nextYrBtn = $('<button>次年</button>');
-	        nextYrBtn.bind("click", function() {
-	            $.datepicker._adjustDate(inputDate, +1, 'Y');
-	        });
-	        prevYrBtn.appendTo(widgetHeader);
-	        nextYrBtn.appendTo(widgetHeader);
-	    	}, 1);
-		};
-	
-		var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-		var old_get = $.datepicker._get;
-		var old_CloseFn = $.datepicker._updateDatepicker;
-		$.extend($.datepicker, {
-    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-            	}).end().end().get(0).outerHTML;
-        	}
-        	return htmlYearMonth;
-    		},
-    		_get:function (a, b) {
-        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-        		return old_get.apply(this, [a, b]);
-    		},
-    		_updateDatepicker:function (inst) {
-        		old_CloseFn.call(this, inst);
-        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
-                    inst.input.val("");
-            	});
-    		},
-    		_setDateDatepicker: function (a, b) {
-    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-    		},
-    		_widgetDatepicker: function () {
-        		return this.dpDiv
-    		}
-		});
-
-		$("#datepicker,#subDatepicker").datepicker({
-			beforeShow: changeYearButtons,
-			onChangeMonthYear: changeYearButtons,
-    		minDate: new Date(),
-    		firstDay: 1, 
-    		dateFormat: "yy-m-d",
-    		showOn: "button",
-    	    buttonImage: "images/calendar.png",
-    	    buttonImageOnly: true,
-    		onSelect: function (dateText, inst) {
-        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-        		var reM = /m+/g;
-        		var reD = /d+/g;
-        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-        		};
-        		$.each(objDate, function (k, v) {
-            		var re = new RegExp(k + "+");
-            		dateFormate = dateFormate.replace(re, v);
-        		});
-        		inst.input.val(dateFormate);
-        		
-        		$('#'+$('.dataRowLocation').val()).find('.missionDate').val( dateFormate );
-    		}
-		});
-	
-		$.datepicker.regional['zh-TW'] = {
-				prevText: '上月',
-				nextText: '次月',
-				monthNames: ['一月','二月','三月','四月','五月','六月',
-				'七月','八月','九月','十月','十一月','十二月'],
-				monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
-				dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
-				dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
-				dayNamesMin: ['日','一','二','三','四','五','六'],
-		};
-		$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-		
-		
-	</script>
-	
-	
 </body>
 </html>

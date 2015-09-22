@@ -16,12 +16,56 @@
 	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁首 -->
 	
+	<!-- 頁面主題提示 -->
+	<div class="row black valign-wrapper" id="pagetitle">
+		
+		<h1 class="valign center-align white-text"
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">活動花絮</h1>
+	</div>		
+	
 	<!-- 內容 -->
 	<main>
+		<div class="row" id="mainboard">
+		
+		
+		
+		
+		</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	<div class="contaniner">
 	<form action="/" id="postForm">
 	<div class="row">
-		<div class="col s12"><h2 style="text-align:center;">活動花絮</h2></div>
 		<div class="col s12 m4 l8">
 			<div class="input-field col s12">
 				<div class="input-field col s12">
@@ -83,21 +127,23 @@
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
 			$(".card").css("width", "310px");
+			//提示頁面主題欄的高度
+			var pagetitleheight = ($(window).height() * 0.25);
+			$("#pagetitle").css("height", pagetitleheight);
 			
-			
-			$.get("<c:url value='/ActicityHighlightDisplayServlet' />", function(responseJson) {
-				console.log(responseJson);
-				if(responseJson.error == "尚未建立花絮!") {
-					$("#error").html("<h4>查詢錯誤!</h4>");
-				} else {
-					$("#projName").text(responseJson.projName);	
-					$("#memberName").text(responseJson.memberName);
-					var offset = responseJson.videoURL.indexOf("watch?v=")+8;
-					$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+responseJson.videoURL.substring(offset, offset+11));
-					$("#frontCover").attr("src", responseJson.frontCover);
-					$("#content").html(responseJson.content);
-				}
-			}); 
+// 			$.get("<c:url value='/ActicityHighlightDisplayServlet' />", function(responseJson) {
+// 				console.log(responseJson);
+// 				if(responseJson.error == "尚未建立花絮!") {
+// 					$("#error").html("<h4>查詢錯誤!</h4>");
+// 				} else {
+// 					$("#projName").text(responseJson.projName);	
+// 					$("#memberName").text(responseJson.memberName);
+// 					var offset = responseJson.videoURL.indexOf("watch?v=")+8;
+// 					$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+responseJson.videoURL.substring(offset, offset+11));
+// 					$("#frontCover").attr("src", responseJson.frontCover);
+// 					$("#content").html(responseJson.content);
+// 				}
+// 			}); 
 			
 						
 			

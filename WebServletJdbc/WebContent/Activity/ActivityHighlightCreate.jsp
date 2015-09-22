@@ -46,12 +46,12 @@
 						<!-- 完整計畫名稱 -->
 						<div class="row">
 								<div class="forinput col l3 right-align">完整計畫名稱:</div>
-								<input class="col l7" name=" projName" id="projName" type="text" readonly="readonly">
+								<input class="col l7 black-text" name=" projName" id="projName" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
 						</div>
 						<!-- 計畫編號 -->
 						<div class="row">
 								<div class="forinput col l3 right-align">活動發起人:</div>
-								<input class="col l7"name="memberName" id="memberName" type="text" readonly="readonly">
+								<input class="col l7 black-text"name="memberName" id="memberName" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
 						</div>
 					</div>
 			</div>
@@ -60,7 +60,7 @@
 				<form action="/" id="postForm">
 					<div class="row">
 						<div class="forinput">影片網址(請輸入YouTube完整網址)</div>
-						<input id="videoURL" type="text" class="validate col l8" name="videoURL" style="padding:0"/>
+						<input id="videoURL" type="text" class="validate col l8" name="videoURL" style="padding:0;font-size:1.6em;font-family:微軟正黑體;"/>
 					</div>				
 					
 					
@@ -68,7 +68,7 @@
 						<div class="forinput">
 							<div>
 								封面上傳
-								<input type="file" id="picture">
+								<input type="file" id="picture" style="width:35%;">
 								<i class="material-icons blue-text">search</i>
 							</div>
 						</div>						
@@ -105,18 +105,22 @@
 		</div>
 		<!-- 預覽的區塊 -->
 		<div class="col l4">
-				<div class="input-field col s12">
-					<h4>花絮封面預覽</h4>
-					<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
+				<div class="input-field row">
+					<h4 class="row center-align">花絮封面預覽</h4>
+					<div class="row center-align">
+						<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >					
+					</div>
 				</div>
-				<div class="input-field col s12">
-					<h4>影片預覽</h4>
+				
+				<div class="input-field row">
+					<h4 class="row center-align">影片預覽</h4>
+					<div class="input-field row center-align">
+						<div class="video-container" style="border:5px solid black;">
+		        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
+		      			</div>	
+		      		</div>
 				</div>
-				<div class="input-field col s12">
-					<div class="video-container">
-	        			<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
-	      			</div>	
-	      		</div>				
+				
 		
 		</div>
 	</div>
@@ -205,7 +209,10 @@
 			CKEDITOR.replace( 'content', {
 		    	customConfig: 'config.js'
 			} );
-			
+			//點預覽處也能上傳
+			$("#frontCover").on("click",function(){
+				$("#picture").trigger("click");
+			});
 			
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
@@ -241,13 +248,13 @@
 			
 			
 			
-// 			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
-// 				console.log(responseJson);
-// 				$("#projName").val(responseJson.projName);	
-// 				$("#memberName").val(responseJson.memberName);
-// 				$("#fullProjId").val(responseJson.fullProjId);
-// 				$("#memberId").val(responseJson.memberId);
-// 			}); 
+			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
+				console.log(responseJson);
+				$("#projName").val(responseJson.projName);	
+				$("#memberName").val(responseJson.memberName);
+				$("#fullProjId").val(responseJson.fullProjId);
+				$("#memberId").val(responseJson.memberId);
+			}); 
 			
 			
 			$( "#postForm" ).submit(function( event ) {
