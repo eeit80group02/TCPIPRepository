@@ -48,6 +48,7 @@ $(window).load(function() {
 			$("#donateBagTitle").css("font-size", "1.5em");
 		} else {
 			// 完整畫面
+			
 			$("#trash").css("display", "inline").css("width", donationBigBagWidth).css("border-left", "10px solid #ff7575");
 			$("#gallery").css("max-width", "65%").css("padding", "0px").css("margin-left", "0px");
 			$("#headMarquee").css("margin-right", donationBigBagWidth);
