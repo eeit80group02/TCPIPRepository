@@ -122,22 +122,27 @@
 			</ul>
 
 			<div id="trash" class="ui-widget-content ui-state-default">
+				<div id="trashHeadTitleIcons">
+					<span id="trashHeadLeftBtn">
+						<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
+							<a href="CheckDonationList.jsp" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="tiny material-icons">card_giftcard</i></a>
+						</button>
+					</span> <span id="trashHeadRightBtn">
+						<button type="button" id="donateDelete" class="btn btn-small btn-floating">
+							<a a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
+						</button>
+					</span>
+				</div>
 
-				<div class="alert alert-success" role="alert" id="xx">
+				<div class="alert alert-success" role="alert" id="trashBody">
+
 					<h3 id="trashHead">
-						<span id="trashHeadLeftBtn">
-							<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
-								<a href="CheckDonationList.jsp" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="tiny material-icons">card_giftcard</i></a>
-							</button>
-						</span> <span id="donateBagTitle">捐獻背包</span> <span id="trashHeadRightBtn">
-							<button type="reset" id="donateDelete" class="btn btn-small btn-floating">
-								<a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
-							</button>
-						</span>
+						<span id="donateBagTitle">捐獻背包</span>
 					</h3>
 				</div>
 			</div>
 		</div>
+
 	</center>
 	<!-- 標頭專用 bottom start -->
 	<!-- 必須最後載入才有效果 -->
@@ -196,7 +201,7 @@
 		var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='取消選取' class='ui-icon ui-icon-refresh' style='float: right'></a>";
 		var donationId = data.attr("value");
 		
-// 		addToCart(donationId);
+		addToCart(donationId);
 		
 		data.find(".fiximg div").css('visibility', 'hidden');
 		data.fadeOut(function() {
@@ -211,6 +216,31 @@
 				});
 			});
 		});
+	}
+	
+	function addToCart(donationId) {
+
+		var xhr = new XMLHttpRequest();
+		if (xhr != null) {
+			xhr.addEventListener("readystatechange", function() {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						lists = xhr.responseText;
+						
+						// 設定cookie值
+						var now = new Date();
+						now.setTime(now.getTime()+1000*60*60*24*30);
+						document.cookie="Items="+lists+";expire="+now.toUTCString();
+						
+					} else {
+// 						alert("something is wrong!");
+					}
+				}
+			});
+			xhr.open("POST", "cart.do", true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xhr.send("toCart=insert&returnJson=true&donationId=" + donationId);
+		}
 	}
 	</script>
 

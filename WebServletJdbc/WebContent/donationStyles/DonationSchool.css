@@ -6,7 +6,8 @@
 }
 
 form div .tooltipped {
-	/* 	border:1px solid blue; */
+	/* 項目標頭 */
+	font-size: 1.2em;
 	text-decoration: none;
 }
 
@@ -32,6 +33,6 @@ i[id^="requiredStar"] {
 	color: red;
 }
 
-.DetailTitle{
+.DetailTitle {
 	float: left;
 }

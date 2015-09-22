@@ -8,33 +8,6 @@ select:disabled {
 	font-weight: bold;
 }
 
-#test2 select {
-	width: 45%;
-}
-
-#address01 {
-	float: left;
-}
-
-#address02 {
-	float: right;
-}
-
-#headUl {
-	margin: 10px;
-}
-
-.headList {
-	/* 	border: 2px solid red; */
-	font-weight: bold;
-	font-size: 1.2em;
-	/* 	background-color: blue; */
-}
-
-#headSearch {
-	margin: 15px;
-}
-
 .active {
 	font-weight: 900;
 	font-size: 2em;
@@ -45,16 +18,6 @@ select:disabled {
 	width: 85%;
 }
 
-#donationBill tr td {
-	border: 1px solid black;
-	text-align: center;
-}
-
-.imgBill {
-	width: 100px;
-	border: 1px solid black;
-}
-
 .tabs li a {
 	text-decoration: none;
 }
@@ -63,17 +26,54 @@ select:disabled {
 	text-decoration: none;
 }
 
-.progress {
-	min-height: 15px;
+#warnText {
+	text-align: center;
+	color: red;
 }
 
-#text, #textUnit {
+.redStar {
+	color: red;
+}
+
+/* test1 */
+#test1 table {
+	font-size: 1.2em;
+	cursor: default;
+	background-color: white;
+}
+
+#test1 table tbody tr:HOVER {
+	background-color: #CCEEFF;
+}
+
+#test1 table tr td {
+	border: 1px solid #ff7575;
+	text-align: center;
+}
+
+#test1 table thead tr {
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	background-color: #ff7575;
+	color: white;
+}
+
+#test1 table .amountRow {
+	min-width: 200px;
+}
+
+#test1 .imgBill {
+	max-width: 100px;
+	border: 1px solid black;
+}
+
+#test1 #text, #test1 #textUnit {
 	font-size: 1.2em;
 	text-align: center;
-	max-width: 60px;
+	max-width: 58px;
 }
 
-#remark {
+#test1 #remark {
 	background-color: white;
 	text-align: left;
 	max-width: 360px;
@@ -84,32 +84,123 @@ select:disabled {
 	padding: 5px;
 }
 
-form div .tooltipped {
-	/* 	border:1px solid blue; */
-	text-decoration: none;
-}
-
-.DetailTitle {
-	/* 	各輸入項的名稱 */
-	font-size: 1em;
-	color: #3CB371;
-}
-
-form .glyphicon-star {
-	color: red;
-}
-
-#warnText {
+#test1 table tbody td:nth-child(2) {
 	text-align: left;
-	color: red;
 }
 
-#imageName, #schoolName, #supplyName, #originalDemandNumber, #originalDemandUnit, #size, #supplyStatus, #demandContent, #remark {
-	/* 	border: 1px solid blue; */
+/* test2 */
+#test2 select {
+	width: 45%;
+}
+
+#test2 #address01 {
+	float: left;
+}
+
+#test2 #address02 {
+	float: right;
+}
+
+#test2 .switch {
+	text-align: right;
+}
+
+#test2 .switch span {
+	font-size: 1.5em;
+}
+
+#test2 div input[id^=text] {
 	font-size: 1.2em;
 }
 
-.leftTitle, .rightTitle {
+#test2 .leftTitle, #test2 .rightTitle {
 	color: #3CB371;
 	font-size: 2em;
+}
+
+#test2 .DetailTitle {
+	/* 	各輸入項的名稱 */
+	font-size: 1.4em;
+}
+
+/* test3 */
+#test3 table {
+	font-size: 1.2em;
+}
+
+#test3 table thead tr td {
+	font-weight: bold;
+	text-align: center;
+	background-color: #ff7575;
+	color: white;
+}
+
+#test3 table tbody tr {
+	background-color: white;
+}
+
+#test3 table td {
+	border: 1px solid #ff7575;
+}
+
+#test3 table tbody td:nth-child(2) {
+	text-align: center;
+}
+
+#test3 table tbody td:nth-child(3) {
+	max-width: 300px;
+}
+
+#test3 #address01 {
+	width: 48%;
+	float: left;
+}
+
+#test3 #address02 {
+	width: 48%;
+	float: right;
+}
+
+#test3 table tbody tr:HOVER {
+	background-color: #CCEEFF;
+}
+
+#test3 .page03SelectTitle a{
+	color: #00AA00;
+}
+
+/* Modal 專用 */
+#test2 .modal-content {
+	color: black;
+	text-align: left;
+	font-size: 1.4em;
+}
+
+#test1 #modalNote02 .modal-content {
+	color: black;
+	text-align: left;
+	font-size: 1.4em;
+}
+
+#test2 .modal-content h4, #test1 .modal-content h4 {
+	text-align: center;
+}
+
+#test3 #modalNote03 td:nth-child(1) {
+	background-color: #ff7575;
+	font-size: 1.2em;
+}
+
+#test3 #modalNote03 {
+	color: black;
+}
+
+#test3 #modalNote03 td {
+	text-align: center;
+	font-size: 1em;
+}
+
+#test3 #modalNote03 ol li {
+	text-align: left;
+	font-size: 1.4em;
 }
