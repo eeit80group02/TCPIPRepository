@@ -458,6 +458,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=display");
 		} else {
 			System.out.println("更新失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=display");
 		}
 
 	}
@@ -482,6 +483,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/UpdataSchoolDemand.jsp");
 		}else{
 			System.out.println("查詢失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/UpdataSchoolDemand.jsp");
 		}
 		
 	}
@@ -537,11 +539,12 @@ public class SchoolDemandServlet extends HttpServlet {
 		// 呼叫Service方法
 		bean = service.display(bean);
 		if (bean != null) {
-			session.setAttribute("Demand", bean);
 			System.out.println("成功查詢bean=" + bean);
+			session.setAttribute("Demand", bean);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/Display.jsp");
 		} else {
 			System.out.println("查詢失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/Display.jsp");
 		}
 	}
 
@@ -567,6 +570,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAllPersonal.jsp");
 		} else {
 			System.out.println("查詢失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAllPersonal.jsp");
 		}
 	}
 
@@ -590,6 +594,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalRender.jsp");
 		} else {
 			System.out.println("查詢失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalRender.jsp");
 		}
 	}
 
@@ -614,6 +619,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
 		} else {
 			System.out.println("查詢失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
 		}
 	}
 

@@ -27,7 +27,7 @@
               <!-- 放置連結處 -->
               <div class="col l4 offset-l2 s12">
                 <h2 class="blue-text text-darken-2">Links</h2>
-                <ul>
+                <ul id="footerlinks">
                   <li><a class="grey-text text-lighten-3" href="https://www.flyingv.cc/">FlingV</a></li>
                   <li><a class="grey-text text-lighten-3" href="https://www.flyingv.cc/freebird">FlingV FreeBird</a></li>
                   <li><a class="grey-text text-lighten-3" href="http://thewall.tw/">這牆音樂 - The Wall Music</a></li>
@@ -58,7 +58,8 @@
 			//footer中的文字大小
 			$("#aboutme > p").css("font-size", "1.2em");
 			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
+// 			$("a").css("font-size", "1.2em");
+			$("#footerlinks>li>a").css("font-size", "1.2em");
 		})
 	</script>
 </body>

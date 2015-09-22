@@ -70,6 +70,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		
 //		String memberId = (String)session.getAttribute("memberId");
 //		String schoolDemandId = request.getParameter("schoolDemandId");
+
 		
 		String memberId = "1";
 		String schoolDemandId =  "18";
@@ -115,35 +116,15 @@ public class ProcessingMemberServlet extends HttpServlet{
 		ProcessingMemberService service = new ProcessingMemberService();
 		ProcessingMemberBean bean = new ProcessingMemberBean();
 		HttpSession session = request.getSession();
-		
-		String schoolId = (String)session.getAttribute("schoolId");
-		String schoolDemandId = request.getParameter("schoolDemandId");
-		
-		if(schoolId ==null || schoolId.trim().length() ==0){
-			errorMsg.put("", "");
-		}
-		if(schoolDemandId ==null || schoolDemandId.trim().length() ==0){
-			errorMsg.put("", "");
+		SchoolBean sbean = null;
+		sbean =(SchoolBean)session.getAttribute("LogiOK");
+		if(sbean == null){
+			response.sendRedirect("login.jsp");
+			return;
 		}
 
-		int sId = 0;
-		try {
-			sId = Integer.parseInt(schoolId);
-		} catch (NumberFormatException e) {
-			errorMsg.put("error", "錯誤");
-		}
-		int sDId = 0;
-		try {
-			sDId = Integer.parseInt(schoolDemandId);
-		} catch (NumberFormatException e) {
-			errorMsg.put("error", "錯誤");
-		}
-		if(!errorMsg.isEmpty()){
-			request.getRequestDispatcher("").forward(request, response);
-		}
-		
-		bean.setMemberId(sId);
-		bean.setSchoolDemandId(sDId);
+//		bean.setMemberId(sId);
+//		bean.setSchoolDemandId(sDId);
 		
 		bean = service.agree(bean);
 		if(bean!=null){

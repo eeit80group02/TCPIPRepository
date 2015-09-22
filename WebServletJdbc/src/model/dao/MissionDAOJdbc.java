@@ -35,7 +35,7 @@ public class MissionDAOJdbc implements MissionDAO
 			e.printStackTrace();
 		}
 	}
-	private static final String INSERT = "INSERT INTO Mission (missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId) VALUES(?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO Mission (missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionId) VALUES(?,?,?,?,?,?,?,?)";
 
 	@Override
 	public MissionBean insert(MissionBean bean)
@@ -120,7 +120,7 @@ public class MissionDAOJdbc implements MissionDAO
 		return result;
 	}
 
-	private static final String UPDATE = "UPDATE Mission SET missionSetId = ?,name = ?,host = ?,endTime = ?,missionPriority = ?,missionPosition = ?,missionStatus = ?,mainMissionSetId = ? WHERE missionId = ?";
+	private static final String UPDATE = "UPDATE Mission SET missionSetId = ?,name = ?,host = ?,endTime = ?,missionPriority = ?,missionPosition = ?,missionStatus = ?,mainMissionId = ? WHERE missionId = ?";
 
 	@Override
 	public MissionBean update(MissionBean bean)
@@ -170,7 +170,7 @@ public class MissionDAOJdbc implements MissionDAO
 		return result;
 	}
 
-	private static final String FIND_BY_PRIMARYKEY = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission WHERE missionId = ?";
+	private static final String FIND_BY_PRIMARYKEY = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionId FROM Mission WHERE missionId = ?";
 
 	@Override
 	public MissionBean findByPrimaryKey(int id)
@@ -226,7 +226,7 @@ public class MissionDAOJdbc implements MissionDAO
 		return result;
 	}
 
-	private static final String SELECT_ALL = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionSetId FROM Mission";
+	private static final String SELECT_ALL = "SELECT missionId,missionSetId,name,host,endTime,missionPriority,missionPosition,missionStatus,mainMissionId FROM Mission";
 
 	@Override
 	public List<MissionBean> getAll()

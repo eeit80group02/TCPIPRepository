@@ -20,7 +20,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">學校名稱${school.name}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">學校名稱 ${school.name}</h3>
 	</div>	
 
 <main>
@@ -48,10 +48,10 @@
 		<div class="col l12" id="accountmanager">
 			<!-- 圖片 -->
 			<div class="col l2">
-				<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
+				<img class="card-panel hoverable" id="view" src="${school.base64String }" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
 			</div>	
 			<!-- 表單本體開始 --> 
-			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<form class="card-panel hoverable green lighten-5 col l10" action="<c:url value='modifySchool.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
 				<div class="row">
 						<!-- 學校圖片#(封面) -->
@@ -72,7 +72,7 @@
 							<li style="opacity:0;">	
 								<!-- 密碼 -->
 								<div class="input-field row">
-									<input id="passwords" type="password" class="validate" name="password" required>
+									<input id="passwords" type="password" class="validate" name="password">
 				<!-- 														後端錯誤訊息顯示 -->
 									<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
 									<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
@@ -81,7 +81,7 @@
 							<li style="opacity:0;">							
 								<!-- 密碼確認 -->
 								<div class="input-field row">
-									<input id="check" type="password" class="validate" name="check" required>
+									<input id="check" type="password" class="validate" name="check">
 				<!-- 														後端錯誤訊息顯示 -->
 									<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
 									<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
@@ -97,14 +97,14 @@
 							<div class="row">
 								<div class="col l8">
 									<div class="forinput">學校編號:</div>
-									<input type="hidden" name="schoolId" value="">
+									<input type="hidden" name="schoolId" value="${school.schoolId}">
 								</div>
 							</div>						
 							<!-- 學校名稱 -->
 							<div class="row">
 								<div class="col l8">
-									<div class="forinput">計畫編號:${param.fullProjId}</div>
-									<input type="hidden" name="fullProjId" value="${param.fullProjId}">
+									<div class="forinput">學校名稱:${param.fullProjId}</div>
+									<input type="hidden" name="name" value="${school.name}">
 								</div>
 							</div>
 						</div>						
@@ -113,7 +113,7 @@
 				
 				<!-- 學校地址(縣市) -->
 					<div class="col l6 input-field left" style="padding-left:0;">
-						<input id="addressDistrict" type="text" class="validate" name="addressDistrict" required value="${param.addressDistrict}">
+						<input id="addressDistrict" type="text" class="validate" name="addressDistrict" required value="${school.addressDistrict}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.addressDistrict}</font>
 						<label for="addressDistrict" style="font-size:1.3em;font-weight:600;">學校地址(縣市)</label>
@@ -121,7 +121,7 @@
 				
 				<!-- 學校地址(完整) -->
 					<div class="col l6 input-field left">
-						<input id="addressComplete" type="text" class="validate" name="addressComplete" required value="${param.addressComplete}" >
+						<input id="addressComplete" type="text" class="validate" name="addressComplete" required value="${school.addressComplete}" >
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.addressComplete}</font>
 						<label for="addressComplete" style="font-size:1.3em;font-weight:600;">學校地址(完整)</label>
@@ -130,7 +130,7 @@
 				
 				<!-- 學校網址 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="" >
-						<input id="url" type="text" class="validate" name="url"  value="${param.url}">
+						<input id="url" type="text" class="validate" name="url"  value="${school.url}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.url}${MsgErr.url}</font>
 						<label for="url" style="font-size:1.3em;font-weight:600;">學校網址</label>
@@ -139,22 +139,24 @@
 					
 				<!-- 學校行政電話總機 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631">
-						<input id="phone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
+						<input id="phone" type="text" class="validate" name="phone" value="${school.phone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
-						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
+						<label for="phone" style="font-size:1.3em;font-weight:600;">行政電話總機</label>					
 					</div>
 					
 				<!-- 關於我 -->
 					
 					<div class="input-field row">
 						<div>關於我</div>
-						<textarea class="ckeditor" name="content" id="content"></textarea>
+						<textarea class="ckeditor" name="content" id="content" maxlength="10">${school.aboutMe}</textarea>
+						<!-- 													後端錯誤訊息顯示 -->
+						<font color="red" size="-1">${MsgErr.textAreaLimit}</font>
 					</div>
 
 				<!-- 聯絡人姓名 -->
 					<div class="row input-field">
-						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
+						<input id="email" type="text" class="validate" name="projectManager" required value="${school.projectManager}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorEmailEmpty}${MsgErr.errorEmailExists}</font>					
 						<label for="email" style="font-size:1.3em;font-weight:600;">聯絡人姓名</label>	
@@ -162,7 +164,7 @@
 					
 				<!-- 聯絡人電話(留學校完整電話+分機) -->
 					<div class="row input-field">
-						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
+						<input id="address" type="text" class="validate" name="accountContact" required value="${school.accountContact}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
 						<label for="address" style="font-size:1.3em;font-weight:600;">聯絡人電話</label>
@@ -170,7 +172,7 @@
 
 				<!-- 聯絡人email -->
 					<div class="row input-field">
-						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
+						<input id="address" type="text" class="validate" name="managerEmail" required value="${school.managerEmail}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
 						<label for="address" style="font-size:1.3em;font-weight:600;">email</label>
@@ -178,10 +180,10 @@
 					
 				<!-- button -->
 					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 						</button>
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
 						</button>
 
@@ -197,32 +199,32 @@
 		
 		
 		<!-- 計畫資訊 -->
-		<div class="col l10" id="projinfos">
-			<div class="row">
-				<a class="btn-large purple lighten-5 black-text" 
-					href="<c:url value='/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />" >
-						<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的初步計畫</span>
-					</a>
-			</div>
-			<div class="row">	
-				<a class="btn-large purple lighten-5 black-text"
-					href="<c:url value='/primaryProj.do?type=displayPersonalByPending&memberId=${LoginOK.memberId}' />" >
-					<span style="font-family:微軟正黑體;font-size:1.5em;">待審核的初步計畫</span>
-					</a>
-			</div>
-			<div class="row">
-				<a class="btn-large purple lighten-5 black-text"
-				 	href="<c:url value='/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />">
-				 	<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的完整計畫</span>
-				 	</a>
-			</div>
-			<div class="row">
-				<a class="btn-large purple lighten-5 black-text"
-					href="<c:url value='/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}' />" >
-					<span style="font-family:微軟正黑體;font-size:1.5em;">洽談中的完整計畫</span>
-					</a>
-			</div>			
-		</div>
+<!-- 		<div class="col l10" id="projinfos"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<a class="btn-large purple lighten-5 black-text"  -->
+<%-- 					href="<c:url value='/primaryProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />" > --%>
+<!-- 						<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的初步計畫</span> -->
+<!-- 					</a> -->
+<!-- 			</div> -->
+<!-- 			<div class="row">	 -->
+<!-- 				<a class="btn-large purple lighten-5 black-text" -->
+<%-- 					href="<c:url value='/primaryProj.do?type=displayPersonalByPending&memberId=${LoginOK.memberId}' />" > --%>
+<!-- 					<span style="font-family:微軟正黑體;font-size:1.5em;">待審核的初步計畫</span> -->
+<!-- 					</a> -->
+<!-- 			</div> -->
+<!-- 			<div class="row"> -->
+<!-- 				<a class="btn-large purple lighten-5 black-text" -->
+<%-- 				 	href="<c:url value='/fullProj.do?type=displayPersonal&memberId=${LoginOK.memberId}' />"> --%>
+<!-- 				 	<span style="font-family:微軟正黑體;font-size:1.5em;">曾發布的完整計畫</span> -->
+<!-- 				 	</a> -->
+<!-- 			</div> -->
+<!-- 			<div class="row"> -->
+<!-- 				<a class="btn-large purple lighten-5 black-text" -->
+<%-- 					href="<c:url value='/fullProj.do?type=displayPersonalByChat&memberId=${LoginOK.memberId}' />" > --%>
+<!-- 					<span style="font-family:微軟正黑體;font-size:1.5em;">洽談中的完整計畫</span> -->
+<!-- 					</a> -->
+<!-- 			</div>			 -->
+<!-- 		</div> -->
 		
 		
 		<!-- 追蹤 -->
@@ -252,6 +254,8 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
+			
+
 			//tabs中li的點擊變色
 			$("#tabsul>li").each(function(){
 				$(this).on("click",function(){
@@ -269,8 +273,8 @@
 			})
 			
 			//預覽圖片
-			$("#picture").change(function(){
-				var file = $("#picture")[0].files[0];
+			$("#frontCover").change(function(){
+				var file = $("#frontCover")[0].files[0];
 				var reader  = new FileReader();
 				reader.onloadend = function () {
 					console.log(reader.result);
@@ -282,7 +286,7 @@
 			})
 			//點擊圖片也能上傳頭像
 			$("#view").on("click",function(){
-				$("#picture").trigger("click");
+				$("#frontCover").trigger("click");
 			})
 			//blur
 			$("input").each(function(){
@@ -532,57 +536,57 @@
 					}
 				})
 		//送出表單前的驗證
-		$("#btndiv").on({
-			"mouseover":function(){
-			if($("#passwords").val() !== "" || $("#check").val() !== ""){
-				if(
-						$("#registerform").data().passwordresults &&
-						$("#registerform").data().passwordresults2 &&
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-						){
-							$("#submitbtn").prop("disabled",false);
-						}else{
-							$("#submitbtn").prop("disabled",true);
-						}				
-			}else{
-				if(
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-				){
-						$("#submitbtn").prop("disabled",false);
-				}else{
-						$("#submitbtn").prop("disabled",true);
-					}						
-			}
+// 		$("#btndiv").on({
+// 			"mouseover":function(){
+// 			if($("#passwords").val() !== "" || $("#check").val() !== ""){
+// 				if(
+// 						$("#registerform").data().passwordresults &&
+// 						$("#registerform").data().passwordresults2 &&
+// 						$("#registerform").data().contactresult &&
+// 						$("#registerform").data().emailresult &&
+// 						$("#registerform").data().birthdayresult &&
+// 						$("#lastName").val().trim() !== "" &&
+// 						$("#firstName").val().trim() !== "" &&
+// 						$("#address").val().trim() !== "" 
+// 						){
+// 							$("#submitbtn").prop("disabled",false);
+// 						}else{
+// 							$("#submitbtn").prop("disabled",true);
+// 						}				
+// 			}else{
+// 				if(
+// 						$("#registerform").data().contactresult &&
+// 						$("#registerform").data().emailresult &&
+// 						$("#registerform").data().birthdayresult &&
+// 						$("#lastName").val().trim() !== "" &&
+// 						$("#firstName").val().trim() !== "" &&
+// 						$("#address").val().trim() !== "" 
+// 				){
+// 						$("#submitbtn").prop("disabled",false);
+// 				}else{
+// 						$("#submitbtn").prop("disabled",true);
+// 					}						
+// 			}
 
-		},"mouseout":function(){
-			if(
-				$("#registerform").data().accountresults &&
-				$("#registerform").data().passwordresults &&
-				$("#registerform").data().passwordresults2 &&
-				$("#registerform").data().contactresult &&
-				$("#registerform").data().emailresult &&
-				$("#registerform").data().birthdayresult &&
-				$("#lastName").val().trim() !== "" &&
-				$("#firstName").val().trim() !== "" &&
-				$("#address").val().trim() !== "" 
+// 		},"mouseout":function(){
+// 			if(
+// 				$("#registerform").data().accountresults &&
+// 				$("#registerform").data().passwordresults &&
+// 				$("#registerform").data().passwordresults2 &&
+// 				$("#registerform").data().contactresult &&
+// 				$("#registerform").data().emailresult &&
+// 				$("#registerform").data().birthdayresult &&
+// 				$("#lastName").val().trim() !== "" &&
+// 				$("#firstName").val().trim() !== "" &&
+// 				$("#address").val().trim() !== "" 
 				
-			){
-				$("#submitbtn").prop("disabled",false);
-			}else{
-				$("#submitbtn").prop("disabled",true);
-			}
-		}
-		});
+// 			){
+// 				$("#submitbtn").prop("disabled",false);
+// 			}else{
+// 				$("#submitbtn").prop("disabled",true);
+// 			}
+// 		}
+// 		});
 		})(jQuery)
 	</script>
 	<script>

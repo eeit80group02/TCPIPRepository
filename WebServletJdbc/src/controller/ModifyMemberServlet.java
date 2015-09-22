@@ -1,5 +1,9 @@
 package controller;
-
+/*
+ * 類型: servlet
+ * 功能: 修改會員資料
+ * 
+ */
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
