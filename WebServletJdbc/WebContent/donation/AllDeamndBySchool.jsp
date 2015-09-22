@@ -134,30 +134,6 @@
 													<td>20顆</td>
 													<td>2015/09/22 14：30：22</td>
 												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
@@ -172,7 +148,20 @@
 						</div>
 					</li>
 				</ul>
+
+
+
 			</div>
+			<div id="test2" class="col s12">我是上架中</div>
+			<div id="test3" class="col s12">我是已下架</div>
+
+
+		</div>
 	</center>
+	<!-- 標頭專用 bottom start -->
+	<!-- 必須最後載入才有效果 -->
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
+	<!-- 標頭專用 bottom end -->
+
 </body>
 </html>
