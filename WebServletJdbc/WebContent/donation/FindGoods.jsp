@@ -307,7 +307,6 @@
 	}
 	</script>
 	
-<!-- 	<script type="text/javascript" src="../donationScripts/Maquee.js"></script> -->
 	<script type="text/javascript" src="../donationScripts/ScreenSize.js"></script>
 	</center>
 	
