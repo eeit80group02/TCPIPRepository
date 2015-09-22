@@ -18,47 +18,98 @@
 	
 	<!-- 內容 -->
 	<main>
-	<div class="contaniner">
-	<form action="/" id="postForm">
-	<div class="row">
-		<div class="col s12"><h2 style="text-align:center;">活動花絮</h2></div>
-		<div class="col s12 m4 l8">
-			<div class="input-field col s12">
-				<div class="input-field col s12">
-					<div id="error"></div>
-				</div>
-				<div class="input-field col s6">
-					<h4>
-					<span id="projName" type="text" class="validate" ></span>
-					<label for="projName" class="active">完整計畫名稱</label>
-					</h4>
-				</div>
-				<div class="input-field col s6">
-					<h4>
-						<span id="memberName" type="text" class="validate"></span>
-						<label for="memberName" class="active">活動發起人</label>
-					</h4>
-				</div>
-				<div class="input-field col s12">
-					<div class="video-container">
-        				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
-      				</div>	
-      			</div>
-      			<div class="input-field col s12">
-      				<div class="divider" ></div>
-					<div id="content"></div>
+		<div class="row" id="mainboard">
+			<!-- 8欄置中 -->
+			<div class="col l8 offset-l2">
+				<!-- 重新定義row -->
+				<div class="row">
+					<!-- 花絮封面 -->
+					<div class="row center-align">
+						<div class="row">
+							<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >						
+						</div>	
+					</div>				
+					<!-- 花絮基本資訊 -->
+					<div class="row card-panel  yellow lighten-3 hoverable">
+						<!-- 完整計畫名稱 -->
+						<div class="row center-align" style="font-size:3em;font-family:微軟正黑體;font-weight:600" id="projName">
+							
+						</div>					
+						<div class="row">
+								<div class="col l3 right left-align">
+									<!-- 活動發起人 -->
+									<div class="center-align card-panel" id="memberName" style="font-size:1.5em;font-family:微軟正黑體;font-weight:600">
+									</div>								
+								</div>
+								<i class="material-icons right red-text" style="font-size:3em;">translate</i>
+						</div>					
+					</div>
+					
+					<!-- 花絮內容 -->
+					<div class="row card-panel  yellow lighten-3 hoverable">					
+					
+						<div class="row">
+							<div class="video-container">
+		        				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
+		      				</div>	
+		      			</div>						
+		      			
+		      			<div class="row">
+		      				<div class="divider" style="height:1em;"></div>
+							<div id="content"></div>
+						</div>					
+							
+					
+					
+					</div>				
 				</div>
 			</div>
+			<!-- 8欄置中 -->		
 		</div>
-		<div class="col s12 m4 l4">
-			<div>
-				<h4>花絮封面</h4>
-				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
-			</div>			
-		</div>
-	</div>
-	</form>
-	</div>
+		
+		
+			
+<!-- 	<div class="contaniner"> -->
+<!-- 	<form action="/" id="postForm"> -->
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col s12"><h2 style="text-align:center;">活動花絮</h2></div> -->
+<!-- 		<div class="col s12 m4 l8"> -->
+<!-- 			<div class="input-field col s12"> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<div id="error"></div> -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s6"> -->
+<!-- 					<h4> -->
+<!-- 					<span id="projName" type="text" class="validate" ></span> -->
+<!-- 					<label for="projName" class="active">完整計畫名稱</label> -->
+<!-- 					</h4> -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s6"> -->
+<!-- 					<h4> -->
+<!-- 						<span id="memberName" type="text" class="validate"></span> -->
+<!-- 						<label for="memberName" class="active">活動發起人</label> -->
+<!-- 					</h4> -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<div class="video-container"> -->
+<!--         				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe> -->
+<!--       				</div>	 -->
+<!--       			</div> -->
+<!--       			<div class="input-field col s12"> -->
+<!--       				<div class="divider" ></div> -->
+<!-- 					<div id="content"></div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<div class="col s12 m4 l4"> -->
+<!-- 			<div> -->
+<!-- 				<h4>花絮封面</h4> -->
+<!-- 				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" > -->
+<!-- 			</div>			 -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	</form> -->
+<!-- 	</div> -->
 	</main>
 
 
@@ -76,10 +127,6 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%

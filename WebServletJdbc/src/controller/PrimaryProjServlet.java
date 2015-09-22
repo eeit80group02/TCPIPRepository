@@ -91,9 +91,12 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProjAll");
 				displayPrimaryProjAll(request,response);
 			}
+			// 單一初步計畫
 			else if(type.equals("display"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProj");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				displayPrimaryProj(request,response);
 			}
 			// 個人管理頁面 => 顯示發布過的初步計畫
@@ -107,7 +110,7 @@ public class PrimaryProjServlet extends HttpServlet
 			// 個人管理頁面=> 顯示需要審核的初步計畫[有學校申請]
 			else if(type.equals("displayPersonalByPending"))
 			{
-				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProjByPending");
+				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProjByPending[審核計畫列表]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayPersonalPrimaryProjByPending(request,response);

@@ -167,12 +167,20 @@
 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set> 
 				<!-- 	檢查 登入者是否學校 -->
 					<c:if test="${LoginOK.beanName.equals('school')}">
-						<form action="<c:url value="/ProcessingProj.do" />" method="post">
-							<input type="hidden" name="schoolId" value="${LoginOK.schoolId}">
-							<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
-							<input type="hidden" name="type" value="apply">
-							<input class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="submit" value="申請計畫洽談" >
-						</form>
+						<c:set var="flag" value="false" />
+						<c:forEach var="processingProjBean" items="${primaryProj.processingProjBean}">
+							<c:if test="${processingProjBean.schoolId == LoginOK.schoolId}">
+								<c:set var="flag" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:if test="${flag.equals('false')}">
+							<form action="<c:url value="/ProcessingProj.do" />" method="post">
+								<input type="hidden" name="schoolId" value="${LoginOK.schoolId}">
+								<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
+								<input type="hidden" name="type" value="apply">
+								<input class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="submit" value="申請計畫洽談" >
+							</form>
+						</c:if>
 					</c:if>
 					
 					<c:if test="${LoginOK.beanName.equals('member')}">
@@ -189,8 +197,9 @@
 		</div>
 	
 	</div>
+
+		
 	<!-- 主要版面 -->
-	
 	</main>
 	<!-- 主要內容 -->	
 	

@@ -31,39 +31,10 @@
 	<!-- 內容 -->
 	<main>
 		<div class="row">
-		<!-- 側邊篩選條件欄 -->
-			<div class="col l3 offset-l1 z-depth-3 hide-on-med-and-down"
-				style="position: absolute; top: 166; padding: 0" id="sidebar">
-				<div class="collection"
-					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-					<ul style="margin: 0;">
-						<li class="collection-header collection-item center-align"
-							style="padding: 0;"><h5 class="teal accent-2"
-								style="margin: 0; display: block; padding: 15px 0 15px 0;">排序</h5></li>
-						<li><a href="#!" class="collection-item">即將結束</a></li>
-						<li><a href="#!" class="collection-item">活動時間</a></li>
-						<li><a href="#!" class="collection-item">需求人數</a></li>
-						<li><a href="#!" class="collection-item">已募集人數</a></li>
-					</ul>
-				</div>
-				<div class="collection"
-					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-					<ul style="margin: 0;">
-						<!-- 提示[篩選] -->
-						<li class="collection-header collection-item center-align"
-							style="padding: 0;"><h5 class="teal accent-2"
-								style="margin: 0; display: block; padding: 15px 0 15px 0;">篩選</h5></li>
-						<li><a href="#!" class="collection-item">北部地區</a></li>
-						<li><a href="#!" class="collection-item">中部地區</a></li>
-						<li><a href="#!" class="collection-item">南部地區</a></li>
-						<li><a href="#!" class="collection-item">東部地區</a></li>
-					</ul>
-				</div>
-			</div>
 			
 			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
 			<!-- 初步計畫列表 -->
-			<div class="col l8 offset-l4" id="projlist">
+			<div class="col l10 offset-l1" id="projlist">
 				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">

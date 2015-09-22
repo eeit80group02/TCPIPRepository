@@ -58,7 +58,7 @@
 		<div class="row valign-wrapper">
 			<!-- 段落提示 -->
 			<div
-				class="card-panel waves-effect waves-red yellow accent-2 z-depth-6 projinfos "
+				class="card-panel yellow accent-2 z-depth-6 projinfos "
 				style="width: 15%;">
 				<h4 style="margin: 0;" class="center-align">募集資訊</h4>
 			</div>
@@ -264,7 +264,7 @@
 		<div class="row valign-wrapper">
 			<!-- 段落提示 -->
 			<div
-				class="card-panel waves-effect waves-red yellow accent-2 z-depth-6 projinfos "
+				class="card-panel yellow accent-2 z-depth-6 projinfos "
 				style="width: 15%;">
 				<h4 style="margin:0" class="center-align">花絮剪影</h4>
 			</div>

@@ -37,103 +37,73 @@
 						</div>	
 					</div>				
 					<!-- 花絮基本資訊 -->
-					<div class="row card-">
-						<div class="row">
-							<div class="col l8 offset-2 yellow lighten-3">
-							 123
+					<div class="row card-panel  yellow lighten-3 hoverable">
+						<div class="row center-align" style="font-size:3em;font-family:微軟正黑體;font-weight:600" id="projName">
 							
-							</div>
 						</div>					
 						<div class="row">
-							<div class="col l8 offset-2 yellow lighten-3">
-							 123
-							
-							</div>
+								<div class="col l3 right left-align">
+									<div class="center-align card-panel" id="memberName" style="font-size:1.5em;font-family:微軟正黑體;font-weight:600">
+									</div>								
+								</div>
+								<i class="material-icons right red-text" style="font-size:3em;">translate</i>
 						</div>					
 					</div>
-				
-				
-				
-<!-- 								<div class="col l8 offset-l2 card-panel yellow lighten-3" style="font-size:3em;font-weight:600"> -->
-<!-- 								花絮封面 -->
-<!-- 							</div>		 -->
-				
+					
+					<!-- 花絮內容 -->
+					<div class="row card-panel  yellow lighten-3 hoverable">					
+					
+						<div class="row">
+							<div class="video-container">
+		        				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
+		      				</div>	
+		      			</div>						
+		      			
+		      			<div class="row">
+		      				<div class="divider" style="height:1em;"></div>
+							<div id="content"></div>
+						</div>					
+							
+					
+					
+					</div>				
 				</div>
 			</div>
 			<!-- 8欄置中 -->		
 		</div>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	<div class="contaniner">
-	<form action="/" id="postForm">
-	<div class="row">
-		<div class="col s12 m4 l8">
-			<div class="input-field col s12">
-				<div class="input-field col s12">
-					<div id="error"></div>
-				</div>
-				<div class="input-field col s6">
-					<h4>
-					<span id="projName" type="text" class="validate" ></span>
-					<label for="projName" class="active">完整計畫名稱</label>
-					</h4>
-				</div>
-				<div class="input-field col s6">
-					<h4>
-						<span id="memberName" type="text" class="validate"></span>
-						<label for="memberName" class="active">活動發起人</label>
-					</h4>
-				</div>
-				<div class="input-field col s12">
-					<div class="video-container">
-        				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
-      				</div>	
-      			</div>
-      			<div class="input-field col s12">
-      				<div class="divider" ></div>
-					<div id="content"></div>
-				</div>
-			</div>
-		</div>
-		<div class="col s12 m4 l4">
-			<div>
-				<h4>花絮封面</h4>
-				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >
-			</div>			
-		</div>
-	</div>
-	</form>
-	</div>
+<!-- 	<div class="contaniner"> -->
+<!-- 	<form action="/" id="postForm"> -->
+<!-- 	<div class="row"> -->
+<!-- 		<div class="col s12 m4 l8"> -->
+<!-- 			<div class="input-field col s12"> -->
+<!-- 				<div class="input-field col s12"> -->
+<!-- 					<div id="error"></div> -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s6"> -->
+<!-- 					<h4> -->
+<!-- 					<span id="projName" type="text" class="validate" ></span> -->
+<!-- 					<label for="projName" class="active">完整計畫名稱</label> -->
+<!-- 					</h4> -->
+<!-- 				</div> -->
+<!-- 				<div class="input-field col s6"> -->
+<!-- 					<h4> -->
+<!-- 						<span id="memberName" type="text" class="validate"></span> -->
+<!-- 						<label for="memberName" class="active">活動發起人</label> -->
+<!-- 					</h4> -->
+<!-- 				</div> -->
+
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 		<div class="col s12 m4 l4"> -->
+<!-- 			<div> -->
+<!-- 				<h4>花絮封面</h4> -->
+<!-- 				<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" > -->
+<!-- 			</div>			 -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+<!-- 	</form> -->
+<!-- 	</div> -->
 	</main>
 
 
@@ -152,31 +122,28 @@
 		$(function() {
 			//mainboard最小高度
 			$("#mainboard").css("min-height","100vh");
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "310px");
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
 			
-// 			$.get("<c:url value='/ActicityHighlightDisplayServlet' />", function(responseJson) {
-// 				console.log(responseJson);
-// 				if(responseJson.error == "尚未建立花絮!") {
-// 					$("#error").html("<h4>查詢錯誤!</h4>");
-// 				} else {
-// 					$("#projName").text(responseJson.projName);	
-// 					$("#memberName").text(responseJson.memberName);
-// 					var offset = responseJson.videoURL.indexOf("watch?v=")+8;
-// 					$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+responseJson.videoURL.substring(offset, offset+11));
-// 					$("#frontCover").attr("src", responseJson.frontCover);
-// 					$("#content").html(responseJson.content);
-// 				}
-// 			}); 
+			$.get("<c:url value='/ActicityHighlightDisplayServlet' />", function(responseJson) {
+				console.log(responseJson);
+				if(responseJson.error == "尚未建立花絮!") {
+					$("#error").html("<h4>查詢錯誤!</h4>");
+				} else {
+					$("#projName").append(responseJson.projName);	
+					$("#memberName").append(responseJson.memberName);
+					var offset = responseJson.videoURL.indexOf("watch?v=")+8;
+					$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+responseJson.videoURL.substring(offset, offset+11));
+					$("#frontCover").attr("src", responseJson.frontCover);
+					$("#content").html(responseJson.content);
+				}
+			}); 
 			
 						
 			
