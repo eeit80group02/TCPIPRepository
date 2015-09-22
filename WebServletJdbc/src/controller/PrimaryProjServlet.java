@@ -79,12 +79,9 @@ public class PrimaryProjServlet extends HttpServlet
 			else if(type.equals("update"))
 			{
 				System.out.println("執行 PrimaryProjServlet updatePrimaryProj");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				updatePrimaryProj(request,response);
-			}
-			else if(type.equals("displayUpdate"))
-			{
-				System.out.println("執行 PrimaryProjServlet displayUpdatePrimaryProj");
-				displayUpdatePrimaryProj(request,response);
 			}
 			else if(type.equals("displayAll"))
 			{
@@ -201,78 +198,15 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 	}
 
-	private void displayUpdatePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
-	{
-		request.setCharacterEncoding("UTF-8");
-		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
-		
-		// 接收資料
-		String primaryProjId = request.getParameter("primaryProjId");
-		
-		// 驗證資料
-		if(primaryProjId == null || primaryProjId.trim().length() == 0)
-		{
-			errorMsg.put("error","queryString key error");
-		}
-		
-		// 進行必要資料轉換
-		int id = 0;
-		try
-		{
-			id = Integer.parseInt(primaryProjId);
-		}
-		catch(NumberFormatException e)
-		{
-			errorMsg.put("error","queryString value error");
-		}
-		
-		if(!errorMsg.isEmpty())
-		{
-			// QueryString 有誤
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.134)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
-
-		// business logic
-		PrimaryProjBean bean = new PrimaryProjBean();
-		bean.setPrimaryProjId(id);
-		bean = service.displayPrimaryProj(bean);
-		
-		if(bean != null)
-		{
-			// 成功導向
-			System.out.println(bean);
-			HttpSession session = request.getSession();
-			session.setAttribute("primaryProj",bean);
-			response.sendRedirect(request.getContextPath() + "/primaryProj/updatePrimaryProjForm.jsp");
-//			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
-			return;
-		}
-		else
-		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
-	}
-
 	private void updatePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		session.removeAttribute("primaryProj");
 		
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
 		request.setAttribute("error",errorMsg);
 		
 		String primaryProjId = null;
-		String memberId = null;
 		String title = null;
 		String projAbstract = null;
 		String content = null;
@@ -299,10 +233,6 @@ public class PrimaryProjServlet extends HttpServlet
 					if(name.equals("primaryProjId"))
 					{
 						primaryProjId = value;
-					}
-					if(name.equals("memberId"))
-					{
-						memberId = value;
 					}
 					if(name.equals("title"))
 					{
@@ -421,27 +351,7 @@ public class PrimaryProjServlet extends HttpServlet
 		{
 			e.printStackTrace();
 		}
-		int mId = 0;
-		try
-		{
-			mId = Integer.parseInt(memberId);
-		}
-		catch(NumberFormatException e)
-		{
-			e.printStackTrace();
-		}
 		
-//		Object object = session.getAttribute("LoginOK");
-//		if(object instanceof MemberBean)
-//		{
-//			MemberBean memberBean = (MemberBean)object;
-//			if(memberBean.getMemberId() != mId)
-//			{
-//				String contextPath = request.getContextPath();
-//				response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
-//				return;
-//			}
-//		}
 		java.util.Date sTime = null;
 		try
 		{
@@ -465,7 +375,7 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 		
 		// 如果 <= 0 代表 日期起訖相同 或者 迄比起 早
-		if(GlobalService.compareDate(sTime,eTime) <= 0)
+		if(GlobalService.compareDate(sTime,eTime) < 0)
 		{
 			errorMsg.put("endTime","活動時間(迄) 不能比 活動時間(起)早");
 		}
@@ -514,34 +424,29 @@ public class PrimaryProjServlet extends HttpServlet
 		}
 		
 		// 將必要資料 包成Bean 導向 Business Logic
-		PrimaryProjBean bean = new PrimaryProjBean();
-		bean.setPrimaryProjId(pId);
-		bean.setMemberId(mId);
-		bean.setTitle(title);
-		bean.setProjAbstract(projAbstract);
-		bean.setContent(content);
-		bean.setIdealPlace(location);
-		bean.setActivityStartTime(sTime);
-		bean.setActivityEndTime(eTime);
-		bean.setDemandNum(dNum);
-		bean.setBudget(bget);
-		bean.setFrontCoverName(fileName);
-		bean.setFrontCover(img);
-		bean.setFrontCoverLength(fileLength);
+		PrimaryProjBean primaryBean = new PrimaryProjBean();
+		primaryBean.setPrimaryProjId(pId);
+		primaryBean.setTitle(title);
+		primaryBean.setProjAbstract(projAbstract);
+		primaryBean.setContent(content);
+		primaryBean.setIdealPlace(location);
+		primaryBean.setActivityStartTime(sTime);
+		primaryBean.setActivityEndTime(eTime);
+		primaryBean.setDemandNum(dNum);
+		primaryBean.setBudget(bget);
+		primaryBean.setFrontCoverName(fileName);
+		primaryBean.setFrontCover(img);
+		primaryBean.setFrontCoverLength(fileLength);
 
 		// 進行 Business
-		bean = service.updatePrimaryProj(bean);
+		primaryBean = service.updatePrimaryProj(primaryBean);
 		
-		if(bean != null)
+		if(primaryBean != null)
 		{
 			// 成功導向
-			System.out.println(bean);
+			System.out.println(primaryBean);
 			
-//			displayPrimaryProj(request,response);
-//			session = request.getSession();
-//			session.setAttribute("primaryProj",bean);
-			
-			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=display&primaryProjId=" + bean.getPrimaryProjId());
+			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=display&primaryProjId=" + primaryBean.getPrimaryProjId());
 		}
 		else
 		{

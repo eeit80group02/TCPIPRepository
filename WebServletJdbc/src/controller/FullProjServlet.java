@@ -349,7 +349,6 @@ public class FullProjServlet extends HttpServlet
 		request.setAttribute("error",errorMsg);
 		
 		String fullProjId = null;
-		String memberId = null;
 		String title = null;
 		String projAbstract = null;
 		String content = null;
