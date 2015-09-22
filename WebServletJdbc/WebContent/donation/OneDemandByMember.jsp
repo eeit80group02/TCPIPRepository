@@ -92,11 +92,11 @@
 			<tfoot>
 					<tr>
 						<td id="addToBag">
-							<button type="button" class="btn btn-large btn-floating">
+							<button type="button" class="btn btn-large btn-floating" >
 								<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="medium material-icons">search</i></a>
 							</button> &nbsp;
 						
-							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating">
+							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem">
 								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="medium material-icons">card_giftcard</i></a>
 							</button>
 						</td>
@@ -104,7 +104,7 @@
 						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
 						
 						<script>
-							var addToBag = document.getElementById("addToBag");
+							var addToBag = document.getElementById("addItem");
 							addToBag.addEventListener("click", insertDeamnd);
 								
 							function insertDeamnd(){
