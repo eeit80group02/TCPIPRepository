@@ -523,16 +523,24 @@ public class SchoolDemandServlet extends HttpServlet {
 			return;
 		}
 		int schoolId = sbean.getSchoolId();
+		
 		bean = (SchoolDemandBean) session.getAttribute("Demand");
 		session.removeAttribute("Demand");
-		
 		if(bean==null){
 			sId = request.getParameter("schoolDemandId");
-			schoolDemandId = Integer.parseInt(sId);
+			if(sId!=null){
+				try {
+					schoolDemandId = Integer.parseInt(sId);
+				} catch (Exception e) {
+					response.sendRedirect("");
+				}
+			}
 		}else{
 			schoolDemandId = bean.getSchoolDemandId();
 		}
-
+		
+		System.out.println(schoolDemandId);
+		System.out.println(schoolId);
 		// 存入Bean
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);

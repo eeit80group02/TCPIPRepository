@@ -68,8 +68,9 @@
 			<div class="col l8 offset-l4" id="projlist">
 				<div class="centerdiv">
 				<c:forEach  var="demand" items="${list}" varStatus="varStatus" >
-					<c:url value="/SchoolDemandServlet.do" var="path">
-						<c:param name="type" value="display" />
+					<c:url value="/Status.do" var="path">
+						<c:param name="type" value="agree" />
+						<c:param name="memberId" value="${demand.processingMemberBean.memberId}" />
 						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" />
 					</c:url>
 					
@@ -86,7 +87,7 @@
 					              <p>${demand.processingMemberBean.memberBean.lastName}${demand.processingMemberBean.memberBean.firstName}</p>
 					              <p>推薦數${demand.processingMemberBean.memberBean.recommendCount}</p>
 					              <p>${demand.demandStatus}</p>
-					              <a class="waves-effect waves-light btn" href="<c:url value='Status.do?type=agree'/>">同意</a>
+					              <a class="waves-effect waves-light btn" href="<c:url value='${path}'/>">同意</a>
 					              <a class="waves-effect waves-light btn">不同意</a>
 					            </div>
 					          </div>

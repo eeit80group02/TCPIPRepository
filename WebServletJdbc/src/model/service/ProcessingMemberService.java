@@ -67,8 +67,19 @@ public class ProcessingMemberService {
 					fBean.setMemberId(bean.getMemberId());
 					fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
 					fBean.setTitle(sDBean.getActivityTopic());
+					fBean.setFrontCoverName(frontCoverName);
+					fBean.setFrontCover(frontCover);
+					fBean.setFrontCoverLength(frontCoverLength);
+					fBean.setProjAbstract(projAbstract);
+					fBean.setContent(content);
 					fBean.setLocation(sDBean.getActivityLocation());
+					fBean.setActivityStartTime(activityStartTime);
+					fBean.setActivityEndTime(activityEndTime);
+					fBean.setEstMember(estMember);
+					fBean.setBudget(budget);
 					fBean.setCreateDate(result.getCheckTime());
+					fBean.setProjStatus("洽談中");
+					fullProjDAO.insert(fBean); 
 				}
 			}
 		}

@@ -67,8 +67,9 @@
 			<!-- 初步計畫列表 -->
 			<div class="col l8 offset-l4" id="projlist">
 				<div class="centerdiv">
+				
 				<c:forEach  var="demand" items="${list}" varStatus="varStatus" >
-					<c:url value="/SchoolDemandServlet.do" var="path">
+					<c:url value="/schoolDemand/SchoolDemandServlet.do" var="path">
 						<c:param name="type" value="display" />
 						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" />
 					</c:url>
@@ -84,7 +85,7 @@
 					            </div>
 					            <div class="card-action">
 					              <p>${demand.demandStatus}</p>
-					              <a href="#">查看</a>
+					              <a href="${path}">查看</a>
 					            </div>
 					          </div>
 					        </div>
