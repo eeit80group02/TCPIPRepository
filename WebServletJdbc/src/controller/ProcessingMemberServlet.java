@@ -111,7 +111,6 @@ public class ProcessingMemberServlet extends HttpServlet{
 		ProcessingMemberService service = new ProcessingMemberService();
 		ProcessingMemberBean bean = new ProcessingMemberBean();
 		HttpSession session = request.getSession();
-		
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
@@ -154,35 +153,40 @@ public class ProcessingMemberServlet extends HttpServlet{
 
 	}
 	public void disagree(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		Map<String, String> errorMsg = new HashMap<String, String>();
 		ProcessingMemberService service = new ProcessingMemberService();
 		ProcessingMemberBean bean = new ProcessingMemberBean();
 		HttpSession session = request.getSession();
-		
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
-		String memberId = request.getParameter("member");
-		String schoolDemandId = request.getParameter("schoolDemandId");
-		if(memberId == null){
-			errorMsg.put("err", "錯誤");
-		}
-		if(schoolDemandId == null){
-			errorMsg.put("err", "錯誤");
-		}
-		if(!errorMsg.isEmpty()){
-			response.sendRedirect("");
-			return;
-		}
-		int mId = 0;
-		Integer.parseInt(memberId);
-		int sId = 0;
-		Integer.parseInt(schoolDemandId);
+
+		
 		
 		
 	}
 	public void cancel(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		ProcessingMemberService service = new ProcessingMemberService();
+		ProcessingMemberBean bean = new ProcessingMemberBean();
+		SchoolBean sbean = null;
+		HttpSession session = request.getSession();
+		sbean = (SchoolBean)session.getAttribute("LoginOK");
+		if(sbean ==null){
+			response.sendRedirect("login.jsp");
+		}
+		String processingMemberId = request.getParameter("processingMemberId");
+		int pMId = 0;
+		try {
+			pMId = Integer.parseInt(processingMemberId);
+		} catch (Exception e) {
+			response.sendRedirect("");
+		}
+		bean = service.cancel(bean);
+		if(bean!=null){
+			response.sendRedirect("");
+		}else{
+			response.sendRedirect("");
+		}
 		
 	}
 }

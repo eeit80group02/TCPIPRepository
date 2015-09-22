@@ -82,7 +82,8 @@
 										洽談中
 								</span>
 							</a>											
-						</div>											
+						</div>
+						<a href='<c:url value='/schoolDemand/SchoolDemandServlet.do?type=mdisplays'/>'>111111</a>											
 					</div>				
 				</div>
 
