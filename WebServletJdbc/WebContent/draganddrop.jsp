@@ -283,11 +283,11 @@
         					
         					
         					$('.participator').on('click',function(){
-        						$('.dialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name'));
+        						$('.missionDetailDialog .missionExecutor').removeClass($('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name'));
         						$('.missionParticipator ul .' + $('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name') + '').remove();
         						
-        						$('.dialog .missionExecutor').text($(this).children('div').text());
-        						$('.dialog .missionExecutor').addClass($(this).children('div').attr('class'));
+        						$('.missionDetailDialog .missionExecutor').text($(this).children('div').text());
+        						$('.missionDetailDialog .missionExecutor').addClass($(this).children('div').attr('class'));
         						
         						$('#'+$('.dataRowLocation').val()).find('.missionExecutor').val( $(this).children('div').text());
         						$('#'+$('.dataRowLocation').val()).find('.missionExecutor').attr('name',$(this).children('div').attr('class'));
@@ -342,12 +342,12 @@
         					$('.participator').unbind().click(function(){
         						var subDataRowId = $(target).parent().parent().attr('id');
         						console.log("subDataRowId="+$(target).parent().parent().attr('id'));
-								if(subDataRowId!= undefined){
-									console.log('this is not subMission!');
+								if(subDataRowId!= void 0 ){
+									console.log('this is submission executor!');
 									$('#'+subDataRowId+' .addSubMissionExecutor').empty();
-									$('#'+subDataRowId+' .addSubMissionExecutor').append('<div class="subMissionExecutor">'+ $(this).text() +'</div>');
+									$('#'+subDataRowId+' .addSubMissionExecutor').append('<div class="subMissionExecutor" style="padding:15px 0px;">'+ $(this).text() +'</div>');
 								} else {
-									console.log("remove subMissionExecutor!");
+									console.log("main input field for select executor!");
         							$('.subMission .addSubMissionExecutor').empty();
         							$('.subMission .addSubMissionExecutor').append('<div class="subMissionExecutor">'+ $(this).text() +'</div>');
 								}        						
@@ -478,15 +478,16 @@
 				if(subMissionExecutor==""){
 					subMissionExecutor = "待認領"
 				}
-				//*****************************************************************************
-				//*****************************************************************************
-				var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + subMissionCount + '" class="row" style="width:585.906px;height:60px;">' + 
+
+				var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + subMissionCount + '" class="row" style="width:585.906px;height:60px;">' +
+														'<div class="subMissionSettings col l1"><i class="material-icons" style="padding:10px 0px;font-size:40px;">settings</i></div>' +
+														'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ subMissionCount +'" class="subMissionStatus filled-in">'+
+														'<label for="subMissionCheckbox'+ subMissionCount +'"></label></div>' +
 														'<textarea class="subMissionName col l5 materialize-textarea" placeholder="請輸入子任務內容" style="max-height:45px;">'+ subMissionName +'</textarea>' +
 														'<div class="subMissionDateContainer col l3"><input type="text" class="subMissionDate subDatepicker col l10" value="'+ subMissionDate +'" readonly>' +
-														'</div>' +
-														'<div class="addSubMissionExecutor col l2"><div class="subMissionExecutor">'+
-														subMissionExecutor +'</div></div><div class="col l1">text</div>' +
-														'<input type="hidden" class="ifShow" value="'+ $('.dataRowLocation').val() +'"></div>');
+														'</div>' + '<div class="addSubMissionExecutor col l2"><div class="subMissionExecutor" style="padding:15px 0px;">'+
+														subMissionExecutor +'</div></div>' +
+														'<input type="hidden" class="mainDataRowLocation" value="'+ $('.dataRowLocation').val() +'"></div>');
 				$('.subMissionContainer ul').prepend($subMission);
 				$('.subMission').hide();
 				$('.openSubMissionWindow').css('display','block');
@@ -609,38 +610,83 @@
 				$('.subMissionDateContainer img').css({'padding':'15px 0px',
 					  'cursor':'pointer'}).addClass('col l2');
 				
-				
-				
+				$('.subMissionSettings').css({'cursor':'pointer'});
 				
 				subMissionCount++;
 			});
 			
 			
+			//Set subMissionSettings dialog for subMission
+			$(document).on('click','.subMissionSettings',function(){
+				if($('.subMissionSettingsDialog').dialog( "isOpen" )){
+					$('.subMissionSettingsDialog').dialog( "close" );
+				}
+				
+				var pos =  $(this).position();
+				$('.subMissionSettingsDialog').dialog("option", "position", {
+                    my: "left",
+                    at: "right",
+                    of: event,
+                });
+				
+				var subMissionId = $(this).parent().attr('id');
+				$('.subMissionLocation').val(subMissionId);
+				$(".subMissionSettingsDialog").dialog("open");
+				$(".ui-dialog-titlebar").hide();
+				
+			});
 			
 			
-			//Set popup dialog close condition
-			$('#commit').click(function(){
-				$('.popupWindow').dialog( "close" );
+			//Set subMissionSettings dialog close condition
+			$('#transferToMission').click(function(){
+				var mainMissionId = $('#'+$('.subMissionLocation').val()).children('input[class="mainDataRowLocation"]').val();
+				var subMissionId = $('.subMissionLocation').val();
+				console.log("subMissionId="+subMissionId);
+				console.log($('#'+subMissionId));
+				var subMissionStatus = $('#'+subMissionId+' .subMissionStatus').val();
+				console.log("subMissionStatus="+subMissionStatus);
+				var subMissionName = $('#'+subMissionId+' .subMissionName').val();
+				console.log("subMissionName="+subMissionName);
+				var subMissionDate = $('#'+subMissionId+' .subMissionDate').val();
+				console.log("subMissionDate="+subMissionDate);
+				var subMissionExecutor = $('#'+subMissionId+' .subMissionExecutor').text();
+				console.log("subMissionExecutor="+subMissionExecutor);
+				
+				//******************************************************************************
+				//******************************************************************************
+				//******************************************************************************
+				$('.subMissionSettingsDialog').dialog( "close" );
 			});			
-			$('#delete').click(function(){
+			$('#deleteSubMission').click(function(){
+				$('#'+$('.subMissionLocation').val()).parent().remove();
+				$('.subMissionSettingsDialog').dialog( "close" );			
+			});			
+			
+			
+			
+			//Set missionTitle dialog close condition
+			$('#confirmMission').click(function(){
+				$('.setMissionTitleDialog').dialog( "close" );
+			});			
+			$('#deleteMission').click(function(){
 				$('#'+$('.titleLocation').val()).parent().hide('slow', function(){ $(this).remove(); });
-				$('.popupWindow').dialog( "close" );			
+				$('.setMissionTitleDialog').dialog( "close" );			
 			});			
 			$(document).on('keypress', '.missionTitle', function(e) {
 				if(e.which == 13) {
-					$('.popupWindow').dialog( "close" );
+					$('.setMissionTitleDialog').dialog( "close" );
 				}
 			});
 			
 			
 			//Change missionTitle, define popup dialog position
 			$(document).on('dblclick','.missionTitle',function() {
-				if($('.popupWindow').dialog( "isOpen" )){
-					$('.popupWindow').dialog( "close" );
+				if($('.setMissionTitleDialog').dialog( "isOpen" )){
+					$('.setMissionTitleDialog').dialog( "close" );
 				}
 				
 				var pos =  $(this).position();
-				$('.popupWindow').dialog("option", "position", {
+				$('.setMissionTitleDialog').dialog("option", "position", {
                     my: "left",
                     at: "right",
                     of: event,
@@ -649,9 +695,9 @@
 				var title = $(this).text();
 				var temp = $(this).attr('id');
 				
-				$('.popupWindow .missionTitle').val(title);
-				$('.popupWindow .titleLocation').val(temp);
-				$(".popupWindow").dialog("open");
+				$('.setMissionTitleDialog .missionTitle').val(title);
+				$('.setMissionTitleDialog .titleLocation').val(temp);
+				$(".setMissionTitleDialog").dialog("open");
 				$(".ui-dialog-titlebar").hide();
 				
 			});
@@ -659,8 +705,8 @@
 			
 			//Get initial mission information and set to dialog
 			$(document).on('click','.li_edit',function() {
-				if($('.dialog').dialog( "isOpen" )){
-					$('.dialog').dialog( "close" );
+				if($('.missionDetailDialog').dialog( "isOpen" )){
+					$('.missionDetailDialog').dialog( "close" );
 				}
 				var div = event.target;
 				var dataName = $(div).text();
@@ -670,9 +716,9 @@
 				var dataExecutorId = $(div).siblings("div").children(".missionExecutor").attr("name");
 				
 				var temp = $(div).siblings("div").attr('id');
-				$('.dialog .missionName').val(dataName);
-				$('.dialog .missionExecutor').text(dataExecutor);
-				$('.dialog .missionDate').val(dataDate);
+				$('.missionDetailDialog .missionName').val(dataName);
+				$('.missionDetailDialog .missionExecutor').text(dataExecutor);
+				$('.missionDetailDialog .missionDate').val(dataDate);
 				
 				$('.missionParticipator ul').empty();
 				
@@ -680,27 +726,27 @@
 				$('.missionParticipator ul').append('<div class="addParticipator btn-floating btn waves-effect waves-light #2196f3 blue"><i class="material-icons">add</i></div>')
 				
 				if($(event.target).hasClass('disable')){
-					$('.dialog .missionStatus').prop('checked', true);
-					$('.dialog .missionName').addClass('disable');
+					$('.missionDetailDialog .missionStatus').prop('checked', true);
+					$('.missionDetailDialog .missionName').addClass('disable');
 				} else {
-					$('.dialog .missionStatus').prop('checked', false);
-					if($('.dialog .missionName').hasClass('disable')) {
-						$('.dialog .missionName').removeClass('disable');
+					$('.missionDetailDialog .missionStatus').prop('checked', false);
+					if($('.missionDetailDialog .missionName').hasClass('disable')) {
+						$('.missionDetailDialog .missionName').removeClass('disable');
 					}
 				}
 				if(dataPriority == "普通" || dataPriority == "緊急" || dataPriority == "非常緊急" ){
-					$('.dialog .missionPriority option[value=' + dataPriority + ']').prop('selected', true);
+					$('.missionDetailDialog .missionPriority option[value=' + dataPriority + ']').prop('selected', true);
 				} else {
-					$('.dialog .missionPriority option[value="普通"]').attr("selected", "selected");
+					$('.missionDetailDialog .missionPriority option[value="普通"]').attr("selected", "selected");
 				}
-				$('.dialog .dataRowLocation').val(temp);
+				$('.missionDetailDialog .dataRowLocation').val(temp);
 				
 				
 				
 				$.each($('.subMissionContainer ul li') ,function(){
-					if( $(this).children('div').children('input[class="ifShow"]').val() == temp ){
+					if( $(this).children('div').children('input[class="mainDataRowLocation"]').val() == temp ){
 						$(this).css('display','block');						
-					} else if( $(this).children('div').children('input[class="ifShow"]').val() != void 0 ) {
+					} else if( $(this).children('div').children('input[class="mainDataRowLocation"]').val() != void 0 ) {
 						$(this).css('display','none');
 					} else {
 						console.log('this is creater!');
@@ -710,7 +756,7 @@
 				
 				
 				
-				$('.dialog').dialog( "open" );
+				$('.missionDetailDialog').dialog( "open" );
 				$(".ui-dialog-titlebar").hide();
 				
 			
@@ -718,7 +764,7 @@
 			});
 			
 			
-			
+			//Cancel subMission
 			$('.cancelSubMission').on('click',function(){
 				$('.subMission').hide();
 				$('.openSubMissionWindow').css('display','block');
@@ -727,21 +773,45 @@
 			
 			
 			//Set dialog change to dataRow
-			$('.popupWindow .missionTitle').on('change',function(){
+			$('.setMissionTitleDialog .missionTitle').on('change',function(){
 				console.log($('.titleLocation').val());
 				$('#'+$('.titleLocation').val()).text($(this).val());
 			});			
-			$('.dialog .missionName').on('change',function(){
+			$('.missionDetailDialog .missionName').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).siblings("div").text($(this).val());
 			});
-			$('.dialog .missionPriority').on('change',function(){
+			$('.missionDetailDialog .missionPriority').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).find('.missionPriority').val($(this).val());
 			});
 			
 			
+			//Set subMissionSettings dialog
+			$('.subMissionSettingsDialog').dialog({
+				autoOpen: false,
+				modal: true,
+				height: 230,
+				width: 200,
+				show: {
+					effect: "slide",
+					direction: "right",
+					duration: 300
+				},
+				hide: {
+			    	effect: "slide",
+			    	direction: "right",
+			    	duration: 300
+				},
+				open: function(){
+		            $('.ui-widget-overlay').bind('click',function(){
+		                $('.subMissionSettingsDialog').dialog('close');
+		            })
+		        }
+			});
 			
-			//Set popup dialog
-			$('.popupWindow').dialog({
+			
+			
+			//Set missionTitle dialog
+			$('.setMissionTitleDialog').dialog({
 				autoOpen: false,
 				modal: true,
 				height: 250,
@@ -758,14 +828,14 @@
 				},
 				open: function(){
 		            $('.ui-widget-overlay').bind('click',function(){
-		                $('.popupWindow').dialog('close');
+		                $('.setMissionTitleDialog').dialog('close');
 		            })
 		        }
 			});
 			
 	
 			//Set mission dialog		
-			$('.dialog').dialog({
+			$('.missionDetailDialog').dialog({
 				autoOpen: false,
 				modal: true,
 				autoResize:true,
@@ -784,7 +854,7 @@
 				},
 				open: function(){
 		            $('.ui-widget-overlay').bind('click',function(){
-		                $('.dialog').dialog('close');
+		                $('.missionDetailDialog').dialog('close');
 		            })
 		        }
 			});
@@ -815,20 +885,31 @@
 			
 			
 			//Set checkbox status, define add line-through to missionTitle or not
-			$('.dialog .missionStatus').on('click',function() {
+			$('.missionDetailDialog .missionStatus').on('click',function() {
 				if($('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable')) {
-					$('.dialog .missionName').removeClass('disable');
+					$('.missionDetailDialog .missionName').removeClass('disable');
 					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
 					$(event.target).prop('checked',false);
 					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
 				} else {
 					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
-					$('.dialog .missionName').addClass('disable');
+					$('.missionDetailDialog .missionName').addClass('disable');
 					$(event.target).prop('checked',true);
 					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
 				}
 			});
 			
+			//Set checkbox status, define add line-through to subMissionTitle or not
+			$(document).on('click','.subMissionStatus',function() {
+				console.log(event.target);
+				if( $(event.target).prop('checked') == true ){
+					$(event.target).val('true');
+					$(event.target).parent().siblings('textarea').css('text-decoration','line-through');
+				} else {
+					$(event.target).val('false');
+					$(event.target).parent().siblings('textarea').css('text-decoration','none');
+				}
+			});
 			
 			
 			//JQuery datepicker
@@ -975,8 +1056,22 @@
 
 	</div>
 	
+	<div class="subMissionSettingsDialog">
+		<div class="row">
+			<h5 class="center-align">子任務選單</h5>
+		</div>
+		<div class="divider" style="margin:10px 0px;padding:1px 0px;">	
+		</div>
+		<div class="row">
+			<div id="transferToMission" class="waves-effect waves-light btn"><h6>轉為主任務</h6></div>
+		</div>
+		<div class="row">
+			<div id="deleteSubMission" class="waves-effect waves-light btn"><h6>刪除子任務</h6></div>
+		</div>
+		<input type="hidden" class="subMissionLocation" value="">
+	</div>
 	
-	<div class="popupWindow">
+	<div class="setMissionTitleDialog">
 		<div class="row">
 			<div class="input-field">
 				<input type="text" class="missionTitle validate">
@@ -985,10 +1080,10 @@
 		</div>
 		<div class="row">
 			<div class="col l6">
-				<div id="commit" class="waves-effect waves-light btn"><h6>完成</h6></div>
+				<div id="confirmMission" class="waves-effect waves-light btn"><h6>完成</h6></div>
 			</div>
 			<div class="col l6">
-				<div id="delete" class="waves-effect waves-light btn"><h6>刪除</h6></div>
+				<div id="deleteMission" class="waves-effect waves-light btn"><h6>刪除</h6></div>
 			</div>
 		</div>
 	</div>
@@ -999,7 +1094,7 @@
 	</div>
 	
 	
-	<div class="dialog">
+	<div class="missionDetailDialog">
 				<div class="row" style="border:1px dotted gray;">
 					<div class="input-field col l1">
 						<input type="checkbox" class="missionStatus filled-in" id="filled-in-box" >
