@@ -241,7 +241,7 @@ public class ProcessingProjDAOJdbc implements ProcessingProjDAO
 		}
 		return false;
 	}
-
+	
 	public static void main(String[] args) throws Exception
 	{
 //		ProcessingProjDAO dao = new ProcessingProjDAOJdbc();

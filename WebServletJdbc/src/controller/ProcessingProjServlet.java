@@ -257,7 +257,9 @@ public class ProcessingProjServlet extends HttpServlet
 		boolean result = service.applyPrimaryProj(bean);
 		if(result)
 		{
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			String contextPath = request.getContextPath();
+			
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/primaryProj.do?type=displayAll"));
 			return;
 		}
 		else
