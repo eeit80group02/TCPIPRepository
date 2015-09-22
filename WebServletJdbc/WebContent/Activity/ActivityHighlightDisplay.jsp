@@ -26,10 +26,41 @@
 	<!-- 內容 -->
 	<main>
 		<div class="row" id="mainboard">
-		
-		
-		
-		
+			<!-- 8欄置中 -->
+			<div class="col l8 offset-l2">
+				<!-- 重新定義row -->
+				<div class="row">
+					<!-- 花絮封面 -->
+					<div class="row center-align">
+						<div class="row">
+							<img class="card-panel hoverable" id="frontCover" src="" style="height: 340px; width: 420px;border:5px solid black;padding:0;" >						
+						</div>	
+					</div>				
+					<!-- 花絮基本資訊 -->
+					<div class="row card-">
+						<div class="row">
+							<div class="col l8 offset-2 yellow lighten-3">
+							 123
+							
+							</div>
+						</div>					
+						<div class="row">
+							<div class="col l8 offset-2 yellow lighten-3">
+							 123
+							
+							</div>
+						</div>					
+					</div>
+				
+				
+				
+<!-- 								<div class="col l8 offset-l2 card-panel yellow lighten-3" style="font-size:3em;font-weight:600"> -->
+<!-- 								花絮封面 -->
+<!-- 							</div>		 -->
+				
+				</div>
+			</div>
+			<!-- 8欄置中 -->		
 		</div>
 	
 	
@@ -119,6 +150,8 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			//mainboard最小高度
+			$("#mainboard").css("min-height","100vh");
 			//footer中連結的文字大小
 			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
