@@ -25,7 +25,7 @@ public class InsertALotOfMember {
 	public static void start() {
 		
 		try {
-			File fr = new File("C:\\Users\\Student\\git\\TCPIPRepository\\init\\schoolData\\member.txt");
+			File fr = new File("schoolData\\member.txt");
 //			new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));)
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF-8"));
 			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -44,7 +44,7 @@ public class InsertALotOfMember {
 				pstmt.setString(8,strArray[7]);							// gender
 				pstmt.setString(9,strArray[8]);			// email
 				
-				File file = new File("C:\\Users\\Student\\git\\TCPIPRepository\\init\\image\\member\\default.jpg");
+				File file = new File("image\\member\\default.jpg");
 				FileInputStream fis = new FileInputStream(file);
 				pstmt.setString(10,file.getName());				// pictureName
 				pstmt.setBinaryStream(11,fis,file.length());	// picture
