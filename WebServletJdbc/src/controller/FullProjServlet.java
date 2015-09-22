@@ -244,6 +244,7 @@ public class FullProjServlet extends HttpServlet
 				System.out.println("==================================================");
 				request.setAttribute("fullProj",result);
 				request.getRequestDispatcher("/personal/displayPersonalFullProjByChat.jsp").forward(request,response);
+				return;
 			}
 		}
 	}
