@@ -5,6 +5,7 @@
 }
 
 body {
+	cursor:default;
 	background-color: #FFEBEB;
 }
 
@@ -12,15 +13,14 @@ body {
 	max-height: 64px;
 }
 
-.nav-wrapper ul li, .brand-logo {
-	
+.nav-wrapper ul li, .brand-logo {	
 	text-align: center;
 	padding: 0px;
 }
 
 .nav-wrapper ul li a{
+	font-size: 1.4em;
 	font-weight: bold;
-/* 	font-size:1.2em; */
 }
 
 

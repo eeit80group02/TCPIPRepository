@@ -21,24 +21,44 @@ $(window).load(function() {
 		// 结果输出至兩個文本框
 		// document.form1.availHeight.value = winHeight;
 		// document.form1.availWidth.value = winWidth;
-		if (winWidth < 765) {
+
+		var noneBag = 650;
+		var smallBag = 880;
+		var bigBag = 1180;
+		var donationSmallBagWidth = "230px";
+		var donationBigBagWidth = "460px";
+
+		if (winWidth < noneBag) {
 			// 小畫面
 			$("#trash").css("display", "none");
-			$("#gallery").css("max-width", "90%");
+			$("#gallery").css("max-width", "90%").css("padding-left", "5%").css("margin-left", "5%");
 			$("#headMarquee").css("margin-right", "0px");
 
-		} else if (winWidth >= 750 && winWidth < 1125) {
+		} else if (winWidth >= noneBag && winWidth < smallBag) {
 			// 中畫面
-			$("#trash").css("display", "inline").css("width", "230px");
-			$("#gallery").css("max-width", "80%");
-			$("#headMarquee").css("margin-right", "220px");
+			$("#trash").css("display", "inline").css("width", donationSmallBagWidth).css("border-left", "5px solid #ff7575");
+			$("#gallery").css("max-width", "70%").css("padding", "0px").css("margin-left", "0px");
+			$("#headMarquee").css("margin-right", donationSmallBagWidth);
 			$("#donateBagTitle").css("font-size", "0.8em");
-		} else {
+		} else if (winWidth >= smallBag && winWidth < bigBag) {
 			// 大畫面
-			$("#trash").css("display", "inline").css("width", "450px");
-			$("#gallery").css("max-width", "60%");
-			$("#headMarquee").css("margin-right", "440px");
+			$("#trash").css("display", "inline").css("width", donationBigBagWidth).css("border-left", "5px solid #ff7575");
+			$("#gallery").css("max-width", "58%").css("padding", "0px").css("margin-left", "0px");
+			$("#headMarquee").css("margin-right", donationBigBagWidth);
 			$("#donateBagTitle").css("font-size", "1.5em");
+		} else {
+			// 完整畫面
+			$("#trash").css("display", "inline").css("width", donationBigBagWidth).css("border-left", "10px solid #ff7575");
+			$("#gallery").css("max-width", "65%").css("padding", "0px").css("margin-left", "0px");
+			$("#headMarquee").css("margin-right", donationBigBagWidth);
+			$("#donateBagTitle").css("font-size", "1.5em");
+		}
+
+		var hideNavBar = 1100;
+		if (winWidth >= hideNavBar) {
+			$("#nav-mobile3").css("display", "inline");
+		} else {
+			$("#nav-mobile3").css("display", "none");
 		}
 	}
 	findDimensions();
