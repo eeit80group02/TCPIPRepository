@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>捐獻牆</title>
+<title>管理捐獻物資</title>
 
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
@@ -12,11 +12,15 @@
 <script>
 	!window.jQuery && document.write("<script type='text/javascript' src='../donationScripts/jquery-2.1.4.min.js'><\/script>")
 </script>
+
 <!-- Materialize -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+
+<!-- Modal 專用 -->
+<script type="text/javascript" src="../donationScripts/Modal.js"></script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
@@ -24,20 +28,10 @@
 
 <!-- 預設 （本機）-->
 <link rel="stylesheet" href="../donationStyles/jquery-ui.css">
-<script type="text/javascript" src="../donationScripts/jquery-1.10.2.js"></script>
-<script type="text/javascript" src="../donationScripts/jquery-ui.js"></script>
-
-<!-- 預設（遠端） -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 <!-- 自訂 -->
-<link rel="stylesheet" href="../donationStyles/DonationWall.css">
-<script type="text/javascript" src="../donationScripts/Donation.js"></script>
-<script type="text/javascript" src="../donationScripts/picture-big.js"></script>
-
-
-<!-- 在多加載一次picture-big，比較保險 -->
-
+<link rel="stylesheet" href="../donationStyles/DonationWallSchool.css">
+<!-- <script type="text/javascript" src="../donationScripts/DonationWallSchool.js"></script> -->
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
 </head>
@@ -47,22 +41,12 @@
 		<nav>
 			<div class="nav-wrapper">
 				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
 				</ul>
+				<a href="#" class="brand-logo center">管理捐獻物資</a>
 
-				<ul id="nav-mobile2" class="">
-					<li><a href="#"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png" class="brand-logo"></a></li>
-				</ul>
 				<ul id="nav-mobile3" class="right hide-on-med-and-down">
-					<li>
-						<form action="<c:url value="/donation/demand.do?type=FindGoods" />">
-							<div class="input-field">
-								<input id="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
-							</div>
-						</form>
-					</li>
-					<li><i class="large material-icons" id="clearIcon">clear</i></li>
-					<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
+
 					<li class="chooseItem" value="需求數量"><a href="#">需求數量</a></li>
 					<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
 						<ul id="dropdownList01" class="dropdown-content">
@@ -83,71 +67,112 @@
 			</div>
 		</nav>
 	</div>
-	<br>
+
 	<!-- 我就是標頭 end -->
-
-	<!-- scrollamount 調整跑馬燈速度 -->
-	<!-- 愛心圖示 + 感謝 + 捐獻者名字 +捐獻+ 捐獻物品 -->
-	<marquee id="headMarquee" scrollamount="8">
-		<img src="../images/heart.png" width="20px">感謝 <b> 許阿瑋 </b>捐獻 <b> 50吋 液晶電視 </b><img src="../images/heart.png" width="20px">感謝 <b> 彭翔翔 </b>捐獻 <b> A4 影印紙 </b><img src="../images/heart.png" width="20px">感謝 <b> 郭豪豪 </b>捐獻 <b> 電風扇 </b>
-	</marquee>
-
+	
 	<center>
-		<!-- Content -->
-		<div class="ui-widget ui-helper-clearfix" id="donateBody">
-			<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+		<div id="donateBody">
+			<br>
+			<div class="col s12">
+				<br>
+				<ul class="tabs">
+					<li class="tab col s4" id="pageTab01"><a href="#test1" class="active">全部物資</a></li>
+					<li class="tab col s4" id="pageTab02"><a href="#test2" class="">上架中</a></li>
+					<li class="tab col s4" id="pageTab03"><a href="#test3" class="">已下架</a></li>
+				</ul>
+				<br>
+			</div>
+			
+			<br>
+			
+			<div id="test1" class="col s12">
 
-				<c:forEach var='item' items='${OneAllDemands}' varStatus='vs'>
-					<li class="ui-widget-content ui-corner-tr" value="${item.donationId}">
+				<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+					<li class="ui-widget-content ui-corner-tr">
 						<div>
 							<div class="fiximg">
 								<!-- h5 標籤不能新增修改，後面設定會用 -->
-								<div class="alert alert-info" role="alert">
-									<h5>${item.supplyName}-${item.schoolName}</h5>
+								<div>
+									<h5>延長線 - 屏東縣鹽埔鄉鹽埔國民小學</h5>
 								</div>
-								<img class="bigimg" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}">
+
+								<img class="bigimg" src="../images/thing01.jpg" alt="延長線" title="延長線">
 							</div>
-							<div>
-								<div class="foottext">需求數量 : ${item.demandNumber}</div>
-								<div class="footIcin">
-									<div id="add${vs.index}">
-										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
-<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
-									</div>		
+							
+							<div class="footIcin">
+								<!-- 放大鏡的 title 跟上面 h5 的名稱要一模一樣 -->
+
+								<!-- 捐獻記錄 start -->
+								<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
+									<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
+										<i class="small material-icons">assignment</i>
+									</button>
+								</span>
+								<!-- Modal Structure -->
+								<div id="modalNote01" class="modal modal-fixed-footer">
+									<div class="modal-content">
+										<h4>捐獻記錄</h4>
+										<table class="donationRecorder">
+											<thead>
+												<tr>
+													<td>捐獻者</td>
+													<td>物資名稱</td>
+													<td>捐獻數量</td>
+													<td>捐獻時間</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>石田三成</td>
+													<td>足球</td>
+													<td>20顆</td>
+													<td>2015/09/22 14：30：22</td>
+												</tr>
+												<tr>
+													<td>石田三成</td>
+													<td>足球</td>
+													<td>20顆</td>
+													<td>2015/09/22 14：30：22</td>
+												</tr>
+												<tr>
+													<td>石田三成</td>
+													<td>足球</td>
+													<td>20顆</td>
+													<td>2015/09/22 14：30：22</td>
+												</tr>
+												<tr>
+													<td>石田三成</td>
+													<td>足球</td>
+													<td>20顆</td>
+													<td>2015/09/22 14：30：22</td>
+												</tr>
+												<tr>
+													<td>石田三成</td>
+													<td>足球</td>
+													<td>20顆</td>
+													<td>2015/09/22 14：30：22</td>
+												</tr>
+												<tr>
+													<td>石田三成</td>
+													<td>足球</td>
+													<td>20顆</td>
+													<td>2015/09/22 14：30：22</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<div class="modal-footer">
+										<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+									</div>
 								</div>
+								<!-- 捐獻記錄 end -->
+								<span class="midText">18 條</span> <span class="rightIcon"><a href="DonationQASchool.html" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a></span>
 							</div>
 						</div>
 					</li>
-				</c:forEach>
-			</ul>
-
-			<div id="trash" class="ui-widget-content ui-state-default">
-
-				<div class="alert alert-success" role="alert" id="xx">
-					<h3 id="trashHead">
-						<span id="trashHeadLeftBtn">
-							<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
-								<a href="CheckDonationList.jsp" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="tiny material-icons">card_giftcard</i></a>
-							</button>
-						</span> <span id="donateBagTitle">捐獻背包</span> <span id="trashHeadRightBtn">
-							<button type="reset" id="donateDelete" class="btn btn-small btn-floating">
-								<a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
-							</button>
-						</span>
-					</h3>
-				</div>
+				</ul>
 			</div>
-		</div>
-	</center>
-	<!-- 標頭專用 bottom start -->
-	<!-- 必須最後載入才有效果 -->
-	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
-	<!-- 標頭專用 bottom end -->
-
-
-	<script type="text/javascript" src="../donationScripts/Maquee.js"></script>
-	<script type="text/javascript" src="../donationScripts/ScreenSize.js"></script>
 	</center>
 </body>
 </html>

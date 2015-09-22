@@ -335,7 +335,7 @@
 								<input type="hidden" name="schoolId" value="${fullProj.schoolId}">
 								<input type="hidden" name="title" value="${fullProj.title}">
 								<input type="hidden" name="projAbstract" value="${fullProj.projAbstract}">
-								<input type="hidden" name="content" value="${fullProj.content}">
+								<input type="hidden" name="content" value='${fullProj.content}'>
 								<input type="hidden" name="location" value="${fullProj.location}">
 								<input type="hidden" name="activityStartTime" value="<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
 								<input type="hidden" name="activityEndTime" value="<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
