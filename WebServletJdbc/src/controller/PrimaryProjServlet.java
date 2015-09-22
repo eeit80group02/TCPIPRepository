@@ -65,6 +65,8 @@ public class PrimaryProjServlet extends HttpServlet
 				if(request.getMethod().equals("POST"))
 				{
 					System.out.println("執行 PrimaryProjServlet createPrimaryProj");
+					System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+					
 					createPrimaryProj(request,response);
 				}
 				else
@@ -94,14 +96,20 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProj");
 				displayPrimaryProj(request,response);
 			}
+			// 個人管理頁面 => 顯示發布過的初步計畫
 			else if(type.equals("displayPersonal"))
 			{
-				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProj");
+				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProj[個人初步計畫列表]");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				displayPersonalPrimaryProj(request,response);
 			}
+			// 個人管理頁面=> 顯示需要審核的初步計畫[有學校申請]
 			else if(type.equals("displayPersonalByPending"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProjByPending");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				displayPersonalPrimaryProjByPending(request,response);
 			}
 			else
@@ -117,52 +125,37 @@ public class PrimaryProjServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
-		
 		HttpSession session = request.getSession();
-		
-		Object object = session.getAttribute("LoginOK");
 		MemberBean memberBean = null;
-		if(object instanceof MemberBean)
+		
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
 		{
-			memberBean = (MemberBean)object;
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
 		}
 		else
 		{
-			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
 		}
 		
-		int id = 0;
 		if(memberBean != null)
 		{
-			id = memberBean.getMemberId();
-		}
+			// business logic
+			PrimaryProjBean primaryProjBean = new PrimaryProjBean();
+			primaryProjBean.setMemberId(memberBean.getMemberId());
+			List<PrimaryProjBean> result = service.displayPersonalPrimaryProjByPending(primaryProjBean);
 		
-		// business logic
-		PrimaryProjBean bean = new PrimaryProjBean();
-		bean.setMemberId(id);
-		List<PrimaryProjBean> result = service.displayPersonalPrimaryProjByPending(bean);
-		
-		if(result != null)
-		{
-			// 成功導向
-			System.out.println(result);
-			session = request.getSession();
-			session.setAttribute("primaryProj",result);
-			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProjByPending.jsp");
-//			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
-			
-		}
-		else
-		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
+			if(result != null)
+			{
+				// 成功導向
+				System.out.println(result);
+				System.out.println("==================================================");
+				request.setAttribute("primaryProj",result);
+				request.getRequestDispatcher("/personal/displayPersonalPrimaryProjByPending.jsp").forward(request,response);
+				return;
+			}
 		}
 	}
 
@@ -170,52 +163,38 @@ public class PrimaryProjServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
-		
 		HttpSession session = request.getSession();
 		
-		Object object = session.getAttribute("LoginOK");
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
 		MemberBean memberBean = null;
-		if(object instanceof MemberBean)
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
 		{
-			memberBean = (MemberBean)object;
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
 		}
 		else
 		{
-			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
 		}
 		
-		int id = 0;
+		// 接收資料 從 session LoginOK 抓取
 		if(memberBean != null)
 		{
-			id = memberBean.getMemberId();
-		}
-
-		// business logic
-		PrimaryProjBean bean = new PrimaryProjBean();
-		bean.setMemberId(id);
-		List<PrimaryProjBean> result = service.displayPersonalPrimaryProj(bean);
-		
-		if(result != null)
-		{
-			// 成功導向
-			System.out.println(result);
-			session = request.getSession();
-			session.setAttribute("primaryProj",result);
-			response.sendRedirect(request.getContextPath() + "/personal/displayPersonalPrimaryProj.jsp");
-//			request.setAttribute("primaryProj",bean);
-//			request.getRequestDispatcher("/primaryProj/updatePrimaryProjForm.jsp").forward(request,response);;
+			// business logic
+			PrimaryProjBean primaryProjBean = new PrimaryProjBean();
+			primaryProjBean.setMemberId(memberBean.getMemberId());
+			List<PrimaryProjBean> result = service.displayPersonalPrimaryProj(primaryProjBean);
 			
-		}
-		else
-		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.154)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
+			if(result != null)
+			{
+				// 成功導向
+				System.out.println(result);
+				System.out.println("==================================================");
+				request.setAttribute("primaryProj",result);
+				request.getRequestDispatcher("/personal/displayPersonalPrimaryProj.jsp").forward(request,response);;
+				return;
+			}
 		}
 	}
 

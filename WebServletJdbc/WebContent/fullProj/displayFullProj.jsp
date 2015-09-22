@@ -187,12 +187,8 @@
 						</div>
 					</div>
 					<!-- 問與答 -->
-					<div class="row">
-						<div class="col l12 card-panel hoverable"  style="background-color:#D1F0E5;">
-							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
-<%-- 							${fullProj.content} --%>
-							</p>
-						</div>
+					<div id="discuss" class="row">
+
 					</div>
 				</div>
 			</div>
@@ -238,7 +234,6 @@
 	</div>
 </main>
 
-
 	<!-- 頁尾 -->
 	<c:import url="/template/footer.jsp"
 		context="${pageContext.request.contextPath}" />
@@ -265,6 +260,57 @@
 			$(".centerdiv").css("height", "385px");
 			$(".card").css("width", "310px");
 		})
+		
+		$(function(){
+			displayMessage();
+			function displayMessage(){
+				$.ajax({
+					"url": "<c:url value='/ProjDiscussServlet.do' />",
+					"type":"POST",
+					"data":{"type":"display","fullProjId":"${fullProj.fullProjId}"},
+					"dataType" :"json",
+					"success":function(data){
+						// data => Object
+// 						console.log(data);
+						$("#discuss > div").remove();
+						$.each(data.result,function(index,value){
+							// data.result => Array[]
+							// Array[index] => Object
+							
+	 						var memberContent = "<p style='font-family:微軟正黑體;font-size:1.4em;font-weight:300;'>" +
+	 											value.questionMemberId + " 說:<br>" + 
+		 									    value.questionMemberContent + "<br>" +
+		  										"<div align='right'>" + value.questionMemberTime + "</div></p>" 
+							// 可以正常跑
+		  					<c:if test="${LoginOK.beanName.equals('member')}">
+								<c:if test="${LoginOK.memberId == fullProj.memberId}">
+									if(value.answerMemberId == "null"){
+										console.log(value.projDiscusId);
+										memberContent += "<div align='right'>" +
+														 "<form action='<c:url value='/ProjDiscussServlet.do' />' method='post'>" +
+														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
+														 "<input type='hidden' name='type' value='reply'>" + 
+														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
+									}
+								</c:if>
+ 							</c:if>
+		  										
+	 						var contentDiv = $("<div class='col l12 card-panel hoverable' style='background-color:#D1F0E5;'></div>").html(memberContent);
+	 						$("#discuss").append(contentDiv);
+							
+							if(value.memberId == "null"){
+								var schoolContent = "學校ID:" + value.schoolId + "<br>" + 
+	 												"留言:" + value.schoolMessage + "<br>" +
+	  												"時間:" + value.schoolMessageTime + "<br>" + 
+	  												"--------------------------------";
+								var contentDiv = $("<div></div>").html(schoolContent);
+								$("#discuss").append(contentDiv);
+							}
+						});
+					}
+				});
+			}
+		});
 	</script>
 </body>
 </html>
