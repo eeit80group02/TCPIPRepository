@@ -1,5 +1,8 @@
 package model.service;
 
+
+import java.util.List;
+
 import model.ProcessingMemberBean;
 import model.SchoolDemandBean;
 import model.dao.ProcessingMemberDAOJdbc;
@@ -33,36 +36,35 @@ public class ProcessingMemberService {
 		return result;
 	}
 	public ProcessingMemberBean agree(ProcessingMemberBean bean){
-		ProcessingMemberBean result = null;
-		SchoolDemandBean sBean = null;
+		List<ProcessingMemberBean> list = null;
+		ProcessingMemberBean result = new ProcessingMemberBean();
+		SchoolDemandBean sDBean = new SchoolDemandBean();
 		if(bean!=null){
-			
-			sBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
-			if(sBean!=null && sBean.getDemandStatus().equals("洽談中") ){
-				bean.setCheckTime(new java.util.Date(System.currentTimeMillis()));
-				bean.setCheckStatus("已通過");
-				result = processingMemberDAO.update(bean);
-				if(result != null){
-					sBean.setDemandStatus("洽談完成");
-					schoolDemandDAO.update(sBean);
+			list = processingMemberDAO.getAll();
+			for(ProcessingMemberBean temp : list){
+				if(bean.getSchoolDemandId() == temp.getSchoolDemandId()){
+					result.setProcessingMemberId(temp.getProcessingMemberId());
+					result.setCheckStatus("未通過");
+					processingMemberDAO.update(result);
 				}
+			}
+			result.setProcessingMemberId(bean.getProcessingMemberId());
+			result.setCheckStatus("已通過");
+			result = processingMemberDAO.update(result);
+			if(result!=null){
+				sDBean.setSchoolDemandId(bean.getSchoolDemandId());
+				sDBean.setDemandStatus("洽談完成");
+				schoolDemandDAO.update(sDBean);
 			}
 		}
 		return result;
 	}
 	public ProcessingMemberBean disagree(ProcessingMemberBean bean){
+		List<ProcessingMemberBean> list = null;
 		ProcessingMemberBean result = null;
-		SchoolDemandBean sBean = null;
 		if(bean!=null){
-			sBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
-			if(sBean!=null && sBean.getDemandStatus().equals("洽談中")){
-				bean.setCheckStatus("未通過");
-				result = processingMemberDAO.update(bean);
-				if(result != null){
-					sBean.setDemandStatus("洽談失敗");
-					schoolDemandDAO.update(sBean);
-				}
-			}
+			bean.setCheckStatus("未通過");
+			result = processingMemberDAO.update(bean);
 		}
 		return result;
 	}
