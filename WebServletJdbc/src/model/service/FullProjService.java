@@ -12,11 +12,13 @@ import model.dao.FullProjDAOJdbc;
 import model.dao.MemberDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
 import model.dao.interfaces.MemberDAO;
+import model.dao.interfaces.MissionBoardDAO;
 
 public class FullProjService
 {
 	private FullProjDAO fullProjDAO = null;
 	private MemberDAO memberDAO = null;
+	private MissionBoardDAO missionBoardDAO = null;
 	public FullProjService()
 	{
 		fullProjDAO = new FullProjDAOJdbc();
@@ -152,6 +154,8 @@ public class FullProjService
 				fullProjBean.setMemberConfirm(true);
 				fullProjBean.setProjStatus("招募中");
 				fullProjDAO.update(fullProjBean);
+				
+				
 				return true;
 			}
 		}
