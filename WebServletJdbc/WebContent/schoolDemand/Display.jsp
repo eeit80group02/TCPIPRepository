@@ -48,10 +48,10 @@
 							<i class="col l1 material-icons black-text" style="font-size:5em;">
 								label_outline
 							</i>							
-							<div class="col l2 right-align valign" style="font-size:2em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l2 right-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
 								活動主題
 							</div>
-							<div class="col l7 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								${Demand.activityTopic}
 							</div>
 						</div>
@@ -63,10 +63,10 @@
 							<i class="col l1 material-icons red-text" style="font-size:5em;">
 								location_on
 							</i>							
-							<div class="col l2 right-align valign" style="font-size:2em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l2 right-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
 								活動地點
 							</div>
-							<div class="col l7 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								${Demand.activityLocation}
 							</div>
 						</div>
@@ -77,16 +77,16 @@
 							<i class="col l1 material-icons blue-text" style="font-size:5em;">
 								thumb_up
 							</i>							
-							<div class="col l2 right-align valign" style="font-size:2em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l2 right-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
 								提供資源
 							</div>
-							<div class="col l3 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								住宿${Demand.offerBean.room}
 							</div>
-							<div class="col l3 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								場地${Demand.offerBean.place}
 							</div>
-							<div class="col l3 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								伙食${Demand.offerBean.food}
 							</div>
 						</div>
@@ -97,10 +97,10 @@
 							<i class="col l1 material-icons green-text" style="font-size:5em;">
 								android
 							</i>							
-							<div class="col l2 right-align valign" style="font-size:2em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l2 right-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
 								活動對象
 							</div>
-							<div class="col l7 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								${Demand.activitySuitable}
 							</div>
 						</div>
@@ -111,10 +111,10 @@
 							<i class="col l1 material-icons orange-text accent-1" style="font-size:5em;">
 								contacts
 							</i>							
-							<div class="col l2 right-align valign center-align" style="font-size:2em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l2 right-align valign center-align" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
 								預計參與的人數
 							</div>
-							<div class="col l7 left-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 								${Demand.participant}
 							</div>
 						</div>
@@ -131,7 +131,7 @@
 					</div>					
 				
 					<div class="row">
-						<div class="col l10 offset-l1 card-panel blue-text hoverable center-align" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
+						<div class="col l10 offset-l1 card-panel blue-text hoverable center-align" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
 							 內容${Demand.activityContact}
 						</div>
 					</div>
@@ -152,9 +152,10 @@
   						</div>
   					</div>
 				</div>
-			</div>
-			<div class="col l2">
-			
+				<div class="row">
+					<a class="btn-large red right" href="<c:url value='SchoolDemandServlet.do?type=updateDisplay' />" style="font-family:微軟正黑體;font-size:2em;font-weight:600">修改</a>
+					<a class="btn-large red right" href="<c:url value='SchoolDemandServlet.do?type=displays' />" style="font-family:微軟正黑體;font-size:2em;font-weight:600">完成</a>				
+				</div>
 			</div>
 		
 		
@@ -221,8 +222,6 @@
 		$(function() {
 			//mainboard最小高度
 			$("#mainboard").css("min-height","80vh");
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//提示頁面主題欄的高度
@@ -230,8 +229,6 @@
 			$("#pagetitle").css("height", pagetitleheight);
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
-			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "310px");
 		})
 	</script>
 </body>

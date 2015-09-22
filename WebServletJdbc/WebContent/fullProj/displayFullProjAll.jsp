@@ -29,7 +29,7 @@
 	
 	<!-- 內容 -->
 	<main>
-	<div class="row">
+	<div class="row" id="mainboard">
 		<!-- 側邊篩選條件欄 -->
 		<div class="col l3 offset-l1 z-depth-3 hide-on-med-and-down"
 			style="position: absolute; top: 166; padding: 0" id="sidebar">
@@ -680,6 +680,9 @@
 	
 	<script>
 		$(function() {
+			//mainboard最小高度
+			$("#mainboard").css("min-height","100vh");
+			
 			//固定側邊欄所在位置
 			$(window).on("scroll", function() {
 				if ($(this).scrollTop() <= $("#projlist").position().top) {
@@ -697,8 +700,6 @@
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
 			//觸發卡片翻轉事件
 			$(".touche").each(function() {
 				$(this).mouseover(function() {
@@ -708,10 +709,6 @@
 					$(".card-title", this).trigger("click");
 				})
 			})
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
-			//提示區塊的按鈕
-			$(".projinfos").css("margin", "0px auto");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
