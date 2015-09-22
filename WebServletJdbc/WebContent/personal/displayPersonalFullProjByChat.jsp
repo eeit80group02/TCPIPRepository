@@ -29,7 +29,7 @@
 	<div class="col l8 offset-l2 indigo lighten-5">
 		<div class="row center-align card-panel blue-text" style="font-size:4em;">洽談中完整計畫</div>
 		<div class="row card-panel" >
-			<table class="bordered highlight">
+			<table class="bordered highlight centered">
 				<thead style="font-size:2em;">
 					<tr>
 						<th>須洽談計畫編號</th>
@@ -40,13 +40,13 @@
 				<tbody>
 					<c:forEach var="bean" items="${fullProj}">
 						<tr>
-							<td>${bean.fullProjId}</td>
-							<td>${bean.title}</td>
+							<td style="font-size:1.6em;font-weight:600">${bean.fullProjId}</td>
+							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
 								<c:url value="/fullProj.do" var="path">
 									<c:param name="type" value="displayFullProjByChat" />
 									<c:param name="fullProjId" value="${bean.fullProjId}" />
 								</c:url>
-							<td><a href="${path}" class="btn-large yellow lighten-5 black-text">洽談</a></td>	
+							<td><a href="${path}" class="btn-large yellow lighten-5 black-text" style="font-size:1.4em;font-weight:600">洽談</a></td>	
 						
 						</tr>
 					</c:forEach>			
