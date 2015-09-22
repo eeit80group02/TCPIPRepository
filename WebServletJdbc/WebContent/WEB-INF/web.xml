@@ -79,7 +79,7 @@
     <servlet-name>DonationSearchServlet</servlet-name>
     <url-pattern>/donation/search.do</url-pattern>
   </servlet-mapping>
-  <servlet>
+    <servlet>
     <servlet-name>DonationJsonSimpleDemo</servlet-name>
     <servlet-class>controller.DonationJsonSimpleDemo</servlet-class>
   </servlet>
