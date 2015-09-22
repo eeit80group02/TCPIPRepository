@@ -17,4 +17,6 @@ public interface ProjDiscusDAO
 
 	public boolean delete(int projDiscussId);
 
+	public List<ProjDiscusBean> selectByFullProjId(int fullProjId);
+
 }

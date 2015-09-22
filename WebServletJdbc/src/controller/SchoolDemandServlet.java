@@ -473,6 +473,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			return;
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
+		System.out.println(bean);
 		session.removeAttribute("Demand");
 		int schoolDemandId = bean.getSchoolDemandId();
 		bean.setSchoolDemandId(schoolDemandId);
@@ -492,7 +493,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		List<SchoolDemandBean> result = null;
 		HttpSession session = request.getSession();
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
-		if(mbean!=null){
+		if(mbean==null){
 			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
@@ -501,11 +502,11 @@ public class SchoolDemandServlet extends HttpServlet {
 		
 		if (!result.isEmpty()) {
 			System.out.println("成功查詢list=" + result);
-			session.setAttribute("render", result);
-			response.sendRedirect("");
+			session.setAttribute("list", result);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 			
 		} else {
-			System.out.println("查詢失敗   導向登入頁面");
+			System.out.println("查詢失敗   導向登入頁面");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
 		}
 	}
 

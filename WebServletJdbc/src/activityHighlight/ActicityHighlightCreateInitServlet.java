@@ -30,7 +30,6 @@ public class ActicityHighlightCreateInitServlet extends HttpServlet {
 		int memberId = 1;
 		// get memberId, fullProjId from outer page
 		
-
 		
 		FullProjDAOJdbc proj = new FullProjDAOJdbc();
 		FullProjBean projBean = proj.findByPrimaryKey(fullProjId);

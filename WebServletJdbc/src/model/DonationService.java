@@ -107,6 +107,8 @@ public class DonationService {
 		// 預設為 1
 		dbdc.setDonateAmount(1);
 		dbdc.setSize(odb.getSize());
+		dbdc.setDemandTime(odb.getDemandTime());
+		dbdc.setExpireTime(odb.getExpireTime());
 		dbdc.setDemandContent(odb.getDemandContent());
 		dbdc.setSupplyStatus(odb.getSupplyStatus());
 		dbdc.setRemark(odb.getRemark());
