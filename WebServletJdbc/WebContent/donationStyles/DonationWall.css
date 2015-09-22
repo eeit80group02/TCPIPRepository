@@ -8,20 +8,24 @@
 }
 
 #donateBody {
-	width: 90%;
+	/* 整個版面 */
+	width: 95%;
 }
 
 #gallery {
 	/*整塊大塊的捐獻牆*/
 	padding: 0px;
 	margin: 0px;
+	min-width: 460px;
+	width: 100%;
+	min-height: 450px;
 	float: left;
-	min-height: 300px;
 }
 
 .gallery.custom-state-active {
 	/*從背包拉回捐獻牆*/
 	background: #FFE4E1;
+	background: rgba(259, 220, 220, 0.5);
 }
 
 .gallery li {
@@ -35,10 +39,12 @@
 	margin: 0 0.5em 0.5em 0;
 	text-align: center;
 	cursor: pointer;
+	border: 2px solid #5599FF;
+	border-radius: 8px;
 }
 
 .gallery li h5 {
-	margin: 0 0 0.5em;
+	margin: 2px;
 	font-size: 1em;
 }
 
@@ -48,7 +54,7 @@
 }
 
 .gallery li a.ui-icon-suitcase {
-	/* 放大鏡icon */
+	/* 捐獻包icon */
 	float: right;
 }
 
@@ -63,6 +69,7 @@
 }
 
 .gallery li img {
+	margin-top: 2px;
 	/* 捐獻磚上的商品縮圖 */
 	width: 130px;
 	height: 130px;
@@ -75,34 +82,37 @@
 #trash {
 	/* 整塊捐獻包包 */
 	margin: 0px;
-	padding: 1%;
-	background-image: url("../images/bg06.png");
-	background-repeat: repeat;
-	border: 1px solid #FFCCCC;
-	float: right;
-	position: fixed;
-	top: 57px;
-	bottom: 0px;
-	right: 0px;
+	padding: 0px 1%;
+	background: rgba(0, 200, 200, 0.3);
+	border-left: 10px solid #ff7575;
+	width: 455px;
 	overflow: auto;
-	width: 450px;
-	max-width: 40%;
+	right: 0px;
+	bottom: 0px;
+	top: 61px;
+	position: fixed;
+	float: right;
 }
 
-#trash h3 {
-	padding: 12px;
+#trash:hover {
+	background: rgba(0, 200, 200, 0.5);
+}
+
+#trashBody {
+	background-color: #ff7575;
 	text-align: center;
+	border: 1px solid #ff7575;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	padding: 0px 0px 10px 0px;
+	margin: 0px 0px 10px 0px;
 	height: 60px;
 }
 
 #trashHead {
-	margin: 0px 0px 10px 0px;
 	font-size: 1.5em;
-	background-color: #ff7575;
-}
-
-#trash h3 .ui-icon {
-	float: right;
+	font-weight: bold;
+	color: white;
 }
 
 #trash .gallery h5 {
@@ -122,12 +132,17 @@
 }
 
 .fiximg div {
-	visibility: hidden;
-	visibility: visible;
-	overflow: hidden;
 	max-height: 45px;
 	color: #0000AA;
 	margin-bottom: 5px;
-	padding: 2px;
+	padding: 1px;
 	text-align: left;
+	overflow: hidden;
+}
+
+#trashHeadTitleIcons {
+	height: 35px;
+	padding: 10px; margin : 0px;
+	background-color: #ff7575;
+	margin: 0px;
 }

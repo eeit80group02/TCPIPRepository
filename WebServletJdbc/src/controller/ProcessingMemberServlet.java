@@ -31,29 +31,24 @@ public class ProcessingMemberServlet extends HttpServlet{
 		request.setAttribute("error", errorMsg);
 
 		String type = request.getParameter("type");
-		System.out.println(type);
-		System.out.println(request.getMethod());
 		if (type == null || type.trim().length() == 0) {
 			errorMsg.put("errorURL", "請勿做作不正當請求(PrimaryProjServlet line.55)");
 			request.getRequestDispatcher("/error.jsp").forward(request,
 					response);
 			return;
 		} else {
-
-			if (request.getMethod().equals("POST")) {
-				if(type.equals("application")){
-					System.out.println("同意");
-					application(request, response);
-				}else if(type.equals("agree")){
-					System.out.println("不同意");
-					agree(request, response);
-				}else if(type.equals("disagree")){
-					System.out.println("取消");
-					disagree(request, response);
-				}else if(type.equals("cancel")){
-					System.out.println("取消");
-					cancel(request, response);
-				}
+			if(type.equals("application")){
+				System.out.println("申請");
+				application(request, response);
+			}else if(type.equals("agree")){
+				System.out.println("同意");
+				agree(request, response);
+			}else if(type.equals("disagree")){
+				System.out.println("不同意");
+				disagree(request, response);
+			}else if(type.equals("cancel")){
+				System.out.println("取消");
+				cancel(request, response);
 			}else {
 				errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.70(必須post))");
 				request.getRequestDispatcher("/error.jsp").forward(request,response);
@@ -116,25 +111,46 @@ public class ProcessingMemberServlet extends HttpServlet{
 		ProcessingMemberService service = new ProcessingMemberService();
 		ProcessingMemberBean bean = new ProcessingMemberBean();
 		HttpSession session = request.getSession();
-		SchoolBean sbean = null;
-		sbean =(SchoolBean)session.getAttribute("LogiOK");
-		if(sbean == null){
+		
+		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
+		if(sbean ==null){
 			response.sendRedirect("login.jsp");
+		}
+		String memberId = request.getParameter("member");
+		String schoolDemandId = request.getParameter("schoolDemandId");
+		if(memberId == null){
+			errorMsg.put("err", "錯誤");
+		}
+		if(schoolDemandId == null){
+			errorMsg.put("err", "錯誤");
+		}
+		if(!errorMsg.isEmpty()){
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 			return;
 		}
-
-//		bean.setMemberId(sId);
-//		bean.setSchoolDemandId(sDId);
+		int mId = 0;
+		int sDId = 0;
+		try {
+			mId = Integer.parseInt(memberId);
+			sDId = Integer.parseInt(schoolDemandId);
+		} catch (NumberFormatException e) {
+			errorMsg.put("err", "錯誤");
+		}
+		if(!errorMsg.isEmpty()){
+			response.sendRedirect("");
+		}
+		
+		bean.setSchoolDemandId(sDId);
+		bean.setMemberId(mId);
 		
 		bean = service.agree(bean);
 		if(bean!=null){
-			System.out.println("建立成功" + bean);
-			request.getRequestDispatcher("").forward(request, response);
-		}else{
-			System.out.println("建立失敗");
-			request.getRequestDispatcher("").forward(request, response);
+			System.out.println("同意成功");
+			response.sendRedirect("");
+		}else {
+			System.out.println("同意失敗");
+			response.sendRedirect("");
 		}
-		
 
 	}
 	public void disagree(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -143,21 +159,26 @@ public class ProcessingMemberServlet extends HttpServlet{
 		ProcessingMemberBean bean = new ProcessingMemberBean();
 		HttpSession session = request.getSession();
 		
-		//取得Session裡學校Bean
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
-		//判斷是否登入
 		if(sbean ==null){
-			//導入登入頁面
-			response.sendRedirect("");
+			response.sendRedirect("login.jsp");
 		}
-		//取得ProcessingMemberID
-		//取得SchoolDemandID
-		//取得MemberID
-		
-		
-		
-		String memberId = request.getParameter("memberId");
-		
+		String memberId = request.getParameter("member");
+		String schoolDemandId = request.getParameter("schoolDemandId");
+		if(memberId == null){
+			errorMsg.put("err", "錯誤");
+		}
+		if(schoolDemandId == null){
+			errorMsg.put("err", "錯誤");
+		}
+		if(!errorMsg.isEmpty()){
+			response.sendRedirect("");
+			return;
+		}
+		int mId = 0;
+		Integer.parseInt(memberId);
+		int sId = 0;
+		Integer.parseInt(schoolDemandId);
 		
 		
 	}
