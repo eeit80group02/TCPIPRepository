@@ -9,9 +9,12 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>personal</title>
+<title>displayPersonalFullProj.jsp</title>
 </head>
 <body>
+	<c:if test="${LoginOK.beanName.equals('school') }">
+		<c:redirect url="/error/permission.jsp" />
+	</c:if>
 <!-- //////////////////////////////發布過的完整計畫//////////////////////// -->
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
