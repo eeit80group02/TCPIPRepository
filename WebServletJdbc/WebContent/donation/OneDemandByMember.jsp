@@ -6,110 +6,107 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>OneMemberDemand</title>
-<style>
-body {
-	margin: 0 auto;
-}
-
-#div1 {
-	border: 1px solid green;
-}
-</style>
+<!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-	!window.jQuery
-			&& document
-					.write("<script src='../scripts/jquery-2.1.4.min.js'><\/script>")
+	!window.jQuery && document.write("<script type='text/javascript' src='../donationScripts/jquery-2.1.4.min.js'><\/script>")
 </script>
-
-<!-- bootstrap -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-
 <!-- Materialize -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- 標頭 css -->
+<link rel="stylesheet" href="../donationStyles/DonationHeader.css">
+<!-- 標頭專用 top end -->
 
 <!-- 自訂 -->
-<link rel="stylesheet" href="../styles/DonationQA.css">
+<link rel="stylesheet" href="../donationStyles/DonationQA.css">
+
 </head>
 <body>
 
-	<center>
-		<h1>問與答</h1>
-		<!-- 表格基本資料 -->
-		<table id="DonationDetail">
-			<tr>
-				<td rowspan="10"><img alt="${OneDemand.supplyName}"
-					title="${OneDemand.supplyName}"
-					src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}"
-					width="300"></td>
-				<td style="text-align: right; width: 150px;">物資名稱：</td>
-				<td style="width: 350px; word-break: break-all;">${OneDemand.supplyName}</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">需求數量：</td>
-				<td style="width: 350px;">${OneDemand.originalDemandUnit}</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">尺寸規格：</td>
-				<td style="width: 350px;">${OneDemand.size}</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">物資狀態：</td>
-				<td style="width: 350px;">${OneDemand.supplyStatus}</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">需求單位：</td>
-				<td style="width: 350px;">${OneDemand.schoolName}
-				<button type="button" class="btn btn-small btn-floating" id="leftBtn">
-					<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="right" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="small material-icons">search</i></a>
-				</button>
-				</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">募集起始時間：</td>
-				<td style="width: 350px;">${OneDemand.demandTime}</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">募集結束時間：</td>
-				<td style="width: 350px;">${OneDemand.expireTime}</td>
-			</tr>
-			<tr>
-				<td style="text-align: right; width: 150px;">募集原因：</td>
-				<td style="width: 350px; word-break: break-all;">${OneDemand.demandContent}</td>
-			</tr>
+	<!-- 我就是標頭 start -->
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<ul id="nav-mobile1" class="left hide-on-med-and-down">
+					<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+				</ul>
 
-			
-			
+				<a href="#" class="brand-logo center">問與答</a>
+				<ul id="nav-mobile3" class="right hide-on-med-and-down">
+					<li><a href="#"><i class="large material-icons">person</i></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<br>
+	<!-- 我就是標頭 end -->
+
+	<center>
+		<!-- 表格基本資料 -->
+		<div class="table-responsive">
+			<table id="donationDetailTable">
+				<tr>
+					<td rowspan="10" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
+					<td class="dataName">物資名稱：</td>
+					<td class="dataValue">${OneDemand.supplyName}</td>
+				</tr>
+				<tr>
+					<td class="dataName">剩餘需求：</td>
+					<td class="dataValue">${OneDemand.demandNumber} ${OneDemand.originalDemandUnit}</td>
+				</tr>
+				<tr>
+					<td class="dataName">尺寸規格：</td>
+					<td class="dataValue">${OneDemand.size}</td>
+				</tr>
+				<tr>
+					<td class="dataName">物資狀態：</td>
+					<td class="dataValue">${OneDemand.supplyStatus}</td>
+				</tr>
+				<tr>
+					<td class="dataName">需求單位：</td>
+					<td class="dataValue">${OneDemand.schoolName}</td>
+				</tr>
+				<tr>
+					<td class="dataName">需求單位地址：</td>
+					<td class="dataValue">屏東縣鹽埔鄉鹽南村勝利路30號</td>
+				</tr>
+				<tr>
+					<td class="dataName">募集起始時間：</td>
+					<td class="dataValue">${OneDemand.demandTime}</td>
+				</tr>
+				<tr>
+					<td class="dataName">募集結束時間：</td>
+					<td class="dataValue">${OneDemand.expireTime}</td>
+				</tr>
+				<tr>
+					<td class="dataName">募集原因：</td>
+					<td class="dataValue">${OneDemand.demandContent}</td>
+				</tr>
+				
 			<tfoot>
 					<tr>
-						
 						<td id="addToBag">
-							<button type="submit" name='toCart' value='insert' class="btn btn-large btn-floating">
+							<button type="button" class="btn btn-large btn-floating" >
+								<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="medium material-icons">search</i></a>
+							</button> &nbsp;
+						
+							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem">
 								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="medium material-icons">card_giftcard</i></a>
 							</button>
 						</td>
-						
 						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
 						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
+						
 						<script>
-							var addToBag = document.getElementById("addToBag");
+							var addToBag = document.getElementById("addItem");
 							addToBag.addEventListener("click", insertDeamnd);
-							
+								
 							function insertDeamnd(){
 								var xhr = new XMLHttpRequest();
 								if (xhr != null) {
@@ -117,7 +114,7 @@ body {
 											if (xhr.readyState == 4) {
 												if (xhr.status == 200) {
 													 lists = xhr.responseText;
-// 													  alert("新增購物車品項一");
+													  alert("新增購物車品項一");
 												} else {
 													alert("something is wrong!");
 												}
@@ -128,14 +125,11 @@ body {
 									"application/x-www-form-urlencoded")
 									xhr.send("toCart=insert&donationId="+"${OneDemand.donationId}"+"&schoolId="+"${OneDemand.schoolId}"+"&schoolName="+"${OneDemand.schoolName}"+"&donationStatus="+"${OneDemand.donationStatus}"+"&supplyName="+"${OneDemand.supplyName}"+"&originalDemandNumber="+"${OneDemand.originalDemandNumber}"+"&originalDemandUnit="+"${OneDemand.originalDemandUnit}"+"&demandNumber="+"${OneDemand.demandNumber}"+"&size="+"${OneDemand.size}"+"&demandContent="+"${OneDemand.demandContent}"+"&supplyStatus="+"${OneDemand.supplyStatus}"+"&demandTime="+"${OneDemand.demandTime}"+"&expireTime="+"${OneDemand.expireTime}"+"&remark="+"${OneDemand.remark}");
 								}
-								
 							}
-							
 						</script>
-					
 					</tr>
 				</tfoot>
-		</table>
+			</table>
 
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">

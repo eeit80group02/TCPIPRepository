@@ -5,38 +5,37 @@
 	width: 850px;
 }
 
-#donationDetailTable, #drop-a-line {
+#donationDetailTable, #drop-a-line, #QandA {
 	width: 85%;
+}
+
+#donationDetailTable tr td {
+	font-size: 1.2em;
 }
 
 #drop-a-line {
 	background-color: white;
-	margin-top: 8px;
 	padding-top: 8px;
 	padding-right: 2%;
 	padding-right: 2%;
+	margin-top: 8px;
 }
 
 #your-message {
-	width: 100%;
-	font-size: 1.2em;
+	font-size: 1.5em;
 }
 
 #messageGO {
 	width: 90px;
 	float: right;
-}
-
-#messageGO {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
 #QandA {
 	/* 	問與答 */
-	font-size: 1.1em;
+	font-size: 1.5em;
 	text-align: left;
-	width: 85%;
 	background-color: white;
 }
 
@@ -96,7 +95,7 @@ span.glyphicon-ok-sign {
 	height: 120px;
 }
 
-/**上面 table 系列**/
+/**上面 table 系列* */
 #donationDetailTable {
 	font-size: 1.2em;
 }
@@ -104,12 +103,12 @@ span.glyphicon-ok-sign {
 .dataName {
 	text-align: right;
 	width: 15%;
-	min-width: 130px;
+	min-width: 180px;
 }
 
 .dataValue {
 	width: 45%;
-	min-width: 300px;
+	min-width: 350px;
 	word-break: break-all;
 }
 
@@ -135,4 +134,8 @@ span.glyphicon-ok-sign {
 
 #addToBag {
 	text-align: center;
+}
+
+.schoolCheck {
+	float: right;
 }

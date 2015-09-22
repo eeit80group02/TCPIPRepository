@@ -42,31 +42,31 @@
 		<div class="row">
 			<div class="col l10 offset-l1">
 				<!-- 印出來、不能更動 -->
-				<div class="row">
-					<div class="col l6 offset-l3 orange accent-3 card-panel hoverable ">
-						<!-- 計畫編號 -->
-						<div class="row">
-							<div class="col l8">
-								<div class="forinput">需求計畫編號:</div>
-								<input type="hidden" name="fullProjId" value="${Demand.fullProjId}">
-							</div>
-						</div>
-						<!-- 會員編號 -->
-						<div class="row">
-							<div class="col l8">
-								<div class="forinput">會員編號:</div>
-								<input type="hidden" name="memberId" value="${Demand.memberId}">
-							</div>
-						</div>						
-						<!-- 學校編號 -->
-						<div class="row">
-							<div class="col l8">
-								<div class="forinput">學校編號:</div>
-								<input type="hidden" name="schoolId" value="${Demand.schoolId}">
-							</div>
-						</div>						
-					</div>
-				</div>					
+<!-- 				<div class="row"> -->
+<!-- 					<div class="col l6 offset-l3 orange accent-3 card-panel hoverable "> -->
+<!-- 						計畫編號 -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col l8"> -->
+<!-- 								<div class="forinput">需求計畫編號:</div> -->
+<%-- 								<input type="hidden" name="schoolDemandId" value="${Demand.schoolDemandId}"> --%>
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						會員編號 -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col l8"> -->
+<!-- 								<div class="forinput">會員編號:</div> -->
+<%-- 								<input type="hidden" name="memberId" value="${Demand.memberId}"> --%>
+<!-- 							</div> -->
+<!-- 						</div>						 -->
+<!-- 						學校編號 -->
+<!-- 						<div class="row"> -->
+<!-- 							<div class="col l8"> -->
+<!-- 								<div class="forinput">學校編號:</div> -->
+<%-- 								<input type="hidden" name="schoolId" value="${Demand.schoolId}"> --%>
+<!-- 							</div> -->
+<!-- 						</div>						 -->
+<!-- 					</div> -->
+<!-- 				</div>					 -->
 				<div class="row">
 					<div class="row card-panel hoverable grey lighten-4">
 						<form action="<c:url value='SchoolDemandServlet.do?type=update' />" method="post" style="font-family:微軟正黑體;font-weight:600;">
@@ -132,7 +132,7 @@
 											</c:when>
 											<c:otherwise>
 												<input type="checkbox" name="place" id="place"/>
-												<label for="place">住宿</label>
+												<label for="place">場地</label>
 											</c:otherwise>
 										</c:choose>
 									</div>
@@ -140,11 +140,11 @@
 										<c:choose>
 											<c:when test="${Demand.offerBean.food}">
 												<input type="checkbox" name="food" id="food" checked="checked"/>
-												<label for="food">場地</label>
+												<label for="food">伙食</label>
 											</c:when>
 											<c:otherwise>
 												<input type="checkbox" name="food" id="food"/>
-												<label for="food">住宿</label>
+												<label for="food">伙食</label>
 											</c:otherwise>
 										</c:choose>
 									</div>
