@@ -26,138 +26,61 @@
 	
 <main>
 	<div class="row" id="mainboard">
-		<div class="col l8 offset-l2" style="border:2px solid yellow">
-          	<div class="card deep-orange accent-2 left">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>1</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2 left">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>2</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2 left">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>3</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2" style="clear:both">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
-          	<div class="card deep-orange accent-2">
-	            <div class="card-content white-text">
-	              <span class="card-title">Card Title</span>
-	              <p>I am a very simple card. I am good at containing small bits of information.
-	              I am convenient because I require little markup to use effectively.</p>
-	            </div>
-	            <div class="card-action">
-	              <a href="#">This is a link</a>
-	              <a href="#">This is a link</a>
-	            </div>
-     		</div>			
+		
+		<!-- 篩選條件置頂 -->
+		<div class="row">
+				<div class="col l12 center-align">
+					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">北部地區</button>
+					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">中部地區</button>
+					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">南部地區</button>
+					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">東部地區</button>
+				</div>
+		</div>		
+		
+		<!-- 8欄置中 -->
+		<div class="col l10 offset-l1">
+          	<!-- 8欄重新定義為row -->
+          	<div class="row">
+          		<!-- 放卡片 -->
+          		<div class="row">
+          			<!-- 卡 -->
+          			<c:if test="${not empty list }">
+          				<c:forEach items="${list}" var="bean">
+				          	<div class="col l5 white offset-l1 card-panel hoverable" style="padding:5px;">
+										<div class="row">
+											<i class="col l2 material-icons red-text medium">
+												loyalty
+											</i>								
+								            <div class="col l10 card-title black-text center-align" style="font-size:1.6em;font-weight:600;line-height:160%;">
+								         	  	需求計畫名稱${bean.activityTopic}
+								            </div>
+							            </div>
+							            <div class="row" style="font-size:1.4em;font-family:標楷體;font-weight:600">
+							            	學校名稱:${bean.schoolBean.name}
+							            </div>	            	
+							            <div class="row" style="font-size:1.4em;font-family:標楷體;font-weight:600">
+							            	活動地點:${bean.activityLocation}
+							            </div>	            	
+							            <div class="row" style="font-size:1.4em;font-family:標楷體;font-weight:600">
+							            	發布時間:${bean.createDate}
+							            </div>	            	
+							            <div class="row right-align" style="font-size:1.4em;font-family:標楷體;font-weight:600">
+							            	<a class="btn indigo">take a look</a>
+							            </div>	            	
+				     		</div>
+			     		</c:forEach>
+		     		</c:if>	          		
+          		</div>
+          	</div>
+			<!-- 8欄重新定義為row -->
+		
 		</div>
-
+		<!-- 8欄置中 -->
 	
 	
 	</div>
 
 </main>
-<!-- 志工方看的，所有的計畫需求 -->
-	<c:forEach var="bean" items="${list}">
-		${bean.schoolBean.name}<br>
-		${bean.participant}<br>
-		${bean.activityTopic}<br>
-		${bean.activityLocation}<br>
-		${bean.activitySuitable}<br>
-		${bean.activityHost}<br>
-		${bean.activityContact}<br>
-		${bean.createDate}<br>
-		${bean.content}<br>
-		${bean.demandStatus}<br>
-		${bean.offerBean.room}<br>
-		${bean.offerBean.place}<br>
-		${bean.offerBean.food}<hr>
-	</c:forEach>
-
 <!-- 頁尾 -->
 <c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
 <!-- 頁尾 -->
@@ -167,38 +90,13 @@
 			//mainboard最小高度
 			$("#mainboard").css("min-height","100vh");
 			
-			//固定側邊欄所在位置
-			$(window).on("scroll", function() {
-				if ($(this).scrollTop() <= $("#projlist").position().top) {
-					$("#sidebar").css({
-						"position" : "absolute",
-						"top" : $("#projlist").position().top
-					});
-				} else {
-					$("#sidebar").css({
-						"position" : "fixed",
-						"top" : 0
-					});
-				}
-			})
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//觸發卡片翻轉事件
-			$(".touche").each(function() {
-				$(this).mouseover(function() {
-					$(".activator", this).trigger("click");
-				})
-				$(this).mouseout(function() {
-					$(".card-title", this).trigger("click");
-				})
-			})
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
-			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "310px");
 		})
 	</script>
 
