@@ -116,19 +116,13 @@ public class SchoolDemandService {
 	public List<SchoolDemandBean> displays(SchoolDemandBean bean){
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		List<SchoolDemandBean> list = null;
-		List<OffersBean> olist = null;
 		list = schoolDemandDao.getAll();
-		olist = offersDao.getAll();
 		for(SchoolDemandBean temp :list){
-			for(OffersBean obean : olist){
-				if(bean.getSchoolId().equals(temp.getSchoolId()) && temp.getSchoolDemandId().equals(obean.getSchoolDemandId())){
-					temp.setOfferBean(obean);
-					result.add(temp);
-				}
+			if(bean.getSchoolId().equals(temp.getSchoolId())){
+				result.add(temp);
 			}
 		}
 		list.clear();
-		olist.clear();
 		return result;
 	}
 	public List<SchoolDemandBean> displayPersonalRender(SchoolBean bean){
@@ -163,22 +157,22 @@ public class SchoolDemandService {
 			if(sDBean.getDemandStatus().equals("洽談中")){
 				for(ProcessingMemberBean pNBean : plist){
 					if(sDBean.getSchoolDemandId()==pNBean.getSchoolDemandId()&&pNBean.getCheckStatus().equals("待審核")){
-						sDBean.setProcessingMemberBean(pNBean);
+						for(MemberBean mBean:mlist){
+							if(pNBean.getMemberId()== mBean.getMemberId()){
+								temp.add(mBean);
+							}
+						}
+						sDBean.setMemberList(temp);
+						
 					}	
 				}
-				for(MemberBean mBean:mlist){
-					if(sDBean.getProcessingMemberBean().getMemberId() == mBean.getMemberId()){
-						temp.add(mBean);
-					}
-				}
-				sDBean.setMemberList(temp);
 				result.add(sDBean);
 			}
 		}
-		temp.clear();
 		slist.clear();
 		plist.clear();
 		mlist.clear();
+		System.out.println("result="+result);
 		return result;
 	}
 	public List<SchoolDemandBean> displayPersonalEnd(SchoolDemandBean bean){

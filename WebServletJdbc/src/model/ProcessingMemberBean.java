@@ -15,7 +15,6 @@ public class ProcessingMemberBean implements Serializable
 	private String checkStatus;			// 審核狀態(已通過 未通過 待審核)
 	private MemberBean memberBean;
 	
-	
 	public ProcessingMemberBean()
 	{
 	}
