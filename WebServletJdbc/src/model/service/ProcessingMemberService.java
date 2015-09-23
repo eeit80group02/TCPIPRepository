@@ -70,7 +70,7 @@ public class ProcessingMemberService {
 					fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
 					fBean.setTitle(sDBean.getActivityTopic());
 					fBean.setFrontCoverName("default");
-					fBean.setFrontCover(frontCover);
+					fBean.setFrontCover();
 					fBean.setFrontCoverLength(image.length());
 					fBean.setProjAbstract("完整計畫");
 					fBean.setContent("0%");
