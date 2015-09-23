@@ -12,6 +12,26 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+	.priProjName{
+		font-size:3em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.btndiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.schldiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}	
+
+</style>
 </head>
 <body class="deep-orange lighten-5">
 	
@@ -33,7 +53,6 @@
 	<main>
 		<div class="row">
 			<c:set var="listlength" value="${fn:length(list)}" />
-<!-- <<<<<<< HEAD -->
 			<!-- 初步計畫列表 -->
 <!-- 			<div class="col l8 offset-l4" id="projlist"> -->
 <!-- 				<div class="centerdiv"> -->
@@ -68,35 +87,47 @@
 <!-- 				</div>				 -->
 <!-- 			</div> -->
 <!-- ======= -->
-			<div class="col l8 offset-l2 indigo lighten-5">
-				<div class="row center-align card-panel red-text" style="font-size:4em;">
-					洽談中需求計畫
+		<div class="col l8 offset-l2 indigo lighten-5">
+			<div class="row center-align card-panel red-text" style="font-size:4em;">
+				洽談中需求計畫
+			</div>
+				
+		<!-- 同意或拒絕 -->
+		<c:forEach items="${list}" var="demand">
+			<div class="row card-panel">
+				<!-- 需求計畫名稱 -->
+				<div class="row priProjName left-align teal-text darken-3">
+					哈哈哈營隊${demand.activityTopic}
 				</div>
-				<div class="row card-panel">
-					<c:forEach items="${list}" var="demand">
-						<div class="row card-panel yellow lighten-1">
-					      <ul class="collection with-header">
-					        <li class="collection-header"><h4>${demand.activityTopic}</h4></li>
-<%-- 					        <c:forEach items="${demand.processingMemberBean}" var="pMBean"> --%>
-					        		<li class="collection-item">
-					        			<div class="row left-align">
-					        				${pMBean.memberBean.lastName}
-					        				${demand.processingMemberBean.memberBean.lastName}
-					        					<button class="secondary-content btn">
-					        						同意
-					        					</button>
-					        			</div>
-					        		</li>
-<%-- 					        </c:forEach> --%>
-					      </ul>
+				<!-- 有意願的志工 forEach在這 -->
+				<c:forEach items="${demand.processingMemberBean}" var="processingMember">
+					<div class="row card-panel light-blue lighten-4">
+						<div class="col l4 left schldiv center-align">
+							郭文豪${processingMember.memberBean.lastName}${processingMember.memberBean.firstName}
 						</div>
-					</c:forEach>
-				</div>
+						<div class="col l4 left schldiv" >
+							已被推薦次數:${processingMember.memberBean.RecommendCount}
+						</div>
+						<div class="col l4 right right-align">
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="cancel">
+									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
+								</form>						
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="agree">
+									<button class="btn red white-text btndiv right" type="submit">同意</button>
+								</form>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</c:forEach>
+		<!-- 同意或拒絕 -->	
+				
 				
 			</div>			
-			
-
-<!-- >>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git -->
 		</div>
 	</main>
 

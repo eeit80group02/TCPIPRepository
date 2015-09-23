@@ -14,7 +14,7 @@ import model.service.ProjModifyService;
 
 import org.json.simple.JSONObject;
 
-@WebServlet("/ProjModifyServlet.do")
+@WebServlet("/projModify.do")
 public class ProjModifyServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;

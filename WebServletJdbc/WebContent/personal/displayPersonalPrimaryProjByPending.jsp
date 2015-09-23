@@ -10,6 +10,26 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
 <title>displayPersonalPrimaryProjByPending</title>
+<style>
+	.priProjName{
+		font-size:3em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.btndiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.schldiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}	
+
+</style>
 </head>
 <body>
 	<c:if test="${LoginOK.beanName.equals('school') }">
@@ -57,49 +77,89 @@
 <!-- 			</table>			 -->
 <!-- 		</div> -->
 		
+
+
+		<!-- 同意或拒絕 -->
+		<c:forEach items="${primaryProj}" var="bean">
+			<div class="row card-panel">
+				<!-- 初步計畫名稱 -->
+				<div class="row priProjName left-align teal-text darken-3">
+					初步計畫名稱${bean.title}
+				</div>
+				<!-- 有意願的學校 forEach在這 -->
+				<c:forEach items="${bean.processingProjBean}" var="processingProj">
+					<div class="row card-panel light-blue lighten-4">
+						<div class="col l4 left schldiv center-align">
+							市立瑞穗國小${processingProj.schoolBean.name}
+						</div>
+						<div class="col l4 left schldiv" >
+							台中市${processingProj.schoolBean.addressDistrict}
+						</div>
+						<div class="col l4 right right-align">
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="cancel">
+									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
+								</form>						
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="agree">
+									<button class="btn red white-text btndiv right" type="submit">同意</button>
+								</form>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</c:forEach>
+		<!-- 同意或拒絕 -->
+
+
+
+
+
 		
 		<!-- 同意或拒絕 -->
-		<div class="row card-panel" >
-			<table class="bordered highlight">
-				<thead style="font-size:2em;">
-					<tr>
-						<th>初步計畫編號</th>
-						<th>初步計畫標題</th>
-						<th>接洽學校</th>
-						<th>所在縣市</th>
-						<th>是否同意</th>
-					</tr>
-				</thead>
-				<tbody style="font-size:1em;">
-					<c:forEach var="bean" items="${primaryProj}">
-						<c:forEach var="processingProj" items="${bean.processingProjBean}">
-							<tr>
-								<!-- 初步計畫編號 -->
-								<td>${bean.primaryProjId}</td>
-								<!-- 初步計畫標題 -->
-								<td>${bean.title}</td>
-								<!-- 有意接洽的學校 -->
-								<td>${processingProj.schoolBean.name}</td>
-								<!-- 該學校的所在縣市 -->
-								<td>${processingProj.schoolBean.addressDistrict}</td>
-								<td>
-									<form action="<c:url value="/ProcessingProj.do" />" method="post">
-										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
-										<input type="hidden" name="type" value="agree">
-										<button class="btn yellow lighten-5 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">同意</button>
-									</form>
-									<form action="<c:url value="/ProcessingProj.do" />" method="post">
-										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
-										<input type="hidden" name="type" value="cancel">
-										<button class="btn red lighten-4 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">拒絕</button>
-									</form>								
-								</td>
-							</tr>
-						</c:forEach>
-					</c:forEach>				
-				</tbody>
-			</table>			
-		</div>
+<!-- 		<div class="row card-panel" > -->
+<!-- 			<table class="bordered highlight"> -->
+<!-- 				<thead style="font-size:2em;"> -->
+<!-- 					<tr> -->
+<!-- 						<th>初步計畫編號</th> -->
+<!-- 						<th>初步計畫標題</th> -->
+<!-- 						<th>接洽學校</th> -->
+<!-- 						<th>所在縣市</th> -->
+<!-- 						<th>是否同意</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody style="font-size:1em;"> -->
+<%-- 					<c:forEach var="bean" items="${primaryProj}"> --%>
+<%-- 						<c:forEach var="processingProj" items="${bean.processingProjBean}"> --%>
+<!-- 							<tr> -->
+<!-- 								初步計畫編號 -->
+<%-- 								<td>${bean.primaryProjId}</td> --%>
+<!-- 								初步計畫標題 -->
+<%-- 								<td>${bean.title}</td> --%>
+<!-- 								有意接洽的學校 -->
+<%-- 								<td>${processingProj.schoolBean.name}</td> --%>
+<!-- 								該學校的所在縣市 -->
+<%-- 								<td>${processingProj.schoolBean.addressDistrict}</td> --%>
+<!-- 								<td> -->
+<%-- 									<form action="<c:url value="/ProcessingProj.do" />" method="post"> --%>
+<%-- 										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}"> --%>
+<!-- 										<input type="hidden" name="type" value="agree"> -->
+<!-- 										<button class="btn yellow lighten-5 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">同意</button> -->
+<!-- 									</form> -->
+<%-- 									<form action="<c:url value="/ProcessingProj.do" />" method="post"> --%>
+<%-- 										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}"> --%>
+<!-- 										<input type="hidden" name="type" value="cancel"> -->
+<!-- 										<button class="btn red lighten-4 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">拒絕</button> -->
+<!-- 									</form>								 -->
+<!-- 								</td> -->
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
+<%-- 					</c:forEach>				 --%>
+<!-- 				</tbody> -->
+<!-- 			</table>			 -->
+<!-- 		</div> -->
 	</div>
 </div>
 <!-- 主要版面 -->
@@ -163,281 +223,6 @@
 			$("#membername").css({
 				"margin-top":(pagetitleheight - namediv)/2
 				,"margin-left":($(window).width()) * 0.2});
-			
-			//表單驗證
-				//密碼
-				$("#passwords").on("keyup",function(){
-					var passwordvalue = $("#passwords").val();
-					if(passwordvalue.trim().length !== 0 ){
-						//必須包含英文字母,rule1為真表示有英文字母;
-						rule1 = /^(?=.*[A-Za-z]).{1,}$/;
-						
-						//必須包含一特殊符號,rule3為真表示有特殊符號
-						rule3 = /^(?=.*[\W]).{1,}$/
-						//不可以有中文字元,rule4為真表示有中文
-						rule4 = /^(?=.*[\u4e00-\u9fa5)]).{1,}$/
-						//密碼長度介於10~16字間
-						var flag1 = false;
-						if(passwordvalue.trim().length >=10 && passwordvalue.trim().length <= 16){
-							flag1 = true;
-						}
-						//必須包含數字
-						rule6 = /^(?=.*[0-9]).{1,}$/
-						
-						var result1 = rule1.test(passwordvalue),
-							result3 = rule3.test(passwordvalue),
-							result4 = rule4.test(passwordvalue),
-							result6 = rule6.test(passwordvalue);
-						
-						var finalchk = false;
-						if(result1 == true && result3 == true && result4 !== true && flag1 == true && result6 == true){
-							finalchk = true;
-						}
-						
-						console.log(finalchk);
-						$("#registerform").data({passwordresults:finalchk});
-						
-						if(result1){
-							$("#rule2pic1").text("done")
-							.css("color","#43a047");
-							$("#rule2text1").css("color","#43a047");								
-						}else{
-							$("#rule2pic1").text("info_outline")
-							.css("color","#ff5252");
-							$("#rule2text1").css("color","#ff5252");								
-						}
-						
-						if(result3){
-							$("#rule2pic3").text("done")
-							.css("color","#43a047");
-							$("#rule2text3").css("color","#43a047");								
-						}else{
-							$("#rule2pic3").text("info_outline")
-							.css("color","#ff5252");
-							$("#rule2text3").css("color","#ff5252");									
-						}
-						
-						if(result4){
-							$("#rule2pic4").text("info_outline")
-							.css("color","#ff5252");
-							$("#rule2text4").css("color","#ff5252");								
-						}else{
-							$("#rule2pic4").text("done")
-							.css("color","#43a047");
-							$("#rule2text4").css("color","#43a047");									
-						}
-						
-						if(flag1){
-							$("#rule2pic5").text("done")
-							.css("color","#43a047");
-							$("#rule2text5").css("color","#43a047");									
-						}else{
-							$("#rule2pic5").text("info_outline")
-							.css("color","#ff5252");
-							$("#rule2text5").css("color","#ff5252");									
-						}
-						
-						if(result6){
-							$("#rule2pic6").text("done")
-							.css("color","#43a047");
-							$("#rule2text6").css("color","#43a047");										
-						}else{
-							$("#rule2pic6").text("info_outline")
-							.css("color","#ff5252");
-							$("#rule2text6").css("color","#ff5252");	
-						}
-						
-					}else{
-						$("#rule2pic1").text("");
-						$("#rule2pic2").text("");
-						$("#rule2pic3").text("");
-						$("#rule2pic4").text("");
-						$("#rule2pic5").text("");
-						$("#rule2pic6").text("");
-						$("#rule2text1").css("color","black");
-						$("#rule2text2").css("color","black");
-						$("#rule2text3").css("color","black");
-						$("#rule2text4").css("color","black");
-						$("#rule2text5").css("color","black");
-						$("#rule2text6").css("color","black");
-					}
-				
-				})
-				
-				//密碼確認
-				$("#check").on("keyup",function(){
-					var checkvalue = $("#check").val(),
-						passwordvalue = $("#passwords").val();
-					if(checkvalue !== ""){
-						var result = (checkvalue.trim() == passwordvalue.trim());
-						$("#registerform").data({passwordresults2:result});
-						if(result && checkvalue !== ""){
-							$("#rule2pic2").css("color","#43a047").text("done");
-							$("#rule2text2").css("color","#43a047");
-						}else{
-							$("#rule2pic2").css("color","#ff5252").text("info_outline");
-							$("#rule2text2").css("color","#ff5252");
-							
-						}
-					}else{
-						$("#rule2pic2").text("");
-						$("#rule2text2").css("color","black");
-					}
-				})
-				
-				//聯絡方式(sevlet內可以判斷格式是否正確再存)
-				$("#idNumber").on("keyup",function(){
-					rule1 = /^(02|03|037|04|049|05|06|07|08|082|0826|0836|089)-[0-9]{5,8}$/
-//						rule1 = /^[0]{1}(?=.*\d).{9}/
-					var result = rule1.test($("#idNumber").val());
-					$("body").data("chkphone1",result);
-					
-					if($("#idNumber").val() !== ""){
-						if(result){
-							$("#rule3pic2").css("color","#43a047").text("done");
-							$("#rule3text2").css("color","#43a047");	
-						}else{
-							$("#rule3pic2").css("color","#ff5252").text("info_outline");
-							$("#rule3text2").css("color","#ff5252");							
-							$("#rule3pic1").css("color","#ff5252").text("info_outline");
-							$("#rule3text1").css("color","#ff5252");
-						}
-					}else{
-						$("#rule3pic2").text("");
-						$("#rule3text2").css("color","black");	
-					}
-					
-					if($("body").data("chkphone2") || result){
-						$("#registerform").data({contactresult:true});							
-						$("#rule3pic1").css("color","#43a047").text("done");
-						$("#rule3text1").css("color","#43a047");
-					}else{
-						$("#rule3pic1").text("");
-						$("#rule3text1").css("color","black");							
-					}
-				});
-				//聯絡方式(手機)
-				$("#phone").on("keyup",function(){
-					rule1 = /^(09)[0-9]{2}-[0-9]{6}$/
-					var result = rule1.test($("#phone").val());
-					$("body").data("chkphone2",result);
-					
-					if($("#phone").val() !== ""){
-						if(result){
-						$("#rule3pic3").css("color","#43a047").text("done");
-						$("#rule3text3").css("color","#43a047");
-						}else{
-							$("#rule3pic3").css("color","#ff5252").text("info_outline");
-							$("#rule3text3").css("color","#ff5252");						
-							$("#rule3pic1").css("color","#ff5252").text("info_outline");
-							$("#rule3text1").css("color","#ff5252");						
-						}
-					}else{
-						$("#rule3pic3").text("");
-						$("#rule3text3").css("color","black");
-					}
-					
-					if($("body").data("chkphone1") || result){
-						$("#registerform").data({contactresult:true});
-						$("#rule3pic1").css("color","#43a047").text("done");
-						$("#rule3text1").css("color","#43a047");
-					}else{
-						$("#rule3pic1").text("");
-						$("#rule3text1").css("color","black");							
-					}
-				})
-				//Email格式
-				$("#email").on("keyup",function(){
-					rule1 = /^[-a-z0-9~!$%^&*_=+}{\?]+(\.[-a-z0-9~!$%^&*_=+}{\?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i ;
-					var result = rule1.test($("#email").val());
-					if($("#email").val() !== ""){
-						if(result){
-							$("#registerform").data({emailresult:true});							
-							$("#rule4pic1").css("color","#43a047").text("done");
-							$("#rule4text1").css("color","#43a047");							
-						}else{
-							$("#rule4pic1").css("color","#ff5252").text("info_outline");
-							$("#rule4text1").css("color","#ff5252");							
-						}
-					}else{
-						$("#rule4pic1").text("");
-						$("#rule4text1").css("color","black");	
-					}
-					})
-					
-
-				//生日格式
-				$("#birthday").on("keyup",function(){
-					rule1 = /^[1-2]{1}[0-9]{3}-[0-9]{2}-[0-9]{2}$/
-					var result = rule1.test($("#birthday").val());
-					var result2 = (new Date($("#birthday").val()).toString() == "Invalid Date");
-					
-					if($("#birthday").val() !== ""){
-						if(result && !result2){
-							$("#registerform").data({birthdayresult:true});
-							$("#rule5pic1").css("color","#43a047").text("done");
-							$("#rule5text1").css("color","#43a047");
-						}else{
-							$("#rule5pic1").css("color","#ff5252").text("info_outline");
-							$("#rule5text1").css("color","#ff5252");									
-						}
-					}else{
-						$("#rule5pic1").text("");
-						$("#rule5text1").css("color","black");	
-					}
-				})
-		//送出表單前的驗證
-		$("#btndiv").on({
-			"mouseover":function(){
-			if($("#passwords").val() !== "" || $("#check").val() !== ""){
-				if(
-						$("#registerform").data().passwordresults &&
-						$("#registerform").data().passwordresults2 &&
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-						){
-							$("#submitbtn").prop("disabled",false);
-						}else{
-							$("#submitbtn").prop("disabled",true);
-						}				
-			}else{
-				if(
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-				){
-						$("#submitbtn").prop("disabled",false);
-				}else{
-						$("#submitbtn").prop("disabled",true);
-					}						
-			}
-
-		},"mouseout":function(){
-			if(
-				$("#registerform").data().accountresults &&
-				$("#registerform").data().passwordresults &&
-				$("#registerform").data().passwordresults2 &&
-				$("#registerform").data().contactresult &&
-				$("#registerform").data().emailresult &&
-				$("#registerform").data().birthdayresult &&
-				$("#lastName").val().trim() !== "" &&
-				$("#firstName").val().trim() !== "" &&
-				$("#address").val().trim() !== "" 
-				
-			){
-				$("#submitbtn").prop("disabled",false);
-			}else{
-				$("#submitbtn").prop("disabled",true);
-			}
-		}
-		});
 		})(jQuery)
 	</script>
 	<script>

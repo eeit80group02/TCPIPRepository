@@ -174,7 +174,7 @@
 							</c:if>
 						</c:forEach>
 						<c:if test="${flag.equals('false')}">
-							<form action="<c:url value="/ProcessingProj.do" />" method="post">
+							<form action="<c:url value="/processingProj.do" />" method="post">
 								<input type="hidden" name="schoolId" value="${LoginOK.schoolId}">
 								<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}">
 								<input type="hidden" name="type" value="apply">

@@ -56,6 +56,7 @@
 
 .disable {
 	text-decoration: line-through;
+	color: #616161 grey darken-2;
 }
 
 #trash-can {
@@ -158,7 +159,9 @@
     							  "<input type='text' class='missionExecutor' value='" + this.host + "' name='" + this.memberId + "' >" +
     							  "<input type='text' class='missionDate' value=" + dateFormat + ">" +
     							  "<input type='text' class='missionPriority' value=" + this.missionPriority + ">"+
-    							  "<input type='text' class='mainMissionId' value=" + this.mainMissionId + "></div>");
+    							  "<input type='text' class='mainMissionId' value=" + this.mainMissionId + ">" +
+    							  "<input type='text' class='missionPosition' value=" + this.missionPosition + ">" +
+    							  "<input type='text' class='missionStatus' value='" + this.missionStatus + "'></div>");
     	   				$('#missionSet'+ this.missionSetId +'').siblings('ul').append($li);
     	   				
     	   				missionCount++;
@@ -236,7 +239,9 @@
 						  "<input type='text' class='missionExecutor' value='待認領' >" +
 						  "<input type='text' class='missionDate'>" +
 						  "<input type='text' class='missionPriority'>"+
-						  "<input type='text' class='mainMissionId' ></div>");
+						  "<input type='text' class='mainMissionId' >" + 
+						  "<input type='text' class='missionPosition' >" + 
+						  "<input type='text' class='missionStatus' ></div>");
 				missionCount++;
 				$li.appendTo($(event.target).parent().siblings( "ul" ));
 			});
@@ -481,12 +486,13 @@
 
 				var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + subMissionCount + '" class="row" style="width:585.906px;height:60px;">' +
 														'<div class="subMissionSettings col l1"><i class="material-icons" style="padding:10px 0px;font-size:40px;">settings</i></div>' +
-														'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ subMissionCount +'" class="subMissionStatus filled-in">'+
+														'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ subMissionCount +'" class="subMissionStatus filled-in" value="進行中" >'+
 														'<label for="subMissionCheckbox'+ subMissionCount +'"></label></div>' +
 														'<textarea class="subMissionName col l5 materialize-textarea" placeholder="請輸入子任務內容" style="max-height:45px;">'+ subMissionName +'</textarea>' +
 														'<div class="subMissionDateContainer col l3"><input type="text" class="subMissionDate subDatepicker col l10" value="'+ subMissionDate +'" readonly>' +
 														'</div>' + '<div class="addSubMissionExecutor col l2"><div class="subMissionExecutor" style="padding:15px 0px;">'+
 														subMissionExecutor +'</div></div>' +
+														'<input type="hidden" class="subMissionPosition" >' +
 														'<input type="hidden" class="mainDataRowLocation" value="'+ $('.dataRowLocation').val() +'"></div>');
 				$('.subMissionContainer ul').prepend($subMission);
 				$('.subMission').hide();
@@ -640,6 +646,7 @@
 			//Set subMissionSettings dialog close condition
 			$('#transferToMission').click(function(){
 				var mainMissionId = $('#'+$('.subMissionLocation').val()).children('input[class="mainDataRowLocation"]').val();
+				console.log("mainMissionId="+mainMissionId);
 				var subMissionId = $('.subMissionLocation').val();
 				console.log("subMissionId="+subMissionId);
 				console.log($('#'+subMissionId));
@@ -651,10 +658,30 @@
 				console.log("subMissionDate="+subMissionDate);
 				var subMissionExecutor = $('#'+subMissionId+' .subMissionExecutor').text();
 				console.log("subMissionExecutor="+subMissionExecutor);
+				var subMissionPosition = $('#'+subMissionId+' .subMissionPosition').val();
+				console.log("subMissionPosition="+subMissionPosition);
+				//******************************************************************************
+				//******************************************************************************
+				//******************************************************************************
+				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>"+ subMissionName +"</div>" +
+						  "<div id='dataRow"+ missionCount + "' style='display:none'>" +
+						  "<input type='text' class='missionExecutor' value='" + subMissionExecutor + "' >" +
+						  "<input type='text' class='missionDate' value='" + subMissionDate + "'>" +
+						  "<input type='text' class='missionPriority' value='普通'>"+
+						  "<input type='text' class='mainMissionId' >" + 
+						  "<input type='text' class='missionPosition' >" + 
+						  "<input type='text' class='missionStatus' value='" + subMissionStatus + "'></div>");
 				
-				//******************************************************************************
-				//******************************************************************************
-				//******************************************************************************
+				$('#'+mainMissionId).parent().parent().append($li);
+				$('#'+subMissionId).parent().remove();
+				
+				if(subMissionStatus=="已完成"){
+					console.log('任務已完成');
+					console.log($('#dataRow'+missionCount).siblings('div'));
+					$('#dataRow'+missionCount).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
+				}
+				
+				missionCount++;
 				$('.subMissionSettingsDialog').dialog( "close" );
 			});			
 			$('#deleteSubMission').click(function(){
@@ -714,6 +741,7 @@
 				var dataDate = $(div).siblings("div").children(".missionDate").val();
 				var dataPriority = $(div).siblings("div").children(".missionPriority").val();
 				var dataExecutorId = $(div).siblings("div").children(".missionExecutor").attr("name");
+// 				var dataStatus = $(div).siblings("div").children(".missionStatus").val();
 				
 				var temp = $(div).siblings("div").attr('id');
 				$('.missionDetailDialog .missionName').val(dataName);
@@ -890,12 +918,18 @@
 					$('.missionDetailDialog .missionName').removeClass('disable');
 					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
 					$(event.target).prop('checked',false);
-					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
+					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#bdbdbd grey lighten-1');
+					$('#'+$('.dataRowLocation').val()+' .missionStatus').val('進行中');
+					
+					console.log($('#'+$('.dataRowLocation').val()+' .missionStatus').val());
 				} else {
 					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
 					$('.missionDetailDialog .missionName').addClass('disable');
 					$(event.target).prop('checked',true);
-					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
+					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#bdbdbd grey lighten-1');
+					$('#'+$('.dataRowLocation').val()+' .missionStatus').val('已完成');
+					
+					console.log($('#'+$('.dataRowLocation').val()+' .missionStatus').val());
 				}
 			});
 			
@@ -903,11 +937,13 @@
 			$(document).on('click','.subMissionStatus',function() {
 				console.log(event.target);
 				if( $(event.target).prop('checked') == true ){
-					$(event.target).val('true');
-					$(event.target).parent().siblings('textarea').css('text-decoration','line-through');
+					$(event.target).val('已完成');
+					$(event.target).parent().siblings('textarea').css({'text-decoration':'line-through',
+																	   'color':'#9e9e9e grey'});
 				} else {
-					$(event.target).val('false');
-					$(event.target).parent().siblings('textarea').css('text-decoration','none');
+					$(event.target).val('進行中');
+					$(event.target).parent().siblings('textarea').css({'text-decoration':'none',
+																	   'color':'black'});
 				}
 			});
 			
@@ -1137,7 +1173,7 @@
 					<div class="col l12">
 						<label for="subMissionContainer">子任務 </label>
 						<div class="subMissionContainer">
-							<ul class="col l12" style="column-count:4;column-gap:0;">
+							<ul class="col l12" style="column-count:4;column-gap:0;width:605.906px;">
 								<li class="notSortable">
 									<div class="openSubMissionWindow">添加子任務</div>
 									<div class="subMission row" style="display:none">

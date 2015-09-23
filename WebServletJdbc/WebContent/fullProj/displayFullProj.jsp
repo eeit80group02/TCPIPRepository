@@ -193,44 +193,28 @@
 				</div>
 			</div>
 			
-			<!-- 任務板連結 -->
-			<c:url var="missionBoard" value="/draganddrop.jsp">
-				<c:param name="fullProjId" value="${fullProj.fullProjId}" />
-			</c:url>
-			<a href="${missionBoard}">任務板</a>
-			
 			<!-- 加入活動的按鈕 -->
-			  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-			    <a class="btn-large red">
-			    	<span style="font-size:2em;font-weight:900">加入活動</span>
-			    </a>
-			  </div>			
-<!-- 			<div class="col l2"> -->
-<%-- 				<c:set var="deadline" value="90000000" /> --%>
-<%-- 				<c:set var="nowDate" value="<%=System.currentTimeMillis()%>"></c:set>  --%>
-<!-- 					檢查 登入者是否學校 -->
-<%-- 					<c:if test="${LoginOK.beanName.equals('school')}"> --%>
-<%-- 						<form action="<c:url value="/ProcessingProj.do" />" method="post"> --%>
-<%-- 							<input type="hidden" name="schoolId" value="${LoginOK.schoolId}"> --%>
-<%-- 							<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}"> --%>
-<!-- 							<input type="hidden" name="type" value="apply"> -->
-<!-- 							<input class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="submit" value="申請計畫洽談" > -->
-<!-- 						</form> -->
-<%-- 					</c:if> --%>
-					
-<%-- 					<c:if test="${LoginOK.beanName.equals('member')}"> --%>
-<%-- 						<c:if test="${LoginOK.memberId == primaryProj.memberId && (primaryProj.createDate.time + deadline) - nowDate > 0}"> --%>
-<%-- 							<form action="<c:url value="/primaryProj.do" />" method="post"> --%>
-<!-- 								<input type="hidden" name="type" value="displayUpdate"> -->
-<%-- 								<input type="hidden" name="primaryProjId" value="${primaryProj.primaryProjId}"> --%>
-<!-- 								<input class="btn-large white-text red accent-2" type="submit" value="修改" style="font-family:微軟正黑體;font-size:1.5em;width:100%;"> -->
-<!-- 							</form> -->
-<%-- 						</c:if> --%>
-<%-- 					</c:if>			 --%>
-
-<!-- 			</div> -->
+			<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+<!-- 				<a class="btn-large red"> -->
+<!-- 			    	<span style="font-size:2em;font-weight:900">加入活動</span> -->
+<!-- 			    </a> -->
+			    
+			    <c:if test="${not LoginOK.beanName.equals('school')}">
+				    <form id="participator" action="<c:url value="/participator.do" />" method="post">
+						<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+						<input id="participatorSubmit" class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="button" value="加入活動" >			
+					</form>
+			    </c:if>
+			</div>
+			
+			<div class="col l2">
+				<form action="<c:url value="/draganddrop.jsp" />" method="get">
+					<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+					<input class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="submit" value="任務板" >			
+				</form>
+			</div>
+			
 		</div>	
-	
 	</div>
 </main>
 
@@ -262,10 +246,19 @@
 		})
 		
 		$(function(){
+			$("#participatorSubmit").on("click",function(){
+				<c:if test="${empty LoginOK}">
+					alert("你必須先登入會員");
+				</c:if>
+				$("#participator").submit();
+			});
+		})
+		
+		$(function(){
 			displayMessage();
 			function displayMessage(){
 				$.ajax({
-					"url": "<c:url value='/ProjDiscussServlet.do' />",
+					"url": "<c:url value='/projDiscuss.do' />",
 					"type":"POST",
 					"data":{"type":"display","fullProjId":"${fullProj.fullProjId}"},
 					"dataType" :"json",
@@ -287,7 +280,7 @@
 									if(value.answerMemberId == "null"){
 										console.log(value.projDiscusId);
 										memberContent += "<div align='right'>" +
-														 "<form action='<c:url value='/ProjDiscussServlet.do' />' method='post'>" +
+														 "<form action='<c:url value='/projDiscuss.do' />' method='post'>" +
 														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
 														 "<input type='hidden' name='type' value='reply'>" + 
 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
