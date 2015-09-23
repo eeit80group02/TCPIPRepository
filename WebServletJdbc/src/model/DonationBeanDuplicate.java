@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 
 public class DonationBeanDuplicate implements Serializable {
@@ -203,5 +204,21 @@ public class DonationBeanDuplicate implements Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	@Override
+	public String toString() {
+		return "DonationBeanDuplicate [donationId=" + donationId
+				+ ", schoolId=" + schoolId + ", schoolName=" + schoolName
+				+ ", donationStatus=" + donationStatus + ", supplyName="
+				+ supplyName + ", originalDemandNumber=" + originalDemandNumber
+				+ ", originalDemandUnit=" + originalDemandUnit
+				+ ", demandNumber=" + demandNumber + ", donateAmount="
+				+ donateAmount + ", size=" + size + ", demandContent="
+				+ demandContent + ", supplyStatus=" + supplyStatus
+				+ ", demandTime=" + demandTime + ", expireTime=" + expireTime
+				+ ", imageName=" + imageName + ", imageFile="
+				+ Arrays.toString(imageFile) + ", imageLength=" + imageLength
+				+ ", remark=" + remark + "]";
 	}
 }
