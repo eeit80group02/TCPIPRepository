@@ -1,5 +1,6 @@
 package model.service;
 
+import java.io.File;
 import java.util.List;
 
 import model.FullProjBean;
@@ -28,7 +29,7 @@ public class ProcessingMemberService {
 		SchoolDemandBean sBean = null;
 		if (bean != null) {
 			sBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
-			if (sBean != null && sBean.getDemandStatus().equals("待洽談")) {
+			if (sBean != null && !sBean.getDemandStatus().equals("洽談完成") && !sBean.getDemandStatus().equals("洽談失敗")) {
 				bean.setCheckStatus("待審核");
 				result = processingMemberDAO.insert(bean);
 				if (result != null) {
@@ -41,6 +42,7 @@ public class ProcessingMemberService {
 	}
 
 	public ProcessingMemberBean agree(ProcessingMemberBean bean) {
+		File image = new File("");
 		List<ProcessingMemberBean> list = null;
 		ProcessingMemberBean result = new ProcessingMemberBean();
 		SchoolDemandBean sDBean = new SchoolDemandBean();
@@ -67,16 +69,16 @@ public class ProcessingMemberService {
 					fBean.setMemberId(bean.getMemberId());
 					fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
 					fBean.setTitle(sDBean.getActivityTopic());
-					fBean.setFrontCoverName(frontCoverName);
-					fBean.setFrontCover(frontCover);
-					fBean.setFrontCoverLength(frontCoverLength);
-					fBean.setProjAbstract(projAbstract);
-					fBean.setContent(content);
+					fBean.setFrontCoverName("default");
+//					fBean.setFrontCover();
+					fBean.setFrontCoverLength(image.length());
+					fBean.setProjAbstract("完整計畫");
+					fBean.setContent("0%");
 					fBean.setLocation(sDBean.getActivityLocation());
-					fBean.setActivityStartTime(activityStartTime);
-					fBean.setActivityEndTime(activityEndTime);
-					fBean.setEstMember(estMember);
-					fBean.setBudget(budget);
+					fBean.setActivityStartTime(new java.util.Date(System.currentTimeMillis()));
+					fBean.setActivityEndTime(new java.util.Date(System.currentTimeMillis()));
+					fBean.setEstMember(0);
+					fBean.setBudget(0);
 					fBean.setCreateDate(result.getCheckTime());
 					fBean.setProjStatus("洽談中");
 					fullProjDAO.insert(fBean); 

@@ -11,6 +11,8 @@ import model.dao.DonationDiscussDAOJdbc;
 import model.dao.DonationOrderDAOJdbc;
 import model.dao.DonationOrderDetailDAOJdbc;
 import model.dao.SchoolDAOJdbc;
+import model.dao.interfaces.DonationOrderDAO;
+import model.dao.interfaces.DonationOrderDetailDAO;
 
 public class DonationService {
 	private DonationDAOJdbc donationDAOJdbc;
@@ -220,10 +222,15 @@ public class DonationService {
 		List<DonationBean> result = new ArrayList<>();
 		result = donationDAOJdbc.getAll();
 		for (DonationBean d : result) {
-			if (schoolId == d.getSchoolId() && d.getDonationStatus().equals("否")) {
+			if (schoolId == d.getSchoolId()) {
 				resultDisplay.add(d);
 			}
 		}
+//		for (DonationBean d : result) {
+//			if (schoolId == d.getSchoolId() && d.getDonationStatus().equals("否")) {
+//				resultDisplay.add(d);
+//			}
+//		}
 		
 		// 包裝一間學校所有捐獻
 		List<DonationBeanDuplicate> listDuplivate = new ArrayList<>();
@@ -269,6 +276,117 @@ public class DonationService {
 		List<DonationBean> result = new ArrayList<>();
 		donationDAOJdbc  = new DonationDAOJdbc();
 		result = donationDAOJdbc.getAll();
+		return result;
+	}
+	
+	public List<DonationOrderDuplicateBean> findOneAllDeamndOrderDetailBySchool(int schoolId) {
+		// 比對schoolId後得到一間學校所有捐獻
+		List<DonationBean> resultDisplay = new ArrayList<>();
+		
+		donationDAOJdbc  = new DonationDAOJdbc();
+		List<DonationBean> result = new ArrayList<>();
+		
+		// a.取出所有捐獻
+		result = donationDAOJdbc.getAll();
+		// b.比對schoolId(一)取出學校所有donationId(多)
+		List<Integer> donationIdInteger = new ArrayList<>();
+		
+		for (DonationBean d : result) {
+			if (schoolId == d.getSchoolId()) {
+				resultDisplay.add(d);
+				// b.1
+				donationIdInteger.add(d.getDonationId());
+			}
+		}
+		
+		//-----------------------------------------------
+		
+		// 存取所有donationOrderId/donateAmount
+		List<DonationOrderDetailBean> dodBeanList = new ArrayList<>();
+		DonationOrderDetailBean dodBean;
+		
+		// 依照donationId存取所有donationOrderId/donateAmount
+		// 先撈出所有捐獻明細
+		DonationOrderDetailDAO orderDetailDAO = new DonationOrderDetailDAOJdbc();
+		List<DonationOrderDetailBean> orderDetailBean = orderDetailDAO.getAll();
+		for (DonationOrderDetailBean d : orderDetailBean) {
+			
+			// 依照donationId取出所有donationOrderId
+			for (Integer i : donationIdInteger) {
+				if (i == d.getDonationId()) {
+					dodBean = new DonationOrderDetailBean();
+					dodBean.setDonationOederId(d.getDonationOederId());
+					dodBean.setDonationId(d.getDonationId());
+					dodBean.setDonationAmount(d.getDonationAmount());
+					System.out.println("@@ "+dodBean.getDonationOederId()+"/"+dodBean.getDonationId()+"/"+dodBean.getDonationAmount());
+					dodBeanList.add(dodBean);
+					
+				}
+			}
+		}
+		System.out.println("dodBeanList = "+dodBeanList);
+		
+		// 送回前端顯示的捐獻明細
+		List<DonationOrderDuplicateBean> newDetailItems = new ArrayList<>();
+		DonationOrderDuplicateBean odduplicateBean;
+		
+		DonationOrderDAO doDAO = new DonationOrderDAOJdbc();
+		// 依照所有donationOrderId存取所需資料為一個新的Bean
+		
+		for (DonationOrderDetailBean d : dodBeanList) {
+			// 依getDonationOederId取出getDonationOederBean
+			DonationOrderBean doBean = doDAO.findByPrimaryKey(d.getDonationOederId());
+			if(doBean != null) {
+				odduplicateBean = new DonationOrderDuplicateBean();
+				odduplicateBean.setDonationOrderId(doBean.getDonationOrderId());
+				// new
+				odduplicateBean.setDonationId(d.getDonationId());
+				odduplicateBean.setDonationAmount(d.getDonationAmount());
+				
+				odduplicateBean.setMemberId(doBean.getMemberId());
+				odduplicateBean.setName(doBean.getName());
+				odduplicateBean.setAddress(doBean.getAddress());
+				odduplicateBean.setPhone(doBean.getPhone());
+				odduplicateBean.setCellPhone(doBean.getCellPhone());
+				odduplicateBean.setEmail(doBean.getEmail());
+				odduplicateBean.setPickTime(doBean.getPickTime());
+				odduplicateBean.setDonationOederDate(doBean.getDonationOederDate());
+				odduplicateBean.setDealId(doBean.getDealId());
+				
+				newDetailItems.add(odduplicateBean);
+			}
+		}
+//		for(DonationOrderDuplicateBean d : newDetailItems) {
+//			System.out.println("*"+d);
+//		}
+		return newDetailItems;
+	}
+	
+	// 會員新增訂單
+	public boolean saveBooking(DonationOrderBean donationOrderBean, 
+			List<DonationOrderDetailBean> list) {
+		boolean result = false;
+		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
+		
+		// "設定交易"
+		
+		// 新增訂單主檔
+		donationOrderBean = donationOrderDAOJdbc.insert(donationOrderBean);
+		if (donationOrderBean != null) {
+			// 取得自增主鍵
+			int pk = donationOrderBean.getDonationOrderId();
+			for (DonationOrderDetailBean d : list) {
+				// 將所有明細設定自增主鍵
+				d.setDonationOederId(pk);
+				donationOrderDetailDAOJdbc = new DonationOrderDetailDAOJdbc();
+				donationOrderDetailDAOJdbc.insert(d);
+				// 新增訂單明細
+				System.out.println("訂單新增成功");
+				result = true;
+			}
+		} else {
+			System.out.println("Not success in DonationService");
+		}
 		return result;
 	}
 	
@@ -323,33 +441,6 @@ public class DonationService {
 		return listDuplivate;
 	}
 	
-	// 會員新增訂單
-	public boolean saveBooking(DonationOrderBean donationOrderBean, 
-			List<DonationOrderDetailBean> list) {
-		boolean result = false;
-		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
-		
-		// "設定交易"
-		
-		// 新增訂單主檔
-		donationOrderBean = donationOrderDAOJdbc.insert(donationOrderBean);
-		if (donationOrderBean != null) {
-			// 取得自增主鍵
-			int pk = donationOrderBean.getDonationOrderId();
-			for (DonationOrderDetailBean d : list) {
-				// 將所有明細設定自增主鍵
-				d.setDonationOederId(pk);
-				donationOrderDetailDAOJdbc = new DonationOrderDetailDAOJdbc();
-				donationOrderDetailDAOJdbc.insert(d);
-				// 新增訂單明細
-				System.out.println("訂單新增成功");
-				result = true;
-			}
-		} else {
-			System.out.println("Not success in DonationService");
-		}
-		return result;
-	}
 	public void bookingOrder(DonationOrderBean donationOrderBean, DonationCart dCart) {
 		
 		// 真正要進資料庫儲存的捐贈明細資料(OrderDetailBeanBean)

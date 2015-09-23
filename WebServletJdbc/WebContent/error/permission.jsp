@@ -21,12 +21,21 @@
 
 	<!-- 內容 -->
 	<main>
-	<% 	
-		response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
-	%>
-	你沒有權限操作此頁面，3秒後導回首頁。<br>
-
-	<a href="<c:url value="/index.jsp" />">回首頁</a>
+		<% 	
+// 			response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+		%>		
+		
+		<div class="row valign-wrapper" id="mainboard">
+			<div class="col l8 offset-l2 valign card-panel white z-depth-3" style="min-height:40vh" id="cardboard">
+				<div class="row center-align" style="font-family:微軟正黑體;font-size:5em;" id="msgboard">
+					你沒有權限操作此頁面<br>3秒後導回首頁
+				</div>
+				<div class="row">
+					<a class="col l2 offset-l5 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回首頁</a>
+				</div>
+			</div>		
+		</div>		
+		
 	</main>
 
 
@@ -46,8 +55,8 @@
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script>
 		$(function() {
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
+			//mainboard最小高度
+			$("#mainboard").css("min-height","80vh");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%

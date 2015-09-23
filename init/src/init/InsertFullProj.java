@@ -383,7 +383,7 @@ public class InsertFullProj
 		
 //																						pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/09/20").getTime()));				// createDate  建立日期
+				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/11/20").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
 				

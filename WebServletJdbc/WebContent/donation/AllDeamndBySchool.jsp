@@ -31,7 +31,6 @@
 
 <!-- 自訂 -->
 <link rel="stylesheet" href="../donationStyles/DonationWallSchool.css">
-<!-- <script type="text/javascript" src="../donationScripts/DonationWallSchool.js"></script> -->
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
 </head>
@@ -41,7 +40,7 @@
 		<nav>
 			<div class="nav-wrapper">
 				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
 				</ul>
 				<a href="#" class="brand-logo center">管理捐獻物資</a>
 
@@ -88,91 +87,212 @@
 			<div id="test1" class="col s12">
 
 				<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
-					<li class="ui-widget-content ui-corner-tr">
-						<div>
-							<div class="fiximg">
-								<!-- h5 標籤不能新增修改，後面設定會用 -->
-								<div>
-									<h5>延長線 - 屏東縣鹽埔鄉鹽埔國民小學</h5>
-								</div>
-
-								<img class="bigimg" src="../images/thing01.jpg" alt="延長線" title="延長線">
-							</div>
-							
-							<div class="footIcin">
-								<!-- 放大鏡的 title 跟上面 h5 的名稱要一模一樣 -->
-
-								<!-- 捐獻記錄 start -->
-								<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
-									<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
-										<i class="small material-icons">assignment</i>
-									</button>
-								</span>
-								<!-- Modal Structure -->
-								<div id="modalNote01" class="modal modal-fixed-footer">
-									<div class="modal-content">
-										<h4>捐獻記錄</h4>
-										<table class="donationRecorder">
-											<thead>
-												<tr>
-													<td>捐獻者</td>
-													<td>物資名稱</td>
-													<td>捐獻數量</td>
-													<td>捐獻時間</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-												<tr>
-													<td>石田三成</td>
-													<td>足球</td>
-													<td>20顆</td>
-													<td>2015/09/22 14：30：22</td>
-												</tr>
-											</tbody>
-										</table>
+					<c:forEach var='item' items='${OneAllDemands}' varStatus='vs'>
+						<li class="ui-widget-content ui-corner-tr" value="${item.donationId}">
+							<div>
+								<div class="fiximg">
+									<!-- h5 標籤不能新增修改，後面設定會用 -->
+									<div class="alert alert-info" role="alert">
+										<h5>${item.supplyName}-${item.schoolName}</h5>
 									</div>
-
-									<div class="modal-footer">
-										<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
-									</div>
+									<img class="bigimg" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}">
 								</div>
-								<!-- 捐獻記錄 end -->
-								<span class="midText">18 條</span> <span class="rightIcon"><a href="DonationQASchool.html" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a></span>
+								
+								<div class="footIcin">
+									<!-- 放大鏡的 title 跟上面 h5 的名稱要一模一樣 -->
+	
+									<!-- 捐獻記錄 start -->
+									<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
+										<button type="button" data-target="modalNote01${vs.index}" class="btn btn-small btn-floating modal-trigger">
+											<i class="small material-icons">assignment</i>
+										</button>
+									</span>
+									<!-- Modal Structure -->
+									<div id="modalNote01${vs.index}" class="modal modal-fixed-footer">
+										<div class="modal-content">
+											<h4>捐獻記錄</h4>
+											<table class="donationRecorder">
+												<thead>
+													<tr>
+														<td>捐獻者</td>
+														<td>捐獻數量</td>
+														<td>捐獻時間</td>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var='initem' items='${OneAllDetails}'>
+													<c:choose>
+														<c:when test="${item.donationId == initem.donationId}">
+															<tr>
+																<td>${initem.name}</td>
+																<td>${initem.donationAmount}</td>
+																<td>${initem.donationOederDate}</td>
+															</tr>
+														</c:when>
+													</c:choose>	
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+	
+										<div class="modal-footer">
+											<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+										</div>
+									</div>
+									<!-- 捐獻記錄 end -->
+									<span class="midText">${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
+										<a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
+									</span>
+								</div>					
 							</div>
-						</div>
-					</li>
+						</li>
+					</c:forEach>
 				</ul>
 			</div>
+			<div id="test2" class="col s12">
+			
+				<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+					<c:forEach var='item' items='${OneAllDemands}' varStatus='vs'>
+					<c:choose>
+					<c:when test="${item.donationStatus == '否'}">
+						<li class="ui-widget-content ui-corner-tr" value="${item.donationId}">
+							<div>
+								<div class="fiximg">
+									<!-- h5 標籤不能新增修改，後面設定會用 -->
+									<div class="alert alert-info" role="alert">
+										<h5>${item.supplyName}-${item.schoolName}</h5>
+									</div>
+									<img class="bigimg" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}">
+								</div>
+								
+								<div class="footIcin">
+									<!-- 放大鏡的 title 跟上面 h5 的名稱要一模一樣 -->
+	
+									<!-- 捐獻記錄 start -->
+									<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
+										<button type="button" data-target="modalNote02${vs.index}" class="btn btn-small btn-floating modal-trigger">
+											<i class="small material-icons">assignment</i>
+										</button>
+									</span>
+									<!-- Modal Structure -->
+									<div id="modalNote02${vs.index}" class="modal modal-fixed-footer">
+										<div class="modal-content">
+											<h4>捐獻記錄</h4>
+											<table class="donationRecorder">
+												<thead>
+													<tr>
+														<td>捐獻者</td>
+														<td>捐獻數量</td>
+														<td>捐獻時間</td>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var='initem' items='${OneAllDetails}'>
+													<c:choose>
+														<c:when test="${item.donationId == initem.donationId}">
+															<tr>
+																<td>${initem.name}</td>
+																<td>${initem.donationAmount}</td>
+																<td>${initem.donationOederDate}</td>
+															</tr>
+														</c:when>
+													</c:choose>	
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+	
+										<div class="modal-footer">
+											<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+										</div>
+									</div>
+									<!-- 捐獻記錄 end -->
+									<span class="midText">${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
+										<a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
+									</span>
+								</div>					
+							</div>
+						</li>
+						</c:when>
+						</c:choose>
+					</c:forEach>
+				</ul>
+			</div>
+			<div id="test3" class="col s12">
+			<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+					<c:forEach var='item' items='${OneAllDemands}' varStatus='vs'>
+					<c:choose>
+					<c:when test="${item.donationStatus == '是'}">
+						<li class="ui-widget-content ui-corner-tr" value="${item.donationId}">
+							<div>
+								<div class="fiximg">
+									<!-- h5 標籤不能新增修改，後面設定會用 -->
+									<div class="alert alert-info" role="alert">
+										<h5>${item.supplyName}-${item.schoolName}</h5>
+									</div>
+									<img class="bigimg" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}">
+								</div>
+								
+								<div class="footIcin">
+									<!-- 放大鏡的 title 跟上面 h5 的名稱要一模一樣 -->
+	
+									<!-- 捐獻記錄 start -->
+									<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
+										<button type="button" data-target="modalNote03${vs.index}" class="btn btn-small btn-floating modal-trigger">
+											<i class="small material-icons">assignment</i>
+										</button>
+									</span>
+									<!-- Modal Structure -->
+									<div id="modalNote03${vs.index}" class="modal modal-fixed-footer">
+										<div class="modal-content">
+											<h4>捐獻記錄</h4>
+											<table class="donationRecorder">
+												<thead>
+													<tr>
+														<td>捐獻者</td>
+														<td>捐獻數量</td>
+														<td>捐獻時間</td>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach var='initem' items='${OneAllDetails}'>
+													<c:choose>
+														<c:when test="${item.donationId == initem.donationId}">
+															<tr>
+																<td>${initem.name}</td>
+																<td>${initem.donationAmount}</td>
+																<td>${initem.donationOederDate}</td>
+															</tr>
+														</c:when>
+													</c:choose>	
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
+	
+										<div class="modal-footer">
+											<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+										</div>
+									</div>
+									<!-- 捐獻記錄 end -->
+									<span class="midText">${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
+										<a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
+									</span>
+								</div>					
+							</div>
+						</li>
+						</c:when>
+						</c:choose>
+					</c:forEach>
+				</ul>
+			</div>
+
+		</div>
 	</center>
+	<!-- 標頭專用 bottom start -->
+	<!-- 必須最後載入才有效果 -->
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
+	<!-- 標頭專用 bottom end -->
+												
 </body>
 </html>

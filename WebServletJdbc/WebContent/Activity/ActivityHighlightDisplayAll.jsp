@@ -13,7 +13,7 @@
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
-<body class="cyan lighten-5">
+<body class="amber lighten-5">
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
   
@@ -30,11 +30,11 @@
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row">
+		<!-- 主要版面 -->
+		<div class="row" id="mainboard">
 			
-			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
-			<!-- 初步計畫列表 -->
-			<div class="col l10 offset-l1" id="projlist">
+			<!-- 活動花絮列表 -->
+			<div class="col l11 offset-l1" id="projlist">
 				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
@@ -55,17 +55,16 @@
 								</div>
 								<!-- 連結到花絮的收看頁面 -->
 								<div class="card-action right-align">
-									<a href="#">take a look</a>
+									<a href="${path }">take a look</a>
 								</div>
 							</div>
 						</div>
 					<!-- 卡片結束 -->
-
-					
 				</c:forEach>
 				</div>				
 			</div>
 		</div>
+		<!-- 主要版面 -->
 	</main>
 
 
@@ -97,16 +96,14 @@
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
-			//提示區塊的按鈕
-			$(".projinfos").css("margin", "0px auto");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
 			$(".card").css("width", "310px");
+			//設定主要面板高度
+			$("#mainboard").css("min-height","100vh");
 		})
 	</script>
 	<script>

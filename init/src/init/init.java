@@ -3,14 +3,16 @@ package init;
 public class init
 {
 
+	private String test = "hahaha";
 	public static void main(String[] args)
 	{
-		InsertMember.start();
-		InsertSchool.start();
-		InsertSchoolDemandId.start();
-		InsertPrimaryProj.start();
-		InsertProcessingProj.start();
-		InsertFullProj.start();
+		InsertMember.start();            //新增會員
+		InsertSchool.start();			 //新增學校
+		InsertSchoolDemandId.start();    //新增學校需求
+		InsertPrimaryProj.start();       //新增會員的初步計畫
+		InsertProcessingProj.start();    //新增會員和學校的交談過程
+		InsertProcessingMember.start();  //新增學校和會員的交談過程
+		InsertFullProj.start();          //新增完整計畫
 		InsertParticipator.start();
 		InsertMissionBoard.start();
 		InsertMissionSet.start();

@@ -517,6 +517,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		String sId = "";
 		int schoolDemandId = 0;
 		// 取值
+
 		SchoolBean sbean = (SchoolBean) session.getAttribute("LoginOK");
 		if(sbean == null){
 			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
@@ -524,23 +525,21 @@ public class SchoolDemandServlet extends HttpServlet {
 		}
 		int schoolId = sbean.getSchoolId();
 		
-		bean = (SchoolDemandBean) session.getAttribute("Demand");
-		session.removeAttribute("Demand");
-		if(bean==null){
-			bean = new SchoolDemandBean();
-			sId = request.getParameter("schoolDemandId");
-			if(sId!=null){
-				try {
-					schoolDemandId = Integer.parseInt(sId);
-				} catch (Exception e) {
-					response.sendRedirect("");
-				}
-			}
-		}else{
+		sId = request.getParameter("schoolDemandId");
+		if(sId==null){
+			bean = (SchoolDemandBean) session.getAttribute("Demand");
+			session.removeAttribute("Demand");	
 			schoolDemandId = bean.getSchoolDemandId();
+		}else {
+			try {
+				schoolDemandId = Integer.parseInt(sId);
+			} catch (Exception e) {
+				response.sendRedirect("");
+			}
 		}
 		
 		// 存入Bean
+		bean = new SchoolDemandBean();
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);
 
