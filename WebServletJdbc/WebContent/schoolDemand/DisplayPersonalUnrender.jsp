@@ -91,6 +91,9 @@
 			<div class="row center-align card-panel red-text" style="font-size:4em;">
 				洽談中需求計畫
 			</div>
+
+		
+		
 				
 		<!-- 同意或拒絕 -->
 		<c:forEach items="${list}" var="demand">

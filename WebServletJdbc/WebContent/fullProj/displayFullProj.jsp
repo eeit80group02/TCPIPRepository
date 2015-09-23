@@ -186,19 +186,39 @@
 							問與答
 						</div>
 					</div>
-					<!-- 問與答 -->
+
 <!-- 					<div id="discuss" class="row"> -->
 
 <!-- 					</div> -->
+					<!-- 問與答 -->					
 					<div class="row">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<div class="card-panel white">
-								<div class="btn red">
 								
+								<!-- 問題 -->
+								<div class="row">
+									<div class="col l2">
+										<div class="btn red white-text">
+											<i class="material-icons">textsms</i>
+										</div>
+									</div>
+									<div class="col l10" style="font-size:1.6em;font-weight:600">
+										要問的問題在這，如果這個問題真的十分可怕的非常長的跟長恨歌一樣的時候不知道會發生事情就來試試看
+									</div>
 								</div>
-								<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
-									123
-								</p>
+								<!-- 問題 -->
+								<!-- 答案 -->
+								<div class="row">
+									<div class="col l2">
+										<div class="btn green white-text">
+											<i class="material-icons">chat_bubble</i>
+										</div>
+									</div>
+									<div class="col l10" style="font-size:1.6em;font-weight:600">
+										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情
+									</div>
+								</div>
+								<!-- 答案 -->
 							</div>	
 						</div>
 					</div>					
