@@ -36,10 +36,6 @@ public class ProcessingProjServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
-		
 		String type = request.getParameter("type");
 		
 		if(type != null && type.trim().length() != 0)
@@ -67,7 +63,9 @@ public class ProcessingProjServlet extends HttpServlet
 		}
 		else
 		{
-			System.out.println("error");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
 		}
 	}
 

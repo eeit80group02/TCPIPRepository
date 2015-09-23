@@ -14,7 +14,7 @@ public class ParticipatorService
 		return result;
 	}
 	 
-	public ParticipatorBean Participate(ParticipatorBean bean)
+	public ParticipatorBean participate(ParticipatorBean bean)
 	{
 		return bean;
 	}
