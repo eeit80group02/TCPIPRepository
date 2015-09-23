@@ -3,6 +3,7 @@ package init;
 public class init
 {
 
+	private String test = "hahaha";
 	public static void main(String[] args)
 	{
 		InsertMember.start();
