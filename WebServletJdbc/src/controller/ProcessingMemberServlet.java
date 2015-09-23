@@ -115,7 +115,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
-		String memberId = request.getParameter("member");
+		String memberId = request.getParameter("memberId");
 		String schoolDemandId = request.getParameter("schoolDemandId");
 		if(memberId == null){
 			errorMsg.put("err", "錯誤");
@@ -160,9 +160,19 @@ public class ProcessingMemberServlet extends HttpServlet{
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
-
-		
-		
+		String memberId = request.getParameter("memberId");
+		int mId = 0;
+		if(memberId !=null){
+			try {
+				mId = Integer.parseInt(memberId);
+			} catch (NumberFormatException e) {
+				response.sendRedirect("");
+			}
+		}else{
+			response.sendRedirect("");
+		}
+		bean.setMemberId(mId);
+		bean = service.disagree(bean);
 		
 	}
 	public void cancel(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {

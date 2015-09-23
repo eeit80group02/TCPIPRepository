@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>personal</title>
+<title>displayPersonalFullProjByChat</title>
 </head>
 <body>
 

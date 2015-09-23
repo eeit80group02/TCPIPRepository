@@ -15,7 +15,7 @@ import model.MemberBean;
 import model.ProcessingProjBean;
 import model.service.ProcessingProjService;
 
-@WebServlet("/ProcessingProj.do")
+@WebServlet("/processingProj.do")
 public class ProcessingProjServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -257,7 +257,9 @@ public class ProcessingProjServlet extends HttpServlet
 		boolean result = service.applyPrimaryProj(bean);
 		if(result)
 		{
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+			String contextPath = request.getContextPath();
+			
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/primaryProj.do?type=displayAll"));
 			return;
 		}
 		else

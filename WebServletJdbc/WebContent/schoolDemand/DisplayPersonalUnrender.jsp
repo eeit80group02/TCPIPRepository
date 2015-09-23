@@ -12,6 +12,26 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+	.priProjName{
+		font-size:3em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.btndiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.schldiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}	
+
+</style>
 </head>
 <body class="deep-orange lighten-5">
 	
@@ -33,33 +53,81 @@
 	<main>
 		<div class="row">
 			<c:set var="listlength" value="${fn:length(list)}" />
-			<div class="col l8 offset-l2 indigo lighten-5">
-				<div class="row center-align card-panel red-text" style="font-size:4em;">
-					洽談中需求計畫
+			<!-- 初步計畫列表 -->
+<!-- 			<div class="col l8 offset-l4" id="projlist"> -->
+<!-- 				<div class="centerdiv"> -->
+<%-- 				<c:forEach  var="demand" items="${list}" varStatus="varStatus" > --%>
+<%-- 					<c:url value="/Status.do" var="path"> --%>
+<%-- 						<c:param name="type" value="agree" /> --%>
+<%-- 						<c:param name="memberId" value="${demand.processingMemberBean.memberId}" /> --%>
+<%-- 						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" /> --%>
+<%-- 					</c:url> --%>
+					
+					<!-- 卡片開始 -->
+<!-- 					      <div class="row"> -->
+<!-- 					        <div class="col s12 m6"> -->
+<!-- 					          <div class="card blue-grey darken-1"> -->
+<!-- 					            <div class="card-content white-text"> -->
+<%-- 					              <span class="card-title">${demand.activityTopic}</span> --%>
+<%-- 					              <p>${demand.activityLocation}</p> --%>
+<%-- 					              <p>${demand.activitySuitable}</p> --%>
+<!-- 					            </div> -->
+<!-- 					            <div class="card-action"> -->
+<%-- 					              <p>${demand.processingMemberBean.memberBean.lastName}${demand.processingMemberBean.memberBean.firstName}</p> --%>
+<%-- 					              <p>推薦數${demand.processingMemberBean.memberBean.recommendCount}</p> --%>
+<%-- 					              <p>${demand.demandStatus}</p> --%>
+<%-- 					              <a class="waves-effect waves-light btn" href="<c:url value='${path}'/>">同意</a> --%>
+<!-- 					              <a class="waves-effect waves-light btn">不同意</a> -->
+<!-- 					            </div> -->
+<!-- 					          </div> -->
+<!-- 					        </div> -->
+<!-- 					      </div> -->
+					<!-- 卡片結束 -->
+<%-- 				</c:forEach> --%>
+<!-- 				</div>				 -->
+<!-- 			</div> -->
+<!-- ======= -->
+		<div class="col l8 offset-l2 indigo lighten-5">
+			<div class="row center-align card-panel red-text" style="font-size:4em;">
+				洽談中需求計畫
+			</div>
+				
+		<!-- 同意或拒絕 -->
+		<c:forEach items="${list}" var="demand">
+			<div class="row card-panel">
+				<!-- 需求計畫名稱 -->
+				<div class="row priProjName left-align teal-text darken-3">
+					${demand.activityTopic}
 				</div>
-				<div class="row card-panel">
-					<c:forEach items="${list}" var="demand">
-						<div class="row card-panel yellow lighten-1">
-					      <ul class="collection with-header">
-					        <li class="collection-header"><h4>${demand.activityTopic}</h4></li>
-					        <c:forEach items="${demand.processingMemberBean}" var="pMBean">
-					        		<li class="collection-item">
-					        			<div class="row left-align">
-					        				${pMBean.memberBean.lastName}
-					        					<button class="secondary-content btn">
-					        						同意
-					        					</button>
-					        			</div>
-					        		</li>
-					        </c:forEach>
-					      </ul>
+				<!-- 有意願的志工 forEach在這 -->
+				<c:forEach items="${demand.memberList}" var="processingMember">
+					<div class="row card-panel light-blue lighten-4">
+						<div class="col l4 left schldiv center-align">
+							${processingMember.lastName}${processingMember.firstName}
 						</div>
-					</c:forEach>
-				</div>
+						<div class="col l4 left schldiv" >
+ 							已被推薦次數:${processingMember.recommendCount} 
+						</div>
+						<div class="col l4 right right-align">
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="cancel">
+									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
+								</form>						
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="agree">
+									<button class="btn red white-text btndiv right" type="submit">同意</button>
+								</form>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</c:forEach>
+		<!-- 同意或拒絕 -->	
+				
 				
 			</div>			
-			
-
 		</div>
 	</main>
 

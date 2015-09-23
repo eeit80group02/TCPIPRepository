@@ -17,4 +17,6 @@ public interface ParticipatorDAO
 
 	public boolean delete(int participatorId);
 
+	public List<ParticipatorBean> selectByFullProjId(int fullProjId);
+
 }

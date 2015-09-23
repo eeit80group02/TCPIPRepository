@@ -512,33 +512,40 @@ public class SchoolDemandServlet extends HttpServlet {
 
 	public void display(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		System.out.println("----------------------------------查詢單筆----------------------------------");
-		SchoolDemandBean bean = new SchoolDemandBean();
+		SchoolDemandBean bean = null;
 		HttpSession session = request.getSession();
 		String sId = "";
 		int schoolDemandId = 0;
 		// 取值
+
 		SchoolBean sbean = (SchoolBean) session.getAttribute("LoginOK");
 		if(sbean == null){
 			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
 		int schoolId = sbean.getSchoolId();
-		bean = (SchoolDemandBean) session.getAttribute("Demand");
-		session.removeAttribute("Demand");
 		
-		if(bean==null){
-			sId = request.getParameter("schoolDemandId");
-			schoolDemandId = Integer.parseInt(sId);
-		}else{
+		sId = request.getParameter("schoolDemandId");
+		if(sId==null){
+			bean = (SchoolDemandBean) session.getAttribute("Demand");
+			session.removeAttribute("Demand");	
 			schoolDemandId = bean.getSchoolDemandId();
+		}else {
+			try {
+				schoolDemandId = Integer.parseInt(sId);
+			} catch (Exception e) {
+				response.sendRedirect("");
+			}
 		}
-
+		
 		// 存入Bean
+		bean = new SchoolDemandBean();
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);
 
 		// 呼叫Service方法
 		bean = service.display(bean);
+
 		if (bean != null) {
 			System.out.println("成功查詢bean=" + bean);
 			session.setAttribute("Demand", bean);

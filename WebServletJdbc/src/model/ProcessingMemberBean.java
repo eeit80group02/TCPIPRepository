@@ -1,6 +1,8 @@
 package model;
 
+
 import java.io.Serializable;
+import java.util.List;
 
 public class ProcessingMemberBean implements Serializable
 {
@@ -12,7 +14,6 @@ public class ProcessingMemberBean implements Serializable
 	private java.util.Date checkTime; 	// 審核時間(指活動發起人下決定跟哪個學校接洽的那刻)(允許空值，只有洽談成功的學校有值)
 	private String checkStatus;			// 審核狀態(已通過 未通過 待審核)
 	private MemberBean memberBean;
-	
 	
 	public ProcessingMemberBean()
 	{
