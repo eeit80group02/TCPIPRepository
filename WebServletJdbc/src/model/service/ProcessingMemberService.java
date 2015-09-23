@@ -1,13 +1,13 @@
 package model.service;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import global.GlobalService;
 
-import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.List;
 
 import model.FullProjBean;
 import model.ProcessingMemberBean;
@@ -35,7 +35,8 @@ public class ProcessingMemberService {
 		SchoolDemandBean sBean = null;
 		if (bean != null) {
 			sBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
-			if (sBean != null && !sBean.getDemandStatus().equals("洽談完成") && !sBean.getDemandStatus().equals("洽談失敗")) {
+			if (sBean != null && !sBean.getDemandStatus().equals("洽談完成")
+					&& !sBean.getDemandStatus().equals("洽談失敗")) {
 				bean.setCheckStatus("待審核");
 				result = processingMemberDAO.insert(bean);
 				if (result != null) {
@@ -48,19 +49,14 @@ public class ProcessingMemberService {
 	}
 
 	public ProcessingMemberBean agree(ProcessingMemberBean bean) {
-		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/WebContent/images/bg02.jpg");
-		WritableRaster raster = null;
-		DataBufferByte data   = null;
+		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/WebContent/images/default.jpg");
+		FileInputStream is = null;
 		List<ProcessingMemberBean> list = null;
 		ProcessingMemberBean result = null;
 		SchoolDemandBean sDBean = new SchoolDemandBean();
 		FullProjBean fBean = new FullProjBean();
-		BufferedImage bufferedImage;
-		System.out.println(bean);
 		try {
-			bufferedImage = ImageIO.read(image);
-			raster = bufferedImage.getRaster();
-			data = (DataBufferByte) raster.getDataBuffer();
+			is = new FileInputStream(image);
 			if (bean != null) {
 				result = new ProcessingMemberBean();
 				list = processingMemberDAO.getAll();
@@ -80,7 +76,8 @@ public class ProcessingMemberService {
 				result.setCheckStatus("已通過");
 				result = processingMemberDAO.update(result);
 				if (result != null) {
-					sDBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
+					sDBean = schoolDemandDAO.findByPrimaryKey(bean
+							.getSchoolDemandId());
 					sDBean.setDemandStatus("洽談完成");
 					sDBean = schoolDemandDAO.update(sDBean);
 					if (sDBean != null) {
@@ -88,25 +85,26 @@ public class ProcessingMemberService {
 						fBean.setMemberId(bean.getMemberId());
 						fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
 						fBean.setTitle(sDBean.getActivityTopic());
-						fBean.setFrontCoverName("default");
-						fBean.setFrontCover(data.getData());
+						fBean.setFrontCoverName("default.jpg");
+						fBean.setFrontCover(GlobalService.convertInputStreamToByteArray(is));
 						fBean.setFrontCoverLength(image.length());
 						fBean.setProjAbstract("完整計畫");
 						fBean.setContent(sDBean.getContent());
 						fBean.setLocation(sDBean.getActivityLocation());
-						fBean.setActivityStartTime(new java.util.Date(System.currentTimeMillis()));
-						fBean.setActivityEndTime(new java.util.Date(System.currentTimeMillis()));
+						fBean.setActivityStartTime(new java.util.Date(System
+								.currentTimeMillis()));
+						fBean.setActivityEndTime(new java.util.Date(System
+								.currentTimeMillis()));
 						fBean.setEstMember(0);
 						fBean.setBudget(0);
 						fBean.setCreateDate(result.getCheckTime());
 						fBean.setProjStatus("洽談中");
-						fullProjDAO.insert(fBean); 
+						fullProjDAO.insert(fBean);
 					}
 				}
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			System.out.println("圖片有問題");
 		}
 		return result;
 	}
