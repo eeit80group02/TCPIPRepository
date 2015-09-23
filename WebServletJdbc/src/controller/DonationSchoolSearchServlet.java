@@ -45,7 +45,6 @@ public class DonationSchoolSearchServlet extends HttpServlet {
 		if (supplyStatus != null) {
 			DonationSearchService donationSearchService = new DonationSearchService();
 			List<DonationBeanDuplicate> dbdList;
-			if (range != null) {
 				dbdList = donationSearchService.manageSchoolByStatus(supplyStatus, schoolId);
 //				request.setAttribute("AllDemands", dbdList);
 				session.setAttribute("OneAllDemands", dbdList);
@@ -61,112 +60,71 @@ public class DonationSchoolSearchServlet extends HttpServlet {
 				response.sendRedirect(response.encodeRedirectURL(request
 						.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 				return;
-			} else {
-				dbdList = donationSearchService.searchByStatus(supplyStatus);
-//				request.setAttribute("AllDemands", dbdList);
-				session.setAttribute("AllDemands", dbdList);
 				
-				// 4.轉至適當畫面
-//				RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
-//				rd.forward(request, response);
-//				return;
-				response.sendRedirect(response.encodeRedirectURL(request
-						.getContextPath()+"/donation/FindGoods.jsp"));
-				return;
-			}
-//			
-		
-		} else if(type != null) {
+		} 
+
 			if (type.equals("byAmount")){
 				DonationSearchService donationSearchService = new DonationSearchService();
 				
 				List<DonationBeanDuplicate> dbdList;
-				if (range != null) {
-					dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+					dbdList = donationSearchService.manageSchoolByOriginalDemandNumber(schoolId);
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("OneAllDemands", dbdList);
+					
+					// 捐獻明細資料
+					DonationService service = new DonationService();
+					List<DonationOrderDuplicateBean> detailList = service.findOneAllDeamndOrderDetailBySchool(schoolId);
+					session.setAttribute("OneAllDetails", detailList);
 					
 					// 4.轉至適當畫面
 //					RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
 //					rd.forward(request, response);
 //					return;
 					response.sendRedirect(response.encodeRedirectURL(request
-							.getContextPath()+"/donation/AllDeamndByMember.jsp"));
+							.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 					return;
-				} else {
-					dbdList = donationSearchService.searchByOriginalDemandNumber();
-//					request.setAttribute("AllDemands", dbdList);
-					session.setAttribute("AllDemands", dbdList);
-					// 4.轉至適當畫面
-//					RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
-//					rd.forward(request, response);
-//					return;
-					response.sendRedirect(response.encodeRedirectURL(request
-							.getContextPath()+"/donation/FindGoods.jsp"));
-					return;
-				}
-				
-				
-				
 				
 			} else if (type.equals("byExpiretime")) {
 				DonationSearchService donationSearchService = new DonationSearchService();
 				List<DonationBeanDuplicate> dbdList;
-				if (range != null) {
-					dbdList = donationSearchService.searchSchoolByExpiretime(schoolId);
+					dbdList = donationSearchService.manageSchoolByExpiretime(schoolId);
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("OneAllDemands", dbdList);
+					
+					// 捐獻明細資料
+					DonationService service = new DonationService();
+					List<DonationOrderDuplicateBean> detailList = service.findOneAllDeamndOrderDetailBySchool(schoolId);
+					session.setAttribute("OneAllDetails", detailList);
 					
 					// 4.轉至適當畫面
 //					RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
 //					rd.forward(request, response);
 //					return;
 					response.sendRedirect(response.encodeRedirectURL(request
-							.getContextPath()+"/donation/AllDeamndByMember.jsp"));
+							.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 					return;
-				} else {
-					dbdList = donationSearchService.searchByExpiretime();
-//					request.setAttribute("AllDemands", dbdList);
-					session.setAttribute("AllDemands", dbdList);
-					// 4.轉至適當畫面
-//					RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
-//					rd.forward(request, response);
-//					return;
-					response.sendRedirect(response.encodeRedirectURL(request
-							.getContextPath()+"/donation/FindGoods.jsp"));
-					return;
-				}
 			
 			} else if (type.equals("byDemandtime")) {
 				DonationSearchService donationSearchService = new DonationSearchService();
 				List<DonationBeanDuplicate> dbdList;
 				if (range != null) {
-					dbdList = donationSearchService.searchSchoolByDemandtime(schoolId);
+					dbdList = donationSearchService.manageSchoolByDemandtime(schoolId);
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("OneAllDemands", dbdList);
+					
+					// 捐獻明細資料
+					DonationService service = new DonationService();
+					List<DonationOrderDuplicateBean> detailList = service.findOneAllDeamndOrderDetailBySchool(schoolId);
+					session.setAttribute("OneAllDetails", detailList);
 					
 					// 4.轉至適當畫面
 //					RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
 //					rd.forward(request, response);
 //					return;
 					response.sendRedirect(response.encodeRedirectURL(request
-							.getContextPath()+"/donation/AllDeamndByMember.jsp"));
+							.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 					return;
-				} else {
-					dbdList = donationSearchService.searchByDemandtime();
-//					request.setAttribute("AllDemands", dbdList);
-					session.setAttribute("AllDemands", dbdList);
-					// 4.轉至適當畫面
-//					RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
-//					rd.forward(request, response);
-//					return;
-					response.sendRedirect(response.encodeRedirectURL(request
-							.getContextPath()+"/donation/FindGoods.jsp"));
-					return;
-				}
-			}
+				} 
 		}
-		
-		
 	}
 }
