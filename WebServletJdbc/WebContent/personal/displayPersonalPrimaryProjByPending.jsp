@@ -83,12 +83,12 @@
 								<!-- 該學校的所在縣市 -->
 								<td>${processingProj.schoolBean.addressDistrict}</td>
 								<td>
-									<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<form action="<c:url value="/processingProj.do" />" method="post">
 										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
 										<input type="hidden" name="type" value="agree">
 										<button class="btn yellow lighten-5 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">同意</button>
 									</form>
-									<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<form action="<c:url value="/processingProj.do" />" method="post">
 										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
 										<input type="hidden" name="type" value="cancel">
 										<button class="btn red lighten-4 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">拒絕</button>

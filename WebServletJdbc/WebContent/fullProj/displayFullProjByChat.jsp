@@ -412,7 +412,7 @@
 		
 			function addMemberMessage(){
 				$.ajax({
-					"url": "<c:url value='/ProjModifyServlet.do' />",
+					"url": "<c:url value='/projModify.do' />",
 					"type":"POST",
 					"data":{"type":"addMember","fullProjId":"${fullProj.fullProjId}","memberId":"${fullProj.memberId}","content":$("#memberContent").val()},
 					"dataType" :"json",
@@ -424,7 +424,7 @@
 			
 			function addSchoolMessage(){
 				$.ajax({
-					"url": "<c:url value='/ProjModifyServlet.do' />",
+					"url": "<c:url value='/projModify.do' />",
 					"type":"POST",
 					"data":{"type":"addSchool","fullProjId":"${fullProj.fullProjId}","schoolId":"${fullProj.schoolId}","content":$("#schoolContent").val()},
 					"dataType" :"json",
@@ -436,7 +436,7 @@
 			
 			function displayMessage(){
 				$.ajax({
-					"url": "<c:url value='/ProjModifyServlet.do' />",
+					"url": "<c:url value='/projModify.do' />",
 					"type":"POST",
 					"data":{"type":"display","fullProjId":"${fullProj.fullProjId}"},
 					"dataType" :"json",
