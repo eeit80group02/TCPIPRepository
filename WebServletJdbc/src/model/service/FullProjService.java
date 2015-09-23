@@ -3,26 +3,33 @@ package model.service;
 import global.GlobalService;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import model.FullProjBean;
 import model.MemberBean;
+import model.ParticipatorBean;
 import model.dao.FullProjDAOJdbc;
 import model.dao.MemberDAOJdbc;
+import model.dao.MissionBoardDAOJdbc;
+import model.dao.ParticipatorDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
 import model.dao.interfaces.MemberDAO;
 import model.dao.interfaces.MissionBoardDAO;
+import model.dao.interfaces.ParticipatorDAO;
 
 public class FullProjService
 {
 	private FullProjDAO fullProjDAO = null;
 	private MemberDAO memberDAO = null;
 	private MissionBoardDAO missionBoardDAO = null;
+	private ParticipatorDAO participatorDAO = null;
+	
 	public FullProjService()
 	{
 		fullProjDAO = new FullProjDAOJdbc();
 		memberDAO = new MemberDAOJdbc();
+		missionBoardDAO = new MissionBoardDAOJdbc();
+		participatorDAO = new ParticipatorDAOJdbc();
 	}
 
 	public List<FullProjBean> displayFullProjAll()
@@ -75,6 +82,37 @@ public class FullProjService
 		return result;
 	}
 	
+	public List<FullProjBean> displayPersonalFullProjProjByParticipate(FullProjBean bean)
+	{
+		List<FullProjBean> result = new ArrayList<FullProjBean>();
+		
+		if(bean != null)
+		{
+			// 先查詢 該會員的所有完整計畫 且 招募中
+			List<FullProjBean> temps = fullProjDAO.selectByMemberId(bean.getMemberId());
+			for(FullProjBean temp : temps)
+			{
+				if(temp.getProjStatus().equals("招募中"))
+				{
+					List<ParticipatorBean> participatorBeans = new ArrayList<ParticipatorBean>();
+					// 單一計畫 參予過的所有人 包含拒絕  找出要審核的
+					for(ParticipatorBean participatorBean : participatorDAO.selectByFullProjId(temp.getFullProjId()))
+					{
+						if(participatorBean.getParticipateStatus().equals("待審核"))
+						{
+							MemberBean memberBean = memberDAO.select(participatorBean.getMemberId());
+							participatorBean.setMemberBean(memberBean);
+							participatorBeans.add(participatorBean);
+						}
+					}
+					temp.setParticipatorBean(participatorBeans);
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
+	
 	// 顯示單一完整計畫 
 	public FullProjBean displayFullProj(FullProjBean bean)
 	{
@@ -100,6 +138,7 @@ public class FullProjService
 		{
 			// 先selete 抓齊所有資料 在對使用者的資料做修改
 			FullProjBean temp = fullProjDAO.findByPrimaryKey(bean.getFullProjId());
+			System.out.println(temp);
 			if(temp != null)
 			{
 				temp.setTitle(bean.getTitle());

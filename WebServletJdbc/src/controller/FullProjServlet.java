@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 
+
 import model.FullProjBean;
 import model.MemberBean;
 import model.service.FullProjService;
@@ -47,18 +48,9 @@ public class FullProjServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
 		String type = request.getParameter("type");
 		
-		if(type == null || type.trim().length() == 0)
-		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.55)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
-		else
+		if(type != null && type.trim().length() != 0)
 		{
 			if(type.equals("update"))
 			{
@@ -66,72 +58,121 @@ public class FullProjServlet extends HttpServlet
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				updateFullProj(request,response);
+				return;
 			}
 			// 欲 補齊完整計畫頁面
-			else if(type.equals("displayFullProjByChat"))
+			if(type.equals("displayFullProjByChat"))
 			{
 				System.out.println("執行FullProjServlet displayFullProjByChat[欲補齊完整計畫]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayFullProjByChat(request,response);
+				return;
 			}
 			// 瀏覽所有招募中的完整計畫[type=displayAll]
-			else if(type.equals("displayAll"))
+			if(type.equals("displayAll"))
 			{
 				System.out.println("執行 FullProjServlet displayFullProjAll");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayFullProjAll(request,response);
+				return;
 			}
 			// 看單一完整計畫[type=display&fullId=?]
-			else if(type.equals("display"))
+			if(type.equals("display"))
 			{
 				System.out.println("執行 FullProjServlet displayFullProj[單一完整計畫]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayFullProj(request,response);
+				return;
 			}
 			// 個人專區，查詢發布過的全部完整計畫
-			else if(type.equals("displayPersonal"))
+			if(type.equals("displayPersonal"))
 			{
 				System.out.println("執行 FullProjServlet displayPersonalFullProj[個人完整計畫列表]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 
 				displayPersonalFullProj(request,response);
+				return;
 			}
 			// 在個人頁面顯示  需跟學校洽談補齊的計劃[type=displayPersonalByChat]
-			else if(type.equals("displayPersonalByChat"))
+			if(type.equals("displayPersonalByChat"))
 			{
 				System.out.println("執行 FullProjServlet displayPersonalFullProjByChat[需洽談的完整計劃列表]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayPersonalFullProjByChat(request,response);
+				return;
 			}
+			// 在個人頁面顯示 招募中的
+			if(type.equals("displayPersonalByParticipate"))
+			{
+				System.out.println("執行 FullProjServlet displayPersonalFullProjByParticipate[需審核參加人的計劃列表]");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				displayPersonalFullProjByParticipate(request,response);
+				return;
+			}
+			
 			// 學校同意此計畫
-			else if(type.equals("schoolConfirm"))
+			if(type.equals("schoolConfirm"))
 			{
 				System.out.println("執行 FullProjServlet schoolConfirm");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				schoolConfirm(request,response);
+				return;
 			}
 			// 發起者發布
-			else if(type.equals("memberConfirm"))
+			if(type.equals("memberConfirm"))
 			{
 				System.out.println("執行 FullProjServlet memberConfirm");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				memberConfirm(request,response);
-			}
-			else
-			{
-				errorMsg.put("errorURL","請勿做作不正當請求( line.83)");
-				request.getRequestDispatcher("/error.jsp").forward(request,response);
 				return;
 			}
 		}
+		
+		String contextPath = request.getContextPath();
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+		return;
 	}
 	
+	private void displayPersonalFullProjByParticipate(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		MemberBean memberBean = null;
+		
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
+		{
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
+			return;
+		}
+		
+		FullProjBean fullProjBean = new FullProjBean();
+		fullProjBean.setMemberId(memberBean.getMemberId());
+		List<FullProjBean> result = service.displayPersonalFullProjProjByParticipate(fullProjBean);
+		
+		if(result != null)
+		{
+			System.out.println(result);
+			System.out.println("==================================================");
+			request.setAttribute("fullProj",result);
+			request.getRequestDispatcher("/personal/displayPersonalFullProjByParticipate.jsp").forward(request,response);
+			return;
+		}
+	}
+
 	private void memberConfirm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
@@ -212,6 +253,7 @@ public class FullProjServlet extends HttpServlet
 
 	private void displayPersonalFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
+		// 會員頁 學校頁應該也類似
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
@@ -318,8 +360,8 @@ public class FullProjServlet extends HttpServlet
 		if(!errorMsg.isEmpty())
 		{
 			// QueryString 有誤
-			errorMsg.put("errorURL","請勿做作不正當請求(FullServlet line.134)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 
@@ -599,12 +641,6 @@ public class FullProjServlet extends HttpServlet
 			
 			// 直接導向 在查詢一次
 			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fullProjBean.getFullProjId());
-		}
-		else
-		{
-			// 失敗導向
-			errorMsg.put("error","編輯計畫建立失敗");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
 			return;
 		}
 	}
@@ -640,8 +676,8 @@ public class FullProjServlet extends HttpServlet
 		if(!errorMsg.isEmpty())
 		{
 			// queryString 不等於 ?type=display&fullProjId=1...
-			errorMsg.put("errorURL","請勿做作不正當請求(FullProjServlet line.198)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 
@@ -661,8 +697,8 @@ public class FullProjServlet extends HttpServlet
 		else
 		{
 			// 沒查到 結果
-			errorMsg.put("errorURL","請勿做作不正當請求(FullProjServlet line.219 查詢失敗)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 
