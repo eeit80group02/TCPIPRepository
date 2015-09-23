@@ -29,13 +29,6 @@
 	<!-- center -->
 	<div class="col l10 offset-l1">
 		<div class="col l12" >
-	      <ul class="tabs" id="tabsul">
-	        <li class="tab col s3 yellow accent-1"><a class="black-text" href="#accountmanager" style="font-family:微軟正黑體;font-weight:600;">學校個人頁面</a></li>
-	        <li class="tab col s3 "><a class="black-text" href="#projinfos" style="font-family:微軟正黑體;font-weight:600;">瀏覽計畫需求挑選發起者</a></li>
-	        <li class="tab col s3 "><a class="black-text" href="#follow" style="font-family:微軟正黑體;font-weight:600;">瀏覽參予過的初步計畫</a></li>
-	        <!-- 自行繼續新增 -->
-<!-- 	        <li class="tab col s3"><a href="#test4">Test 4</a></li> -->
-	      </ul>		
 		</div>
 		
 			

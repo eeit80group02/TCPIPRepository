@@ -40,69 +40,7 @@
 
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
-	<script>
-	  //將資料存到陣列中
-	  var datas = ["a"];
-	  var show;
-	  window.addEventListener("load",init);
-	  var txt; // 物件
-	  var xhr = null;
-	  var lists = null;
-	  
-	  function init(){
-		  txt = document.getElementById("searchDonation");
-		  txt.addEventListener("keyup",getData,false);
-		  show = document.getElementById("div1");
-		  
-	  }
-	  
-	  function getData(){
-		  xhr = new XMLHttpRequest();
-		  if (xhr != null) {
-			  xhr.addEventListener("readystatechange", function() {
-				  if (xhr.readyState == 4 && xhr.status == 200) {
-					 lists = xhr.responseText;
-					 datas = JSON.parse(lists);
-					 
-				     show.style.display="block";
-				     if(show.childNodes.length > 0){
-				    	 show.removeChild(show.childNodes[0]);
-				     }
-				     var eleUl = document.createElement("ul");
-				     for(var j=0;j<datas.length;j++){
-				  	    var txtLi = document.createTextNode(datas[j]);
-				  	    var eleLi = document.createElement("li");
-				  	    eleLi.appendChild(txtLi);
-				  	    eleLi.addEventListener("mouseover",function(){this.className='s1'},false)
-				  	    eleLi.addEventListener("mouseout",function(){this.className='s2'},false)
-				  	    eleLi.addEventListener("click",function(){
-				  	    	 document.myData.keyword.value = this.firstChild.nodeValue;  		  	  
-				  		  	 show.style.display="none";
-				  	    },false)
-				  	    eleUl.appendChild(eleLi);
-				     }
-				     if (datas.length != 0) {
-					     show.appendChild(eleUl);
-				     } else {
-				    	 
-				     }
-				     
-				  } else {
-					  console.log(xhr.status + ":" + xhr.statusText);			  }
-				  
-			  });
-			  
-			  var input = txt.value;
-			  if (input.length != 0) {
-				  xhr.open("get", "jsimple.do?term="+input, true);
-			  } else {
-				  input = "cmaxxx";
-				  xhr.open("get", "jsimple.do?term="+input, true);
-			  }
-			  xhr.send();
-		  }	
-	  }
-	</script>
+	
 
 </head>
 <body>
@@ -188,7 +126,7 @@
 				<div id="trashHeadTitleIcons">
 					<span id="trashHeadLeftBtn">
 						<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
-							<a href="CheckDonationList.jsp" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="tiny material-icons">card_giftcard</i></a>
+							<a href="CheckDonationList.jsp" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="tiny material-icons">card_giftcard</i></a>
 						</button>
 					</span> <span id="trashHeadRightBtn">
 						<button type="button" id="donateDelete" class="btn btn-small btn-floating">
@@ -319,5 +257,71 @@
 // 		alert($(this).val());
 	});
 	</script>
+	
+	<script>
+	  //將資料存到陣列中
+	  var datas = ["a"];
+	  var show;
+	  window.addEventListener("load",init);
+	  var txt; // 物件
+	  var xhr = null;
+	  var lists = null;
+	  
+	  function init(){
+		  txt = document.getElementById("searchDonation");
+		  txt.addEventListener("keyup",getData,false);
+		  show = document.getElementById("div1");
+		  
+	  }
+	  
+	  function getData(){
+		  xhr = new XMLHttpRequest();
+		  if (xhr != null) {
+			  xhr.addEventListener("readystatechange", function() {
+				  if (xhr.readyState == 4 && xhr.status == 200) {
+					 lists = xhr.responseText;
+					 datas = JSON.parse(lists);
+					 
+				     show.style.display="block";
+				     if(show.childNodes.length > 0){
+				    	 show.removeChild(show.childNodes[0]);
+				     }
+				     var eleUl = document.createElement("ul");
+				     for(var j=0;j<datas.length;j++){
+				  	    var txtLi = document.createTextNode(datas[j]);
+				  	    var eleLi = document.createElement("li");
+				  	    eleLi.appendChild(txtLi);
+				  	    eleLi.addEventListener("mouseover",function(){this.className='s1'},false)
+				  	    eleLi.addEventListener("mouseout",function(){this.className='s2'},false)
+				  	    eleLi.addEventListener("click",function(){
+				  	    	 document.myData.keyword.value = this.firstChild.nodeValue;  		  	  
+				  		  	 show.style.display="none";
+				  	    },false)
+				  	    eleUl.appendChild(eleLi);
+				     }
+				     if (datas.length != 0) {
+					     show.appendChild(eleUl);
+				     } else {
+				    	 
+				     }
+				     
+				  } else {
+					  console.log(xhr.status + ":" + xhr.statusText);			  }
+				  
+			  });
+			  
+			  var input = txt.value;
+			  if (input.length != 0) {
+				  xhr.open("get", "jsimple.do?term="+input, true);
+			  } else {
+				  input = "cmaxxx";
+				  xhr.open("get", "jsimple.do?term="+input, true);
+			  }
+			  xhr.send();
+		  }	
+	  }
+	</script>
+	
+	
 </body>
 </html>

@@ -9,10 +9,12 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>personal</title>
+<title>displayPersonalPrimaryProjByPending</title>
 </head>
 <body>
-
+	<c:if test="${LoginOK.beanName.equals('school') }">
+		<c:redirect url="/error/permission.jsp" />
+	</c:if>
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 	<!-- 頁首 -->
@@ -69,8 +71,8 @@
 					</tr>
 				</thead>
 				<tbody style="font-size:1em;">
-<%-- 					<c:forEach var="bean" items="${primaryProj}"> --%>
-<%-- 						<c:forEach var="processingProj" items="${bean.processingProjBean}"> --%>
+					<c:forEach var="bean" items="${primaryProj}">
+						<c:forEach var="processingProj" items="${bean.processingProjBean}">
 							<tr>
 								<!-- 初步計畫編號 -->
 								<td>${bean.primaryProjId}</td>
@@ -93,8 +95,8 @@
 									</form>								
 								</td>
 							</tr>
-<%-- 						</c:forEach> --%>
-<%-- 					</c:forEach>				 --%>
+						</c:forEach>
+					</c:forEach>				
 				</tbody>
 			</table>			
 		</div>

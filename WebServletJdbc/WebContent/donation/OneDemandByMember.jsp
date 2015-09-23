@@ -33,8 +33,8 @@
 		<nav>
 			<div class="nav-wrapper">
 				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-					<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 				</ul>
 
 				<a href="#" class="brand-logo center">問與答</a>
@@ -97,7 +97,7 @@
 							</button> &nbsp;
 						
 							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem">
-								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="medium material-icons">card_giftcard</i></a>
+								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="medium material-icons">card_giftcard</i></a>
 							</button>
 						</td>
 						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>

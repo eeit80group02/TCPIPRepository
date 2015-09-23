@@ -5,7 +5,6 @@ import global.GlobalService;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.MemberBean;
 import model.PrimaryProjBean;
 import model.ProcessingProjBean;
 import model.dao.MemberDAOJdbc;
@@ -61,7 +60,6 @@ public class PrimaryProjService
 			PrimaryProjBean temp = primaryProjDAO.findByPrimaryKey(bean.getPrimaryProjId());
 			if(temp != null)
 			{
-				temp.setMemberId(bean.getMemberId());
 				temp.setTitle(bean.getTitle());
 				temp.setProjAbstract(bean.getProjAbstract());
 				temp.setContent(bean.getContent());
@@ -126,6 +124,18 @@ public class PrimaryProjService
 			{
 				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
 				result.setMemberBean(memberDAO.select(result.getMemberId()));
+				
+				// 存放 有申請的學校資料
+				List<ProcessingProjBean> ProcessingProjBeans = processingProjDAO.selectByPrimaryProjId(result.getPrimaryProjId());
+				List<ProcessingProjBean> temps = new ArrayList<ProcessingProjBean>();
+				for(ProcessingProjBean processingProjBean : ProcessingProjBeans)
+				{
+					if(processingProjBean.getCheckStatus().equals("待審核"))
+					{
+						temps.add(processingProjBean);
+					}
+				}
+				result.setProcessingProjBean(temps);
 			}
 		}
 		return result;
@@ -157,7 +167,7 @@ public class PrimaryProjService
 				{
 					// 有在洽談中的初步計畫編號
 					int primaryProjId = temp.getPrimaryProjId();
-					// 對該計畫去查學所有有申請
+					// 對該計畫去查所有有申請
 					List<ProcessingProjBean> processing = processingProjDAO.selectByPrimaryProjId(primaryProjId);
 					// 找出該計畫需要待審核的集合
 					List<ProcessingProjBean> pending = new ArrayList<ProcessingProjBean>();

@@ -1,0 +1,120 @@
+@CHARSET "UTF-8";
+
+#donateBody {
+	/* 整個版面 */
+	width: 85%;
+}
+
+.active {
+	font-weight: bold;
+	font-size: 2em;
+}
+
+#gallery {
+	/*整塊大塊的捐獻牆*/
+	padding: 0px;
+	margin: 0px;
+	min-width: 460px;
+	width: 100%;
+	min-height: 450px;
+	float: left;
+}
+
+.gallery li {
+	/*捐獻磚*/
+	background-image: url("../images/bg03.jpg");
+	background-repeat: repeat;
+	float: left;
+	width: 190px;
+	height: 250px;
+	padding: 0.4em;
+	margin: 0 0.5em 0.5em 0;
+	text-align: center;
+	cursor: pointer;
+	border: 2px solid #5599FF;
+	border-radius: 8px;
+}
+
+.gallery li:HOVER {
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.gallery li h5 {
+	margin: 2px;
+	font-size: 1em;
+}
+
+.gallery li .leftIcon {
+	float: left;
+}
+
+.gallery li .rightIcon {
+	float: right;
+}
+
+.fiximg {
+	height: 195px;
+}
+
+.fiximg div {
+	border-style: outset;
+	margin-top: 0px;
+	padding: 1px;
+}
+
+.gallery li img {
+	margin-top: 2px;
+	/* 捐獻磚上的商品縮圖 */
+	width: 130px;
+	height: 130px;
+}
+
+.foottext {
+	font-size: 0.8em;
+}
+
+.bigimg {
+	border: 1px solid #33CCFF;
+}
+
+#donateDelete {
+	float: right;
+}
+
+#donateTotal {
+	float: left;
+}
+
+.fiximg div {
+	max-height: 45px;
+	color: #0000AA;
+	margin-bottom: 5px;
+	padding: 1px;
+	text-align: left;
+	overflow: hidden;
+}
+
+/* Modal */
+.modal-content .donationRecorder {
+	text-align: center;
+	font-size: 1.4em;
+	border: 1px solid #5599FF;
+}
+
+.modal-content .donationRecorder td {
+	text-align: center;
+	border: 1px solid #ff7575;
+}
+
+.modal-content .donationRecorder td {
+	text-align: center;
+	border: 1px solid #ff7575;
+}
+
+.modal-content .donationRecorder thead tr {
+	background-color: #ff7575;
+}
+
+.modal-content .donationRecorder tbody tr:HOVER {
+	background-color: #CCEEFF;
+}
