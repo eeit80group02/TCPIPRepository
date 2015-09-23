@@ -306,7 +306,6 @@
 								<input type="hidden" name="type" value="schoolConfirm">
 								<button type="submit" class="btn-large white-text red" style="width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;">學校同意</button>
 							</form>
-							${sessionScope.schoolConfirm}
 						</div>
 					</c:if>
 				</c:if>		
@@ -381,12 +380,19 @@
 	<script>
 		// jQuery
 		$(function(){
+			<c:if test="${not empty sessionScope.schoolConfirm}">
+				<c:remove var="schoolConfirm" scope="session"/>
+				alert("發起者尚未補全計畫。");
+			</c:if>
+		});
+		
+		$(function(){
 			displayMessage();
-			var closeTimer = <fmt:formatDate value="${fullProj.createDate}" pattern="yyyy-MM-dd" />
+// 			var closeTimer = <fmt:formatDate value="${fullProj.createDate}" pattern="yyyy-MM-dd" />
 			
-			if(typeof(closeTimer) == "undefined"){
-				var timer = setInterval(displayMessage,60000);
-			}
+// 			if(typeof(closeTimer) == void 0){
+// 				var timer = setInterval(displayMessage,60000);
+// 			}
 	        
 			$("#memberButton").on("click",function(){
 				if($("#memberContent").val().length < 10) {

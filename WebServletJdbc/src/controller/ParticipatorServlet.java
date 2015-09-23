@@ -3,6 +3,7 @@ package controller;
 import global.GlobalService;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 
 import javax.servlet.ServletException;
@@ -92,7 +93,21 @@ public class ParticipatorServlet extends HttpServlet
 			e.printStackTrace();
 		}
 		
-		service.participate(participatorBean);
-		request.getRequestDispatcher("/index.jsp").forward(request,response);
+		ParticipatorBean result = service.participate(participatorBean);
+		
+		if(result != null)
+		{
+			session.setAttribute("success","success");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=display&fullProjId=" + fullProjId));
+			return;
+		}
+		else
+		{
+			session.setAttribute("participate","此計畫活動時間，您有其他計畫參予中");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=display&fullProjId=" + fullProjId));
+			return;
+		}
 	}
 }

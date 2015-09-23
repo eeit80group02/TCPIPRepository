@@ -19,4 +19,6 @@ public interface ParticipatorDAO
 
 	public List<ParticipatorBean> selectByFullProjId(int fullProjId);
 
+	public List<ParticipatorBean> selectByMemberId(int memberId);
+
 }

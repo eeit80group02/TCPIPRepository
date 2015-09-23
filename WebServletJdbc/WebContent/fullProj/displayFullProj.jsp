@@ -229,7 +229,6 @@
 		context="${pageContext.request.contextPath}" />
 	<!-- 頁尾 -->
 
-
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
@@ -262,7 +261,17 @@
 					</c:otherwise>
 				</c:choose>
 			});
-		})
+			
+			<c:if test="${not empty sessionScope.success}">
+				<c:remove var="success" scope="session"/>
+				alert("已申請成功，等待發起者審核");
+			</c:if>
+			
+			<c:if test="${not empty sessionScope.participate}">
+    			<c:remove var="participate" scope="session"/>
+				alert("此活動時間，亦有其他計畫進行中");
+    		</c:if>
+		});
 		
 		$(function(){
 			displayMessage();

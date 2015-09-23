@@ -164,7 +164,6 @@ public class FullProjServlet extends HttpServlet
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
-		session.removeAttribute("schoolConfirm");
 		
 		String fullProjId = request.getParameter("fullProjId");
 		String location = request.getParameter("location");
