@@ -47,7 +47,6 @@ $(function() {
 		var donationId = $item.attr("value");
 		addToCart(donationId);
 
-		$item.find(".fiximg div").css('visibility', 'hidden');
 		$item.fadeOut(function() {
 			var $list = $("ul", $trash).length ? $("ul", $trash) : $("<ul class='gallery ui-helper-reset'/>").appendTo($trash);
 
@@ -60,6 +59,7 @@ $(function() {
 				});
 			});
 		});
+		$item.find(".fiximg div").css('visibility', 'hidden').css('height','0px');
 	}
 
 	// image recycle function
@@ -71,10 +71,10 @@ $(function() {
 		var donationToken = $item.attr("value");
 		deleteFromCart(donationToken);
 
-		$item.find(".fiximg div").css('visibility', 'visible');
 		$item.fadeOut(function() {
 			$item.find("a.ui-icon-refresh").remove().end().css("width", "190px").find("img").css("height", "124px").end().appendTo($gallery).fadeIn().find(".footIcin").append(trash_icon);
 		});
+		$item.find(".fiximg div").css('visibility', 'visible').css('height','45px');
 	}
 
 	// image preview function, demonstrating the ui.dialog used as a modal
