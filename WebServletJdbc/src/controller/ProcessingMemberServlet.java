@@ -115,7 +115,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
-		String memberId = request.getParameter("member");
+		String memberId = request.getParameter("memberId");
 		String schoolDemandId = request.getParameter("schoolDemandId");
 		if(memberId == null){
 			errorMsg.put("err", "錯誤");

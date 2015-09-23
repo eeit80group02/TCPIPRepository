@@ -53,26 +53,60 @@
 	<main>
 		<div class="row">
 			<c:set var="listlength" value="${fn:length(list)}" />
-			<div class="col l8 offset-l2 indigo lighten-5">
-				<div class="row center-align card-panel red-text" style="font-size:4em;">
-					洽談中需求計畫
-				</div>
+			<!-- 初步計畫列表 -->
+<!-- 			<div class="col l8 offset-l4" id="projlist"> -->
+<!-- 				<div class="centerdiv"> -->
+<%-- 				<c:forEach  var="demand" items="${list}" varStatus="varStatus" > --%>
+<%-- 					<c:url value="/Status.do" var="path"> --%>
+<%-- 						<c:param name="type" value="agree" /> --%>
+<%-- 						<c:param name="memberId" value="${demand.processingMemberBean.memberId}" /> --%>
+<%-- 						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" /> --%>
+<%-- 					</c:url> --%>
+					
+					<!-- 卡片開始 -->
+<!-- 					      <div class="row"> -->
+<!-- 					        <div class="col s12 m6"> -->
+<!-- 					          <div class="card blue-grey darken-1"> -->
+<!-- 					            <div class="card-content white-text"> -->
+<%-- 					              <span class="card-title">${demand.activityTopic}</span> --%>
+<%-- 					              <p>${demand.activityLocation}</p> --%>
+<%-- 					              <p>${demand.activitySuitable}</p> --%>
+<!-- 					            </div> -->
+<!-- 					            <div class="card-action"> -->
+<%-- 					              <p>${demand.processingMemberBean.memberBean.lastName}${demand.processingMemberBean.memberBean.firstName}</p> --%>
+<%-- 					              <p>推薦數${demand.processingMemberBean.memberBean.recommendCount}</p> --%>
+<%-- 					              <p>${demand.demandStatus}</p> --%>
+<%-- 					              <a class="waves-effect waves-light btn" href="<c:url value='${path}'/>">同意</a> --%>
+<!-- 					              <a class="waves-effect waves-light btn">不同意</a> -->
+<!-- 					            </div> -->
+<!-- 					          </div> -->
+<!-- 					        </div> -->
+<!-- 					      </div> -->
+					<!-- 卡片結束 -->
+<%-- 				</c:forEach> --%>
+<!-- 				</div>				 -->
+<!-- 			</div> -->
+<!-- ======= -->
+		<div class="col l8 offset-l2 indigo lighten-5">
+			<div class="row center-align card-panel red-text" style="font-size:4em;">
+				洽談中需求計畫
+			</div>
 				
-					<!-- 同意或拒絕 -->
-<%-- 		<c:forEach items="${primaryProj}" var="bean"> --%>
+		<!-- 同意或拒絕 -->
+		<c:forEach items="${list}" var="demand">
 			<div class="row card-panel">
 				<!-- 需求計畫名稱 -->
 				<div class="row priProjName left-align teal-text darken-3">
 					哈哈哈營隊${demand.activityTopic}
 				</div>
 				<!-- 有意願的志工 forEach在這 -->
-<%-- 				<c:forEach items="${bean.processingProjBean}" var="processingProj"> --%>
+				<c:forEach items="${demand.processingMemberBean}" var="processingMember">
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
-							郭文豪${pMBean.memberBean.lastName}${pMBean.memberBean.firstName}
+							郭文豪${processingMember.memberBean.lastName}${processingMember.memberBean.firstName}
 						</div>
 						<div class="col l4 left schldiv" >
-							已被推薦次數:${pMBean.memberBean.RecommendCount}
+							已被推薦次數:${processingMember.memberBean.RecommendCount}
 						</div>
 						<div class="col l4 right right-align">
 								<form action="<c:url value="/ProcessingProj.do" />" method="post">
@@ -87,55 +121,13 @@
 								</form>
 						</div>
 					</div>
-<%-- 				</c:forEach> --%>
+				</c:forEach>
 			</div>
-<%-- 		</c:forEach> --%>
+		</c:forEach>
 		<!-- 同意或拒絕 -->	
 				
 				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-<!-- 				<div class="row card-panel"> -->
-<%-- 					<c:forEach items="${list}" var="demand"> --%>
-<!-- 						<div class="row card-panel yellow lighten-1"> -->
-<!-- 					      <ul class="collection with-header"> -->
-<%-- 					        <li class="collection-header"><h4>${demand.activityTopic}</h4></li> --%>
-<%-- 					        <c:forEach items="${demand.processingMemberBean}" var="pMBean"> --%>
-<!-- 					        		<li class="collection-item"> -->
-<!-- 					        			<div class="row left-align"> -->
-<%-- 					        				${pMBean.memberBean.lastName} --%>
-<!-- 					        					<button class="secondary-content btn"> -->
-<!-- 					        						同意 -->
-<!-- 					        					</button> -->
-<!-- 					        			</div> -->
-<!-- 					        		</li> -->
-<%-- 					        </c:forEach> --%>
-<!-- 					      </ul> -->
-<!-- 						</div> -->
-<%-- 					</c:forEach> --%>
-<!-- 				</div> -->
-				
 			</div>			
-			
-
 		</div>
 	</main>
 

@@ -54,7 +54,7 @@
 									<td style="font-size:1.6em;font-weight:600">${demand.activityTopic}</td>
 									<td class="red-text" style="font-size:1.6em;font-weight:600">${demand.demandStatus}</td>
 									<td>
-										<c:url value="/SchoolDemandServlet.do" var="path">
+										<c:url value="/schoolDemand/SchoolDemandServlet.do" var="path">
 											<c:param name="type" value="display" />
 											<c:param name="schoolDemandId" value="${demand.schoolDemandId}" />
 										</c:url>	
@@ -85,6 +85,37 @@
 			
 <%-- 			<c:set var="listlength" value="${fn:length(list)}" /> --%>
 			<!-- 初步計畫列表 -->
+<!-- <<<<<<< HEAD -->
+<!-- 			<div class="col l8 offset-l4" id="projlist"> -->
+<!-- 				<div class="centerdiv"> -->
+				
+<%-- 				<c:forEach  var="demand" items="${list}" varStatus="varStatus" > --%>
+<%-- 					<c:url value="/schoolDemand/SchoolDemandServlet.do" var="path"> --%>
+<%-- 						<c:param name="type" value="display" /> --%>
+<%-- 						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" /> --%>
+<%-- 					</c:url> --%>
+					
+					<!-- 卡片開始 -->
+<!-- 					      <div class="row"> -->
+<!-- 					        <div class="col s12 m6"> -->
+<!-- 					          <div class="card blue-grey darken-1"> -->
+<!-- 					            <div class="card-content white-text"> -->
+<%-- 					              <span class="card-title">${demand.activityTopic}</span> --%>
+<%-- 					              <p>${demand.activityLocation}</p> --%>
+<%-- 					              <p>${demand.activitySuitable}</p> --%>
+<!-- 					            </div> -->
+<!-- 					            <div class="card-action"> -->
+<%-- 					              <p>${demand.demandStatus}</p> --%>
+<%-- 					              <a href="${path}">查看</a> --%>
+<!-- 					            </div> -->
+<!-- 					          </div> -->
+<!-- 					        </div> -->
+<!-- 					      </div> -->
+					<!-- 卡片結束 -->
+<%-- 				</c:forEach> --%>
+<!-- 				</div>				 -->
+<!-- 			</div> -->
+<!-- ======= -->
 <!-- 						<div class="col l8 offset-l4" id="projlist"> -->
 <!-- 							<div class="centerdiv"> -->
 <%-- 							<c:forEach  var="demand" items="${list}" varStatus="varStatus" > --%>
@@ -113,6 +144,7 @@
 <%-- 							</c:forEach> --%>
 <!-- 							</div>				 -->
 <!-- 						</div> -->
+<!-- >>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git -->
 		</div>
 	</main>
 

@@ -22,6 +22,7 @@ public class SchoolDemandBean implements Serializable
 	private OffersBean offerBean; // 對應提供項目
 	private ProcessingMemberBean processingMemberBean; //對應狀態
 	private SchoolBean schoolBean; //對應學校
+	private List<MemberBean> memberList;
 	
 	public SchoolDemandBean()
 	{
@@ -161,11 +162,20 @@ public class SchoolDemandBean implements Serializable
 		this.schoolBean = schoolBean;
 	}
 
+	
+	public List<MemberBean> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<MemberBean> memberList) {
+		this.memberList = memberList;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "SchoolDemandBean [schoolDemandId=" + schoolDemandId + ", schoolId=" + schoolId + ", participant=" + participant + ", activityTopic=" + activityTopic + ", activityLocation=" + activityLocation + ", activitySuitable=" + activitySuitable
-				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + ", ProcessingMemberBean=" + processingMemberBean + ", SchoolBean=" + schoolBean + "]";
+				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + ", ProcessingMemberBean=" + processingMemberBean + ", SchoolBean=" + schoolBean + ", memberList " + memberList + "]";
 	}
 
 }
