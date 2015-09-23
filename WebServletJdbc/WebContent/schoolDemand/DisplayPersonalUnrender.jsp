@@ -97,16 +97,16 @@
 			<div class="row card-panel">
 				<!-- 需求計畫名稱 -->
 				<div class="row priProjName left-align teal-text darken-3">
-					哈哈哈營隊${demand.activityTopic}
+					${demand.activityTopic}
 				</div>
 				<!-- 有意願的志工 forEach在這 -->
-				<c:forEach items="${demand.processingMemberBean}" var="processingMember">
+				<c:forEach items="${demand.memberList}" var="processingMember">
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
-							郭文豪${processingMember.memberBean.lastName}${processingMember.memberBean.firstName}
+							${processingMember.lastName}${processingMember.firstName}
 						</div>
 						<div class="col l4 left schldiv" >
-							已被推薦次數:${processingMember.memberBean.RecommendCount}
+ 							已被推薦次數:${processingMember.recommendCount} 
 						</div>
 						<div class="col l4 right right-align">
 								<form action="<c:url value="/ProcessingProj.do" />" method="post">
