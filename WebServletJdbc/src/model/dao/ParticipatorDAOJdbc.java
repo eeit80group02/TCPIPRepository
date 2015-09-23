@@ -266,6 +266,39 @@ public class ParticipatorDAOJdbc implements ParticipatorDAO {
 		return result;
 	}
 
+	private static final String SELECT_BY_MEMBERID = "SELECT participatorId,fullProjId,memberId,activityStartTime,activityEndTime,participateStatus,checkTime,isParticipate FROM Participator WHERE memberId = ?";
+	
+	@Override
+	public List<ParticipatorBean> selectByMemberId(int memberId) {
+		List<ParticipatorBean> result = new ArrayList<ParticipatorBean>();
+
+		try (Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_MEMBERID);) {
+			pstmt.setInt(1,memberId);
+			try(ResultSet rset = pstmt.executeQuery();){
+				while (rset.next()) {
+					ParticipatorBean bean = new ParticipatorBean();
+					bean.setParticipatorId(rset.getInt("participatorId"));
+					bean.setFullProjId(rset.getInt("fullProjId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					bean.setActivityStartTime(rset.getTimestamp("activityStartTime"));
+					bean.setActivityEndTime(rset.getTimestamp("activityEndTime"));
+					bean.setParticipateStatus(rset.getString("participateStatus"));
+					bean.setCheckTime(rset.getTimestamp("checkTime"));
+					bean.setIsParticipate(rset.getString("isParticipate"));
+
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	// 測試檔
 	public static void main(String[] args) throws Exception {
 		ParticipatorDAO dao = new ParticipatorDAOJdbc();

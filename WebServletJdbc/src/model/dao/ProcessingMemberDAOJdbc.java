@@ -153,7 +153,7 @@ public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 	public ProcessingMemberBean update(ProcessingMemberBean bean)
 	{
 		ProcessingMemberBean result = null;
-
+		
 		if(bean != null)
 		{
 			try(Connection conn = datasource.getConnection();

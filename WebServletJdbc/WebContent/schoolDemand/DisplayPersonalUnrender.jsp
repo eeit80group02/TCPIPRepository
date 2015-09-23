@@ -109,27 +109,29 @@
 				</div>
 					
 				<!-- 有意願的志工 forEach在這 -->
-				<c:forEach items="${demand.memberList}" var="processingMember" varStatus="i">
-					<c:url></c:url>
+				<c:forEach items="${demand.memberList}" var="processingMember" varStatus="i">		
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
 							${processingMember.lastName}${processingMember.firstName}
 						</div>
 						<div class="col l4 left schldiv" >
  							已被推薦次數:${processingMember.recommendCount}
- 							${demand.processingMemberList[i.index].processingMemberId}
 
 						</div>
 						<div class="col l4 right right-align">
 
-								<form action="<c:url value="/ProcessingProj.do" />" method="post">
-									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
-									<input type="hidden" name="type" value="cancel">
+								<form action="<c:url value="/schoolDemand/Status.do" />" method="post">
+									<input type="hidden" name="type" value="disagree">
+									<input type="hidden" name="processingMemberId" value="${demand.processingMemberList[i.index].processingMemberId}">
+									<input type="hidden" name="memberId" value="${processingMember.memberId}">
+									<input type="hidden" name="schoolDemandId" value="${demand.schoolDemandId}">
 									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
 								</form>						
-								<form action="<c:url value="/ProcessingProj.do" />" method="post">
-									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+								<form action="<c:url value="/schoolDemand/Status.do" />" method="post">
 									<input type="hidden" name="type" value="agree">
+									<input type="hidden" name="processingMemberId" value="${demand.processingMemberList[i.index].processingMemberId}">
+									<input type="hidden" name="memberId" value="${processingMember.memberId}">
+									<input type="hidden" name="schoolDemandId" value="${demand.schoolDemandId}">
 									<button class="btn red white-text btndiv right" type="submit">同意</button>
 								</form>
 						</div>
