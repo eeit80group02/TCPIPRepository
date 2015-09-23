@@ -46,20 +46,20 @@
 
 				<ul id="nav-mobile3" class="right hide-on-med-and-down">
 
-					<li class="chooseItem" value="需求數量"><a href="#">需求數量</a></li>
+					<li class="chooseItem" value="需求數量"><a href="<c:url value='schoolSearch.do?type=byAmount&range=oneSchool'/>">需求數量</a></li>
 					<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
 						<ul id="dropdownList01" class="dropdown-content">
-							<li class="chooseDropdownItem" value="最新發佈"><a href="#">最新發佈</a></li>
+							<li class="chooseDropdownItem" value="最新發佈"><a href="<c:url value='schoolSearch.do?type=byDemandtime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">最新發佈</a></li>
 							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="即將結束"><a href="#">即將結束</a></li>
+							<li class="chooseDropdownItem" value="即將結束"><a href="<c:url value='schoolSearch.do?type=byExpiretime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">即將結束</a></li>
 						</ul></li>
 					<li><a class="dropdown-button" href="#!" data-activates="dropdownList02">物資狀態<i class="mdi-navigation-arrow-drop-down right"></i></a>
 						<ul id="dropdownList02" class="dropdown-content">
-							<li class="chooseDropdownItem" value="不拘"><a href="#">不拘</a></li>
+							<li class="chooseDropdownItem" value="不拘"><a href="<c:url value='schoolSearch.do?supplyStatus=1&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">不拘</a></li>
 							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="全新"><a href="#">全新</a></li>
+							<li class="chooseDropdownItem" value="全新"><a href="<c:url value='schoolSearch.do?supplyStatus=2&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">全新</a></li>
 							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="二手"><a href="#">二手</a></li>
+							<li class="chooseDropdownItem" value="二手"><a href="<c:url value='schoolSearch.do?supplyStatus=3&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">二手</a></li>
 						</ul></li>
 					<li><a href="#"><i class="large material-icons">person</i></a></li>
 				</ul>
