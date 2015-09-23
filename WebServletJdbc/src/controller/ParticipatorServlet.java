@@ -5,6 +5,8 @@ import global.GlobalService;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import model.MemberBean;
 import model.ParticipatorBean;
+import model.ProcessingProjBean;
 import model.service.ParticipatorService;
 
 @WebServlet("/participator.do")
@@ -40,13 +43,23 @@ public class ParticipatorServlet extends HttpServlet
 		
 		if(type != null && type.trim().length() != 0)
 		{
+			// 會員提出申請
 			if(type.equals("participate"))
 			{
-				// 會員提出申請
 				System.out.println("執行 ParticipatorServlet participate");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				participate(request,response);
+				return;
+			}
+			
+			// 發起者取消
+			if(type.equals("cancel"))
+			{
+				System.out.println("執行 ParticipatorServlet cancelParticipator");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				cancelParticipator(request,response);
 				return;
 			}
 		}
@@ -54,6 +67,65 @@ public class ParticipatorServlet extends HttpServlet
 		String contextPath = request.getContextPath();
 		response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 		return;
+	}
+
+	private void cancelParticipator(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		// 接收資料
+		String participatorId = request.getParameter("participatorId");
+		
+		// 驗證資料
+		if(participatorId == null || participatorId.trim().length() == 0)
+		{
+			errorMsg.put("error","沒有participatorId");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+		
+		// 轉換資料
+		int iParticipatorId = 0;
+		try
+		{
+			iParticipatorId = Integer.parseInt(participatorId);
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("error","參數有錯");
+			e.printStackTrace();
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+		
+		// business
+		ParticipatorBean participatorBean = new ParticipatorBean();
+		participatorBean.setParticipatorId(iParticipatorId);
+		
+		boolean result = service.cancelParticipator(participatorBean);
+		if(result)
+		{
+			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayPersonalByParticipate");
+		}
+		else
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
 	}
 
 	private void participate(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
