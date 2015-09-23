@@ -15,7 +15,10 @@ import model.DonationBeanDuplicate;
 import model.DonationCart;
 import model.DonationDiscussBeanDuplicate;
 import model.DonationDiscussService;
+import model.DonationOrderBean;
+import model.DonationOrderDuplicateBean;
 import model.DonationService;
+import model.SchoolBean;
 
 //@WebServlet("/OneDemand")
 public class DemandSelected extends HttpServlet {
@@ -35,7 +38,11 @@ public class DemandSelected extends HttpServlet {
 		if (session == null) {
 			// ...
 		}
-
+		
+		// LoginOK of School
+//		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
+//		int schoolId = sBean.getSchoolId();
+		
 		// 驗證購物車
 		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
 		if (dCart == null) {
@@ -120,11 +127,18 @@ public class DemandSelected extends HttpServlet {
 			int schoolId = Integer.parseInt(schoolIdStr);
 			
 			// 3.呼叫Model
+			// 捐獻資料
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(schoolId);
 			
+			// 捐獻明細資料
+			List<DonationOrderDuplicateBean> detailList = service.findOneAllDeamndOrderDetailBySchool(schoolId);
+			for(DonationOrderDuplicateBean d : detailList) {
+				System.out.println("*"+d);
+			}
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDetails", detailList);
 //			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
 //			rd.forward(request, response);
 //			return;
