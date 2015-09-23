@@ -10,6 +10,26 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
 <title>displayPersonalPrimaryProjByPending</title>
+<style>
+	.priProjName{
+		font-size:3em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.btndiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}
+	
+	.schldiv{
+		font-size:1.6em;
+		font-family:微軟正黑體;
+		font-weight:600;
+	}	
+
+</style>
 </head>
 <body>
 	<c:if test="${LoginOK.beanName.equals('school') }">
@@ -57,49 +77,89 @@
 <!-- 			</table>			 -->
 <!-- 		</div> -->
 		
+
+
+		<!-- 同意或拒絕 -->
+		<c:forEach items="${primaryProj}" var="bean">
+			<div class="row card-panel">
+				<!-- 初步計畫名稱 -->
+				<div class="row priProjName left-align teal-text darken-3">
+					初步計畫名稱${bean.title}
+				</div>
+				<!-- 有意願的學校 forEach在這 -->
+				<c:forEach items="${bean.processingProjBean}" var="processingProj">
+					<div class="row card-panel light-blue lighten-4">
+						<div class="col l4 left schldiv center-align">
+							市立瑞穗國小${processingProj.schoolBean.name}
+						</div>
+						<div class="col l4 left schldiv" >
+							台中市${processingProj.schoolBean.addressDistrict}
+						</div>
+						<div class="col l4 right right-align">
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="cancel">
+									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
+								</form>						
+								<form action="<c:url value="/ProcessingProj.do" />" method="post">
+									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+									<input type="hidden" name="type" value="agree">
+									<button class="btn red white-text btndiv right" type="submit">同意</button>
+								</form>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+		</c:forEach>
+		<!-- 同意或拒絕 -->
+
+
+
+
+
 		
 		<!-- 同意或拒絕 -->
-		<div class="row card-panel" >
-			<table class="bordered highlight">
-				<thead style="font-size:2em;">
-					<tr>
-						<th>初步計畫編號</th>
-						<th>初步計畫標題</th>
-						<th>接洽學校</th>
-						<th>所在縣市</th>
-						<th>是否同意</th>
-					</tr>
-				</thead>
-				<tbody style="font-size:1em;">
-					<c:forEach var="bean" items="${primaryProj}">
-						<c:forEach var="processingProj" items="${bean.processingProjBean}">
-							<tr>
-								<!-- 初步計畫編號 -->
-								<td>${bean.primaryProjId}</td>
-								<!-- 初步計畫標題 -->
-								<td>${bean.title}</td>
-								<!-- 有意接洽的學校 -->
-								<td>${processingProj.schoolBean.name}</td>
-								<!-- 該學校的所在縣市 -->
-								<td>${processingProj.schoolBean.addressDistrict}</td>
-								<td>
-									<form action="<c:url value="/ProcessingProj.do" />" method="post">
-										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
-										<input type="hidden" name="type" value="agree">
-										<button class="btn yellow lighten-5 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">同意</button>
-									</form>
-									<form action="<c:url value="/ProcessingProj.do" />" method="post">
-										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
-										<input type="hidden" name="type" value="cancel">
-										<button class="btn red lighten-4 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">拒絕</button>
-									</form>								
-								</td>
-							</tr>
-						</c:forEach>
-					</c:forEach>				
-				</tbody>
-			</table>			
-		</div>
+<!-- 		<div class="row card-panel" > -->
+<!-- 			<table class="bordered highlight"> -->
+<!-- 				<thead style="font-size:2em;"> -->
+<!-- 					<tr> -->
+<!-- 						<th>初步計畫編號</th> -->
+<!-- 						<th>初步計畫標題</th> -->
+<!-- 						<th>接洽學校</th> -->
+<!-- 						<th>所在縣市</th> -->
+<!-- 						<th>是否同意</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody style="font-size:1em;"> -->
+<%-- 					<c:forEach var="bean" items="${primaryProj}"> --%>
+<%-- 						<c:forEach var="processingProj" items="${bean.processingProjBean}"> --%>
+<!-- 							<tr> -->
+<!-- 								初步計畫編號 -->
+<%-- 								<td>${bean.primaryProjId}</td> --%>
+<!-- 								初步計畫標題 -->
+<%-- 								<td>${bean.title}</td> --%>
+<!-- 								有意接洽的學校 -->
+<%-- 								<td>${processingProj.schoolBean.name}</td> --%>
+<!-- 								該學校的所在縣市 -->
+<%-- 								<td>${processingProj.schoolBean.addressDistrict}</td> --%>
+<!-- 								<td> -->
+<%-- 									<form action="<c:url value="/ProcessingProj.do" />" method="post"> --%>
+<%-- 										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}"> --%>
+<!-- 										<input type="hidden" name="type" value="agree"> -->
+<!-- 										<button class="btn yellow lighten-5 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">同意</button> -->
+<!-- 									</form> -->
+<%-- 									<form action="<c:url value="/ProcessingProj.do" />" method="post"> --%>
+<%-- 										<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}"> --%>
+<!-- 										<input type="hidden" name="type" value="cancel"> -->
+<!-- 										<button class="btn red lighten-4 black-text" type="submit" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體">拒絕</button> -->
+<!-- 									</form>								 -->
+<!-- 								</td> -->
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
+<%-- 					</c:forEach>				 --%>
+<!-- 				</tbody> -->
+<!-- 			</table>			 -->
+<!-- 		</div> -->
 	</div>
 </div>
 <!-- 主要版面 -->
