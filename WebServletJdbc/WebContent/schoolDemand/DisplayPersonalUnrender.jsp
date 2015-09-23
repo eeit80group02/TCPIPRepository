@@ -92,6 +92,11 @@
 				洽談中需求計畫
 			</div>
 				
+<%-- 				<c:forEach items="${list}" var="bean"> --%>
+<%-- 					<div>${bean.schoolDemandId }</div><br> --%>
+<%-- 					<div>${bean.processingMemberList }</div><br> --%>
+<%-- 				</c:forEach> --%>
+				
 		<!-- 同意或拒絕 -->
 		<c:forEach items="${list}" var="demand">
 			<div class="row card-panel">
@@ -99,16 +104,21 @@
 				<div class="row priProjName left-align teal-text darken-3">
 					${demand.activityTopic}
 				</div>
+					
 				<!-- 有意願的志工 forEach在這 -->
-				<c:forEach items="${demand.memberList}" var="processingMember">
+				<c:forEach items="${demand.memberList}" var="processingMember" varStatus="i">
+					<c:url></c:url>
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
 							${processingMember.lastName}${processingMember.firstName}
 						</div>
 						<div class="col l4 left schldiv" >
- 							已被推薦次數:${processingMember.recommendCount} 
+ 							已被推薦次數:${processingMember.recommendCount}
+ 							${demand.processingMemberList[i.index].processingMemberId}
+
 						</div>
 						<div class="col l4 right right-align">
+
 								<form action="<c:url value="/ProcessingProj.do" />" method="post">
 									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
 									<input type="hidden" name="type" value="cancel">

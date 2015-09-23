@@ -116,10 +116,15 @@ public class SchoolDemandService {
 	public List<SchoolDemandBean> displays(SchoolDemandBean bean){
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		List<SchoolDemandBean> list = null;
+		List<OffersBean> olist = null;
 		list = schoolDemandDao.getAll();
+		olist = offersDao.getAll();
 		for(SchoolDemandBean temp :list){
-			if(bean.getSchoolId().equals(temp.getSchoolId())){
-				result.add(temp);
+			for(OffersBean oBean : olist){
+				if(bean.getSchoolId().equals(temp.getSchoolId()) && temp.getSchoolDemandId() == oBean.getSchoolDemandId()){
+					temp.setOfferBean(oBean);
+					result.add(temp);
+				}
 			}
 		}
 		list.clear();
