@@ -1,7 +1,13 @@
 package model.service;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import model.FullProjBean;
 import model.ProcessingMemberBean;
@@ -42,48 +48,65 @@ public class ProcessingMemberService {
 	}
 
 	public ProcessingMemberBean agree(ProcessingMemberBean bean) {
-		File image = new File("");
+		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/WebContent/images/bg02.jpg");
+		WritableRaster raster = null;
+		DataBufferByte data   = null;
 		List<ProcessingMemberBean> list = null;
-		ProcessingMemberBean result = new ProcessingMemberBean();
+		ProcessingMemberBean result = null;
 		SchoolDemandBean sDBean = new SchoolDemandBean();
 		FullProjBean fBean = new FullProjBean();
-		if (bean != null) {
-			list = processingMemberDAO.getAll();
-			for (ProcessingMemberBean temp : list) {
-				if (bean.getSchoolDemandId() == temp.getSchoolDemandId()) {
-					result.setProcessingMemberId(temp.getProcessingMemberId());
-					result.setCheckStatus("未通過");
-					processingMemberDAO.update(result);
+		BufferedImage bufferedImage;
+		System.out.println(bean);
+		try {
+			bufferedImage = ImageIO.read(image);
+			raster = bufferedImage.getRaster();
+			data = (DataBufferByte) raster.getDataBuffer();
+			if (bean != null) {
+				result = new ProcessingMemberBean();
+				list = processingMemberDAO.getAll();
+				for (ProcessingMemberBean temp : list) {
+					if (bean.getSchoolDemandId() == temp.getSchoolDemandId()) {
+						result.setMemberId(temp.getMemberId());
+						result.setProcessingMemberId(temp.getProcessingMemberId());
+						result.setCheckStatus("未通過");
+						result.setSchoolDemandId(bean.getSchoolDemandId());
+						processingMemberDAO.update(result);
+					}
+				}
+				result.setMemberId(bean.getMemberId());
+				result.setSchoolDemandId(bean.getSchoolDemandId());
+				result.setProcessingMemberId(bean.getProcessingMemberId());
+				result.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+				result.setCheckStatus("已通過");
+				result = processingMemberDAO.update(result);
+				if (result != null) {
+					sDBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
+					sDBean.setDemandStatus("洽談完成");
+					sDBean = schoolDemandDAO.update(sDBean);
+					if (sDBean != null) {
+						fBean.setSchoolId(sDBean.getSchoolId());
+						fBean.setMemberId(bean.getMemberId());
+						fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
+						fBean.setTitle(sDBean.getActivityTopic());
+						fBean.setFrontCoverName("default");
+						fBean.setFrontCover(data.getData());
+						fBean.setFrontCoverLength(image.length());
+						fBean.setProjAbstract("完整計畫");
+						fBean.setContent(sDBean.getContent());
+						fBean.setLocation(sDBean.getActivityLocation());
+						fBean.setActivityStartTime(new java.util.Date(System.currentTimeMillis()));
+						fBean.setActivityEndTime(new java.util.Date(System.currentTimeMillis()));
+						fBean.setEstMember(0);
+						fBean.setBudget(0);
+						fBean.setCreateDate(result.getCheckTime());
+						fBean.setProjStatus("洽談中");
+						fullProjDAO.insert(fBean); 
+					}
 				}
 			}
-			result.setProcessingMemberId(bean.getProcessingMemberId());
-			result.setCheckTime(new java.util.Date(System.currentTimeMillis()));
-			result.setCheckStatus("已通過");
-			result = processingMemberDAO.update(result);
-			if (result != null) {
-				sDBean.setSchoolDemandId(bean.getSchoolDemandId());
-				sDBean.setDemandStatus("洽談完成");
-				sDBean = schoolDemandDAO.update(sDBean);
-				if (sDBean != null) {
-					fBean.setSchoolId(sDBean.getSchoolId());
-					fBean.setMemberId(bean.getMemberId());
-					fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
-					fBean.setTitle(sDBean.getActivityTopic());
-					fBean.setFrontCoverName("default");
-					fBean.setFrontCover();
-					fBean.setFrontCoverLength(image.length());
-					fBean.setProjAbstract("完整計畫");
-					fBean.setContent("0%");
-					fBean.setLocation(sDBean.getActivityLocation());
-					fBean.setActivityStartTime(new java.util.Date(System.currentTimeMillis()));
-					fBean.setActivityEndTime(new java.util.Date(System.currentTimeMillis()));
-					fBean.setEstMember(0);
-					fBean.setBudget(0);
-					fBean.setCreateDate(result.getCheckTime());
-					fBean.setProjStatus("洽談中");
-					fullProjDAO.insert(fBean); 
-				}
-			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -94,6 +117,7 @@ public class ProcessingMemberService {
 		if (bean != null) {
 			bean.setProcessingMemberId(bean.getProcessingMemberId());
 			bean.setCheckStatus("未通過");
+			System.out.println(bean);
 			result = processingMemberDAO.update(bean);
 		}
 		return result;

@@ -29,7 +29,6 @@ public class ProcessingMemberServlet extends HttpServlet{
 
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		request.setAttribute("error", errorMsg);
-
 		String type = request.getParameter("type");
 		if (type == null || type.trim().length() == 0) {
 			errorMsg.put("errorURL", "請勿做作不正當請求(PrimaryProjServlet line.55)");
@@ -107,7 +106,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 	
 	public void agree(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		
-		Map<String, String> errorMsg = new HashMap<String, String>();
+
 		ProcessingMemberService service = new ProcessingMemberService();
 		ProcessingMemberBean bean = new ProcessingMemberBean();
 		HttpSession session = request.getSession();
@@ -115,40 +114,37 @@ public class ProcessingMemberServlet extends HttpServlet{
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
+		String processingMemberId = request.getParameter("processingMemberId");
 		String memberId = request.getParameter("memberId");
 		String schoolDemandId = request.getParameter("schoolDemandId");
-		if(memberId == null){
-			errorMsg.put("err", "錯誤");
-		}
-		if(schoolDemandId == null){
-			errorMsg.put("err", "錯誤");
-		}
-		if(!errorMsg.isEmpty()){
-			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
-			return;
-		}
+		int pMId = 0;
 		int mId = 0;
 		int sDId = 0;
-		try {
-			mId = Integer.parseInt(memberId);
-			sDId = Integer.parseInt(schoolDemandId);
-		} catch (NumberFormatException e) {
-			errorMsg.put("err", "錯誤");
-		}
-		if(!errorMsg.isEmpty()){
-			response.sendRedirect("");
+		if(processingMemberId != null && memberId != null && schoolDemandId != null){
+			try {
+				pMId = Integer.parseInt(processingMemberId);
+				mId = Integer.parseInt(memberId);
+				sDId = Integer.parseInt(schoolDemandId);
+			} catch (NumberFormatException e) {
+				response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
+			}
+		}else{
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
 		
-		bean.setSchoolDemandId(sDId);
+		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
-		
+		bean.setSchoolDemandId(sDId);
+		System.out.println(bean);
 		bean = service.agree(bean);
+		System.out.println(bean);
 		if(bean!=null){
 			System.out.println("同意成功");
-			response.sendRedirect("");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
+			return;
 		}else {
 			System.out.println("同意失敗");
-			response.sendRedirect("");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
 
 	}
@@ -160,20 +156,35 @@ public class ProcessingMemberServlet extends HttpServlet{
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
+		String processingMemberId = request.getParameter("processingMemberId");
 		String memberId = request.getParameter("memberId");
+		String schoolDemandId = request.getParameter("schoolDemandId");
+		int pMId = 0;
 		int mId = 0;
-		if(memberId !=null){
+		int sDId = 0;
+		if(processingMemberId != null && memberId != null){
 			try {
+				pMId = Integer.parseInt(processingMemberId);
 				mId = Integer.parseInt(memberId);
+				sDId = Integer.parseInt(schoolDemandId);
 			} catch (NumberFormatException e) {
-				response.sendRedirect("");
+				response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 			}
 		}else{
-			response.sendRedirect("");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
+		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
+		bean.setSchoolDemandId(sDId);
+		System.out.println(bean);
 		bean = service.disagree(bean);
-		
+		if(bean!=null){
+			System.out.println("拒絕成功" + bean);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
+		}else{
+			System.out.println("拒絕失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
+		}
 	}
 	public void cancel(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		ProcessingMemberService service = new ProcessingMemberService();
