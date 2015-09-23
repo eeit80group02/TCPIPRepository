@@ -52,11 +52,9 @@
 						</div>
 						<div class="col l4 right right-align">
 
-								<form action="<c:url value="/schoolDemand/Status.do" />" method="post">
-									<input type="hidden" name="type" value="disagree">
-									<input type="hidden" name="processingMemberId" value="${demand.processingMemberList[i.index].processingMemberId}">
-									<input type="hidden" name="memberId" value="${processingMember.memberId}">
-									<input type="hidden" name="schoolDemandId" value="${demand.schoolDemandId}">
+								<form action="<c:url value="/participator.do" />" method="post">
+									<input type="hidden" name="participatorId" value="${participatorBean.participatorId}">
+									<input type="hidden" name="type" value="cancel">
 									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
 								</form>						
 								<form action="<c:url value="/schoolDemand/Status.do" />" method="post">
