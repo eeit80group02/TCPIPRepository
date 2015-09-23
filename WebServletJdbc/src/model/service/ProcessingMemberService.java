@@ -49,7 +49,7 @@ public class ProcessingMemberService {
 	}
 
 	public ProcessingMemberBean agree(ProcessingMemberBean bean) {
-		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/WebContent/images/default.jpg");
+		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/image/fullProj/default.jpg");
 		FileInputStream is = null;
 		List<ProcessingMemberBean> list = null;
 		ProcessingMemberBean result = null;
