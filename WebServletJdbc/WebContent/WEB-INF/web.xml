@@ -72,12 +72,20 @@
     <url-pattern>/donation/messages.do</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>DonationSearchServlet</servlet-name>
-    <servlet-class>controller.DonationSearchServlet</servlet-class>
+    <servlet-name>DonationMemberSearchServlet</servlet-name>
+    <servlet-class>controller.DonationMemberSearchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>DonationSearchServlet</servlet-name>
+    <servlet-name>DonationMemberSearchServlet</servlet-name>
     <url-pattern>/donation/search.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DonationSchoolSearchServlet</servlet-name>
+    <servlet-class>controller.DonationSchoolSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonationSchoolSearchServlet</servlet-name>
+    <url-pattern>/donation/schoolSearch.do</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>DonationJsonSimpleDemo</servlet-name>
@@ -86,5 +94,13 @@
   <servlet-mapping>
     <servlet-name>DonationJsonSimpleDemo</servlet-name>
     <url-pattern>/donation/jsimple.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DonationGoogleServlet</servlet-name>
+    <servlet-class>controller.DonationGoogleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DonationGoogleServlet</servlet-name>
+    <url-pattern>/donation/google.do</url-pattern>
   </servlet-mapping>
 </web-app>

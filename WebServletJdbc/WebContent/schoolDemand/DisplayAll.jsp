@@ -44,8 +44,8 @@
           		<!-- 放卡片 -->
           		<div class="row">
           			<!-- 卡 -->
-          			<c:if test="${not empty list}">
-          				<c:forEach items="${list}" var="bean">
+          			<c:if test="${not empty mlist}">
+          				<c:forEach items="${mlist}" var="bean">
 				          	<div class="col l5 white offset-l1 card-panel hoverable" style="padding:5px;">
 										<div class="row">
 											<i class="col l2 material-icons red-text medium">
@@ -65,7 +65,7 @@
 							            	發布時間:${bean.createDate}
 							            </div>	            	
 							            <div class="row right-align" style="font-size:1.4em;font-family:標楷體;font-weight:600">
-							            	<a class="btn indigo">take a look</a>
+							            	<a class="btn indigo" href="<c:url value='SchoolDemandServlet.do?type=display' />">take a look</a>
 							            </div>	            	
 				     		</div>
 			     		</c:forEach>

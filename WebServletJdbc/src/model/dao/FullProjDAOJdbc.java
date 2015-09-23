@@ -52,7 +52,12 @@ public class FullProjDAOJdbc implements FullProjDAO
 			{
 				FullProjBean bean = new FullProjBean();
 				bean.setFullProjId(rset.getInt("fullProjId"));
-				bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+				if(rset.getObject("primaryProjId")!=null){
+					bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+				}else{
+					bean.setPrimaryProjId((Integer)rset.getObject("primaryProjId"));
+				}
+				
 				
 				if(rset.getObject("schoolDemandId") != null)
 				{

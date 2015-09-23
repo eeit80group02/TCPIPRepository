@@ -16,7 +16,7 @@ import model.DonationService;
 import model.service.DonationSearchService;
 
 //@WebServlet("/DonationSearchServlet")
-public class DonationSearchServlet extends HttpServlet {
+public class DonationMemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
