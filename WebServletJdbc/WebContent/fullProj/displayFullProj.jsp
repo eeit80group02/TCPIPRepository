@@ -187,9 +187,21 @@
 						</div>
 					</div>
 					<!-- 問與答 -->
-					<div id="discuss" class="row">
+<!-- 					<div id="discuss" class="row"> -->
 
-					</div>
+<!-- 					</div> -->
+					<div class="row">
+						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
+							<div class="card-panel white">
+								<div class="btn red">
+								
+								</div>
+								<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
+									123
+								</p>
+							</div>	
+						</div>
+					</div>					
 				</div>
 			</div>
 			
@@ -235,14 +247,10 @@
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
-			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "310px");
 		})
 		
 		$(function(){

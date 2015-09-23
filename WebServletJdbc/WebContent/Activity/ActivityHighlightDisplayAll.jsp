@@ -30,13 +30,13 @@
 	
 	<!-- 內容 -->
 	<main>
+		<!-- 主要版面 -->
 		<div class="row">
 			
-			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
-			<!-- 初步計畫列表 -->
-			<div class="col l10 offset-l1" id="projlist">
+			<!-- 活動花絮列表 -->
+			<div class="col l11 offset-l1" id="projlist" style="border:2px solid red;">
 				<div class="centerdiv">
-<%-- 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" > --%>
+				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
 						<c:param name="type" value="display" />
 						<c:param name="primaryProjId" value="${primaryProj.primaryProjId}" />
@@ -60,102 +60,11 @@
 							</div>
 						</div>
 					<!-- 卡片結束 -->
-					<!-- 卡片開始 -->
-						<div class="touche">
-							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
-								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-								</div>
-								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content">
-									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
-								</div>
-								<!-- 連結到花絮的收看頁面 -->
-								<div class="card-action right-align">
-									<a href="${path }">take a look</a>
-								</div>
-							</div>
-						</div>
-					<!-- 卡片結束 -->
-					<!-- 卡片開始 -->
-						<div class="touche">
-							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
-								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-								</div>
-								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content">
-									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
-								</div>
-								<!-- 連結到花絮的收看頁面 -->
-								<div class="card-action right-align">
-									<a href="${path }">take a look</a>
-								</div>
-							</div>
-						</div>
-					<!-- 卡片結束 -->
-					<!-- 卡片開始 -->
-						<div class="touche">
-							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
-								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-								</div>
-								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content">
-									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
-								</div>
-								<!-- 連結到花絮的收看頁面 -->
-								<div class="card-action right-align">
-									<a href="${path }">take a look</a>
-								</div>
-							</div>
-						</div>
-					<!-- 卡片結束 -->
-					<!-- 卡片開始 -->
-						<div class="touche">
-							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
-								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-								</div>
-								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content">
-									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
-								</div>
-								<!-- 連結到花絮的收看頁面 -->
-								<div class="card-action right-align">
-									<a href="${path }">take a look</a>
-								</div>
-							</div>
-						</div>
-					<!-- 卡片結束 -->
-					<!-- 卡片開始 -->
-						<div class="touche">
-							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
-								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
-								</div>
-								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content">
-									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
-								</div>
-								<!-- 連結到花絮的收看頁面 -->
-								<div class="card-action right-align">
-									<a href="${path }">take a look</a>
-								</div>
-							</div>
-						</div>
-					<!-- 卡片結束 -->
-
-					
-<%-- 				</c:forEach> --%>
+				</c:forEach>
 				</div>				
 			</div>
 		</div>
+		<!-- 主要版面 -->
 	</main>
 
 
