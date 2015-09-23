@@ -25,78 +25,135 @@
 	<!-- 頁面主題提示 -->
 	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">需求計畫</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">全部需求計畫</h1>
 	</div>
 	
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row">
-		<!-- 側邊篩選條件欄 -->
-			<div class="col l3 offset-l1 z-depth-3 hide-on-med-and-down"
-				style="position: absolute; top: 166; padding: 0" id="sidebar">
-				<div class="collection"
-					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-					<ul style="margin: 0;">
-						<li class="collection-header collection-item center-align"
-							style="padding: 0;"><h5 class="teal accent-2"
-								style="margin: 0; display: block; padding: 15px 0 15px 0;">排序</h5></li>
-						<li><a href="<c:url value='SchoolDemandServlet.do?type=displays' />" class="collection-item">查詢全部</a></li>
-						<li><a href="<c:url value='SchoolDemandServlet.do?type=displayPersonalRender' />" class="collection-item">待洽談</a></li>
-						<li><a href="<c:url value='SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="collection-item">待審核</a></li>
-						<li><a href="#!" class="collection-item">需求人數</a></li>
-						<li><a href="#!" class="collection-item">已募集人數</a></li>
-					</ul>
-				</div>
-				<div class="collection"
-					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-					<ul style="margin: 0;">
-						<!-- 提示[篩選] -->
-						<li class="collection-header collection-item center-align"
-							style="padding: 0;"><h5 class="teal accent-2"
-								style="margin: 0; display: block; padding: 15px 0 15px 0;">篩選</h5></li>
-						<li><a href="#!" class="collection-item">北部地區</a></li>
-						<li><a href="#!" class="collection-item">中部地區</a></li>
-						<li><a href="#!" class="collection-item">南部地區</a></li>
-						<li><a href="#!" class="collection-item">東部地區</a></li>
-					</ul>
+		<div class="row" id="mainboard">
+				<c:set var="listlength" value="${fn:length(list)}" />
+
+				
+			<div class="col l8 offset-l2 indigo lighten-5">
+				<div class="row center-align card-panel red-text" style="font-size:4em;">瀏覽需求計畫</div>
+				<div class="row card-panel" >
+					<table class="bordered highlight centered">
+						<thead style="font-size:2em;">
+							<tr>
+								<th>需求計畫編號</th>
+								<th>需求計畫標題</th>
+								<th>狀態</th>
+								<th>link</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach var="demand" items="${list}" varStatus="varStatus">
+								<tr>
+									<td style="font-size:1.6em;font-weight:600">${demand.schoolDemandId}</td>
+									<td style="font-size:1.6em;font-weight:600">${demand.activityTopic}</td>
+									<td class="red-text" style="font-size:1.6em;font-weight:600">${demand.demandStatus}</td>
+									<td>
+										<c:url value="/schoolDemand/SchoolDemandServlet.do" var="path">
+											<c:param name="type" value="display" />
+											<c:param name="schoolDemandId" value="${demand.schoolDemandId}" />
+										</c:url>	
+										<a href="${path}" class="btn-large yellow lighten-5 black-text" style="font-size:1.4em;font-weight:600">查看</a>
+									</td>
+								</tr>
+							</c:forEach>			
+						</tbody>
+					</table>			
 				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 			
-			<c:set var="listlength" value="${fn:length(list)}" />
+<%-- 			<c:set var="listlength" value="${fn:length(list)}" /> --%>
 			<!-- 初步計畫列表 -->
-			<div class="col l8 offset-l4" id="projlist">
-				<div class="centerdiv">
+<!-- <<<<<<< HEAD -->
+<!-- 			<div class="col l8 offset-l4" id="projlist"> -->
+<!-- 				<div class="centerdiv"> -->
 				
-				<c:forEach  var="demand" items="${list}" varStatus="varStatus" >
-					<c:url value="/schoolDemand/SchoolDemandServlet.do" var="path">
-						<c:param name="type" value="display" />
-						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" />
-					</c:url>
+<%-- 				<c:forEach  var="demand" items="${list}" varStatus="varStatus" > --%>
+<%-- 					<c:url value="/schoolDemand/SchoolDemandServlet.do" var="path"> --%>
+<%-- 						<c:param name="type" value="display" /> --%>
+<%-- 						<c:param name="schoolDemandId" value="${demand.schoolDemandId}" /> --%>
+<%-- 					</c:url> --%>
 					
 					<!-- 卡片開始 -->
-					      <div class="row">
-					        <div class="col s12 m6">
-					          <div class="card blue-grey darken-1">
-					            <div class="card-content white-text">
-					              <span class="card-title">${demand.activityTopic}</span>
-					              <p>${demand.activityLocation}</p>
-					              <p>${demand.activitySuitable}</p>
-					            </div>
-					            <div class="card-action">
-					              <p>${demand.demandStatus}</p>
-					              <a href="${path}">查看</a>
-					            </div>
-					          </div>
-					        </div>
-					      </div>
+<!-- 					      <div class="row"> -->
+<!-- 					        <div class="col s12 m6"> -->
+<!-- 					          <div class="card blue-grey darken-1"> -->
+<!-- 					            <div class="card-content white-text"> -->
+<%-- 					              <span class="card-title">${demand.activityTopic}</span> --%>
+<%-- 					              <p>${demand.activityLocation}</p> --%>
+<%-- 					              <p>${demand.activitySuitable}</p> --%>
+<!-- 					            </div> -->
+<!-- 					            <div class="card-action"> -->
+<%-- 					              <p>${demand.demandStatus}</p> --%>
+<%-- 					              <a href="${path}">查看</a> --%>
+<!-- 					            </div> -->
+<!-- 					          </div> -->
+<!-- 					        </div> -->
+<!-- 					      </div> -->
 					<!-- 卡片結束 -->
-				</c:forEach>
-				</div>				
-			</div>
+<%-- 				</c:forEach> --%>
+<!-- 				</div>				 -->
+<!-- 			</div> -->
+<!-- ======= -->
+<!-- 						<div class="col l8 offset-l4" id="projlist"> -->
+<!-- 							<div class="centerdiv"> -->
+<%-- 							<c:forEach  var="demand" items="${list}" varStatus="varStatus" > --%>
+<%-- 								<c:url value="/SchoolDemandServlet.do" var="path"> --%>
+<%-- 									<c:param name="type" value="display" /> --%>
+<%-- 									<c:param name="schoolDemandId" value="${demand.schoolDemandId}" /> --%>
+<%-- 								</c:url> --%>
+								
+								<!-- 卡片開始 -->
+<!-- 								      <div class="row"> -->
+<!-- 								        <div class="col s12 m6"> -->
+<!-- 								          <div class="card blue-grey darken-1"> -->
+<!-- 								            <div class="card-content white-text"> -->
+<%-- 								              <span class="card-title">${demand.activityTopic}</span> --%>
+<%-- 								              <p>${demand.activityLocation}</p> --%>
+<%-- 								              <p>${demand.activitySuitable}</p> --%>
+<!-- 								            </div> -->
+<!-- 								            <div class="card-action"> -->
+<%-- 								              <p>${demand.demandStatus}</p> --%>
+<!-- 								              <a href="#">查看</a> -->
+<!-- 								            </div> -->
+<!-- 								          </div> -->
+<!-- 								        </div> -->
+<!-- 								      </div> -->
+								<!-- 卡片結束 -->
+<%-- 							</c:forEach> --%>
+<!-- 							</div>				 -->
+<!-- 						</div> -->
+<!-- >>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git -->
 		</div>
 	</main>
 
+
+
+
+<%-- <li><a href="<c:url value='SchoolDemandServlet.do?type=displays' />" class="collection-item">查詢全部</a></li> --%>
+<%-- 						<li><a href="<c:url value='SchoolDemandServlet.do?type=displayPersonalRender' />" class="collection-item">待洽談</a></li> --%>
+<%-- 						<li><a href="<c:url value='SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="collection-item">待審核</a></li> --%>
 
 	<!-- 頁尾 -->
 		<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"></c:import>
@@ -109,38 +166,12 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
-			//固定側邊欄所在位置
-			$(window).on("scroll", function() {
-				if ($(this).scrollTop() <= $("#projlist").position().top) {
-					$("#sidebar").css({
-						"position" : "absolute",
-						"top" : $("#projlist").position().top
-					});
-				} else {
-					$("#sidebar").css({
-						"position" : "fixed",
-						"top" : 0
-					});
-				}
-			})
+			//mainboard最小高度
+			$("#mainboard").css("min-height","100vh");
+			
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
-			//觸發卡片翻轉事件
-			$(".touche").each(function() {
-				$(this).mouseover(function() {
-					$(".activator", this).trigger("click");
-				})
-				$(this).mouseout(function() {
-					$(".card-title", this).trigger("click");
-				})
-			})
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
-			//提示區塊的按鈕
-			$(".projinfos").css("margin", "0px auto");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%

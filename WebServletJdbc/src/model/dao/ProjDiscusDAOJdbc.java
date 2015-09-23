@@ -237,6 +237,51 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 		}
 		return result;
 	}
+	private static final String SELECT_BY_FULLPROJID = "SELECT projDiscussId,fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime FROM ProjDiscuss WHERE fullProjId = ?";
+	@Override
+	public List<ProjDiscusBean> selectByFullProjId(int fullProjId)
+	{
+		List<ProjDiscusBean> result = new ArrayList<ProjDiscusBean>();
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_FULLPROJID);)
+		{
+			pstmt.setInt(1,fullProjId);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				while(rset.next())
+				{
+					ProjDiscusBean bean = new ProjDiscusBean();
+					bean.setProjDiscusId(rset.getInt("projDiscussId"));
+					bean.setFullProjId(rset.getInt("fullProjId"));
+					bean.setQuestionMemberId(rset.getInt("questionMemberId"));
+					bean.setQuestionMemberContent(rset.getString("questionMemberContent"));
+					bean.setQuestionMemberTime(rset.getTimestamp("questionMemberTime"));
+					
+					if(rset.getObject("answerMemberId") != null)
+					{
+						bean.setAnswerMemberId(rset.getInt("answerMemberId"));
+					}
+					else
+					{
+						bean.setAnswerMemberId((Integer)rset.getObject("answerMemberId"));
+					}
+					
+					bean.setAnswerMemberContent(rset.getString("answerMemberContent"));
+					bean.setAnswerMemberTime(rset.getTimestamp("answerMemberTime"));
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	private static final String DELETE = "DELETE FROM ProjDiscuss WHERE projDiscussId = ?";
 	@Override

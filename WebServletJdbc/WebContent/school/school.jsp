@@ -53,7 +53,7 @@
 							</a>
 						</div>					
 						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text"> 
+							<a id="changepassworda" href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="col l12 btn-large yellow lighten-5 black-text"> 
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 									洽談中
 								</span>

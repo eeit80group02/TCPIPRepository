@@ -512,7 +512,7 @@ public class SchoolDemandServlet extends HttpServlet {
 
 	public void display(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		System.out.println("----------------------------------查詢單筆----------------------------------");
-		SchoolDemandBean bean = new SchoolDemandBean();
+		SchoolDemandBean bean = null;
 		HttpSession session = request.getSession();
 		String sId = "";
 		int schoolDemandId = 0;
@@ -527,6 +527,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		bean = (SchoolDemandBean) session.getAttribute("Demand");
 		session.removeAttribute("Demand");
 		if(bean==null){
+			bean = new SchoolDemandBean();
 			sId = request.getParameter("schoolDemandId");
 			if(sId!=null){
 				try {
@@ -539,14 +540,13 @@ public class SchoolDemandServlet extends HttpServlet {
 			schoolDemandId = bean.getSchoolDemandId();
 		}
 		
-		System.out.println(schoolDemandId);
-		System.out.println(schoolId);
 		// 存入Bean
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);
 
 		// 呼叫Service方法
 		bean = service.display(bean);
+
 		if (bean != null) {
 			System.out.println("成功查詢bean=" + bean);
 			session.setAttribute("Demand", bean);

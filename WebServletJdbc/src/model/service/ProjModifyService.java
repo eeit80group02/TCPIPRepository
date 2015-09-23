@@ -30,7 +30,11 @@ public class ProjModifyService
 			{
 				jsonObject.put("memberId",bean.getMemberId().toString());
 				jsonObject.put("memberMessage",bean.getMemberMessage().toString());
-				jsonObject.put("memberMessageTime",bean.getMemberMessageTime().toString());
+				
+				java.util.Date memberDate = bean.getMemberMessageTime();
+				// 格式化輸出 ex 2015-09-09 11:22:33
+				jsonObject.put("memberMessageTime",String.format("%TF %TT",memberDate,memberDate));
+				
 			}
 			else
 			{
@@ -41,7 +45,9 @@ public class ProjModifyService
 			{
 				jsonObject.put("schoolId",bean.getSchoolId().toString());
 				jsonObject.put("schoolMessage",bean.getSchoolMessage().toString());
-				jsonObject.put("schoolMessageTime",bean.getSchoolMessageTime().toString());
+				
+				java.util.Date schoolDate = bean.getSchoolMessageTime();
+				jsonObject.put("schoolMessageTime",String.format("%TF %TT",schoolDate,schoolDate));
 			}
 			else
 			{
