@@ -74,11 +74,13 @@ public class SchoolDemandService {
 	public SchoolDemandBean display(SchoolDemandBean bean){
 		SchoolDemandBean result = null;
 		OffersBean temp = null;
-		System.out.println(bean);
+		SchoolBean sBean = null;
 		if(bean!=null){
 			result = schoolDemandDao.findByPrimaryKey(bean.getSchoolDemandId());
 			temp = offersDao.findByPrimaryKey(bean.getSchoolDemandId());
+			sBean = schoolDao.findByPrimaryKey(bean.getSchoolDemandId());
 			result.setOfferBean(temp);
+			result.setSchoolBean(sBean);
 		}
 		return result;
 	}
@@ -127,7 +129,6 @@ public class SchoolDemandService {
 		slist = schoolDemandDao.getAll();
 		plist = processingMemberDao.getAll();
 		mlist = memberDao.select();
-
 		for(SchoolDemandBean sDBean : slist){
 			if(sDBean.getDemandStatus().equals("洽談中")){
 				for(ProcessingMemberBean pNBean : plist){
@@ -159,10 +160,15 @@ public class SchoolDemandService {
 	}
 	public SchoolDemandBean mdisplay(SchoolDemandBean bean){
 		SchoolDemandBean result = null;
-		result = schoolDemandDao.findByPrimaryKey(bean.getSchoolDemandId());
-		
-		
-		
+		OffersBean oBean = null;
+		SchoolBean sBean = null;
+		if(bean!=null){
+			result = schoolDemandDao.findByPrimaryKey(bean.getSchoolDemandId());
+			sBean = schoolDao.findByPrimaryKey(bean.getSchoolId());
+			oBean = offersDao.findByPrimaryKey(bean.getSchoolDemandId());
+			result.setSchoolBean(sBean);
+			result.setOfferBean(oBean);
+		}
 		return result;
 	}
 	public List<SchoolDemandBean> mdisplays(){
@@ -172,14 +178,11 @@ public class SchoolDemandService {
 		List<SchoolBean> slist = null;
 		list = schoolDemandDao.getAll();
 		olist = offersDao.getAll();
-
 		slist = schoolDao.getAll();
-
 		for(SchoolDemandBean bean : list){
 			for(SchoolBean sbean : slist){
 				if(bean.getSchoolId().equals(sbean.getSchoolId())){
 					bean.setSchoolBean(sbean);
-					
 				}
 			}
 			for(OffersBean obean:olist){
