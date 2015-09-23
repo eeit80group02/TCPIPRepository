@@ -49,10 +49,10 @@
 								label_outline
 							</i>							
 							<div class="col l2 right-align valign" style="font-size:1.6em;font-family:微軟正黑體;font-weight:600">
-								活動主題
+								學校名稱
 							</div>
 							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								${Demand.activityTopic}
+<%-- 								${Demand.activityTopic} --%>
 							</div>
 						</div>
 						<!-- 活動主題  -->

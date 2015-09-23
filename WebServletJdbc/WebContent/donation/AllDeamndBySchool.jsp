@@ -31,7 +31,6 @@
 
 <!-- 自訂 -->
 <link rel="stylesheet" href="../donationStyles/DonationWallSchool.css">
-<!-- <script type="text/javascript" src="../donationScripts/DonationWallSchool.js"></script> -->
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
 </head>

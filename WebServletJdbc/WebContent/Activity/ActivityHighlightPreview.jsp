@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 </head>
-<body class="cyan lighten-5">
+<body class="amber lighten-5">
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}" />
 	<!-- 頁首 -->

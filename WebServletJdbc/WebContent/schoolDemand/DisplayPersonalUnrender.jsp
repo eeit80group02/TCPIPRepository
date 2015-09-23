@@ -51,7 +51,7 @@
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row">
+		<div class="row" id="mainboard">
 			<c:set var="listlength" value="${fn:length(list)}" />
 			<!-- 初步計畫列表 -->
 <!-- 			<div class="col l8 offset-l4" id="projlist"> -->
@@ -91,6 +91,9 @@
 			<div class="row center-align card-panel red-text" style="font-size:4em;">
 				洽談中需求計畫
 			</div>
+
+		
+		
 				
 <%-- 				<c:forEach items="${list}" var="bean"> --%>
 <%-- 					<div>${bean.schoolDemandId }</div><br> --%>
@@ -139,6 +142,11 @@
 		<!-- 同意或拒絕 -->	
 				
 				
+			</div>
+			<div class="col l2">
+				<div class="btn red white-text" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">
+					刷新					
+				</div>
 			</div>			
 		</div>
 	</main>
@@ -155,6 +163,8 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			//mainboard最小高度
+			$("#mainboard").css("min-height","100vh");
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);

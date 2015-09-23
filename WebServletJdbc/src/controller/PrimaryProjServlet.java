@@ -51,13 +51,7 @@ public class PrimaryProjServlet extends HttpServlet
 		request.setAttribute("error",errorMsg);
 		String type = request.getParameter("type");
 		
-		if(type == null || type.trim().length() == 0)
-		{
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.55)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
-		else
+		if(type != null && type.trim().length() != 0)
 		{
 			if(type.equals("create"))
 			{
@@ -68,11 +62,12 @@ public class PrimaryProjServlet extends HttpServlet
 					System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 					
 					createPrimaryProj(request,response);
+					return;
 				}
 				else
 				{
-					errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.70(必須post))");
-					request.getRequestDispatcher("/error.jsp").forward(request,response);
+					String contextPath = request.getContextPath();
+					response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 					return;
 				}
 			}
@@ -82,11 +77,15 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				updatePrimaryProj(request,response);
+				return;
 			}
 			else if(type.equals("displayAll"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProjAll");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				displayPrimaryProjAll(request,response);
+				return;
 			}
 			// 單一初步計畫
 			else if(type.equals("display"))
@@ -95,6 +94,7 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayPrimaryProj(request,response);
+				return;
 			}
 			// 個人管理頁面 => 顯示發布過的初步計畫
 			else if(type.equals("displayPersonal"))
@@ -103,6 +103,7 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayPersonalPrimaryProj(request,response);
+				return;
 			}
 			// 個人管理頁面=> 顯示需要審核的初步計畫[有學校申請]
 			else if(type.equals("displayPersonalByPending"))
@@ -111,14 +112,12 @@ public class PrimaryProjServlet extends HttpServlet
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 				
 				displayPersonalPrimaryProjByPending(request,response);
-			}
-			else
-			{
-				errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.83)");
-				request.getRequestDispatcher("/error.jsp").forward(request,response);
 				return;
 			}
 		}
+		String contextPath = request.getContextPath();
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+		return;
 	}
 	
 	private void displayPersonalPrimaryProjByPending(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -448,13 +447,6 @@ public class PrimaryProjServlet extends HttpServlet
 			
 			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=display&primaryProjId=" + primaryBean.getPrimaryProjId());
 		}
-		else
-		{
-			// 失敗導向
-			errorMsg.put("error","編輯計畫建立失敗");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
-			return;
-		}
 	}
 
 	private void displayPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -489,8 +481,8 @@ public class PrimaryProjServlet extends HttpServlet
 		if(!errorMsg.isEmpty())
 		{
 			// queryString 不等於 ?type=display&primaryProjId=1...
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.198)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
 		}
 
@@ -510,8 +502,8 @@ public class PrimaryProjServlet extends HttpServlet
 		else
 		{
 			// 沒查到 結果
-			errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.219 查詢失敗)");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
 		}
 
@@ -777,8 +769,8 @@ public class PrimaryProjServlet extends HttpServlet
 		else
 		{
 			// 失敗導向
-			errorMsg.put("error","初步計畫建立失敗");
-			request.getRequestDispatcher("/error.jsp").forward(request,response);
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
 			return;
 		}
 	}

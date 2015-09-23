@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}[No.<fmt:formatNumber value="${LoginOK.memberId}" pattern="0000" />]</h3>
 	</div>	
 
 <main>
@@ -82,6 +82,13 @@
 							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByChat' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 										洽談中
+								</span>
+							</a>											
+						</div>
+						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByChat' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										招募中(審核志工)
 								</span>
 							</a>											
 						</div>

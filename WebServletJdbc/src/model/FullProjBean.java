@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class FullProjBean implements Serializable
 {
@@ -35,6 +36,7 @@ public class FullProjBean implements Serializable
 	
 	private String base64String;					// base64字串
 	private MemberBean memberBean;					// 會員資料
+	private List<ParticipatorBean> participatorBeans;	// 參加人集合
 	public FullProjBean()
 	{
 	}
@@ -317,6 +319,16 @@ public class FullProjBean implements Serializable
 	public void setMemberBean(MemberBean memberBean)
 	{
 		this.memberBean = memberBean;
+	}
+
+	public List<ParticipatorBean> getParticipatorBeans()
+	{
+		return participatorBeans;
+	}
+
+	public void setParticipatorBeans(List<ParticipatorBean> participatorBeans)
+	{
+		this.participatorBeans = participatorBeans;
 	}
 
 	@Override

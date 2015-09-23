@@ -30,7 +30,7 @@
 
 
 <body class="deep-orange lighten-5">
-<header> 頁首 <nav>
+<header>  <nav>
 	<div class="nav-wrapper grey darken-3">
 		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
 			src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
@@ -94,14 +94,14 @@
 			    <li style="margin:0;">
 			      <button class="collapsible-header deep-orange lighten-4 left-align" id="accountinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;" autofocus><i class="material-icons">play_arrow</i>帳號</button>
 			      <div class="collapsible-body cyan lighten-5 black-text"  id="accountinfo">
-			      	<div style="font-size:1.2em;">
-			      		<ul id="finalchk1">
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li>
-			      		</ul>
-			      	</div>
+<!-- 			      	<div style="font-size:1.2em;"> -->
+<!-- 			      		<ul id="finalchk1"> -->
+<!-- 				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li> -->
+<!-- 				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li> -->
+<!-- 				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li> -->
+<!-- 				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li> -->
+<!-- 			      		</ul> -->
+<!-- 			      	</div> -->
 			      </div>
 			    </li>
 			    <li style="margin:0">
@@ -186,7 +186,15 @@
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
 							<label for="accounts" style="font-size:1.3em;font-weight:600;">帳號</label>
+							
 						</div>
+						<!-- 帳號的驗證 -->
+					      		<ul id="actvalidatediv" class="card-panel cyan lighten-5" style="padding:5px;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:0px;">
+						      		<li id="liheight"style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li>
+						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li>
+						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li>
+						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li>
+					      		</ul>
 						<!-- 密碼 -->
 						<div class="input-field row">
 							<input id="passwords" type="password" class="validate" name="password" required>
@@ -534,7 +542,7 @@
 		    		dayNamesMin: ['日','一','二','三','四','五','六'],
 		    	};
 		    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-				
+			
 			//mouseover時，單個input元素被舉起
 			$(".input-field").addClass("hoverable");
 
@@ -571,10 +579,21 @@
 					}
 				})
 				
-				$("#accounts").on("focus",function(){
-					if(!$("#accountinfohead").hasClass("active"))
-					$("#accountinfohead").trigger("click");
-				})
+				$("#accounts").on({"focus":function(){
+					Materialize.showStaggeredList("#actvalidatediv");
+				  $( "#actvalidatediv" ).animate({
+					height:($("#liheight").height()*5)
+				  }, 1000 );
+										
+				},"blur":function(){
+					$("#actvalidatediv").animate({
+						height:"1px"
+					  }, 1000 );
+					console.log($("#actvalidatediv>li"));
+					$("#actvalidatediv>li").each(function(){
+						$(this).css("opacity","0");
+					})
+				}})
 				
 				$("#passwords").on("focus",function(){
 					if(!$("#passwordinfohead").hasClass("active"))
