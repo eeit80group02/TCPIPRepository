@@ -138,6 +138,7 @@ public class FullProjService
 		{
 			// 先selete 抓齊所有資料 在對使用者的資料做修改
 			FullProjBean temp = fullProjDAO.findByPrimaryKey(bean.getFullProjId());
+			System.out.println(temp);
 			if(temp != null)
 			{
 				temp.setTitle(bean.getTitle());
