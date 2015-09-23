@@ -81,13 +81,41 @@
 								提供資源
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								住宿${Demand.offerBean.room}
+								住宿
+								<c:choose>
+									<c:when test="${Demand.offerBean.room == true}">
+									
+										<i class="material-icons green-text" style="font-size:2em;vertical-align:bottom;">done</i>
+									</c:when>
+									<c:when test="${Demand.offerBean.room == false}">
+									
+										<i class="material-icons red-text" style="font-size:2em;vertical-align:bottom;">announcement</i>
+									</c:when>
+								</c:choose>
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								場地${Demand.offerBean.place}
+								場地
+								<c:choose>
+									<c:when test="${Demand.offerBean.place == true}">
+									
+										<i class="material-icons green-text" style="font-size:2em;vertical-align:bottom;">done</i>
+									</c:when>
+									<c:when test="${Demand.offerBean.place == false}">
+									
+										<i class="material-icons red-text" style="font-size:2em;vertical-align:bottom;">announcement</i>
+									</c:when>
+								</c:choose>								
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								伙食${Demand.offerBean.food}
+								伙食
+								<c:choose>
+									<c:when test="${Demand.offerBean.food == true}">
+										<i class="material-icons green-text" style="font-size:2em;vertical-align:bottom;">done</i>
+									</c:when>
+									<c:when test="${Demand.offerBean.food == false}">
+										<i class="material-icons red-text" style="font-size:2em;vertical-align:bottom;">announcement</i>
+									</c:when>
+								</c:choose>									
 							</div>
 						</div>
 						<!-- 提供 -->
