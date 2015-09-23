@@ -6,82 +6,268 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>OneMemberDemand</title>
-<style>
-body {
-	margin:0 auto;
-}
-#div1 {
-	border:1px solid green;
-}
-</style>
+<!-- 標頭專用 top start -->
+<!-- 一定要載入的 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+	!window.jQuery && document.write("<script type='text/javascript' src='../donationScripts/jquery-2.1.4.min.js'><\/script>")
+</script>
+<!-- Materialize -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- 標頭 css -->
+<link rel="stylesheet" href="../donationStyles/DonationHeader.css">
+<!-- 標頭專用 top end -->
+
+<!-- 自訂 -->
+<link rel="stylesheet" href="../donationStyles/DonationQA.css">
+
 </head>
 <body>
-<center>
-<center>
-<h3>${OneDemand.schoolName}單一需求</h3>
-<a href='DonationIndex.jsp'>回首頁</a>|
-<!-- <form action='demand.do' method='GET'> -->
-<%-- 	<input type='text' name='schoolId' value='${param.schoolId}'> --%>
-<!-- 	<input type='submit' name='findOne' value='app'> -->
-<!-- </form> -->
-<table style="width:200px;height:60px;background-color:#FFB7DD;">
-	<tr><td>${OneDemand.donationId}</td></tr>
-	<tr><td>${OneDemand.schoolId}</td></tr>
-	<!-- 若為學校登入則關閉連結 -->
-	<tr><td><a href="<c:url value='demand.do?type=AllDeamndBySchool&schoolId=${OneDemand.schoolId}&donationId=${OneDemand.donationId}&schoolName=${OneDemand.schoolName}'/>">${OneDemand.schoolName}全部需求</td></tr>
-	<tr><td>${OneDemand.donationStatus}</td></tr>
-	<tr><td>${OneDemand.supplyName}</td></tr>
-	<tr><td>${OneDemand.originalDemandNumber}</td></tr>
-	<tr><td>${OneDemand.originalDemandUnit}</td></tr>
-	<tr><td>${OneDemand.demandNumber}</td></tr>
-	<tr><td>${OneDemand.size}</td></tr>
-	<tr><td>${OneDemand.demandContent}</td></tr>
-	<tr><td>${OneDemand.supplyStatus}</td></tr>
-	<tr><td>${OneDemand.demandTime}</td></tr>
-	<tr><td>${OneDemand.expireTime}</td></tr>
-	<tr><td>${OneDemand.remark}</td></tr>
-<%-- 	<tr><td>${OneDemand.imageName}</td></tr> --%>
-<%-- 	<tr><td>${OneDemand.imageFile}</td></tr> --%>
-<%-- 	<tr><td>${OneDemand.imageLength}</td></tr> --%>
-	<td><img src='${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}'></td>
-</table>
-<hr>
-	<table>
-	<c:forEach var='item' items='${AllMessages}'>
-	<table style="width:800px;height:60px;background-color:#FFFF77;">
-		<tr><th><P>會員:${item.memberName} 於 ${item.memberMessageTime} 留言</P></th></tr>
-		<tr><th><P>${item.memberMessage}</P></th></tr>
-		<!-- 學校有登陸才顯示是否有回復 -->
-		
-		
-		<!-- 檢查學校是否有回復 -->
-		<c:if test="${!empty item.schoolMessage}">
-		<table style="width:800px;height:60px;background-color:#C3C3C3;">
-		<tr><th><P>回復:${item.schoolId} 於 ${item.schoolMessageTime} 留言</P></th></tr>
-		<tr><th><P>${item.schoolMessage}</P></th></tr>
-		</table>
-		</c:if>
-		<c:if test="${empty item.schoolMessage}">
-		<table style="width:790px;height:100px;background-color:#FF8888;">
-		<form action='messages.do' method='POST'>
-		<tr><th><input type='textarea' name='textarea' style="width:790px;height:60px;"></th></tr>
-		<input type='hidden' name='donationId' value='${OneDemand.donationId}'>
-		<input type='hidden' name='schoolId' value='${OneDemand.schoolId}'>
-		<input type='hidden' name='memberId' value='${item.memberId}'>
-		<input type='hidden' name='donationDiscussId' value='${item.donationDiscussId}'>
-		<input type='hidden' name='memberMessage' value='${item.memberMessage}'>
-		<input type='hidden' name='memberMessageTime' value=' ${item.memberMessageTime}'>
-		<input type='hidden' name='reporter' value='school'>
-		<tr><th><input type='submit' name='reply' value='回復'></th></tr>
-		</form>
-		</table>
-		</c:if>
+<!-- 我就是標頭 start -->
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<ul id="nav-mobile1" class="left hide-on-med-and-down">
+					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+				</ul>
 
-	</table>
-	</c:forEach>
-	</table>
+				<a href="#" class="brand-logo center">問與答</a>
+				<ul id="nav-mobile3" class="right hide-on-med-and-down">
+					<li><a href="#"><i class="large material-icons">person</i></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<br>
+	<!-- 我就是標頭 end -->
+	
+	<center>
+		<!-- 表格基本資料 -->
+		<div class="table-responsive">
+			<table id="donationDetailTable">
+				<tr>
+					<td rowspan="10" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
+					<td class="dataName">物資名稱：</td>
+					<td class="dataValue">${OneDemand.supplyName}</td>
+				</tr>
+				<tr>
+					<td class="dataName">剩餘需求：</td>
+					<td class="dataValue">${OneDemand.demandNumber} ${OneDemand.originalDemandUnit}</td>
+				</tr>
+				<tr>
+					<td class="dataName">尺寸規格：</td>
+					<td class="dataValue">${OneDemand.size}</td>
+				</tr>
+				<tr>
+					<td class="dataName">物資狀態：</td>
+					<td class="dataValue">${OneDemand.supplyStatus}</td>
+				</tr>
+				<tr>
+					<td class="dataName">需求單位：</td>
+					<td class="dataValue">${OneDemand.schoolName}</td>
+				</tr>
+				<tr>
+					<td class="dataName">需求單位地址：</td>
+					<td class="dataValue">屏東縣鹽埔鄉鹽南村勝利路30號</td>
+				</tr>
+				<tr>
+					<td class="dataName">募集起始時間：</td>
+					<td class="dataValue">${OneDemand.demandTime}</td>
+				</tr>
+				<tr>
+					<td class="dataName">募集結束時間：</td>
+					<td class="dataValue">${OneDemand.expireTime}</td>
+				</tr>
+				<tr>
+					<td class="dataName">募集原因：</td>
+					<td class="dataValue">${OneDemand.demandContent}</td>
+				</tr>
+				
+			<tfoot>
+					<tr>
+<!-- 						<td id="addToBag"> -->
+<!-- 							<button type="button" class="btn btn-large btn-floating" > -->
+<%-- 								<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="medium material-icons">search</i></a> --%>
+<!-- 							</button> &nbsp; -->
+						
+<!-- 							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem"> -->
+<!-- 								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="medium material-icons">card_giftcard</i></a> -->
+<!-- 							</button> -->
+<!-- 						</td> -->
+						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
+						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
+						
+						<script>
+							var addToBag = document.getElementById("addItem");
+							addToBag.addEventListener("click", insertDeamnd);
+								
+							function insertDeamnd(){
+								var xhr = new XMLHttpRequest();
+								if (xhr != null) {
+										xhr.addEventListener("readystatechange", function(){
+											if (xhr.readyState == 4) {
+												if (xhr.status == 200) {
+													 lists = xhr.responseText;
+													  alert("新增購物車品項一");
+												} else {
+													alert("something is wrong!");
+												}
+											} 
+										});
+									xhr.open("POST", "cart.do", true);
+									xhr.setRequestHeader("Content-Type", 
+									"application/x-www-form-urlencoded")
+									xhr.send("toCart=insert&donationId="+"${OneDemand.donationId}"+"&schoolId="+"${OneDemand.schoolId}"+"&schoolName="+"${OneDemand.schoolName}"+"&donationStatus="+"${OneDemand.donationStatus}"+"&supplyName="+"${OneDemand.supplyName}"+"&originalDemandNumber="+"${OneDemand.originalDemandNumber}"+"&originalDemandUnit="+"${OneDemand.originalDemandUnit}"+"&demandNumber="+"${OneDemand.demandNumber}"+"&size="+"${OneDemand.size}"+"&demandContent="+"${OneDemand.demandContent}"+"&supplyStatus="+"${OneDemand.supplyStatus}"+"&demandTime="+"${OneDemand.demandTime}"+"&expireTime="+"${OneDemand.expireTime}"+"&remark="+"${OneDemand.remark}");
+								}
+							}
+						</script>
+					</tr>
+				</tfoot>
+			</table>
+
+		<!-- 留言板 -->
+		<form id="drop-a-line" role="form">
+			<div class="row">
+				<div class="col-md-10">
+					<div class="input-field col m12 s12">
+						<textarea id="your-message" class="materialize-textarea"></textarea>
+						<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
+
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="messageGO">
+						<button type="reset" class="btn btn-small btn-floating" id="send-message">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
+						</button>
+						<button type="reset" class="btn btn-small btn-floating" id="cancel-message">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+						</button>
+					</div>
+
+				</div>
+			</div>
+		</form>
+
+		<!-- Q&A -->
+		<div id="QandA" class="col s12 m9">
+			<ul class="collapsible" data-collapsible="expandable">
+				<c:forEach var='item' items='${AllMessages}' varStatus="vs">
+					<li id='li'>
+						<div class="collapsible-header">
+							<span class="glyphicon glyphicon-question-sign"></span> <b>${item.memberName}</b>：
+							<c:if test="${!empty item.schoolMessage}">
+								<span class="glyphicon glyphicon-ok-sign"></span>
+							</c:if>
+							<br>${item.memberMessage}&nbsp;<span class="talkTime">${item.memberMessageTime}
+						</div>
+						<div class="collapsible-body">
+							<c:choose>
+								<c:when test="${empty item.schoolMessage}">
+									<c:choose>
+									<c:when test="${LoginOK.schoolId == item.schoolId}">
+									<table style="width:790px;height:100px;background-color:#FF8888;">
+										<form action='<c:url value="/donation/messages.do"/>' method='POST'>
+										<tr><th><input type='textarea' name='textarea' style="width:790px;height:60px;"></th></tr>
+										<input type='hidden' name='donationId' value='${OneDemand.donationId}'>
+										<input type='hidden' name='schoolId' value='${OneDemand.schoolId}'>
+										<input type='hidden' name='memberId' value='${item.memberId}'>
+										<input type='hidden' name='donationDiscussId' value='${item.donationDiscussId}'>
+										<input type='hidden' name='memberMessage' value='${item.memberMessage}'>
+										<input type='hidden' name='memberMessageTime' value=' ${item.memberMessageTime}'>
+										<input type='hidden' name='reporter' value='school'>
+										<tr><th><input type='submit' name='reply' value='回復'></th></tr>
+										</form>
+										</table>
+									</c:when>
+									<c:otherwise>
+									<p>等待回覆...</p>
+									</c:otherwise>
+									</c:choose>
+								</c:when>
+								<c:otherwise>
+									<P>${item.schoolMessage}</P>
+								</c:otherwise>
+							</c:choose>
+							<br>
+						</div>
+					</li>
+				</c:forEach>
+			</ul>
+		</div>
+		<hr>
+
+		<!-- 會員留言處理 -->
+		<script>
+			var addBtn = document.getElementById("send-message");
+			var QandA = document.getElementById("QandA");
+			// 	var p1 = document.getElementById("p1");
+			// 	var p2 = document.getElementById("p2");
+			var textByMember = document.getElementById("your-message");
+
+			var xhr = null;
+
+			addBtn.addEventListener("click", load);
+
+			function load() {
+				xhr = new XMLHttpRequest();
+				if (xhr != null) {
+					xhr.addEventListener("readystatechange", returnData);
+					xhr.open("POST", "messages.do", true);
+					xhr.setRequestHeader("Content-Type",
+							"application/x-www-form-urlencoded")
+					xhr.send("reporter=member&textarea="
+							+ textByMember.value
+							+ "&donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}&returnJson=true")
+				}
+			}
+
+			function returnData() {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						lists = xhr.responseText;
+						datas = JSON.parse(lists);
+						alert("ms "+datas);
+						var memberId = datas[0];
+						var memberMessage = datas[1];
+						var memberMessageTime = datas[2];
+
+						var tr1 = document.createElement("tr");
+						var th1 = document.createElement("th");
+						var p1 = document.createElement("p");
+						var textP1 = document.createTextNode("會員:" + memberId
+								+ " 於 " + memberMessageTime + "留言");
+						tr1.appendChild(th1);
+						th1.appendChild(p1)
+						p1.appendChild(textP1);
+
+						var tr2 = document.createElement("tr");
+						var th2 = document.createElement("th");
+						var p2 = document.createElement("p");
+						var textP2 = document.createTextNode("內容:"
+								+ memberMessage);
+						tr1.appendChild(th2);
+						th1.appendChild(p2)
+						p1.appendChild(textP2);
+
+						QandA.appendChild(tr2);
+						QandA.appendChild(tr1);
+					} else {
+						alert("something is wrong!");
+					}
+				}
+			}
+			$(function() {
+				$("#send-message").click(function() {
+					$("#your-message").val("");
+				});
+			}(jQuery));
+		</script>
 	</center>
-</center>
-<iframe name='hidden_frame' style='width:0px;height:0px'></iframe>
 </body>
 </html>
