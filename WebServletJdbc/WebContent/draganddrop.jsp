@@ -229,7 +229,7 @@
 								if( temp == 0 ){
 									console.log(temp + ":" +this.name);
 									console.log($('#missionSet'+ this.missionSetId + ' ~ ul input.missionPosition[value=' + missionPosition + ']').parent().parent().html());
-									$('#missionSet'+ this.missionSetId + ' ~ ul input.missionPosition').last().parent().parent().before($mainMission);
+									$('#missionSet'+ this.missionSetId + ' ~ ul input.missionPosition').first().parent().parent().before($mainMission);
 									console.log($('#missionSet'+ this.missionSetId + ' ~ ul input.missionPosition[value=' + missionPosition + ']').parent().parent().html());
 								} else{    	    				
 	    	    					$('#missionSet'+ this.missionSetId + ' ~ ul input.missionPosition[value=' + temp + ']').parent().parent().after($mainMission);
