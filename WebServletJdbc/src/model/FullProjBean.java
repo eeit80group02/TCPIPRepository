@@ -36,7 +36,7 @@ public class FullProjBean implements Serializable
 	
 	private String base64String;					// base64字串
 	private MemberBean memberBean;					// 會員資料
-	private List<ParticipatorBean> participatorBeans;	// 參加人集合
+	private List<ParticipatorBean> participatorBean;	// 參加人集合
 	public FullProjBean()
 	{
 	}
@@ -321,14 +321,14 @@ public class FullProjBean implements Serializable
 		this.memberBean = memberBean;
 	}
 
-	public List<ParticipatorBean> getParticipatorBeans()
+	public List<ParticipatorBean> getParticipatorBean()
 	{
-		return participatorBeans;
+		return participatorBean;
 	}
 
-	public void setParticipatorBeans(List<ParticipatorBean> participatorBeans)
+	public void setParticipatorBean(List<ParticipatorBean> participatorBean)
 	{
-		this.participatorBeans = participatorBeans;
+		this.participatorBean = participatorBean;
 	}
 
 	@Override

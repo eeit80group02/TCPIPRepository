@@ -71,7 +71,7 @@ public class PrimaryProjServlet extends HttpServlet
 					return;
 				}
 			}
-			else if(type.equals("update"))
+			if(type.equals("update"))
 			{
 				System.out.println("執行 PrimaryProjServlet updatePrimaryProj");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
@@ -79,7 +79,7 @@ public class PrimaryProjServlet extends HttpServlet
 				updatePrimaryProj(request,response);
 				return;
 			}
-			else if(type.equals("displayAll"))
+			if(type.equals("displayAll"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProjAll");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
@@ -88,7 +88,7 @@ public class PrimaryProjServlet extends HttpServlet
 				return;
 			}
 			// 單一初步計畫
-			else if(type.equals("display"))
+			if(type.equals("display"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPrimaryProj");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
@@ -97,7 +97,7 @@ public class PrimaryProjServlet extends HttpServlet
 				return;
 			}
 			// 個人管理頁面 => 顯示發布過的初步計畫
-			else if(type.equals("displayPersonal"))
+			if(type.equals("displayPersonal"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProj[個人初步計畫列表]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
@@ -106,7 +106,7 @@ public class PrimaryProjServlet extends HttpServlet
 				return;
 			}
 			// 個人管理頁面=> 顯示需要審核的初步計畫[有學校申請]
-			else if(type.equals("displayPersonalByPending"))
+			if(type.equals("displayPersonalByPending"))
 			{
 				System.out.println("執行 PrimaryProjServlet displayPersonalPrimaryProjByPending[審核計畫列表]");
 				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
