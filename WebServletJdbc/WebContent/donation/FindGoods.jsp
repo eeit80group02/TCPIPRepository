@@ -38,7 +38,6 @@
 <!-- 在多加載一次picture-big，比較保險 -->
 
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
-123123
 </head>
 <body>
 	<!-- 我就是標頭 start -->
