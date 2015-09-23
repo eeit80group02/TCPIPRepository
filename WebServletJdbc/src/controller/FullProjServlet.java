@@ -105,6 +105,16 @@ public class FullProjServlet extends HttpServlet
 				displayPersonalFullProjByChat(request,response);
 				return;
 			}
+			// 在個人頁面顯示 招募中的
+			if(type.equals("displayPersonalByParticipate"))
+			{
+				System.out.println("執行 FullProjServlet displayPersonalFullProjByParticipate[需審核參加人的計劃列表]");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				displayPersonalFullProjByParticipate(request,response);
+				return;
+			}
+			
 			// 學校同意此計畫
 			if(type.equals("schoolConfirm"))
 			{
@@ -130,6 +140,39 @@ public class FullProjServlet extends HttpServlet
 		return;
 	}
 	
+	private void displayPersonalFullProjByParticipate(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		MemberBean memberBean = null;
+		
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
+		{
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
+			return;
+		}
+		
+		FullProjBean fullProjBean = new FullProjBean();
+		fullProjBean.setMemberId(memberBean.getMemberId());
+		List<FullProjBean> result = service.displayPersonalFullProjProjByParticipate(fullProjBean);
+		
+		if(result != null)
+		{
+			System.out.println(result);
+			System.out.println("==================================================");
+			request.setAttribute("fullProj",result);
+			request.getRequestDispatcher("/personal/displayPersonalFullProjByParticipate.jsp").forward(request,response);
+			return;
+		}
+	}
+
 	private void memberConfirm(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");

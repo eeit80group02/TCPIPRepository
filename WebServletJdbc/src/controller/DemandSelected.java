@@ -39,10 +39,6 @@ public class DemandSelected extends HttpServlet {
 			// ...
 		}
 		
-		// LoginOK of School
-//		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
-//		int schoolId = sBean.getSchoolId();
-		
 		// 驗證購物車
 		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
 		if (dCart == null) {
