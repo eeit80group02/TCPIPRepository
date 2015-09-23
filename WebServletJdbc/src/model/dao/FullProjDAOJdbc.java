@@ -154,8 +154,11 @@ public class FullProjDAOJdbc implements FullProjDAO
 				{
 					result = new FullProjBean();
 					result.setFullProjId(rset.getInt("fullProjId"));
-					result.setPrimaryProjId(rset.getInt("primaryProjId"));
-					
+					if(rset.getObject("primaryProjId") != null){
+						result.setPrimaryProjId(rset.getInt("primaryProjId"));
+					}else{
+						result.setPrimaryProjId((Integer)rset.getObject("primaryProjId"));
+					}
 					if(rset.getObject("schoolDemandId") != null)
 					{
 						result.setSchoolDemandId(rset.getInt("schoolDemandId"));

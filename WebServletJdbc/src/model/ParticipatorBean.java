@@ -14,6 +14,8 @@ public class ParticipatorBean implements Serializable
 	private String participateStatus;           // 審核狀態
 	private java.util.Date checkTime;           // 審核通過時間
 	private String isParticipate;               // 是否參加
+	
+	private MemberBean memberBean;              // 參加人資料
 
 	public ParticipatorBean()
 	{
@@ -97,6 +99,16 @@ public class ParticipatorBean implements Serializable
 	public void setIsParticipate(String isParticipate)
 	{
 		this.isParticipate = isParticipate;
+	}
+
+	public MemberBean getMemberBean()
+	{
+		return memberBean;
+	}
+
+	public void setMemberBean(MemberBean memberBean)
+	{
+		this.memberBean = memberBean;
 	}
 
 	@Override
