@@ -142,7 +142,29 @@
 
 #trashHeadTitleIcons {
 	height: 35px;
-	padding: 10px; margin : 0px;
+	padding: 10px;
+	margin: 0px;
 	background-color: #ff7575;
 	margin: 0px;
+}
+
+/* div01 專用*/
+#div01 ul {
+	font-size: 1.2em;
+	background: rgba(255, 117, 117, 0.9);
+	border-radius: 15px;
+	max-height: 400px;
+	overflow: auto;
+	width: 220px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+#div01 ul li {
+	line-height: 3em;
+	width: 200px;
+}
+
+#div01 ul li:HOVER {
+	background: rgba(100, 0, 0, 0.3);
 }

@@ -1,0 +1,139 @@
+@CHARSET "UTF-8";
+
+#DonationDetail {
+	/* 	上面的 table */
+	width: 850px;
+}
+
+#donationDetailTable, #drop-a-line, #QandA {
+	width: 85%;
+}
+
+#donationDetailTable tr td {
+	font-size: 1.2em;
+}
+
+.schoolTalkBack {
+	padding: 55px 1% 0px 1%;
+	margin-top: 10px;
+	background-color: white;
+}
+
+#your-message {
+	font-size: 1.2em;
+}
+
+.messageGO {
+	width: 90px;
+	float: right;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#QandA {
+	/* 	問與答 */
+	font-size: 1.5em;
+	text-align: left;
+	background-color: white;
+}
+
+.collapsible-header:HOVER {
+	color: white;
+	background-color: #00AA00;
+}
+
+.collapsible-header {
+	height: auto;
+	background-color: #98F898;
+}
+
+span.glyphicon-ok-sign {
+	/* 	打勾 */
+	/* 	border: 2px solid black; */
+	margin-top: 8px;
+	float: right;
+}
+
+.talkTime {
+	/* 	會員發問顯示時間用 */
+	font-size: 0.6em;
+	text-align: right;
+}
+
+.talkBackTime {
+	/* 	學校回答顯示時間用 */
+	font-size: 0.6em;
+	text-align: right;
+	padding: 0px 10px 10px 0px;
+}
+
+.col-md-7 {
+	text-align: left;
+	line-height: 2em;
+}
+
+.dataName {
+	text-align: right;
+}
+
+#dataName {
+	float: left;
+}
+
+#dataValue {
+	word-break: break-all;
+	min-width: 400px;
+}
+
+#remark {
+	width: auto;
+	margin-right: 9%;
+	height: 120px;
+	overflow: auto;
+	height: 120px;
+}
+
+/**上面 table 系列* */
+#donationDetailTable {
+	font-size: 1.2em;
+}
+
+.dataName {
+	text-align: right;
+	width: 15%;
+	min-width: 180px;
+}
+
+.dataValue {
+	width: 45%;
+	min-width: 350px;
+	word-break: break-all;
+}
+
+#donationImage {
+	text-align: center;
+	width: 30%;
+	max-width: 400px;
+	min-width: 300px;
+}
+
+#remark {
+	margin: 5px;
+	margin-right: 15px;
+	padding: 5px;
+	border: 1px solid black;
+	width: 100%;
+	background-color: white;
+}
+
+#donationPicture {
+	border: 1px solid black;
+}
+
+#addToBag {
+	text-align: center;
+}
+
+.schoolCheck {
+	float: right;
+}

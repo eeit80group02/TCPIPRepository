@@ -5,6 +5,10 @@
 	width: 85%;
 }
 
+#test1 ul {
+	padding-left: 1%;
+}
+
 .active {
 	font-weight: bold;
 	font-size: 2em;
