@@ -494,15 +494,18 @@ public class SchoolDemandServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
-			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
-			return;
+			if(mbean.getMemberId()==null){
+				System.out.println("非會員登入");
+				response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+				return;
+			}
 		}
 		result = service.mdisplays();
 		System.out.println(result.size());
 		
 		if (!result.isEmpty()) {
 			System.out.println("成功查詢list=" + result);
-			session.setAttribute("list", result);
+			session.setAttribute("mlist", result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 			
 		} else {
