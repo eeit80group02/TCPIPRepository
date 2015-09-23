@@ -28,11 +28,11 @@
 	<main>
 		<div class="row valign-wrapper" id="mainboard">
 			<div class="col l8 offset-l2 valign card-panel white z-depth-3" style="min-height:40vh" id="cardboard">
-				<div class="center-align" style="font-family:微軟正黑體;font-size:5em;" id="msgboard">
+				<div class="row center-align" style="font-family:微軟正黑體;font-size:5em;" id="msgboard">
 					感謝你的使用,你已經登出
 				</div>
-				<div class="row" style="">
-					<a class="col l2 offset-l5 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;">回首頁</a>
+				<div class="row">
+					<a class="col l2 offset-l5 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回首頁</a>
 				</div>
 			</div>		
 		</div>
@@ -59,14 +59,10 @@
 			$("#msgboard").css("margin-top",(carhei-mbhei)/2)
 			//mainboard最小高度
 			$("#mainboard").css("min-height","80vh");
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
-			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "310px");
 		})
 	</script>
 </body>

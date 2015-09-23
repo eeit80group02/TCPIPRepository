@@ -17,7 +17,7 @@
 <script type="text/javascript" src="jquery/jquery.error.message.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
-<body class="deep-orange lighten-5">
+<body class="amber lighten-5">
 	<!-- 頁首 -->
 <header> <!-- 頁首 --> <nav>
 	<div class="nav-wrapper grey darken-3">

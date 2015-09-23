@@ -384,6 +384,7 @@
 			displayMessage();
 			var closeTimer = <fmt:formatDate value="${fullProj.createDate}" pattern="yyyy-MM-dd" />
 			
+// 			----------這裡有錯這裡有錯這裡有錯這裡有錯這裡有錯--------------------------------------------------------------
 			if(typeof(closeTimer) == "undefined"){
 				var timer = setInterval(displayMessage,60000);
 			}
