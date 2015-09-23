@@ -5,12 +5,6 @@ $(function() {
 
 	$("*").click(div01hide);
 
-	$("#searchIcon").click(function() {
-		var input = $("#searchDonation").val();
-		var datas = $("#div01").val();
-		alert(input);
-	});
-
 	txt = document.getElementById("searchDonation");
 	txt.addEventListener("keyup", getData, false);
 	div01 = document.getElementById("div01");
@@ -39,6 +33,7 @@ $(function() {
 						eleLi.addEventListener("click", function() {
 							var outPrint = this.firstChild.nodeValue;
 							$("#searchDonation").val(outPrint);
+							$("#searchDonation").trigger($.Event("focus"));
 						}, false)
 
 						eleUl.appendChild(eleLi);
