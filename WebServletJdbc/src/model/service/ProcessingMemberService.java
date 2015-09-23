@@ -1,6 +1,12 @@
 package model.service;
 
+import global.GlobalService;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 import model.FullProjBean;
@@ -29,7 +35,8 @@ public class ProcessingMemberService {
 		SchoolDemandBean sBean = null;
 		if (bean != null) {
 			sBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
-			if (sBean != null && !sBean.getDemandStatus().equals("洽談完成") && !sBean.getDemandStatus().equals("洽談失敗")) {
+			if (sBean != null && !sBean.getDemandStatus().equals("洽談完成")
+					&& !sBean.getDemandStatus().equals("洽談失敗")) {
 				bean.setCheckStatus("待審核");
 				result = processingMemberDAO.insert(bean);
 				if (result != null) {
@@ -42,48 +49,62 @@ public class ProcessingMemberService {
 	}
 
 	public ProcessingMemberBean agree(ProcessingMemberBean bean) {
-		File image = new File("");
+		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/WebContent/images/default.jpg");
+		FileInputStream is = null;
 		List<ProcessingMemberBean> list = null;
-		ProcessingMemberBean result = new ProcessingMemberBean();
+		ProcessingMemberBean result = null;
 		SchoolDemandBean sDBean = new SchoolDemandBean();
 		FullProjBean fBean = new FullProjBean();
-		if (bean != null) {
-			list = processingMemberDAO.getAll();
-			for (ProcessingMemberBean temp : list) {
-				if (bean.getSchoolDemandId() == temp.getSchoolDemandId()) {
-					result.setProcessingMemberId(temp.getProcessingMemberId());
-					result.setCheckStatus("未通過");
-					processingMemberDAO.update(result);
+		try {
+			is = new FileInputStream(image);
+			if (bean != null) {
+				result = new ProcessingMemberBean();
+				list = processingMemberDAO.getAll();
+				for (ProcessingMemberBean temp : list) {
+					if (bean.getSchoolDemandId() == temp.getSchoolDemandId()) {
+						result.setMemberId(temp.getMemberId());
+						result.setProcessingMemberId(temp.getProcessingMemberId());
+						result.setCheckStatus("未通過");
+						result.setSchoolDemandId(bean.getSchoolDemandId());
+						processingMemberDAO.update(result);
+					}
+				}
+				result.setMemberId(bean.getMemberId());
+				result.setSchoolDemandId(bean.getSchoolDemandId());
+				result.setProcessingMemberId(bean.getProcessingMemberId());
+				result.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+				result.setCheckStatus("已通過");
+				result = processingMemberDAO.update(result);
+				if (result != null) {
+					sDBean = schoolDemandDAO.findByPrimaryKey(bean
+							.getSchoolDemandId());
+					sDBean.setDemandStatus("洽談完成");
+					sDBean = schoolDemandDAO.update(sDBean);
+					if (sDBean != null) {
+						fBean.setSchoolId(sDBean.getSchoolId());
+						fBean.setMemberId(bean.getMemberId());
+						fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
+						fBean.setTitle(sDBean.getActivityTopic());
+						fBean.setFrontCoverName("default.jpg");
+						fBean.setFrontCover(GlobalService.convertInputStreamToByteArray(is));
+						fBean.setFrontCoverLength(image.length());
+						fBean.setProjAbstract("完整計畫");
+						fBean.setContent(sDBean.getContent());
+						fBean.setLocation(sDBean.getActivityLocation());
+						fBean.setActivityStartTime(new java.util.Date(System
+								.currentTimeMillis()));
+						fBean.setActivityEndTime(new java.util.Date(System
+								.currentTimeMillis()));
+						fBean.setEstMember(0);
+						fBean.setBudget(0);
+						fBean.setCreateDate(result.getCheckTime());
+						fBean.setProjStatus("洽談中");
+						fullProjDAO.insert(fBean);
+					}
 				}
 			}
-			result.setProcessingMemberId(bean.getProcessingMemberId());
-			result.setCheckTime(new java.util.Date(System.currentTimeMillis()));
-			result.setCheckStatus("已通過");
-			result = processingMemberDAO.update(result);
-			if (result != null) {
-				sDBean.setSchoolDemandId(bean.getSchoolDemandId());
-				sDBean.setDemandStatus("洽談完成");
-				sDBean = schoolDemandDAO.update(sDBean);
-				if (sDBean != null) {
-					fBean.setSchoolId(sDBean.getSchoolId());
-					fBean.setMemberId(bean.getMemberId());
-					fBean.setSchoolDemandId(sDBean.getSchoolDemandId());
-					fBean.setTitle(sDBean.getActivityTopic());
-					fBean.setFrontCoverName("default");
-//					fBean.setFrontCover();
-					fBean.setFrontCoverLength(image.length());
-					fBean.setProjAbstract("完整計畫");
-					fBean.setContent("0%");
-					fBean.setLocation(sDBean.getActivityLocation());
-					fBean.setActivityStartTime(new java.util.Date(System.currentTimeMillis()));
-					fBean.setActivityEndTime(new java.util.Date(System.currentTimeMillis()));
-					fBean.setEstMember(0);
-					fBean.setBudget(0);
-					fBean.setCreateDate(result.getCheckTime());
-					fBean.setProjStatus("洽談中");
-					fullProjDAO.insert(fBean); 
-				}
-			}
+		} catch (FileNotFoundException e) {
+			System.out.println("圖片有問題");
 		}
 		return result;
 	}
@@ -94,6 +115,7 @@ public class ProcessingMemberService {
 		if (bean != null) {
 			bean.setProcessingMemberId(bean.getProcessingMemberId());
 			bean.setCheckStatus("未通過");
+			System.out.println(bean);
 			result = processingMemberDAO.update(bean);
 		}
 		return result;

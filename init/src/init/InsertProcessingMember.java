@@ -1,8 +1,6 @@
 package init;
 /*
- * 功能: 新增一百筆會員資料
- * 圖片為預設圖片
- * 密碼為: passw0rd
+ * 功能: 新增數筆計畫需求洽談中志工(學校提出計畫需求流程)資料
  */
 
 import global.GlobalService;
@@ -18,17 +16,17 @@ import java.sql.PreparedStatement;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
 
-public class InsertManyProcessingProj {
+public class InsertProcessingMember {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
 
-	private static final String INSERT = "INSERT INTO ProcessingProj (primaryProjId,schoolId,checkTime,checkStatus) VALUES(?,?,?,?)";
+	private static final String INSERT = "INSERT INTO ProcessingMember (schoolDemandId,memberId,checkTime,checkStatus) VALUES(?,?,?,?)";
 
 	public static void start() {
 		BufferedReader br = null;
 		try {
-			File fr = new File("schoolData\\ProcessingProj.txt");
+			File fr = new File("schoolData\\ProcessingMember.txt");
 //			new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));)
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF-8"));
 			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -76,7 +74,7 @@ public class InsertManyProcessingProj {
 				}
 			}
 		}
-		System.out.println("初步計畫洽談中學校的資料新增成功");
+		System.out.println("計畫需求洽談中志工(學校提出計畫需求流程)資料=>新增成功");
 	}
 
 	public static void main(String[] args) {

@@ -1,119 +1,85 @@
 package init;
+/*
+ * 功能: 新增數筆初步計畫洽談中學校的資料
+ * 
+ */
 
 import global.GlobalService;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Types;
+import java.text.SimpleDateFormat;
 
-public class InsertProcessingProj
-{
+public class InsertProcessingProj {
 	private static final String URL = GlobalService.URL;
 	private static final String USERNAME = GlobalService.USERNAME;
 	private static final String PASSWORD = GlobalService.PASSWORD;
-	
+
 	private static final String INSERT = "INSERT INTO ProcessingProj (primaryProjId,schoolId,checkTime,checkStatus) VALUES(?,?,?,?)";
-	
-	public static void start()
-	{
-		// 第一筆
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
-			pstmt.setInt(1,1);
-			pstmt.setInt(2,11601);
-			pstmt.setTimestamp(3,new java.sql.Timestamp(System.currentTimeMillis()));
-			pstmt.setString(4,"已通過");
-			pstmt.executeUpdate();
-		}
-		catch(SQLException e)
-		{
+
+	public static void start() {
+		BufferedReader br = null;
+		try {
+			File fr = new File("schoolData\\ProcessingProj.txt");
+//			new BufferedReader(new InputStreamReader(new FileInputStream(file),"UTF-8"));)
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF-8"));
+			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			PreparedStatement pstmt = conn.prepareStatement(INSERT);
+			while (br.ready()) {
+				String str = br.readLine();
+				String[] strArray = str.split("\\s+");
+				
+				pstmt.setInt(1,Integer.parseInt(strArray[0]));
+				pstmt.setInt(2,Integer.parseInt(strArray[1]));
+				if(strArray[2].equals("null")){
+					pstmt.setNull(3,Types.TIMESTAMP);
+				} else {
+					//時間-小時
+					int randomHour = (int) (Math.random()*24);
+					//時間-分秒
+					int randomMinute = (int) (1+Math.random()*59);
+					int randomSecond = (int) (1+Math.random()*59);
+					String formatStr = "%02d";
+					String theHour = String.format(formatStr, randomHour);
+					String theMinute = String.format(formatStr, randomMinute);
+					String theSecond = String.format(formatStr, randomSecond);
+					String temp = strArray[2]+" "+ theHour + ":" + theMinute + ":" + theSecond;
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					pstmt.setTimestamp(3,new java.sql.Timestamp(sdf.parse(temp).getTime()));	// registerTime
+				}
+				pstmt.setString(4,strArray[3]);
+				pstmt.executeUpdate();
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		// 第二筆
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+		finally
 		{
-			pstmt.setInt(1,1);
-			pstmt.setInt(2,11602);
-			pstmt.setTimestamp(3,new java.sql.Timestamp(System.currentTimeMillis()));
-			pstmt.setString(4,"未通過");
-			pstmt.executeUpdate();
+			if(br != null)
+			{
+				try
+				{
+					br.close();
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+				}
+			}
 		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		// 第三筆
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
-			pstmt.setInt(1,1);
-			pstmt.setInt(2,14501);
-			pstmt.setTimestamp(3,new java.sql.Timestamp(System.currentTimeMillis()));
-			pstmt.setString(4,"未通過");
-			pstmt.executeUpdate();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		// 第四筆
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
-			pstmt.setInt(1,2);
-			pstmt.setInt(2,11601);
-			pstmt.setNull(3,Types.TIMESTAMP);
-			pstmt.setString(4,"待審核");
-			pstmt.executeUpdate();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		// 第五筆
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
-			pstmt.setInt(1,2);
-			pstmt.setInt(2,14506);
-			pstmt.setNull(3,Types.TIMESTAMP);
-			pstmt.setString(4,"待審核");
-			pstmt.executeUpdate();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		// 第六筆
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
-			pstmt.setInt(1,2);
-			pstmt.setInt(2,14509);
-			pstmt.setNull(3,Types.TIMESTAMP);
-			pstmt.setString(4,"待審核");
-			pstmt.executeUpdate();
-		}
-		catch(SQLException e)
-		{
-			e.printStackTrace();
-		}
-		
-		System.out.println("發起者洽談資料");
-		
+		System.out.println("初步計畫洽談中學校的資料新增成功");
 	}
-	public static void main(String[] args)
-	{
-		InsertProcessingProj.start();
+
+	public static void main(String[] args) {
+		start();
 	}
 
 }

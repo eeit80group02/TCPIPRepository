@@ -229,13 +229,19 @@
 			<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
 <!-- 				<a class="btn-large red"> -->
 <!-- 			    	<span style="font-size:2em;font-weight:900">加入活動</span> -->
-<!-- 			    </a> -->
-			    
+<!-- 			    </a> --> 	
+
+				<!-- 學校 或者 發起者看不到 -->
 			    <c:if test="${not LoginOK.beanName.equals('school')}">
-				    <form id="participator" action="<c:url value="/participator.do" />" method="post">
-						<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-						<input id="participatorSubmit" class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="button" value="加入活動" >			
-					</form>
+			    	<c:if test="${LoginOK.memberId != fullProj.memberId}">
+					    <form id="participator" action="<c:url value="/participator.do" />" method="post">
+							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+							<input type="hidden" name="startTime" value="${startTime}">
+							<input type="hidden" name="endTime" value="${endTime}">
+							<input type="hidden" name="type" value="participate">
+							<input id="participatorSubmit" class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="button" value="加入活動" >			
+						</form>
+			    	</c:if>
 			    </c:if>
 			</div>
 			
@@ -254,7 +260,6 @@
 	<c:import url="/template/footer.jsp"
 		context="${pageContext.request.contextPath}" />
 	<!-- 頁尾 -->
-
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -275,12 +280,26 @@
 		
 		$(function(){
 			$("#participatorSubmit").on("click",function(){
-				<c:if test="${empty LoginOK}">
-					alert("你必須先登入會員");
-				</c:if>
-				$("#participator").submit();
+				<c:choose>
+					<c:when test="${empty LoginOK}">
+						alert("你必須先登入會員");
+					</c:when>
+					<c:otherwise>
+						$("#participator").submit();
+					</c:otherwise>
+				</c:choose>
 			});
-		})
+			
+			<c:if test="${not empty sessionScope.success}">
+				<c:remove var="success" scope="session"/>
+				alert("已申請成功，等待發起者審核");
+			</c:if>
+			
+			<c:if test="${not empty sessionScope.participate}">
+    			<c:remove var="participate" scope="session"/>
+				alert("此活動時間，亦有其他計畫進行中");
+    		</c:if>
+		});
 		
 		$(function(){
 			displayMessage();
