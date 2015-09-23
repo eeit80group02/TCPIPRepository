@@ -35,12 +35,9 @@
 <script type="text/javascript" src="../donationScripts/Donation.js"></script>
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
-
 <!-- 在多加載一次picture-big，比較保險 -->
 
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
-
-
 
 </head>
 <body>
@@ -243,10 +240,7 @@
 			}
 		}
 	</script>
-
 	<script type="text/javascript" src="../donationScripts/ScreenSize.js"></script>
-	</center>
-
 	<script type="text/javascript" src="../donationScripts/AutoComplete.js"></script>
 </body>
 </html>
