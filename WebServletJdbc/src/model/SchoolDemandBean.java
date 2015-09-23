@@ -20,7 +20,7 @@ public class SchoolDemandBean implements Serializable
 	private String content; 			// 需求內容(1000字?)
 	private String demandStatus;		// 計畫狀態(待洽談、洽談中、洽談完成、洽談失敗)
 	private OffersBean offerBean; // 對應提供項目
-	private ProcessingMemberBean processingMemberBean; //對應狀態
+	private List<ProcessingMemberBean> processingMemberList; //對應狀態
 	private SchoolBean schoolBean; //對應學校
 	private List<MemberBean> memberList;
 	
@@ -145,15 +145,15 @@ public class SchoolDemandBean implements Serializable
 		this.offerBean = offerBean;
 	}
 
-	public ProcessingMemberBean getProcessingMemberBean() {
-		return processingMemberBean;
+	public List<ProcessingMemberBean> getProcessingMemberList() {
+		return processingMemberList;
 	}
 
-	public void setProcessingMemberBean(ProcessingMemberBean processingMemberBean) {
-		this.processingMemberBean = processingMemberBean;
+	public void setProcessingMemberList(
+			List<ProcessingMemberBean> processingMemberList) {
+		this.processingMemberList = processingMemberList;
 	}
-	
-	
+
 	public SchoolBean getSchoolBean() {
 		return schoolBean;
 	}
@@ -175,7 +175,7 @@ public class SchoolDemandBean implements Serializable
 	public String toString()
 	{
 		return "SchoolDemandBean [schoolDemandId=" + schoolDemandId + ", schoolId=" + schoolId + ", participant=" + participant + ", activityTopic=" + activityTopic + ", activityLocation=" + activityLocation + ", activitySuitable=" + activitySuitable
-				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + ", ProcessingMemberBean=" + processingMemberBean + ", SchoolBean=" + schoolBean + ", memberList " + memberList + "]";
+				+ ", activityHost=" + activityHost + ", activityContact=" + activityContact + ", createDate=" + createDate + ", content=" + content + ", demandStatus=" + demandStatus + ", offerBean=" + offerBean + ", ProcessingMemberList=" + processingMemberList + ", SchoolBean=" + schoolBean + ", memberList " + memberList + "]";
 	}
 
 }
