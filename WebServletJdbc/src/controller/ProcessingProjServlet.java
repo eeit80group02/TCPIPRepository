@@ -15,7 +15,7 @@ import model.MemberBean;
 import model.ProcessingProjBean;
 import model.service.ProcessingProjService;
 
-@WebServlet("/ProcessingProj.do")
+@WebServlet("/processingProj.do")
 public class ProcessingProjServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;

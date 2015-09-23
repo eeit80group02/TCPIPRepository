@@ -56,6 +56,7 @@
 
 .disable {
 	text-decoration: line-through;
+	color: #616161 grey darken-2;
 }
 
 #trash-can {
@@ -146,6 +147,8 @@
     	   			
     	   			//Add mission from database
     	   			$.each(result.missions, function(){
+    	   				//check is subMission or not
+    	   				var mainMissionId = this.mainMissionId;
     	   				//format date from yyyy-mm-dd to 民國
     	   				var date = new Date(Date.parse(this.missionEndTime));
     	   				var year = date.getYear()-11;
@@ -153,13 +156,167 @@
     	   				var day = date.getDate();
     	   				var dateFormat = year + "-" + month + "-" + day;
     	   				
-    	   				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>" + this.name + "</div>" +
-    							  "<div id='dataRow"+ this.missionId + "' style='display:none'>" +
-    							  "<input type='text' class='missionExecutor' value='" + this.host + "' name='" + this.memberId + "' >" +
-    							  "<input type='text' class='missionDate' value=" + dateFormat + ">" +
-    							  "<input type='text' class='missionPriority' value=" + this.missionPriority + ">"+
-    							  "<input type='text' class='mainMissionId' value=" + this.mainMissionId + "></div>");
-    	   				$('#missionSet'+ this.missionSetId +'').siblings('ul').append($li);
+    	   				//Check if this is subMission or not
+    	   				if( mainMissionId == void 0){
+    	   					var $mainMission = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>" + this.name + "</div>" +
+      													  "<div id='dataRow"+ this.missionId + "' style='display:none'>" +
+      													  "<input type='text' class='missionExecutor' value='" + this.host + "' name='" + this.memberId + "' >" +
+      													  "<input type='text' class='missionDate' value=" + dateFormat + ">" +
+      													  "<input type='text' class='missionPriority' value=" + this.missionPriority + ">"+
+      													  "<input type='text' class='mainMissionId' value=" + this.mainMissionId + ">" +
+      													  "<input type='text' class='missionPosition' value=" + this.missionPosition + ">" +
+      													  "<input type='text' class='missionStatus' value='" + this.missionStatus + "'></div>");
+    	   					
+    	   					$('#missionSet'+ this.missionSetId +'').siblings('ul').append($mainMission);
+    	   					
+    	   					if(this.missionStatus=="已完成"){
+        						console.log('主任務: '+this.name+' 已完成');
+        						$('#dataRow'+this.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
+        					}
+    	   					
+    	   					
+    	   				} else {
+    	   					//Set subMission sortable
+    	   					$(".subMissionContainer ul").sortable({
+								cursor : 'move',
+								toleranceElement : '> div',
+								item : 'li', //Specifies which items inside the element should be sortable.
+								handle : 'div',
+								placeholder : "placeholder",
+								forcePlaceholderSize: true,
+								start: function(e, ui){
+							        ui.placeholder.height(ui.helper.outerHeight());
+							        $('.placeholder').css('background-color','#3f51b5 indigo');
+							    }
+							})
+    	   					
+    	   					
+    	    	   			//add subMission
+    	    	   			var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + subMissionCount + '" class="row" style="width:585.906px;height:60px;">' +
+														'<div class="subMissionSettings col l1"><i class="material-icons" style="padding:10px 0px;font-size:40px;">settings</i></div>' +
+														'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ subMissionCount +'" class="subMissionStatus filled-in" value="' + this.missionStatus + '" >'+
+														'<label for="subMissionCheckbox'+ subMissionCount +'"></label></div>' +
+														'<textarea class="subMissionName col l5 materialize-textarea" placeholder="請輸入子任務內容" style="max-height:45px;">'+ this.name +'</textarea>' +
+														'<div class="subMissionDateContainer col l3"><input type="text" class="subMissionDate subDatepicker col l10" value="'+ dateFormat +'" readonly>' +
+														'</div>' + '<div class="addSubMissionExecutor col l2"><div class="subMissionExecutor" style="padding:15px 0px;">'+ this.host +'</div></div>' +
+														'<input type="hidden" class="subMissionPosition" value="' + this.missionPosition + '" >' +
+														'<input type="hidden" class="mainDataRowLocation" value="dataRow'+ mainMissionId +'"></div>');
+        					
+    	    	   			$('.subMissionContainer ul').prepend($subMission);
+    	    	   			
+    	    	   			if(this.missionStatus=="已完成"){
+    	    					console.log('子任務: ' + this.name + ' 已完成');
+    	    					console.log($('#subDataRow'+subMissionCount+' .subMissionStatus'));
+    	    					$('#subDataRow'+subMissionCount).parent().removeClass('#81d4fa light-blue lighten-3');
+    	    					$('#subDataRow'+subMissionCount).parent().addClass('#bdbdbd grey lighten-1');
+    	    					$('#subDataRow'+subMissionCount+' .subMissionStatus').prop('checked',true);
+    	    					$('#subDataRow'+subMissionCount).children('textarea').css({'text-decoration':'line-through',
+									   													   'color':'#9e9e9e grey'})
+    	    				}
+    	    	   
+    	    	   			subMissionCount++;
+    	    	   			
+    	    	   			
+    	    	   			//JQuery datepicker
+    	    				var inputDate = $(".subDatepicker");
+    	    				var changeYearButtons = function() {
+    	    					setTimeout(function() {
+    	    				        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+    	    				        var prevYrBtn = $('<button>前年</button>');
+    	    				        prevYrBtn.bind("click", function() {
+    	    				            $.datepicker._adjustDate(inputDate, -1, 'Y');
+    	    				    });
+    	    				    var nextYrBtn = $('<button>次年</button>');
+    	    				    nextYrBtn.bind("click", function() {
+    	    				        $.datepicker._adjustDate(inputDate, +1, 'Y');
+    	    				    });
+    	    				    prevYrBtn.appendTo(widgetHeader);
+    	    				    nextYrBtn.appendTo(widgetHeader);
+    	    				   }, 1);
+    	    				};
+    	    		
+    	    				var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+    	    				var old_get = $.datepicker._get;
+    	    				var old_CloseFn = $.datepicker._updateDatepicker;
+    	    				$.extend($.datepicker, {
+    	    		    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+    	    		        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+    	    		        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+    	    		            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+    	    		                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+    	    		            	}).end().end().get(0).outerHTML;
+    	    		        	}
+    	    		        	return htmlYearMonth;
+    	    		    		},
+    	    		    		_get:function (a, b) {
+    	    		        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+    	    		        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+    	    		        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+    	    		        		return old_get.apply(this, [a, b]);
+    	    		    		},
+    	    		    		_updateDatepicker:function (inst) {
+    	    		        		old_CloseFn.call(this, inst);
+    	    		        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
+    	    		                    inst.input.val("");
+    	    		            	});
+    	    		    		},
+    	    		    		_setDateDatepicker: function (a, b) {
+    	    		    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+    	    		    		},
+    	    		    		_widgetDatepicker: function () {
+    	    		        		return this.dpDiv
+    	    		    		}
+    	    				});
+    	    				
+    	    				
+    	    				$(".subDatepicker").datepicker({
+    	    					beforeShow: changeYearButtons,
+    	    					onChangeMonthYear: changeYearButtons,
+    	    		    		minDate: new Date(),
+    	    		    		firstDay: 1, 
+    	    		    		dateFormat: "yy-m-d",
+    	    		    		showOn: "button",
+    	    		    	    buttonImage: "images/calendar.png",
+    	    		    	    buttonImageOnly: true,
+    	    		    		onSelect: function (dateText, inst) {
+    	    		        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+    	    		        		var reM = /m+/g;
+    	    		        		var reD = /d+/g;
+    	    		        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+    	    		            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+    	    		            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+    	    		        		};
+    	    		        		$.each(objDate, function (k, v) {
+    	    		            		var re = new RegExp(k + "+");
+    	    		            		dateFormate = dateFormate.replace(re, v);
+    	    		        		});
+    	    		        		inst.input.val(dateFormate);
+    	    		        		
+    	    		        		
+    	    		    		}
+    	    				});
+    	    			
+    	    				$.datepicker.regional['zh-TW'] = {
+    	    						prevText: '上月',
+    	    						nextText: '次月',
+    	    						monthNames: ['一月','二月','三月','四月','五月','六月',
+    	    						'七月','八月','九月','十月','十一月','十二月'],
+    	    						monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+    	    						dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+    	    						dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+    	    						dayNamesMin: ['日','一','二','三','四','五','六'],
+    	    				};
+    	    				$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+    	    	   			
+    	    				//Set datapicker icon position
+    	    				$('.subMissionDateContainer').siblings('.ui-datepicker-trigger').appendTo('.subMissionDateContainer')
+    	    				
+    	    				$('.subMissionDateContainer img').css({'padding':'15px 0px',
+    	    					  'cursor':'pointer'}).addClass('col l2');
+    	    				
+    	    				$('.subMissionSettings').css({'cursor':'pointer'});
+    	   				}
+    	   				
     	   				
     	   				missionCount++;
     	   			});
@@ -236,7 +393,9 @@
 						  "<input type='text' class='missionExecutor' value='待認領' >" +
 						  "<input type='text' class='missionDate'>" +
 						  "<input type='text' class='missionPriority'>"+
-						  "<input type='text' class='mainMissionId' ></div>");
+						  "<input type='text' class='mainMissionId' >" + 
+						  "<input type='text' class='missionPosition' >" + 
+						  "<input type='text' class='missionStatus' ></div>");
 				missionCount++;
 				$li.appendTo($(event.target).parent().siblings( "ul" ));
 			});
@@ -481,34 +640,31 @@
 
 				var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + subMissionCount + '" class="row" style="width:585.906px;height:60px;">' +
 														'<div class="subMissionSettings col l1"><i class="material-icons" style="padding:10px 0px;font-size:40px;">settings</i></div>' +
-														'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ subMissionCount +'" class="subMissionStatus filled-in">'+
+														'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ subMissionCount +'" class="subMissionStatus filled-in" value="進行中" >'+
 														'<label for="subMissionCheckbox'+ subMissionCount +'"></label></div>' +
 														'<textarea class="subMissionName col l5 materialize-textarea" placeholder="請輸入子任務內容" style="max-height:45px;">'+ subMissionName +'</textarea>' +
 														'<div class="subMissionDateContainer col l3"><input type="text" class="subMissionDate subDatepicker col l10" value="'+ subMissionDate +'" readonly>' +
 														'</div>' + '<div class="addSubMissionExecutor col l2"><div class="subMissionExecutor" style="padding:15px 0px;">'+
 														subMissionExecutor +'</div></div>' +
+														'<input type="hidden" class="subMissionPosition" >' +
 														'<input type="hidden" class="mainDataRowLocation" value="'+ $('.dataRowLocation').val() +'"></div>');
 				$('.subMissionContainer ul').prepend($subMission);
 				$('.subMission').hide();
 				$('.openSubMissionWindow').css('display','block');
 				
 				//Set subMission sortable
-				$(".subMissionContainer ul").sortable({
-					cursor : 'move',
-					toleranceElement : '> div',
-					item : 'li', //Specifies which items inside the element should be sortable.
-					handle : 'div',
-					placeholder : "placeholder",
-					forcePlaceholderSize: true,
-					start: function(e, ui){
-				        ui.placeholder.height(ui.helper.outerHeight());
-				        $('.placeholder').css('background-color','#3f51b5 indigo');
-				    }
-				})
-				
-				
-				
-				
+// 				$(".subMissionContainer ul").sortable({
+// 					cursor : 'move',
+// 					toleranceElement : '> div',
+// 					item : 'li', //Specifies which items inside the element should be sortable.
+// 					handle : 'div',
+// 					placeholder : "placeholder",
+// 					forcePlaceholderSize: true,
+// 					start: function(e, ui){
+// 				        ui.placeholder.height(ui.helper.outerHeight());
+// 				        $('.placeholder').css('background-color','#3f51b5 indigo');
+// 				    }
+// 				})
 				
 				
 				//JQuery datepicker
@@ -603,8 +759,6 @@
 				$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
 				
 				//Set datapicker icon position
-// 				$('.subMissionDate').siblings('.ui-datepicker-trigger').addClass('col l1').css({'display':'block',
-// 																								'z-index':'1'});
 				$('.subMissionDateContainer').siblings('.ui-datepicker-trigger').appendTo('.subMissionDateContainer')
 				
 				$('.subMissionDateContainer img').css({'padding':'15px 0px',
@@ -640,6 +794,7 @@
 			//Set subMissionSettings dialog close condition
 			$('#transferToMission').click(function(){
 				var mainMissionId = $('#'+$('.subMissionLocation').val()).children('input[class="mainDataRowLocation"]').val();
+				console.log("mainMissionId="+mainMissionId);
 				var subMissionId = $('.subMissionLocation').val();
 				console.log("subMissionId="+subMissionId);
 				console.log($('#'+subMissionId));
@@ -651,10 +806,30 @@
 				console.log("subMissionDate="+subMissionDate);
 				var subMissionExecutor = $('#'+subMissionId+' .subMissionExecutor').text();
 				console.log("subMissionExecutor="+subMissionExecutor);
+				var subMissionPosition = $('#'+subMissionId+' .subMissionPosition').val();
+				console.log("subMissionPosition="+subMissionPosition);
+				//******************************************************************************
+				//******************************************************************************
+				//******************************************************************************
+				var $li = $("<li></li>").html("<div class='li_edit waves-effect waves-light btn'>"+ subMissionName +"</div>" +
+						  "<div id='dataRow"+ missionCount + "' style='display:none'>" +
+						  "<input type='text' class='missionExecutor' value='" + subMissionExecutor + "' >" +
+						  "<input type='text' class='missionDate' value='" + subMissionDate + "'>" +
+						  "<input type='text' class='missionPriority' value='普通'>"+
+						  "<input type='text' class='mainMissionId' >" + 
+						  "<input type='text' class='missionPosition' >" + 
+						  "<input type='text' class='missionStatus' value='" + subMissionStatus + "'></div>");
 				
-				//******************************************************************************
-				//******************************************************************************
-				//******************************************************************************
+				$('#'+mainMissionId).parent().parent().append($li);
+				$('#'+subMissionId).parent().remove();
+				
+				if(subMissionStatus=="已完成"){
+					console.log('任務已完成');
+					console.log($('#dataRow'+missionCount).siblings('div'));
+					$('#dataRow'+missionCount).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
+				}
+				
+				missionCount++;
 				$('.subMissionSettingsDialog').dialog( "close" );
 			});			
 			$('#deleteSubMission').click(function(){
@@ -714,6 +889,7 @@
 				var dataDate = $(div).siblings("div").children(".missionDate").val();
 				var dataPriority = $(div).siblings("div").children(".missionPriority").val();
 				var dataExecutorId = $(div).siblings("div").children(".missionExecutor").attr("name");
+// 				var dataStatus = $(div).siblings("div").children(".missionStatus").val();
 				
 				var temp = $(div).siblings("div").attr('id');
 				$('.missionDetailDialog .missionName').val(dataName);
@@ -890,12 +1066,18 @@
 					$('.missionDetailDialog .missionName').removeClass('disable');
 					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
 					$(event.target).prop('checked',false);
-					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#616161 grey darken-2');
+					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#bdbdbd grey lighten-1');
+					$('#'+$('.dataRowLocation').val()+' .missionStatus').val('進行中');
+					
+					console.log($('#'+$('.dataRowLocation').val()+' .missionStatus').val());
 				} else {
 					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
 					$('.missionDetailDialog .missionName').addClass('disable');
 					$(event.target).prop('checked',true);
-					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#616161 grey darken-2');
+					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#bdbdbd grey lighten-1');
+					$('#'+$('.dataRowLocation').val()+' .missionStatus').val('已完成');
+					
+					console.log($('#'+$('.dataRowLocation').val()+' .missionStatus').val());
 				}
 			});
 			
@@ -903,11 +1085,17 @@
 			$(document).on('click','.subMissionStatus',function() {
 				console.log(event.target);
 				if( $(event.target).prop('checked') == true ){
-					$(event.target).val('true');
-					$(event.target).parent().siblings('textarea').css('text-decoration','line-through');
+					$(event.target).val('已完成');
+					$(event.target).parent().parent().parent().removeClass('#81d4fa light-blue lighten-3');
+					$(event.target).parent().parent().parent().addClass('#bdbdbd grey lighten-1');
+					$(event.target).parent().siblings('textarea').css({'text-decoration':'line-through',
+																	   'color':'#9e9e9e grey'});
 				} else {
-					$(event.target).val('false');
-					$(event.target).parent().siblings('textarea').css('text-decoration','none');
+					$(event.target).val('進行中');
+					$(event.target).parent().parent().parent().removeClass('#bdbdbd grey lighten-1');
+					$(event.target).parent().parent().parent().addClass('#81d4fa light-blue lighten-3');
+					$(event.target).parent().siblings('textarea').css({'text-decoration':'none',
+																	   'color':'black'});
 				}
 			});
 			
@@ -1137,7 +1325,7 @@
 					<div class="col l12">
 						<label for="subMissionContainer">子任務 </label>
 						<div class="subMissionContainer">
-							<ul class="col l12" style="column-count:4;column-gap:0;">
+							<ul class="col l12" style="column-count:4;column-gap:0;width:605.906px;">
 								<li class="notSortable">
 									<div class="openSubMissionWindow">添加子任務</div>
 									<div class="subMission row" style="display:none">
