@@ -91,7 +91,7 @@ public class InsertFullProj
 				pstmt.setString(11,"台中市");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/05/21");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/07/21");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015-06-04");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,12);							// estMember  活動志工人數
 				pstmt.setInt(15,150000);						// budget 活動預算
@@ -138,9 +138,9 @@ public class InsertFullProj
 				pstmt.setString(11,"台南市");				// location 活動確定地點
 				
 				pstmt.setString(12,"2014/10/16");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/12/14");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2014/10/23");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,28);							// estMember  活動志工人數
+				pstmt.setInt(14,18);							// estMember  活動志工人數
 				pstmt.setInt(15,50000);						// budget 活動預算
 		
 //							pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
@@ -186,9 +186,9 @@ public class InsertFullProj
 				pstmt.setString(11,"屏東縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/07/28");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/09/07");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/08/05");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,18);							// estMember  活動志工人數
+				pstmt.setInt(14,11);							// estMember  活動志工人數
 				pstmt.setInt(15,300000);						// budget 活動預算
 		
 //										pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
@@ -202,7 +202,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24, true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -233,9 +233,9 @@ public class InsertFullProj
 				pstmt.setString(11,"臺東縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/07/07");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/07/30");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/07/14");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,25);							// estMember  活動志工人數
+				pstmt.setInt(14,15);							// estMember  活動志工人數
 				pstmt.setInt(15,100000);						// budget 活動預算
 		
 //													pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
@@ -281,9 +281,9 @@ public class InsertFullProj
 				pstmt.setString(11,"宜蘭縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2013/10/24");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/05/30");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2013/11/02");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,30);							// estMember  活動志工人數
+				pstmt.setInt(14,10);							// estMember  活動志工人數
 				pstmt.setInt(15,7700000);						// budget 活動預算
 		
 //																pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
@@ -297,7 +297,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,false);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,false);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -329,9 +329,9 @@ public class InsertFullProj
 				pstmt.setString(11,"台南市");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/01/16");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/03/16");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/01/23");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,35);							// estMember  活動志工人數
+				pstmt.setInt(14,17);							// estMember  活動志工人數
 				pstmt.setInt(15,90000);						// budget 活動預算
 		
 //																			pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
@@ -345,7 +345,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -376,14 +376,14 @@ public class InsertFullProj
 				pstmt.setString(11,"屏東縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2013/12/09");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/02/17");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2013/12/15");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,10);		// estMember  活動志工人數
 				pstmt.setInt(15,50000);		// budget 活動預算
 		
 //																						pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/09/20").getTime()));				// createDate  建立日期
+				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/11/20").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
 				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
 				
@@ -392,7 +392,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -424,7 +424,7 @@ public class InsertFullProj
 				pstmt.setString(11,"新竹縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/02/20");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/04/17");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/02/28");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,10);		// estMember  活動志工人數
 				pstmt.setInt(15,50000);		// budget 活動預算
@@ -440,7 +440,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setInt(22,5);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -469,26 +469,26 @@ public class InsertFullProj
 				
 				pstmt.setString(9,"粉鳥林漁港 環境整理物資採購計劃，有錢出錢，有力出力！資源互助，讓美麗的小漁港，永遠美麗！");		// projAbstract 計畫摘要
 				pstmt.setString(10,"東澳‧粉鳥林漁港\n東澳灣．粉鳥林漁港位在宜蘭縣南澳鄉，為東澳灣的最南端，彎弧形的海灣由沙灘及交研所組成，湛藍的山海景緻盡收眼底，耳邊傳來海浪陣陣拍打岩岸的聲響，站在烏巖角上方的蘇花公路轉彎處，景色最為迷人。粉鳥林漁港早期有許多鴿子群聚於此，而鴿子的台灣稱為粉鳥，因此被稱為「粉鳥林漁港」，此漁港捕獲豆腐鯊的數量為台灣之最，不僅海天美景宜人，還有多種生鮮魚類，許多釣客也相當喜愛到此垂釣。(文章來源：玩全台灣旅遊網)\n為什麼需要募集採購垃圾袋的經費呢?\n粉鳥林是一個很美的小漁港，在過去訪客不多，垃圾也不多的時候，港邊的環境整理，皆由當地的海巡駐所人員自掏腰包，購買垃圾清潔袋，掃把等器材，並在非值班的時間，自發性的來整理環境垃圾。\n但隨著假日遊客增加，垃圾也隨之增加！造成原本美麗的小漁港慢慢變樣了！！而由於粉鳥林地處偏遠的東澳灣，當地政府的環保單位，沒有人力定期來整理清掃垃圾。\n而當地住民或海巡駐人員，雖有人有心願意就近協助整理環境，卻無力負擔購買垃圾清潔袋，掃把等耗材！為什麼我們想發起這個活動? \n我非常喜歡大海，常一個人遠從台北開車到粉鳥林垂釣。而每次到那後，總會隨手整理一下港邊的垃圾。久而久之，也與當地人有些認識及互動。從一次次的閒聊中，能深刻感受到當地居民對這環境的熱愛，但從言語中也有透露出一些無能為力。(下圖：居民的無奈) \n因為，過去的粉鳥林漁港，一個垃圾袋可以用上二個星期，還裝不滿。但現在，一個星期假日，就會產生好幾大袋的垃圾。而大型垃圾袋雖然一個10多元，但當垃圾袋消耗量大時，這些費用對於原本經濟收入就不佳的當地居民，也是沉重的負擔！他們實在沒有能力再自掏腰包了！(下圖：清潔物資的不足) \n大家可以怎麼幫粉鳥林? \n希望藉由這次活動，募集5000元的經費，用來購買10箱大型清潔袋(90x120cm)，及竹掃帚，垃圾夾等用具，供當地居民們清潔使用~~預計可使用半年。專案若成功，我們會將購買品項等相關證明、照片發布在故事記錄並更新在內文中。\n垃圾整理裝袋打包好後，就不會被風吹到海裡，也不會被貓狗抓食，更不會異味飄散。一包包的垃圾們，就可以乖乖地等候鎮公所的清潔車來搬運囉！(當地居民會電話聯絡鎮公所派車來載）");		// content 計畫內容
-				pstmt.setString(11,"新竹縣");				// location 活動確定地點
+				pstmt.setString(11,"宜蘭縣");				// location 活動確定地點
 				
-				pstmt.setString(12,"2015/02/20");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/04/17");				//activityEndTime  活動結束時間
+				pstmt.setString(12,"2013/10/11");				//activityStartTime 活動開始時間
+				pstmt.setString(13,"2013/10/20");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,10);		// estMember  活動志工人數
-				pstmt.setInt(15,50000);		// budget 活動預算
+				pstmt.setInt(14,12);		// estMember  活動志工人數
+				pstmt.setInt(15,5000);		// budget 活動預算
 		
 //																												pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 				pstmt.setTimestamp(16,new java.sql.Timestamp(sdf.parse("2013/10/05").getTime()));				// createDate  建立日期
 				pstmt.setString(17,"已完成");				    // projStatus  計畫狀態  
-				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-隊輔組-總務組");		// orgArchitecture  成員架構
+				pstmt.setString(18,"活動發起人-活動總召-活動組-企畫組-總務組");		// orgArchitecture  成員架構
 				
 				pstmt.setNull(19,Types.NVARCHAR);		// projFileName  完整計畫檔名(pdf)
 				pstmt.setNull(20,Types.VARBINARY);		// projFile  完整計畫檔案(上傳完整計畫的pdf檔)
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
-				pstmt.setInt(22,5);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(22,Types.NULL);		// reviews  評價分數(學校評價)(滿分5分)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -519,7 +519,7 @@ public class InsertFullProj
 				pstmt.setString(11,"雲林縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2014/07/06");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/09/01");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2014/07/11");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,20);		// estMember  活動志工人數
 				pstmt.setInt(15,100000);		// budget 活動預算
@@ -535,7 +535,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,false);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -567,7 +567,7 @@ public class InsertFullProj
 				pstmt.setString(11,"宜蘭縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/06/10");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/08/24");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/06/18");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,14);		// estMember  活動志工人數
 				pstmt.setInt(15,500000);		// budget 活動預算
@@ -583,7 +583,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -615,7 +615,7 @@ public class InsertFullProj
 				pstmt.setString(11,"澎湖縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/06/12");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/07/15");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/06/20");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,18);		// estMember  活動志工人數
 				pstmt.setInt(15,40000);		// budget 活動預算
@@ -631,7 +631,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -663,7 +663,7 @@ public class InsertFullProj
 				pstmt.setString(11,"桃園市");				// location 活動確定地點
 				
 				pstmt.setString(12,"2014/04/07");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/06/02");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2014/04/14");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,10);		// estMember  活動志工人數
 				pstmt.setInt(15,50000);		// budget 活動預算
@@ -679,7 +679,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -711,7 +711,7 @@ public class InsertFullProj
 				pstmt.setString(11,"台東縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2014/05/26");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/06/08");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2014/06/02");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,10);		// estMember  活動志工人數
 				pstmt.setInt(15,18500);		// budget 活動預算
@@ -726,7 +726,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,false);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -757,7 +757,7 @@ public class InsertFullProj
 				pstmt.setString(11,"彰化縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2014/05/08");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2014/06/05");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2014/05/13");				//activityEndTime  活動結束時間
 				
 				pstmt.setInt(14,13);		// estMember  活動志工人數
 				pstmt.setInt(15,5000);		// budget 活動預算
@@ -772,7 +772,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,false);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
@@ -803,9 +803,9 @@ public class InsertFullProj
 				pstmt.setString(11,"花蓮縣");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015/04/16");				//activityStartTime 活動開始時間
-				pstmt.setString(13,"2015/06/15");				//activityEndTime  活動結束時間
+				pstmt.setString(13,"2015/04/22");				//activityEndTime  活動結束時間
 				
-				pstmt.setInt(14,25);		// estMember  活動志工人數
+				pstmt.setInt(14,15);		// estMember  活動志工人數
 				pstmt.setInt(15,100000);		// budget 活動預算
 		
 	//																																								pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
@@ -819,7 +819,7 @@ public class InsertFullProj
 				pstmt.setNull(21,Types.BIGINT);			// projFileLength  檔案長度(pdf)
 				
 				pstmt.setNull(22,Types.INTEGER);		// reviews  評價分數(學校評價)(滿分5分)
-				pstmt.setNull(23,Types.INTEGER);		// reviewsContent 評價內容(指學校給社團的評價內容)
+				pstmt.setNull(23,Types.NVARCHAR);		// reviewsContent 評價內容(指學校給社團的評價內容)
 				
 				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
 				pstmt.setBoolean(25,true);				// memberConfirm  發起人確認狀態(同意、預設null) TorF

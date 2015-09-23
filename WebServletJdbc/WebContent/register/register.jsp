@@ -30,53 +30,9 @@
 
 
 <body class="deep-orange lighten-5">
-<header> 頁首 <nav>
-	<div class="nav-wrapper grey darken-3">
-		<a href="#!" class="brand-logo"> <img alt="TCPIP" title="TCPIP"
-			src="${pageContext.request.contextPath}/picture/LOGO.PNG" />
-		</a>
-
-
-		<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
-			<li><a href="sass.html">瀏覽</a></li>
-			<li><a href="badges.html">捐贈</a></li>
-			<li><a href="#modal1" class="modal-trigger">登入</a></li>
-			<li><a href="#!"><i class="material-icons">search</i></a></li>
-		</ul>
-	</div>
-	</nav>
-</header>
-
-	 
- <!-- 登入用modal --> 
-  <div id="modal1" class="modal">
-    <div class="modal-content blue lighten-5" style="height:80%;width:100%;">
-    	<div class="row" style="margin-top:0px;">
-	      <h4 class="center-align" style="font-family:微軟正黑體;font-weight:600;">登入TCPIP</h4>
-	    </div>
-	    <div class="divider" style="display:block;"></div>
-			    <div style="width:60%;margin:0 auto;">  
-			      <form class="col l6 offset-l3" id="login">
-			      	<div class="input-field" style="margin-top:10%;">
-			          	<input id="account" type="text" class="validate">
-			          	<label for="account" style="font-size:1.5em;">帳號</label>
-		        	</div>
-		        	<div class="input-field">
-				         <input id="password" type="password" class="validate">
-				         <label for="password" style="font-size:1.5em;">密碼</label>
-		        	</div>
-			      </form>
-		    	</div>
-    </div>
-    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
-    	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a>
-		  <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	      
-	      <a href="#!" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a>
-    	</div>
-    </div>
-  </div>
- <!-- 登入用modal end tag-->  
+	<!-- 頁首 -->
+	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"/>
+	<!-- 頁首 -->
 		
 
 	<!-- 頁面主題提示 -->
@@ -92,63 +48,72 @@
 	        <div class="card-panel hoverable" style="padding:0;margin:0;">
 			  <ul id="formul" class="collapsible" data-collapsible="accordion" style="font-family:微軟正黑體;font-weight:600;margin:0;">
 			    <li style="margin:0;">
-			      <button class="collapsible-header deep-orange lighten-4 left-align" id="accountinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;" autofocus><i class="material-icons">play_arrow</i>帳號</button>
-			      <div class="collapsible-body cyan lighten-5 black-text"  id="accountinfo">
-			      	<div style="font-size:1.2em;">
-			      		<ul id="finalchk1">
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li>
-			      		</ul>
-			      	</div>
+			      <button class="deep-orange lighten-4 left-align" id="accountinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;" autofocus><i class="material-icons">play_arrow</i>帳號</button>
+			      <div class="cyan lighten-5 black-text"  id="accountinfo">
+<!-- 			      	<div style="font-size:1.2em;"> -->
+					      		<ul id="actvalidatediv" class="card-panel cyan lighten-5" style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+						      		<li id="liheight"style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li>
+						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li>
+						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li>
+						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li>
+					      		</ul>
+<!-- 			      	</div> -->
 			      </div>
 			    </li>
 			    <li style="margin:0">
-			      <button class="collapsible-header deep-orange lighten-4 left-align" id="passwordinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼</button>
-			      <div class="collapsible-body cyan lighten-5 black-text" id="passwordinfo">
-			      	<div style="font-size:1.2em;">
-			      		<ul id="finalchk2">
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic1"></i><span id="rule2text1">必須包含英文字母</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic6"></i><span id="rule2text6">必須包含數字</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic2"></i><span id="rule2text2">密碼與密碼確認必須相同</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic3"></i><span id="rule2text3">必須包含至少一特殊符號</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic4"></i><span id="rule2text4">不得有中文字元</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic5"></i><span id="rule2text5">必須介於10~16個字元間</span></li>
+			      <button class="deep-orange lighten-4 left-align" id="passwordinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼</button>
+			      <div class="yan lighten-5 black-text" id="passwordinfo">
+<!-- 			      	<div style="font-size:1.2em;"> -->
+			      		<ul id="pswdvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic1"></i><span id="rule2text1">必須包含英文字母</span></li>
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic6"></i><span id="rule2text6">必須包含數字</span></li>
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic3"></i><span id="rule2text3">必須包含至少一特殊符號</span></li>
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic4"></i><span id="rule2text4">不得有中文字元</span></li>
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic5"></i><span id="rule2text5">必須介於10~16個字元間</span></li>
 			      		</ul>
-			      	</div>			      
+<!-- 			      	</div>			       -->
 			      </div>
 			    </li>
 			    <li style="margin:0">
-			      <button class="collapsible-header deep-orange lighten-4 left-align" id="phoneinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>聯絡方式</button>
-			      <div class="collapsible-body cyan lighten-5 black-text" id="phoneinfo">
-			      <div style="font-size:1.2em;">
-			      		<ul id="finalchk3">
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic1"></i><span id="rule3text1">室內電話、手機至少擇一選填</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic2"></i><span id="rule3text2">室內電話符合格式</span></li>
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic3"></i><span id="rule3text3">手機符合格式</span></li>
+			      <button class="deep-orange lighten-4 left-align"style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼確認</button>
+			      <div class="yan lighten-5 black-text">
+<!-- 			      	<div style="font-size:1.2em;"> -->
+			      		<ul id="chkvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic2"></i><span id="rule2text2">密碼與密碼確認必須相同</span></li>
 			      		</ul>
-			      	</div>	
+<!-- 			      	</div>			       -->
 			      </div>
 			    </li>
 			    <li style="margin:0">
-			      <button class="collapsible-header deep-orange lighten-4 left-align" id="birthdayinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>生日</button>
-			      <div class="collapsible-body cyan lighten-5 black-text" id="birthdayinfo">
-			      <div style="font-size:1.2em;">
-			      		<ul id="finalchk4">
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule5pic1"></i><span id="rule5text1">生日符合格式</span></li>
+			      <button class="deep-orange lighten-4 left-align" id="phoneinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>聯絡方式</button>
+			      <div class="cyan lighten-5 black-text" id="phoneinfo">
+<!-- 			      <div style="font-size:1.2em;"> -->
+			      		<ul id="phonevalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic1"></i><span id="rule3text1">室內電話、手機至少擇一選填</span></li>
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic2"></i><span id="rule3text2">室內電話符合格式</span></li>
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic3"></i><span id="rule3text3">手機符合格式</span></li>
 			      		</ul>
-			      	</div>	
+<!-- 			      	</div>	 -->
 			      </div>
 			    </li>
 			    <li style="margin:0">
-			      <button class="collapsible-header deep-orange lighten-4 left-align" id="emailinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>Email</button>
-			      <div class="collapsible-body cyan lighten-5 black-text" id="emailinfo">
-			      <div style="font-size:1.2em;">
-			      		<ul id="finalchk5">
-				      		<li><i class="material-icons" style="vertical-align:text-bottom;" id="rule4pic1"></i><span id="rule4text1">Email符合格式</span></li>
+			      <button class="deep-orange lighten-4 left-align" id="birthdayinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>生日</button>
+			      <div class="cyan lighten-5 black-text" id="birthdayinfo">
+<!-- 			      <div style="font-size:1.2em;"> -->
+			      		<ul id="birthvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule5pic1"></i><span id="rule5text1">生日符合格式</span></li>
 			      		</ul>
-			      	</div>	
+<!-- 			      	</div>	 -->
+			      </div>
+			    </li>
+			    <li style="margin:0">
+			      <button class="deep-orange lighten-4 left-align" id="emailinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>Email</button>
+			      <div class="cyan lighten-5 black-text" id="emailinfo">
+<!-- 			      <div style="font-size:1.2em;"> -->
+			      		<ul id="emailvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule4pic1"></i><span id="rule4text1">Email符合格式</span></li>
+			      		</ul>
+<!-- 			      	</div>	 -->
 			      </div>
 			    </li>
 			  </ul>
@@ -186,6 +151,7 @@
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
 							<label for="accounts" style="font-size:1.3em;font-weight:600;">帳號</label>
+							
 						</div>
 						<!-- 密碼 -->
 						<div class="input-field row">
@@ -400,36 +366,11 @@
 		 </div>
 <!-- 身分驗證用modal end tag-->  		 
 		 
+	<!-- 頁尾 -->
+	<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}"/>
+	<!-- 頁尾 -->
 
 
-
-
-        <footer class="page-footer grey darken-4">
-          <div class="container">
-            <!-- footer上半部的container -->
-			<!-- footer左半邊 -->
-			<div>
-                <h2 class="blue-text text-darken-2 left" style="display:inline;margin:0 10px 0 5px;">TCPIP</h2>
-              	<div class="left" id="taiwan">
-              		<p class="grey-text text-lighten-4 ">Taiwan Camp’s Project Innovation Platform </p>
-              	</div>
-            </div>
-			  <div class="right" style="color:white;">
-				<h2 class="blue-text text-darken-2 left" style="display:inline;margin:0 10px 0 5px;">LINKS</h2>
-              	<div class="left">
-              	  <a class="grey-text text-lighten-3" href="https://www.flyingv.cc/">FlingV</a><br/>
-                  <a class="grey-text text-lighten-3" href="http://www.indievox.com/">iNDIEVOX</a><br/>
-                  <a class="grey-text text-lighten-3" href="http://www.elivtw.com/">以立國際服務</a>
-			  </div>
-          </div>
-          <!-- footer下半部的container -->
-          <div class="footer-copyright valign-wrapper" style="clear:both;">
-            <div class="container center-align">
-          		 台灣志願服務營隊計畫創新平台 © 2015 Copyright 
-            </div>
-          </div>
-          </div>
-        </footer>
 
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -534,7 +475,7 @@
 		    		dayNamesMin: ['日','一','二','三','四','五','六'],
 		    	};
 		    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-				
+			
 			//mouseover時，單個input元素被舉起
 			$(".input-field").addClass("hoverable");
 
@@ -561,52 +502,33 @@
 			});
 			
 				
-			//禁止使用者點擊
-				$("#validateform").on({
-					"mouseover":function(){
-						$(".collapsible-header").prop("disabled",true);
-					},
-					"mouseout":function(){
-						$(".collapsible-header").prop("disabled",false);
-					}
-				})
+				function makeanimate(ele1,ele2,ele3){
+					$(ele1).on({"focus":function(e){
+							$(ele2).animate({
+								height:($("#liheight").height()*(ele3.length))
+							}, 1000 );
+							$(ele3).animate({
+								opacity:"1"
+							},500);							
+					},"blur":function(e){
+							$(ele2).animate({
+								height:"1px"
+							  }, 1000 );
+							$(ele3).animate({
+								opacity:"0"
+							},500);								
+							
+					}})
+				};
 				
-				$("#accounts").on("focus",function(){
-					if(!$("#accountinfohead").hasClass("active"))
-					$("#accountinfohead").trigger("click");
-				})
+				makeanimate($("#accounts"),$( "#actvalidatediv" ),$("#actvalidatediv>li"));
+				makeanimate($("#passwords"),$( "#pswdvalidatediv" ),$("#pswdvalidatediv>li"));
+				makeanimate($("#check"),$( "#chkvalidatediv" ),$("#chkvalidatediv>li"));
+				makeanimate($("#phone"),$( "#phonevalidatediv" ),$("#phonevalidatediv>li"));
+				makeanimate($("#idNumber"),$( "#phonevalidatediv" ),$("#phonevalidatediv>li"));
+				makeanimate($("#birthday"),$( "#birthvalidatediv" ),$("#birthvalidatediv>li"));
+				makeanimate($("#email"),$( "#emailvalidatediv" ),$("#emailvalidatediv>li"));
 				
-				$("#passwords").on("focus",function(){
-					if(!$("#passwordinfohead").hasClass("active"))
-						$("#passwordinfohead").trigger("click");
-				})
-
-				$("#check").on("focus",function(){
-					if(!$("#passwordinfohead").hasClass("active"))
-						$("#passwordinfohead").trigger("click");
-				})
-				
-				$("#idNumber").on("focus",function(){
-					if(!$("#phoneinfohead").hasClass("active")){
-						$("#phoneinfohead").trigger("click");
-					}
-				})
-				
-				$("#phone").on("focus",function(){
-					if(!$("#phoneinfohead").hasClass("active")){
-						$("#phoneinfohead").trigger("click");
-					}
-				})
-				
-				$("#email").on("focus",function(){
-					if(!$("#emailinfohead").hasClass("active"))
-						$("#emailinfohead").trigger("click");
-				})
-				
-				$("#birthday").on("focus",function(){
-					if(!$("#birthdayinfohead").hasClass("active"))
-						$("#birthdayinfohead").trigger("click");
-				})
 
 			//表單驗證
 				//身分證字號
@@ -972,8 +894,6 @@
 					});
 				}
 			})			
-			//footer中連結的文字大小
-			$("a").css("font-size","1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
@@ -981,8 +901,6 @@
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
 			//帳號、密碼欄focus的背景色變化
 			$("#login > div > input").each(function(){
 				$(this).on({"focus":function(){

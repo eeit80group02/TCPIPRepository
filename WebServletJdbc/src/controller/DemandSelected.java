@@ -39,10 +39,6 @@ public class DemandSelected extends HttpServlet {
 			// ...
 		}
 		
-		// LoginOK of School
-//		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
-//		int schoolId = sBean.getSchoolId();
-		
 		// 驗證購物車
 		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
 		if (dCart == null) {
@@ -130,12 +126,15 @@ public class DemandSelected extends HttpServlet {
 			// 捐獻資料
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(schoolId);
+			for(DonationBeanDuplicate d : list) {
+				System.out.println("*"+d);
+			}
 			
 			// 捐獻明細資料
 			List<DonationOrderDuplicateBean> detailList = service.findOneAllDeamndOrderDetailBySchool(schoolId);
-			for(DonationOrderDuplicateBean d : detailList) {
-				System.out.println("*"+d);
-			}
+//			for(DonationOrderDuplicateBean d : detailList) {
+//				System.out.println("*"+d);
+//			}
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDetails", detailList);

@@ -4,25 +4,28 @@
 	font-family: 標楷體;
 }
 
+i {
+	cursor: pointer;
+}
+
 body {
-	cursor:default;
+	cursor: default;
 	background-color: #FFEBEB;
 }
 
-#TCPIP ,#DonationWallIcon{
+#TCPIP, #DonationWallIcon {
 	max-height: 64px;
 }
 
-.nav-wrapper ul li, .brand-logo {	
+.nav-wrapper ul li, .brand-logo {
 	text-align: center;
 	padding: 0px;
 }
 
-.nav-wrapper ul li a{
+.nav-wrapper ul li a {
 	font-size: 1.4em;
 	font-weight: bold;
 }
-
 
 #dropdownList01, #dropdownList02 {
 	width: 130px;

@@ -41,7 +41,6 @@
 
 
 	
-	
 	<!-- 頁面主題提示 -->
 	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
@@ -51,7 +50,7 @@
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row">
+		<div class="row" id="mainboard">
 			<c:set var="listlength" value="${fn:length(list)}" />
 			<!-- 初步計畫列表 -->
 <!-- 			<div class="col l8 offset-l4" id="projlist"> -->
@@ -87,10 +86,18 @@
 <!-- 				</div>				 -->
 <!-- 			</div> -->
 <!-- ======= -->
-		<div class="col l8 offset-l2 indigo lighten-5">
-			<div class="row center-align card-panel red-text" style="font-size:4em;">
-				洽談中需求計畫
-			</div>
+			<div class="col l8 offset-l2 indigo lighten-5">
+				<div class="row center-align card-panel red-text" style="font-size:4em;">
+					洽談中需求計畫
+				</div>
+
+		
+		
+				
+<%-- 				<c:forEach items="${list}" var="bean"> --%>
+<%-- 					<div>${bean.schoolDemandId }</div><br> --%>
+<%-- 					<div>${bean.processingMemberList }</div><br> --%>
+<%-- 				</c:forEach> --%>
 				
 		<!-- 同意或拒絕 -->
 		<c:forEach items="${list}" var="demand">
@@ -99,24 +106,31 @@
 				<div class="row priProjName left-align teal-text darken-3">
 					${demand.activityTopic}
 				</div>
+					
 				<!-- 有意願的志工 forEach在這 -->
-				<c:forEach items="${demand.memberList}" var="processingMember">
+				<c:forEach items="${demand.memberList}" var="processingMember" varStatus="i">		
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
 							${processingMember.lastName}${processingMember.firstName}
 						</div>
 						<div class="col l4 left schldiv" >
- 							已被推薦次數:${processingMember.recommendCount} 
+ 							已被推薦次數:${processingMember.recommendCount}
+
 						</div>
 						<div class="col l4 right right-align">
-								<form action="<c:url value="/ProcessingProj.do" />" method="post">
-									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
-									<input type="hidden" name="type" value="cancel">
+
+								<form action="<c:url value="/schoolDemand/Status.do" />" method="post">
+									<input type="hidden" name="type" value="disagree">
+									<input type="hidden" name="processingMemberId" value="${demand.processingMemberList[i.index].processingMemberId}">
+									<input type="hidden" name="memberId" value="${processingMember.memberId}">
+									<input type="hidden" name="schoolDemandId" value="${demand.schoolDemandId}">
 									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
 								</form>						
-								<form action="<c:url value="/ProcessingProj.do" />" method="post">
-									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
+								<form action="<c:url value="/schoolDemand/Status.do" />" method="post">
 									<input type="hidden" name="type" value="agree">
+									<input type="hidden" name="processingMemberId" value="${demand.processingMemberList[i.index].processingMemberId}">
+									<input type="hidden" name="memberId" value="${processingMember.memberId}">
+									<input type="hidden" name="schoolDemandId" value="${demand.schoolDemandId}">
 									<button class="btn red white-text btndiv right" type="submit">同意</button>
 								</form>
 						</div>
@@ -127,6 +141,11 @@
 		<!-- 同意或拒絕 -->	
 				
 				
+			</div>
+			<div class="col l2">
+				<div class="btn red white-text" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">
+					刷新					
+				</div>
 			</div>			
 		</div>
 	</main>
@@ -143,6 +162,8 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			//mainboard最小高度
+			$("#mainboard").css("min-height","100vh");
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);

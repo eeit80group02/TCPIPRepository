@@ -222,10 +222,15 @@ public class DonationService {
 		List<DonationBean> result = new ArrayList<>();
 		result = donationDAOJdbc.getAll();
 		for (DonationBean d : result) {
-			if (schoolId == d.getSchoolId() && d.getDonationStatus().equals("否")) {
+			if (schoolId == d.getSchoolId()) {
 				resultDisplay.add(d);
 			}
 		}
+//		for (DonationBean d : result) {
+//			if (schoolId == d.getSchoolId() && d.getDonationStatus().equals("否")) {
+//				resultDisplay.add(d);
+//			}
+//		}
 		
 		// 包裝一間學校所有捐獻
 		List<DonationBeanDuplicate> listDuplivate = new ArrayList<>();

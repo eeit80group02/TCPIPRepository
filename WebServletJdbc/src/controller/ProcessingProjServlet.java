@@ -36,10 +36,6 @@ public class ProcessingProjServlet extends HttpServlet
 	{
 		request.setCharacterEncoding("UTF-8");
 		
-		// 錯誤訊息 容器
-		Map<String,String> errorMsg = new HashMap<String,String>();
-		request.setAttribute("error",errorMsg);
-		
 		String type = request.getParameter("type");
 		
 		if(type != null && type.trim().length() != 0)
@@ -48,27 +44,35 @@ public class ProcessingProjServlet extends HttpServlet
 			{
 				// 學校提出申請
 				System.out.println("執行 ProcessingProjServlet applyPrimaryProj");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				applyPrimaryProj(request,response);
+				return;
 			}
 			
 			if(type.equals("agree"))
 			{
 				// 發起者審核
 				System.out.println("執行 ProcessingProjServlet applyPrimaryProj");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				agreePrimaryProj(request,response);
+				return;
 			}
 			
 			if(type.equals("cancel"))
 			{
 				// 發起者取消
 				System.out.println("執行 ProcessingProjServlet cancelPrimaryProj");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
 				cancelPrimaryProj(request,response);
+				return;
 			}
 		}
-		else
-		{
-			System.out.println("error");
-		}
+		String contextPath = request.getContextPath();
+		response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+		return;
 	}
 
 	private void cancelPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -89,7 +93,8 @@ public class ProcessingProjServlet extends HttpServlet
 		
 		if(!errorMsg.isEmpty())
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 		
@@ -107,7 +112,8 @@ public class ProcessingProjServlet extends HttpServlet
 		
 		if(!errorMsg.isEmpty())
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 		
@@ -118,17 +124,14 @@ public class ProcessingProjServlet extends HttpServlet
 		boolean result = service.cancelProcessingProj(bean);
 		if(result)
 		{
-			HttpSession session = request.getSession();
-			MemberBean memberBean = (MemberBean)session.getAttribute("LoginOK");
-			
-			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending&memberId=" + memberBean.getMemberId());
+			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending");
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
-		
 	}
 
 	private void agreePrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -149,7 +152,8 @@ public class ProcessingProjServlet extends HttpServlet
 		
 		if(!errorMsg.isEmpty())
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 		
@@ -167,7 +171,8 @@ public class ProcessingProjServlet extends HttpServlet
 		
 		if(!errorMsg.isEmpty())
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 		
@@ -178,14 +183,12 @@ public class ProcessingProjServlet extends HttpServlet
 		boolean result = service.agreeProcessingProj(bean);
 		if(result)
 		{
-			HttpSession session = request.getSession();
-			MemberBean memberBean = (MemberBean)session.getAttribute("LoginOK");
-			
-			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending&memberId=" + memberBean.getMemberId());
+			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending");
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 	}
@@ -215,7 +218,8 @@ public class ProcessingProjServlet extends HttpServlet
 		
 		if(!errorMsg.isEmpty())
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 		
@@ -264,7 +268,8 @@ public class ProcessingProjServlet extends HttpServlet
 		}
 		else
 		{
-			response.sendRedirect(request.getContextPath() + "/error.jsp");
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 			return;
 		}
 	}
