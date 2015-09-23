@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class InsertALotOfMember {
@@ -51,8 +52,19 @@ public class InsertALotOfMember {
 				pstmt.setString(10,file.getName());				// pictureName
 				pstmt.setBinaryStream(11,fis,file.length());	// picture
 				pstmt.setLong(12,file.length());				// pictureLength
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse(strArray[9].toString()).getTime()));	// registerTime
+				
+				//時間-小時
+				int randomHour = (int) (Math.random()*24);
+				//時間-分秒
+				int randomMinute = (int) (1+Math.random()*59);
+				int randomSecond = (int) (1+Math.random()*59);
+				String formatStr = "%02d";
+				String theHour = String.format(formatStr, randomHour);
+				String theMinute = String.format(formatStr, randomMinute);
+				String theSecond = String.format(formatStr, randomSecond);
+				String temp = strArray[9]+" "+ theHour + ":" + theMinute + ":" + theSecond;
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse(temp).getTime()));	// registerTime
 				pstmt.setInt(14,Integer.parseInt(strArray[10]));								// RecommendCount
 				pstmt.setString(15,strArray[11]);					// account
 				pstmt.setBytes(16,strArray[12].getBytes());		// password
