@@ -3,10 +3,13 @@ package model.service;
 import global.GlobalService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import model.FullProjBean;
 import model.MemberBean;
+import model.MissionBoardBean;
 import model.ParticipatorBean;
 import model.dao.FullProjDAOJdbc;
 import model.dao.MemberDAOJdbc;
@@ -45,6 +48,19 @@ public class FullProjService
 				MemberBean memberBean = memberDAO.select(bean.getMemberId());
 				bean.setMemberBean(memberBean);
 				bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
+				
+				int fullProjId = bean.getFullProjId();
+				List<ParticipatorBean> participatorBeans = new ArrayList<ParticipatorBean>();
+				for(ParticipatorBean participatorBean : participatorDAO.selectByFullProjId(fullProjId))
+				{
+					if(participatorBean.getParticipateStatus().equals("已通過"))
+					{
+						participatorBeans.add(participatorBean);
+					}
+				}
+				Map<String,List<ParticipatorBean>> participatorBeanMap = new HashMap<String,List<ParticipatorBean>>();
+				participatorBeanMap.put("pending",participatorBeans);
+				bean.setParticipatorMap(participatorBeanMap);
 				temp.add(bean);
 			}
 		}
@@ -101,7 +117,7 @@ public class FullProjService
 		return result;
 	}
 	
-	public List<FullProjBean> displayPersonalFullProjProjByParticipate(FullProjBean bean)
+	public List<FullProjBean> displayPersonalFullProjByParticipate(FullProjBean bean)
 	{
 		List<FullProjBean> result = new ArrayList<FullProjBean>();
 		
@@ -124,7 +140,9 @@ public class FullProjService
 							participatorBeans.add(participatorBean);
 						}
 					}
-					temp.setParticipatorBean(participatorBeans);
+					Map<String,List<ParticipatorBean>> participatorBeanMap = new HashMap<String,List<ParticipatorBean>>();
+					participatorBeanMap.put("pending",participatorBeans);
+					temp.setParticipatorMap(participatorBeanMap);
 					result.add(temp);
 				}
 			}
@@ -145,6 +163,27 @@ public class FullProjService
 				MemberBean memberBean = memberDAO.select(result.getMemberId());
 				result.setMemberBean(memberBean);
 				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+			
+				// 找出該計畫的申請人
+				List<ParticipatorBean> participatorByPending = new ArrayList<ParticipatorBean>();
+				List<ParticipatorBean> participatorByPass = new ArrayList<ParticipatorBean>();
+				for(ParticipatorBean participatorBean : participatorDAO.selectByFullProjId(fullProjId))
+				{
+					if(participatorBean.getParticipateStatus().equals("待審核"))
+					{
+						participatorByPending.add(participatorBean);
+					}
+					
+					if(participatorBean.getParticipateStatus().equals("已通過"))
+					{
+						participatorByPass.add(participatorBean);
+					}
+				}
+				
+				Map<String,List<ParticipatorBean>> temp = new HashMap<String,List<ParticipatorBean>>();
+				temp.put("pending",participatorByPending);
+				temp.put("pass",participatorByPass);
+				result.setParticipatorMap(temp);
 			}
 		}
 		return result;
@@ -155,7 +194,7 @@ public class FullProjService
 		
 		if (bean != null) 
 		{
-			// 先selete 抓齊所有資料 在對使用者的資料做修改
+			// 先select 抓齊所有資料 在對使用者的資料做修改
 			FullProjBean temp = fullProjDAO.findByPrimaryKey(bean.getFullProjId());
 			System.out.println(temp);
 			if(temp != null)
@@ -213,6 +252,11 @@ public class FullProjService
 				fullProjBean.setProjStatus("招募中");
 				fullProjDAO.update(fullProjBean);
 				
+				MissionBoardBean missionBoardBean = new MissionBoardBean();
+				missionBoardBean.setFullProjId(fullProjBean.getFullProjId());
+				missionBoardBean.setName(fullProjBean.getTitle());
+				missionBoardBean.setMissionSetNum(0);
+				missionBoardDAO.insert(missionBoardBean);
 				
 				return true;
 			}

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -99,7 +100,7 @@
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>
-									${fullProj.estMember}							
+									${fn:length(fullProj.participatorMap.pass)}/${fullProj.estMember}							
 									</div>
 								</div>
 							</div>	
@@ -226,13 +227,27 @@
 			
 			<!-- 加入活動的按鈕 -->
 			<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-<!-- 				<a class="btn-large red"> -->
-<!-- 			    	<span style="font-size:2em;font-weight:900">加入活動</span> -->
-<!-- 			    </a> --> 	
-
+				<!-- 檢查是否申請過 -->
+				<c:if test="${LoginOK.beanName.equals('member')}">
+					<c:set var="flag" value="false" />
+					<c:forEach var="pending" items="${fullProj.participatorMap.pending}">
+						<c:if test="${pending.memberId == LoginOK.memberId}">
+							<c:set var="flag" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:forEach var="pass" items="${fullProj.participatorMap.pass}">
+						<c:if test="${pass.memberId == LoginOK.memberId}">
+							<c:set var="flag" value="true" />
+						</c:if>
+					</c:forEach>
+				</c:if>
+				
+				<c:if test="${fn:length(fullProj.participatorMap.pass) == fullProj.estMember}">
+					<c:set var="flag" value="true" />
+				</c:if>
 				<!-- 學校 或者 發起者看不到 -->
 			    <c:if test="${not LoginOK.beanName.equals('school')}">
-			    	<c:if test="${LoginOK.memberId != fullProj.memberId}">
+			    	<c:if test="${LoginOK.memberId != fullProj.memberId && not flag}">
 					    <form id="participator" action="<c:url value="/participator.do" />" method="post">
 							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
 							<input type="hidden" name="startTime" value="${startTime}">

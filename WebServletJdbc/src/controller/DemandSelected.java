@@ -33,10 +33,11 @@ public class DemandSelected extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		// 此網頁要學校需登入後才能使用
-		HttpSession session = request.getSession(false);
-		if (session == null) {
-			// ...
+		HttpSession session = request.getSession();
+		if (session.isNew()) {
+			System.out.println("產生session");
+		} else {
+			System.out.println("同session");
 		}
 		
 		// 驗證購物車
@@ -48,11 +49,8 @@ public class DemandSelected extends HttpServlet {
 		
 		// 1.接收資料
 		String type = request.getParameter("type");
-		System.out.println("type= "+type);
 		String schoolIdStr = request.getParameter("schoolId");
-		System.out.println("%1 "+schoolIdStr);
 		String donationIdStr = request.getParameter("donationId");
-		System.out.println("%2 "+donationIdStr);
 		if (type.equals("FindGoods")) {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
@@ -61,7 +59,7 @@ public class DemandSelected extends HttpServlet {
 			
 //			request.setAttribute("AllDemands", listDuplivate);
 			session.setAttribute("AllDemands", listDuplivate);
-			session.setAttribute("cartItems", list);
+//			session.setAttribute("cartItems", list);
 			
 			// 4.轉至適當畫面
 			RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
@@ -82,7 +80,7 @@ public class DemandSelected extends HttpServlet {
 			
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", listdbd);
-			session.setAttribute("cartItems", list);
+//			session.setAttribute("cartItems", list);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndByMember.jsp");
 			rd.forward(request, response);
@@ -94,15 +92,16 @@ public class DemandSelected extends HttpServlet {
 		} else if (type.equals("OneDemandByMember")) {
 			// 2.資料轉換
 			int donationId = Integer.parseInt(donationIdStr);
-			System.out.println("++donationId "+donationId);
 			int schoolId = Integer.parseInt(schoolIdStr);
-			System.out.println("++@schoolId "+schoolId);
+			
 			// 3.呼叫Model
 			DonationService service = new DonationService();
+			
 			/* 單一需求內容 */
 			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId);
 			System.out.println("time1 "+donationBeanDuplicate.getDemandTime());
 			System.out.println("time2 "+donationBeanDuplicate.getExpireTime());
+			
 			/* 留言處理 */
 			DonationDiscussService donationDiscussService = new DonationDiscussService();
 			List<DonationDiscussBeanDuplicate> discussList = donationDiscussService.getOneDonationAllMessages(donationId);
@@ -126,15 +125,10 @@ public class DemandSelected extends HttpServlet {
 			// 捐獻資料
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(schoolId);
-			for(DonationBeanDuplicate d : list) {
-				System.out.println("*"+d);
-			}
 			
 			// 捐獻明細資料
 			List<DonationOrderDuplicateBean> detailList = service.findOneAllDeamndOrderDetailBySchool(schoolId);
-//			for(DonationOrderDuplicateBean d : detailList) {
-//				System.out.println("*"+d);
-//			}
+
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDetails", detailList);
@@ -159,9 +153,6 @@ public class DemandSelected extends HttpServlet {
 			DonationDiscussService donationDiscussService = new DonationDiscussService();
 			List<DonationDiscussBeanDuplicate> discussList = donationDiscussService.getOneDonationAllMessages(donationId);
 			
-			/* 捐獻會員*/
-			
-			
 //			request.setAttribute("AllMessages", discussList);
 //			request.setAttribute("OneDemand", donationBeanDuplicate);
 			session.setAttribute("AllMessages", discussList);
@@ -172,6 +163,7 @@ public class DemandSelected extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/OneDeamndBySchool.jsp"));
 			return;
+			
 		} else if (type.equals("UpdateOneDemand")) {
 			int donationId = Integer.parseInt(donationIdStr);
 			int schoolId = Integer.parseInt(schoolIdStr);
@@ -179,6 +171,7 @@ public class DemandSelected extends HttpServlet {
 			DonationBean donationBean = new DonationBean();
 			DonationService service = new DonationService();
 			DonationBeanDuplicate donationBeanDuplicate = service.findOneDemand(donationId);
+			
 //			request.setAttribute("OneDemand", donationBeanDuplicate);
 			session.setAttribute("OneDemand", donationBeanDuplicate);
 //			RequestDispatcher rd = request.getRequestDispatcher("UpdateOneDemand.jsp");

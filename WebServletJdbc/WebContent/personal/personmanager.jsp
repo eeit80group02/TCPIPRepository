@@ -31,7 +31,7 @@
 				<div class="row" id="secondboard">
 					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
 						<div class="row">
-							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='maintainpersonal.jsp' />">
+							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='showMemberData.do' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 									修改資料
 								</span>
@@ -120,6 +120,13 @@
 							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByParticipate' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 										招募中(審核志工)
+								</span>
+							</a>											
+						</div>
+						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										志工 看申請中的計畫
 								</span>
 							</a>											
 						</div>

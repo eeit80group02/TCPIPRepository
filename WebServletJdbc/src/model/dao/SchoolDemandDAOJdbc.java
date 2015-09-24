@@ -75,7 +75,7 @@ public class SchoolDemandDAOJdbc implements SchoolDemandDAO
 		return result;
 	}
 
-	private static final String SELECT_ALL = "SELECT schoolDemandId,schoolId,participant,activityTopic,activityLocation,activitySuitable,activityHost,activityContact,createDate,content,demandStatus FROM SchoolDemand";
+	private static final String SELECT_ALL = "SELECT schoolDemandId,schoolId,participant,activityTopic,activityLocation,activitySuitable,activityHost,activityContact,createDate,content,demandStatus FROM SchoolDemand order by createDate desc";
 	@Override
 	public List<SchoolDemandBean> getAll()
 	{

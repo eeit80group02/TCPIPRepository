@@ -41,8 +41,8 @@
 			<nav>
 				<div class="nav-wrapper">
 					<ul id="nav-mobile1" class="left hide-on-med-and-down">
-						<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-						<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+						<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+						<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 					</ul>
 
 					<a href="#" class="brand-logo center">填寫捐獻需求</a>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -81,7 +82,7 @@
 							<p style="font-size: 20pt" class="truncate">${fullProj.title}</p>
 						</div>
 						<div class="card-action right-align">
-							<span>需求人數:10/${fullProj.estMember}</span>
+							<span>需求人數:${fn:length(fullProj.participatorMap.pending)}/${fullProj.estMember}</span>
 						</div>
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">

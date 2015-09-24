@@ -179,7 +179,7 @@ public class FullProjServlet extends HttpServlet
 		
 		FullProjBean fullProjBean = new FullProjBean();
 		fullProjBean.setMemberId(memberBean.getMemberId());
-		List<FullProjBean> result = service.displayPersonalFullProjProjByParticipate(fullProjBean);
+		List<FullProjBean> result = service.displayPersonalFullProjByParticipate(fullProjBean);
 		
 		if(result != null)
 		{
