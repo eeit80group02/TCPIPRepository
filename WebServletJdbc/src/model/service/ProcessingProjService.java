@@ -112,7 +112,7 @@ public class ProcessingProjService
 				fullProjBean.setProjAbstract(primaryProjBean.getProjAbstract());
 				fullProjBean.setContent(primaryProjBean.getContent());
 				fullProjBean.setLocation(primaryProjBean.getIdealPlace());
-				fullProjBean.setActivityStartTime(primaryProjBean.getActivityEndTime());
+				fullProjBean.setActivityStartTime(primaryProjBean.getActivityStartTime());
 				fullProjBean.setActivityEndTime(primaryProjBean.getActivityEndTime());
 				fullProjBean.setEstMember(primaryProjBean.getDemandNum());
 				fullProjBean.setBudget(primaryProjBean.getBudget());

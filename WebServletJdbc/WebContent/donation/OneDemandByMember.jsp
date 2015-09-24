@@ -163,7 +163,8 @@
 						<div class="collapsible-header">
 							<span class="glyphicon glyphicon-question-sign"></span> <b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
-								<span class="glyphicon glyphicon-ok-sign"></span>
+									<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
+<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
 							<br>${item.memberMessage}&nbsp;<span class="talkTime">${item.memberMessageTime}
 						</div>
@@ -173,7 +174,8 @@
 									<p>等待回覆...</p>
 								</c:when>
 								<c:otherwise>
-									<P>${item.schoolMessage}</P>
+									<p>${item.schoolMessage}   </p>
+									<div class="talkBackTime">${item.schoolMessageTime}</div>
 								</c:otherwise>
 							</c:choose>
 							<br>

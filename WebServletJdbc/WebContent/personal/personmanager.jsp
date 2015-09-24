@@ -99,6 +99,13 @@
 								</span>
 							</a>											
 						</div>
+						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										志工 看申請中的計畫
+								</span>
+							</a>											
+						</div>
 						<a href='<c:url value='/schoolDemand/SchoolDemandServlet.do?type=mdisplays'/>'></a>											
 					</div>				
 				</div>
@@ -159,6 +166,17 @@
 			$("#membername").css({
 				"margin-top":(pagetitleheight2 - namediv)/2
 				,"margin-left":($(window).width()) * 0.2});
+			
+			
+			//設定背板的大小
+			var bodyw = $("body").width(),
+			    backwid = ($("body").width())* 0.68;
+			$("#backboard").css({
+				"width":backwid,
+				"margin":"0 auto",
+				"padding":"30px 0",
+				
+			});
 			
 		});
 	</script>
