@@ -120,7 +120,6 @@ public class ProcessingProjServlet extends HttpServlet
 		// business
 		ProcessingProjBean bean = new ProcessingProjBean();
 		bean.setProcessingProjId(iProcessingProjId);
-		
 		boolean result = service.cancelProcessingProj(bean);
 		if(result)
 		{

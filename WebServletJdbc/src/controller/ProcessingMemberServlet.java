@@ -186,18 +186,25 @@ public class ProcessingMemberServlet extends HttpServlet{
 		if(sbean ==null){
 			response.sendRedirect("login.jsp");
 		}
-		String processingMemberId = request.getParameter("processingMemberId");
-		int pMId = 0;
+		String schoolDemandId = request.getParameter("schoolDemandId");
+		String memberId = request.getParameter("memberId");
+		int sDId = 0;
+		int mId = 0;
 		try {
-			pMId = Integer.parseInt(processingMemberId);
+			sDId = Integer.parseInt(schoolDemandId);
+			mId = Integer.parseInt(memberId);
 		} catch (Exception e) {
 			response.sendRedirect("");
 		}
+		bean.setMemberId(mId);
+		bean.setSchoolDemandId(sDId);
 		bean = service.cancel(bean);
 		if(bean!=null){
-			response.sendRedirect("");
+			System.out.println("取消成功");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}else{
-			response.sendRedirect("");
+			System.out.println("取消失敗");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
 		
 	}
