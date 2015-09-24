@@ -47,7 +47,7 @@
 		<!-- 切版面開始 -->
 		<div class="col l8">
 			<!-- 表單本體開始 -->
-			<form class="card-panel hoverable" action="<c:url value="/fullProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="fullform">
+			<form class="card-panel hoverable" action="<c:url value="/fullProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;">
 				<div class="row">
 						<!-- 印出來、不能更動 -->
 <!-- 						<div class="row orange accent-3"> -->
@@ -79,17 +79,17 @@
 						<!-- 完整計畫編號 -->
 						<div class="row">
 								<div class="forinput col l3 right-align">完整計畫編號:${param.fullProjId}</div>
-								<input class="col l7 black-text" name="fullProjId" id="fullProjId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+								<input type="hidden" name="fullProjId" value="${param.fullProjId}" />
 						</div>
 						<!-- 會員編號 -->
 						<div class="row">
 								<div class="forinput col l3 right-align">會員編號:${param.memberId}</div>
-								<input class="col l7 black-text"name="memberId" id="memberId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+								<input type="hidden" name="memberId" value="${param.memberId}" />
 						</div>
 						<!-- 學校編號 -->
 						<div class="row">
 								<div class="forinput col l3 right-align">學校編號:${param.schoolId}</div>
-								<input class="col l7 black-text" name="schoolId" id="schoolId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+								<input type="hidden" name="schoolId" value="${param.schoolId}" />
 						</div>
 					</div>
 				
@@ -219,10 +219,10 @@
 					
 					<div class="row" id="btndiv">
 						<div class="col l8">
-							<button  class="btn-large yellow lighten-5 black-text right" type="submit" name="action" id="submitbtn">
+							<button  class="btn-large yellow lighten-5 black-text right" type="submit">
 								<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
 							</button>
-							<button  class="btn-large yellow lighten-5 black-text right" type="reset" name="action">
+							<button  class="btn-large yellow lighten-5 black-text right" type="reset">
 								<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 							</button>
 						</div>

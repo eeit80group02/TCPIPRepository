@@ -33,9 +33,7 @@
 
 	<!-- 頁面主題提示 -->
 	<div class="row black valign-wrapper" id="pagetitle">
-
-		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">預覽完整計畫</h1>
+		<h1 class="valign center-align white-text" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">預覽完整計畫</h1>
 	</div>
 
 	<!-- 內容 -->
@@ -50,23 +48,19 @@
 
 
 				<!-- 固定資訊 -->
-				<div class="card-panel hoverable row"
-					style="background-color: #FFFCEC">
-
+				<div class="card-panel hoverable row" style="background-color: #FFFCEC">
 					<!-- 基本資訊 -->
 					<div class="row">
-						<div
-							class="col l8 btn-large offset-l2 card-panel hoverable black-text white"
-							style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							基本資訊</div>
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
+							基本資訊
+						</div>
 					</div>
 					<!-- 計畫編號 -->
 					<div class="row">
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">計畫編號</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">計畫編號</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.fullProjId}</div>
@@ -83,8 +77,7 @@
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">學校編號</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">學校編號</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.schoolId}</div>
@@ -101,8 +94,7 @@
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">會員編號</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">會員編號</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.memberId}</div>
@@ -123,18 +115,16 @@
 
 					<!-- 計畫資訊 -->
 					<div class="row">
-						<div
-							class="col l8 btn-large offset-l2 card-panel hoverable black-text white"
-							style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							計畫資訊</div>
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
+							計畫資訊
+						</div>
 					</div>
 					<!-- 標題 -->
 					<div class="row">
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">計畫標題</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">計畫標題</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.title}</div>
@@ -149,8 +139,7 @@
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">活動地點</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">活動地點</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.location}</div>
@@ -166,17 +155,12 @@
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">活動時間</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">活動時間</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>
-										<fmt:formatDate var="startTime"
-											value="${fullProj.activityStartTime}" type="date"
-											pattern="yyyy-MM-dd" />
-										<fmt:formatDate var="endTime"
-											value="${fullProj.activityEndTime}" type="date"
-											pattern="yyyy-MM-dd" />
+										<fmt:formatDate var="startTime" value="${fullProj.activityStartTime}" type="date" pattern="yyyy-MM-dd" />
+										<fmt:formatDate var="endTime" value="${fullProj.activityEndTime}" type="date" pattern="yyyy-MM-dd" />
 										${startTime} ~ ${endTime}
 									</div>
 								</div>
@@ -192,8 +176,7 @@
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">招募人數</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">招募人數</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.estMember}</div>
@@ -209,8 +192,7 @@
 						<div class="col l8 offset-l2">
 							<div class="row">
 								<div class="col l4 transparent black-text valign-wrapper">
-									<h5 class="itemheader center-align"
-										style="display: inline-block; margin: 0 auto;">活動預算</h5>
+									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">活動預算</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>${fullProj.budget}</div>
@@ -226,17 +208,15 @@
 					style="background-color: #FFFCEC">
 
 					<div class="row">
-						<div
-							class="col l8 btn-large offset-l2 card-panel hoverable black-text white"
-							style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							成員架構</div>
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
+							成員架構
+						</div>
 					</div>
 					<div class="row">
-						<div class="col l8 offset-l2 card-panel hoverable"
-							style="background-color: #D1F0E5;">
-							<p
-								style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
-								${fullProj.orgArchitecture}</p>
+						<div class="col l8 offset-l2 card-panel hoverable" style="background-color: #D1F0E5;">
+							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
+								${fullProj.orgArchitecture}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -245,17 +225,15 @@
 					style="background-color: #FFFCEC">
 
 					<div class="row">
-						<div
-							class="col l8 btn-large offset-l2 card-panel hoverable black-text white"
-							style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							計畫摘要</div>
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
+							計畫摘要
+						</div>
 					</div>
 					<div class="row">
-						<div class="col l8 offset-l2 card-panel hoverable"
-							style="background-color: #D1F0E5;">
-							<p
-								style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
-								${fullProj.projAbstract}</p>
+						<div class="col l8 offset-l2 card-panel hoverable" style="background-color: #D1F0E5;">
+							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
+								${fullProj.projAbstract}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -267,18 +245,16 @@
 					style="background-color: #FFFCEC">
 					<!-- 計畫內容 -->
 					<div class="row">
-						<div
-							class="col l8 btn-large offset-l2 card-panel hoverable black-text white"
-							style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							完整計畫內容</div>
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
+							完整計畫內容
+						</div>
 					</div>
 					<!-- 計畫內容 -->
 					<div class="row">
-						<div class="col l12 card-panel hoverable"
-							style="background-color: #D1F0E5;">
-							<p
-								style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
-								${fullProj.content}</p>
+						<div class="col l12 card-panel hoverable" style="background-color: #D1F0E5;">
+							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
+								${fullProj.content}
+							</p>
 						</div>
 					</div>
 				</div>
@@ -289,17 +265,15 @@
 					style="background-color: #FFFCEC">
 					<!-- 問與答 -->
 					<div class="row">
-						<div
-							class="col l8 btn-large offset-l2 card-panel hoverable black-text white"
-							style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							問與答</div>
+						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
+							問與答
+						</div>
 					</div>
 					<!-- 問與答 -->
 					<div class="row">
 						<div id="test" class="col l12 card-panel hoverable"
 							style="background-color: #D1F0E5;">
-							<p
-								style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
+							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
 								<%-- 							${fullProj.content} --%>
 							</p>
 						</div>
@@ -315,14 +289,11 @@
 					<c:if test="${empty fullProj.schoolConfirm}">
 						<div class="card-panel white">
 							<form action="<c:url value="/fullProj.do" />" method="post">
-								<input type="hidden" name="fullProjId"
-									value="${fullProj.fullProjId}" /> <input type="hidden"
-									name="location" value="${fullProj.location}"> <input
-									type="hidden" name="orgArchitecture"
-									value="${fullProj.orgArchitecture}"> <input
-									type="hidden" name="type" value="schoolConfirm">
-								<button type="submit" class="btn-large white-text red"
-									style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">學校同意</button>
+								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}" /> 
+								<input type="hidden" name="location" value="${fullProj.location}"> 
+								<input type="hidden" name="orgArchitecture" value="${fullProj.orgArchitecture}"> 
+								<input type="hidden" name="type" value="schoolConfirm">
+								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">學校同意</button>
 							</form>
 						</div>
 					</c:if>
@@ -334,11 +305,9 @@
 						test="${empty fullProj.memberConfirm && fullProj.schoolConfirm == true}">
 						<div class="card-panel white">
 							<form action="<c:url value="/fullProj.do" />" method="post">
-								<input type="hidden" name="fullProjId"
-									value="${fullProj.fullProjId}" /> <input type="hidden"
-									name="type" value="memberConfirm">
-								<button type="submit" class="btn-large white-text red"
-									style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">完整計畫發布</button>
+								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}" /> 
+								<input type="hidden" name="type" value="memberConfirm">
+								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">完整計畫發布</button>
 							</form>
 						</div>
 					</c:if>
@@ -350,57 +319,49 @@
 					<c:if
 						test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中') && empty fullProj.schoolConfirm}">
 						<div class="card-panel white">
-							<form action="<c:url value="/fullProj/updateFullProjForm.jsp" />"
-								method="post" accept-charset="UTF-8">
-								<input type="hidden" name="fullProjId"
-									value="${fullProj.fullProjId}"> <input type="hidden"
-									name="memberId" value="${fullProj.memberId}"> <input
-									type="hidden" name="schoolId" value="${fullProj.schoolId}">
-								<input type="hidden" name="title" value="${fullProj.title}">
-								<input type="hidden" name="projAbstract"
-									value="${fullProj.projAbstract}"> <input type="hidden"
-									name="content" value='${fullProj.content}'> <input
-									type="hidden" name="location" value="${fullProj.location}">
-								<input type="hidden" name="activityStartTime"
-									value="<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
-								<input type="hidden" name="activityEndTime"
-									value="<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
-								<input type="hidden" name="estMember"
-									value="${fullProj.estMember}"> <input type="hidden"
-									name="budget" value="${fullProj.budget}"> <input
-									type="hidden" name="orgArchitecture"
-									value="${fullProj.orgArchitecture}"> <input
-									type="hidden" name="base64String"
-									value="${fullProj.base64String}">
-								<button type="submit" class="btn-large white-text red"
-									style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">補齊完整計畫</button>
+							<form action="<c:url value="/fullProj/updateFullProjForm.jsp" />" method="post" accept-charset="UTF-8">
+								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}"> 
+								<input type="hidden" name="memberId" value="${fullProj.memberId}"> 
+								<input type="hidden" name="schoolId" value="${fullProj.schoolId}"> 
+								<input type="hidden" name="title" value="${fullProj.title}"> 
+								<input type="hidden" name="projAbstract" value="${fullProj.projAbstract}"> 
+								<input type="hidden" name="content" value='${fullProj.content}'> 
+						   <%-- <input type="hidden" name="location" value="${fullProj.location}"> --%>
+								<input type="hidden" name="activityStartTime" value="<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
+								<input type="hidden" name="activityEndTime" value="<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
+								<input type="hidden" name="estMember" value="${fullProj.estMember}"> 
+								<input type="hidden" name="budget" value="${fullProj.budget}"> 
+								<input type="hidden" name="orgArchitecture" value="${fullProj.orgArchitecture}"> 
+								<input type="hidden" name="base64String" value="${fullProj.base64String}">
+								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">補齊完整計畫</button>
 							</form>
 						</div>
 					</c:if>
 				</c:if>
 			</div>
 		</div>
-		<div id="myDiv"></div>
+		</div>
+<!-- 		<div id="myDiv"></div> -->
 
-		<c:if
-			test="${LoginOK.beanName.equals('member') && empty fullProj.createDate}">	
-		會員留言：<br>
-			<textarea id="memberContent"></textarea>
-			<sapn id="memberError"></sapn>
-			<br>
-			<input type="button" id="memberButton" value="傳送">
-			<br>
-		</c:if>
+<%-- 		<c:if --%>
+<%-- <%-- 			test="${LoginOK.beanName.equals('member') && empty fullProj.createDate}">	 --%> --%>
+<%-- 		會員留言：<br> --%>
+<%-- <!-- 			<textarea id="memberContent"></textarea> --> --%>
+<%-- <!-- 			<sapn id="memberError"></sapn> --> --%>
+<%-- <!-- 			<br> --> --%>
+<%-- <!-- 			<input type="button" id="memberButton" value="傳送"> --> --%>
+<%-- <!-- 			<br> --> --%>
+<%-- <%-- 		</c:if> --%> --%>
 
-		<c:if
-			test="${LoginOK.beanName.equals('school') && empty fullProj.createDate}">	
-		學校留言：<br>
-			<textarea id="schoolContent"></textarea>
-			<sapn id="schoolError"></sapn>
-			<br>
-			<input type="button" id="schoolButton" value="傳送">
-			<br>
-		</c:if>
+<%-- <%-- 		<c:if --%> --%>
+<%-- <%-- 			test="${LoginOK.beanName.equals('school') && empty fullProj.createDate}">	 --%> --%>
+<%-- <!-- 		學校留言：<br> --> --%>
+<%-- <!-- 			<textarea id="schoolContent"></textarea> --> --%>
+<%-- <!-- 			<sapn id="schoolError"></sapn> --> --%>
+<%-- <!-- 			<br> --> --%>
+<%-- <!-- 			<input type="button" id="schoolButton" value="傳送"> --> --%>
+<%-- <!-- 			<br> --> --%>
+<%-- <%-- 		</c:if> --%> --%>
 	</main>
 
 

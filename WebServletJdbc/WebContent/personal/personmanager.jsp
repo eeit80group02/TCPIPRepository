@@ -92,6 +92,13 @@
 								</span>
 							</a>											
 						</div>
+						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										志工 看申請中的計畫
+								</span>
+							</a>											
+						</div>
 						<a href='<c:url value='/schoolDemand/SchoolDemandServlet.do?type=mdisplays'/>'></a>											
 					</div>				
 				</div>

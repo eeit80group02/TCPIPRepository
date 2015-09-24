@@ -3,9 +3,9 @@ package controller;
 import global.GlobalService;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -53,7 +53,17 @@ public class ParticipatorServlet extends HttpServlet
 				return;
 			}
 			
-			// 發起者取消
+			// 發起者同意
+			if(type.equals("agree"))
+			{
+				System.out.println("執行 ParticipatorServlet agreeParticipator");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				agreeParticipator(request,response);
+				return;
+			}
+			
+			// 發起者取消 or 會員自己取消 一樣改成未通過
 			if(type.equals("cancel"))
 			{
 				System.out.println("執行 ParticipatorServlet cancelParticipator");
@@ -62,11 +72,119 @@ public class ParticipatorServlet extends HttpServlet
 				cancelParticipator(request,response);
 				return;
 			}
+			// 顯示 會員申請中的列表
+			if(type.equals("displayParticipator"))
+			{
+				System.out.println("執行 ParticipatorServlet dispalyParticipator");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				dispalyParticipator(request,response);
+				return;
+			}
 		}
 		
 		String contextPath = request.getContextPath();
 		response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 		return;
+	}
+
+	private void agreeParticipator(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		Map<String,String> errorMsg = new HashMap<String,String>();
+		request.setAttribute("error",errorMsg);
+		
+		// 接收資料
+		String participatorId = request.getParameter("participatorId");
+		
+		// 驗證資料
+		if(participatorId == null || participatorId.trim().length() == 0)
+		{
+			errorMsg.put("error","沒有participatorId");
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+		
+		// 轉換資料
+		int iParticipatorId = 0;
+		try
+		{
+			iParticipatorId = Integer.parseInt(participatorId);
+		}
+		catch(NumberFormatException e)
+		{
+			errorMsg.put("error","參數有錯");
+			e.printStackTrace();
+		}
+		
+		if(!errorMsg.isEmpty())
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+		
+		// business
+		ParticipatorBean participateorBean = new ParticipatorBean();
+		participateorBean.setParticipatorId(iParticipatorId);
+		
+		boolean result = service.agreeParticipator(participateorBean);
+		if(result)
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath+ "/fullProj.do?type=displayPersonalByParticipate"));
+			return;
+		}
+		else
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+	}
+
+	private void dispalyParticipator(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		MemberBean memberBean = null;
+		
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
+		{
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
+			return;
+		}
+		
+		ParticipatorBean participatorBean = new ParticipatorBean();
+		participatorBean.setMemberId(memberBean.getMemberId());
+		
+		List<ParticipatorBean> result = service.dispalyParticipator(participatorBean);
+		
+		if(result != null)
+		{
+			request.setAttribute("participator",result);
+			request.getRequestDispatcher("/personal/displayPersonalParticipateFullProj.jsp").forward(request,response);
+			return;
+		}
+		else
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
 	}
 
 	private void cancelParticipator(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -118,7 +236,25 @@ public class ParticipatorServlet extends HttpServlet
 		boolean result = service.cancelParticipator(participatorBean);
 		if(result)
 		{
-			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayPersonalByParticipate");
+			// 根據不同操作 導向不同頁面
+			if(request.getParameter("option").equals("1"))
+			{
+				String contextPath = request.getContextPath();
+				response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayPersonalByParticipate"));
+				return;
+			}
+			else if(request.getParameter("option").equals("2"))
+			{
+				String contextPath = request.getContextPath();
+				response.sendRedirect(response.encodeRedirectURL(contextPath + "/participator.do?type=displayParticipator"));
+				return;
+			}
+			else
+			{
+				String contextPath = request.getContextPath();
+				response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+				return;
+			}
 		}
 		else
 		{
