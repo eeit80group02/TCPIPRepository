@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import model.ActivityHighlightBean;
 import model.MemberBean;
 import model.service.ActicityHighlightService;
 
+@WebServlet("/ActicityHighlightServlet.do")
 public class ActicityHighlightServlet extends HttpServlet {
 
 	private ActicityHighlightService service;
@@ -44,7 +46,7 @@ public class ActicityHighlightServlet extends HttpServlet {
 		request.setAttribute("error", errorMsg);
 
 		String type = request.getParameter("type");
-
+		System.out.println(type);
 		if (type == null || type.trim().length() == 0) {
 			errorMsg.put("errorURL", "請勿做作不正當請求(PrimaryProjServlet line.55)");
 			request.getRequestDispatcher("/error.jsp").forward(request,
@@ -133,13 +135,16 @@ public class ActicityHighlightServlet extends HttpServlet {
 		bean.setFrontCover(img);
 		bean.setFrontCoverLength(fileLength);
 		bean.setVideoURL(vedioURL);
-		bean = service.creat(bean);
+		System.out.println(bean);
+		//bean = service.creat(bean);
 		if(bean!=null){
 			System.out.println("新增成功");
-			response.sendRedirect("");
-		}else{
-			System.out.println("時間未到");
+			request.getRequestDispatcher("").forward(request, response);
+			//response.sendRedirect("");
 		}
+//		else{
+//			System.out.println("時間未到");
+//		}
 
 	}
 
