@@ -19,4 +19,6 @@ public interface FullProjDAO
 
 	public List<FullProjBean> selectByMemberId(int memberId);
 
+	public List<FullProjBean> selectBySchoolId(int schoolId);
+
 }
