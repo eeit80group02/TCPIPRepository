@@ -82,6 +82,25 @@ public class FullProjService
 		return result;
 	}
 	
+	public List<FullProjBean> displaySchoolFullProjProjByChat(FullProjBean bean)
+	{
+		List<FullProjBean> result = new ArrayList<FullProjBean>();
+		
+		if(bean != null)
+		{
+			// 先查詢 該學校的所有完整計畫
+			List<FullProjBean> temps = fullProjDAO.selectBySchoolId(bean.getSchoolId());
+			for(FullProjBean temp : temps)
+			{
+				if(temp.getProjStatus().equals("洽談中"))
+				{
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
+	
 	public List<FullProjBean> displayPersonalFullProjProjByParticipate(FullProjBean bean)
 	{
 		List<FullProjBean> result = new ArrayList<FullProjBean>();
