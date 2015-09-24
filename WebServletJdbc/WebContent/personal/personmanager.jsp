@@ -37,6 +37,23 @@
 								</span>
 							</a>
 						</div>
+						<div class="row divider" style="height:10px;"></div>						
+						<div class="row yellow lighten-3 card-panel">
+							<div class="row">
+								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										我參加過的完整計畫
+									</span>
+								</a>
+							</div>
+							<div class="row">
+								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										執行中的完整計劃
+									</span>
+								</a>											
+							</div>																
+						</div>						
 					</div>
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
@@ -50,7 +67,7 @@
 						<div class="row">
 							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonal' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									瀏覽初步計畫
+									我建立的初步計畫
 								</span>
 							</a>
 						</div>					
@@ -79,9 +96,23 @@
 							</a>											
 						</div>											
 						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										我發布的完整計畫
+								</span>
+							</a>											
+						</div>											
+						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										我發布的初步計畫
+								</span>
+							</a>											
+						</div>											
+						<div class="row">
 							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByChat' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談中
+										洽談中完整計畫
 								</span>
 							</a>											
 						</div>

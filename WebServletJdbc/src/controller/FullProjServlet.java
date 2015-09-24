@@ -2,8 +2,13 @@ package controller;
 
 import global.GlobalService;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,8 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import model.FullProjBean;
 import model.MemberBean;
@@ -736,6 +742,14 @@ public class FullProjServlet extends HttpServlet
 		FullProjBean bean = new FullProjBean();
 		bean.setFullProjId(id);
 		bean = service.displayFullProj(bean);
+		JSONObject jobj = new JSONObject();
+		
+		try{
+			jobj = this.getGoogleMapInfo(bean);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 		
 		if(bean != null)
 		{
@@ -743,6 +757,7 @@ public class FullProjServlet extends HttpServlet
 			System.out.println("單一計劃 :" + bean);
 			System.out.println("======================================================");
 			request.setAttribute("fullProj",bean);
+			request.setAttribute("googleMap",jobj);
 			request.getRequestDispatcher("/fullProj/displayFullProj.jsp").forward(request,response);
 		}
 		else
@@ -766,5 +781,101 @@ public class FullProjServlet extends HttpServlet
 		request.getRequestDispatcher("/fullProj/displayFullProjAll.jsp").forward(request,response);
 
 		return;			
+	}
+	
+	//為了取得學校地點的經緯度
+	private JSONObject getGoogleMapInfo(FullProjBean bean) throws IOException{
+		
+		String loacation = bean.getLocation();
+		JSONObject jobj = new JSONObject();
+		try{
+				//連線到google Map Server
+				URL findGeoCode = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + 
+						"中山女中" + 
+					 "&key=AIzaSyCFcem4n3RifwMGgXOcF9raNW8lT2BSKs0");
+				// open connection
+				URLConnection makeConnect = findGeoCode.openConnection();
+		        // read result
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						makeConnect.getInputStream()));
+				
+				StringBuilder wholeJson = new StringBuilder();
+				String inputLine;
+				while ((inputLine = in.readLine()) != null){
+					wholeJson.append(inputLine.trim());
+				} 
+				String rendering = wholeJson.toString();
+				// transfer String to JsonObject
+				Object obj = JSONValue.parse(rendering);
+				if(obj instanceof JSONObject){
+					jobj = (JSONObject) obj;
+					JSONArray j1 = (JSONArray) jobj.get("results");
+					JSONObject j2 = (JSONObject) j1.get(0);
+					JSONObject j3 = (JSONObject) j2.get("geometry");
+					JSONObject j4 = (JSONObject) j3.get("location");
+					double lng = (double) j4.get("lng");
+					double lat = (double) j4.get("lat");
+					
+					this.getNearestStation(lat, lng);
+				}
+				
+				
+			}catch(MalformedURLException e){
+				System.out.println(e.getMessage());
+			}
+		return jobj;
+		
+	}
+	
+	
+	public String[] getNearestStation(double lat,double lng) throws IOException{
+		
+		String[] result= {"1","3"}; 
+		
+		Map map1 = useSameUrl(lat, lng,"train_station");
+		if((int)map1.get("resultnumbers") == 0){
+			Map map2 = useSameUrl(lat, lng,"bus_station");
+			if((int)map2.get("resultnumbers") == 0){
+				Map map3 = useSameUrl(lat, lng,"airport");
+				if((int)map2.get("resultnumbers") == 0){
+					
+				}
+			}
+		}else{
+			JSONObject jobj1 = (JSONObject)map1.get("results");
+			System.out.println(jobj1.get("results").toString());
+		}
+		
+		
+		return result;
+	}
+	
+	public Map useSameUrl(double lat,double lng,String type) throws IOException{
+		
+		Map map = new HashMap();
+		URL findGeoCode = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
+		 		+ lat + "," + lng  
+		 		+ "&rankby=distance&types="+type+"&key=AIzaSyCFcem4n3RifwMGgXOcF9raNW8lT2BSKs0");				
+		
+		URLConnection conn = findGeoCode.openConnection();
+		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		
+		String line;
+		StringBuffer stb = new StringBuffer();
+		
+		while((line = in.readLine()) != null){
+			System.out.println(line);
+			stb.append(line);
+		}
+		
+		Object jobj = JSONValue.parse(stb.toString());
+		if(jobj instanceof JSONObject){
+			JSONObject j1 = (JSONObject) jobj;
+			JSONArray j2 = (JSONArray)j1.get("results");
+			map.put("resultnumbers", j2.size());
+			map.put("results", j1);
+		}
+		
+		return map;
 	}
 }
