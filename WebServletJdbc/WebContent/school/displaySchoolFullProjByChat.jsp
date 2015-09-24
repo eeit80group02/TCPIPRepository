@@ -9,12 +9,10 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>school</title>
+<title>displaySchoolFullProjByChat</title>
 </head>
 <body>
-	<c:if test="${LoginOK.beanName.equals('member') }">
-		<c:redirect url="/error/permission.jsp" />
-	</c:if>
+
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 	<!-- 頁首 -->
@@ -22,114 +20,47 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">學校名稱${LoginOK.name}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.name}</h3>
 	</div>	
 
-	<main>
-		<div class="row" id="mainboard">
-			<div class="card-panel indigo lighten-5 hoverable" id="backboard">
-				<div class="row" id="secondboard">
-					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='showSchoolData.do' />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									修改資料
-								</span>
-							</a>
-						</div>
-					</div>
-					<div class="white card-panel left" style="min-height:60vh">
-						<div class="row">
-							<a id="changepassworda" href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									建立需求計畫
-								</span>
-							</a>
-						</div>
-						<div class="row divider" style="height:10px;"></div>					
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displays' />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									全部需求計畫
-								</span>
-							</a>
-						</div>					
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="col l12 btn-large yellow lighten-5 black-text"> 
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									洽談中
-								</span>
-							</a>
-						</div>					
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										待洽談
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談完成
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談失敗
-								</span>
-							</a>											
-						</div>
-					</div>				
-					<div class="white card-panel left" style="min-height:60vh">
-						<div class="row">
-							<a id="changepassworda" href="../donation/InsertDonateGoods.jsp" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										建立物資需求
-								</span>
-							</a>											
-						</div>					
-						<div class="row divider" style="height:10px;"></div>
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										全部物資需求
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										已獲得物資
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										募集中物資
-								</span>
-							</a>											
-						</div>	
+<main>
+<!-- 主要版面 -->
+<div class="row" id="mainboard">
+	<div class="col l8 offset-l2 indigo lighten-5">
+		<div class="row center-align card-panel blue-text" style="font-size:4em;">洽談中完整計畫</div>
+		<div class="row card-panel" >
+			<table class="bordered highlight centered">
+				<thead style="font-size:2em;">
+					<tr>
+						<th>須洽談計畫編號</th>
+						<th>完整計畫標題</th>
+						<th>link</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="bean" items="${fullProj}">
+						<tr>
+							<td style="font-size:1.6em;font-weight:600">${bean.fullProjId}</td>
+							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
+								<c:url value="/fullProj.do" var="path">
+									<c:param name="type" value="displayFullProjByChat" />
+									<c:param name="fullProjId" value="${bean.fullProjId}" />
+								</c:url>
+							<td><a href="${path}" class="btn-large yellow lighten-5 black-text" style="font-size:1.4em;font-weight:600">洽談</a></td>	
 						
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/fullProj.do?type=displaySchoolByChat' />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談中計劃
-								</span>
-							</a>											
-						</div>											
-					</div>
-					
-				</div>
-
-
-
-			</div>
+						</tr>
+					</c:forEach>			
+				</tbody>
+			</table>			
 		</div>
-	</main>
+	</div>
+</div>
+<!-- 主要版面 -->
+
+</main>
+
+
+
 	<!-- 頁尾 -->
 		<c:import url="/template/footer.jsp" context="${pageContext.request.contextPath}" ></c:import>
 	<!-- 頁尾 -->
@@ -141,28 +72,13 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
-			//設定背板的大小
-			var bodyw = $("body").width(),
-			    backwid = ($("body").width())* 0.68;
-			$("#backboard").css({
-				"width":backwid,
-				"margin":"0 auto",
-				"padding":"30px 0",
-				
-			});
-			
-			$("#secondboard>div").css({
-				"width":(bodyw * 0.20),
-				"margin-left":(bodyw * 0.02	)
-			})
 			
 			//body的最小高度
 			$("#mainboard").css("min-height","100vh");
-			//點擊預覽圖片也能上傳檔案
+			//show出修改密碼
 			$("#changepassworda").on("click",function(){
 				$("#changepassword").css("display","block");	
 			})
-			
 			//預覽圖片
 			$("#picture").change(function(){
 				var file = $("#picture")[0].files[0];
@@ -192,9 +108,6 @@
 				})
 			})
 			
-			
-			//初始化tab
-			$('ul.tabs').tabs();
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
@@ -496,4 +409,3 @@
 
 </body>
 </html>
-

@@ -54,7 +54,6 @@
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li>
 					<form action="<c:url value='google.do'/>" method='GET'>
-
 						<div class="input-field">
 							<input id="searchDonation" name="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="searchDonation">
 							<i type='submit' class="large material-icons" id="searchIcon">search</i></label>

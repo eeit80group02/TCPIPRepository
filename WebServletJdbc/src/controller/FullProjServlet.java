@@ -21,8 +21,10 @@ import javax.servlet.http.Part;
 
 
 
+
 import model.FullProjBean;
 import model.MemberBean;
+import model.SchoolBean;
 import model.service.FullProjService;
 
 @WebServlet("/fullProj.do")
@@ -105,7 +107,17 @@ public class FullProjServlet extends HttpServlet
 				displayPersonalFullProjByChat(request,response);
 				return;
 			}
-			// 在個人頁面顯示 招募中的
+			
+			// 在學校頁面顯示  需跟發起者洽談的計劃[type=displaySchoolByChat]
+			if(type.equals("displaySchoolByChat"))
+			{
+				System.out.println("執行 FullProjServlet displaySchoolFullProjByChat[需跟發起者洽談的完整計劃列表]");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				displaySchoolFullProjByChat(request,response);
+				return;
+			}
+			// 在個人頁面顯示 招募中需要審核的
 			if(type.equals("displayPersonalByParticipate"))
 			{
 				System.out.println("執行 FullProjServlet displayPersonalFullProjByParticipate[需審核參加人的計劃列表]");
@@ -251,9 +263,48 @@ public class FullProjServlet extends HttpServlet
 		}
 	}
 
+	private void displaySchoolFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		// 學校頁
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		SchoolBean schoolBean = null;
+		
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是學校登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof SchoolBean)
+		{
+			schoolBean = (SchoolBean)session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
+			return;
+		}
+		
+		if(schoolBean != null)
+		{
+			// business logic
+			FullProjBean fullProjBean = new FullProjBean();
+			fullProjBean.setSchoolId(schoolBean.getSchoolId());
+			List<FullProjBean> result = service.displaySchoolFullProjProjByChat(fullProjBean);
+			
+			if(result != null)
+			{
+				// 成功導向
+				System.out.println(result);
+				System.out.println("==================================================");
+				request.setAttribute("fullProj",result);
+				request.getRequestDispatcher("/school/displaySchoolFullProjByChat.jsp").forward(request,response);
+				return;
+			}
+		}
+	}
+	
 	private void displayPersonalFullProjByChat(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
-		// 會員頁 學校頁應該也類似
+		// 會員頁 
 		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession session = request.getSession();
