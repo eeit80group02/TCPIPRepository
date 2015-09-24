@@ -17,9 +17,7 @@ public class DonationCart {
 		List<String> itemList = new ArrayList<>();
 		Set<Integer> s = cart.keySet();
 		for(Integer i : s) {
-//			itemList.add("$('#"+i+"')");
 			itemList.add(i.toString());
-//			System.out.println("$('#"+i+"')");
 		}
 		return itemList;
 	}
@@ -30,7 +28,6 @@ public class DonationCart {
 		for(Integer i : s) {
 			idString += i+"@";
 		}
-		System.out.println("idString= "+idString);
 		return idString;
 	}
 
@@ -40,7 +37,6 @@ public class DonationCart {
 	
 	public boolean remove() {
 		cart.clear();
-//		cart = new LinkedHashMap<>();
 		System.out.println("清除購物車所有品項");
 		return true;
 	}
@@ -72,9 +68,8 @@ public class DonationCart {
 			cart.remove(donationId);
 			
 			Set<Integer> i = cart.keySet();
-			System.out.println("i="+i);
 			for (Integer s : i) {
-				System.out.println("@@@in delete's cart= "+ s);
+				System.out.println("in delete's cart= "+ s);
 			}
 			
 			return true;

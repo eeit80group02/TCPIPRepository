@@ -143,8 +143,8 @@
 				
 			</div>
 			<div class="col l2">
-				<div class="btn red white-text" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">
-					刷新					
+				<div class="btn red" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">
+					<a href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender'/>" class="white-text">刷新</a>					
 				</div>
 			</div>			
 		</div>

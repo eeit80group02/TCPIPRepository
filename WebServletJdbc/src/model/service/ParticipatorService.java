@@ -5,8 +5,6 @@ import java.util.List;
 
 import model.FullProjBean;
 import model.ParticipatorBean;
-import model.PrimaryProjBean;
-import model.ParticipatorBean;
 import model.dao.FullProjDAOJdbc;
 import model.dao.ParticipatorDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
@@ -144,9 +142,9 @@ public class ParticipatorService
 				java.util.Date tempStartTime = participatorBean.getActivityStartTime();
 				java.util.Date tempEndTime = participatorBean.getActivityEndTime();
 				
+				List<ParticipatorBean> memberParticipator = participatorDAO.selectByMemberId(memberId);
 				// 找出該會員 其他待審核的參加記錄
-				List<ParticipatorBean> temps = participatorDAO.selectByMemberId(memberId);
-				for(ParticipatorBean temp : temps)
+				for(ParticipatorBean temp : memberParticipator)
 				{
 					// 找出 所有待審核時間 對 剛申請的檢查是否有衝突
 					if(temp.getParticipateStatus().equals("待審核"))
@@ -187,6 +185,40 @@ public class ParticipatorService
 							participatorDAO.update(temp);
 						}
 					}
+				}
+				
+				// 找出該計畫的招募情況 如果已滿 同計畫要一併取消
+				int fullProjId = participatorBean.getFullProjId();
+				FullProjBean fullProjBean = fullProjDAO.findByPrimaryKey(fullProjId);
+				int estMember = fullProjBean.getEstMember();
+				
+				List<ParticipatorBean> pass = new ArrayList<ParticipatorBean>();
+				List<ParticipatorBean> fullProjParticipator = participatorDAO.selectByFullProjId(fullProjId);
+				for(ParticipatorBean temp : fullProjParticipator)
+				{
+					if(temp.getParticipateStatus().equals("已通過"))
+					{
+						pass.add(temp);
+					}
+				}
+				
+				// 人數已招滿
+				if(pass.size() == estMember)
+				{
+					// 如果還有待審核 全取消
+					for(ParticipatorBean temp : fullProjParticipator)
+					{
+						if(temp.getParticipateStatus().equals("待審核"))
+						{
+							temp.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+							temp.setParticipateStatus("未通過");
+							participatorDAO.update(temp);
+						}
+					}
+					
+					// 因為已經招募完 把完整計畫改成 進行中
+					fullProjBean.setProjStatus("進行中");
+					fullProjDAO.update(fullProjBean);
 				}
 				return true;
 			}

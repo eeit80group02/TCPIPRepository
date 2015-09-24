@@ -79,6 +79,13 @@
 							</a>											
 						</div>											
 						<div class="row">
+							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonal' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										瀏覽花絮
+								</span>
+							</a>											
+						</div>											
+						<div class="row">
 							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByChat' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 										洽談中
