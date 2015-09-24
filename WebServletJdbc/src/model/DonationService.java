@@ -162,6 +162,7 @@ public class DonationService {
 		return donationBean;
 	}
 	public List<DonationBeanDuplicate> findOneAllDeamndByMember(int schoolId) {
+		System.out.println("rrrschoolId = "+schoolId);
 		// 比對schoolId後得到一間學校所有捐獻
 		List<DonationBean> resultDisplay = new ArrayList<>();
 		
