@@ -32,7 +32,7 @@ public class DonationCartServlet extends HttpServlet {
 		
 		// 若尚未登入會員則自己產生一個 session，負責傳遞資料
 		HttpSession session = request.getSession(false);
-		String sId = session.getId();
+
 		DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
 		if (dCart == null) {
 			dCart = new DonationCart();
@@ -49,6 +49,7 @@ public class DonationCartServlet extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
+		
 		String donationIdStr = request.getParameter("donationId");
 		int donationId = 0;
 
@@ -71,7 +72,7 @@ public class DonationCartServlet extends HttpServlet {
 			
 			// 4.挑選適當畫面
 			if (dialog != null) {
-				RequestDispatcher rd = request.getRequestDispatcher("CheckDonationList.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
 				rd.forward(request, response);
 				return;
 				

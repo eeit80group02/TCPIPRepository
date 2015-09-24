@@ -24,6 +24,7 @@ import javax.servlet.http.Part;
 import model.DonationBean;
 import model.DonationBeanDuplicate;
 import model.DonationService;
+import model.MemberBean;
 import model.SchoolBean;
 
 @MultipartConfig(
@@ -48,13 +49,31 @@ public class DonationServlet extends HttpServlet {
 			// 導向登入畫面
 		}
 		
+		// 驗證是否為學校登入
+		Object obj = session.getAttribute("LoginOK");
+		if (obj == null) {
+			// 導向登入會員
+			System.out.println("無登入狀態，轉至TCPIP首頁");
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/index.jsp"));
+			return;
+			
+		} else if (obj instanceof MemberBean) {
+			System.out.println("會員登入狀態，轉至捐獻頁");
+			response.sendRedirect(response.encodeRedirectURL(request
+					.getContextPath()+"/index.jsp"));
+			return;
+			
+		} else if (obj instanceof SchoolBean) {
+			System.out.println("學校登入狀態，");
+		}
+		
 		// 1.接收資料
 		int donationId = 0; 						// 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
 		String donationIdStr = null; 		
 
 		SchoolBean sBean = (SchoolBean) session.getAttribute("LoginOK");
 		int schoolId = sBean.getSchoolId();
-		System.out.println("schoolId: "+schoolId);
 		
 		// 預設為否
 		String donationStatus = "否"; 				// 捐獻是否完成
@@ -153,7 +172,8 @@ public class DonationServlet extends HttpServlet {
 				errorMsgs.put("errorOriginalDemandUnit", "請輸入需求單位");
 			}
 			if(size == null || size.trim().length() == 0) {
-				errorMsgs.put("errorSize", "請輸入尺寸規格(物品的大小,長*寬*高)");
+				size = "";
+//				errorMsgs.put("errorSize", "請輸入尺寸規格(物品的大小,長*寬*高)");
 			}
 			if(demandContent == null || demandContent.trim().length() == 0) {
 				errorMsgs.put("errorDemandContent", "請輸入需求說明(為什麼需要這項物資)");
@@ -233,6 +253,7 @@ public class DonationServlet extends HttpServlet {
 			// 4.永續層存取
 			DonationService service = new DonationService();
 			donationBean = service.saveDemand(donationBean);
+			
 			if (donationBean == null) {
 				errorMsgs.put("Fail", "物資需求新增失敗");
 				System.out.println("物資需求新增失敗");
@@ -248,14 +269,11 @@ public class DonationServlet extends HttpServlet {
 			}
 				 	
 			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(donationBean.getSchoolId());
-//			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", list);
 			
 			is.close();
+			
 			// 5.挑選適當畫面
-//			RequestDispatcher rd = request.getRequestDispatcher("AllDeamndBySchool.jsp");
-//			rd.forward(request, response);
-//			return;
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/AllDeamndBySchool.jsp"));
 			return;
@@ -264,6 +282,7 @@ public class DonationServlet extends HttpServlet {
 			// 4.永續層存取
 			DonationService service = new DonationService();
 			DonationBean donationBeanUpdate = service.UpdateOneDemandBySchool(donationBean);
+			
 			if (donationBeanUpdate == null) {
 				errorMsgs.put("Fail", "物資需求更新失敗");
 				System.out.println("物資需求更新失敗");
@@ -279,7 +298,8 @@ public class DonationServlet extends HttpServlet {
 			}
 				 	
 			List<DonationBeanDuplicate> list = service.findOneAllDeamndBySchool(donationBeanUpdate.getSchoolId());
-			request.setAttribute("OneAllDemands", list);
+//			request.setAttribute("OneAllDemands", list);
+			session.setAttribute("OneAllDemands", list);
 
 			is.close();
 			// 5.挑選適當畫面
