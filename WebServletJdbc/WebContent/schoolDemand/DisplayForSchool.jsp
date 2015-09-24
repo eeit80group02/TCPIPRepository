@@ -23,7 +23,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${Demand.activityTopic}</h1>
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">${mDemand.activityTopic}</h1>
 	</div>
 	<!-- 頁面主題提示 -->
 	
@@ -52,7 +52,7 @@
 								學校名稱
 							</div>
 							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-<%-- 								${Demand.} --%>
+								${mDemand.schoolBean.name}
 							</div>
 						</div>
 						<!-- 活動主題  -->
@@ -67,7 +67,7 @@
 								活動地點
 							</div>
 							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								${Demand.activityLocation}
+								${mDemand.activityLocation}
 							</div>
 						</div>
 						<!-- 活動地點 -->
@@ -81,13 +81,13 @@
 								提供資源
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								住宿${Demand.offerBean.room}
+								住宿${mDemand.offerBean.room}
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								場地${Demand.offerBean.place}
+								場地${mDemand.offerBean.place}
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								伙食${Demand.offerBean.food}
+								伙食${mDemand.offerBean.food}
 							</div>
 						</div>
 						<!-- 提供 -->
@@ -101,7 +101,7 @@
 								活動對象
 							</div>
 							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								${Demand.activitySuitable}
+								${mDemand.activitySuitable}
 							</div>
 						</div>
 						<!-- 活動適合對象 -->
@@ -115,7 +115,7 @@
 								預計參與的人數
 							</div>
 							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								${Demand.participant}
+								${mDemand.participant}
 							</div>
 						</div>
 						<!-- 預計參與的人數 -->
@@ -132,7 +132,7 @@
 				
 					<div class="row">
 						<div class="col l10 offset-l1 card-panel blue-text hoverable center-align" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-							 內容${Demand.activityContact}
+							 內容${mDemand.activityContact}
 						</div>
 					</div>
 				
@@ -145,7 +145,7 @@
   					</div>
   					<div class="col l8 left-align">
   						<div class="row" style="font-size:1.6em;font-weight:900">
-  							活動負責人:${Demand.activityContact}
+  							活動負責人:${mDemand.activityContact}
   						</div>
   						<div class="row" style="font-size:1.6em;font-weight:900">
   							負責人聯絡電話:
@@ -153,7 +153,11 @@
   					</div>
 				</div>
 				<div class="row">
-					<a class="btn-large red right" href="<c:url value='SchoolDemandServlet.do?type=updateDisplay' />" style="font-family:微軟正黑體;font-size:2em;font-weight:600">申請</a>
+					<c:url value="/schoolDemand/Status.do" var="path">
+						<c:param name="type" value="application" />
+						<c:param name="schoolDemandId" value="${mDemand.schoolDemandId}" />
+					</c:url>	
+					<a class="btn-large red right" href="${path }" style="font-family:微軟正黑體;font-size:2em;font-weight:600">申請</a>
 				</div>
 			</div>
 		
