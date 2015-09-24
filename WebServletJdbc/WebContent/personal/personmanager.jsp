@@ -31,7 +31,7 @@
 				<div class="row" id="secondboard">
 					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
 						<div class="row">
-							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='maintainpersonal.jsp' />">
+							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='showMemberData.do' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
 									修改資料
 								</span>
