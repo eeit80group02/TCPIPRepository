@@ -57,7 +57,7 @@
 			</div>
 			
 			<div class="row deep-purple lighten-5 hoverable" style="padding:2em;">
-				<form action="ActicityHighlightCreateInitServlet" id="postForm" method="post">
+				<form action="ActivityHighlightPostServlet" id="postForm" method="post">
 					<div class="row">
 						<div class="forinput">影片網址(請輸入YouTube完整網址)</div>
 						<input id="videoURL" type="text" class="validate col l8" name="videoURL" style="padding:0;font-size:1.6em;font-family:微軟正黑體;"/>
