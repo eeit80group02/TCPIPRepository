@@ -153,6 +153,17 @@
 				"margin-top":(pagetitleheight2 - namediv)/2
 				,"margin-left":($(window).width()) * 0.2});
 			
+			
+			//設定背板的大小
+			var bodyw = $("body").width(),
+			    backwid = ($("body").width())* 0.68;
+			$("#backboard").css({
+				"width":backwid,
+				"margin":"0 auto",
+				"padding":"30px 0",
+				
+			});
+			
 		});
 	</script>
 
