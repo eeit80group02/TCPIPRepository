@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class FullProjBean implements Serializable
 {
@@ -36,7 +37,8 @@ public class FullProjBean implements Serializable
 	
 	private String base64String;					// base64字串
 	private MemberBean memberBean;					// 會員資料
-	private List<ParticipatorBean> participatorBean;	// 參加人集合
+	private Map<String,List<ParticipatorBean>> participatorMap;	// 參加人集合<待審核 & 已通過>
+	
 	public FullProjBean()
 	{
 	}
@@ -321,14 +323,14 @@ public class FullProjBean implements Serializable
 		this.memberBean = memberBean;
 	}
 
-	public List<ParticipatorBean> getParticipatorBean()
+	public Map<String,List<ParticipatorBean>> getParticipatorMap()
 	{
-		return participatorBean;
+		return participatorMap;
 	}
 
-	public void setParticipatorBean(List<ParticipatorBean> participatorBean)
+	public void setParticipatorMap(Map<String,List<ParticipatorBean>> participatorMap)
 	{
-		this.participatorBean = participatorBean;
+		this.participatorMap = participatorMap;
 	}
 
 	@Override

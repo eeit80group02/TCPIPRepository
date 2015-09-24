@@ -82,7 +82,7 @@
 							<p style="font-size: 20pt" class="truncate">${fullProj.title}</p>
 						</div>
 						<div class="card-action right-align">
-							<span>需求人數:${fn:length(fullProj.participatorBean)}/${fullProj.estMember}</span>
+							<span>需求人數:${fn:length(fullProj.participatorMap.pending)}/${fullProj.estMember}</span>
 						</div>
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">
