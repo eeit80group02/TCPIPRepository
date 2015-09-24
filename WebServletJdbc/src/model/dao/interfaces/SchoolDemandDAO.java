@@ -16,5 +16,7 @@ public interface SchoolDemandDAO
 	public SchoolDemandBean update(SchoolDemandBean bean);
 
 	public boolean delete(int schoolDemandId);
+	
+	public List<SchoolDemandBean> findByPrimarySchoolId(int schoolId);
 
 }

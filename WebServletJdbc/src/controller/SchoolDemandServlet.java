@@ -665,6 +665,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			session.setAttribute("list", result);
 			System.out.println("成功查詢list=" + result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
+			return;
 		} else {
 			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");

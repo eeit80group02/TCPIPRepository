@@ -245,4 +245,45 @@ public class SchoolDemandDAOJdbc implements SchoolDemandDAO
 		
 		System.out.println(dao.update(bean2));
 	}
+	
+	private static final String SELECT_BY_SCHOOLID = "SELECT schoolDemandId,schoolId,participant,activityTopic,activityLocation,activitySuitable,activityHost,activityContact,createDate,content,demandStatus FROM SchoolDemand WHERE schoolId = ? and demandStatus='洽談中'";
+	@Override
+	public List<SchoolDemandBean> findByPrimarySchoolId(int schoolId) {
+		List<SchoolDemandBean> result = null;
+		SchoolDemandBean bean = null;
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_SCHOOLID);)
+		{
+			pstmt.setInt(1,schoolId);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				result = new ArrayList<SchoolDemandBean>();
+				while(rset.next())
+				{
+					bean = new SchoolDemandBean();
+					bean.setSchoolDemandId(rset.getInt("schoolDemandId"));
+					bean.setSchoolId(rset.getInt("schoolId"));
+					bean.setParticipant(rset.getInt("participant"));
+					bean.setActivityTopic(rset.getString("activityTopic"));
+					bean.setActivityLocation(rset.getString("activityLocation"));
+					bean.setActivitySuitable(rset.getString("activitySuitable"));
+					bean.setActivityHost(rset.getString("activityHost"));
+					bean.setActivityContact(rset.getString("activityContact"));
+					bean.setCreateDate(rset.getTimestamp("createDate"));
+					bean.setContent(rset.getString("content"));
+					bean.setDemandStatus(rset.getString("demandStatus"));
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

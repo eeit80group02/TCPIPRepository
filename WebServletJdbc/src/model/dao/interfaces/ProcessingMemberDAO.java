@@ -16,5 +16,6 @@ public interface ProcessingMemberDAO
 	public ProcessingMemberBean update(ProcessingMemberBean bean);
 
 	public boolean delete(int processingMemberId);
-
+	
+	public List<ProcessingMemberBean> finBySchoolDemandId(int schoolDemandId);
 }
