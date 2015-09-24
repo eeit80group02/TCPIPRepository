@@ -28,7 +28,7 @@
 			</a>
 	
 	
-			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
+			<ul class="right" style="font-size:1.5em;">
 			
 <!-- 				根據登入顯示不同選項 -->
 				<c:if test="${not empty LoginOK}">

@@ -99,20 +99,20 @@
 								</span>
 							</a>											
 						</div>											
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										已獲得物資
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										募集中物資
-								</span>
-							</a>											
-						</div>	
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										已獲得物資 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div>											 -->
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										募集中物資 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div>	 -->
 						
 						<div class="row">
 							<a id="changepassworda" href="<c:url value='/fullProj.do?type=displaySchoolByChat' />" class="col l12 btn-large yellow lighten-5 black-text" >
