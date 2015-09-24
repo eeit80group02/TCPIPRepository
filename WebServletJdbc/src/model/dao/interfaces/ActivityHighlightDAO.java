@@ -16,5 +16,6 @@ public interface ActivityHighlightDAO
 	public ActivityHighlightBean update(ActivityHighlightBean bean);
 
 	public boolean delete(int fullProjId);
-
+	
+	public List<ActivityHighlightBean> findByPrimaryMemberId(ActivityHighlightBean bean);
 }

@@ -36,6 +36,11 @@ public class ActicityHighlightService {
 		result = activityHighlightDAO.update(bean);
 		return result;	
 	}
+	public List<ActivityHighlightBean> displayAllforMember(ActivityHighlightBean bean){
+		List<ActivityHighlightBean> result = null;
+		result = activityHighlightDAO.findByPrimaryMemberId(bean);
+		return result;	
+	}
 	public ActivityHighlightBean display(ActivityHighlightBean bean){
 		ActivityHighlightBean result = null;
 		result = activityHighlightDAO.findByPrimaryKey(bean.getFullProjId());
