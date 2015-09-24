@@ -32,21 +32,21 @@ public class DonationGoogleServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String searchDonation = request.getParameter("searchDonation");
-		System.out.println("searchDonation = "+searchDonation);
+		HttpSession session = request.getSession();
 		
-		// 3.呼叫Model
+		// 1.接收資料
+		String searchDonation = request.getParameter("searchDonation");
+		
+		// 2.呼叫Model
 		SchoolService sService = new SchoolService();
 		int schoolId = sService.getSchoolIdByName(searchDonation);
-		System.out.println("schoolId "+schoolId);
+
 		DonationService dService = new DonationService();
 		List<DonationBeanDuplicate> listdbd = dService.findOneAllDeamndByMember(schoolId);
-		System.out.println("listdbd = "+listdbd);
 		
-		HttpSession session = request.getSession();
 		session.setAttribute("OneAllDemands", listdbd);
 		
-		// 5.
+		// 3.傳送資料
 		RequestDispatcher rd = request.getRequestDispatcher("AllDeamndByMember.jsp");
 		rd.forward(request, response);
 		return;
