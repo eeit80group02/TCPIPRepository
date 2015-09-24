@@ -172,7 +172,8 @@ public class DonationServlet extends HttpServlet {
 				errorMsgs.put("errorOriginalDemandUnit", "請輸入需求單位");
 			}
 			if(size == null || size.trim().length() == 0) {
-				errorMsgs.put("errorSize", "請輸入尺寸規格(物品的大小,長*寬*高)");
+				size = "";
+//				errorMsgs.put("errorSize", "請輸入尺寸規格(物品的大小,長*寬*高)");
 			}
 			if(demandContent == null || demandContent.trim().length() == 0) {
 				errorMsgs.put("errorDemandContent", "請輸入需求說明(為什麼需要這項物資)");
