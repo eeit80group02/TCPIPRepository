@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.MemberBean;
 import model.ProcessingMemberBean;
 import model.SchoolBean;
 import model.service.ProcessingMemberService;
@@ -59,45 +60,35 @@ public class ProcessingMemberServlet extends HttpServlet{
 		
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		ProcessingMemberBean bean = new ProcessingMemberBean();
-		ProcessingMemberService service = new ProcessingMemberService();
+		ProcessingMemberService service = new ProcessingMemberService();	
 		HttpSession session = request.getSession();
 		
-//		String memberId = (String)session.getAttribute("memberId");
-//		String schoolDemandId = request.getParameter("schoolDemandId");
+		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
+		if(mbean==null){
+			response.sendRedirect("/login/login.jsp");
+			return;
+		}
+		
+		int memberId = mbean.getMemberId();
+		String schoolDemandId = request.getParameter("schoolDemandId");
 
-		
-		String memberId = "1";
-		String schoolDemandId =  "18";
-		
-		if(memberId ==null || memberId.trim().length() ==0){
-			errorMsg.put("error", "錯誤");
-		}
-		if(schoolDemandId ==null || schoolDemandId.trim().length() ==0){
-			errorMsg.put("error", "錯誤");
-		}
-		int mId = 0;
-		try {
-			mId = Integer.parseInt(memberId);
-		} catch (NumberFormatException e) {
-			errorMsg.put("error", "錯誤");
-		}
 		int sId = 0;
 		try {
 			sId = Integer.parseInt(schoolDemandId);
 		} catch (NumberFormatException e) {
-			errorMsg.put("error", "錯誤");
-		}
-		if(!errorMsg.isEmpty()){
-			request.getRequestDispatcher("").forward(request, response);
+			System.out.println("錯誤");
+			response.sendRedirect("");
+			return;
 		}
 		
-		bean.setMemberId(mId);
+		bean.setMemberId(memberId);
 		bean.setSchoolDemandId(sId);
-		
+		System.out.println(bean);
 		bean = service.application(bean);
 		if(bean!=null){
 			System.out.println("建立成功" + bean);
-			request.getRequestDispatcher("").forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=mdisplays");
+			return;
 		}else{
 			System.out.println("建立失敗");
 			request.getRequestDispatcher("").forward(request, response);

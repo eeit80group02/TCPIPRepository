@@ -78,7 +78,7 @@ public class SchoolDemandService {
 		if(bean!=null){
 			result = schoolDemandDao.findByPrimaryKey(bean.getSchoolDemandId());
 			temp = offersDao.findByPrimaryKey(bean.getSchoolDemandId());
-			sBean = schoolDao.findByPrimaryKey(bean.getSchoolDemandId());
+			sBean = schoolDao.findByPrimaryKey(bean.getSchoolId());
 			result.setOfferBean(temp);
 			result.setSchoolBean(sBean);
 		}
