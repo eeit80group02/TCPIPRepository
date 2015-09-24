@@ -41,7 +41,6 @@
 
 
 	
-	
 	<!-- 頁面主題提示 -->
 	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
 		<h1 class="valign center-align white-text"
@@ -87,10 +86,10 @@
 <!-- 				</div>				 -->
 <!-- 			</div> -->
 <!-- ======= -->
-		<div class="col l8 offset-l2 indigo lighten-5">
-			<div class="row center-align card-panel red-text" style="font-size:4em;">
-				洽談中需求計畫
-			</div>
+			<div class="col l8 offset-l2 indigo lighten-5">
+				<div class="row center-align card-panel red-text" style="font-size:4em;">
+					洽談中需求計畫
+				</div>
 
 		
 		

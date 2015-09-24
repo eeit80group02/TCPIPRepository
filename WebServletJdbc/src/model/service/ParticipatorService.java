@@ -1,9 +1,10 @@
 package model.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.ParticipatorBean;
+import model.PrimaryProjBean;
+import model.ProcessingProjBean;
 import model.dao.ParticipatorDAOJdbc;
 import model.dao.interfaces.ParticipatorDAO;
 
@@ -72,6 +73,26 @@ public class ParticipatorService
 		}
 		
 		return result;
+	}
+	
+	public boolean cancelParticipator(ParticipatorBean bean)
+	{
+		if(bean != null)
+		{
+			int participatorId = bean.getParticipatorId();
+			
+			// 先對 該參加人表格 select 取出該筆資料
+			ParticipatorBean participatorBean = participatorDAO.findByPrimaryKey(participatorId);
+			participatorBean.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+			participatorBean.setParticipateStatus("未通過");
+			participatorBean = participatorDAO.update(participatorBean);
+			
+			if(participatorBean != null)
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 	public static void main(String[] args)
 	{

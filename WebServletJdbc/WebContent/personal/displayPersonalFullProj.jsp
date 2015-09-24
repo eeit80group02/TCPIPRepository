@@ -48,11 +48,25 @@
 							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
 							<td class="red-text" style="font-size:1.6em;font-weight:600">${bean.projStatus}
 							<td>
-								<c:url value="/fullProj.do" var="path">
-									<c:param name="type" value="display" />
-									<c:param name="fullProjId" value="${bean.fullProjId}" />
-								</c:url>
+								<c:choose>
+									<c:when test="${bean.projStatus.equals('洽談中')}">
+										<c:url value="/fullProj.do" var="path">
+											<c:param name="type" value="displayFullProjByChat" />
+											<c:param name="fullProjId" value="${bean.fullProjId}" />
+										</c:url>
+									</c:when>
+									
+									<c:otherwise>
+										<c:url value="/fullProj.do" var="path">
+											<c:param name="type" value="display" />
+											<c:param name="fullProjId" value="${bean.fullProjId}" />
+										</c:url>
+									</c:otherwise>
+								</c:choose>
+					
 								<a href="${path}" class="btn-large yellow lighten-5 black-text" style="font-size:1.4em;font-weight:600">查看</a>
+							<td>
+						
 							</td>
 						</tr>
 					</c:forEach>			

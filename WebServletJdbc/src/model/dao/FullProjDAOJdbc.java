@@ -52,12 +52,14 @@ public class FullProjDAOJdbc implements FullProjDAO
 			{
 				FullProjBean bean = new FullProjBean();
 				bean.setFullProjId(rset.getInt("fullProjId"));
-				if(rset.getObject("primaryProjId")!=null){
+				if(rset.getObject("primaryProjId") != null)
+				{
 					bean.setPrimaryProjId(rset.getInt("primaryProjId"));
-				}else{
+				}
+				else
+				{
 					bean.setPrimaryProjId((Integer)rset.getObject("primaryProjId"));
 				}
-				
 				
 				if(rset.getObject("schoolDemandId") != null)
 				{
@@ -159,9 +161,12 @@ public class FullProjDAOJdbc implements FullProjDAO
 				{
 					result = new FullProjBean();
 					result.setFullProjId(rset.getInt("fullProjId"));
-					if(rset.getObject("primaryProjId") != null){
+					if(rset.getObject("primaryProjId") != null)
+					{
 						result.setPrimaryProjId(rset.getInt("primaryProjId"));
-					}else{
+					}
+					else
+					{
 						result.setPrimaryProjId((Integer)rset.getObject("primaryProjId"));
 					}
 					if(rset.getObject("schoolDemandId") != null)
@@ -595,7 +600,15 @@ public class FullProjDAOJdbc implements FullProjDAO
 				{
 					bean = new FullProjBean();
 					bean.setFullProjId(rset.getInt("fullProjId"));
-					bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+					
+					if(rset.getObject("primaryProjId") != null)
+					{
+						bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+					}
+					else
+					{
+						bean.setSchoolDemandId((Integer)rset.getObject("primaryProjId"));
+					}
 					
 					if(rset.getObject("schoolDemandId") != null)
 					{
@@ -679,6 +692,122 @@ public class FullProjDAOJdbc implements FullProjDAO
 				e.printStackTrace();
 			}
 		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	private static final String SELECT_BY_SCHOOLID = "SELECT fullProjId,primaryProjId,schoolDemandId,memberId,schoolId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,location,activityStartTime,activityEndTime,estMember,budget,createDate,projStatus,orgArchitecture,projFileName,projFile,projFileLength,reviews,reviewsContent,schoolConfirm,memberConfirm FROM FullProj WHERE schoolId = ?";
+	@Override
+	public List<FullProjBean> selectBySchoolId(int schoolId)
+	{
+		List<FullProjBean> result = new ArrayList<FullProjBean>();
+		FullProjBean bean = null;
+		
+		try(Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_SCHOOLID);)
+				{
+			pstmt.setInt(1,schoolId);
+			try(ResultSet rset = pstmt.executeQuery();)
+			{
+				while(rset.next())
+				{
+					bean = new FullProjBean();
+					bean.setFullProjId(rset.getInt("fullProjId"));
+					
+					if(rset.getObject("primaryProjId") != null)
+					{
+						bean.setPrimaryProjId(rset.getInt("primaryProjId"));
+					}
+					else
+					{
+						bean.setSchoolDemandId((Integer)rset.getObject("primaryProjId"));
+					}
+					
+					if(rset.getObject("schoolDemandId") != null)
+					{
+						bean.setSchoolDemandId(rset.getInt("schoolDemandId"));
+					}
+					else
+					{
+						bean.setSchoolDemandId((Integer)rset.getObject("schoolDemandId"));
+					}
+					
+					if(rset.getObject("memberId") != null)
+					{
+						bean.setMemberId(rset.getInt("memberId"));
+					}
+					else
+					{
+						bean.setMemberId((Integer)rset.getObject("memberId"));
+					}
+					
+					bean.setSchoolId(rset.getInt("schoolId"));
+					bean.setTitle(rset.getString("title"));
+					bean.setFrontCoverName(rset.getString("frontCoverName"));
+					bean.setFrontCover(rset.getBytes("frontCover"));
+					bean.setFrontCoverLength(rset.getLong("frontCoverLength"));
+					bean.setProjAbstract(rset.getString("projAbstract"));
+					bean.setContent(rset.getString("content"));
+					bean.setLocation(rset.getString("location"));
+					bean.setActivityStartTime(rset.getTimestamp("activityStartTime"));
+					bean.setActivityEndTime(rset.getTimestamp("activityEndTime"));
+					bean.setEstMember(rset.getInt("estMember"));
+					bean.setBudget(rset.getInt("budget"));
+					bean.setCreateDate(rset.getTimestamp("createDate"));
+					bean.setProjStatus(rset.getString("projStatus"));
+					bean.setOrgArchitecture(rset.getString("orgArchitecture"));
+					bean.setProjFileName(rset.getString("projFileName"));
+					bean.setProjFile(rset.getBytes("projFile"));
+					
+					if(rset.getObject("projFileLength") != null)
+					{
+						bean.setProjFileLength(rset.getLong("projFileLength"));
+					}
+					else
+					{
+						bean.setProjFileLength((Long)rset.getObject("projFileLength"));
+					}
+					
+					if(rset.getObject("reviews") != null)
+					{
+						bean.setReviews(rset.getInt("reviews"));
+					}
+					else
+					{
+						bean.setReviews((Integer)rset.getObject("reviews"));
+					}
+					
+					bean.setReviewsContent(rset.getString("reviewsContent"));
+					
+					if(rset.getObject("schoolConfirm") != null)
+					{
+						bean.setSchoolConfirm(rset.getBoolean("schoolConfirm"));
+					}
+					else
+					{
+						bean.setSchoolConfirm((Boolean)rset.getObject("schoolConfirm"));
+					}
+					
+					if(rset.getObject("memberConfirm") != null)
+					{
+						bean.setMemberConfirm(rset.getBoolean("memberConfirm"));
+					}
+					else
+					{
+						bean.setMemberConfirm((Boolean)rset.getObject("memberConfirm"));
+					}
+					
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+				}
 		catch(SQLException e)
 		{
 			e.printStackTrace();

@@ -50,29 +50,48 @@
 			<form class="card-panel hoverable" action="<c:url value="/fullProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="fullform">
 				<div class="row">
 						<!-- 印出來、不能更動 -->
-						<div class="row orange accent-3">
+<!-- 						<div class="row orange accent-3"> -->
 							<!-- 計畫編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">計畫編號:${param.fullProjId}</div>
-									<input type="hidden" name="fullProjId" value="${param.fullProjId}">
-								</div>
-							</div>
-							<!-- 會員編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">會員編號:${param.memberId}</div>
-									<input type="hidden" name="memberId" value="${param.memberId}">
-								</div>
-							</div>						
-							<!-- 學校編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">學校編號:${param.schoolId}</div>
-									<input type="hidden" name="schoolId" value="${param.schoolId}">
-								</div>
-							</div>						
-						</div>				
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col l8"> -->
+<%-- 									<div class="forinput">計畫編號:${param.fullProjId}</div> --%>
+<%-- 									<input type="hidden" name="fullProjId" value="${param.fullProjId}"> --%>
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							會員編號 -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col l8"> -->
+<%-- 									<div class="forinput">會員編號:${param.memberId}</div> --%>
+<%-- 									<input type="hidden" name="memberId" value="${param.memberId}"> --%>
+<!-- 								</div> -->
+<!-- 							</div>						 -->
+<!-- 							學校編號 -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col l8"> -->
+<%-- 									<div class="forinput">學校編號:${param.schoolId}</div> --%>
+<%-- 									<input type="hidden" name="schoolId" value="${param.schoolId}"> --%>
+<!-- 								</div> -->
+<!-- 							</div>						 -->
+<!-- 						</div>				 -->
+				
+					<!-- 印出來不能動的資訊 -->
+					<div class="orange lighten-2 card-panel hoverable ">
+						<!-- 完整計畫編號 -->
+						<div class="row">
+								<div class="forinput col l3 right-align">完整計畫編號:${param.fullProjId}</div>
+								<input class="col l7 black-text" name="fullProjId" id="fullProjId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+						</div>
+						<!-- 會員編號 -->
+						<div class="row">
+								<div class="forinput col l3 right-align">會員編號:${param.memberId}</div>
+								<input class="col l7 black-text"name="memberId" id="memberId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+						</div>
+						<!-- 學校編號 -->
+						<div class="row">
+								<div class="forinput col l3 right-align">學校編號:${param.schoolId}</div>
+								<input class="col l7 black-text" name="schoolId" id="schoolId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+						</div>
+					</div>
 				
 				
 						<!-- 計畫封面 -->

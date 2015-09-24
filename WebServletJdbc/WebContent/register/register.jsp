@@ -502,17 +502,6 @@
 			});
 			
 				
-			//禁止使用者點擊
-				$("#validateform").on({
-					"mouseover":function(){
-						$(".collapsible-header").prop("disabled",true);
-					},
-					"mouseout":function(){
-						$(".collapsible-header").prop("disabled",false);
-					}
-				})
-				
-				
 				function makeanimate(ele1,ele2,ele3){
 					$(ele1).on({"focus":function(e){
 							$(ele2).animate({
@@ -905,8 +894,6 @@
 					});
 				}
 			})			
-			//footer中連結的文字大小
-			$("a").css("font-size","1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
@@ -914,8 +901,6 @@
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
 			//帳號、密碼欄focus的背景色變化
 			$("#login > div > input").each(function(){
 				$(this).on({"focus":function(){

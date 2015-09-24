@@ -116,6 +116,22 @@ public class InsertMission {
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setInt(1, 1);
+			pstmt.setString(2, "教材成品試閱");
+			pstmt.setInt(3, 1);
+			pstmt.setTimestamp(4, new Timestamp(GlobalService.convertStringToDate("2015-05-23").getTime()));
+			pstmt.setString(5, "非常緊急");
+			pstmt.setInt(6, 3);
+			pstmt.setString(7, "進行中");
+			pstmt.setInt(8, 1);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 1);
 			pstmt.setString(2, "教師聘請");
 			pstmt.setInt(3, 1);
 			pstmt.setTimestamp(4, new Timestamp(GlobalService.convertStringToDate("2015-05-19").getTime()));

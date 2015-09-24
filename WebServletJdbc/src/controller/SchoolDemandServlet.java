@@ -78,10 +78,13 @@ public class SchoolDemandServlet extends HttpServlet {
 			} else if (type.equals("displayPersonalUnrender")) {
 				System.out.println("displayPersonalUnrender");
 				displayPersonalUnrender(request, response);
+			} else if (type.equals("mdisplay")) {
+				System.out.println("mdisplay");
+				mdisplay(request, response);
 			} else if (type.equals("mdisplays")) {
 				System.out.println("mdisplays");
 				mdisplays(request, response);
-			} else {
+			}else {
 				errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.83)");
 				request.getRequestDispatcher("/error.jsp").forward(request,
 						response);
@@ -485,6 +488,40 @@ public class SchoolDemandServlet extends HttpServlet {
 		}else{
 			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/UpdataSchoolDemand.jsp");
+		}
+		
+	}
+	public void mdisplay(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("----------------------------------會員顯示單筆----------------------------------");
+		SchoolDemandBean result = new SchoolDemandBean();
+		HttpSession session = request.getSession();
+		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
+		if(mbean==null){
+			if(mbean.getMemberId()==null){
+				System.out.println("非會員登入");
+				response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+				return;
+			}
+		}
+		String schoolDemandId = request.getParameter("schoolDemandId");
+		String schoolId = request.getParameter("schoolId");
+
+		int sDId = 0;
+		int sId = 0;
+		try {
+			sDId = Integer.parseInt(schoolDemandId);
+			sId = Integer.parseInt(schoolId);
+		} catch (NumberFormatException e) {
+			System.out.println("錯誤");
+		}
+		result.setSchoolDemandId(sDId);
+		result.setSchoolId(sId);
+		result = service.mdisplay(result);
+		if(result!=null){
+			session.setAttribute("mDemand", result);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayForSchool.jsp");
+		}else{
+			response.sendRedirect(request.getContextPath()+"");
 		}
 		
 	}
