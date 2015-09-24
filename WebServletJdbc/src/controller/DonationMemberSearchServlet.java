@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.DonationBeanDuplicate;
+import model.DonationCart;
 import model.DonationService;
 import model.service.DonationSearchService;
 
@@ -54,6 +55,35 @@ public class DonationMemberSearchServlet extends HttpServlet {
 			if (range != null) {
 				dbdList = donationSearchService.searchSchoolByStatus(supplyStatus, schoolId);
 //				request.setAttribute("AllDemands", dbdList);
+				System.out.println("ss dbdList"+dbdList);
+				if(dbdList.isEmpty()) {
+					System.out.println("123");
+					dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+					if(dbdList.isEmpty()) {
+						DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+						if (dCart == null) {
+							dCart = new DonationCart();
+							session.setAttribute("DonationCart", dCart);
+						}
+						
+						// 3.呼叫Model
+						DonationService service = new DonationService();
+						List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+						List<String> list = dCart.getDonationIdList();
+						
+//						request.setAttribute("AllDemands", listDuplivate);
+						session.setAttribute("AllDemands", listDuplivate);
+						session.setAttribute("cartItems", list);
+						
+						// 4.轉至適當畫面
+						RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+						rd.forward(request, response);
+						return;
+//						response.sendRedirect(response.encodeRedirectURL(request
+//								.getContextPath()+"/donation/FindGoods.jsp"));
+//						return;
+					}
+				}
 				session.setAttribute("OneAllDemands", dbdList);
 				
 				// 4.轉至適當畫面
@@ -65,6 +95,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 				return;
 			} else {
 				dbdList = donationSearchService.searchByStatus(supplyStatus);
+				
+				if(dbdList.isEmpty()) {
+					System.out.println("123");
+					dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+					if(dbdList.isEmpty()) {
+						DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+						if (dCart == null) {
+							dCart = new DonationCart();
+							session.setAttribute("DonationCart", dCart);
+						}
+						
+						// 3.呼叫Model
+						DonationService service = new DonationService();
+						List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+						List<String> list = dCart.getDonationIdList();
+						
+//						request.setAttribute("AllDemands", listDuplivate);
+						session.setAttribute("AllDemands", listDuplivate);
+						session.setAttribute("cartItems", list);
+						
+						// 4.轉至適當畫面
+						RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+						rd.forward(request, response);
+						return;
+//						response.sendRedirect(response.encodeRedirectURL(request
+//								.getContextPath()+"/donation/FindGoods.jsp"));
+//						return;
+					}
+				}
+				
 //				request.setAttribute("AllDemands", dbdList);
 				session.setAttribute("AllDemands", dbdList);
 				
@@ -85,6 +145,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 				List<DonationBeanDuplicate> dbdList;
 				if (range != null) {
 					dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+
+					if(dbdList.isEmpty()) {
+						System.out.println("123");
+						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+						if(dbdList.isEmpty()) {
+							DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+							if (dCart == null) {
+								dCart = new DonationCart();
+								session.setAttribute("DonationCart", dCart);
+							}
+							
+							// 3.呼叫Model
+							DonationService service = new DonationService();
+							List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+							List<String> list = dCart.getDonationIdList();
+							
+//							request.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("cartItems", list);
+							
+							// 4.轉至適當畫面
+							RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+							rd.forward(request, response);
+							return;
+//							response.sendRedirect(response.encodeRedirectURL(request
+//									.getContextPath()+"/donation/FindGoods.jsp"));
+//							return;
+						}
+					}
+					
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("OneAllDemands", dbdList);
 					
@@ -97,6 +187,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 					return;
 				} else {
 					dbdList = donationSearchService.searchByOriginalDemandNumber();
+
+					if(dbdList.isEmpty()) {
+						System.out.println("123");
+						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+						if(dbdList.isEmpty()) {
+							DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+							if (dCart == null) {
+								dCart = new DonationCart();
+								session.setAttribute("DonationCart", dCart);
+							}
+							
+							// 3.呼叫Model
+							DonationService service = new DonationService();
+							List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+							List<String> list = dCart.getDonationIdList();
+							
+//							request.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("cartItems", list);
+							
+							// 4.轉至適當畫面
+							RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+							rd.forward(request, response);
+							return;
+//							response.sendRedirect(response.encodeRedirectURL(request
+//									.getContextPath()+"/donation/FindGoods.jsp"));
+//							return;
+						}
+					}
+					
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("AllDemands", dbdList);
 					// 4.轉至適當畫面
@@ -116,6 +236,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 				List<DonationBeanDuplicate> dbdList;
 				if (range != null) {
 					dbdList = donationSearchService.searchSchoolByExpiretime(schoolId);
+					
+					if(dbdList.isEmpty()) {
+						System.out.println("123");
+						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+						if(dbdList.isEmpty()) {
+							DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+							if (dCart == null) {
+								dCart = new DonationCart();
+								session.setAttribute("DonationCart", dCart);
+							}
+							
+							// 3.呼叫Model
+							DonationService service = new DonationService();
+							List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+							List<String> list = dCart.getDonationIdList();
+							
+//							request.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("cartItems", list);
+							
+							// 4.轉至適當畫面
+							RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+							rd.forward(request, response);
+							return;
+//							response.sendRedirect(response.encodeRedirectURL(request
+//									.getContextPath()+"/donation/FindGoods.jsp"));
+//							return;
+						}
+					}
+					
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("OneAllDemands", dbdList);
 					
@@ -128,6 +278,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 					return;
 				} else {
 					dbdList = donationSearchService.searchByExpiretime();
+					
+					if(dbdList.isEmpty()) {
+						System.out.println("123");
+						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+						if(dbdList.isEmpty()) {
+							DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+							if (dCart == null) {
+								dCart = new DonationCart();
+								session.setAttribute("DonationCart", dCart);
+							}
+							
+							// 3.呼叫Model
+							DonationService service = new DonationService();
+							List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+							List<String> list = dCart.getDonationIdList();
+							
+//							request.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("cartItems", list);
+							
+							// 4.轉至適當畫面
+							RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+							rd.forward(request, response);
+							return;
+//							response.sendRedirect(response.encodeRedirectURL(request
+//									.getContextPath()+"/donation/FindGoods.jsp"));
+//							return;
+						}
+					}
+					
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("AllDemands", dbdList);
 					// 4.轉至適當畫面
@@ -144,6 +324,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 				List<DonationBeanDuplicate> dbdList;
 				if (range != null) {
 					dbdList = donationSearchService.searchSchoolByDemandtime(schoolId);
+					
+					if(dbdList.isEmpty()) {
+						System.out.println("123");
+						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+						if(dbdList.isEmpty()) {
+							DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+							if (dCart == null) {
+								dCart = new DonationCart();
+								session.setAttribute("DonationCart", dCart);
+							}
+							
+							// 3.呼叫Model
+							DonationService service = new DonationService();
+							List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+							List<String> list = dCart.getDonationIdList();
+							
+//							request.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("cartItems", list);
+							
+							// 4.轉至適當畫面
+							RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+							rd.forward(request, response);
+							return;
+//							response.sendRedirect(response.encodeRedirectURL(request
+//									.getContextPath()+"/donation/FindGoods.jsp"));
+//							return;
+						}
+					}
+					
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("OneAllDemands", dbdList);
 					
@@ -156,6 +366,36 @@ public class DonationMemberSearchServlet extends HttpServlet {
 					return;
 				} else {
 					dbdList = donationSearchService.searchByDemandtime();
+					
+					if(dbdList.isEmpty()) {
+						System.out.println("123");
+						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
+						if(dbdList.isEmpty()) {
+							DonationCart dCart = (DonationCart) session.getAttribute("DonationCart");
+							if (dCart == null) {
+								dCart = new DonationCart();
+								session.setAttribute("DonationCart", dCart);
+							}
+							
+							// 3.呼叫Model
+							DonationService service = new DonationService();
+							List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
+							List<String> list = dCart.getDonationIdList();
+							
+//							request.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("AllDemands", listDuplivate);
+							session.setAttribute("cartItems", list);
+							
+							// 4.轉至適當畫面
+							RequestDispatcher rd = request.getRequestDispatcher("FindGoods.jsp");
+							rd.forward(request, response);
+							return;
+//							response.sendRedirect(response.encodeRedirectURL(request
+//									.getContextPath()+"/donation/FindGoods.jsp"));
+//							return;
+						}
+					}
+					
 //					request.setAttribute("AllDemands", dbdList);
 					session.setAttribute("AllDemands", dbdList);
 					// 4.轉至適當畫面

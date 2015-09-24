@@ -13,7 +13,7 @@ import org.json.simple.JSONArray;
 
 import java.sql.*;
 
-@WebServlet("/DonationJsonSimpleDemo")
+//@WebServlet("/DonationJsonSimpleDemo")
 public class DonationJsonSimpleDemo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
