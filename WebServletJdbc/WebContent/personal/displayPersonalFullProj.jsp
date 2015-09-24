@@ -64,6 +64,10 @@
 									</c:otherwise>
 								</c:choose>
 					
+								<c:if test="${bean.projStatus.equals('已完成')}">
+									<a href="" class="btn-large red white-text" style="font-size:1.4em;font-weight:600">建立花絮</a>
+								</c:if>
+								
 								<a href="${path}" class="btn-large yellow lighten-5 black-text" style="font-size:1.4em;font-weight:600">查看</a>
 							<td>
 						
