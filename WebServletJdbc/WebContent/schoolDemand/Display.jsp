@@ -52,7 +52,7 @@
 								學校名稱
 							</div>
 							<div class="col l7 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-<%-- 								${Demand.activityTopic} --%>
+								${Demand.schoolBean.name}
 							</div>
 						</div>
 						<!-- 活動主題  -->

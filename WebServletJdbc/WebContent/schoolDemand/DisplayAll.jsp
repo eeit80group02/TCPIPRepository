@@ -47,6 +47,11 @@
           			<c:if test="${not empty mlist}">
           				<c:forEach items="${mlist}" var="bean">
 				          	<div class="col l5 white offset-l1 card-panel hoverable" style="padding:5px;">
+				          		<c:url value="/schoolDemand/SchoolDemandServlet.do?type=display" var="path">
+									<c:param name="type" value="mdisplay" />
+									<c:param name="schoolDemandId" value="${bean.schoolDemandId}" />
+									<c:param name="schoolId" value="${bean.schoolId}" />
+								</c:url>
 										<div class="row">
 											<i class="col l2 material-icons red-text medium">
 												loyalty
@@ -65,7 +70,7 @@
 							            	發布時間:${bean.createDate}
 							            </div>	            	
 							            <div class="row right-align" style="font-size:1.4em;font-family:標楷體;font-weight:600">
-							            	<a class="btn indigo" href="<c:url value='SchoolDemandServlet.do?type=display' />">take a look</a>
+							            	<a class="btn indigo" href="${path}">take a look</a>
 							            </div>	            	
 				     		</div>
 			     		</c:forEach>
