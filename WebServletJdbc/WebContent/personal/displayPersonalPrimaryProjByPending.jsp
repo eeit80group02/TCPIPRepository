@@ -84,24 +84,24 @@
 			<div class="row card-panel">
 				<!-- 初步計畫名稱 -->
 				<div class="row priProjName left-align teal-text darken-3">
-					初步計畫名稱${bean.title}
+					${bean.title}
 				</div>
 				<!-- 有意願的學校 forEach在這 -->
 				<c:forEach items="${bean.processingProjBean}" var="processingProj">
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
-							市立瑞穗國小${processingProj.schoolBean.name}
+							${processingProj.schoolBean.name}
 						</div>
 						<div class="col l4 left schldiv" >
-							台中市${processingProj.schoolBean.addressDistrict}
+							${processingProj.schoolBean.addressDistrict}
 						</div>
 						<div class="col l4 right right-align">
-								<form action="<c:url value="/processingProj" />" method="post">
+								<form action="<c:url value="/processingProj.do" />" method="post">
 									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
 									<input type="hidden" name="type" value="cancel">
 									<button class="btn red white-text btndiv right" type="submit">拒絕</button>
 								</form>						
-								<form action="<c:url value="/processingProj" />" method="post">
+								<form action="<c:url value="/processingProj.do" />" method="post">
 									<input type="hidden" name="processingProjId" value="${processingProj.processingProjId}">
 									<input type="hidden" name="type" value="agree">
 									<button class="btn red white-text btndiv right" type="submit">同意</button>

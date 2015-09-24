@@ -504,17 +504,22 @@ public class SchoolDemandServlet extends HttpServlet {
 			}
 		}
 		String schoolDemandId = request.getParameter("schoolDemandId");
+		String schoolId = request.getParameter("schoolId");
+
+		int sDId = 0;
 		int sId = 0;
 		try {
-			sId = Integer.parseInt(schoolDemandId);
+			sDId = Integer.parseInt(schoolDemandId);
+			sId = Integer.parseInt(schoolId);
 		} catch (NumberFormatException e) {
 			System.out.println("錯誤");
 		}
-		result.setSchoolDemandId(sId);
+		result.setSchoolDemandId(sDId);
+		result.setSchoolId(sId);
 		result = service.mdisplay(result);
 		if(result!=null){
 			session.setAttribute("mDemand", result);
-			response.sendRedirect(request.getContextPath()+"");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayForSchool.jsp");
 		}else{
 			response.sendRedirect(request.getContextPath()+"");
 		}
@@ -660,6 +665,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			session.setAttribute("list", result);
 			System.out.println("成功查詢list=" + result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
+			return;
 		} else {
 			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");

@@ -9,10 +9,12 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>personal</title>
+<title>school</title>
 </head>
 <body>
-
+	<c:if test="${LoginOK.beanName.equals('member') }">
+		<c:redirect url="/error/permission.jsp" />
+	</c:if>
 	<!-- 頁首 -->
 		<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 	<!-- 頁首 -->
@@ -97,21 +99,30 @@
 								</span>
 							</a>											
 						</div>											
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										已獲得物資 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div>											 -->
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										募集中物資 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div>	 -->
+						
 						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
+							<a id="changepassworda" href="<c:url value='/fullProj.do?type=displaySchoolByChat' />" class="col l12 btn-large yellow lighten-5 black-text" >
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										已獲得物資
+										洽談中計劃
 								</span>
 							</a>											
 						</div>											
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										募集中物資
-								</span>
-							</a>											
-						</div>											
-					</div>				
+					</div>
+					
 				</div>
 
 

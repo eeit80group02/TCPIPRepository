@@ -28,11 +28,12 @@
 			</a>
 	
 	
-			<ul class="right hide-on-med-and-down" style="font-size:1.5em;">
+			<ul class="right" style="font-size:1.5em;">
 			
 <!-- 				根據登入顯示不同選項 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">
+						<li><a href="<c:url value="/schoolDemand/SchoolDemandServlet.do?type=mdisplays" />">學校需求</a></li>
 						<li><a href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提案</a></li>
 					</c:if>
 	

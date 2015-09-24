@@ -211,19 +211,24 @@ public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 	// 測試
 	public static void main(String[] args)
 	{
-		ProcessingMemberDAO dao = new ProcessingMemberDAOJdbc();
-
+//		ProcessingMemberDAO dao = new ProcessingMemberDAOJdbc();
+//		List<ProcessingMemberBean> list = null;
+//		
+//		list = dao.finBySchoolDemandId(27);
+//		
+//		System.out.println(list);
+		
 		// findByPrimaryKey for Test 查詢單一筆資料
-		ProcessingMemberBean bean = dao.findByPrimaryKey(1);
-		System.out.println(bean);
+//		ProcessingMemberBean bean = dao.findByPrimaryKey(1);
+//		System.out.println(bean);
 //
 //		// select All for Test 查詢全部
-		List<ProcessingMemberBean> beans = dao.getAll();
-		System.out.println();
-		for(ProcessingMemberBean b : beans)
-		{
-			System.out.println(b);
-		}
+//		List<ProcessingMemberBean> beans = dao.getAll();
+//		System.out.println();
+//		for(ProcessingMemberBean b : beans)
+//		{
+//			System.out.println(b);
+//		}
 //
 //		// insert 新增
 //		ProcessingMemberBean bean1 = new ProcessingMemberBean();
@@ -234,17 +239,48 @@ public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 //		System.out.println(dao.insert(bean1));
 //
 //		// update 更新
-		ProcessingMemberBean bean2 = new ProcessingMemberBean();
-		bean2.setProcessingMemberId(2);
-		bean2.setSchoolDemandId(1);
-		bean2.setMemberId(6);
-		bean2.setCheckTime(new java.util.Date(System.currentTimeMillis()));
-		bean2.setCheckStatus("已審核");
-		System.out.println(dao.update(bean2));
+//		ProcessingMemberBean bean2 = new ProcessingMemberBean();
+//		bean2.setProcessingMemberId(2);
+//		bean2.setSchoolDemandId(1);
+//		bean2.setMemberId(6);
+//		bean2.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+//		bean2.setCheckStatus("已審核");
+//		System.out.println(dao.update(bean2));
 //
 //		// delete 刪除
-		System.out.println(dao.delete(1));
+//		System.out.println(dao.delete(1));
 
+	}
+
+	
+	private static final String SELECT_BY_ID_DEMAND = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE schoolDemandId = ? and checkStatus='待審核'";
+	@Override
+	public List<ProcessingMemberBean> finBySchoolDemandId(int schoolDemandId) {
+		List<ProcessingMemberBean> result = null;
+		ProcessingMemberBean bean = null;
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID_DEMAND);){
+				pstmt.setInt(1,schoolDemandId);
+				try(ResultSet rset = pstmt.executeQuery();){
+					result = new ArrayList<ProcessingMemberBean>();
+					while(rset.next()){
+						bean = new ProcessingMemberBean();
+						bean.setProcessingMemberId(rset.getInt("processingMemberId"));
+						bean.setSchoolDemandId(rset.getInt("schoolDemandId"));
+						bean.setMemberId(rset.getInt("memberId"));
+						bean.setCheckTime(rset.getTimestamp("checkTime"));
+						bean.setCheckStatus(rset.getString("checkStatus"));
+						result.add(bean);
+					}
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		return result;
 	}
 
 }

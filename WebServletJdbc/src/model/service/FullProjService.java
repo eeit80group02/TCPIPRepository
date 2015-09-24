@@ -7,6 +7,8 @@ import java.util.List;
 
 import model.FullProjBean;
 import model.MemberBean;
+import model.MissionBean;
+import model.MissionBoardBean;
 import model.ParticipatorBean;
 import model.dao.FullProjDAOJdbc;
 import model.dao.MemberDAOJdbc;
@@ -45,6 +47,17 @@ public class FullProjService
 				MemberBean memberBean = memberDAO.select(bean.getMemberId());
 				bean.setMemberBean(memberBean);
 				bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(),bean.getFrontCover()));
+				
+				int fullProjId = bean.getFullProjId();
+				List<ParticipatorBean> participatorBeans = new ArrayList<ParticipatorBean>();
+				for(ParticipatorBean participatorBean : participatorDAO.selectByFullProjId(fullProjId))
+				{
+					if(participatorBean.getParticipateStatus().equals("已通過"))
+					{
+						participatorBeans.add(participatorBean);
+					}
+				}
+				bean.setParticipatorBean(participatorBeans);
 				temp.add(bean);
 			}
 		}
@@ -71,6 +84,25 @@ public class FullProjService
 		{
 			// 先查詢 該會員的所有完整計畫
 			List<FullProjBean> temps = fullProjDAO.selectByMemberId(bean.getMemberId());
+			for(FullProjBean temp : temps)
+			{
+				if(temp.getProjStatus().equals("洽談中"))
+				{
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
+	
+	public List<FullProjBean> displaySchoolFullProjProjByChat(FullProjBean bean)
+	{
+		List<FullProjBean> result = new ArrayList<FullProjBean>();
+		
+		if(bean != null)
+		{
+			// 先查詢 該學校的所有完整計畫
+			List<FullProjBean> temps = fullProjDAO.selectBySchoolId(bean.getSchoolId());
 			for(FullProjBean temp : temps)
 			{
 				if(temp.getProjStatus().equals("洽談中"))
@@ -126,6 +158,17 @@ public class FullProjService
 				MemberBean memberBean = memberDAO.select(result.getMemberId());
 				result.setMemberBean(memberBean);
 				result.setBase64String(GlobalService.convertByteArrayToBase64String(result.getFrontCoverName(),result.getFrontCover()));
+			
+				// 找出該計畫的申請人
+				List<ParticipatorBean> participatorBeans = new ArrayList<ParticipatorBean>();
+				for(ParticipatorBean participatorBean : participatorDAO.selectByFullProjId(fullProjId))
+				{
+					if(participatorBean.getParticipateStatus().equals("已通過"))
+					{
+						participatorBeans.add(participatorBean);
+					}
+				}
+				result.setParticipatorBean(participatorBeans);
 			}
 		}
 		return result;
@@ -194,6 +237,11 @@ public class FullProjService
 				fullProjBean.setProjStatus("招募中");
 				fullProjDAO.update(fullProjBean);
 				
+				MissionBoardBean missionBoardBean = new MissionBoardBean();
+				missionBoardBean.setFullProjId(fullProjBean.getFullProjId());
+				missionBoardBean.setName(fullProjBean.getTitle());
+				missionBoardBean.setMissionSetNum(0);
+				missionBoardDAO.insert(missionBoardBean);
 				
 				return true;
 			}

@@ -16,6 +16,7 @@ public class ParticipatorBean implements Serializable
 	private String isParticipate;               // 是否參加
 	
 	private MemberBean memberBean;              // 參加人資料
+	private FullProjBean fullProjBean;			// 計畫資料
 
 	public ParticipatorBean()
 	{
@@ -109,6 +110,16 @@ public class ParticipatorBean implements Serializable
 	public void setMemberBean(MemberBean memberBean)
 	{
 		this.memberBean = memberBean;
+	}
+
+	public FullProjBean getFullProjBean()
+	{
+		return fullProjBean;
+	}
+
+	public void setFullProjBean(FullProjBean fullProjBean)
+	{
+		this.fullProjBean = fullProjBean;
 	}
 
 	@Override

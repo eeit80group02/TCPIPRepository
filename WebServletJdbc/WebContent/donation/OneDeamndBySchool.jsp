@@ -16,14 +16,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭 css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
 <!-- 標頭專用 top end -->
 
 <!-- 自訂 -->
-<link rel="stylesheet" href="../donationStyles/DonationQA.css">
+<link rel="stylesheet" href="../donationStyles/DonationQASchool.css">
 
 </head>
 <body>
@@ -101,58 +100,9 @@
 <!-- 						</td> -->
 						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
 						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
-						
-						<script>
-							var addToBag = document.getElementById("addItem");
-							addToBag.addEventListener("click", insertDeamnd);
-								
-							function insertDeamnd(){
-								var xhr = new XMLHttpRequest();
-								if (xhr != null) {
-										xhr.addEventListener("readystatechange", function(){
-											if (xhr.readyState == 4) {
-												if (xhr.status == 200) {
-													 lists = xhr.responseText;
-													  alert("新增購物車品項一");
-												} else {
-													alert("something is wrong!");
-												}
-											} 
-										});
-									xhr.open("POST", "cart.do", true);
-									xhr.setRequestHeader("Content-Type", 
-									"application/x-www-form-urlencoded")
-									xhr.send("toCart=insert&donationId="+"${OneDemand.donationId}"+"&schoolId="+"${OneDemand.schoolId}"+"&schoolName="+"${OneDemand.schoolName}"+"&donationStatus="+"${OneDemand.donationStatus}"+"&supplyName="+"${OneDemand.supplyName}"+"&originalDemandNumber="+"${OneDemand.originalDemandNumber}"+"&originalDemandUnit="+"${OneDemand.originalDemandUnit}"+"&demandNumber="+"${OneDemand.demandNumber}"+"&size="+"${OneDemand.size}"+"&demandContent="+"${OneDemand.demandContent}"+"&supplyStatus="+"${OneDemand.supplyStatus}"+"&demandTime="+"${OneDemand.demandTime}"+"&expireTime="+"${OneDemand.expireTime}"+"&remark="+"${OneDemand.remark}");
-								}
-							}
-						</script>
 					</tr>
 				</tfoot>
 			</table>
-
-		<!-- 留言板 -->
-		<form id="drop-a-line" role="form">
-			<div class="row">
-				<div class="col-md-10">
-					<div class="input-field col m12 s12">
-						<textarea id="your-message" class="materialize-textarea"></textarea>
-						<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
-
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="messageGO">
-						<button type="reset" class="btn btn-small btn-floating" id="send-message">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
-						</button>
-						<button type="reset" class="btn btn-small btn-floating" id="cancel-message">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
-						</button>
-					</div>
-
-				</div>
-			</div>
-		</form>
 
 		<!-- Q&A -->
 		<div id="QandA" class="col s12 m9">
@@ -162,7 +112,8 @@
 						<div class="collapsible-header">
 							<span class="glyphicon glyphicon-question-sign"></span> <b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
-								<span class="glyphicon glyphicon-ok-sign"></span>
+								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
+<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
 							<br>${item.memberMessage}&nbsp;<span class="talkTime">${item.memberMessageTime}
 						</div>
@@ -171,19 +122,31 @@
 								<c:when test="${empty item.schoolMessage}">
 									<c:choose>
 									<c:when test="${LoginOK.schoolId == item.schoolId}">
-									<table style="width:790px;height:100px;background-color:#FF8888;">
-										<form action='<c:url value="/donation/messages.do"/>' method='POST'>
-										<tr><th><input type='textarea' name='textarea' style="width:790px;height:60px;"></th></tr>
-										<input type='hidden' name='donationId' value='${OneDemand.donationId}'>
-										<input type='hidden' name='schoolId' value='${OneDemand.schoolId}'>
-										<input type='hidden' name='memberId' value='${item.memberId}'>
-										<input type='hidden' name='donationDiscussId' value='${item.donationDiscussId}'>
-										<input type='hidden' name='memberMessage' value='${item.memberMessage}'>
-										<input type='hidden' name='memberMessageTime' value=' ${item.memberMessageTime}'>
-										<input type='hidden' name='reporter' value='school'>
-										<tr><th><input type='submit' name='reply' value='回復'></th></tr>
+										<form class="schoolTalkBack" action='<c:url value="/donation/messages.do"/>' method='POST'>
+											<div class="row">
+												<div class="input-field col m10 s10">
+													<textarea id="your-message" name='textarea' class="materialize-textarea"></textarea>
+													<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
+												</div>
+				
+												<div class="messageGO">
+													<button type="submit" class="btn btn-small btn-floating" id="send-message">
+														<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
+													</button>
+													<button type="button" class="btn btn-small btn-floating" id="cancel-message">
+														<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+													</button>
+												</div>
+											</div>
+											<input type='hidden' name='donationId' value='${OneDemand.donationId}'>
+											<input type='hidden' name='schoolId' value='${OneDemand.schoolId}'>
+											<input type='hidden' name='memberId' value='${item.memberId}'>
+											<input type='hidden' name='donationDiscussId' value='${item.donationDiscussId}'>
+											<input type='hidden' name='memberMessage' value='${item.memberMessage}'>
+											<input type='hidden' name='memberMessageTime' value=' ${item.memberMessageTime}'>
+											<input type='hidden' name='reporter' value='school'>
+											
 										</form>
-										</table>
 									</c:when>
 									<c:otherwise>
 									<p>等待回覆...</p>
@@ -191,7 +154,8 @@
 									</c:choose>
 								</c:when>
 								<c:otherwise>
-									<P>${item.schoolMessage}</P>
+										<p>${item.schoolMessage}   </p>
+										<div class="talkBackTime">${item.schoolMessageTime}</div>
 								</c:otherwise>
 							</c:choose>
 							<br>
@@ -201,73 +165,6 @@
 			</ul>
 		</div>
 		<hr>
-
-		<!-- 會員留言處理 -->
-		<script>
-			var addBtn = document.getElementById("send-message");
-			var QandA = document.getElementById("QandA");
-			// 	var p1 = document.getElementById("p1");
-			// 	var p2 = document.getElementById("p2");
-			var textByMember = document.getElementById("your-message");
-
-			var xhr = null;
-
-			addBtn.addEventListener("click", load);
-
-			function load() {
-				xhr = new XMLHttpRequest();
-				if (xhr != null) {
-					xhr.addEventListener("readystatechange", returnData);
-					xhr.open("POST", "messages.do", true);
-					xhr.setRequestHeader("Content-Type",
-							"application/x-www-form-urlencoded")
-					xhr.send("reporter=member&textarea="
-							+ textByMember.value
-							+ "&donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}&returnJson=true")
-				}
-			}
-
-			function returnData() {
-				if (xhr.readyState == 4) {
-					if (xhr.status == 200) {
-						lists = xhr.responseText;
-						datas = JSON.parse(lists);
-						alert("ms "+datas);
-						var memberId = datas[0];
-						var memberMessage = datas[1];
-						var memberMessageTime = datas[2];
-
-						var tr1 = document.createElement("tr");
-						var th1 = document.createElement("th");
-						var p1 = document.createElement("p");
-						var textP1 = document.createTextNode("會員:" + memberId
-								+ " 於 " + memberMessageTime + "留言");
-						tr1.appendChild(th1);
-						th1.appendChild(p1)
-						p1.appendChild(textP1);
-
-						var tr2 = document.createElement("tr");
-						var th2 = document.createElement("th");
-						var p2 = document.createElement("p");
-						var textP2 = document.createTextNode("內容:"
-								+ memberMessage);
-						tr1.appendChild(th2);
-						th1.appendChild(p2)
-						p1.appendChild(textP2);
-
-						QandA.appendChild(tr2);
-						QandA.appendChild(tr1);
-					} else {
-						alert("something is wrong!");
-					}
-				}
-			}
-			$(function() {
-				$("#send-message").click(function() {
-					$("#your-message").val("");
-				});
-			}(jQuery));
-		</script>
 	</center>
 </body>
 </html>
