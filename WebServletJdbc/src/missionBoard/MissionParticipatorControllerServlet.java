@@ -32,8 +32,6 @@ public class MissionParticipatorControllerServlet extends HttpServlet {
 		System.out.println(memberId);
 		System.out.println(missionId);
 
-		response.setContentType("text/plain; charset=UTF-8");
-		PrintWriter out = response.getWriter();
 
 		if (action.equalsIgnoreCase("insert")) {
 			MissionParticipatorBean missionParticipatorBean = new MissionParticipatorBean();
@@ -41,8 +39,17 @@ public class MissionParticipatorControllerServlet extends HttpServlet {
 			missionParticipatorBean.setMissionId(Integer.valueOf(missionId));
 			MissionParticipatorBean result = new MissionParticipatorDAOJdbc().insert(missionParticipatorBean);
 
+			JSONObject missionParticipator = new JSONObject();
+			missionParticipator.put("missionId", result.getMissionId());
+			missionParticipator.put("memberId", result.getMemberId());
+			
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = response.getWriter();
 			if (result != null) {
-				out.write("Insert succeed!");
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("result", "Insert succeed");
+				jsonObject.put("participator", missionParticipator);
+				out.write(jsonObject.toJSONString());
 			} else {
 				out.write("Insert failed!");
 			}
@@ -56,6 +63,8 @@ public class MissionParticipatorControllerServlet extends HttpServlet {
 				}
 			}
 
+			response.setContentType("text/plain; charset=UTF-8");
+			PrintWriter out = response.getWriter();
 			if (missionParticipatorId > 0) {
 				boolean deleteResult = new MissionParticipatorDAOJdbc().delete(missionParticipatorId);
 				if (deleteResult) {
@@ -70,6 +79,9 @@ public class MissionParticipatorControllerServlet extends HttpServlet {
 			List<MissionParticipatorBean> result = new MissionParticipatorDAOJdbc()
 					.selectByMissionId(Integer.valueOf(missionId));
 
+			
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter out = response.getWriter();
 			if (result != null) {
 				JSONObject missionParticipator = new JSONObject();
 				for (MissionParticipatorBean bean : result) {
@@ -84,7 +96,6 @@ public class MissionParticipatorControllerServlet extends HttpServlet {
 					missionParticipator.put("member" + memberNumber, member);
 				}
 
-				response.setContentType("application/json; charset=UTF-8");
 				out.write(missionParticipator.toJSONString());
 			} else {
 				out.write("Mission not found!");
