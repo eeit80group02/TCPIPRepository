@@ -4,13 +4,15 @@ $(window).load(function() {
 			var fileName = $("#imageName").val();
 			var lowercaseFileName = fileName.toLowerCase();
 			var checkFileType = lowercaseFileName.match(/\.(jpg|gif|jpeg|png)$/g);
+			
+			console.log(fileName);
 
 			if (checkFileType != null) {
 				if (this.files && this.files[0]) {
 					var reader = new FileReader();
 					reader.onload = function(e) {
 						var Base64 = e.target.result;
-						$('#donationPicture').attr('src', Base64);
+						$('#donationPicture').attr('src', Base64).attr('style', 'vertical-align:middle');
 					}
 					reader.readAsDataURL(this.files[0]);
 				}
@@ -27,7 +29,6 @@ $(window).load(function() {
 
 	$("#sendMessage").click(function() {
 		var imgBase64 = $('#donationPicture').attr('src');
-//		alert(imgBase64.trim().length);
 		if (imgBase64.trim().length == 0) {
 			Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請上傳封面圖片</span>', 1800, 'rounded');
 		}

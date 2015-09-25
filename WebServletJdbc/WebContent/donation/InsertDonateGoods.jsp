@@ -70,19 +70,27 @@
 						<div class="input-field col m12 s12">
 							<input type="text" id="schoolName" disabled value="${LoginOK.name}"><label for="schoolName"><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="學校名稱"><span class="DetailTitle"><i class="tiny material-icons">location_city</i>&nbsp;申請單位&nbsp;</span></a></span></label>
 						</div>
+
+
+
 						<!-- 上傳圖片 -->
 						<div id="basicDataHead">
 							<div class="input-field col m12 s12">
-								<input type="file" id="imageName" name='imageName' required="required"><label for="imageName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400"><span class="DetailTitle"><i class="tiny material-icons">image</i>&nbsp;上傳封面&nbsp;<i class="tiny material-icons" id="requiredStar01">star</i></span></a><br> <br> <a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400">
+								<input type="file" id="imageName" required="required"><label for="imageName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400"><span class="DetailTitle"><i class="tiny material-icons">image</i>&nbsp;上傳封面&nbsp;<i class="tiny material-icons" id="requiredStar01">star</i></span></a><br> <br> <a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400">
 										<div id="donationPictureFrame">
 											<center>
 												<!-- 強迫img在div內部置中 -->
 												<img id="donationPicture" src="" alt="" title="上傳圖片">
 											</center>
+
 										</div>
 								</a> </label>
 							</div>
 						</div>
+
+
+
+
 						<br> <br> <br>
 					</div>
 					<div class="col s12 m12 l6">
@@ -90,22 +98,22 @@
 						<br> <br>
 						<!-- 物資名稱 -->
 						<div class="input-field col m12 s12">
-							<input type="text" id="supplyName" name='supplyName' value='${param.supplyName}' maxlength="25" required="required" autofocus="autofocus" autocomplete="off"><label for="supplyName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="最多輸入 25 個字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;物資名稱&nbsp;<i class="tiny material-icons" id="requiredStar02">star</i></span></a></label>
+							<input type="text" id="supplyName" name='supplyName' value='${param.supplyName}' maxlength="25" required="required" autocomplete="off"><label for="supplyName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="最多輸入 25 個字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;物資名稱&nbsp;<i class="tiny material-icons" id="requiredStar02">star</i></span></a></label>
 						</div>
 
 						<!-- 需求數量(數量) -->
 						<div class="input-field col m12 s12">
-							<input type="number" id="originalDemandNumber" name='originalDemandNumber' value='${param.originalDemandNumber}' required="required" autofocus="autofocus" autocomplete="off" max="9999" min="1"><label for="originalDemandNumber"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="輸入數字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品數量&nbsp;<i class="tiny material-icons" id="requiredStar03">star</i></span></a></label>
+							<input type="number" id="originalDemandNumber" name='originalDemandNumber' value='${param.originalDemandNumber}' required="required" autocomplete="off" max="9999" min="1"><label for="originalDemandNumber"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="輸入數字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品數量&nbsp;<i class="tiny material-icons" id="requiredStar03">star</i></span></a></label>
 						</div>
 
 						<!-- 原始輸入需求數量(單位) -->
 						<div class="input-field col m12 s12">
-							<input type="text" id="originalDemandUnit" name='originalDemandUnit' value='${param.originalDemandUnit}' required="required" autofocus="autofocus" autocomplete="off"><label for="originalDemandUnit"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：包、打、張、隻、箱"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品單位&nbsp;<i class="tiny material-icons" id="requiredStar04">star</i></span></a></label>
+							<input type="text" id="originalDemandUnit" name='originalDemandUnit' value='${param.originalDemandUnit}' required="required" autocomplete="off"><label for="originalDemandUnit"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：包、打、張、隻、箱"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品單位&nbsp;<i class="tiny material-icons" id="requiredStar04">star</i></span></a></label>
 						</div>
 
 						<!-- 尺寸規格(例如:物品的大小>長*寬*高) -->
 						<div class="input-field col m12 s12">
-							<input type="text" id="size" name='size' value='${param.size}' autofocus="autofocus" autocomplete="off"><label for="size"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：物品大小的長.寬.高、電壓 110V 或 220V"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;尺寸規格&nbsp;</span></a></label>
+							<input type="text" id="size" name='size' value='${param.size}' autocomplete="off"><label for="size"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：物品大小的長.寬.高、電壓 110V 或 220V"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;尺寸規格&nbsp;</span></a></label>
 						</div>
 
 						<!-- 物資狀態(全新/二手/不拘) -->
@@ -119,7 +127,7 @@
 
 						<!-- 需求說明(為什麼需要這項物資) -->
 						<div class="input-field col m12 s12">
-							<textarea id="demandContent" name='demandContent' value='${param.demandContent}' class="materialize-textarea" required="required" autofocus="autofocus"></textarea>
+							<textarea id="demandContent" name='demandContent' value='${param.demandContent}' class="materialize-textarea" required="required"></textarea>
 							<label for="demandContent"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求說明&nbsp;<i class="tiny material-icons" id="requiredStar05">star</i></span></a></label>
 						</div>
 
@@ -127,7 +135,7 @@
 
 					<!-- 備註 -->
 					<div class="input-field col s12 m12 l12">
-						<textarea id="remark" name='remark' value='${param.remark}' class="materialize-textarea" autofocus="autofocus"></textarea>
+						<textarea id="remark" name='remark' value='${param.remark}' class="materialize-textarea"></textarea>
 						<label for="remark"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
 					</div>
 

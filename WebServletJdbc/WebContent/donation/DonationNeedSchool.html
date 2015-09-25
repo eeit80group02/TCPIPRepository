@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭 css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
@@ -31,31 +30,27 @@
 
 </head>
 <body>
+
+	<!-- 我就是標頭 start -->
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<ul id="nav-mobile1" class="left hide-on-med-and-down">
+					<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+				</ul>
+
+				<a href="#" class="brand-logo center">填寫捐獻需求</a>
+				<ul id="nav-mobile3" class="right hide-on-med-and-down">
+					<li><a href="#"><i class="large material-icons">person</i></a></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<br>
+	<!-- 我就是標頭 end -->
+
 	<center>
-		<!-- 我就是標頭 start -->
-		<div class="navbar-fixed">
-			<nav>
-				<div class="nav-wrapper">
-					<ul id="nav-mobile1" class="left hide-on-med-and-down">
-						<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-						<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
-					</ul>
-
-					<a href="#" class="brand-logo center">填寫捐獻需求</a>
-					<ul id="nav-mobile3" class="right hide-on-med-and-down">
-						<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
-							<ul id="dropdownList03" class="dropdown-content">
-								<li class="chooseDropdownItem" value="全新"><a href="#">會員頁面</a></li>
-								<li class="divider"></li>
-								<li class="chooseDropdownItem" value="不拘"><a href="#">登入/出</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-		<br>
-		<!-- 我就是標頭 end -->
-
 		<form id=wholeForm action="#">
 			<div id="warnText">
 				<i class="tiny material-icons">star</i>&nbsp;<span>符號為必填欄位</span>
@@ -63,28 +58,34 @@
 			<div class="row">
 				<div class="col s12 m12 l6">
 					<!-- 左上 -->
-					<br> <br>
+					<br>
 					<div class="input-field col m12 s12">
 						<input type="text" id="schoolName" disabled value="宜蘭縣羅東國民中學"><label for="schoolName"><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="學校名稱"><span class="DetailTitle"><i class="tiny material-icons">location_city</i>&nbsp;申請單位&nbsp;</span></a></span></label>
 					</div>
+					
+					
 					<!-- 上傳圖片 -->
 					<div id="basicDataHead">
 						<div class="input-field col m12 s12">
-							<input type="file" id="imageName" required="required"><label for="imageName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400"><span class="DetailTitle"><i class="tiny material-icons">image</i>&nbsp;上傳封面&nbsp;<i class="tiny material-icons" id="requiredStar01">star</i></span></a><br> <br> <a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400">
+							<input type="file" id="imageName" required="required"><label for="imageName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400"><span class="DetailTitle"><i class="tiny material-icons">image</i>&nbsp;上傳封面&nbsp;<i class="tiny material-icons" id="requiredStar01">star</i></span></a><br><br> <a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400">
 									<div id="donationPictureFrame">
 										<center>
 											<!-- 強迫img在div內部置中 -->
 											<img id="donationPicture" src="" alt="" title="上傳圖片">
 										</center>
+
 									</div>
 							</a> </label>
 						</div>
 					</div>
-					<br> <br> <br>
+					
+
+					<br> <br> <br> <br> <br> <br>
 				</div>
+
 				<div class="col s12 m12 l6">
 					<!-- 右上 -->
-					<br> <br>
+					<br>
 					<!-- 物資名稱 -->
 					<div class="input-field col m12 s12">
 						<input type="text" id="supplyName" maxlength="25" required="required" autofocus="autofocus" autocomplete="off"><label for="supplyName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="最多輸入 25 個字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;物資名稱&nbsp;<i class="tiny material-icons" id="requiredStar02">star</i></span></a></label>
@@ -123,27 +124,23 @@
 				</div>
 
 				<!-- 備註 -->
-				<div class="input-field col s12 m12 l12">
+				<div class="input-field col s12">
 					<textarea id="remark" class="materialize-textarea" autofocus="autofocus"></textarea>
 					<label for="remark"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
+					<button type="submit" id="sendMessage" class="btn btn-small btn-floating">
+						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
+					</button>
+					<button type="button" id="cancelMessage" class="btn btn-small btn-floating">
+						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+					</button>
 				</div>
-
-				<button type="submit" id="sendMessage" class="btn btn-small btn-floating">
-					<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
-				</button>
-				<button type="submit" id="cancelMessage" class="btn btn-small btn-floating">
-					<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
-				</button>
-
 			</div>
 		</form>
-
 	</center>
 
 	<!-- 標頭專用 bottom start -->
 	<!-- 必須最後載入才有效果 -->
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
 	<!-- 標頭專用 bottom end -->
 </body>
 </html>
