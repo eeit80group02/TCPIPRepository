@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,11 +77,11 @@
 				</tr>
 				<tr>
 					<td class="dataName">募集起始時間：</td>
-					<td class="dataValue">${OneDemand.demandTime}</td>
+					<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm"/></td>
 				</tr>
 				<tr>
 					<td class="dataName">募集結束時間：</td>
-					<td class="dataValue">${OneDemand.expireTime}</td>
+					<td class="dataValue"><fmt:formatDate value="${OneDemand.expireTime}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<tr>
 					<td class="dataName">募集原因：</td>
@@ -115,7 +116,8 @@
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
 <!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
-							<br>${item.memberMessage}&nbsp;<span class="talkTime">${item.memberMessageTime}
+							<br>${item.memberMessage}
+							<div class="talkTime"><fmt:formatDate value="${item.memberMessageTime}" pattern="yyyy-MM-dd hh:mm"/></div>
 						</div>
 						<div class="collapsible-body">
 							<c:choose>
@@ -154,8 +156,8 @@
 									</c:choose>
 								</c:when>
 								<c:otherwise>
-										<p>${item.schoolMessage}   </p>
-										<div class="talkBackTime">${item.schoolMessageTime}</div>
+										<p>${item.schoolMessage}</p>
+										<div class="talkBackTime"><fmt:formatDate value="${item.schoolMessageTime}" pattern="yyyy-MM-dd hh:mm"/></div>
 								</c:otherwise>
 							</c:choose>
 							<br>

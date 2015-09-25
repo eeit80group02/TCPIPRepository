@@ -315,8 +315,8 @@ public class DonationDAOJdbc implements DonationDAO
 				bean.setSize(rs.getString("size"));
 				bean.setDemandContent(rs.getString("demandContent"));
 				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setDemandTime(rs.getTimestamp("demandTime"));
+				bean.setExpireTime(rs.getTimestamp("expireTime"));
 				bean.setImageName(rs.getString("imageName"));
 				bean.setImageFile(rs.getBytes("imageFile"));
 				bean.setImageLength(rs.getLong("imageLength"));
@@ -356,8 +356,8 @@ public class DonationDAOJdbc implements DonationDAO
 				bean.setSize(rs.getString("size"));
 				bean.setDemandContent(rs.getString("demandContent"));
 				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setDemandTime(rs.getTimestamp("demandTime"));
+				bean.setExpireTime(rs.getTimestamp("expireTime"));
 				bean.setImageName(rs.getString("imageName"));
 				bean.setImageFile(rs.getBytes("imageFile"));
 				bean.setImageLength(rs.getLong("imageLength"));
@@ -397,8 +397,8 @@ public class DonationDAOJdbc implements DonationDAO
 				bean.setSize(rs.getString("size"));
 				bean.setDemandContent(rs.getString("demandContent"));
 				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setDemandTime(rs.getTimestamp("demandTime"));
+				bean.setExpireTime(rs.getTimestamp("expireTime"));
 				bean.setImageName(rs.getString("imageName"));
 				bean.setImageFile(rs.getBytes("imageFile"));
 				bean.setImageLength(rs.getLong("imageLength"));
@@ -438,8 +438,8 @@ public class DonationDAOJdbc implements DonationDAO
 				bean.setSize(rs.getString("size"));
 				bean.setDemandContent(rs.getString("demandContent"));
 				bean.setSupplyStatus(rs.getString("supplyStatus"));
-				bean.setDemandTime(rs.getDate("demandTime"));
-				bean.setExpireTime(rs.getDate("expireTime"));
+				bean.setDemandTime(rs.getTimestamp("demandTime"));
+				bean.setExpireTime(rs.getTimestamp("expireTime"));
 				bean.setImageName(rs.getString("imageName"));
 				bean.setImageFile(rs.getBytes("imageFile"));
 				bean.setImageLength(rs.getLong("imageLength"));

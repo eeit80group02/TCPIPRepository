@@ -140,7 +140,7 @@
 										</div>
 									</div>
 									<!-- 捐獻記錄 end -->
-									<span class="midText">${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
+									<span class="midText">${item.originalDemandNumber-item.demandNumber}/${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
 										<a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
 									</span>
 								</div>					
@@ -207,7 +207,7 @@
 										</div>
 									</div>
 									<!-- 捐獻記錄 end -->
-									<span class="midText">${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
+									<span class="midText">${item.originalDemandNumber-item.demandNumber}/${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
 										<a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
 									</span>
 								</div>					
@@ -275,7 +275,7 @@
 										</div>
 									</div>
 									<!-- 捐獻記錄 end -->
-									<span class="midText">${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
+									<span class="midText">${item.originalDemandNumber-item.demandNumber}/${item.originalDemandNumber}${item.originalDemandUnit}</span> <span class="rightIcon">
 										<a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
 									</span>
 								</div>					
