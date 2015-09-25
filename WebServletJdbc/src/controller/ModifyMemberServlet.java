@@ -37,7 +37,7 @@ public class ModifyMemberServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("/personal.jsp call ModifyMemberServlet success!!");
+		System.out.println("maintainpersonal.jsp call ModifyMemberServlet success!!");
 		request.setCharacterEncoding("utf-8");
 		// 準備存放錯誤訊息的Map物件
 		Map<String, String> errMsg = new HashMap<String, String>();
@@ -48,7 +48,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		request.setAttribute("MsgErr", errMsg); // 顯示錯誤訊息
 		session.setAttribute("MsgOk", okMsg); // 顯示正常訊息
-		MemberBean bean = (MemberBean)session.getAttribute("LoginOK");
+		MemberBean bean = (MemberBean)session.getAttribute("member");
 		String account = null;                       //帳號
 		String gender = null;                        //性別
         String idNumber = null;						 //身分證字號
@@ -199,7 +199,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		// 如果有一個以上的必填欄位有錯誤
 		if (!errMsg.isEmpty()) {
 			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
-			RequestDispatcher rd = request.getRequestDispatcher("personal.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("maintainpersonal.jsp");
 			rd.forward(request, response);
 			//若以上有任一欄位錯誤則return,停止以下的程式執行
 			return;
@@ -229,7 +229,7 @@ public class ModifyMemberServlet extends HttpServlet {
 		if (!errMsg.isEmpty()) {
 			// 導向原來輸入資料的畫面，這次會顯示錯誤訊息
 			RequestDispatcher rd = request
-					.getRequestDispatcher("personal.jsp");
+					.getRequestDispatcher("maintainpersonal.jsp");
 			rd.forward(request, response);
 			return;
 		}

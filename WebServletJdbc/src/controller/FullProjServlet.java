@@ -2,8 +2,13 @@ package controller;
 
 import global.GlobalService;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,8 +24,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 
 import model.FullProjBean;
 import model.MemberBean;
@@ -173,7 +179,7 @@ public class FullProjServlet extends HttpServlet
 		
 		FullProjBean fullProjBean = new FullProjBean();
 		fullProjBean.setMemberId(memberBean.getMemberId());
-		List<FullProjBean> result = service.displayPersonalFullProjProjByParticipate(fullProjBean);
+		List<FullProjBean> result = service.displayPersonalFullProjByParticipate(fullProjBean);
 		
 		if(result != null)
 		{
@@ -736,6 +742,14 @@ public class FullProjServlet extends HttpServlet
 		FullProjBean bean = new FullProjBean();
 		bean.setFullProjId(id);
 		bean = service.displayFullProj(bean);
+		JSONObject jobj = new JSONObject();
+		
+		try{
+			jobj = this.getGoogleMapInfo(bean);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
 		
 		if(bean != null)
 		{
@@ -743,6 +757,7 @@ public class FullProjServlet extends HttpServlet
 			System.out.println("單一計劃 :" + bean);
 			System.out.println("======================================================");
 			request.setAttribute("fullProj",bean);
+			request.setAttribute("googleMap",jobj);
 			request.getRequestDispatcher("/fullProj/displayFullProj.jsp").forward(request,response);
 		}
 		else
@@ -766,5 +781,148 @@ public class FullProjServlet extends HttpServlet
 		request.getRequestDispatcher("/fullProj/displayFullProjAll.jsp").forward(request,response);
 
 		return;			
+	}
+	
+	//為了取得學校地點的經緯度
+	private JSONObject getGoogleMapInfo(FullProjBean bean) throws IOException{
+		
+		String location = bean.getLocation();
+		JSONObject jobj = new JSONObject();
+		try{
+				//連線到google Map Server
+				URL findGeoCode = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + 
+						location + 
+					 "&key=AIzaSyCFcem4n3RifwMGgXOcF9raNW8lT2BSKs0");
+				// open connection
+				URLConnection makeConnect = findGeoCode.openConnection();
+		        // read result
+				BufferedReader in = new BufferedReader(new InputStreamReader(
+						makeConnect.getInputStream()));
+				
+				StringBuilder wholeJson = new StringBuilder();
+				String inputLine;
+				while ((inputLine = in.readLine()) != null){
+					wholeJson.append(inputLine.trim());
+				} 
+				String rendering = wholeJson.toString();
+				// transfer String to JsonObject
+				Object obj = JSONValue.parse(rendering);
+				if(obj instanceof JSONObject){
+					jobj = (JSONObject) obj;
+					JSONArray j1 = (JSONArray) jobj.get("results");
+					JSONObject j2 = (JSONObject) j1.get(0);
+					JSONObject j3 = (JSONObject) j2.get("geometry");
+					JSONObject j4 = (JSONObject) j3.get("location");
+					jobj = this.getNearestStationAndLocation(j4);
+				}
+				
+				
+			}catch(MalformedURLException e){
+				System.out.println(e.getMessage());
+			}
+		return jobj;
+		
+	}
+	
+	
+	
+	public JSONObject getNearestStationAndLocation(JSONObject jobj) throws IOException{
+		
+		double lng = (double) jobj.get("lng");
+		double lat = (double) jobj.get("lat");
+		JSONObject finaljobj = null;
+		Map map1 = hasTrafficResults(lat, lng,"train_station");
+		if((int)map1.get("resultnumbers") == 0){
+			Map map2 = hasTrafficResults(lat, lng,"bus_station");
+			if((int)map2.get("resultnumbers") == 0){
+				Map map3 = hasTrafficResults(lat, lng,"airport");
+				if((int)map2.get("resultnumbers") == 0){
+					
+				}else{
+					System.out.println("最近的航空站");
+					finaljobj = this.autoBoxingInfo(map3, jobj);
+				}
+			}else{
+				System.out.println("最近的公車站");
+				finaljobj = this.autoBoxingInfo(map2, jobj);
+			}
+		}else{
+			System.out.println("最近的火車站");
+			finaljobj = this.autoBoxingInfo(map1, jobj);
+		}
+		return finaljobj;
+	}
+	
+	
+	private JSONObject autoBoxingInfo(Map map,JSONObject jobj){
+		
+		//obj1 is a resultSet
+		JSONObject jobj1 = (JSONObject)map.get("results");
+		//result1 is the first result
+		JSONObject result1 = this.getClosestStation(jobj1);
+		Map<String, JSONObject> finalMap = new HashMap<String,JSONObject>();
+		//jobj is projLocation
+		finalMap.put("fulprojLocation", jobj);
+		finalMap.put("closestStation", result1);
+		JSONObject finaljobj = new JSONObject(finalMap);
+		
+		
+		return finaljobj;
+	}
+	
+	
+	// get the result of place nearby search
+	/*
+	 * there are lots of results, we need the first one.
+	 */
+	private JSONObject getClosestStation(JSONObject jsonobject){
+		JSONObject result = new JSONObject();
+		JSONArray station1  = (JSONArray) jsonobject.get("results");
+		JSONObject station2 = (JSONObject) station1.get(0);
+		JSONObject station3 = (JSONObject) station2.get("geometry");
+		result = (JSONObject) station3.get("location");
+		
+		return result;
+	}
+	
+	
+	/*
+	 * to determine whether there are traffic stations or not
+	 * train_station > bus_station > airport
+	 * lat == center (location of fulproj)
+	 * lng == center (location of fulproj)
+	 * type== keyword used to search
+	 */
+	public Map hasTrafficResults(double lat,double lng,String type) throws IOException{
+		
+		Map map = new HashMap();
+		URL findGeoCode = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="
+		 		+ lat + "," + lng  
+		 		+ "&rankby=distance&types="+type+"&key=AIzaSyCFcem4n3RifwMGgXOcF9raNW8lT2BSKs0");				
+		//open Connection
+		URLConnection conn = findGeoCode.openConnection();
+		//get results
+		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+		
+		String line;
+		StringBuffer stb = new StringBuffer();
+		
+		//read line of results
+		while((line = in.readLine()) != null){
+			stb.append(line);
+		}
+		
+		//determine whether there are results of our query or not
+		// if j2.size() greater than 0 means we have results
+		// j1 will never be a nullpoint
+		Object jobj = JSONValue.parse(stb.toString());
+		if(jobj instanceof JSONObject){
+			JSONObject j1 = (JSONObject) jobj;
+			JSONArray j2 = (JSONArray)j1.get("results");
+			map.put("resultnumbers", j2.size());
+			map.put("results", j1);
+		}
+		
+		return map;
 	}
 }

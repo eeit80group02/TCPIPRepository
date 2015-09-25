@@ -27,7 +27,7 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 	private static final String INSERT = "INSERT INTO ActivityHighlight (fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,videoURL,content) values (?,?,?,?,?,?,?)";
 	private static final String UPDATE = "UPDATE ActivityHighlight SET memberId = ?,frontCoverName = ?,frontCover = ?,frontCoverLength = ?,videoURL = ?,content = ? WHERE fullProjId = ?";
 	private static final String DELETE = "DELETE FROM ActivityHighlight WHERE fullProjId = ?";
-
+	private static final String SELECT_BY_PRYMARY_KEY_MEMBERID = "SELECT fullProjId,memberId,frontCoverName,frontCover,frontCoverLength,videoURL,content FROM ActivityHighlight WHERE memberId = ?";
 	private DataSource datasource;
 	
 	public ActivityHighlightDAOJdbc()
@@ -213,7 +213,36 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 
 		return false;
 	}
-
+	public List<ActivityHighlightBean> findByPrimaryMemberId(ActivityHighlightBean bean){
+		List<ActivityHighlightBean> result =new ArrayList<ActivityHighlightBean>();
+		try(Connection conn = datasource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_PRYMARY_KEY_MEMBERID);){
+				pstmt.setInt(1,bean.getMemberId());
+				try(ResultSet rs = pstmt.executeQuery();){
+					while(rs.next()){
+					bean = new ActivityHighlightBean();
+					bean.setFullProjId(rs.getInt("FullProjId"));
+					bean.setMemberId(rs.getInt("MemberId"));
+					bean.setFrontCoverName(rs.getString("frontCoverName"));
+					bean.setFrontCover(rs.getBytes("frontCover"));
+					bean.setFrontCoverLength(rs.getLong("frontCoverLength"));
+					bean.setVideoURL(rs.getString("VideoURL"));
+					bean.setContent(rs.getString("Content"));
+					result.add(bean);
+					}
+				}
+				catch(SQLException e)
+				{
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		ActivityHighlightDAO dao = new ActivityHighlightDAOJdbc();
@@ -274,4 +303,5 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 		List<ActivityHighlightBean> bean5 = dao.getAll();
 		System.out.println(bean5);
 	}
+
 }
