@@ -172,7 +172,7 @@ public class DonationServlet extends HttpServlet {
 				errorMsgs.put("errorOriginalDemandUnit", "請輸入需求單位");
 			}
 			if(size == null || size.trim().length() == 0) {
-				size = "";
+				size = "不限";
 //				errorMsgs.put("errorSize", "請輸入尺寸規格(物品的大小,長*寬*高)");
 			}
 			if(demandContent == null || demandContent.trim().length() == 0) {
@@ -180,6 +180,10 @@ public class DonationServlet extends HttpServlet {
 			}
 			if(supplyStatus == null || supplyStatus.trim().length() == 0) {
 				errorMsgs.put("errorSupplyStatus", "物資狀態(全新/二手/不拘)");
+			} 
+			if(remark == null || remark.trim().length() == 0) {
+				remark = "無";
+//				errorMsgs.put("errorSupplyStatus", "物資狀態(全新/二手/不拘)");
 			} 
 		}
 		if(!choice.equals("insert")) {
