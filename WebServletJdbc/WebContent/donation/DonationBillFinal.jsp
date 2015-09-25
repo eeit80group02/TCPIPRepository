@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -61,21 +59,16 @@
 	});
 </script>
 <!-- 宅配通top end -->
+
 </head>
-
 <body>
-<!-- 驗證是否為會員 -->
-	<c:if test="${LoginOK.beanName.equals('school') }">
-		<c:redirect url="/error/permission.jsp" />
-	</c:if>
-
 	<!-- 我就是標頭 start -->
 	<div class="navbar-fixed">
 		<nav>
 		<div class="nav-wrapper">
 			<ul id="nav-mobile1" class="left hide-on-med-and-down">
-				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+				<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+				<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
 			<a href="#" class="brand-logo center">捐獻明細</a>
@@ -85,7 +78,6 @@
 						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
 						<li class="divider"></li>
 						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
-
 					</ul></li>
 			</ul>
 		</div>
@@ -108,23 +100,23 @@
 
 				</div>
 
-							<!-- 第一頁 -->
+				<!-- 第一頁 start -->
 				<div id="test1" class="col s12">
 					<div class="col s12">
-						<div id="warnText">
-							<span>確認捐獻物品明細</span>
-							<!-- 小叮嚀 start -->
-							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
+						<div class="warnText">
+							<span>確認捐獻背包</span>
+							<!-- 操作小叮嚀 start -->
+							<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
 							<!-- Modal Structure -->
-							<div id="modalNote02" class="modal modal-fixed-footer">
+							<div id="modalNote01" class="modal modal-fixed-footer">
 								<div class="modal-content">
-									<h4>小叮嚀：</h4>
+									<h4>操作小叮嚀：</h4>
 									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_before</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">remove</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">add</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
 										</li>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除捐獻物品。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻物品。
 										</li>
 									</ol>
 								</div>
@@ -132,14 +124,14 @@
 									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
 								</div>
 							</div>
-							<!-- 小叮嚀 end -->
+							<!-- 操作小叮嚀 end -->
 
 						</div>
 						<br>
 					</div>
 
 					<form action="">
-						<table id="donationBill" class="responsive-table">
+						<table id="donationBill01" class="responsive-table">
 							<thead>
 								<tr>
 									<td>捐獻物資</td>
@@ -151,115 +143,99 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
-										<tr>
-											<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="${item.value.supplyName}" title="${item.value.supplyName}"></td>
-											<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號</td>
-											<td>${item.value.supplyStatus}</td>
-											<td style="word-break: break-all;"><div id="remark" class="remark">${item.value.demandContent}</div></td>
-											
-											<td>
-												<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
-													<i class="small material-icons">remove</i>
-												</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.value.originalDemandUnit}</label>
-												<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
-													<i class="small material-icons">add</i>
-												</button>
-											</td>
-											<td class="deleteRow">
-												<button type="button" class="btn btn-small btn-floating">
-													<i class="small material-icons">delete</i>
-												</button>
-											</td>
-									
-											<script type="text/javascript">
-											
-												$(window).load(function() {
-													var step = 1; // 默認步長
-													var changeStepTimer = null; // 改變速度計數器
-													var setValueTimer = null; // 設置值計數器
-	
-													/* 改變速度私有方法 */
-													var changeStep = function() {
-														// 每隔 2 秒速度加 5
-														changeStepTimer = setInterval(function() {
-															step += 5
-														}, 2000);
-													}
-	
-													/* 設置值私有方法 */
-													var setAddValue = function() {
-	// 													var input = $("#text${vs.index}").val();
-														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
-														setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
-													}
-	
-													/* 設置值私有方法 */
-													var setSubValue = function() {
-	// 													var input = $("#text${vs.index}").val();
-														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
-														setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
-													}
-	
-													/* 按下鼠標處理函數 */
-													$("#buttonSub${vs.index}").mousedown(function() {
-	// 													var input = $("#text${vs.index}").val();
-														// 正規表示法找整數
-														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-															changeStep();
-															setSubValue();
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").val("1");
-														}
-	
-													});
-	
-													/* 按下鼠標處理函數 */
-													$("#buttonAdd${vs.index}").mousedown(function() {
-	// 													var input = $("#text${vs.index}").val();
-														// 正規表示法找整數
-														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-															changeStep();
-															setAddValue();
-															
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").val(1);
-														}
-	
-													});
-	
-													/* 鬆開鼠標處理函數 */
-													$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
-	
-													function checkText() {
-														var input = $("#text${vs.index}").val();
-														if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").empty();
-															$("#text${vs.index}").val("1");
-														}
-														console.log("${item.value.schoolName}");
-														console.log(input);
-														clearInterval(changeStepTimer);
-														clearTimeout(setValueTimer);
-														step = 1;
-													}
-												}(jQuery));
-												</script>
-											</tr>
-									</c:forEach>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
+									<td style="word-break: break-all;"><div class="remark01">室電風扇插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
+									<td style="word-break: break-all;"><div class="remark01">室電風扇插頭線長不4教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
+
+									<td style="word-break: break-all;"><div class="remark01">室線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" class="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
+
+									<td style="word-break: break-all;"><div class="remark01">室電風扇插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+
+									<td class="amountRow">
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<br> <br>
 
 						<button type="button" id="page01Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">favorite</i></a>
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">keyboard_arrow_left</i></a>
 						</button>
-						<button type="button" id="page01Mid" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+						<button type="button" id="page01Clear" class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="全部清除"><i class="small material-icons">clear</i></a>
 						</button>
 						<button type="submit" id="page01Next" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
@@ -268,20 +244,6 @@
 					<br>
 				</div>
 				<!-- 第一頁 end -->
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 
 				<!-- 第二頁 start -->
 				<div id="test2" class="col s12">
@@ -488,7 +450,9 @@
 							</button>
 							&nbsp;填寫寄件人資料
 							<!-- 一鍵輸入 -->
-							<button type="button" id="OneClick" class="btn btn-small btn-floating">一鍵填</button>
+							<button type="button" id="OneClickDonationBillFinal" class="btn btn-small btn-floating">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+							</button>
 						</div>
 						<br>
 						<!-- 右上 寄件人系列 -->
@@ -941,8 +905,11 @@
 	<!-- 宅配通 bottom start -->
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
-	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
+	<script type="text/javascript" src="../donationScripts/SexSwitch.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
+
+	<!-- 數字加速器 -->
+	<script type="text/javascript" src="../donationScripts/CheckNumber.js"></script>
 
 	<!-- 標頭專用 bottom start -->
 	<!-- 必須最後載入才有效果 -->
@@ -951,7 +918,6 @@
 
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
-
 
 </body>
 </html>

@@ -8,7 +8,7 @@ select:disabled {
 	font-weight: bold;
 }
 
-.active {
+.tabs .active {
 	font-weight: bold;
 	font-size: 2em;
 }
@@ -192,6 +192,11 @@ select:disabled {
 	border-bottom: 1px solid black;
 	background-color: #ff7575;
 	color: white;
+}
+
+#result {
+	padding: 10px;
+	height: 50px;
 }
 
 /* Modal 專用 */
