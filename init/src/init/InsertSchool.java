@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Types;
+import java.util.Date;
 
 
 public class InsertSchool
@@ -37,7 +38,7 @@ public class InsertSchool
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
 
-				
+				int iCount = 1;
 				while(line != null)
 				{
 					String[] splitStr = line.split("\t");
@@ -52,17 +53,25 @@ public class InsertSchool
 						if(count == 7)
 						{
 							count = 1;
-							pstmt.executeUpdate();
+							pstmt.addBatch();
+//							pstmt.executeUpdate();
 						}
 					}
 					if(count == 6)
 					{
 						count = 1;
 						pstmt.setNull(6,Types.NVARCHAR);
-						pstmt.executeUpdate();
+						pstmt.addBatch();
+//						pstmt.executeUpdate();
 					}
 					line = br.readLine();
+					if(iCount++ == 500)
+					{
+						pstmt.executeBatch();
+						iCount = 1;
+					}
 				}
+				pstmt.executeBatch();
 			}
 			catch(Exception e)
 			{
@@ -85,6 +94,7 @@ public class InsertSchool
 			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
+				int iCount = 1;
 				while(line != null)
 				{
 					String[] splitStr = line.split("\t");
@@ -99,17 +109,26 @@ public class InsertSchool
 						if(count == 7)
 						{
 							count = 1;
-							pstmt.executeUpdate();
+							pstmt.addBatch();
+//							pstmt.executeUpdate();
 						}
 					}
 					if(count == 6)
 					{
 						count = 1;
 						pstmt.setNull(6,Types.NVARCHAR);
-						pstmt.executeUpdate();
+						pstmt.addBatch();
+//						pstmt.executeUpdate();
+					}
+					
+					if(iCount++ == 500)
+					{
+						pstmt.executeBatch();
+						iCount = 1;
 					}
 					line = br.readLine();
 				}
+				pstmt.executeBatch();
 			}
 			catch(Exception e)
 			{
@@ -132,6 +151,7 @@ public class InsertSchool
 			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_ELEMENTARY_GRADE);)
 			{
+				int iCount = 1;
 				while(line != null)
 				{
 //					System.out.println(line);
@@ -171,9 +191,16 @@ public class InsertSchool
 					pstmt.setInt(7,Integer.parseInt(context[22]) + Integer.parseInt(context[23]));
 					pstmt.setInt(8,Integer.parseInt(context[24]) + Integer.parseInt(context[25]));
 
-					pstmt.executeUpdate();
+					pstmt.addBatch();
+//					pstmt.executeUpdate();
 					line = br.readLine();
+					if(iCount++ == 500)
+					{
+						pstmt.executeBatch();
+						iCount = 1;
+					}
 				}
+				pstmt.executeBatch();
 			}
 			catch(Exception e)
 			{
@@ -203,6 +230,7 @@ public class InsertSchool
 			try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT_JUNIOR_GRADE);)
 			{
+				int iCount = 1;
 				while(line != null)
 				{
 //					System.out.println(line);
@@ -227,9 +255,16 @@ public class InsertSchool
 					pstmt.setInt(4,Integer.parseInt(context[13]) + Integer.parseInt(context[14]));
 					pstmt.setInt(5,Integer.parseInt(context[15]) + Integer.parseInt(context[16]));
 
-					pstmt.executeUpdate();
+					pstmt.executeBatch();
+//					pstmt.executeUpdate();
 					line = br.readLine();
+					if(iCount++ == 500)
+					{
+						pstmt.executeBatch();
+						iCount = 1;
+					}
 				}
+				pstmt.executeBatch();
 			}
 			catch(Exception e)
 			{
@@ -246,7 +281,9 @@ public class InsertSchool
 	}
 	public static void main(String[] args) throws Exception, IOException
 	{
+		Date start = new Date(System.currentTimeMillis());
 		start();
-		
+		Date end = new Date(System.currentTimeMillis());
+		System.out.println(end.getTime()-start.getTime());
 	}
 }
