@@ -194,6 +194,11 @@ select:disabled {
 	color: white;
 }
 
+#result {
+	padding: 10px;
+	height: 50px;
+}
+
 /* Modal 專用 */
 #test2 .modal-content {
 	color: black;
