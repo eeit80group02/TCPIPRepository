@@ -123,7 +123,6 @@
 					</li>
 				</c:forEach>
 			</ul>
-
 			<div id="trash" class="ui-widget-content ui-state-default">
 				<div id="trashHeadTitleIcons">
 					<span id="trashHeadLeftBtn">
