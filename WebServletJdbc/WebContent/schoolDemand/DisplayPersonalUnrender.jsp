@@ -103,7 +103,10 @@
 		<c:forEach items="${list}" var="demand">
 			<div class="row card-panel">
 				<!-- 需求計畫名稱 -->
-				<div class="row priProjName left-align teal-text darken-3">
+				<div class="row priProjName left-align">
+					<i class="material-icons medium purple-text accent-1" style="vertical-align:middle;">
+						assignment
+					</i>				
 					${demand.activityTopic}
 				</div>
 					

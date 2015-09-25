@@ -10,6 +10,13 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
 <title>school</title>
+<style>
+	.fontStyle {
+		font-family:微軟正黑體;
+		font-weight:600;
+		font-size:1.4em;
+	}
+</style>
 </head>
 <body>
 	<c:if test="${LoginOK.beanName.equals('member') }">
@@ -22,69 +29,71 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">學校名稱${LoginOK.name}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.name}</h3>
 	</div>	
 
 	<main>
 		<div class="row" id="mainboard">
-			<div class="card-panel indigo lighten-5 hoverable" id="backboard">
+			<div class="card-panel indigo lighten-5" id="backboard">
 				<div class="row" id="secondboard">
-					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='showSchoolData.do' />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									修改資料
-								</span>
-							</a>
-						</div>
-						<div class="row divider" style="height:10px;"></div>						
-						<div class="row yellow lighten-3 card-panel">
+					<div class="card-panel left hoverable" style="min-height:60vh" id="firstdiv">
+						<div>
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								活動計畫
+							</h3>
+							<div class="row divider red" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
-								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
-									<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談中完整計畫
+								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
+										我申請的初步計畫
 									</span>
 								</a>
 							</div>
 							<div class="row">
-								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
-									<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談中初步計劃
+								<a href="<c:url value="" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
+										洽談中完整計畫
 									</span>
-								</a>											
-							</div>																
+								</a>
+							</div>
 						</div>
 					</div>
-					<div class="white card-panel left" style="min-height:60vh">
-						<div class="row">
-							<a id="changepassworda" href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									建立需求計畫
-								</span>
-							</a>
-						</div>
-						<div class="row divider" style="height:10px;"></div>					
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displays' />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									全部需求計畫
-								</span>
-							</a>
-						</div>					
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="col l12 btn-large yellow lighten-5 black-text"> 
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									洽談中
-								</span>
-							</a>
-						</div>					
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										待洽談
-								</span>
-							</a>											
-						</div>
+					<div class="white card-panel left hoverable" style="min-height:60vh">
+						<div>
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								需求計畫
+							</h3>
+							<div class="row divider red" style="opacity:0.5;height:10px;"></div>
+							<div class="row">
+								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
+										建立需求計畫
+									</span>
+								</a>
+							</div>
+							<div class="row">
+								<a href="<c:url value="/schoolDemand/SchoolDemandServlet.do?type=displays" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
+										全部需求計畫
+									</span>
+								</a>
+							</div>
+							<div class="row">
+								<a href="<c:url value='/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender' />" class="col l12 btn-large yellow lighten-5 black-text"> 
+									<span class="fontStyle">
+										洽談中
+									</span>
+								</a>
+							</div>					
+							<div class="row">
+								<a href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
+											待洽談
+									</span>
+								</a>											
+							</div>
+						</div>						
+
 <!-- 						<div class="row"> -->
 <!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
 <!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
@@ -100,23 +109,28 @@
 <!-- 							</a>											 -->
 <!-- 						</div> -->
 					</div>				
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
-					<div class="white card-panel left" style="min-height:60vh">
-						<div class="row">
-							<a id="changepassworda" href="../donation/InsertDonateGoods.jsp" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+					<div class="white card-panel left hoverable" style="min-height:60vh">
+						<div>
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								物資需求
+							</h3>
+							<div class="row divider red" style="opacity:0.5;height:10px;"></div>
+							<div class="row">
+								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
 										建立物資需求
-								</span>
-							</a>											
-						</div>					
-						<div class="row divider" style="height:10px;"></div>
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+									</span>
+								</a>
+							</div>
+							<div class="row">
+								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
 										全部物資需求
-								</span>
-							</a>											
-						</div>											
+									</span>
+								</a>
+							</div>
+						</div>						
+						
 <!-- 						<div class="row"> -->
 <!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
 <!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->

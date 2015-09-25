@@ -63,24 +63,24 @@
 			<!-- 表單本體開始 -->
 			<form class="card-panel hoverable" action="<c:url value="/primaryProj.do" />" method="post" enctype="multipart/form-data" style="padding:2.5em;background-color:#FFFCEC;" id="updateForm" method="post">
 				<div class="row">
-						<div class="row orange accent-3">
-							<!-- 計畫編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">計畫編號:${param.primaryProjId}</div>
-									<input type="hidden" name="primaryProjId" value="${param.primaryProjId}" /><br>
-								</div>
-							</div>
-	
-	
-							<!-- 會員編號 -->
-							<div class="row">
-								<div class="col l8">
-									<div class="forinput">會員編號:${param.memberId}</div>
-									<input type="hidden" name="memberId" value="${param.memberId}" /><br>
-								</div>
-							</div>						
+					
+					<!-- 印出來不能動的資訊 -->
+					<div class="orange lighten-2 card-panel hoverable ">
+						<!-- 計畫編號 -->
+						<div class="row">
+								<div class="forinput col l3 right-align">計畫編號:${param.primaryProjId}</div>
+								<input type="hidden" name="primaryProjId" value="${param.primaryProjId}" />
 						</div>
+						<!-- 會員名稱 -->
+						<div class="row">
+								<!-- 這裡要印會員名稱但還沒有el -->
+								<div class="forinput col l3 right-align">會員名稱:</div>
+								<!-- 小心!!這裡是初步計畫id -->
+								<input type="hidden" name="primaryProjId" value="${param.primaryProjId}" />
+						</div>
+					</div>						
+						
+						
 						
 						<!-- 計畫封面 -->
 						<div class="file-field input-field row">
