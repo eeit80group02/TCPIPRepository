@@ -6,20 +6,24 @@ $(window).load(function() {
 
 	$(".switch input[id='checkboxRight']").click(function() {
 		count++;
-		console.log(count);
-		if (count % 2 == 0) {
-			console.log(female);
-		} else {
-			console.log(male);
-		}
+		 console.log(count);
+		 if (count % 2 == 0) {
+		 console.log(female);
+		 } else {
+		 console.log(male);
+		 }
 	});
 
 	$("#page02Mid").click(function() {
 		if (count % 2 == 0) {
 			count = 0;
+			// 最後取值的地方
+//			alert(female);
 
 		} else {
 			count = 1;
+			// 最後取值的地方
+//			alert(male);
 		}
 	});
 }(jQuery));

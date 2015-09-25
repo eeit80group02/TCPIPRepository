@@ -117,7 +117,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 				mId = Integer.parseInt(memberId);
 				sDId = Integer.parseInt(schoolDemandId);
 			} catch (NumberFormatException e) {
-				response.sendRedirect(request.getContextPath()+"/schoolDemand/passMember.jsp");
+				response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 			}
 		}else{
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
@@ -131,7 +131,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		System.out.println(bean);
 		if(bean!=null){
 			System.out.println("同意成功");
-			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/passMember.jsp");
 			return;
 		}else {
 			System.out.println("同意失敗");
