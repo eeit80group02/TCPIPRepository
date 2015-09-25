@@ -22,7 +22,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${member.lastName}${member.firstName}</h3>
 	</div>	
 
 <main>
@@ -38,7 +38,7 @@
 			<!-- 圖片 -->
 			<div class="col l2">
 				<div class="row">
-					<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
+					<img class="card-panel hoverable" id="view" src="${member.base64String}" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
 				</div>
 				<div class="row">
 					<a href="<c:url value='personmanager.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" style="width: 5.25cm;">
@@ -49,7 +49,7 @@
 				</div>				
 			</div>	
 			<!-- 表單本體開始 --> 
-			<form class="card-panel hoverable indigo lighten-5 col l10" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
+			<form class="card-panel hoverable indigo lighten-5 col l10" action="<c:url value='modifyMember.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
 				<div class="row">
 						<!-- 頭像上傳 -->
@@ -70,7 +70,7 @@
 							<li style="opacity:0;">	
 								<!-- 密碼 -->
 								<div class="input-field row">
-									<input id="passwords" type="password" class="validate" name="password" required>
+									<input id="passwords" type="password" class="validate" name="password" >
 				<!-- 														後端錯誤訊息顯示 -->
 									<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
 									<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
@@ -79,7 +79,7 @@
 							<li style="opacity:0;">							
 								<!-- 密碼確認 -->
 								<div class="input-field row">
-									<input id="check" type="password" class="validate" name="check" required>
+									<input id="check" type="password" class="validate" name="check" >
 				<!-- 														後端錯誤訊息顯示 -->
 									<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
 									<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
@@ -92,7 +92,7 @@
 				<div class="row" style="clear:both;">
 				<!-- 姓氏 -->
 					<div class="col l6 input-field left" style="padding-left:0;">
-						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
+						<input id="lastName" type="text" class="validate" name="lastName" required value="${member.lastName}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
 						<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
@@ -100,7 +100,7 @@
 				
 				<!-- 名字 -->
 					<div class="col l6 input-field left">
-						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstname}" >
+						<input id="firstName" type="text" class="validate" name="firstName" required value="${member.firstName}" >
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorFirstNameEmpty}</font>
 						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
@@ -109,7 +109,7 @@
 				
 				<!-- 電話 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
-						<input id="idNumber" type="text" class="validate" name="phone"  value="${param.phone}">
+						<input id="idNumber" type="text" class="validate" name="phone"  value="${member.phone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
 						<label for="idNumber" style="font-size:1.3em;font-weight:600;">室內電話</label>
@@ -118,7 +118,7 @@
 					
 				<!-- 手機 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
-						<input id="phone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
+						<input id="phone" type="text" class="validate" name="cellPhone" value="${member.cellPhone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
 						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
@@ -126,7 +126,7 @@
 					
 				<!-- 生日 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
-						<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
+						<input id="birthday" type="text" class="validate" name="birthday" required value="${member.birthday}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorBirthdayStrEmpty}${MsgErr.errFormat}</font>				
 						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>	
@@ -134,7 +134,7 @@
 
 				<!-- Email -->
 					<div class="row input-field">
-						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
+						<input id="email" type="text" class="validate" name="email" required value="${member.email}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorEmailEmpty}${MsgErr.errorEmailExists}</font>					
 						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>	
@@ -142,7 +142,7 @@
 					
 				<!-- Address -->
 					<div class="row input-field">
-						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
+						<input id="address" type="text" class="validate" name="address" required value="${member.address}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
 						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>
@@ -150,10 +150,10 @@
 					
 				<!-- button -->
 					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 						</button>
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
 						</button>
 
@@ -183,7 +183,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
+			//test
 			
+			$("#submitbtn").click(function(){
+				$(this).submit();
+			})
 			//body的最小高度
 			$("#mainboard").css("min-height","100vh");
 			//show出修改密碼
@@ -451,57 +455,57 @@
 					}
 				})
 		//送出表單前的驗證
-		$("#btndiv").on({
-			"mouseover":function(){
-			if($("#passwords").val() !== "" || $("#check").val() !== ""){
-				if(
-						$("#registerform").data().passwordresults &&
-						$("#registerform").data().passwordresults2 &&
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-						){
-							$("#submitbtn").prop("disabled",false);
-						}else{
-							$("#submitbtn").prop("disabled",true);
-						}				
-			}else{
-				if(
-						$("#registerform").data().contactresult &&
-						$("#registerform").data().emailresult &&
-						$("#registerform").data().birthdayresult &&
-						$("#lastName").val().trim() !== "" &&
-						$("#firstName").val().trim() !== "" &&
-						$("#address").val().trim() !== "" 
-				){
-						$("#submitbtn").prop("disabled",false);
-				}else{
-						$("#submitbtn").prop("disabled",true);
-					}						
-			}
+// 		$("#btndiv").on({
+// 			"mouseover":function(){
+// 			if($("#passwords").val() !== "" || $("#check").val() !== ""){
+// 				if(
+// 						$("#registerform").data().passwordresults &&
+// 						$("#registerform").data().passwordresults2 &&
+// 						$("#registerform").data().contactresult &&
+// 						$("#registerform").data().emailresult &&
+// 						$("#registerform").data().birthdayresult &&
+// 						$("#lastName").val().trim() !== "" &&
+// 						$("#firstName").val().trim() !== "" &&
+// 						$("#address").val().trim() !== "" 
+// 						){
+// 							$("#submitbtn").prop("disabled",false);
+// 						}else{
+// 							$("#submitbtn").prop("disabled",true);
+// 						}				
+// 			}else{
+// 				if(
+// 						$("#registerform").data().contactresult &&
+// 						$("#registerform").data().emailresult &&
+// 						$("#registerform").data().birthdayresult &&
+// 						$("#lastName").val().trim() !== "" &&
+// 						$("#firstName").val().trim() !== "" &&
+// 						$("#address").val().trim() !== "" 
+// 				){
+// 						$("#submitbtn").prop("disabled",false);
+// 				}else{
+// 						$("#submitbtn").prop("disabled",true);
+// 					}						
+// 			}
 
-		},"mouseout":function(){
-			if(
-				$("#registerform").data().accountresults &&
-				$("#registerform").data().passwordresults &&
-				$("#registerform").data().passwordresults2 &&
-				$("#registerform").data().contactresult &&
-				$("#registerform").data().emailresult &&
-				$("#registerform").data().birthdayresult &&
-				$("#lastName").val().trim() !== "" &&
-				$("#firstName").val().trim() !== "" &&
-				$("#address").val().trim() !== "" 
+// 		},"mouseout":function(){
+// 			if(
+// 				$("#registerform").data().accountresults &&
+// 				$("#registerform").data().passwordresults &&
+// 				$("#registerform").data().passwordresults2 &&
+// 				$("#registerform").data().contactresult &&
+// 				$("#registerform").data().emailresult &&
+// 				$("#registerform").data().birthdayresult &&
+// 				$("#lastName").val().trim() !== "" &&
+// 				$("#firstName").val().trim() !== "" &&
+// 				$("#address").val().trim() !== "" 
 				
-			){
-				$("#submitbtn").prop("disabled",false);
-			}else{
-				$("#submitbtn").prop("disabled",true);
-			}
-		}
-		});
+// 			){
+// 				$("#submitbtn").prop("disabled",false);
+// 			}else{
+// 				$("#submitbtn").prop("disabled",true);
+// 			}
+// 		}
+// 		});
 		})(jQuery)
 	</script>
 	<script>

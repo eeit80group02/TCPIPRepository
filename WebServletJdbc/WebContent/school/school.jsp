@@ -37,6 +37,23 @@
 								</span>
 							</a>
 						</div>
+						<div class="row divider" style="height:10px;"></div>						
+						<div class="row yellow lighten-3 card-panel">
+							<div class="row">
+								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										洽談中完整計畫
+									</span>
+								</a>
+							</div>
+							<div class="row">
+								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										洽談中初步計劃
+									</span>
+								</a>											
+							</div>																
+						</div>
 					</div>
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
@@ -61,13 +78,13 @@
 								</span>
 							</a>
 						</div>					
-<!-- 						<div class="row"> -->
-<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
-<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
-<!-- 										待洽談 -->
-<!-- 								</span> -->
-<!-- 							</a>											 -->
-<!-- 						</div> -->
+						<div class="row">
+							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										待洽談
+								</span>
+							</a>											
+						</div>
 <!-- 						<div class="row"> -->
 <!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
 <!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
@@ -82,7 +99,8 @@
 <!-- 								</span> -->
 <!-- 							</a>											 -->
 <!-- 						</div> -->
-<!-- 					</div>				 -->
+					</div>				
+>>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
 							<a id="changepassworda" href="../donation/InsertDonateGoods.jsp" class="col l12 btn-large yellow lighten-5 black-text" >
@@ -114,13 +132,13 @@
 <!-- 							</a>											 -->
 <!-- 						</div>	 -->
 						
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='/fullProj.do?type=displaySchoolByChat' />" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談中計劃
-								</span>
-							</a>											
-						</div>											
+<!-- 						<div class="row"> -->
+<%-- 							<a id="changepassworda" href="<c:url value='/fullProj.do?type=displaySchoolByChat' />" class="col l12 btn-large yellow lighten-5 black-text" > --%>
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										洽談中計劃 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div>											 -->
 					</div>
 					
 				</div>

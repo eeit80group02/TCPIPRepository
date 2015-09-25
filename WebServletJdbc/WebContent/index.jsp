@@ -303,6 +303,7 @@
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script>
 		$(function() {
+			
 			//觸發卡片翻轉事件
 			$(".touche").each(function(){
 				$(this).mouseover(function(){

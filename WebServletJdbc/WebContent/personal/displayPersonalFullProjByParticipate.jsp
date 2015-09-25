@@ -41,7 +41,7 @@
 				</div>
 					
 				<!-- 待審核的志工 forEach在這 -->
-				<c:forEach items="${bean.participatorBean}" var="participatorBean" varStatus="i">		
+				<c:forEach items="${bean.participatorMap.pending}" var="participatorBean" varStatus="i">		
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
 							${participatorBean.memberBean.lastName}${participatorBean.memberBean.firstName}

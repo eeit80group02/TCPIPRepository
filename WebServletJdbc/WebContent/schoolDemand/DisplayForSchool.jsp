@@ -72,6 +72,7 @@
 						</div>
 						<!-- 活動地點 -->
 
+
 						<!-- 提供 -->
 						<div class="col l10 offset-l1 card-panel valign-wrapper hoverable">
 							<i class="col l1 material-icons blue-text" style="font-size:5em;">
@@ -81,17 +82,45 @@
 								提供資源
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								住宿${mDemand.offerBean.room}
+								住宿
+								<c:choose>
+									<c:when test="${mDemand.offerBean.room == true}">
+									
+										<i class="material-icons green-text" style="font-size:2em;vertical-align:bottom;">done</i>
+									</c:when>
+									<c:when test="${mDemand.offerBean.room == false}">
+									
+										<i class="material-icons red-text" style="font-size:2em;vertical-align:bottom;">announcement</i>
+									</c:when>
+								</c:choose>
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								場地${mDemand.offerBean.place}
+								場地
+								<c:choose>
+									<c:when test="${mDemand.offerBean.place == true}">
+									
+										<i class="material-icons green-text" style="font-size:2em;vertical-align:bottom;">done</i>
+									</c:when>
+									<c:when test="${mDemand.offerBean.place == false}">
+									
+										<i class="material-icons red-text" style="font-size:2em;vertical-align:bottom;">announcement</i>
+									</c:when>
+								</c:choose>								
 							</div>
 							<div class="col l3 left-align valign" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-								伙食${mDemand.offerBean.food}
+								伙食
+								<c:choose>
+									<c:when test="${mDemand.offerBean.food == true}">
+										<i class="material-icons green-text" style="font-size:2em;vertical-align:bottom;">done</i>
+									</c:when>
+									<c:when test="${mDemand.offerBean.food == false}">
+										<i class="material-icons red-text" style="font-size:2em;vertical-align:bottom;">announcement</i>
+									</c:when>
+								</c:choose>									
 							</div>
 						</div>
 						<!-- 提供 -->
-						
+
 						<!-- 活動適合對象 -->
 						<div class="col l10 offset-l1 card-panel valign-wrapper hoverable">
 							<i class="col l1 material-icons green-text" style="font-size:5em;">
