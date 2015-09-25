@@ -61,28 +61,28 @@
 								</span>
 							</a>
 						</div>					
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										待洽談
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談完成
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談失敗
-								</span>
-							</a>											
-						</div>
-					</div>				
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										待洽談 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div> -->
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										洽談完成 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div> -->
+<!-- 						<div class="row"> -->
+<!-- 							<a id="changepassworda" href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										洽談失敗 -->
+<!-- 								</span> -->
+<!-- 							</a>											 -->
+<!-- 						</div> -->
+<!-- 					</div>				 -->
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
 							<a id="changepassworda" href="../donation/InsertDonateGoods.jsp" class="col l12 btn-large yellow lighten-5 black-text" >
