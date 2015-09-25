@@ -76,16 +76,14 @@ public class InsertMember {
 				
 				if(count++ == 500)
 				{
-					int[] x = pstmt.executeBatch();
-					System.out.println(x.length);
+					pstmt.executeBatch();
 					count = 1;
 				}
 				
 			}
-			int[] x = pstmt.executeBatch();
+			pstmt.executeBatch();
 			
-			System.out.println(x.length);
-
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
