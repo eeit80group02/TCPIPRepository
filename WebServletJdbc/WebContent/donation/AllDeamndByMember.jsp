@@ -45,42 +45,47 @@
 	<!-- 我就是標頭 start -->
 	<div class="navbar-fixed">
 		<nav>
-			<div class="nav-wrapper">
-				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-				</ul>
+		<div class="nav-wrapper">
+			<ul id="nav-mobile1" class="left hide-on-med-and-down">
+				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+			</ul>
 
-				<ul id="nav-mobile2" class="">
-					<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png" class="brand-logo"></a></li>
-				</ul>
-				<ul id="nav-mobile3" class="right hide-on-med-and-down">
-					<li>
-						<form action="#">
-							<div class="input-field">
-								<input id="searchDonation" value="${OneAllDemands[0].schoolName}" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
-							</div>
-						</form>
-					</li>
-					<li><i class="large material-icons" id="clearIcon">clear</i></li>
-					<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
-					<li class="chooseItem" value="需求數量"><a href="<c:url value='search.do?type=byAmount&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">需求數量</a></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
-						<ul id="dropdownList01" class="dropdown-content">
-							<li class="chooseDropdownItem" value="最新發佈"><a href="<c:url value='search.do?type=byDemandtime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">最新發佈</a></li>
-							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="即將結束"><a href="<c:url value='search.do?type=byExpiretime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">即將結束</a></li>
-						</ul></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdownList02">物資狀態<i class="mdi-navigation-arrow-drop-down right"></i></a>
-						<ul id="dropdownList02" class="dropdown-content">
-							<li class="chooseDropdownItem" value="不拘"><a href="<c:url value='search.do?supplyStatus=1&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">不拘</a></li>
-							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="全新"><a href="<c:url value='search.do?supplyStatus=2&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">全新</a></li>
-							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="二手"><a href="<c:url value='search.do?supplyStatus=3&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">二手</a></li>
-						</ul></li>
-					<li><a href="#"><i class="large material-icons">person</i></a></li>
-				</ul>
-			</div>
+			<ul id="nav-mobile2" class="">
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png" class="brand-logo"></a></li>
+			</ul>
+			<ul id="nav-mobile3" class="right hide-on-med-and-down">
+				<li>
+					<form action="#">
+						<div class="input-field">
+							<input id="searchDonation" value="${OneAllDemands[0].schoolName}" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
+						</div>
+					</form>
+				</li>
+				<li><i class="large material-icons" id="clearIcon">clear</i></li>
+				<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
+				<li class="chooseItem" value="需求數量"><a href="<c:url value='search.do?type=byAmount&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">需求數量</a></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
+					<ul id="dropdownList01" class="dropdown-content">
+						<li class="chooseDropdownItem" value="最新發佈"><a href="<c:url value='search.do?type=byDemandtime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">最新發佈</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="即將結束"><a href="<c:url value='search.do?type=byExpiretime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">即將結束</a></li>
+					</ul></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList02">物資狀態<i class="mdi-navigation-arrow-drop-down right"></i></a>
+					<ul id="dropdownList02" class="dropdown-content">
+						<li class="chooseDropdownItem" value="不拘"><a href="<c:url value='search.do?supplyStatus=1&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">不拘</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="全新"><a href="<c:url value='search.do?supplyStatus=2&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">全新</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="二手"><a href="<c:url value='search.do?supplyStatus=3&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">二手</a></li>
+					</ul></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+					<ul id="dropdownList03" class="dropdown-content">
+						<li class="chooseDropdownItem" value="全新"><a href="#">會員頁面</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="不拘"><a href="#">登入/出</a></li>
+					</ul></li>
+			</ul>
+		</div>
 		</nav>
 	</div>
 	<br>
@@ -98,7 +103,7 @@
 			<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
 
 				<c:forEach var='item' items='${OneAllDemands}' varStatus='vs'>
-					<li class="ui-widget-content ui-corner-tr"  id="${item.donationId}" value="${item.donationId}">
+					<li class="ui-widget-content ui-corner-tr" id="${item.donationId}" value="${item.donationId}">
 						<div>
 							<div class="fiximg">
 								<!-- h5 標籤不能新增修改，後面設定會用 -->
@@ -111,9 +116,9 @@
 								<div class="foottext">需求數量 : ${item.demandNumber}</div>
 								<div class="footIcin">
 									<div id="add${vs.index}">
-										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
-<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
-									</div>		
+										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
+										<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -151,97 +156,97 @@
 	<!-- 標頭專用 bottom end -->
 
 	<script>
-	// deleteAll
-	$('#donateDelete').click(function(){
-		// 設定cookie值
-		var now = new Date();
-		now.setTime(now.getTime()-1);
-		document.cookie="Items=;expire="+now.toUTCString();
-	});
-	
-	// 取出指定name的value
-	var objName = "Items";
-	var tempvalue = getCookie(objName);
-	console.log("!   "+tempvalue);
-	var value = tempvalue.match(/[0-9]+/g);
-	for(var c=0;c<value.length; c++) {
-		console.log(value[c]);
-		// 傳入已加入購物車的清單
-		var i = value[c];
-		var data = $("#"+i+"");
-		deleteImage(data);
-	}
-	//獲取指定名稱的cookie的值 
-	function getCookie(objName){
-		var arrStr = document.cookie.split("; "); 
-		for(var i = 0;i < arrStr.length;i ++){ 
-		var temp = arrStr[i].split("="); 
-		if(temp[0] == objName) 
-		return unescape(temp[1]); 
-		} 
-	}
-	// 傳入已加入購物車的清單
-	var i = "${item}";
-	var data = $("#"+i+"");
-	deleteImage(data);
-	
-	// there's the gallery and the trash
-	var $gallery = $("#gallery"), $trash = $("#trash"), $head5 = $(".ui-widget-header");
+		// deleteAll
+		$('#donateDelete').click(function() {
+			// 設定cookie值
+			var now = new Date();
+			now.setTime(now.getTime() - 1);
+			document.cookie = "Items=;expire=" + now.toUTCString();
+		});
 
-	// let the gallery be droppable as well, accepting items from the trash
-	$gallery.droppable({
-		accept : "#trash li",
-		activeClass : "custom-state-active",
-		drop : function(event, ui) {
-			recycleImage(ui.draggable);
+		// 取出指定name的value
+		var objName = "Items";
+		var tempvalue = getCookie(objName);
+		console.log("!   " + tempvalue);
+		var value = tempvalue.match(/[0-9]+/g);
+		for (var c = 0; c < value.length; c++) {
+			console.log(value[c]);
+			// 傳入已加入購物車的清單
+			var i = value[c];
+			var data = $("#" + i + "");
+			deleteImage(data);
 		}
-	});
+		//獲取指定名稱的cookie的值 
+		function getCookie(objName) {
+			var arrStr = document.cookie.split("; ");
+			for (var i = 0; i < arrStr.length; i++) {
+				var temp = arrStr[i].split("=");
+				if (temp[0] == objName)
+					return unescape(temp[1]);
+			}
+		}
+		// 傳入已加入購物車的清單
+		var i = "${item}";
+		var data = $("#" + i + "");
+		deleteImage(data);
 
-	function deleteImage(data) {
-		var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='取消選取' class='ui-icon ui-icon-refresh' style='float: right'></a>";
-		var donationId = data.attr("value");
-		
-		addToCart(donationId);
-		
-		data.find(".fiximg div").css('visibility', 'hidden');
-		data.fadeOut(function() {
-			var $list = $("ul", $trash).length ? $("ul", $trash) : $("<ul class='gallery ui-helper-reset'/>").appendTo($trash);
+		// there's the gallery and the trash
+		var $gallery = $("#gallery"), $trash = $("#trash"), $head5 = $(".ui-widget-header");
 
-			data.find("a.ui-icon-suitcase").remove();
-			data.append(recycle_icon).appendTo($list).fadeIn(function() {
-				data.animate({
-					width : "190px"
-				}).find("img").animate({
-					height : "124px"
+		// let the gallery be droppable as well, accepting items from the trash
+		$gallery.droppable({
+			accept : "#trash li",
+			activeClass : "custom-state-active",
+			drop : function(event, ui) {
+				recycleImage(ui.draggable);
+			}
+		});
+
+		function deleteImage(data) {
+			var recycle_icon = "<a href='link/to/recycle/script/when/we/have/js/off' title='取消選取' class='ui-icon ui-icon-refresh' style='float: right'></a>";
+			var donationId = data.attr("value");
+
+			addToCart(donationId);
+
+			data.find(".fiximg div").css('visibility', 'hidden');
+			data.fadeOut(function() {
+				var $list = $("ul", $trash).length ? $("ul", $trash) : $("<ul class='gallery ui-helper-reset'/>").appendTo($trash);
+
+				data.find("a.ui-icon-suitcase").remove();
+				data.append(recycle_icon).appendTo($list).fadeIn(function() {
+					data.animate({
+						width : "190px"
+					}).find("img").animate({
+						height : "124px"
+					});
 				});
 			});
-		});
-	}
-	
-	function addToCart(donationId) {
-
-		var xhr = new XMLHttpRequest();
-		if (xhr != null) {
-			xhr.addEventListener("readystatechange", function() {
-				if (xhr.readyState == 4) {
-					if (xhr.status == 200) {
-						lists = xhr.responseText;
-						
-						// 設定cookie值
-						var now = new Date();
-						now.setTime(now.getTime()+1000*60*60*24*30);
-						document.cookie="Items="+lists+";expire="+now.toUTCString();
-						
-					} else {
-// 						alert("something is wrong!");
-					}
-				}
-			});
-			xhr.open("POST", "cart.do", true);
-			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xhr.send("toCart=insert&returnJson=true&donationId=" + donationId);
 		}
-	}
+
+		function addToCart(donationId) {
+
+			var xhr = new XMLHttpRequest();
+			if (xhr != null) {
+				xhr.addEventListener("readystatechange", function() {
+					if (xhr.readyState == 4) {
+						if (xhr.status == 200) {
+							lists = xhr.responseText;
+
+							// 設定cookie值
+							var now = new Date();
+							now.setTime(now.getTime() + 1000 * 60 * 60 * 24 * 30);
+							document.cookie = "Items=" + lists + ";expire=" + now.toUTCString();
+
+						} else {
+							// 						alert("something is wrong!");
+						}
+					}
+				});
+				xhr.open("POST", "cart.do", true);
+				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xhr.send("toCart=insert&returnJson=true&donationId=" + donationId);
+			}
+		}
 	</script>
 
 	<script type="text/javascript" src="../donationScripts/Maquee.js"></script>
