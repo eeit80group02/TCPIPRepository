@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>InsertGoods</title>
+<title>捐獻物品輸入</title>
 
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭 css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
@@ -38,22 +37,22 @@
 			<!-- 我就是標頭 start -->
 			<div class="navbar-fixed">
 				<nav>
-				<div class="nav-wrapper">
-					<ul id="nav-mobile1" class="left hide-on-med-and-down">
-						<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-						<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
-					</ul>
+					<div class="nav-wrapper">
+						<ul id="nav-mobile1" class="left hide-on-med-and-down">
+							<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+							<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+						</ul>
 
-					<a href="#" class="brand-logo center">填寫捐獻需求</a>
-					<ul id="nav-mobile3" class="right hide-on-med-and-down">
-						<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
-							<ul id="dropdownList03" class="dropdown-content">
-								<li class="chooseDropdownItem" value="會員頁面"><a href="#">學校頁面</a></li>
-								<li class="divider"></li>
-								<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
-							</ul></li>
-					</ul>
-				</div>
+						<a href="#" class="brand-logo center">填寫捐獻需求</a>
+						<ul id="nav-mobile3" class="right hide-on-med-and-down">
+							<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+								<ul id="dropdownList03" class="dropdown-content">
+									<li class="chooseDropdownItem" value="會員頁面"><a href="#">學校頁面</a></li>
+									<li class="divider"></li>
+									<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+								</ul></li>
+						</ul>
+					</div>
 				</nav>
 			</div>
 			<br>
@@ -154,7 +153,6 @@
 		<!-- 標頭專用 bottom start -->
 		<!-- 必須最後載入才有效果 -->
 		<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
 		<!-- 標頭專用 bottom end -->
 </body>
 </html>

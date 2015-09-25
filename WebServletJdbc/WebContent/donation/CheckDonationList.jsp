@@ -61,8 +61,8 @@
 	});
 </script>
 <!-- 宅配通top end -->
-
 </head>
+
 <body>
 <!-- 驗證是否為會員 -->
 	<c:if test="${LoginOK.beanName.equals('school') }">
@@ -108,23 +108,23 @@
 
 				</div>
 
-				<!-- 第一頁 start -->
+							<!-- 第一頁 -->
 				<div id="test1" class="col s12">
 					<div class="col s12">
-						<div class="warnText">
-							<span>確認捐獻背包</span>
-							<!-- 操作小叮嚀 start -->
-							<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
+						<div id="warnText">
+							<span>確認捐獻物品明細</span>
+							<!-- 小叮嚀 start -->
+							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
 							<!-- Modal Structure -->
-							<div id="modalNote01" class="modal modal-fixed-footer">
+							<div id="modalNote02" class="modal modal-fixed-footer">
 								<div class="modal-content">
-									<h4>操作小叮嚀：</h4>
+									<h4>小叮嚀：</h4>
 									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">remove</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">add</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_before</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
 										</li>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻物品。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除捐獻物品。
 										</li>
 									</ol>
 								</div>
@@ -132,14 +132,14 @@
 									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
 								</div>
 							</div>
-							<!-- 操作小叮嚀 end -->
+							<!-- 小叮嚀 end -->
 
 						</div>
 						<br>
 					</div>
 
 					<form action="">
-						<table id="donationBill01" class="responsive-table">
+						<table id="donationBill" class="responsive-table">
 							<thead>
 								<tr>
 									<td>捐獻物資</td>
@@ -151,8 +151,7 @@
 								</tr>
 							</thead>
 							<tbody>
-
-							<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
+								<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
 										<tr>
 											<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="${item.value.supplyName}" title="${item.value.supplyName}"></td>
 											<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號</td>
@@ -187,51 +186,80 @@
 															step += 5
 														}, 2000);
 													}
-												});
-
-												/* 按下鼠標處理函數 */
-												$("#buttonAdd${vs.index}").mousedown(function() {
-													// 													var input = $("#text${vs.index}").val();
-													// 正規表示法找整數
-													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-														changeStep();
-														setAddValue();
-
-													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-														$("#text${vs.index}").val(1);
+	
+													/* 設置值私有方法 */
+													var setAddValue = function() {
+	// 													var input = $("#text${vs.index}").val();
+														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
+														setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
 													}
-
-												});
-
-												/* 鬆開鼠標處理函數 */
-												$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
-
-												function checkText() {
-													var input = $("#text${vs.index}").val();
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
-													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-														$("#text${vs.index}").empty();
-														$("#text${vs.index}").val("1");
+	
+													/* 設置值私有方法 */
+													var setSubValue = function() {
+	// 													var input = $("#text${vs.index}").val();
+														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
+														setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
 													}
-													clearInterval(changeStepTimer);
-													clearTimeout(setValueTimer);
-													step = 1;
-												}
-											}(jQuery));
-										</script>
-									</tr>
-								</c:forEach>
+	
+													/* 按下鼠標處理函數 */
+													$("#buttonSub${vs.index}").mousedown(function() {
+	// 													var input = $("#text${vs.index}").val();
+														// 正規表示法找整數
+														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+															changeStep();
+															setSubValue();
+														} else {
+															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+															$("#text${vs.index}").val("1");
+														}
+	
+													});
+	
+													/* 按下鼠標處理函數 */
+													$("#buttonAdd${vs.index}").mousedown(function() {
+	// 													var input = $("#text${vs.index}").val();
+														// 正規表示法找整數
+														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+															changeStep();
+															setAddValue();
+															
+														} else {
+															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+															$("#text${vs.index}").val(1);
+														}
+	
+													});
+	
+													/* 鬆開鼠標處理函數 */
+													$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
+	
+													function checkText() {
+														var input = $("#text${vs.index}").val();
+														if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+														} else {
+															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+															$("#text${vs.index}").empty();
+															$("#text${vs.index}").val("1");
+														}
+														console.log("${item.value.schoolName}");
+														console.log(input);
+														clearInterval(changeStepTimer);
+														clearTimeout(setValueTimer);
+														step = 1;
+													}
+												}(jQuery));
+												</script>
+											</tr>
+									</c:forEach>
 							</tbody>
 						</table>
 						<br> <br>
 
 						<button type="button" id="page01Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">keyboard_arrow_left</i></a>
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">favorite</i></a>
 						</button>
-						<button type="button" id="page01Clear" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="全部清除"><i class="small material-icons">clear</i></a>
+						<button type="button" id="page01Mid" class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
 						</button>
 						<button type="submit" id="page01Next" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
@@ -240,6 +268,20 @@
 					<br>
 				</div>
 				<!-- 第一頁 end -->
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 
 				<!-- 第二頁 start -->
 				<div id="test2" class="col s12">
@@ -899,7 +941,7 @@
 	<!-- 宅配通 bottom start -->
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
-	<script type="text/javascript" src="../donationScripts/SexSwitch.js"></script>
+	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
 
 	<!-- 標頭專用 bottom start -->
