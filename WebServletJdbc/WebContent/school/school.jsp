@@ -100,6 +100,7 @@
 <!-- 							</a>											 -->
 <!-- 						</div> -->
 					</div>				
+>>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 					<div class="white card-panel left" style="min-height:60vh">
 						<div class="row">
 							<a id="changepassworda" href="../donation/InsertDonateGoods.jsp" class="col l12 btn-large yellow lighten-5 black-text" >

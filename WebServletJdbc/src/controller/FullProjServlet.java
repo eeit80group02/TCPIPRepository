@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -787,17 +788,23 @@ public class FullProjServlet extends HttpServlet
 	private JSONObject getGoogleMapInfo(FullProjBean bean) throws IOException{
 		
 		String location = bean.getLocation();
+
+		System.out.println("utf-8:"+URLEncoder.encode(location, "UTF-8"));
+		System.out.println("US-ASCII:"+URLEncoder.encode(location, "US-ASCII"));
+		System.out.println("ISO-8859-1:"+URLEncoder.encode(location, "ISO-8859-1"));
+		
+		
 		JSONObject jobj = new JSONObject();
 		try{
 				//連線到google Map Server
 				URL findGeoCode = new URL("https://maps.googleapis.com/maps/api/geocode/json?address=" + 
-						location + 
-					 "&key=AIzaSyCFcem4n3RifwMGgXOcF9raNW8lT2BSKs0");
+						URLEncoder.encode(location, "UTF-8") + "&key=AIzaSyCFcem4n3RifwMGgXOcF9raNW8lT2BSKs0");
+
 				// open connection
 				URLConnection makeConnect = findGeoCode.openConnection();
 		        // read result
 				BufferedReader in = new BufferedReader(new InputStreamReader(
-						makeConnect.getInputStream()));
+						makeConnect.getInputStream(),"UTF-8"));
 				
 				StringBuilder wholeJson = new StringBuilder();
 				String inputLine;
@@ -915,6 +922,7 @@ public class FullProjServlet extends HttpServlet
 		//determine whether there are results of our query or not
 		// if j2.size() greater than 0 means we have results
 		// j1 will never be a nullpoint
+
 		Object jobj = JSONValue.parse(stb.toString());
 		if(jobj instanceof JSONObject){
 			JSONObject j1 = (JSONObject) jobj;

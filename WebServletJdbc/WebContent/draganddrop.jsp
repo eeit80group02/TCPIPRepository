@@ -79,6 +79,100 @@
 				$(this).css({'cursor':'pointer'});
 			});
 			
+			//Set subMissionDatepicker
+			function setSubMissionDatepicker(){
+				//JQuery datepicker
+				var inputDate = $(".subDatepicker");
+				var changeYearButtons = function() {
+					setTimeout(function() {
+				        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
+				        var prevYrBtn = $('<button>前年</button>');
+				        prevYrBtn.bind("click", function() {
+				            $.datepicker._adjustDate(inputDate, -1, 'Y');
+				    });
+				    var nextYrBtn = $('<button>次年</button>');
+				    nextYrBtn.bind("click", function() {
+				        $.datepicker._adjustDate(inputDate, +1, 'Y');
+				    });
+				    prevYrBtn.appendTo(widgetHeader);
+				    nextYrBtn.appendTo(widgetHeader);
+				   }, 1);
+				};
+		
+				var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
+				var old_get = $.datepicker._get;
+				var old_CloseFn = $.datepicker._updateDatepicker;
+				$.extend($.datepicker, {
+		    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
+		        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
+		        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
+		            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
+		                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
+		            	}).end().end().get(0).outerHTML;
+		        	}
+		        	return htmlYearMonth;
+		    		},
+		    		_get:function (a, b) {
+		        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
+		        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
+		        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
+		        		return old_get.apply(this, [a, b]);
+		    		},
+		    		_updateDatepicker:function (inst) {
+		        		old_CloseFn.call(this, inst);
+		        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
+		                    inst.input.val("");
+		            	});
+		    		},
+		    		_setDateDatepicker: function (a, b) {
+		    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
+		    		},
+		    		_widgetDatepicker: function () {
+		        		return this.dpDiv
+		    		}
+				});
+				
+				
+				$(".subDatepicker").datepicker({
+					beforeShow: changeYearButtons,
+					onChangeMonthYear: changeYearButtons,
+		    		minDate: new Date(),
+		    		firstDay: 1, 
+		    		dateFormat: "yy-m-d",
+		    		showOn: "button",
+		    	    buttonImage: "images/calendar.png",
+		    	    buttonImageOnly: true,
+		    		onSelect: function (dateText, inst) {
+		        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
+		        		var reM = /m+/g;
+		        		var reD = /d+/g;
+		        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
+		            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
+		            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
+		        		};
+		        		$.each(objDate, function (k, v) {
+		            		var re = new RegExp(k + "+");
+		            		dateFormate = dateFormate.replace(re, v);
+		        		});
+		        		inst.input.val(dateFormate);
+		        		
+		        		
+		    		}
+				});
+			
+				$.datepicker.regional['zh-TW'] = {
+						prevText: '上月',
+						nextText: '次月',
+						monthNames: ['一月','二月','三月','四月','五月','六月',
+						'七月','八月','九月','十月','十一月','十二月'],
+						monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
+						dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+						dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+						dayNamesMin: ['日','一','二','三','四','五','六'],
+				};
+				$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+			}
+			
 			//Define container for mission board
 			$("ul.nested_with_switc").sortable({
 				cursor : 'move',
@@ -93,10 +187,11 @@
 					$.each(temp, function(index, value){
 						console.log(index + ":" + value);
 						
-						$('#'+value+' > input.missionSetOrder').val(index+1);
-						var missionSetPos = $('#'+value+' > input.missionSetOrder').val();
+// 						$('#'+value+' > input.missionSetOrder').val(index+1);
+						var missionSetPos = index+1;
 						var missionSetId = $('#'+value+' div:first-child').attr('id').substring(10);
-						var missionSetName = $('#'+value+' > div:first-child').text();
+						var name = $('#'+value+' > div:first-child').text();
+						var missionBoardId = boardInformation.missionBoard.missionBoardId;
 						
 						//Update database
 						$.ajax({
@@ -105,11 +200,14 @@
 		    			    data:{'action':'UpdateMissionSetOrder',
 		    			    	  'missionSetOrder':missionSetPos,
 		    			    	  'missionSetId':missionSetId,
-		    			    	  'missionSetName':missionSetName,
-		    			    	  'missionBoardId':BoardInformation.missionBoard.missionBoardId},
+		    			    	  'name':name,
+		    			    	  'missionBoardId':missionBoardId},
 		    			    dataType:'json',
 		    			    success:function(result){
 		    			    	console.log(result);
+		    			    	if(result.result == "succeed"){
+		    			    		$('#'+value+' > input.missionSetOrder').val(result.missionSet.missionSetOrder);
+		    			    	}
 		    			    },
 		    			    error:function(result){
 		    			    	console.log(result);
@@ -134,13 +232,13 @@
 			
 			
 			//Set Initail Board from database
-			var BoardInformation;
+			var boardInformation;
 			$.ajax({
     			url:'<c:url value="/GetMissionBoardServlet" />',
     	   		type:'get',
     	   		dataType:'json',
     	   		success:function(result){
-    	   			BoardInformation = result;
+    	   			boardInformation = result;
     	   			console.log(result);
     	   			
     	   			
@@ -153,7 +251,7 @@
     					var $ul = $('.nested_with_switc');
     					var title = this.missionSetName;
     					console.log(title);
-    	    			var $li = $('<li id="missionSetOrderId' + missionSetCount + '" class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + this.missionSetId + 
+    	    			var $missionSet = $('<li id="missionSetOrderId' + missionSetCount + '" class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + this.missionSetId + 
     	    						'" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
     	    						'</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
     	    						'<i class="large material-icons">add</i></div><input type="hidden" class="missionSetOrder" value="' + this.missionSetOrder + '">');
@@ -161,7 +259,7 @@
     	    			console.log("ul element length="+$ul.children('li').length);
     	    			if( $ul.children('li').length == 0 ){
     	    				console.log("ul no child! " + title + " append directly");
-    	    				$ul.append($li);
+    	    				$ul.append($missionSet);
     	    			} else if( $ul.children('li').length > 0 ){
     	    				var missionSetOrder = this.missionSetOrder;
     	    				
@@ -172,7 +270,13 @@
     	    					}
     	    				});
     	    				
-    	    				$('ul.nested_with_switc input.missionSetOrder[value=' + temp + ']').parent().after($li);
+    	    				console.log("temp",temp)
+    	    				if(temp == 0 ){
+    	    					console.log("append at first!");
+    	    					$('ul.nested_with_switc').first().prepend($missionSet);
+    	    				} else {
+    	    					$('ul.nested_with_switc input.missionSetOrder[value=' + temp + ']').parent().after($missionSet);
+    	    				}
     	    			}
     	    			
     	    			var width = $('div > div > ul').width() + 310;
@@ -181,85 +285,7 @@
     	    			missionSetCount++;
     				});
     	   			
-    				$("ul.nested_with_switc > li > ul").sortable({
-	    				cursor : 'move',
-	    				toleranceElement : '> div',
-	    				item : 'li', //Specifies which items inside the element should be sortable.
-	    				handle : 'div',
-	    				connectWith : 'ul.nested_with_switc > li > ul', //A selector of other sortable elements that the items from this list should be connected to.
-	    				placeholder : "placeholder",
-	    				forcePlaceholderSize: true,
-	    				start: function(e, ui){
-	    					ui.placeholder.height(ui.helper.outerHeight());
-	    					$('.placeholder').css('background-color','#afb42b lime darken-2');
-	    				},
-	    				stop: function(event, ui){
-// 	    					var temp = $("ul.nested_with_switc > li > ul").sortable("toArray");
-	    					
-	    					var orderArray = new Array();
-	    					var child = $('ul.nested_with_switc > li > ul > li').each(function(){
-	    						orderArray.push($(this).attr("id")+":"+$(this).parent().siblings('input').val());
-// 	    						console.log("position",$(this).children("div").children("input.missionPosition").val());
-	    					});
-	    					console.log("order",orderArray);  
-	    					
-	    					var missionSet;
-	    					var count = 1;
-	    					for(var i = 0; i < orderArray.length; i++){
-	    						var pair = orderArray[i].split(":");
-// 	    						console.log("pair",pair);
-	    						$('#'+pair[0]+' input.missionSetId').val(pair[1]);
-	    						
-	    						
-	    						if( missionSet != pair[1] ){
-	    							missionSet = pair[1];
-	    							count = 1;
-	    						}
-	    						$('#'+pair[0]+' input.missionPosition').val(count);
-	    						
-	    						var missionId = $('#'+pair[0]+ ' > div:last-child').attr('id').substring(9);
-	    						var missionSetId = $('#'+pair[0]+ ' > div:last-child > input.missionSetId').val();
-	    						var name = $('#'+pair[0]+ ' > div:first-child').text();
-	    						var host = $('#'+pair[0]+ ' > div:last-child > input.missionExecutor').attr('name');
-	    						var date =$('#'+pair[0]+ ' > div:last-child > input.missionDate').val();
-	    						var sep = date.split('-');
-	    						var endTime = (parseInt(sep[0])+1911) + "-" + sep[1] + "-" + sep[2];
-	    						var missionPriority = $('#'+pair[0]+ ' > div:last-child > input.missionPriority').val();
-	    						var missionPosition = $('#'+pair[0]+' input.missionPosition').val();
-	    						var missionStatus =  $('#'+pair[0]+ ' > div:last-child > input.missionStatus').val();
-	    						var mainMissionId = $('#'+pair[0]+ ' > div:last-child > input.mainMissionId').val();
-	    						
-	    						//Updata database
-	    	    				$.ajax({
-	    		    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
-	    		    			    type:'post',
-	    		    			    data:{'action':'UpdateMissionPosition',
-	    		    			    	  'missionId':missionId,
-	    		    			    	  'missionSetId':missionSetId,
-	    		    			    	  'name':name,
-	    		    			    	  'host':host,
-	    		    			    	  'endTime':endTime,
-	    		    			    	  'missionPriority':missionPriority,
-	    		    			    	  'missionPosition':missionPosition,
-	    		    			    	  'missionStatus':missionStatus,
-	    		    			    	  'mainMissionId':mainMissionId},
-	    		    			    dataType:'json',
-	    		    			    success:function(result){
-	    		    			    	console.log(result);
-	    		    			    },
-	    		    			    error:function(result){
-	    		    			    	console.log(result);
-	    		    			    }
-	    		    			});
-	    						
-	    						
-	    						console.log("missionPosition",$('#'+pair[0]+' input.missionPosition').val());
-// 	    						console.log( $('#'+pair[0]+' input.missionSetId').val() );
-	    						count++;
-	    					}
-	    					
-	    				}
-	    			})
+    				setMissionSortable();
     	   			
     	   			
     	   			
@@ -348,7 +374,6 @@
 			    							count = 1;
 			    						}
 			    						
-			    						$('#'+pair[0]+' input.subMissionPosition').val(count);
 			    						console.log( "1.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
 			    						if(pair[0] != "undefined" ){
 				    						var missionId = $('#'+pair[0]+' .missionId').val();
@@ -360,7 +385,7 @@
 				    						var endTime = (parseInt(sep[0])+1911) + "-" + sep[1] + "-" + sep[2];
 				    						var missionPriority = "普通";
 				    						console.log( "2.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
-				    						var missionPosition = $('#'+pair[0]+' input.subMissionPosition').val();
+				    						var missionPosition = count;
 				    						console.log( "3.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
 				    						var missionStatus = $('#'+pair[0]+' .subMissionStatus').val();
 				    						var mainMissionId2 = $('#'+pair[0]+' .mainDataRowLocation').val().substring(9);
@@ -385,6 +410,9 @@
 				    		    			    dataType:'json',
 				    		    			    success:function(result){
 				    		    			    	console.log(result);
+				    		    			    	if(result.result=="succeed"){
+				    		    			    		$('#'+pair[0]+' input.subMissionPosition').val(result.mission.missionPosition);
+				    		    			    	}
 				    		    			    },
 				    		    			    error:function(result){
 				    		    			    	console.log(result);
@@ -401,7 +429,7 @@
 							})
     	   					
     	   					
-    	    	   			//add subMission
+    	    	   			//add subMission from database
     	    	   			var $ul = $('.subMissionContainer ul');
     	    	   			var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + missionCount + '" class="row" style="width:585.906px;height:60px;">' +
 														'<div class="subMissionSettings col l1"><i class="material-icons" style="padding:10px 0px;font-size:40px;">settings</i></div>' +
@@ -447,97 +475,8 @@
     	    				}
     	    	   			
     	    	   			
-    	    	   			//JQuery datepicker
-    	    				var inputDate = $(".subDatepicker");
-    	    				var changeYearButtons = function() {
-    	    					setTimeout(function() {
-    	    				        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
-    	    				        var prevYrBtn = $('<button>前年</button>');
-    	    				        prevYrBtn.bind("click", function() {
-    	    				            $.datepicker._adjustDate(inputDate, -1, 'Y');
-    	    				    });
-    	    				    var nextYrBtn = $('<button>次年</button>');
-    	    				    nextYrBtn.bind("click", function() {
-    	    				        $.datepicker._adjustDate(inputDate, +1, 'Y');
-    	    				    });
-    	    				    prevYrBtn.appendTo(widgetHeader);
-    	    				    nextYrBtn.appendTo(widgetHeader);
-    	    				   }, 1);
-    	    				};
-    	    		
-    	    				var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-    	    				var old_get = $.datepicker._get;
-    	    				var old_CloseFn = $.datepicker._updateDatepicker;
-    	    				$.extend($.datepicker, {
-    	    		    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-    	    		        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-    	    		        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-    	    		            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-    	    		                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-    	    		            	}).end().end().get(0).outerHTML;
-    	    		        	}
-    	    		        	return htmlYearMonth;
-    	    		    		},
-    	    		    		_get:function (a, b) {
-    	    		        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-    	    		        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-    	    		        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-    	    		        		return old_get.apply(this, [a, b]);
-    	    		    		},
-    	    		    		_updateDatepicker:function (inst) {
-    	    		        		old_CloseFn.call(this, inst);
-    	    		        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
-    	    		                    inst.input.val("");
-    	    		            	});
-    	    		    		},
-    	    		    		_setDateDatepicker: function (a, b) {
-    	    		    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-    	    		    		},
-    	    		    		_widgetDatepicker: function () {
-    	    		        		return this.dpDiv
-    	    		    		}
-    	    				});
-    	    				
-    	    				
-    	    				$(".subDatepicker").datepicker({
-    	    					beforeShow: changeYearButtons,
-    	    					onChangeMonthYear: changeYearButtons,
-    	    		    		minDate: new Date(),
-    	    		    		firstDay: 1, 
-    	    		    		dateFormat: "yy-m-d",
-    	    		    		showOn: "button",
-    	    		    	    buttonImage: "images/calendar.png",
-    	    		    	    buttonImageOnly: true,
-    	    		    		onSelect: function (dateText, inst) {
-    	    		        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-    	    		        		var reM = /m+/g;
-    	    		        		var reD = /d+/g;
-    	    		        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-    	    		            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-    	    		            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-    	    		        		};
-    	    		        		$.each(objDate, function (k, v) {
-    	    		            		var re = new RegExp(k + "+");
-    	    		            		dateFormate = dateFormate.replace(re, v);
-    	    		        		});
-    	    		        		inst.input.val(dateFormate);
-    	    		        		
-    	    		        		
-    	    		    		}
-    	    				});
-    	    			
-    	    				$.datepicker.regional['zh-TW'] = {
-    	    						prevText: '上月',
-    	    						nextText: '次月',
-    	    						monthNames: ['一月','二月','三月','四月','五月','六月',
-    	    						'七月','八月','九月','十月','十一月','十二月'],
-    	    						monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
-    	    						dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
-    	    						dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
-    	    						dayNamesMin: ['日','一','二','三','四','五','六'],
-    	    				};
-    	    				$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
-    	    	   			
+							setSubMissionDatepicker();    
+							
     	    				//Set datapicker icon position
     	    				$('.subMissionDateContainer').siblings('.ui-datepicker-trigger').appendTo('.subMissionDateContainer')
     	    				
@@ -561,25 +500,9 @@
        		});
 			
 			
-			
-			//Add missionSet
-			var missionSetCount = 1;
-			$(document).on('click', '.addBoard', function(){
-				var title = $('#nameTitle').val();
-				var missionSetOrder = $('ul.nested_with_switc > li').size() + 1;
-				if(title==""){
-					title = "MissionSet";
-				}
-				var $li = $('<li id="missionSetOrderId' + missionSetCount + '" class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
-						  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
-						  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
-						  '<i class="large material-icons">add</i></div></div><input type="hidden" class="missionSetOrder" value="'+ missionSetOrder + '" >');
-				missionSetCount++;
-				$('#nameTitle').val("");
-				$('.nested_with_switc').append($li);
-				var width = $('div > div > ul').width() + 310;
-				$('.nested_with_switc').css('width', width);
-				
+			//**********************************************************************************************************************
+			//Define mission sortable in MissionSet
+			function setMissionSortable( ){
 				$("ul.nested_with_switc > li > ul").sortable({
     				cursor : 'move',
     				toleranceElement : '> div',
@@ -593,12 +516,9 @@
     					$('.placeholder').css('background-color','#afb42b lime darken-2');
     				},
     				stop: function(event, ui){
-//	    					var temp = $("ul.nested_with_switc > li > ul").sortable("toArray");
-    					
     					var orderArray = new Array();
     					var child = $('ul.nested_with_switc > li > ul > li').each(function(){
     						orderArray.push($(this).attr("id")+":"+$(this).parent().siblings('input').val());
-//	    						console.log("position",$(this).children("div").children("input.missionPosition").val());
     					});
     					console.log("order",orderArray);  
     					
@@ -606,7 +526,6 @@
     					var count = 1;
     					for(var i = 0; i < orderArray.length; i++){
     						var pair = orderArray[i].split(":");
-//	    						console.log("pair",pair);
     						$('#'+pair[0]+' input.missionSetId').val(pair[1]);
     						
     						
@@ -614,43 +533,121 @@
     							missionSet = pair[1];
     							count = 1;
     						}
-    						$('#'+pair[0]+' input.missionPosition').val(count);
+    						
+    						var missionId = $('#'+pair[0]+ ' > div:last-child').attr('id').substring(9);
+    						var missionSetId = $('#'+pair[0]+ ' > div:last-child > input.missionSetId').val();
+    						var name = $('#'+pair[0]+ ' > div:first-child').text();
+    						var host = $('#'+pair[0]+ ' > div:last-child > input.missionExecutor').attr('name');
+    						var date =$('#'+pair[0]+ ' > div:last-child > input.missionDate').val();
+    						var sep = date.split('-');
+    						var endTime = (parseInt(sep[0])+1911) + "-" + sep[1] + "-" + sep[2];
+    						var missionPriority = $('#'+pair[0]+ ' > div:last-child > input.missionPriority').val();
+    						var missionPosition = count;
+    						var missionStatus =  $('#'+pair[0]+ ' > div:last-child > input.missionStatus').val();
+    						var mainMissionId = $('#'+pair[0]+ ' > div:last-child > input.mainMissionId').val();
+    						
+    						//Updata database
+    	    				$.ajax({
+    		    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
+    		    			    type:'post',
+    		    			    data:{'action':'UpdateMissionPosition',
+    		    			    	  'missionId':missionId,
+    		    			    	  'missionSetId':missionSetId,
+    		    			    	  'name':name,
+    		    			    	  'host':host,
+    		    			    	  'endTime':endTime,
+    		    			    	  'missionPriority':missionPriority,
+    		    			    	  'missionPosition':missionPosition,
+    		    			    	  'missionStatus':missionStatus,
+    		    			    	  'mainMissionId':mainMissionId},
+    		    			    dataType:'json',
+    		    			    success:function(result){
+    		    			    	console.log(result);
+    		    			    	if(result.result == "succeed"){
+    		    			    		$('#'+pair[0]+' input.missionPosition').val(result.mission.missionPosition);
+    		    			    	}
+    		    			    },
+    		    			    error:function(result){
+    		    			    	console.log(result);
+    		    			    }
+    		    			});
+    						
     						
     						console.log("missionPosition",$('#'+pair[0]+' input.missionPosition').val());
-//	    						console.log( $('#'+pair[0]+' input.missionSetId').val() );
     						count++;
-    					} 	    					
+    					}
+    					
     				}
     			})
+			}
 				
+			//Add missionSet
+			function addMissionSet() {
+				var title = $('#nameTitle').val();
+				var missionSetOrder = $('ul.nested_with_switc > li').size() + 1;
+				if(title==""){
+					title = "MissionSet";
+				}
+				
+				var missionBoardId = boardInformation.missionBoard.missionBoardId;
+				console.log("missionBoardId",missionBoardId);
+				var name = title;
+				console.log("name",name);
+				var missionSetOrder = missionSetOrder;
+				console.log("missionSetOrder",missionSetOrder);
+				//Updata database
+				$.ajax({
+    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
+    			    type:'post',
+    			    data:{'action':'InsertMissionSet',
+    			    	  'missionBoardId':missionBoardId,
+    			    	  'name':name,
+    			    	  'missionSetOrder':missionSetOrder},
+    			    dataType:'json',
+    			    success:function(result){
+    			    	console.log(result);
+    			    	if(result.result == "succeed"){
+    			    		var $missionSet = $('<li id="missionSetOrderId' + result.missionSet.missionSetId + '" class="#cddc39 lime"></li>').html('<div id="missionSet' + result.missionSet.missionSetId + 
+    								  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ result.missionSet.name +
+    								  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
+    								  '<i class="large material-icons">add</i></div></div><input type="hidden" class="missionSetOrder" value="'+ result.missionSet.missionSetOrder + '" >');
+	    			    	
+    			    		$('.nested_with_switc').append($missionSet);
+	    					var width = $('div > div > ul').width() + 310;
+	    					$('.nested_with_switc').css('width', width);
+	    					$('#nameTitle').val("");
+	    					
+	    					missionSetCount++;
+    			    	}
+    			    },
+    			    error:function(result){
+    			    	console.log(result);
+    			    	console.log("Insert new missionSet failed!");
+    			    }
+    			});
+				
+			}
+			
+			//Add missionSet
+			var missionSetCount = 1;
+			$(document).on('click', '.addBoard', function(){
+				addMissionSet();
+				setMissionSortable();
 			});
 			
 			//Accept add missionSet with enter pressed at input field 
 			$(document).on('keypress', '#nameTitle', function(e) {
 			    if(e.which == 13) {
-			    	var title = $('#nameTitle').val();
-					if(title==""){
-						title = "MissionSet";
-					}
-					var $li = $('<li id="missionSetOrderId' + missionSetCount + '" class="#cddc39 lime"></li>').html('<div id="missionSet' + missionSetCount + 
-							  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
-							  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
-							  '<i class="large material-icons">add</i></div><input type="hidden" class="missionSetOrder" value="">');
-					missionSetCount++;
-					$('#nameTitle').val("");
-					$('.nested_with_switc').append($li);
-					var width = $('div > div > ul').width() + 310;
-					$('.nested_with_switc').css('width', width);
-					
+			    	addMissionSet();
+					setMissionSortable();
 			    }
 			});
-			
 			
 			
 			//Add mission
 			var missionCount = 1;
 			$(document).on('click','.addMission',function() {
-				var $li = $("<li id='missionOrderId" + missionCount + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>Mission"+ missionCount +"</div>" +
+				var $mission = $("<li id='missionOrderId" + missionCount + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>Mission"+ missionCount +"</div>" +
 						  "<div id='missionId"+ missionCount + "' style='display:none'>" +
 						  "<input type='text' class='missionExecutor' value='待認領' >" +
 						  "<input type='text' class='missionDate'>" +
@@ -660,7 +657,7 @@
 						  "<input type='text' class='missionStatus' >" +
 						  "<input type='text' class='missionSetId' value='" + $(this).siblings('input').val() + "'></div>");
 				missionCount++;
-				$li.appendTo($(event.target).parent().siblings( "ul" ));
+				$mission.appendTo($(event.target).parent().siblings( "ul" ));
 			});
 			
 			
@@ -959,96 +956,7 @@
 				$('.openSubMissionWindow').css('display','block');
 				
 				
-				//JQuery datepicker
-				var inputDate = $(".subDatepicker");
-				var changeYearButtons = function() {
-					setTimeout(function() {
-				        var widgetHeader = inputDate.datepicker("widget").find(".ui-datepicker-header");
-				        var prevYrBtn = $('<button>前年</button>');
-				        prevYrBtn.bind("click", function() {
-				            $.datepicker._adjustDate(inputDate, -1, 'Y');
-				    });
-				    var nextYrBtn = $('<button>次年</button>');
-				    nextYrBtn.bind("click", function() {
-				        $.datepicker._adjustDate(inputDate, +1, 'Y');
-				    });
-				    prevYrBtn.appendTo(widgetHeader);
-				    nextYrBtn.appendTo(widgetHeader);
-				   }, 1);
-				};
-		
-				var old_generateMonthYearHeader = $.datepicker._generateMonthYearHeader;
-				var old_get = $.datepicker._get;
-				var old_CloseFn = $.datepicker._updateDatepicker;
-				$.extend($.datepicker, {
-		    		_generateMonthYearHeader:function (a,b,c,d,e,f,g,h) {
-		        		var htmlYearMonth = old_generateMonthYearHeader.apply(this, [a, b, c, d, e, f, g, h]);
-		        		if ($(htmlYearMonth).find(".ui-datepicker-year").length > 0) {
-		            		htmlYearMonth = $(htmlYearMonth).find(".ui-datepicker-year").find("option").each(function (i, e) {
-		                if (Number(e.value) - 1911 > 0) $(e).text(Number(e.innerText) - 1911);
-		            	}).end().end().get(0).outerHTML;
-		        	}
-		        	return htmlYearMonth;
-		    		},
-		    		_get:function (a, b) {
-		        		a.selectedYear = a.selectedYear - 1911 < 0 ? a.selectedYear + 1911 : a.selectedYear;
-		        		a.drawYear = a.drawYear - 1911 < 0 ? a.drawYear + 1911 : a.drawYear;
-		        		a.curreatYear = a.curreatYear - 1911 < 0 ? a.curreatYear + 1911 : a.curreatYear;
-		        		return old_get.apply(this, [a, b]);
-		    		},
-		    		_updateDatepicker:function (inst) {
-		        		old_CloseFn.call(this, inst);
-		        		$(this).datepicker("widget").find(".ui-datepicker-buttonpane").children(":last").click(function (e) {
-		                    inst.input.val("");
-		            	});
-		    		},
-		    		_setDateDatepicker: function (a, b) {
-		    	    	if (a = this._getInst(a)) { this._setDate(a, b); this._updateDatepicker(a); this._updateAlternate(a) }
-		    		},
-		    		_widgetDatepicker: function () {
-		        		return this.dpDiv
-		    		}
-				});
-				
-				
-				$(".subDatepicker").datepicker({
-					beforeShow: changeYearButtons,
-					onChangeMonthYear: changeYearButtons,
-		    		minDate: new Date(),
-		    		firstDay: 1, 
-		    		dateFormat: "yy-m-d",
-		    		showOn: "button",
-		    	    buttonImage: "images/calendar.png",
-		    	    buttonImageOnly: true,
-		    		onSelect: function (dateText, inst) {
-		        		var dateFormate = inst.settings.dateFormat == null ? "yy/mm/dd" : inst.settings.dateFormat; //取出格式文字
-		        		var reM = /m+/g;
-		        		var reD = /d+/g;
-		        		var objDate = { y: inst.selectedYear - 1911 < 0 ? inst.selectedYear : inst.selectedYear - 1911,
-		            		m: String(inst.selectedMonth).length != 1 ? inst.selectedMonth + 1 :  String(inst.selectedMonth + 1),
-		            		d: String(inst.selectedDay).length != 1 ? inst.selectedDay : String(inst.selectedDay)
-		        		};
-		        		$.each(objDate, function (k, v) {
-		            		var re = new RegExp(k + "+");
-		            		dateFormate = dateFormate.replace(re, v);
-		        		});
-		        		inst.input.val(dateFormate);
-		        		
-		        		
-		    		}
-				});
-			
-				$.datepicker.regional['zh-TW'] = {
-						prevText: '上月',
-						nextText: '次月',
-						monthNames: ['一月','二月','三月','四月','五月','六月',
-						'七月','八月','九月','十月','十一月','十二月'],
-						monthNamesShort:["一月","二月","三月","四月","五月","六月","七月","八月","九月","十月","十一月","十二月"],
-						dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
-						dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
-						dayNamesMin: ['日','一','二','三','四','五','六'],
-				};
-				$.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
+				setSubMissionDatepicker();
 				
 				//Set datapicker icon position
 				$('.subMissionDateContainer').siblings('.ui-datepicker-trigger').appendTo('.subMissionDateContainer')
@@ -1123,8 +1031,8 @@
 				
 				if(subMissionStatus=="已完成"){
 					console.log('任務已完成');
-					console.log($('#missionId'+missionCount).siblings('div'));
-					$('#missionId'+missionCount).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
+					console.log($('#missionId'+missionId).siblings('div'));
+					$('#missionId'+missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
 				}
 				
 				missionCount++;
@@ -1155,27 +1063,86 @@
 			
 			
 			//Set missionTitle dialog close condition
-			$('#confirmMission').click(function(){
+			$('#confirmMissionSet').click(function(){
 				$('.setMissionTitleDialog').dialog( "close" );
 			});			
-			$('#deleteMission').click(function(){
+			$('#deleteMissionSet').click(function(){
 				
 				var deletePos = $('#'+$('.titleLocation').val()).siblings('input').val();
 				console.log("deleteMissionSetPos",deletePos);
+				
+				var deleteCondition = true;
 				$('ul.nested_with_switc > li').each(function(){
-					var oldPos = $(this).children('input').val();
+					var oldPos = $(this).children('input.missionSetOrder').val();
 					console.log("oldPos",oldPos);
+					var newPos = oldPos;
 					if( oldPos > deletePos){
-						var newPos = oldPos -1;
-						$(this).children('input').val(newPos);
+						newPos = oldPos -1;
 					}
-					console.log("newPos",$(this).children('input').val());
+					console.log("newPos",newPos);
+					
+					var missionSetOrder = newPos;
+					console.log("missionSetOrder",missionSetOrder);
+					var missionSetId = $(this).children('div:first-child').attr('id').substring(10);
+					console.log("missionSetId",missionSetId);
+					var name =$(this).children('div:first-child').text();
+					console.log("name",name);
+					var missionBoardId = boardInformation.missionBoard.missionBoardId;
+					console.log("missionBoardId",missionBoardId);
+					$.ajax({
+	    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
+	    			    type:'post',
+	    			    data:{'action':'UpdateMissionSetOrder',
+	    			    	  'missionSetOrder':missionSetOrder,
+	    			    	  'missionSetId':missionSetId,
+	    			    	  'name':name,
+	    			    	  'missionBoardId':missionBoardId},
+	    			    dataType:'json',
+	    			    async: false,
+	    			    success:function(result){
+	    			    	console.log(result);
+	    			    	if(result.result == "succeed"){
+	    			    		$(this).children('input.missionSetOrder').val(result.missionSet.missionSetOrder);
+	    			    	} else {
+	    			    		console.log(name);
+	    			    		deleteCondition = false;
+	    			    		console.log("Update missionSet order failed!");
+	    			    	}
+	    			    },
+	    			    error:function(result){
+	    			    	console.log(result);
+	    			    }
+	    			});
+					
 				});
 				
-				$('#'+$('.titleLocation').val()).parent().hide('slow', function(){ $(this).remove(); });
-				
-				
-				$('.setMissionTitleDialog').dialog( "close" );			
+				if(deleteCondition == true){
+					var missionSetOrder = $('#'+$('.titleLocation').val()).siblings('input.missionSetOrder').val();
+					var missionSetId = $('.titleLocation').val().substring(10);
+					var name = $('#'+$('.titleLocation').val()).text();
+					var missionBoardId = boardInformation.missionBoard.missionBoardId;
+					
+					$.ajax({
+	    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
+	    			    type:'post',
+	    			    data:{'action':'DeleteMissionSet',
+	    			    	  'missionSetId':missionSetId},
+	    			    success:function(result){
+	    			    	console.log(result);
+	    			    	if(result == "succeed"){
+	    			    		$('#'+$('.titleLocation').val()).parent().hide('slow', function(){ $(this).remove(); });
+	    		    			$('.setMissionTitleDialog').dialog( "close" );
+	    			    	} else {
+	    			    		console.log("delete failed");
+	    			    	}
+	    			    },
+	    			    error:function(result){
+	    			    	console.log(result);
+	    			    }
+	    			});
+				} else {
+					console.log('Update stage failed!');
+				}
 			});			
 			$(document).on('keypress', '.missionTitle', function(e) {
 				if(e.which == 13) {
@@ -1305,13 +1272,45 @@
 				$('.openSubMissionWindow').css('display','block');
 			})
 			
-			
-			
-			//Set dialog change to missionId
+			//**********************************************************************************************************************************
+			//Set dialog change to missionSet
 			$('.setMissionTitleDialog .missionTitle').on('change',function(){
 				console.log($('.titleLocation').val());
 				$('#'+$('.titleLocation').val()).text($(this).val());
-			});			
+				
+				var missionSetOrder = $('#'+$('.titleLocation').val()).siblings('input.missionSetOrder').val();
+				console.log("missionSetOrder",missionSetOrder);
+				var missionSetId = $('#'+$('.titleLocation').val()).attr('id').substring(10);
+				console.log("missionSetId",missionSetId);
+				var name = $(this).val();
+				console.log("name",name);
+				var missionBoardId = boardInformation.missionBoard.missionBoardId;
+				console.log("missionBoardId",missionBoardId);
+				$.ajax({
+    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
+    			    type:'post',
+    			    data:{'action':'UpdateMissionSetName',
+    			    	  'missionSetOrder':missionSetOrder,
+    			    	  'missionSetId':missionSetId,
+    			    	  'name':name,
+    			    	  'missionBoardId':missionBoardId},
+    			    dataType:'json',
+    			    success:function(result){
+    			    	console.log(result);
+    			    	if(result.result == "succeed"){
+    			    		$('#'+$('.titleLocation').val()).text(result.missionSet.name);
+    			    	} else {
+    			    		console.log(name);
+    			    		deleteCondition = false;
+    			    		console.log("Update missionSet order failed!");
+    			    	}
+    			    },
+    			    error:function(result){
+    			    	console.log(result);
+    			    }
+    			});
+			});
+			//Set dialog change to mission
 			$('.missionDetailDialog .missionName').on('change',function(){
 				$('#'+$('.dataRowLocation').val()).siblings("div").text($(this).val());
 			});
@@ -1627,10 +1626,10 @@
 		</div>
 		<div class="row">
 			<div class="col l6">
-				<div id="confirmMission" class="waves-effect waves-light btn"><h6>完成</h6></div>
+				<div id="confirmMissionSet" class="waves-effect waves-light btn"><h6>完成</h6></div>
 			</div>
 			<div class="col l6">
-				<div id="deleteMission" class="waves-effect waves-light btn"><h6>刪除</h6></div>
+				<div id="deleteMissionSet" class="waves-effect waves-light btn"><h6>刪除</h6></div>
 			</div>
 		</div>
 	</div>
