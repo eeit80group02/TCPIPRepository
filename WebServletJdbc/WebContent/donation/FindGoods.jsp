@@ -56,14 +56,12 @@
 				<li>
 					<form action="<c:url value='google.do'/>" method='GET' id="searchForm">
 						<div class="input-field">
-							<input id="searchDonation" name="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="searchDonation">
-							<i type='submit' class="large material-icons" id="searchIcon">search</i></label>
+							<input id="searchDonation" name="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="searchDonation"> <i type='submit' class="large material-icons" id="searchIcon">search</i></label>
 							<div id="div01"></div>
 						</div>
 					</form>
 				</li>
 				<li><i class="large material-icons" id="clearIcon">clear</i></li>
-				<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
 				<li class="chooseItem" value="需求數量"><a href="<c:url value='search.do?type=byAmount'/>">需求數量</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
 					<ul id="dropdownList01" class="dropdown-content">
@@ -79,7 +77,13 @@
 						<li class="divider"></li>
 						<li class="chooseDropdownItem" value="二手"><a href="<c:url value='search.do?supplyStatus=3'/>">二手</a></li>
 					</ul></li>
-				<li><a href="#"><i class="large material-icons">person</i></a></li>
+
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+					<ul id="dropdownList03" class="dropdown-content">
+						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		</nav>
@@ -112,7 +116,7 @@
 								<div class="foottext">需求數量 : ${item.demandNumber}</div>
 								<div class="footIcin">
 									<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
-<%-- 									<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+<fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm"/>+<fmt:formatDate value="${OneDemand.expireTime}" pattern="yyyy-MM-dd"/>+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
+									<%-- 									<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+<fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm"/>+<fmt:formatDate value="${OneDemand.expireTime}" pattern="yyyy-MM-dd"/>+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
 								</div>
 							</div>
 						</div>

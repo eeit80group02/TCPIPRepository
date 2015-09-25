@@ -45,3 +45,7 @@ body {
 	color: #3CB371;
 	font-size: 1.2em;
 }
+
+.navbar-fixed .nav-wrapper .dropdown-button {
+	min-width: 120px;
+}

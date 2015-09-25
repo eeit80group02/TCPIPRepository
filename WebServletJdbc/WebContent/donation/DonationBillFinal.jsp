@@ -1,6 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -64,18 +62,13 @@
 
 </head>
 <body>
-<!-- 驗證是否為會員 -->
-	<c:if test="${LoginOK.beanName.equals('school') }">
-		<c:redirect url="/error/permission.jsp" />
-	</c:if>
-
 	<!-- 我就是標頭 start -->
 	<div class="navbar-fixed">
 		<nav>
 		<div class="nav-wrapper">
 			<ul id="nav-mobile1" class="left hide-on-med-and-down">
-				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+				<li><a href="#"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+				<li><a href="DonationWall.html"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
 			<a href="#" class="brand-logo center">捐獻明細</a>
@@ -85,7 +78,6 @@
 						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
 						<li class="divider"></li>
 						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
-
 					</ul></li>
 			</ul>
 		</div>
@@ -151,78 +143,90 @@
 								</tr>
 							</thead>
 							<tbody>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
+									<td style="word-break: break-all;"><div class="remark01">室電風扇插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
+									<td style="word-break: break-all;"><div class="remark01">室電風扇插頭線長不4教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
 
-							<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
-										<tr>
-											<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="${item.value.supplyName}" title="${item.value.supplyName}"></td>
-											<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號</td>
-											<td>${item.value.supplyStatus}</td>
-											<td style="word-break: break-all;"><div id="remark" class="remark">${item.value.demandContent}</div></td>
-											
-											<td>
-												<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
-													<i class="small material-icons">remove</i>
-												</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.value.originalDemandUnit}</label>
-												<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
-													<i class="small material-icons">add</i>
-												</button>
-											</td>
-											<td class="deleteRow">
-												<button type="button" class="btn btn-small btn-floating">
-													<i class="small material-icons">delete</i>
-												</button>
-											</td>
-									
-											<script type="text/javascript">
-											
-												$(window).load(function() {
-													var step = 1; // 默認步長
-													var changeStepTimer = null; // 改變速度計數器
-													var setValueTimer = null; // 設置值計數器
-	
-													/* 改變速度私有方法 */
-													var changeStep = function() {
-														// 每隔 2 秒速度加 5
-														changeStepTimer = setInterval(function() {
-															step += 5
-														}, 2000);
-													}
-												});
+									<td style="word-break: break-all;"><div class="remark01">室線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
 
-												/* 按下鼠標處理函數 */
-												$("#buttonAdd${vs.index}").mousedown(function() {
-													// 													var input = $("#text${vs.index}").val();
-													// 正規表示法找整數
-													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-														changeStep();
-														setAddValue();
+									<td>
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" class="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
+								<tr>
+									<td><img class="imgBill" src="../images/thing01.jpg" alt="延長線" title="延長線" /><br>延長線</td>
+									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+									</td>
+									<td>不拘</td>
 
-													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-														$("#text${vs.index}").val(1);
-													}
+									<td style="word-break: break-all;"><div class="remark01">室電風扇插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插插頭線長不教室電風扇插頭線長不足</div></td>
 
-												});
-
-												/* 鬆開鼠標處理函數 */
-												$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
-
-												function checkText() {
-													var input = $("#text${vs.index}").val();
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
-													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-														$("#text${vs.index}").empty();
-														$("#text${vs.index}").val("1");
-													}
-													clearInterval(changeStepTimer);
-													clearTimeout(setValueTimer);
-													step = 1;
-												}
-											}(jQuery));
-										</script>
-									</tr>
-								</c:forEach>
+									<td class="amountRow">
+										<button type="button" id="buttonSub" class="btn btn-small btn-floating">
+											<i class="small material-icons">remove</i>
+										</button> <input type="text" id="text" value="1" autocomplete="off"> <label for="text" id="textUnit">條</label>
+										<button type="button" id="buttonAdd" class="btn btn-small btn-floating">
+											<i class="small material-icons">add</i>
+										</button>
+									</td>
+									<td class="deleteRow">
+										<button type="button" class="btn btn-small btn-floating">
+											<i class="small material-icons">delete</i>
+										</button>
+									</td>
+								</tr>
 							</tbody>
 						</table>
 						<br> <br>
@@ -267,37 +271,6 @@
 								</div>
 							</div>
 							<!-- 操作小叮嚀 end -->
-
-								</div>
-								<br>
-								<!-- 右上 -->
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight01" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight01" class="" id="textRightLable01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;姓名&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								</div>
-
-								<div class="switch">
-									<br> <label><span id="Male">先生</span><input checked type="checkbox" id="checkboxRight"> <span class="lever"></span><span id="Female">小姐</span> </label> <br>
-								</div>
-								<br> <select class="browser-default" id="addressRight01" name="address01">
-									<option value="台南縣">台南縣</option>
-									<option value="宜蘭縣">宜蘭縣</option>
-								</select> <select class="browser-default" id="addressRight02" name="address02">
-									<option value="白河區">白河區</option>
-									<option value="礁溪鄉">礁溪鄉</option>
-								</select> <br> <br> <br>
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight02" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight02" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="glyphicon glyphicon-info-sign" id="infoForDonate"></span>&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								</div>
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight03" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight03" class="" id="textRightLable03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								</div>
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight04" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight04" class="" id="textRightLable04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-								</div>
-								<div class="input-field col m12 s12">
-									<input type="email" id="textRight05" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight05" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-								</div>
-							</div>
 
 						</div>
 						<br>
@@ -933,6 +906,9 @@
 	<script type="text/javascript" src="../donationScripts/SexSwitch.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
 
+	<!-- 數字加速器 -->
+	<script type="text/javascript" src="../donationScripts/CheckNumber.js"></script>
+
 	<!-- 標頭專用 bottom start -->
 	<!-- 必須最後載入才有效果 -->
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
@@ -940,7 +916,6 @@
 
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
-
 
 </body>
 </html>
