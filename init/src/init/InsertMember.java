@@ -16,8 +16,8 @@ import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class InsertMember {
 	private static final String URL = GlobalService.URL;
@@ -34,19 +34,20 @@ public class InsertMember {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(fr),"UTF-8"));
 			Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);
+			int count = 1;
 			while (br.ready()) {
 				String str = br.readLine();
 				String[] strArray = str.split("\\s+");
 				
-				pstmt.setString(1,strArray[0]);							// lastName
-				pstmt.setString(2,strArray[1]);   						// firstName
+				pstmt.setString(1,strArray[0]);				// lastName
+				pstmt.setString(2,strArray[1]);   			// firstName
 				pstmt.setString(3,strArray[2]);				// idNumber
-				pstmt.setString(4,strArray[3]);					// phone
+				pstmt.setString(4,strArray[3]);				// phone
 				pstmt.setString(5,strArray[4]);				// cellPhone
 				pstmt.setString(6,strArray[5]);				// birthday
-				pstmt.setString(7,strArray[6]);	// address
-				pstmt.setString(8,strArray[7]);							// gender
-				pstmt.setString(9,strArray[8]);			// email
+				pstmt.setString(7,strArray[6]);				// address
+				pstmt.setString(8,strArray[7]);				// gender
+				pstmt.setString(9,strArray[8]);				// email
 				
 				File file = new File("image\\member\\default.jpg");
 				FileInputStream fis = new FileInputStream(file);
@@ -71,8 +72,19 @@ public class InsertMember {
 				pstmt.setBytes(16,strArray[12].getBytes());		// password
 				pstmt.setString(17,strArray[13]); 						// accountStatus
 				
-				pstmt.executeUpdate();
+				pstmt.addBatch();
+				
+				if(count++ == 500)
+				{
+					int[] x = pstmt.executeBatch();
+					System.out.println(x.length);
+					count = 1;
+				}
+				
 			}
+			int[] x = pstmt.executeBatch();
+			
+			System.out.println(x.length);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -95,7 +107,10 @@ public class InsertMember {
 	}
 
 	public static void main(String[] args) {
+		Date start = new Date(System.currentTimeMillis());
 		start();
+		Date end = new Date(System.currentTimeMillis());
+		System.out.println(end.getTime()-start.getTime());
 	}
 
 }
