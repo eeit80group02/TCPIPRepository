@@ -268,37 +268,6 @@
 							</div>
 							<!-- 操作小叮嚀 end -->
 
-								</div>
-								<br>
-								<!-- 右上 -->
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight01" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight01" class="" id="textRightLable01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;姓名&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								</div>
-
-								<div class="switch">
-									<br> <label><span id="Male">先生</span><input checked type="checkbox" id="checkboxRight"> <span class="lever"></span><span id="Female">小姐</span> </label> <br>
-								</div>
-								<br> <select class="browser-default" id="addressRight01" name="address01">
-									<option value="台南縣">台南縣</option>
-									<option value="宜蘭縣">宜蘭縣</option>
-								</select> <select class="browser-default" id="addressRight02" name="address02">
-									<option value="白河區">白河區</option>
-									<option value="礁溪鄉">礁溪鄉</option>
-								</select> <br> <br> <br>
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight02" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight02" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="glyphicon glyphicon-info-sign" id="infoForDonate"></span>&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								</div>
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight03" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight03" class="" id="textRightLable03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								</div>
-								<div class="input-field col m12 s12">
-									<input type="text" id="textRight04" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight04" class="" id="textRightLable04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-								</div>
-								<div class="input-field col m12 s12">
-									<input type="email" id="textRight05" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight05" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-								</div>
-							</div>
-
 						</div>
 						<br>
 					</div>
