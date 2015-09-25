@@ -450,7 +450,9 @@
 							</button>
 							&nbsp;填寫寄件人資料
 							<!-- 一鍵輸入 -->
-							<button type="button" id="OneClick" class="btn btn-small btn-floating">一鍵填</button>
+							<button type="button" id="OneClickDonationBillFinal" class="btn btn-small btn-floating">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+							</button>
 						</div>
 						<br>
 						<!-- 右上 寄件人系列 -->
