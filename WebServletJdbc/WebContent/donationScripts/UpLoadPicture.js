@@ -1,6 +1,7 @@
 $(window).load(function() {
 	$(function() {
 		$("#imageName").change(function() {
+			// 判斷格式
 			var fileName = $("#imageName").val();
 			var lowercaseFileName = fileName.toLowerCase();
 			var checkFileType = lowercaseFileName.match(/\.(jpg|gif|jpeg|png)$/g);
@@ -27,7 +28,7 @@ $(window).load(function() {
 
 	$("#sendMessage").click(function() {
 		var imgBase64 = $('#donationPicture').attr('src');
-//		alert(imgBase64.trim().length);
+		// alert(imgBase64.trim().length);
 		if (imgBase64.trim().length == 0) {
 			Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請上傳封面圖片</span>', 1800, 'rounded');
 		}
