@@ -282,16 +282,14 @@
 	    <script>
 	    	
 	    	var fromJava = <%=request.getAttribute("googleMap")%>
-// 	    	var jsonobj = JSON.parse(fromJava);
-	    	console.log(fromJava.results[0].geometry.location.lng);
-	    	console.log(fromJava.results[0].geometry.location.lat);
+	    	console.log(fromJava.closestStation);
 	    	
 			function initMap() {
 			  var directionsService = new google.maps.DirectionsService,
 			  	  directionsDisplay = new google.maps.DirectionsRenderer,
-			  	  centerlatlng = new google.maps.LatLng(23.317834,121.4510462);
+			  	  centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
 			  var map = new google.maps.Map(document.getElementById('googlemap'), {
-			    zoom: 14,
+			    zoom: 17,
 			    center: centerlatlng
 			  });
 			  
@@ -309,8 +307,8 @@
 			
 			function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 				
-				var start = new google.maps.LatLng(25.0478642,121.5166395);
-				var destination = new google.maps.LatLng(25.0469394,121.5150319);
+				var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+				var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
 			  directionsService.route({
 			    origin: start,
 			    destination: destination,

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -110,7 +111,8 @@
 							<div>
 								<div class="foottext">需求數量 : ${item.demandNumber}</div>
 								<div class="footIcin">
-									<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
+									<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
+<%-- 									<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+<fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm"/>+<fmt:formatDate value="${OneDemand.expireTime}" pattern="yyyy-MM-dd"/>+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
 								</div>
 							</div>
 						</div>

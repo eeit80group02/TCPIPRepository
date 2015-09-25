@@ -1,27 +1,25 @@
 $(function() {
-
-	$("#QQQ").click(function() {
-		$("#searchDonation").trigger($.Event.keyCode=13);
-	});
-
-	$("#searchForm").submit(function() {
-		alert("你成功砂密特了");
-	});
-
 	// searchIcon
+	$("#searchIcon").hover(function() {
+		$("#searchIcon").css("cursor", "pointer");
+	});
 	$("#searchIcon").click(function() {
 		// 按 searchIcon 搜尋
 		var input = $("#searchDonation").val();
 		if (input != null && input.trim().length != 0) {
 			$("#searchDonation").val("" + input);
+//			alert("按 Icon 搜尋 " + input);
 		}
 	});
 
 	// clearIcon
+	$("#clearIcon").hover(function() {
+		$("#clearIcon").css("cursor", "pointer");
+	});
+
 	$("#clearIcon").click(function() {
 		// 按 clearIcon 清除
 		$("#searchDonation").val("");
-
 	});
 
 	$("#searchDonation").keydown(function(evt) {
@@ -30,6 +28,7 @@ $(function() {
 			var input = $("#searchDonation").val();
 			if (input != null && input.trim().length != 0) {
 				$("#searchDonation").val("" + input);
+//				alert("按Enter 搜尋 " + input);
 			}
 		}
 	});
@@ -37,9 +36,11 @@ $(function() {
 	$(".chooseItem").click(getPressValue);
 
 	$(".chooseDropdownItem").click(getPressValue);
-
-	function getPressValue() {
+	
+	function getPressValue(){
 		var input = $(this).attr("value");
+//		alert("以 " + input + " 排序");
 	}
-
+	
+	
 }(jQuery));
