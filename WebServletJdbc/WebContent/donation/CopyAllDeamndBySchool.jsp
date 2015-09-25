@@ -80,9 +80,9 @@
 					</ul></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
-						<li class="chooseDropdownItem" value="全新"><a href="#">學校頁面</a></li>
+						<li class="chooseDropdownItem" value="學校頁面"><a href="#">學校頁面</a></li>
 						<li class="divider"></li>
-						<li class="chooseDropdownItem" value="不拘"><a href="#">登入/出</a></li>
+						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
 					</ul></li>
 			</ul>
 		</div>
