@@ -1,7 +1,10 @@
 package model;
 
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -429,7 +432,32 @@ public class DonationService {
 					donationBeanDuplicate.setDemandContent(d.getDemandContent());
 					donationBeanDuplicate.setSupplyStatus(d.getSupplyStatus());
 					
+//					Date d1 = d.getDemandTime();
+//					SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//					String str1 = sdf1.format(d1);
+//					System.out.println("str1 = "+str1);
+//					Date parseDate1 = null;
+//					 try {
+//						parseDate1 = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse(str1);
+//					} catch (ParseException e) {
+//						e.printStackTrace();
+//					}
+					
+//					System.out.println("parseDate1 = "+d.getDemandTime());
 					donationBeanDuplicate.setDemandTime(d.getDemandTime());
+					
+//					Date d2 = d.getExpireTime();
+//					SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+//					String str2 = sdf1.format(d2);
+//					System.out.println("str2 = "+str2);
+//					Date parseDate2 = null;
+//					 try {
+//						parseDate2 = new SimpleDateFormat("yyyy-MM-dd").parse(str2);
+//					} catch (ParseException e) {
+//						e.printStackTrace();
+//					}
+					 
+//					System.out.println("parseDate2 = "+parseDate2);
 					donationBeanDuplicate.setExpireTime(d.getExpireTime());
 					donationBeanDuplicate.setImageName(d.getImageName());
 					donationBeanDuplicate.setImageFile(d.getImageFile());

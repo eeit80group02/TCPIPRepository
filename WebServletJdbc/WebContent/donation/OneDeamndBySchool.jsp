@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,7 +48,6 @@
 	
 	<center>
 		<!-- 表格基本資料 -->
-		<div class="table-responsive">
 			<table id="donationDetailTable">
 				<tr>
 					<td rowspan="10" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
@@ -76,11 +76,11 @@
 				</tr>
 				<tr>
 					<td class="dataName">募集起始時間：</td>
-					<td class="dataValue">${OneDemand.demandTime}</td>
+					<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm"/></td>
 				</tr>
 				<tr>
 					<td class="dataName">募集結束時間：</td>
-					<td class="dataValue">${OneDemand.expireTime}</td>
+					<td class="dataValue"><fmt:formatDate value="${OneDemand.expireTime}" pattern="yyyy-MM-dd"/></td>
 				</tr>
 				<tr>
 					<td class="dataName">募集原因：</td>
@@ -89,15 +89,7 @@
 				
 			<tfoot>
 					<tr>
-<!-- 						<td id="addToBag"> -->
-<!-- 							<button type="button" class="btn btn-large btn-floating" > -->
-<%-- 								<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="medium material-icons">search</i></a> --%>
-<!-- 							</button> &nbsp; -->
-						
-<!-- 							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem"> -->
-<!-- 								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="medium material-icons">card_giftcard</i></a> -->
-<!-- 							</button> -->
-<!-- 						</td> -->
+						<td id="addToBag"></td>
 						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
 						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
 					</tr>
@@ -115,7 +107,8 @@
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
 <!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
-							<br>${item.memberMessage}&nbsp;<span class="talkTime">${item.memberMessageTime}
+							<br>${item.memberMessage}
+							<div class="talkTime"><fmt:formatDate value="${item.memberMessageTime}" pattern="yyyy-MM-dd hh:mm"/></div>
 						</div>
 						<div class="collapsible-body">
 							<c:choose>
@@ -154,8 +147,8 @@
 									</c:choose>
 								</c:when>
 								<c:otherwise>
-										<p>${item.schoolMessage}   </p>
-										<div class="talkBackTime">${item.schoolMessageTime}</div>
+										<p>${item.schoolMessage}</p>
+										<div class="talkBackTime"><fmt:formatDate value="${item.schoolMessageTime}" pattern="yyyy-MM-dd hh:mm"/></div>
 								</c:otherwise>
 							</c:choose>
 							<br>
