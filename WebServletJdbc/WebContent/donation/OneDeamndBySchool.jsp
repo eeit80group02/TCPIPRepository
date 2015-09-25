@@ -48,7 +48,6 @@
 	
 	<center>
 		<!-- 表格基本資料 -->
-		<div class="table-responsive">
 			<table id="donationDetailTable">
 				<tr>
 					<td rowspan="10" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
@@ -90,15 +89,7 @@
 				
 			<tfoot>
 					<tr>
-<!-- 						<td id="addToBag"> -->
-<!-- 							<button type="button" class="btn btn-large btn-floating" > -->
-<%-- 								<a href="<c:url value='demand.do?type=AllDeamndByMember&schoolId=${OneDemand.schoolId}'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看同學校的其他物資"><i class="medium material-icons">search</i></a> --%>
-<!-- 							</button> &nbsp; -->
-						
-<!-- 							<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem"> -->
-<!-- 								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="medium material-icons">card_giftcard</i></a> -->
-<!-- 							</button> -->
-<!-- 						</td> -->
+						<td id="addToBag"></td>
 						<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
 						<td class="dataValue"><div id="remark">${OneDemand.remark}</div></td>
 					</tr>

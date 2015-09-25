@@ -50,7 +50,6 @@
 
 	<center>
 		<!-- 表格基本資料 -->
-		<div class="table-responsive">
 			<table id="donationDetailTable">
 				<tr>
 					<td rowspan="10" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
@@ -131,7 +130,7 @@
 					</tr>
 				</tfoot>
 			</table>
-
+</div>
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
 			<div class="row">
