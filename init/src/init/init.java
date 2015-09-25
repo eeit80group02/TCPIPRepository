@@ -1,11 +1,14 @@
 package init;
 
+import java.util.Date;
+
 public class init
 {
 
 	private String test = "hahaha";
 	public static void main(String[] args)
 	{
+		Date start = new Date(System.currentTimeMillis());
 		InsertMember.start();            //新增會員
 		InsertSchool.start();			 //新增學校
 		InsertSchoolDemandId.start();    //新增學校需求
@@ -17,6 +20,8 @@ public class init
 		InsertMissionBoard.start();
 		InsertMissionSet.start();
 		InsertMission.start();
-		System.out.println("資料全部已新增");
+		System.out.println("資料全部已新增");		
+		Date end = new Date(System.currentTimeMillis());
+		System.out.println("費時:" + (end.getTime()-start.getTime()) + "ms");
 	}
 }
