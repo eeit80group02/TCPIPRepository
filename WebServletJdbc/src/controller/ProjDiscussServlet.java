@@ -8,7 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.MemberBean;
+import model.ProjDiscussBean;
 import model.service.ProjDiscussService;
 
 import org.json.simple.JSONObject;
@@ -43,6 +46,10 @@ public class ProjDiscussServlet extends HttpServlet
 		{
 			replyDiscuss(request,response);
 		}
+		else if(type.equals("post"))
+		{
+			postDiscuss(request,response);
+		}
 //		else if(type.equals("addMember"))
 //		{
 //			addMemberMessage(request,response);
@@ -53,10 +60,45 @@ public class ProjDiscussServlet extends HttpServlet
 //		}
 	}
 
+	private void postDiscuss(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		HttpSession session = request.getSession();
+		
+		MemberBean memberBean = null;
+		if(session.getAttribute("LoginOK") instanceof MemberBean)
+		{
+			memberBean = (MemberBean) session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+		
+		String fullProjId = request.getParameter("fullProjId");
+		String content = request.getParameter("content");
+		
+		int fId = Integer.parseInt(fullProjId);
+		
+		ProjDiscussBean projDiscusBean = new ProjDiscussBean();
+		projDiscusBean.setFullProjId(fId);
+		projDiscusBean.setQuestionMemberId(memberBean.getMemberId());
+		projDiscusBean.setQuestionMemberContent(content);
+		
+		JSONObject result = service.postDiscuss(projDiscusBean);
+		out.write(result.toJSONString());
+		
+	}
+
 	private void replyDiscuss(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getParameter("projDiscuss"));
+		System.out.println(request.getParameter("type"));
 	}
 
 	private void displayDiscuss(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
