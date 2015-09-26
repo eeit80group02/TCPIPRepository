@@ -185,6 +185,12 @@
 						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white"  style="background-color:#D1F0E5;font-size:2em;font-weight:900;font-family:微軟正黑體">
 							問與答
 						</div>
+						<div class="col l2 btn-large card-panel hoverable indigo darken-4"  style="background-color:#D1F0E5;font-size:1.6em;font-weight:600;font-family:微軟正黑體;width:15%;margin-left:10px;">
+							<a href="#askmodal" id="askbtn" class="white-text center-align" >
+								<i class="material-icons" style="font-size:1.5em;vertical-align:middle;">live_help</i>
+								我要提問
+							</a>
+						</div>
 					</div>
 
 <!-- 					<div id="discuss" class="row"> -->
@@ -210,6 +216,13 @@
 <!-- 									</div> -->
 <!-- 								</div> -->
 								<!-- 答案 -->
+
+								<div class="row">
+									<a href="#replymodal" id="replybtn" class="col l2 btn-large right black-text center-align  green accent-1" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體;">
+										<i class="material-icons black-text" style="font-size:1.5em;vertical-align:bottom;">input</i>
+										回覆 
+									</a>
+								</div>
 							</div>	
 						</div>
 					</div>					
@@ -253,7 +266,12 @@
 			<div class="col l2">
 				<form action="<c:url value="/draganddrop.jsp" />" method="get">
 					<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-					<input class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="submit" value="任務板" >			
+<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
+					<button type="submit" class="btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:2em;width:100%">
+						<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
+						任務板
+					</button>
+					
 				</form>
 			</div>
 			
@@ -261,16 +279,23 @@
 	</div>
 </main>
 
-			<!-- 發問用按鈕 -->
-			  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-					<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">提問</a>
-			  </div>
-			<!-- 發問用按鈕 -->
+
 			
+			<!-- 回覆用modal -->
+			  <div id="replymodal" class="modal bottom-sheet" style="min-height:40vh;">
+			    <div class="modal-content">
+			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我的<span class="red-text">回覆</span>是...</h4>
+			      <textarea id="content" rows="10" cols="40" style="height:10em;" name=""></textarea>
+			    </div>
+			    <div class="modal-footer">
+			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
+			    </div>
+			  </div>			
+			<!-- 回覆用modal -->
 			<!-- 提問用modal -->
 			  <div id="askmodal" class="modal bottom-sheet" style="min-height:40vh;">
 			    <div class="modal-content">
-			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要提問</h4>
+			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我的<span class="red-text">問題</span>是...</h4>
 			      <textarea id="content" rows="10" cols="40" style="height:10em;" name=""></textarea>
 			    </div>
 			    <div class="modal-footer">
@@ -317,6 +342,7 @@
 		$(function() {
 			//leanModal註冊
 			$("#askbtn").leanModal();
+			$("#replybtn").leanModal();
 			//mainboard固定大小
 			$("#mainboard").css("min-height","100vh");
 			//提示頁面主題欄的高度
