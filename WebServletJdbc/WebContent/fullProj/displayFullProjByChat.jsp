@@ -266,7 +266,7 @@
 					<!-- 問與答 -->
 					<div class="row">
 						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							問與答
+							意見版
 						</div>
 					</div>
 					<!-- 問與答 -->
@@ -276,38 +276,50 @@
 								
 								<!-- 如果是學校 -->
 								<div class="row">
-									<div class="col l2">
-										  <div class="chip">
-										    <img src="images/yuna.jpg" alt="Contact Person">
-										    Jane Doe
-										  </div>
-										<div class="btn red white-text">
-											<i class="material-icons">forum</i>
-										</div>
-									</div>
-									<div class="col l10 red lighten-4" style="font-size:1.6em;font-weight:600">
+									<div class="col l10 card-panel" style="font-size:1.6em;font-weight:600;
+										border-right:10px double red;">
 										要問的問題在這，如果這個問題真的十分可怕的非常長的跟長恨歌一樣的時候不知道會發生事情就來試試看
 									</div>
+									<div class="col l2">
+										School
+									</div>
 								</div>
+								<!-- 如果是學校 -->
 								
-								<!-- 答案 -->
+								<!-- 如果是活動發起人 -->
 								<div class="row">
 									<div class="col l2">
-										<div class="btn green white-text">
-											<i class="material-icons">chat_bubble</i>
-										</div>
+										Member
 									</div>
-									<div class="col l10" style="font-size:1.6em;font-weight:600">
+									<div class="col l10 card-panel" style="font-size:1.6em;font-weight:600;
+									border-left:10px double #76ff03;">
 										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情
 									</div>
 								</div>
-								<!-- 答案 -->
+								<!-- 如果是活動發起人 -->
+								
 							</div>	
 						</div>
 					</div>
 				</div>
 			</div>
-
+			<!-- 發問用按鈕 -->
+			  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+					<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">留言</a>
+			  </div>
+			<!-- 發問用按鈕 -->
+			
+			<!-- 提問用modal -->
+			  <div id="askmodal" class="modal bottom-sheet" style="min-height:40vh;">
+			    <div class="modal-content">
+			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要留言...</h4>
+			      <textarea rows="10" cols="40" style="height:10em;" name=""></textarea>
+			    </div>
+			    <div class="modal-footer">
+			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
+			    </div>
+			  </div>			
+			<!-- 提問用modal -->
 
 			<!-- 按鈕版面 -->
 			<div class="col l2">
@@ -506,13 +518,13 @@
 		});
 		
 		$(function() {
+			//註冊提問modal
+			$("#askbtn").leanModal();
 			//mainboard固定大小
 			$("#mainboard").css("min-height","100vh");
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
