@@ -395,7 +395,7 @@
 
 	        
 			$("#memberButton").on("click",function(){
-				if($("#content").val().length < 10) {
+				if($("#content").val().trim().length < 10) {
 					alert("留言必須大於10個字");
 				}
 				else{
@@ -404,7 +404,7 @@
 			});
 			
 			$("#schoolButton").on("click",function(){
-				if($("#content").val().length < 10) {
+				if($("#content").val().trim().length < 10) {
 					alert("留言必須大於10個字");
 				}
 				else{
