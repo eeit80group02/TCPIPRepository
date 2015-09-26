@@ -270,6 +270,25 @@
 	</div>
 </main>
 
+			<!-- 發問用按鈕 -->
+			  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+					<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">提問</a>
+			  </div>
+			<!-- 發問用按鈕 -->
+			
+			<!-- 提問用modal -->
+			  <div id="askmodal" class="modal bottom-sheet" style="min-height:40vh;">
+			    <div class="modal-content">
+			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要提問</h4>
+			      <textarea rows="10" cols="40" style="height:10em;" name=""></textarea>
+			    </div>
+			    <div class="modal-footer">
+			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
+			    </div>
+			  </div>			
+			<!-- 提問用modal -->
+
+
 	<!-- 頁尾 -->
 	<c:import url="/template/footer.jsp"
 		context="${pageContext.request.contextPath}" />
@@ -278,56 +297,6 @@
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-	
-	    <script>
-	    	
-	    	var fromJava = <%=request.getAttribute("googleMap")%>
-	    	console.log(fromJava.closestStation);
-	    	
-			function initMap() {
-			  var directionsService = new google.maps.DirectionsService,
-			  	  directionsDisplay = new google.maps.DirectionsRenderer,
-			  	  centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
-			  var map = new google.maps.Map(document.getElementById('googlemap'), {
-			    zoom: 17,
-			    center: centerlatlng
-			  });
-			  
-// 			  var nearbySearchService = new google.maps.places.PlacesService(map);
-// 			  nearbySearchService.nearbySearch({
-// 				  location:centerlatlng,
-// 				  radius:
-// 			  })
-			  
-			  calculateAndDisplayRoute(directionsService, directionsDisplay);
-			  directionsDisplay.setMap(map);
-			
-			
-			}
-			
-			function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-				
-				var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
-				var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
-			  directionsService.route({
-			    origin: start,
-			    destination: destination,
-			    travelMode: google.maps.TravelMode.DRIVING
-			  }, function(response, status) {
-			    if (status === google.maps.DirectionsStatus.OK) {
-			      directionsDisplay.setDirections(response);
-			    } else {
-			      window.alert('Directions request failed due to ' + status);
-			    }
-			  });
-			}
-
-    </script>
-	
-	
-	
-	
-	
 	
 	
 	<script>
@@ -355,6 +324,8 @@
 	
 	
 		$(function() {
+			//leanModal註冊
+			$("#askbtn").leanModal();
 			//mainboard固定大小
 			$("#mainboard").css("min-height","100vh");
 			//提示頁面主題欄的高度
@@ -440,9 +411,52 @@
 // 			}
 // 		});
 	</script>
+	    <script>
+	    	
+	    	var fromJava = <%=request.getAttribute("googleMap")%>
+	    	
+			function initMap() {
+			  var directionsService = new google.maps.DirectionsService,
+			  	  directionsDisplay = new google.maps.DirectionsRenderer,
+			  	  centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+			  var map = new google.maps.Map(document.getElementById('googlemap'), {
+			    zoom: 17,
+			    center: centerlatlng
+			  });
+			  
+// 			  var nearbySearchService = new google.maps.places.PlacesService(map);
+// 			  nearbySearchService.nearbySearch({
+// 				  location:centerlatlng,
+// 				  radius:
+// 			  })
+			  
+			  calculateAndDisplayRoute(directionsService, directionsDisplay);
+			  directionsDisplay.setMap(map);
+			
+			
+			}
+			
+			function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+				
+				var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+				var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
+			  directionsService.route({
+			    origin: start,
+			    destination: destination,
+			    travelMode: google.maps.TravelMode.DRIVING
+			  }, function(response, status) {
+			    if (status === google.maps.DirectionsStatus.OK) {
+			      directionsDisplay.setDirections(response);
+			    } else {
+			      window.alert('Directions request failed due to ' + status);
+			    }
+			  });
+			}
+
+    </script>
 	
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAHkK5NA4vU8FN1pvxGhc-3eBut2VZ3RPs&callback=initMap"
+	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
         async defer></script>
 </body>
 </html>

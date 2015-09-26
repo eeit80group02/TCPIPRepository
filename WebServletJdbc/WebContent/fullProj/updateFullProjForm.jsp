@@ -182,7 +182,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">成員架構<span style="font-size:0.8em;font-weight:300;"></span></div>
-								<input id="orgArchitecture" name="orgArchitecture" type="text"  value="${param.orgArchitecture}" style="font-size:1.2em;color:black;font-weight:600;" required>
+								<textarea class="ckeditor" id="orgArchitecture" rows="10" cols="100" name="orgArchitecture" style="font-size:1.2em;color:black;font-weight:600;" required>${param.orgArchitecture}</textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.orgArchitecture}</span>
@@ -219,11 +219,11 @@
 					
 					<div class="row" id="btndiv">
 						<div class="col l8">
-							<button  class="btn-large yellow lighten-5 black-text right" type="submit">
-								<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
+							<button  class="btn-large red white-text right" type="submit">
+								<span style="font-family:微軟正黑體;font-size:1.6em;font-weight:600;">送出</span>
 							</button>
-							<button  class="btn-large yellow lighten-5 black-text right" type="reset">
-								<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
+							<button  class="btn-large red white-text right" type="reset">
+								<span style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">取消</span>
 							</button>
 						</div>
 					</div>
@@ -259,7 +259,10 @@
 		   })
 		   
 			//指定ckeditor()的skin
-			CKEDITOR.replace("content",{skin:"moono"})
+			CKEDITOR.replace("content",{skin:"moono"});
+			CKEDITOR.replace("orgArchitecture",{
+				height:300
+			});
 			
 			//test
 			$("#title").on("focus",function(){

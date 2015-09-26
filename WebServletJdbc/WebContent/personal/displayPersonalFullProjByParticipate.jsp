@@ -33,15 +33,18 @@
 		
 		
 		<!-- 完整計畫 -->
-		<c:forEach items="${fullProj}" var="bean">
+<%-- 		<c:forEach items="${fullProj}" var="bean"> --%>
 			<div class="row card-panel">
 				<!-- 完整計畫名稱 -->
-				<div class="row priProjName left-align teal-text darken-3">
+				<div class="row priProjName left-align ">
+					<i class="material-icons medium purple-text accent-1" style="vertical-align:middle;">
+						assignment
+					</i>
 					${bean.title}
 				</div>
 					
 				<!-- 待審核的志工 forEach在這 -->
-				<c:forEach items="${bean.participatorMap.pending}" var="participatorBean" varStatus="i">		
+<%-- 				<c:forEach items="${bean.participatorMap.pending}" var="participatorBean" varStatus="i">		 --%>
 					<div class="row card-panel light-blue lighten-4">
 						<div class="col l4 left schldiv center-align">
 							${participatorBean.memberBean.lastName}${participatorBean.memberBean.firstName}
@@ -66,9 +69,9 @@
 							</form>
 						</div>
 					</div>
-				</c:forEach>
+<%-- 				</c:forEach> --%>
 			</div>
-		</c:forEach>
+<%-- 		</c:forEach> --%>
 
 <%-- 			<c:forEach var="bean" items="${fullProj}"> --%>
 <%-- 		編號 ${bean.fullProjId}<br> --%>

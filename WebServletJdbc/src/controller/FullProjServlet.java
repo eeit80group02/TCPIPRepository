@@ -788,11 +788,6 @@ public class FullProjServlet extends HttpServlet
 	private JSONObject getGoogleMapInfo(FullProjBean bean) throws IOException{
 		
 		String location = bean.getLocation();
-
-		System.out.println("utf-8:"+URLEncoder.encode(location, "UTF-8"));
-		System.out.println("US-ASCII:"+URLEncoder.encode(location, "US-ASCII"));
-		System.out.println("ISO-8859-1:"+URLEncoder.encode(location, "ISO-8859-1"));
-		
 		
 		JSONObject jobj = new JSONObject();
 		try{
