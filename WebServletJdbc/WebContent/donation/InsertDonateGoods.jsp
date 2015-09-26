@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -26,13 +27,11 @@
 <script type="text/javascript" src="../donationScripts/DonationSchool.js"></script>
 
 <!-- 上傳圖片用 -->
-<script type="text/javascript" src="//code.jquery.com/jquery-1.9.1.js"></script>
 <link rel="stylesheet" type="text/css" href="../donationStyles/UpLoadPicture.css">
 <script type="text/javascript" src="../donationScripts/UpLoadPicture.js"></script>
 
 </head>
 <body>
-	<center>
 		<center>
 			<!-- 我就是標頭 start -->
 			<div class="navbar-fixed">
@@ -107,11 +106,8 @@
 								</a> </label>
 							</div>
 						</div>
+						<br> <br> <br> <br>
 
-
-
-
-						<br> <br> <br>
 					</div>
 					<div class="col s12 m12 l6">
 						<!-- 右上 -->
@@ -150,21 +146,22 @@
 							<textarea id="demandContent" name='demandContent' value='${param.demandContent}' class="materialize-textarea" required="required"></textarea>
 							<label for="demandContent" class="" id="textLable05"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求說明&nbsp;<i class="tiny material-icons" id="requiredStar05">star</i></span></a></label>
 						</div>
-
 					</div>
 
 					<!-- 備註 -->
-					<div class="input-field col s12 m12 l12">
+					<div class="input-field col s12 m12 l12" id="bottomDiv">
 						<textarea id="remark" name='remark' value='${param.remark}' class="materialize-textarea"></textarea>
 						<label for="remark" class="" id="textLable06"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
+						<button type="submit" id="sendMessage" name='hidden' value='insert' class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
+						</button>
+						<button type="submit" id="cancelMessage" class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+						</button>
+
 					</div>
 
-					<button type="submit" id="sendMessage" name='hidden' value='insert' class="btn btn-small btn-floating">
-						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
-					</button>
-					<button type="submit" id="cancelMessage" class="btn btn-small btn-floating">
-						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
-					</button>
+
 
 				</div>
 			</form>
@@ -174,7 +171,6 @@
 		<!-- 標頭專用 bottom start -->
 		<!-- 必須最後載入才有效果 -->
 		<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
 		<!-- 標頭專用 bottom end -->
 		<!-- 一鍵填入 -->
 		<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
