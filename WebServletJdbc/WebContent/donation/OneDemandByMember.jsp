@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OneMemberDemand</title>
+<title>問與答</title>
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -24,7 +24,6 @@
 
 <!-- 自訂 -->
 <link rel="stylesheet" href="../donationStyles/DonationQA.css">
-
 </head>
 <body>
 
@@ -101,7 +100,7 @@
 						</button> &nbsp;
 
 						<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="medium material-icons">card_giftcard</i></a>
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="medium material-icons">card_giftcard</i></a>
 						</button>
 					</td>
 					<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
@@ -118,7 +117,7 @@
 									if (xhr.readyState == 4) {
 										if (xhr.status == 200) {
 											lists = xhr.responseText;
-											alert("新增購物車品項一");
+											// 											alert("新增購物車品項一");
 										} else {
 											alert("something is wrong!");
 										}
@@ -137,7 +136,7 @@
 		</div>
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
-			<div class="row">
+			<div class="row" id="sayBoard">
 				<div class="col-md-10">
 					<div class="input-field col m12 s12">
 						<textarea id="your-message" class="materialize-textarea"></textarea>
@@ -159,9 +158,9 @@
 			</div>
 		</form>
 
-		<div id="saySomething" class="col s12 m9"></div>
-		<!-- Q&A -->
+		<div id="saySomething"></div>
 		<div id="QandA" class="col s12 m9">
+			<!-- Q&A -->
 			<ul class="collapsible" data-collapsible="expandable">
 				<c:forEach var='item' items='${AllMessages}' varStatus="vs">
 					<li id='li${vs.index}'>
@@ -228,14 +227,14 @@
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];
 
-						var xbrx = document.createElement("br");
-						
 						var xulx = document.createElement("ul");
 						xulx.setAttribute("class", "collapsible");
 						xulx.setAttribute("data-collapsible", "expandable");
 
 						var xlix = document.createElement("li");
 
+						//上半部 start
+						var xbr1x = document.createElement("br");
 						var xdiv1x = document.createElement("div");
 						xdiv1x.setAttribute("class", "collapsible-header");
 
@@ -247,52 +246,65 @@
 						var xb1textx = document.createTextNode(memberId + " :");
 
 						var xdiv1textx = document.createTextNode(memberMessage);
-						
+
 						var xdiv2x = document.createElement("div");
 						xdiv2x.setAttribute("class", "talkTime");
-						
-						var xdiv2textx = document.createTextNode(memberMessageTime);
 
-						var xtextP1x = document.createTextNode(memberMessageTime + "留言");
+						var xdiv2textx = document.createTextNode(memberMessageTime.substr(0, 19));
+						//上半部 end
 
-						var xdiv2x = document.createElement("div");
-						var xtextP2x = document.createTextNode("內容:" + memberMessage);
+						//下半部 start
+						var xdiv3x = document.createElement("div");
+						xdiv3x.setAttribute("class", "collapsible-body");
+						xdiv3x.setAttribute("style", "display: block;");
+
+						var xp1x = document.createElement("p");
+						var xdiv3textx = document.createTextNode("等待回覆...");
+						//下半部 end
 
 						xi1x.appendChild(xi1textx);//icon
 						xb1x.appendChild(xb1textx);//name
 						xdiv2x.appendChild(xdiv2textx);//time
+						xp1x.appendChild(xdiv3textx);
 
 						xdiv1x.appendChild(xi1x);
 						xdiv1x.appendChild(xb1x);
-						xdiv1x.appendChild(xbrx);
+						xdiv1x.appendChild(xbr1x);
 						xdiv1x.appendChild(xdiv1textx);
 						xdiv1x.appendChild(xdiv2x);
-						
+
+						xdiv3x.appendChild(xp1x);
+
 						xlix.appendChild(xdiv1x);
+						xlix.appendChild(xdiv3x);
 
 						xulx.appendChild(xlix);
 
-						// 						tr1.appendChild(th2);
-						// 						th1.appendChild(p2)
-						// 						div1.appendChild(textP2);
-
-						// 						var ul1 = document.createElement("ul");
-						// 						var li1 = document.createElement("li");
-						// 						var divhead = document.createElement("div");
-						// 						var textP1 = document.createTextNode("會員:" + memberId + " 於 " + memberMessageTime + "留言");
-						// 						tr1.appendChild(th1);
-						// 						th1.appendChild(p1)
-						// 						p1.appendChild(textP1);
-
-						// 						var ul2 = document.createElement("ul");
-						// 						var li2 = document.createElement("li");
-						// 						var p2 = document.createElement("p");
-						// 						var textP2 = document.createTextNode("內容:" + memberMessage);
-						// 						tr1.appendChild(th2);
-						// 						th1.appendChild(p2)
-						// 						p1.appendChild(textP2);
-
 						saySomething.appendChild(xulx);
+
+						$(window).load(function() {
+							var s1 = {
+								'color' : 'green',
+								'background-color' : 'orange',
+								'width' : '400px',
+								'text-align' : 'center'
+							};
+							var s2 = {
+								'color' : 'purple',
+								'background-color' : 'cyan',
+								'width' : '400px',
+								'text-align' : 'center'
+							};
+							$("#saySomething .collapsible-header").click(function() {
+								var xxx = $("#saySomething .collapsible-body").attr("style");
+								if (xxx == "display: block;") {
+									$("#saySomething .collapsible-body").attr("style", "display: none;");
+								} else {
+									$("#saySomething .collapsible-body").attr("style", "display: block;");
+								}
+							});
+						}(jQuery));
+
 					} else {
 						alert("something is wrong!");
 					}
@@ -305,7 +317,7 @@
 			}(jQuery));
 		</script>
 	</center>
-	</center>
 	<iframe name='hidden_frame' style='width: 0px; height: 0px'></iframe>
+	<script type="text/javascript" src="../donationScripts/DonationQA.js"></script>
 </body>
 </html>
