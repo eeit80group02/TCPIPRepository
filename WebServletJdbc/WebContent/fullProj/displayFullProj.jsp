@@ -193,31 +193,22 @@
 					<!-- 問與答 -->					
 					<div class="row">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
-							<div class="card-panel white">
+							<div id="discuss" class="card-panel white">
+							<!-- 內容在jQuery -->
+								<!-- 問題 -->
 								
 								<!-- 問題 -->
-								<div class="row">
-									<div class="col l2">
-										<div class="btn red white-text">
-											<i class="material-icons">textsms</i>
-										</div>
-									</div>
-									<div class="col l10" style="font-size:1.6em;font-weight:600">
-										要問的問題在這，如果這個問題真的十分可怕的非常長的跟長恨歌一樣的時候不知道會發生事情就來試試看
-									</div>
-								</div>
-								<!-- 問題 -->
 								<!-- 答案 -->
-								<div class="row">
-									<div class="col l2">
-										<div class="btn green white-text">
-											<i class="material-icons">chat_bubble</i>
-										</div>
-									</div>
-									<div class="col l10" style="font-size:1.6em;font-weight:600">
-										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情
-									</div>
-								</div>
+<!-- 								<div class="row"> -->
+<!-- 									<div class="col l2"> -->
+<!-- 										<div class="btn green white-text"> -->
+<!-- 											<i class="material-icons">chat_bubble</i> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div class="col l10" style="font-size:1.6em;font-weight:600"> -->
+<!-- 										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情 -->
+<!-- 									</div> -->
+<!-- 								</div> -->
 								<!-- 答案 -->
 							</div>	
 						</div>
@@ -280,7 +271,7 @@
 			  <div id="askmodal" class="modal bottom-sheet" style="min-height:40vh;">
 			    <div class="modal-content">
 			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要提問</h4>
-			      <textarea rows="10" cols="40" style="height:10em;" name=""></textarea>
+			      <textarea id="content" rows="10" cols="40" style="height:10em;" name=""></textarea>
 			    </div>
 			    <div class="modal-footer">
 			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
@@ -349,38 +340,65 @@
 				</c:choose>
 			});
 			
-			<c:if test="${not empty sessionScope.success}">
-				<c:remove var="success" scope="session"/>
-				alert("已申請成功，等待發起者審核");
-			</c:if>
+// 			<c:if test="${not empty sessionScope.success}">
+// 				<c:remove var="success" scope="session"/>
+// 				alert("已申請成功，等待發起者審核");
+// 			</c:if>
 			
-			<c:if test="${not empty sessionScope.participate}">
-    			<c:remove var="participate" scope="session"/>
-				alert("此活動時間，亦有其他計畫進行中");
-    		</c:if>
+// 			<c:if test="${not empty sessionScope.participate}">
+// 				<c:remove var="participate" scope="session"/>
+// 				alert("此活動時間，亦有其他計畫進行中");
+// 			</c:if>
 		});
 		
-// 		$(function(){
-// 			displayMessage();
-// 			function displayMessage(){
-// 				$.ajax({
-// 					"url": "<c:url value='/projDiscuss.do' />",
-// 					"type":"POST",
-// 					"data":{"type":"display","fullProjId":"${fullProj.fullProjId}"},
-//  				"dataType" :"json",
-// 					"success":function(data){
-						// data => Object
-// 						console.log(data);
+		$(function(){
+			displayMessage();
+			function displayMessage(){
+				$.ajax({
+					"url": "<c:url value='/projDiscuss.do' />",
+					"type":"POST",
+					"data":{"type":"display","fullProjId":"${fullProj.fullProjId}"},
+ 					"dataType" :"json",
+					"success":function(data){
+					 // data => Object
+					 console.log(data);
 // 						$("#discuss > div").remove();
-// 						$.each(data.result,function(index,value){
-							// data.result => Array[]
-							// Array[index] => Object
+						$.each(data.result,function(index,value){
+// 							data.result => Array[]
+// 							Array[index] => Object
 							
-// 	 						var memberContent = "<p style='font-family:微軟正黑體;font-size:1.4em;font-weight:300;'>" +
-// 	 											value.questionMemberId + " 說:<br>" + 
-// 		 									    value.questionMemberContent + "<br>" +
-// 		  										"<div align='right'>" + value.questionMemberTime + "</div></p>" 
-							// 可以正常跑
+	 						var content = "<div class='col l2'><div class='btn red white-text'>" +
+	 									  "<i class='material-icons'>textsms</i></div></div>" +
+	 									  "<div class='col l10' style='font-size:1.6em;font-weight:600'>" +
+	 									   value.questionMember + " 問:<br>" + 
+		 								   value.questionMemberContent + "<br>" +
+		  								  "<div align='right'><small>" + value.questionMemberTime + "</small></div></div>";
+		  										
+		  					if(value.answerMemberId == "null"){
+
+		  					}else{
+		  						content += "<div class='col l2'><div class='btn green white-text'>" +
+						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
+								   		   "<div class='col l10' style='font-size:1.6em;font-weight:600'> " +
+								   			value.answerMember + " 答:<br>" + 
+								     		value.answerMemberContent + "<br>" +
+  								  		   "<div align='right'><small>" + value.answerMemberTime + "</small></div></div>";
+		  					}
+		  								   
+// 		 									if(value.answerMemberId == "null"){
+// 	 										console.log(value.projDiscusId);
+// 	 										memberContent += "<div align='right'>" +
+// 	 														 "<form action='<c:url value='/projDiscuss.do' />' method='post'>" +
+// 	 														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
+// 	 														 "<input type='hidden' name='type' value='reply'>" + 
+// 	 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
+// 	 									}
+		  								   
+		  								   
+	 						var contentDiv = $("<div class='row'></div>").html(content);
+	 						$("#discuss").append(contentDiv);
+		  															
+		  				// 可以正常跑
 // 		  					<c:if test="${LoginOK.beanName.equals('member')}">
 // 								<c:if test="${LoginOK.memberId == fullProj.memberId}">
 // 									if(value.answerMemberId == "null"){
@@ -394,8 +412,6 @@
 // 								</c:if>
 //  							</c:if>
 		  										
-// 	 						var contentDiv = $("<div class='col l12 card-panel hoverable' style='background-color:#D1F0E5;'></div>").html(memberContent);
-// 	 						$("#discuss").append(contentDiv);
 							
 // 							if(value.memberId == "null"){
 // 								var schoolContent = "學校ID:" + value.schoolId + "<br>" + 
@@ -405,11 +421,11 @@
 // 								var contentDiv = $("<div></div>").html(schoolContent);
 // 								$("#discuss").append(contentDiv);
 // 							}
-// 						});
-// 					}
-// 				});
-// 			}
-// 		});
+						});
+					}
+				});
+			}
+		});
 	</script>
 	    <script>
 	    	
