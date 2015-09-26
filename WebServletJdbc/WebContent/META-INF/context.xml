@@ -9,11 +9,11 @@
       	maxIdle="2"
       	maxWait="5000" />
 
-	<Resource name="jdbc/TCPIP" type="javax.sql.DataSource"
-		username="eeit80group02@qjtxi3tofr" password="p@ssw0rd"
-		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-      	url="jdbc:sqlserver://qjtxi3tofr.database.windows.net:1433;database=TCPIP"
-      	maxActive="3"
-      	maxIdle="2"
-      	maxWait="5000" />	
+<!-- 	<Resource name="jdbc/TCPIP" type="javax.sql.DataSource" -->
+<!-- 		username="eeit80group02@qjtxi3tofr" password="p@ssw0rd" -->
+<!-- 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
+<!--       	url="jdbc:sqlserver://qjtxi3tofr.database.windows.net:1433;database=TCPIP" -->
+<!--       	maxActive="3" -->
+<!--       	maxIdle="2" -->
+<!--       	maxWait="5000" />	 -->
 </Context>
