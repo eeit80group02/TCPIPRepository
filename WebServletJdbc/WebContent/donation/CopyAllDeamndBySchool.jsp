@@ -45,42 +45,47 @@
 	<!-- 我就是標頭 start -->
 	<div class="navbar-fixed">
 		<nav>
-			<div class="nav-wrapper">
-				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-				</ul>
+		<div class="nav-wrapper">
+			<ul id="nav-mobile1" class="left hide-on-med-and-down">
+				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+			</ul>
 
-				<ul id="nav-mobile2" class="">
-					<li><a href="#"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png" class="brand-logo"></a></li>
-				</ul>
-				<ul id="nav-mobile3" class="right hide-on-med-and-down">
-					<li>
-						<form action="<c:url value="/donation/demand.do?type=FindGoods" />">
-							<div class="input-field">
-								<input id="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
-							</div>
-						</form>
-					</li>
-					<li><i class="large material-icons" id="clearIcon">clear</i></li>
-					<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
-					<li class="chooseItem" value="需求數量"><a href="#">需求數量</a></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
-						<ul id="dropdownList01" class="dropdown-content">
-							<li class="chooseDropdownItem" value="最新發佈"><a href="#">最新發佈</a></li>
-							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="即將結束"><a href="#">即將結束</a></li>
-						</ul></li>
-					<li><a class="dropdown-button" href="#!" data-activates="dropdownList02">物資狀態<i class="mdi-navigation-arrow-drop-down right"></i></a>
-						<ul id="dropdownList02" class="dropdown-content">
-							<li class="chooseDropdownItem" value="不拘"><a href="#">不拘</a></li>
-							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="全新"><a href="#">全新</a></li>
-							<li class="divider"></li>
-							<li class="chooseDropdownItem" value="二手"><a href="#">二手</a></li>
-						</ul></li>
-					<li><a href="#"><i class="large material-icons">person</i></a></li>
-				</ul>
-			</div>
+			<ul id="nav-mobile2" class="">
+				<li><a href="#"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png" class="brand-logo"></a></li>
+			</ul>
+			<ul id="nav-mobile3" class="right hide-on-med-and-down">
+				<li>
+					<form action="<c:url value="/donation/demand.do?type=FindGoods" />">
+						<div class="input-field">
+							<input id="searchDonation" type="search" required placeholder="輸入物品或學校" autocomplete="off"> <label for="search"><i class="large material-icons" id="searchIcon">search</i></label>
+						</div>
+					</form>
+				</li>
+				<li><i class="large material-icons" id="clearIcon">clear</i></li>
+				<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
+				<li class="chooseItem" value="需求數量"><a href="#">需求數量</a></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
+					<ul id="dropdownList01" class="dropdown-content">
+						<li class="chooseDropdownItem" value="最新發佈"><a href="#">最新發佈</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="即將結束"><a href="#">即將結束</a></li>
+					</ul></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList02">物資狀態<i class="mdi-navigation-arrow-drop-down right"></i></a>
+					<ul id="dropdownList02" class="dropdown-content">
+						<li class="chooseDropdownItem" value="不拘"><a href="#">不拘</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="全新"><a href="#">全新</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="二手"><a href="#">二手</a></li>
+					</ul></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+					<ul id="dropdownList03" class="dropdown-content">
+						<li class="chooseDropdownItem" value="學校頁面"><a href="#">學校頁面</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+					</ul></li>
+			</ul>
+		</div>
 		</nav>
 	</div>
 	<br>
@@ -111,9 +116,9 @@
 								<div class="foottext">需求數量 : ${item.demandNumber}</div>
 								<div class="footIcin">
 									<div id="add${vs.index}">
-										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
-<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
-									</div>		
+										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}+${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}+${item.originalDemandUnit}"></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a>
+										<%-- 										<a href="<c:url value='demand.do?type=OneDemandByMember&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" title="${item.supplyName} - ${item.schoolName}" class="ui-icon ui-icon-zoomin" id="${item.donationId}+${item.schoolId}+${item.schoolName}+${item.supplyStatus}+${item.supplyName}+${item.originalDemandNumber}+${item.originalDemandUnit}+${item.demandNumber}+${item.size}+${item.demandContent}+${item.supplyStatus}+${item.demandTime}+${item.expireTime}+${item.remark}" ></a> <a href="link/to/trash/script/when/we/have/js/off" title="加入捐獻背包" class="ui-icon ui-icon-suitcase"></a> --%>
+									</div>
 								</div>
 							</div>
 						</div>

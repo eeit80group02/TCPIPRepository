@@ -37,22 +37,22 @@
 			<!-- 我就是標頭 start -->
 			<div class="navbar-fixed">
 				<nav>
-				<div class="nav-wrapper">
-					<ul id="nav-mobile1" class="left hide-on-med-and-down">
-						<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-						<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
-					</ul>
+					<div class="nav-wrapper">
+						<ul id="nav-mobile1" class="left hide-on-med-and-down">
+							<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+							<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+						</ul>
 
-					<a href="#" class="brand-logo center">填寫捐獻需求</a>
-					<ul id="nav-mobile3" class="right hide-on-med-and-down">
-						<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
-							<ul id="dropdownList03" class="dropdown-content">
-								<li class="chooseDropdownItem" value="會員頁面"><a href="#">學校頁面</a></li>
-								<li class="divider"></li>
-								<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
-							</ul></li>
-					</ul>
-				</div>
+						<a href="#" class="brand-logo center">填寫捐獻需求</a>
+						<ul id="nav-mobile3" class="right hide-on-med-and-down">
+							<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+								<ul id="dropdownList03" class="dropdown-content">
+									<li class="chooseDropdownItem" value="會員頁面"><a href="#">學校頁面</a></li>
+									<li class="divider"></li>
+									<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+								</ul></li>
+						</ul>
+					</div>
 				</nav>
 			</div>
 			<br>
@@ -61,9 +61,6 @@
 			<form id="drop-a-line" enctype='multipart/form-data' action='donate.do' method='POST'>
 				<div id="warnText">
 					<i class="tiny material-icons">star</i>&nbsp;<span>符號為必填欄位</span>
-					<button type="button" id="OneClickInsertDonateGoods" class="btn btn-small btn-floating">
-						<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
-					</button>
 				</div>
 				<div class="row">
 					<div class="col s12 m12 l6">
@@ -100,22 +97,22 @@
 						<br> <br>
 						<!-- 物資名稱 -->
 						<div class="input-field col m12 s12">
-							<input type="text" id="supplyName" name='supplyName' value='${param.supplyName}' maxlength="25" required="required" autocomplete="off"><label for="supplyName" class="" id="textLable01"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="最多輸入 25 個字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;物資名稱&nbsp;<i class="tiny material-icons" id="requiredStar02">star</i></span></a></label>
+							<input type="text" id="supplyName" name='supplyName' value='${param.supplyName}' maxlength="25" required="required" autocomplete="off"><label for="supplyName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="最多輸入 25 個字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;物資名稱&nbsp;<i class="tiny material-icons" id="requiredStar02">star</i></span></a></label>
 						</div>
 
 						<!-- 需求數量(數量) -->
 						<div class="input-field col m12 s12">
-							<input type="number" id="originalDemandNumber" name='originalDemandNumber' value='${param.originalDemandNumber}' required="required" autocomplete="off" max="9999" min="1"><label for="originalDemandNumber" class="" id="textLable02"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="輸入數字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品數量&nbsp;<i class="tiny material-icons" id="requiredStar03">star</i></span></a></label>
+							<input type="number" id="originalDemandNumber" name='originalDemandNumber' value='${param.originalDemandNumber}' required="required" autocomplete="off" max="9999" min="1"><label for="originalDemandNumber"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="輸入數字"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品數量&nbsp;<i class="tiny material-icons" id="requiredStar03">star</i></span></a></label>
 						</div>
 
 						<!-- 原始輸入需求數量(單位) -->
 						<div class="input-field col m12 s12">
-							<input type="text" id="originalDemandUnit" name='originalDemandUnit' value='${param.originalDemandUnit}' required="required" autocomplete="off"><label for="originalDemandUnit" class="" id="textLable03"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：包、打、張、隻、箱"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品單位&nbsp;<i class="tiny material-icons" id="requiredStar04">star</i></span></a></label>
+							<input type="text" id="originalDemandUnit" name='originalDemandUnit' value='${param.originalDemandUnit}' required="required" autocomplete="off"><label for="originalDemandUnit"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：包、打、張、隻、箱"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求物品單位&nbsp;<i class="tiny material-icons" id="requiredStar04">star</i></span></a></label>
 						</div>
 
 						<!-- 尺寸規格(例如:物品的大小>長*寬*高) -->
 						<div class="input-field col m12 s12">
-							<input type="text" id="size" name='size' value='${param.size}' autocomplete="off"><label for="size" class="" id="textLable04"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：物品大小的長.寬.高、電壓 110V 或 220V"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;尺寸規格&nbsp;</span></a></label>
+							<input type="text" id="size" name='size' value='${param.size}' autocomplete="off"><label for="size"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="例如：物品大小的長.寬.高、電壓 110V 或 220V"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;尺寸規格&nbsp;</span></a></label>
 						</div>
 
 						<!-- 物資狀態(全新/二手/不拘) -->
@@ -130,7 +127,7 @@
 						<!-- 需求說明(為什麼需要這項物資) -->
 						<div class="input-field col m12 s12">
 							<textarea id="demandContent" name='demandContent' value='${param.demandContent}' class="materialize-textarea" required="required"></textarea>
-							<label for="demandContent" class="" id="textLable05"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求說明&nbsp;<i class="tiny material-icons" id="requiredStar05">star</i></span></a></label>
+							<label for="demandContent"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求說明&nbsp;<i class="tiny material-icons" id="requiredStar05">star</i></span></a></label>
 						</div>
 
 					</div>
@@ -138,7 +135,7 @@
 					<!-- 備註 -->
 					<div class="input-field col s12 m12 l12">
 						<textarea id="remark" name='remark' value='${param.remark}' class="materialize-textarea"></textarea>
-						<label for="remark" class="" id="textLable06"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
+						<label for="remark"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
 					</div>
 
 					<button type="submit" id="sendMessage" name='hidden' value='insert' class="btn btn-small btn-floating">
@@ -156,9 +153,6 @@
 		<!-- 標頭專用 bottom start -->
 		<!-- 必須最後載入才有效果 -->
 		<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
 		<!-- 標頭專用 bottom end -->
-		<!-- 一鍵填入 -->
-		<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 </body>
 </html>

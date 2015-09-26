@@ -73,7 +73,12 @@
 
 			<a href="#" class="brand-logo center">捐獻明細</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
-				<li><a href="#"><i class="large material-icons">person</i></a></li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+					<ul id="dropdownList03" class="dropdown-content">
+						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
+						<li class="divider"></li>
+						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+					</ul></li>
 			</ul>
 		</div>
 		</nav>
@@ -445,7 +450,9 @@
 							</button>
 							&nbsp;填寫寄件人資料
 							<!-- 一鍵輸入 -->
-							<button type="button" id="OneClick" class="btn btn-small btn-floating">一鍵填</button>
+							<button type="button" id="OneClickDonationBillFinal" class="btn btn-small btn-floating">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+							</button>
 						</div>
 						<br>
 						<!-- 右上 寄件人系列 -->

@@ -271,11 +271,38 @@
 					</div>
 					<!-- 問與答 -->
 					<div class="row">
-						<div id="test" class="col l12 card-panel hoverable"
-							style="background-color: #D1F0E5;">
-							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
-								<%-- 							${fullProj.content} --%>
-							</p>
+						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
+							<div class="card-panel white">
+								
+								<!-- 如果是學校 -->
+								<div class="row">
+									<div class="col l2">
+										  <div class="chip">
+										    <img src="images/yuna.jpg" alt="Contact Person">
+										    Jane Doe
+										  </div>
+										<div class="btn red white-text">
+											<i class="material-icons">forum</i>
+										</div>
+									</div>
+									<div class="col l10 red lighten-4" style="font-size:1.6em;font-weight:600">
+										要問的問題在這，如果這個問題真的十分可怕的非常長的跟長恨歌一樣的時候不知道會發生事情就來試試看
+									</div>
+								</div>
+								
+								<!-- 答案 -->
+								<div class="row">
+									<div class="col l2">
+										<div class="btn green white-text">
+											<i class="material-icons">chat_bubble</i>
+										</div>
+									</div>
+									<div class="col l10" style="font-size:1.6em;font-weight:600">
+										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情
+									</div>
+								</div>
+								<!-- 答案 -->
+							</div>	
 						</div>
 					</div>
 				</div>
@@ -344,24 +371,24 @@
 <!-- 		<div id="myDiv"></div> -->
 
 <%-- 		<c:if --%>
-<%-- <%-- 			test="${LoginOK.beanName.equals('member') && empty fullProj.createDate}">	 --%> --%>
+<%-- <%-- 			test="${LoginOK.beanName.equals('member') && empty fullProj.createDate}">	 --%> 
 <%-- 		會員留言：<br> --%>
 <%-- <!-- 			<textarea id="memberContent"></textarea> --> --%>
 <%-- <!-- 			<sapn id="memberError"></sapn> --> --%>
 <%-- <!-- 			<br> --> --%>
 <%-- <!-- 			<input type="button" id="memberButton" value="傳送"> --> --%>
 <%-- <!-- 			<br> --> --%>
-<%-- <%-- 		</c:if> --%> --%>
+<%-- <%-- 		</c:if> --%> 
 
-<%-- <%-- 		<c:if --%> --%>
-<%-- <%-- 			test="${LoginOK.beanName.equals('school') && empty fullProj.createDate}">	 --%> --%>
+<%-- <%-- 		<c:if --%> 
+<%-- <%-- 			test="${LoginOK.beanName.equals('school') && empty fullProj.createDate}">	 --%> 
 <%-- <!-- 		學校留言：<br> --> --%>
 <%-- <!-- 			<textarea id="schoolContent"></textarea> --> --%>
 <%-- <!-- 			<sapn id="schoolError"></sapn> --> --%>
 <%-- <!-- 			<br> --> --%>
 <%-- <!-- 			<input type="button" id="schoolButton" value="傳送"> --> --%>
 <%-- <!-- 			<br> --> --%>
-<%-- <%-- 		</c:if> --%> --%>
+<%-- <%-- 		</c:if> --%> 
 	</main>
 
 

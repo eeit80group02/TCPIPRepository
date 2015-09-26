@@ -151,7 +151,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">預計人數</div>
-								<input id="demandNum" type="number" name="demandNum" required value="${param.demandNum}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="demandNum" type="number" name="demandNum" required value="${param.demandNum}" style="font-size:1.2em;color:black;font-weight:600;" max="100">
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.demandNum}</span>
@@ -164,7 +164,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">活動預算</div>
-								<input id="budget" type="number" name="budget" required value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;">
+								<input id="budget" type="number" name="budget" required value="${param.budget}" style="font-size:1.2em;color:black;font-weight:600;" max="99999999">
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.budget}</span>
@@ -177,7 +177,7 @@
 						<div class="row">
 							<div class="col l8">
 								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;">${param.projAbstract}</textarea>
+								<textarea class="materialize-textarea" id="projAbstract" rows="10" cols="100" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;" >${param.projAbstract}</textarea>
 							</div>
 							<div class="col l4">	
 								<span class="error">${error.projAbstract}</span>
@@ -201,11 +201,11 @@
 					
 					<div class="row" id="btndiv">
 						<div class="col l8">
-							<button  class="btn-large yellow lighten-5 black-text right" type="submit" name="action" id="submitbtn">
-								<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
+							<button  class="btn-large red white-text right" type="submit" name="action" id="submitbtn">
+								<span style="font-family:微軟正黑體;font-size:1.3em;font-weight:600">送出</span>
 							</button>
-							<button  class="btn-large yellow lighten-5 black-text right" type="reset" name="action">
-								<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
+							<button  class="btn-large red white-text right" type="reset" name="action">
+								<span style="font-family:微軟正黑體;font-size:1.3em;font-weight:600">取消</span>
 							</button>
 						</div>
 					</div>

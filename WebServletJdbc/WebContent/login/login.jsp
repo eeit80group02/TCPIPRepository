@@ -12,6 +12,12 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+	.btndiv {
+			 
+	}
+
+</style>
 </head>
 <body class="deep-orange lighten-5">
 	<!-- 頁首 -->
@@ -41,14 +47,19 @@
 					<form action="<c:url value="/LoginServlet.do" />" method="post">
 						<div class="row">
 							<div class="row" style="font-family:微軟正黑體;font-size:2em;">帳號</div>
-							<input class="row" type="text" name="account"  value="${param.account}" style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error">${error.account}</span>
+							<input class="row" type="text" name="account"  value="${param.account}" style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error" style="color:red;">${error.account}</span>
 						</div>
 						<div class="row">
 							<div class="row" style="font-family:微軟正黑體;font-size:2em;">密碼</div>
-							<input class="row" type="text" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error">${error.password}</span>
+							<input class="row" type="text" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error" style="color:red;">${error.password}</span>
 						</div>
 						<input type="hidden" name="type" value="member">
-						<button type="submit" class="btn-large amber darken-2 white-text right" style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;">登入</button>
+						<div class="row"  style="font-family:微軟正黑體;font-size:1.3em;font-weight:600;">
+							<button type="submit" class="btn-large amber darken-2 white-text right" style="font-family:微軟正黑體;font-size:1.2em;font-weight:600;">登入</button>
+							<a href="<c:url value="/forgotPassword/forgotPassword.jsp" />" class="btn-large amber darken-2 white-text right">忘記密碼</a>	      
+						    <a href="<c:url value="/register/register.jsp" />" class="btn-large amber darken-2 white-text right">註冊帳號</a>						
+						</div>
+
 					</form>				
 				</div>
 			</div>
@@ -69,7 +80,11 @@
 							<input class="row" type="text" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error">${error.password}</span>
 						</div>
 						<input type="hidden" name="type" value="school">
-						<button type="submit" class="btn-large amber darken-2 white-text right" style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;">登入</button>
+						<div class="row">
+							<button type="submit" class="btn-large amber darken-2 white-text right" style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;margin:0">登入</button>
+							<button class="btn-large amber darken-2 white-text right" style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;">開通帳號</button>
+						</div>
+						
 					</form>				
 				</div>
 			</div>

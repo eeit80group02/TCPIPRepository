@@ -40,25 +40,25 @@
 					<li class="collection-header collection-item center-align"
 						style="padding: 0;"><h5 class="teal accent-2"
 							style="margin: 0; display: block; padding: 15px 0 15px 0;">排序</h5></li>
-					<li><a href="#!" class="collection-item">即將結束</a></li>
-					<li><a href="#!" class="collection-item">活動時間</a></li>
-					<li><a href="#!" class="collection-item">需求人數</a></li>
-					<li><a href="#!" class="collection-item">已募集人數</a></li>
+					<li><a href="#!" class="collection-item">招募中</a></li>
+					<li><a href="#!" class="collection-item">進行中</a></li>
+					<li><a href="#!" class="collection-item">已結束</a></li>
+<!-- 					<li><a href="#!" class="collection-item">已募集人數</a></li> -->
 				</ul>
 			</div>
-			<div class="collection"
-				style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-				<ul style="margin: 0;">
-					<!-- 提示[篩選] -->
-					<li class="collection-header collection-item center-align"
-						style="padding: 0;"><h5 class="teal accent-2"
-							style="margin: 0; display: block; padding: 15px 0 15px 0;">篩選</h5></li>
-					<li><a href="#!" class="collection-item">北部地區</a></li>
-					<li><a href="#!" class="collection-item">中部地區</a></li>
-					<li><a href="#!" class="collection-item">南部地區</a></li>
-					<li><a href="#!" class="collection-item">東部地區</a></li>
-				</ul>
-			</div>
+<!-- 			<div class="collection" -->
+<!-- 				style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;"> -->
+<!-- 				<ul style="margin: 0;"> -->
+<!-- 					提示[篩選] -->
+<!-- 					<li class="collection-header collection-item center-align" -->
+<!-- 						style="padding: 0;"><h5 class="teal accent-2" -->
+<!-- 							style="margin: 0; display: block; padding: 15px 0 15px 0;">篩選</h5></li> -->
+<!-- 					<li><a href="#!" class="collection-item">北部地區</a></li> -->
+<!-- 					<li><a href="#!" class="collection-item">中部地區</a></li> -->
+<!-- 					<li><a href="#!" class="collection-item">南部地區</a></li> -->
+<!-- 					<li><a href="#!" class="collection-item">東部地區</a></li> -->
+<!-- 				</ul> -->
+<!-- 			</div> -->
 		</div>
 		<!-- </div> -->
 
