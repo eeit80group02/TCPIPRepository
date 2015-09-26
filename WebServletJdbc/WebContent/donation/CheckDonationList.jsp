@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -62,7 +61,6 @@
 </script>
 <!-- 宅配通top end -->
 </head>
-
 <body>
 	<!-- 驗證是否為會員 -->
 	<c:if test="${LoginOK.beanName.equals('school') }">
@@ -105,9 +103,6 @@
 						</c:choose>
 					</ul></li>
 			</ul>
-
-
-
 		</div>
 		</nav>
 	</div>
@@ -128,23 +123,23 @@
 
 				</div>
 
-				<!-- 第一頁 -->
+				<!-- 第一頁 start -->
 				<div id="test1" class="col s12">
 					<div class="col s12">
-						<div id="warnText">
-							<span>確認捐獻物品明細</span>
-							<!-- 小叮嚀 start -->
-							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
+						<div class="warnText">
+							<span>確認捐獻背包</span>
+							<!-- 操作小叮嚀 start -->
+							<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
 							<!-- Modal Structure -->
-							<div id="modalNote02" class="modal modal-fixed-footer">
+							<div id="modalNote01" class="modal modal-fixed-footer">
 								<div class="modal-content">
-									<h4>小叮嚀：</h4>
+									<h4>操作小叮嚀：</h4>
 									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_before</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">remove</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">add</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
 										</li>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除捐獻物品。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻物品。
 										</li>
 									</ol>
 								</div>
@@ -152,14 +147,14 @@
 									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
 								</div>
 							</div>
-							<!-- 小叮嚀 end -->
+							<!-- 操作小叮嚀 end -->
 
 						</div>
 						<br>
 					</div>
 
 					<form action="">
-						<table id="donationBill" class="responsive-table">
+						<table id="donationBill01" class="responsive-table">
 							<thead>
 								<tr>
 									<td>捐獻物資</td>
@@ -276,10 +271,10 @@
 						<br> <br>
 
 						<button type="button" id="page01Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">favorite</i></a>
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">keyboard_arrow_left</i></a>
 						</button>
-						<button type="button" id="page01Mid" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
+						<button type="button" id="page01Clear" class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="全部清除"><i class="small material-icons">clear</i></a>
 						</button>
 						<button type="submit" id="page01Next" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
@@ -288,20 +283,6 @@
 					<br>
 				</div>
 				<!-- 第一頁 end -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 				<!-- 第二頁 start -->
 				<div id="test2" class="col s12">
@@ -508,7 +489,9 @@
 							</button>
 							&nbsp;填寫寄件人資料
 							<!-- 一鍵輸入 -->
-							<button type="button" id="OneClick" class="btn btn-small btn-floating">一鍵填</button>
+							<button type="button" id="OneClickDonationBillFinal" class="btn btn-small btn-floating">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+							</button>
 						</div>
 						<br>
 						<!-- 右上 寄件人系列 -->
@@ -964,10 +947,6 @@
 	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
 
-	<!-- 標頭專用 bottom start -->
-	<!-- 必須最後載入才有效果 -->
-	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<!-- 標頭專用 bottom end -->
 
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
