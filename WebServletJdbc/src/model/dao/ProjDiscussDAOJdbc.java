@@ -15,14 +15,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import model.ProjDiscusBean;
-import model.dao.interfaces.ProjDiscusDAO;
+import model.ProjDiscussBean;
+import model.dao.interfaces.ProjDiscussDAO;
 
-public class ProjDiscusDAOJdbc implements ProjDiscusDAO
+public class ProjDiscussDAOJdbc implements ProjDiscussDAO
 {
 	private DataSource datasource;
 
-	public ProjDiscusDAOJdbc()
+	public ProjDiscussDAOJdbc()
 	{
 		try
 		{
@@ -37,18 +37,18 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 	
 	private static final String SELECT_ALL = "SELECT projDiscussId,fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime FROM ProjDiscuss";
 	@Override
-	public List<ProjDiscusBean> getAll()
+	public List<ProjDiscussBean> getAll()
 	{
-		List<ProjDiscusBean> result = null;
+		List<ProjDiscussBean> result = null;
 		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_ALL);
 			ResultSet rset = pstmt.executeQuery();)
 		{
-			result = new ArrayList<ProjDiscusBean>();
+			result = new ArrayList<ProjDiscussBean>();
 			while(rset.next())
 			{
-				ProjDiscusBean bean = new ProjDiscusBean();
-				bean.setProjDiscusId(rset.getInt("projDiscussId"));
+				ProjDiscussBean bean = new ProjDiscussBean();
+				bean.setProjDiscussId(rset.getInt("projDiscussId"));
 				bean.setFullProjId(rset.getInt("fullProjId"));
 				bean.setQuestionMemberId(rset.getInt("questionMemberId"));
 				bean.setQuestionMemberContent(rset.getString("questionMemberContent"));
@@ -77,9 +77,9 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 
 	private static final String SELECT_BY_ID = "SELECT projDiscussId,fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime FROM ProjDiscuss WHERE projDiscussId = ?";
 	@Override
-	public ProjDiscusBean findByPrimaryKey(int projDiscussId)
+	public ProjDiscussBean findByPrimaryKey(int projDiscussId)
 	{
-		ProjDiscusBean result = null;
+		ProjDiscussBean result = null;
 		
 		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);)
@@ -89,8 +89,8 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 			{
 				if(rset.next())
 				{
-					result = new ProjDiscusBean();
-					result.setProjDiscusId(rset.getInt("projDiscussId"));
+					result = new ProjDiscussBean();
+					result.setProjDiscussId(rset.getInt("projDiscussId"));
 					result.setFullProjId(rset.getInt("fullProjId"));
 					result.setQuestionMemberId(rset.getInt("questionMemberId"));
 					result.setQuestionMemberContent(rset.getString("questionMemberContent"));
@@ -124,9 +124,9 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 
 	private static final String INSERT = "INSERT INTO ProjDiscuss (fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime) VALUES (?,?,?,?,?,?,?)";
 	@Override
-	public ProjDiscusBean insert(ProjDiscusBean bean)
+	public ProjDiscussBean insert(ProjDiscussBean bean)
 	{
-		ProjDiscusBean result = null;
+		ProjDiscussBean result = null;
 		
 		if(bean != null)
 		{
@@ -184,9 +184,9 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 
 	private static final String UPDATE = "UPDATE ProjDiscuss SET fullProjId = ?,questionMemberId = ?,questionMemberContent = ?,questionMemberTime = ?,answerMemberId = ?,answerMemberContent = ?,answerMemberTime = ? WHERE projDiscussId = ?";
 	@Override
-	public ProjDiscusBean update(ProjDiscusBean bean)
+	public ProjDiscussBean update(ProjDiscussBean bean)
 	{
-		ProjDiscusBean result = null;
+		ProjDiscussBean result = null;
 		if(bean != null)
 		{
 			try(Connection conn = datasource.getConnection();
@@ -223,11 +223,11 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 					pstmt.setNull(7,Types.TIMESTAMP);
 				}
 				
-				pstmt.setInt(8,bean.getProjDiscusId());
+				pstmt.setInt(8,bean.getProjDiscussId());
 				int i = pstmt.executeUpdate();
 				if(i == 1)
 				{
-					result = this.findByPrimaryKey(bean.getProjDiscusId());
+					result = this.findByPrimaryKey(bean.getProjDiscussId());
 				}
 			}
 			catch(SQLException e)
@@ -239,9 +239,9 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 	}
 	private static final String SELECT_BY_FULLPROJID = "SELECT projDiscussId,fullProjId,questionMemberId,questionMemberContent,questionMemberTime,answerMemberId,answerMemberContent,answerMemberTime FROM ProjDiscuss WHERE fullProjId = ?";
 	@Override
-	public List<ProjDiscusBean> selectByFullProjId(int fullProjId)
+	public List<ProjDiscussBean> selectByFullProjId(int fullProjId)
 	{
-		List<ProjDiscusBean> result = new ArrayList<ProjDiscusBean>();
+		List<ProjDiscussBean> result = new ArrayList<ProjDiscussBean>();
 		try(Connection conn = datasource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_FULLPROJID);)
 		{
@@ -250,8 +250,8 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 			{
 				while(rset.next())
 				{
-					ProjDiscusBean bean = new ProjDiscusBean();
-					bean.setProjDiscusId(rset.getInt("projDiscussId"));
+					ProjDiscussBean bean = new ProjDiscussBean();
+					bean.setProjDiscussId(rset.getInt("projDiscussId"));
 					bean.setFullProjId(rset.getInt("fullProjId"));
 					bean.setQuestionMemberId(rset.getInt("questionMemberId"));
 					bean.setQuestionMemberContent(rset.getString("questionMemberContent"));
@@ -306,10 +306,10 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 
 	public static void main(String[] args)
 	{
-		ProjDiscusDAO dao = new ProjDiscusDAOJdbc();
+		ProjDiscussDAO dao = new ProjDiscussDAOJdbc();
 		
 		// insert
-		ProjDiscusBean bean = new ProjDiscusBean();
+		ProjDiscussBean bean = new ProjDiscussBean();
 		bean.setFullProjId(1);
 		bean.setQuestionMemberId(1);
 		bean.setQuestionMemberContent("你好 我想問...");
@@ -326,8 +326,8 @@ public class ProjDiscusDAOJdbc implements ProjDiscusDAO
 		System.out.println(dao.delete(1));
 		
 		// 修改
-		ProjDiscusBean bean2 = new ProjDiscusBean();
-		bean2.setProjDiscusId(3);
+		ProjDiscussBean bean2 = new ProjDiscussBean();
+		bean2.setProjDiscussId(3);
 		bean2.setFullProjId(1);
 		bean2.setQuestionMemberId(1);
 		bean2.setQuestionMemberContent("你好 我想問...");
