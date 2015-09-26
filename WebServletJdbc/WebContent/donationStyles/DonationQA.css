@@ -5,7 +5,7 @@
 	width: 850px;
 }
 
-#donationDetailTable, #drop-a-line, #QandA {
+#donationDetailTable, #drop-a-line, #QandA ,#saySomething{
 	width: 85%;
 }
 
@@ -32,7 +32,7 @@
 	padding-bottom: 10px;
 }
 
-#QandA {
+#QandA ,#saySomething{
 	/* 	問與答 */
 	font-size: 1.5em;
 	text-align: left;

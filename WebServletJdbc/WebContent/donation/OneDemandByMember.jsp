@@ -126,7 +126,8 @@
 								});
 								xhr.open("POST", "cart.do", true);
 								xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit=" + "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
+								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit="
+										+ "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
 							}
 						}
 					</script>
@@ -158,6 +159,7 @@
 			</div>
 		</form>
 
+		<div id="saySomething" class="col s12 m9"></div>
 		<!-- Q&A -->
 		<div id="QandA" class="col s12 m9">
 			<ul class="collapsible" data-collapsible="expandable">
@@ -165,7 +167,7 @@
 					<li id='li${vs.index}'>
 
 						<div class="collapsible-header">
-							<span class="glyphicon glyphicon-question-sign"></span> <b>${item.memberName}</b>：
+							<i class="tiny material-icons">help</i>&nbsp;<b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
 								<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
@@ -198,8 +200,7 @@
 		<script>
 			var addBtn = document.getElementById("send-message");
 			var QandA = document.getElementById("QandA");
-			// 	var p1 = document.getElementById("p1");
-			// 	var p2 = document.getElementById("p2");
+			var saySomething = document.getElementById("saySomething");
 			var textByMember = document.getElementById("your-message");
 
 			var xhr = null;
@@ -222,29 +223,76 @@
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
 						datas = JSON.parse(lists);
-						alert("ms " + datas);
+						// 						alert("ms " + datas);
 						var memberId = datas[0];
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];
 
-						var tr1 = document.createElement("tr");
-						var th1 = document.createElement("th");
-						var p1 = document.createElement("p");
-						var textP1 = document.createTextNode("會員:" + memberId + " 於 " + memberMessageTime + "留言");
-						tr1.appendChild(th1);
-						th1.appendChild(p1)
-						p1.appendChild(textP1);
+						var xbrx = document.createElement("br");
+						
+						var xulx = document.createElement("ul");
+						xulx.setAttribute("class", "collapsible");
+						xulx.setAttribute("data-collapsible", "expandable");
 
-						var tr2 = document.createElement("tr");
-						var th2 = document.createElement("th");
-						var p2 = document.createElement("p");
-						var textP2 = document.createTextNode("內容:" + memberMessage);
-						tr1.appendChild(th2);
-						th1.appendChild(p2)
-						p1.appendChild(textP2);
+						var xlix = document.createElement("li");
 
-						QandA.appendChild(tr2);
-						QandA.appendChild(tr1);
+						var xdiv1x = document.createElement("div");
+						xdiv1x.setAttribute("class", "collapsible-header");
+
+						var xi1x = document.createElement("i");
+						xi1x.setAttribute("class", "tiny material-icons");
+						var xi1textx = document.createTextNode("help");
+
+						var xb1x = document.createElement("b");
+						var xb1textx = document.createTextNode(memberId + " :");
+
+						var xdiv1textx = document.createTextNode(memberMessage);
+						
+						var xdiv2x = document.createElement("div");
+						xdiv2x.setAttribute("class", "talkTime");
+						
+						var xdiv2textx = document.createTextNode(memberMessageTime);
+
+						var xtextP1x = document.createTextNode(memberMessageTime + "留言");
+
+						var xdiv2x = document.createElement("div");
+						var xtextP2x = document.createTextNode("內容:" + memberMessage);
+
+						xi1x.appendChild(xi1textx);//icon
+						xb1x.appendChild(xb1textx);//name
+						xdiv2x.appendChild(xdiv2textx);//time
+
+						xdiv1x.appendChild(xi1x);
+						xdiv1x.appendChild(xb1x);
+						xdiv1x.appendChild(xbrx);
+						xdiv1x.appendChild(xdiv1textx);
+						xdiv1x.appendChild(xdiv2x);
+						
+						xlix.appendChild(xdiv1x);
+
+						xulx.appendChild(xlix);
+
+						// 						tr1.appendChild(th2);
+						// 						th1.appendChild(p2)
+						// 						div1.appendChild(textP2);
+
+						// 						var ul1 = document.createElement("ul");
+						// 						var li1 = document.createElement("li");
+						// 						var divhead = document.createElement("div");
+						// 						var textP1 = document.createTextNode("會員:" + memberId + " 於 " + memberMessageTime + "留言");
+						// 						tr1.appendChild(th1);
+						// 						th1.appendChild(p1)
+						// 						p1.appendChild(textP1);
+
+						// 						var ul2 = document.createElement("ul");
+						// 						var li2 = document.createElement("li");
+						// 						var p2 = document.createElement("p");
+						// 						var textP2 = document.createTextNode("內容:" + memberMessage);
+						// 						tr1.appendChild(th2);
+						// 						th1.appendChild(p2)
+						// 						p1.appendChild(textP2);
+
+						saySomething.appendChild(xulx);
 					} else {
 						alert("something is wrong!");
 					}
