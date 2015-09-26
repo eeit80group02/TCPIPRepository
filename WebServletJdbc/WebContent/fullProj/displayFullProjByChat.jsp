@@ -454,7 +454,7 @@
 							if(value.schoolId == "null"){
 		 						var content = "<div class='col l2'>發起者</div>" + 
 		 									  "<div class='col l10 card-panel' style='font-size:1.6em;font-weight:600;border-left:10px double #76ff03;'>" +
-		 									  value.memberMessage + "</div>"
+		 									  value.memberMessage + "</div>";
 		 						var contentDiv = $("<div class='row'></div>").html(content);
 		 						$("#discuss").append(contentDiv);
 							}
@@ -462,7 +462,7 @@
 							if(value.memberId == "null"){
 								var content = "<div class='col l10 card-panel' style='font-size:1.6em;font-weight:600;border-right:10px double red;'>" + 
 											   value.schoolMessage + "</div>" + 
-											  "<div class='col l2'>學校</div>"
+											  "<div class='col l2'>學校</div>";
 								var contentDiv = $("<div class='row'></div>").html(content);
 								$("#discuss").append(contentDiv);
 							}

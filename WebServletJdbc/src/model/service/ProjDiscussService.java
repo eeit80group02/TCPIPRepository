@@ -42,8 +42,8 @@ public class ProjDiscussService
 			{
 				questionMember = String.format("[No.%04d] " + questionMemberBean.getLastName() + "小姐",bean.getQuestionMemberId());
 			}
-			
-			jsonObject.put("questionMemberId",questionMember);
+			jsonObject.put("questionMemberId",bean.getQuestionMemberId());
+			jsonObject.put("questionMember",questionMember);
 			jsonObject.put("questionMemberContent",bean.getQuestionMemberContent().toString());
 			
 			java.util.Date questionTime = bean.getQuestionMemberTime();
@@ -52,7 +52,9 @@ public class ProjDiscussService
 			
 			if(bean.getAnswerMemberId() != null)
 			{
-				jsonObject.put("answerMemberId",bean.getAnswerMemberId().toString());
+
+				jsonObject.put("answerMemberId",bean.getAnswerMemberId());
+				jsonObject.put("answerMember","發起者");
 				jsonObject.put("answerMemberContent",bean.getAnswerMemberContent().toString());
 				
 				java.util.Date answerTime = bean.getAnswerMemberTime();
