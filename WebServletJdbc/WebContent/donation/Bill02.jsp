@@ -652,24 +652,26 @@
 							});
 						</script>
 						<!-- 宅配被隱藏end -->
-						<button type="button" id="page03Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="上一步"><i class="small material-icons">keyboard_arrow_left</i></a>
+
+
+						<button type="button" id="page02Prev" class="btn btn-small btn-floating">
+							<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="上一步"><i class="small material-icons">keyboard_arrow_left</i></a>
 						</button>
 
-						<button type="button" id="page03Clean" class="btn btn-small btn-floating">
+						<button type="button" id="page02Clean" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
 						</button>
 
 						<button type="submit" id="btnSend" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="確認送出"><i class="small material-icons">done</i></a>
 						</button>
+						<button type="submit" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
+						</button>
 					</form>
 
 					<div id="result"></div>
 
-					<button type="submit" id="page03Ok" class="btn btn-small btn-floating" onclick="Button1Click()">
-						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-					</button>
 
 					<!-- 進行資料庫存取訂單 -->
 					<script>
@@ -838,7 +840,6 @@
 	<!-- 宅配通 bottom start -->
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
-	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
 
 	<!-- 一鍵Demo -->

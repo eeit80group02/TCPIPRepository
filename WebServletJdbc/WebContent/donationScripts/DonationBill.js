@@ -97,62 +97,56 @@ $(window).load(function() {
 	// 換頁系列 end
 
 	// 同步會員資料
-	$("#test3 #buttonRight01").click(function() {
-		var textLeft01 = $("#test3 input[id='textLeft01']").val();
-		var textLeft02 = $("#test3 input[id='textLeft02']").val();
-		var textLeft03 = $("#test3 input[id='textLeft03']").val();
-		var textLeft04 = $("#test3 input[id='textLeft04']").val();
-		var textLeft05 = $("#test3 input[id='textLeft05']").val();
+	$("#test2 #buttonRight01").click(function() {
+		var textLeft01 = $("#test2 input[id='textLeft01']").val();
+		var textLeft02 = $("#test2 input[id='textLeft02']").val();
+		var textLeft03 = $("#test2 input[id='textLeft03']").val();
+		var textLeft04 = $("#test2 input[id='textLeft04']").val();
+		var textLeft05 = $("#test2 input[id='textLeft05']").val();
 
-		$("#bodyContent input[id='txtOcname']").val(textLeft01);
-		$("#bodyContent input[id='txtOaddress']").val(textLeft02);
-		$("#bodyContent input[id='txtOtel']").val(textLeft03);
-		$("#bodyContent input[id='txtOmobile']").val(textLeft04);
-		$("#bodyContent input[id='txtOemail']").val(textLeft05);
+		$("#test2 input[id='txtOcname']").val(textLeft01);
+		$("#test2 input[id='txtOaddress']").val(textLeft02);
+		$("#test2 input[id='txtOtel']").val(textLeft03);
+		$("#test2 input[id='txtOmobile']").val(textLeft04);
+		$("#test2 input[id='txtOemail']").val(textLeft05);
 
-		$("#bodyContent #textRightLable01").attr("class", "active");
-		$("#bodyContent #textRightLable02").attr("class", "active");
-		$("#bodyContent #textRightLable03").attr("class", "active");
-		$("#bodyContent #textRightLable04").attr("class", "active");
-		$("#bodyContent #textRightLable05").attr("class", "active");
-
-		// 地址同步
-		// var addressLeft01 = $("#test2 #addressLeft01").val();
-		// var addressLeft02 = $("#test2 #addressLeft02").val();
-		// $("#test2 #addressRight01").val(addressLeft01);
-		// $("#test2 #addressRight02").val(addressLeft02);
+		$("#test2 #textRightLable01").attr("class", "active");
+		$("#test2 #textRightLable02").attr("class", "active");
+		$("#test2 #textRightLable03").attr("class", "active");
+		$("#test2 #textRightLable04").attr("class", "active");
+		$("#test2 #textRightLable05").attr("class", "active");
 
 		Materialize.toast('<i class="tiny material-icons">check_circle</i>&nbsp;<span>已同步資料</span>', 1800, 'rounded');
 	});
 
-	// 第三頁輸入資料判斷
-	$("#test3 input[id='txtOcname']").blur(checkTxtOcname);
+	// 第二頁輸入資料判斷
+	$("#test2 input[id='txtOcname']").blur(checkTxtOcname);
 
 	function checkTxtOcname() {
 		// 名字判斷
-		var txtOcname = $("#test3 input[id='txtOcname']").val();
+		var txtOcname = $("#test2 input[id='txtOcname']").val();
 		if (/^[a-zA-Z\u4e00-\u9fa5]{2,15}$/.test(txtOcname)) {
 		} else {
 			Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>姓名格式錯誤</span>', 1800, 'rounded');
 		}
 	}
 
-	$("#test3 input[id='txtOaddress']").blur(checkTxtOaddress);
+	$("#test2 input[id='txtOaddress']").blur(checkTxtOaddress);
 
 	function checkTxtOaddress() {
 		// 地址判斷
-		var txtOaddress = $("#test3 input[id='txtOaddress']").val();
+		var txtOaddress = $("#test2 input[id='txtOaddress']").val();
 		if (/^[\u4e00-\u9fa5]/.test(txtOaddress) && /[a-zA-Z0-9\u4e00-\u9fa5].{3,25}$/.test(txtOaddress)) {
 		} else {
 			Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>地址格式錯誤</span>', 1800, 'rounded');
 		}
 	}
 
-	$("#test3 input[id='txtOtel']").blur(checkTxtOtel).keyup(checkTxtOtelKey).keydown(checkTxtOtelKey);
+	$("#test2 input[id='txtOtel']").blur(checkTxtOtel).keyup(checkTxtOtelKey).keydown(checkTxtOtelKey);
 
 	function checkTxtOtel() {
 		// 電話判斷
-		var txtOtel = $("#test3 input[id='txtOtel']").val();
+		var txtOtel = $("#test2 input[id='txtOtel']").val();
 
 		if (/^[0-9\-\ \#\.\(\)].{5,12}/.test(txtOtel) && /^[0-9]/.test(txtOtel)) {
 		} else {
@@ -162,16 +156,16 @@ $(window).load(function() {
 
 	function checkTxtOtelKey() {
 		// 電話判斷變空白
-		var checkTxtOtelKey = $("#test3 input[id='txtOtel']").val();
+		var checkTxtOtelKey = $("#test2 input[id='txtOtel']").val();
 		if (/[a-z]/.test(checkTxtOtelKey) || /[\u4e00-\u9fa5]/.test(checkTxtOtelKey)) {
-			$("#test3 input[id='txtOtel']").val(checkTxtOtelKey.substring(0, checkTxtOtelKey.length - 1));
+			$("#test2 input[id='txtOtel']").val(checkTxtOtelKey.substring(0, checkTxtOtelKey.length - 1));
 		}
 	}
 
-	$("#test3 input[id='txtOmobile']").blur(checkTxtOmobile).keyup(checkTxtOmobileKey).keydown(checkTxtOmobileKey);
+	$("#test2 input[id='txtOmobile']").blur(checkTxtOmobile).keyup(checkTxtOmobileKey).keydown(checkTxtOmobileKey);
 	function checkTxtOmobile() {
 		// 手機判斷
-		var checkTxtOmobile = $("#test3 input[id='txtOmobile']").val();
+		var checkTxtOmobile = $("#test2 input[id='txtOmobile']").val();
 
 		if (/^09/.test(checkTxtOmobile) && /^[0-9]{10}$/.test(checkTxtOmobile)) {
 		} else {
@@ -180,22 +174,28 @@ $(window).load(function() {
 	}
 	function checkTxtOmobileKey() {
 		// 手機判斷變空白
-		var checkTxtOmobile = $("#test3 input[id='txtOmobile']").val();
+		var checkTxtOmobile = $("#test2 input[id='txtOmobile']").val();
 
 		if (isNaN(checkTxtOmobile)) {
-			$("#test3 input[id='txtOmobile']").val(checkTxtOmobile.substring(0, checkTxtOmobile.length - 1));
+			$("#test2 input[id='txtOmobile']").val(checkTxtOmobile.substring(0, checkTxtOmobile.length - 1));
 		}
 	}
 
-	$("#test3 input[id='txtOemail']").blur(checkTxtOemail);
+	$("#test2 input[id='txtOemail']").blur(checkTxtOemail);
 	function checkTxtOemail() {
 		// E-mail判斷
-		var checkTxtOemail = $("#test3 input[id='txtOemail']").val();
+		var checkTxtOemail = $("#test2 input[id='txtOemail']").val();
 
 		if (/^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+\.)+[a-zA-Z0-9.-]{2,4}$/.test(checkTxtOemail)) {
 		} else {
 			Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>E-mail 格式錯誤</span>', 1800, 'rounded');
 		}
 	}
+
+	$("#page02Next").css("display", "none");
+	$("#btnSend").click(function() {
+//		$(this).css("display", "none");
+		$("#page02Next").css("display", "inline");
+	});
 
 }(jQuery));
