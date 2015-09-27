@@ -430,7 +430,7 @@
 		  										
 		  					if(value.answerMemberId == "null"){
 								content += "<a href='#askmodal' id='projDiscuss" + value.projDiscussId + "' class='btn red white-text right' style='font-family:微軟正黑體;font-size:1.8em;font-weight:600'>回覆</a>"
-		  						$("#projDiscuss" + value.projDiscussId).leanModal();
+		  						$("#projDiscuss1").leanModal();
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
