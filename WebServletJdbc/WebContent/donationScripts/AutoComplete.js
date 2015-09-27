@@ -68,5 +68,8 @@ $(function() {
 	function div01hide() {
 		$("#div01").css("display", "none");
 	}
+	$("#searchIcon").click(function() {
+		
+	});
 
 });
