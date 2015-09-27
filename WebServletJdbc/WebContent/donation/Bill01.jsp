@@ -70,8 +70,8 @@
 					<br>
 					<ul class="tabs">
 						<li class="tab col s3" id="pageTab01"><a href="#test1" class="active">受贈單位</a></li>
-						<li class="tab col s3" id="pageTab02"><a href="#test2" >捐獻明細</a></li>
-						<li class="tab col s3" id="pageTab04"><a href="#test3" >完成捐獻</a></li>
+						<li class="tab col s3 disabled" id="pageTab02"><a href="#test2" >捐獻明細</a></li>
+						<li class="tab col s3 disabled" id="pageTab04"><a href="#test3" >完成捐獻</a></li>
 					</ul>
 					<br>
 
