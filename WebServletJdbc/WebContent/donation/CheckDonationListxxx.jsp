@@ -64,7 +64,7 @@
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="#modal1" class="modal-trigger">登入</a></li>
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>

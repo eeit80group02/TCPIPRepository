@@ -94,7 +94,7 @@
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="#modal1" class="modal-trigger">登入</a></li>
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -106,6 +106,7 @@
 		</div>
 		</nav>
 	</div>
+	
 	<br>
 	<!-- 我就是標頭 end -->
 	<center>
@@ -172,7 +173,7 @@
 										<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
 										</td>
 										<td>${item.value.supplyStatus}</td>
-										<td style="word-break: break-all;"><div id="remark" class="remark">${item.value.demandContent}</div></td>
+										<td style="word-break: break-all;"><div id="remark" class="remark01">${item.value.demandContent}</div></td>
 
 										<td>
 											<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
