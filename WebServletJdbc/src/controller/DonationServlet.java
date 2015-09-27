@@ -42,7 +42,6 @@ public class DonationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("@@123");
 		// 必須學校登入會員才可使用
 		HttpSession session = request.getSession(false);
 		if (session == null) {
@@ -156,7 +155,6 @@ public class DonationServlet extends HttpServlet {
 				}
 			}
 		}
-		System.out.println("@@456");
 		// 2.驗證資料
 		if (schoolId == 0) {
 			errorMsgs.put("errorSchoolId", "系統須帶入schoolId");
@@ -197,7 +195,6 @@ public class DonationServlet extends HttpServlet {
 			rd.forward(request, response);
 			return;
 		}
-
 		// 3.資料轉換
 		if (!choice.equals("delete")) {
 			originalDemandNumber = Integer.parseInt(originalDemandNumberStr);
@@ -205,7 +202,6 @@ public class DonationServlet extends HttpServlet {
 		if (choice.equals("update") || choice.equals("delete")) {
 			donationId = Integer.parseInt(donationIdStr);
 		}
-
 		// 輸入需求等於剩餘需求，依學校更新而產生的Bean
 		DonationBean donationBean = new DonationBean();
 		donationBean.setDonationId(donationId);
@@ -252,9 +248,7 @@ public class DonationServlet extends HttpServlet {
 			}
 		}
 		
-		
 		if (choice.equals("insert")) {
-			System.out.println("@@789");
 			// 4.永續層存取
 			DonationService service = new DonationService();
 			donationBean = service.saveDemand(donationBean);
