@@ -88,8 +88,6 @@
 		$(function() {
 			//mainboard最小高度
 			$("#mainboard").css("min-height","80vh");
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//提示頁面主題欄的高度

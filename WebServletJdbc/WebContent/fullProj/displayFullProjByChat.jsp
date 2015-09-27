@@ -286,7 +286,7 @@
 			<!-- 提問用modal -->
 			  <div id="askmodal" class="modal bottom-sheet" style="min-height:40vh;">
 			    <div class="modal-content">
-			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要留言...</h4>
+			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要<span class="red-text">留言</span>...</h4>
 			      <textarea id="content" rows="10" cols="40" style="height:10em;" name=""></textarea>
 			    </div>
 			    <div class="modal-footer">

@@ -41,7 +41,7 @@
 					<img class="card-panel hoverable" id="view" src="${member.base64String}" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
 				</div>
 				<div class="row">
-					<a href="<c:url value='personmanager.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" style="width: 5.25cm;">
+					<a href="<c:url value='personmanager.jsp' />" class="col l12 btn-large red white-text" style="width: 5.25cm;font-weight:600;font-size:1.4em;">
 						<span  style="font-family:微軟正黑體;font-size:1.2em;">
 							回會員中心
 						</span>
