@@ -23,7 +23,7 @@ $(window).load(function() {
 		Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>按 Esc 或 <i class="tiny material-icons">done</i> 關閉視窗</span>', 2000, 'rounded');
 	});
 	// 第三頁的小叮嚀
-	$("#test3 button[data-target='modalNote03']").one('mouseover', function() {
+	$("#bodyContent button[data-target='modalNote03']").one('mouseover', function() {
 		// 第一次移過去等同 click
 		$(this).trigger($.Event("click"));
 		Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>按 Esc 或 <i class="tiny material-icons">done</i> 關閉視窗</span>', 2000, 'rounded');
@@ -104,17 +104,17 @@ $(window).load(function() {
 		var textLeft04 = $("#test3 input[id='textLeft04']").val();
 		var textLeft05 = $("#test3 input[id='textLeft05']").val();
 
-		$("#test3 input[id='txtOcname']").val(textLeft01);
-		$("#test3 input[id='txtOaddress']").val(textLeft02);
-		$("#test3 input[id='txtOtel']").val(textLeft03);
-		$("#test3 input[id='txtOmobile']").val(textLeft04);
-		$("#test3 input[id='txtOemail']").val(textLeft05);
+		$("#bodyContent input[id='txtOcname']").val(textLeft01);
+		$("#bodyContent input[id='txtOaddress']").val(textLeft02);
+		$("#bodyContent input[id='txtOtel']").val(textLeft03);
+		$("#bodyContent input[id='txtOmobile']").val(textLeft04);
+		$("#bodyContent input[id='txtOemail']").val(textLeft05);
 
-		$("#test3 #textRightLable01").attr("class", "active");
-		$("#test3 #textRightLable02").attr("class", "active");
-		$("#test3 #textRightLable03").attr("class", "active");
-		$("#test3 #textRightLable04").attr("class", "active");
-		$("#test3 #textRightLable05").attr("class", "active");
+		$("#bodyContent #textRightLable01").attr("class", "active");
+		$("#bodyContent #textRightLable02").attr("class", "active");
+		$("#bodyContent #textRightLable03").attr("class", "active");
+		$("#bodyContent #textRightLable04").attr("class", "active");
+		$("#bodyContent #textRightLable05").attr("class", "active");
 
 		// 地址同步
 		// var addressLeft01 = $("#test2 #addressLeft01").val();

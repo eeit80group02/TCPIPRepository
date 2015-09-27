@@ -147,11 +147,11 @@ select:disabled {
 	width: 45%;
 }
 
-#test2 #ddlCity, #test2 #ddlCity1, #test3 #addressLeft01 {
+#test2 #ddlCity, #test2 #ddlCity1, #test2 #addressLeft01 {
 	float: left;
 }
 
-#test3 #ddlArea, #test3 #addressLeft02, #test3 #ddlOcname_ex, #test3 #ddlArea1, #test3 #textLeft06 {
+#test2 #ddlArea, #test2 #addressLeft02, #test2 #ddlOcname_ex, #test3 #ddlArea1, #test3 #textLeft06 {
 	float: right;
 }
 
@@ -226,30 +226,16 @@ select:disabled {
 	font-size: 1.4em;
 }
 
-#test2 .modal-content h4, #test1 .modal-content h4 {
-	text-align: center;
-}
-
-#test3 #modalNote03 td:nth-child(1) {
-	background-color: #ff7575;
-	font-size: 1.2em;
-}
-
-#test3 #modalNote03 {
+#test2 #modalNote03 {
 	color: black;
 }
 
-#test3 #modalNote03 td {
-	text-align: center;
-	font-size: 1em;
-}
-
-#test3 #modalNote03 ol li {
+#test2 #modalNote03 .modal-content {
 	text-align: left;
 	font-size: 1.4em;
 }
 
-#test3 .someTitle {
+#test2 .someTitle {
 	font-size: 1.2em;
 	text-align: left;
 }
