@@ -39,4 +39,11 @@
 		$("#test3 #textRightLable06").attr("class", "active");
 
 	});
+
+	// OneDemandByMember
+	$("#OneClickOneDemandByMember").click(function() {
+		$("#your-message").val("請問哪個時間方便收件呢？");
+		$("#sayBoardText").attr("class", "active");
+	});
+
 }(jQuery));

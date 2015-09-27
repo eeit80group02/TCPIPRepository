@@ -155,15 +155,17 @@
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
 			<div class="row" id="sayBoard">
-				<div class="col-md-10">
+				<div class="col-md-9">
 					<div class="input-field col m12 s12">
 						<textarea id="your-message" class="materialize-textarea"></textarea>
-						<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
-
+						<label for="your-message" class="" id="sayBoardText"><i class="medium material-icons">comment</i></label>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<div id="messageGO">
+						<button type="button" id="OneClickOneDemandByMember" class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+						</button>
 						<button type="reset" class="btn btn-small btn-floating" id="send-message">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
 						</button>
@@ -176,10 +178,10 @@
 			</div>
 		</form>
 
-		<div id="saySomething"></div>
 		<div id="QandA" class="col s12 m9">
 			<!-- Q&A -->
 			<ul class="collapsible" data-collapsible="expandable">
+				<li id="saySomethingLi"></li>
 				<c:forEach var='item' items='${AllMessages}' varStatus="vs">
 					<li id='li${vs.index}'>
 
@@ -217,7 +219,7 @@
 		<script>
 			var addBtn = document.getElementById("send-message");
 			var QandA = document.getElementById("QandA");
-			var saySomething = document.getElementById("saySomething");
+			var saySomethingLi = document.getElementById("saySomethingLi");
 			var textByMember = document.getElementById("your-message");
 
 			var xhr = null;
@@ -244,12 +246,6 @@
 						var memberId = datas[0];
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];
-
-						var xulx = document.createElement("ul");
-						xulx.setAttribute("class", "collapsible");
-						xulx.setAttribute("data-collapsible", "expandable");
-
-						var xlix = document.createElement("li");
 
 						//上半部 start
 						var xbr1x = document.createElement("br");
@@ -293,32 +289,16 @@
 
 						xdiv3x.appendChild(xp1x);
 
-						xlix.appendChild(xdiv1x);
-						xlix.appendChild(xdiv3x);
-
-						xulx.appendChild(xlix);
-
-						saySomething.appendChild(xulx);
+						saySomethingLi.appendChild(xdiv1x);
+						saySomethingLi.appendChild(xdiv3x);
 
 						$(window).load(function() {
-							var s1 = {
-								'color' : 'green',
-								'background-color' : 'orange',
-								'width' : '400px',
-								'text-align' : 'center'
-							};
-							var s2 = {
-								'color' : 'purple',
-								'background-color' : 'cyan',
-								'width' : '400px',
-								'text-align' : 'center'
-							};
-							$("#saySomething .collapsible-header").click(function() {
-								var xxx = $("#saySomething .collapsible-body").attr("style");
+							$("#saySomethingLi .collapsible-header").click(function() {
+								var xxx = $("#saySomethingLi .collapsible-body").attr("style");
 								if (xxx == "display: block;") {
-									$("#saySomething .collapsible-body").attr("style", "display: none;");
+									$("#saySomethingLi .collapsible-body").attr("style", "display: none;");
 								} else {
-									$("#saySomething .collapsible-body").attr("style", "display: block;");
+									$("#saySomethingLi .collapsible-body").attr("style", "display: block;");
 								}
 							});
 						}(jQuery));
@@ -328,14 +308,10 @@
 					}
 				}
 			}
-			$(function() {
-				$("#send-message").click(function() {
-					$("#your-message").val("");
-				});
-			}(jQuery));
 		</script>
 	</center>
 	<iframe name='hidden_frame' style='width: 0px; height: 0px'></iframe>
 	<script type="text/javascript" src="../donationScripts/DonationQA.js"></script>
+	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 </body>
 </html>

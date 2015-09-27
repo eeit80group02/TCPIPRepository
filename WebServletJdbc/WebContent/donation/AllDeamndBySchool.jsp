@@ -95,6 +95,30 @@
 	<center>
 		<div id="donateBody">
 			<br>
+			<!-- 操作小叮嚀 start -->
+			<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
+				<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
+			</button>
+			<!-- Modal Structure -->
+			<div id="modalNote01" class="modal modal-fixed-footer">
+				<div class="modal-content">
+					<h4>操作小叮嚀：</h4>
+					<ol>
+						<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">assignment</i></a>&nbsp;單擊左鍵，可以查看捐獻記錄。
+						</li><br>
+						<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>&nbsp;單擊左鍵，可以進行修改內容。
+						</li><br>
+						<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>&nbsp;單擊左鍵，進入管理問與答。
+						</li>
+					</ol>
+				</div>
+				<div class="modal-footer">
+					<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+				</div>
+			</div>
+			<!-- 操作小叮嚀 end -->
+
+			<br>
 			<div class="col s12">
 				<br>
 				<ul class="tabs">
@@ -333,6 +357,6 @@
 
 		</div>
 	</center>
-
+	<script type="text/javascript" src="../donationScripts/AllDeamnBySchool.js"></script>
 </body>
 </html>

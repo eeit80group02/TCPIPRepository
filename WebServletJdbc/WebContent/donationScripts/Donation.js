@@ -74,7 +74,7 @@ $(function() {
 		$item.fadeOut(function() {
 			$item.find("a.ui-icon-refresh").remove().end().css("width", "190px").find("img").css("height", "124px").end().appendTo($gallery).fadeIn().find(".footIcin").append(trash_icon);
 		});
-		$item.find(".fiximg div").css('visibility', 'visible').css('height', '45px');
+		$item.find(".fiximg div").css('visibility', 'visible').css('height','45px');
 	}
 
 	// image preview function, demonstrating the ui.dialog used as a modal
