@@ -2,7 +2,9 @@ package model.service;
 
 import global.GlobalService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -263,6 +265,21 @@ public class FullProjService
 		}
 		return false;
 	}
+	
+	public String getDeadline(java.util.Date activityStartTime){
+		String result = null;
+		
+		if(activityStartTime != null){
+			Calendar c = Calendar.getInstance();
+			c.setTime(activityStartTime);
+			c.add(Calendar.MONTH, -2);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			result = sdf.format(c.getTime());
+		}
+		
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		FullProjService service = new FullProjService();
