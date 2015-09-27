@@ -36,21 +36,44 @@
 	<c:if test="${LoginOK.beanName.equals('school') }">
 		<c:redirect url="/error/permission.jsp" />
 	</c:if>
-	
+
 	<!-- 我就是標頭 start -->
 	<div class="navbar-fixed">
 		<nav>
-			<div class="nav-wrapper">
-				<ul id="nav-mobile1" class="left hide-on-med-and-down">
-					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-					<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
-				</ul>
+		<div class="nav-wrapper">
+			<ul id="nav-mobile1" class="left hide-on-med-and-down">
+				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+			</ul>
 
-				<a href="#" class="brand-logo center">捐獻明細</a>
-				<ul id="nav-mobile3" class="right hide-on-med-and-down">
-					<li><a href="#"><i class="large material-icons">person</i></a></li>
-				</ul>
-			</div>
+			<a href="#" class="brand-logo center">捐獻明細</a>
+			<ul id="nav-mobile3" class="right hide-on-med-and-down">
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+					<ul id="dropdownList03" class="dropdown-content">
+						<!-- 有登入時，會有學校頁面或者個人頁面 -->
+						<c:if test="${not empty LoginOK}">
+							<c:if test="${LoginOK.beanName.equals('member')}">
+								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+							</c:if>
+
+							<c:if test="${LoginOK.beanName.equals('school')}">
+								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+							</c:if>
+						</c:if>
+						<li class="divider"></li>
+						<!-- 沒登入時，必須看到登入按鈕 -->
+						<c:choose>
+							<c:when test="${empty LoginOK}">
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+							</c:when>
+
+							<c:otherwise>
+								<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul></li>
+			</ul>
+		</div>
 		</nav>
 	</div>
 	<br>
@@ -115,103 +138,103 @@
 							</thead>
 							<tbody>
 								<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
-										<tr>
-											<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="${item.value.supplyName}" title="${item.value.supplyName}"></td>
-											<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號</td>
-											<td>${item.value.supplyStatus}</td>
-											<td style="word-break: break-all;"><div id="remark" class="remark">${item.value.demandContent}</div></td>
-											
-											<td>
-												<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
-													<i class="small material-icons">navigate_before</i>
-												</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.value.originalDemandUnit}</label>
-												<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
-													<i class="small material-icons">navigate_next</i>
-												</button>
-											</td>
-											<td class="deleteRow">
-												<button type="button" class="btn btn-small btn-floating">
-													<i class="small material-icons">delete</i>
-												</button>
-											</td>
-									
-											<script type="text/javascript">
-											
-												$(window).load(function() {
-													var step = 1; // 默認步長
-													var changeStepTimer = null; // 改變速度計數器
-													var setValueTimer = null; // 設置值計數器
-	
-													/* 改變速度私有方法 */
-													var changeStep = function() {
-														// 每隔 2 秒速度加 5
-														changeStepTimer = setInterval(function() {
-															step += 5
-														}, 2000);
+									<tr>
+										<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="${item.value.supplyName}" title="${item.value.supplyName}"></td>
+										<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
+										</td>
+										<td>${item.value.supplyStatus}</td>
+										<td style="word-break: break-all;"><div id="remark" class="remark">${item.value.demandContent}</div></td>
+
+										<td>
+											<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
+												<i class="small material-icons">navigate_before</i>
+											</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.value.originalDemandUnit}</label>
+											<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
+												<i class="small material-icons">navigate_next</i>
+											</button>
+										</td>
+										<td class="deleteRow">
+											<button type="button" class="btn btn-small btn-floating">
+												<i class="small material-icons">delete</i>
+											</button>
+										</td>
+
+										<script type="text/javascript">
+											$(window).load(function() {
+												var step = 1; // 默認步長
+												var changeStepTimer = null; // 改變速度計數器
+												var setValueTimer = null; // 設置值計數器
+
+												/* 改變速度私有方法 */
+												var changeStep = function() {
+													// 每隔 2 秒速度加 5
+													changeStepTimer = setInterval(function() {
+														step += 5
+													}, 2000);
+												}
+
+												/* 設置值私有方法 */
+												var setAddValue = function() {
+													// 													var input = $("#text${vs.index}").val();
+													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
+													setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
+												}
+
+												/* 設置值私有方法 */
+												var setSubValue = function() {
+													// 													var input = $("#text${vs.index}").val();
+													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
+													setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
+												}
+
+												/* 按下鼠標處理函數 */
+												$("#buttonSub${vs.index}").mousedown(function() {
+													// 													var input = $("#text${vs.index}").val();
+													// 正規表示法找整數
+													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+														changeStep();
+														setSubValue();
+													} else {
+														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														$("#text${vs.index}").val("1");
 													}
-	
-													/* 設置值私有方法 */
-													var setAddValue = function() {
-	// 													var input = $("#text${vs.index}").val();
-														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
-														setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
+
+												});
+
+												/* 按下鼠標處理函數 */
+												$("#buttonAdd${vs.index}").mousedown(function() {
+													// 													var input = $("#text${vs.index}").val();
+													// 正規表示法找整數
+													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+														changeStep();
+														setAddValue();
+
+													} else {
+														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														$("#text${vs.index}").val(1);
 													}
-	
-													/* 設置值私有方法 */
-													var setSubValue = function() {
-	// 													var input = $("#text${vs.index}").val();
-														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
-														setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
+
+												});
+
+												/* 鬆開鼠標處理函數 */
+												$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
+
+												function checkText() {
+													var input = $("#text${vs.index}").val();
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+													} else {
+														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														$("#text${vs.index}").empty();
+														$("#text${vs.index}").val("1");
 													}
-	
-													/* 按下鼠標處理函數 */
-													$("#buttonSub${vs.index}").mousedown(function() {
-	// 													var input = $("#text${vs.index}").val();
-														// 正規表示法找整數
-														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-															changeStep();
-															setSubValue();
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").val("1");
-														}
-	
-													});
-	
-													/* 按下鼠標處理函數 */
-													$("#buttonAdd${vs.index}").mousedown(function() {
-	// 													var input = $("#text${vs.index}").val();
-														// 正規表示法找整數
-														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-															changeStep();
-															setAddValue();
-															
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").val(1);
-														}
-	
-													});
-	
-													/* 鬆開鼠標處理函數 */
-													$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
-	
-													function checkText() {
-														var input = $("#text${vs.index}").val();
-														if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").empty();
-															$("#text${vs.index}").val("1");
-														}
-														clearInterval(changeStepTimer);
-														clearTimeout(setValueTimer);
-														step = 1;
-													}
-												}(jQuery));
-												</script>
-											</tr>
-									</c:forEach>
+													clearInterval(changeStepTimer);
+													clearTimeout(setValueTimer);
+													step = 1;
+												}
+											}(jQuery));
+										</script>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						<br> <br>
@@ -327,9 +350,7 @@
 								</select> <select class="browser-default" id="addressRight02" name="address02">
 									<option value="白河區">白河區</option>
 									<option value="礁溪鄉">礁溪鄉</option>
-								</select> <br>
-								<br>
-								<br>
+								</select> <br> <br> <br>
 								<div class="input-field col m12 s12">
 									<input type="text" id="textRight02" required="required" autofocus="autofocus" autocomplete="off"><label for="textRight02" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="glyphicon glyphicon-info-sign" id="infoForDonate"></span>&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
 								</div>
@@ -645,33 +666,33 @@
 	<!-- 必須最後載入才有效果 -->
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<!-- 標頭專用 bottom end -->
-	
+
 	<!-- 檢查是否被刪除 -->
 	<script type="text/javascript">
-		$("#page01Mid").click(function () {
-		var qqq= $("#donationBill tr:eq(1) ").attr("style");
-		alert(qqq);
-	});
+		$("#page01Mid").click(function() {
+			var qqq = $("#donationBill tr:eq(1) ").attr("style");
+			alert(qqq);
+		});
 	</script>
-	
+
 	<!-- 訂單送出 -->
-		<form action='<c:url value="checkOrder.do?linkto=checkBooking"/>' method='POST' target='#drop-a-line'>
-			<input type='submit' name='fillOrder' value='booking' id='booking'>
-		</form>
-		
-		<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
-			<form action='<c:url value="checkOrder.do?linkto=checkBooking"/>' method='POST'>
+	<form action='<c:url value="checkOrder.do?linkto=checkBooking"/>' method='POST' target='#drop-a-line'>
+		<input type='submit' name='fillOrder' value='booking' id='booking'>
+	</form>
+
+	<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'>
+		<form action='<c:url value="checkOrder.do?linkto=checkBooking"/>' method='POST'>
 			<script type="text/javascript">
 				(function($) {
 					$("#page01Next").click(function() {
 						var kk = $('#donationBill tr:eq("${vs.index+1}")').attr("style");
 						if (!kk) {
 							var donationId = "${item.value.donationId}";
-							var donateAmount = $("#text${vs.index}").val();			
-							
+							var donateAmount = $("#text${vs.index}").val();
+
 							xhr = new XMLHttpRequest();
 							if (xhr != null) {
-								xhr.addEventListener("readystatechange", function(donateAmount){
+								xhr.addEventListener("readystatechange", function(donateAmount) {
 									if (xhr.readyState == 4) {
 										if (xhr.status == 200) {
 											lists = xhr.responseText;
@@ -681,16 +702,15 @@
 									}
 								});
 								xhr.open("POST", "cart.do", true);
-								xhr.setRequestHeader("Content-Type",
-										"application/x-www-form-urlencoded")
-								xhr.send("toCart=update&donationId="+"${item.value.donationId}"+"&donateAmount="+donateAmount);
+								xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+								xhr.send("toCart=update&donationId=" + "${item.value.donationId}" + "&donateAmount=" + donateAmount);
 							}
 						}
 					});
 				}(jQuery));
 			</script>
-			</form>
-		</c:forEach>
-	
+		</form>
+	</c:forEach>
+
 </body>
 </html>

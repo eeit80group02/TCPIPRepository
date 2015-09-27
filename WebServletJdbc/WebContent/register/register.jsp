@@ -43,7 +43,7 @@
 
 <main>
 	<div class="row">
-	<!-- 檢查表單填寫情況 -->
+		<!-- 檢查表單填寫情況 -->
 		<div class="col l3" id="validateform" style="position:absolute;">
 	        <div class="card-panel hoverable" style="padding:0;margin:0;">
 			  <ul id="formul" class="collapsible" data-collapsible="accordion" style="font-family:微軟正黑體;font-weight:600;margin:0;">
@@ -134,12 +134,13 @@
 								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture">
 							</div>									
 							<!-- 身分證驗證按鈕 -->
-							 <button data-target="modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
+							 <button data-target="identityVarifyModal" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
 <!-- 							 <a href="#modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</a> -->
 						</div>
 						<!-- 身分證字號 -->
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly">
+<!-- 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required> -->
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
 							<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
@@ -147,7 +148,7 @@
 						</div>
 						<!-- 帳號 -->
 						<div class="input-field row">
-							<input id="accounts" type="text" class="validate" name="account" required>
+							<input id="accounts" type="text" class="validate" name="account" value="${param.account }" required>
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
 							<label for="accounts" style="font-size:1.3em;font-weight:600;">帳號</label>
@@ -173,7 +174,7 @@
 				<div class="row">
 				<!-- 姓氏 -->
 					<div class="col l4 input-field left" style="padding-left:0;">
-						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastname}">
+						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastName}">
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
 						<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
@@ -181,7 +182,7 @@
 				
 				<!-- 名字 -->
 					<div class="col l4 input-field left">
-						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstname}" >
+						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstName}" >
 <!-- 													後端錯誤訊息顯示 -->
 						<font color="red" size="-1">${MsgErr.errorFirstNameEmpty}</font>
 						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
@@ -200,16 +201,16 @@
 				
 				<!-- 電話 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
-						<input id="idNumber" type="text" class="validate" name="phone"  value="${param.phone}">
+						<input id="phone" type="text" class="validate" name="phone"  value="${param.phone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
-						<label for="idNumber" style="font-size:1.3em;font-weight:600;">室內電話</label>
+						<label for="phone" style="font-size:1.3em;font-weight:600;">室內電話</label>
 											
 					</div>
 					
 				<!-- 手機 -->
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
-						<input id="phone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
+						<input id="cellPhone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
 						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
@@ -264,7 +265,7 @@
 	</div>
 </main>
 <!-- 身分驗證用modal --> 
-		<div id="modal2" class="modal">
+		<div id="identityVarifyModal" class="modal">
 		   <div class="modal-content blue lighten-5" style="height:100%;width:100%;">
 	<!-- 主要版型 -->
 	<div class="row">
@@ -476,6 +477,9 @@
 		    	};
 		    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
 			
+		    //註冊modal
+		   	$("#idcardnumberbtn").leanModal();
+		    
 			//mouseover時，單個input元素被舉起
 			$(".input-field").addClass("hoverable");
 
@@ -506,17 +510,17 @@
 					$(ele1).on({"focus":function(e){
 							$(ele2).animate({
 								height:($("#liheight").height()*(ele3.length))
-							}, 1000 );
+							}, 150 );
 							$(ele3).animate({
 								opacity:"1"
-							},500);							
+							},150);							
 					},"blur":function(e){
 							$(ele2).animate({
 								height:"1px"
-							  }, 1000 );
+							  }, 150 );
 							$(ele3).animate({
 								opacity:"0"
-							},500);								
+							},150);								
 							
 					}})
 				};
@@ -525,7 +529,7 @@
 				makeanimate($("#passwords"),$( "#pswdvalidatediv" ),$("#pswdvalidatediv>li"));
 				makeanimate($("#check"),$( "#chkvalidatediv" ),$("#chkvalidatediv>li"));
 				makeanimate($("#phone"),$( "#phonevalidatediv" ),$("#phonevalidatediv>li"));
-				makeanimate($("#idNumber"),$( "#phonevalidatediv" ),$("#phonevalidatediv>li"));
+				makeanimate($("#cellPhone"),$( "#phonevalidatediv" ),$("#phonevalidatediv>li"));
 				makeanimate($("#birthday"),$( "#birthvalidatediv" ),$("#birthvalidatediv>li"));
 				makeanimate($("#email"),$( "#emailvalidatediv" ),$("#emailvalidatediv>li"));
 				
@@ -741,13 +745,13 @@
 					})
 					
 					//聯絡方式(sevlet內可以判斷格式是否正確再存)
-					$("#idNumber").on("keyup",function(){
+					$("#phone").on("keyup",function(){
 						rule1 = /^(02|03|037|04|049|05|06|07|08|082|0826|0836|089)-[0-9]{5,8}$/
 // 						rule1 = /^[0]{1}(?=.*\d).{9}/
-						var result = rule1.test($("#idNumber").val());
+						var result = rule1.test($("#phone").val());
 						$("body").data("chkphone1",result);
 						
-						if($("#idNumber").val() !== ""){
+						if($("#phone").val() !== ""){
 							if(result){
 								$("#rule3pic2").css("color","#43a047").text("done");
 								$("#rule3text2").css("color","#43a047");	
@@ -772,12 +776,12 @@
 						}
 					});
 					//聯絡方式(手機)
-					$("#phone").on("keyup",function(){
+					$("#cellPhone").on("keyup",function(){
 						rule1 = /^(09)[0-9]{2}-[0-9]{6}$/
-						var result = rule1.test($("#phone").val());
+						var result = rule1.test($("#cellPhone").val());
 						$("body").data("chkphone2",result);
 						
-						if($("#phone").val() !== ""){
+						if($("#cellPhone").val() !== ""){
 							if(result){
 							$("#rule3pic3").css("color","#43a047").text("done");
 							$("#rule3text3").css("color","#43a047");

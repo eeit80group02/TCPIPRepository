@@ -17,7 +17,7 @@
 	<% 
 		session.removeAttribute("LoginOK");
 		session.invalidate();
-// 	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
 	%>
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp"
@@ -36,9 +36,6 @@
 				</div>
 			</div>		
 		</div>
-
-
-		
 	</main>
 
 

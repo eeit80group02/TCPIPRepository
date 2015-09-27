@@ -38,7 +38,7 @@ public class FullProjDAOJdbc implements FullProjDAO
 		}
 	}
 	
-	private static final String SELECT_ALL = "SELECT fullProjId,primaryProjId,schoolDemandId,memberId,schoolId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,location,activityStartTime,activityEndTime,estMember,budget,createDate,projStatus,orgArchitecture,projFileName,projFile,projFileLength,reviews,reviewsContent,schoolConfirm,memberConfirm FROM FullProj";
+	private static final String SELECT_ALL = "SELECT fullProjId,primaryProjId,schoolDemandId,memberId,schoolId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,location,activityStartTime,activityEndTime,estMember,budget,createDate,projStatus,orgArchitecture,projFileName,projFile,projFileLength,reviews,reviewsContent,schoolConfirm,memberConfirm FROM FullProj ORDER BY fullProjId DESC";
 	@Override
 	public List<FullProjBean> getAll()
 	{

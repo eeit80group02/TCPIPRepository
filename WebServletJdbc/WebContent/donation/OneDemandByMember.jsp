@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>OneMemberDemand</title>
+<title>問與答</title>
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -24,7 +24,6 @@
 
 <!-- 自訂 -->
 <link rel="stylesheet" href="../donationStyles/DonationQA.css">
-
 </head>
 <body>
 
@@ -41,9 +40,27 @@
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
-						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
+						<!-- 有登入時，會有學校頁面或者個人頁面 -->
+						<c:if test="${not empty LoginOK}">
+							<c:if test="${LoginOK.beanName.equals('member')}">
+								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+							</c:if>
+
+							<c:if test="${LoginOK.beanName.equals('school')}">
+								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+							</c:if>
+						</c:if>
 						<li class="divider"></li>
-						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+						<!-- 沒登入時，必須看到登入按鈕 -->
+						<c:choose>
+							<c:when test="${empty LoginOK}">
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+							</c:when>
+
+							<c:otherwise>
+								<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul></li>
 			</ul>
 		</div>
@@ -101,7 +118,7 @@
 						</button> &nbsp;
 
 						<button type="button" name='toCart' value='insert' class="btn btn-large btn-floating" id="addItem">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻明細"><i class="medium material-icons">card_giftcard</i></a>
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="medium material-icons">card_giftcard</i></a>
 						</button>
 					</td>
 					<td style="text-align: right; width: 150px; vertical-align: top; padding-top: 10px;">備註：</td>
@@ -118,7 +135,7 @@
 									if (xhr.readyState == 4) {
 										if (xhr.status == 200) {
 											lists = xhr.responseText;
-											alert("新增購物車品項一");
+											// 											alert("新增購物車品項一");
 										} else {
 											alert("something is wrong!");
 										}
@@ -126,7 +143,8 @@
 								});
 								xhr.open("POST", "cart.do", true);
 								xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit=" + "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
+								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit="
+										+ "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
 							}
 						}
 					</script>
@@ -136,16 +154,18 @@
 		</div>
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
-			<div class="row">
-				<div class="col-md-10">
+			<div class="row" id="sayBoard">
+				<div class="col-md-9">
 					<div class="input-field col m12 s12">
 						<textarea id="your-message" class="materialize-textarea"></textarea>
-						<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
-
+						<label for="your-message" class="" id="sayBoardText"><i class="medium material-icons">comment</i></label>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<div id="messageGO">
+						<button type="button" id="OneClickOneDemandByMember" class="btn btn-small btn-floating">
+							<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+						</button>
 						<button type="reset" class="btn btn-small btn-floating" id="send-message">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
 						</button>
@@ -158,14 +178,15 @@
 			</div>
 		</form>
 
-		<!-- Q&A -->
 		<div id="QandA" class="col s12 m9">
+			<!-- Q&A -->
 			<ul class="collapsible" data-collapsible="expandable">
+				<li id="saySomethingLi"></li>
 				<c:forEach var='item' items='${AllMessages}' varStatus="vs">
 					<li id='li${vs.index}'>
 
 						<div class="collapsible-header">
-							<span class="glyphicon glyphicon-question-sign"></span> <b>${item.memberName}</b>：
+							<i class="tiny material-icons">help</i>&nbsp;<b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
 								<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
@@ -198,8 +219,7 @@
 		<script>
 			var addBtn = document.getElementById("send-message");
 			var QandA = document.getElementById("QandA");
-			// 	var p1 = document.getElementById("p1");
-			// 	var p2 = document.getElementById("p2");
+			var saySomethingLi = document.getElementById("saySomethingLi");
 			var textByMember = document.getElementById("your-message");
 
 			var xhr = null;
@@ -222,42 +242,76 @@
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
 						datas = JSON.parse(lists);
-						alert("ms " + datas);
+						// 						alert("ms " + datas);
 						var memberId = datas[0];
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];
 
-						var tr1 = document.createElement("tr");
-						var th1 = document.createElement("th");
-						var p1 = document.createElement("p");
-						var textP1 = document.createTextNode("會員:" + memberId + " 於 " + memberMessageTime + "留言");
-						tr1.appendChild(th1);
-						th1.appendChild(p1)
-						p1.appendChild(textP1);
+						//上半部 start
+						var xbr1x = document.createElement("br");
+						var xdiv1x = document.createElement("div");
+						xdiv1x.setAttribute("class", "collapsible-header");
 
-						var tr2 = document.createElement("tr");
-						var th2 = document.createElement("th");
-						var p2 = document.createElement("p");
-						var textP2 = document.createTextNode("內容:" + memberMessage);
-						tr1.appendChild(th2);
-						th1.appendChild(p2)
-						p1.appendChild(textP2);
+						var xi1x = document.createElement("i");
+						xi1x.setAttribute("class", "tiny material-icons");
+						var xi1textx = document.createTextNode("help");
 
-						QandA.appendChild(tr2);
-						QandA.appendChild(tr1);
+						var xb1x = document.createElement("b");
+						var xb1textx = document.createTextNode(memberId + " :");
+
+						var xdiv1textx = document.createTextNode(memberMessage);
+
+						var xdiv2x = document.createElement("div");
+						xdiv2x.setAttribute("class", "talkTime");
+
+						var xdiv2textx = document.createTextNode(memberMessageTime.substr(0, 19));
+						//上半部 end
+
+						//下半部 start
+						var xdiv3x = document.createElement("div");
+						xdiv3x.setAttribute("class", "collapsible-body");
+						xdiv3x.setAttribute("style", "display: block;");
+
+						var xp1x = document.createElement("p");
+						var xdiv3textx = document.createTextNode("等待回覆...");
+						//下半部 end
+
+						xi1x.appendChild(xi1textx);//icon
+						xb1x.appendChild(xb1textx);//name
+						xdiv2x.appendChild(xdiv2textx);//time
+						xp1x.appendChild(xdiv3textx);
+
+						xdiv1x.appendChild(xi1x);
+						xdiv1x.appendChild(xb1x);
+						xdiv1x.appendChild(xbr1x);
+						xdiv1x.appendChild(xdiv1textx);
+						xdiv1x.appendChild(xdiv2x);
+
+						xdiv3x.appendChild(xp1x);
+
+						saySomethingLi.appendChild(xdiv1x);
+						saySomethingLi.appendChild(xdiv3x);
+
+						$(window).load(function() {
+							$("#saySomethingLi .collapsible-header").click(function() {
+								var xxx = $("#saySomethingLi .collapsible-body").attr("style");
+								if (xxx == "display: block;") {
+									$("#saySomethingLi .collapsible-body").attr("style", "display: none;");
+								} else {
+									$("#saySomethingLi .collapsible-body").attr("style", "display: block;");
+								}
+							});
+						}(jQuery));
+
 					} else {
 						alert("something is wrong!");
 					}
 				}
 			}
-			$(function() {
-				$("#send-message").click(function() {
-					$("#your-message").val("");
-				});
-			}(jQuery));
 		</script>
 	</center>
-	</center>
 	<iframe name='hidden_frame' style='width: 0px; height: 0px'></iframe>
+	<script type="text/javascript" src="../donationScripts/DonationQA.js"></script>
+	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 </body>
 </html>

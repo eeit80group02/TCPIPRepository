@@ -19,10 +19,10 @@
 	<!-- 頁首 -->  
 
 	<!-- 頁面主題提示 -->
-	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
-		<h1 class="valign center-align white-text"
-			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;">招募中(審核志工)</h1>
-	</div>
+	<div class="row brown darken-4" id="pagetitle">
+		<h3 class="white-text"
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}</h3>
+	</div>	
 
 <main>
 	<div class="row" id="mainboard">
@@ -36,7 +36,10 @@
 		<c:forEach items="${fullProj}" var="bean">
 			<div class="row card-panel">
 				<!-- 完整計畫名稱 -->
-				<div class="row priProjName left-align teal-text darken-3">
+				<div class="row priProjName left-align ">
+					<i class="material-icons medium purple-text accent-1" style="vertical-align:middle;">
+						assignment
+					</i>
 					${bean.title}
 				</div>
 					
@@ -110,6 +113,12 @@
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
 			$(".card").css("width", "310px");
+			//會員名稱margin-top,margin-left
+			var namediv = $("#membername").height();
+			$("#membername").css({
+				"margin-top":(pagetitleheight - namediv)/2
+				,"margin-left":($(window).width()) * 0.2});
+
 		})
 	</script>
 	<script>
@@ -117,6 +126,11 @@
 		$(window).on("resize", function() {
 			var pagetitleheight2 = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight2);
+			//會員名稱margin-top,margin-left
+			var namediv = $("#membername").height();
+			$("#membername").css({
+				"margin-top":(pagetitleheight2 - namediv)/2
+				,"margin-left":($(window).width()) * 0.2});
 		});
 	</script>	  	
 </body>

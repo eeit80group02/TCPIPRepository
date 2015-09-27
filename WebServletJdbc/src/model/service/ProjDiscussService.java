@@ -6,32 +6,32 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import model.MemberBean;
-import model.ProjDiscusBean;
+import model.ProjDiscussBean;
 import model.ProjModifyBean;
 import model.dao.MemberDAOJdbc;
-import model.dao.ProjDiscusDAOJdbc;
+import model.dao.ProjDiscussDAOJdbc;
 import model.dao.interfaces.MemberDAO;
-import model.dao.interfaces.ProjDiscusDAO;
+import model.dao.interfaces.ProjDiscussDAO;
 
 public class ProjDiscussService
 {
-	private ProjDiscusDAO projDiscusDAO = null;
+	private ProjDiscussDAO projDiscusDAO = null;
 	private MemberDAO memberDAO = null;
 	public ProjDiscussService()
 	{
-		projDiscusDAO = new ProjDiscusDAOJdbc();
+		projDiscusDAO = new ProjDiscussDAOJdbc();
 		memberDAO = new MemberDAOJdbc();
 	}
 	
 	public JSONObject select(int fullProjId)
 	{
-		List<ProjDiscusBean> beans = projDiscusDAO.selectByFullProjId(fullProjId);
+		List<ProjDiscussBean> beans = projDiscusDAO.selectByFullProjId(fullProjId);
 		JSONArray jsonArray = new JSONArray();
-		for(ProjDiscusBean bean : beans)
+		for(ProjDiscussBean bean : beans)
 		{
 			JSONObject jsonObject = new JSONObject();
 
-			jsonObject.put("projDiscusId",bean.getProjDiscusId().toString());
+			jsonObject.put("projDiscussId",bean.getProjDiscussId().toString());
 			MemberBean questionMemberBean = memberDAO.select(bean.getQuestionMemberId());
 			String questionMember;
 			if(questionMemberBean.getGender().equals("男"))
@@ -42,8 +42,8 @@ public class ProjDiscussService
 			{
 				questionMember = String.format("[No.%04d] " + questionMemberBean.getLastName() + "小姐",bean.getQuestionMemberId());
 			}
-			
-			jsonObject.put("questionMemberId",questionMember);
+			jsonObject.put("questionMemberId",bean.getQuestionMemberId());
+			jsonObject.put("questionMember",questionMember);
 			jsonObject.put("questionMemberContent",bean.getQuestionMemberContent().toString());
 			
 			java.util.Date questionTime = bean.getQuestionMemberTime();
@@ -52,7 +52,9 @@ public class ProjDiscussService
 			
 			if(bean.getAnswerMemberId() != null)
 			{
-				jsonObject.put("answerMemberId",bean.getAnswerMemberId().toString());
+
+				jsonObject.put("answerMemberId",bean.getAnswerMemberId());
+				jsonObject.put("answerMember","發起者");
 				jsonObject.put("answerMemberContent",bean.getAnswerMemberContent().toString());
 				
 				java.util.Date answerTime = bean.getAnswerMemberTime();
@@ -68,6 +70,22 @@ public class ProjDiscussService
 		JSONObject result = new JSONObject();
 		result.put("result",jsonArray);
 		return result;
+	}
+	
+	public JSONObject postDiscuss(ProjDiscussBean bean)
+	{
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result","failure");
+		if(bean != null)
+		{
+			bean.setQuestionMemberTime(new java.util.Date(System.currentTimeMillis()));
+			ProjDiscussBean temp = projDiscusDAO.insert(bean);
+			if(temp != null)
+			{
+				jsonObject.put("result","success");
+			}
+		}
+		return jsonObject;
 	}
 	public static void main(String[] args)
 	{

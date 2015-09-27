@@ -5,8 +5,12 @@
 	width: 850px;
 }
 
-#donationDetailTable, #drop-a-line, #QandA {
+#donationDetailTable, #drop-a-line, #QandA, #saySomething {
 	width: 85%;
+}
+
+#saySomething ,#QandA{
+	margin: 0px;
 }
 
 #donationDetailTable tr td {
@@ -26,13 +30,13 @@
 }
 
 #messageGO {
-	width: 90px;
+	width: 200px;
 	float: right;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
-#QandA {
+#QandA, #saySomething {
 	/* 	問與答 */
 	font-size: 1.5em;
 	text-align: left;

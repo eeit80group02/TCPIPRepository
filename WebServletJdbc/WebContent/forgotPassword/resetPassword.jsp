@@ -49,7 +49,7 @@
 	      			</div>					
 				</div>
 				<div class="row">
-					<button class="col l2 btn-large right black-text yellow lighten-5" type="submit" style="font-size:2em;">重設密碼</button>
+					<button class="col l2 btn-large right white-text red" type="submit" style="font-size:2em;">重設密碼</button>
 				</div>
 
 			</form>		

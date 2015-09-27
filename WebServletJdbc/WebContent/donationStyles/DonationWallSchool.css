@@ -5,10 +5,6 @@
 	width: 85%;
 }
 
-#test1 ul {
-	padding-left: 1%;
-}
-
 #donateBody .active {
 	font-weight: bold;
 	font-size: 2em;
@@ -30,7 +26,7 @@
 	background-repeat: repeat;
 	float: left;
 	width: 190px;
-	height: 250px;
+	height: 268px;
 	padding: 0.4em;
 	margin: 0 0.5em 0.5em 0;
 	text-align: center;
@@ -95,26 +91,11 @@
 }
 
 /* Modal */
-.modal-content .donationRecorder {
-	text-align: center;
+#modalNote01 .modal-content {
+	text-align: left;
 	font-size: 1.4em;
-	border: 1px solid #5599FF;
 }
 
-.modal-content .donationRecorder td {
+#modalNote01 .modal-content h4 {
 	text-align: center;
-	border: 1px solid #ff7575;
-}
-
-.modal-content .donationRecorder td {
-	text-align: center;
-	border: 1px solid #ff7575;
-}
-
-.modal-content .donationRecorder thead tr {
-	background-color: #ff7575;
-}
-
-.modal-content .donationRecorder tbody tr:HOVER {
-	background-color: #CCEEFF;
 }

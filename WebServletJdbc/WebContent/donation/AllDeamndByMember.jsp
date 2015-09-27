@@ -63,7 +63,7 @@
 				</li>
 				<li><i class="large material-icons" id="clearIcon">clear</i></li>
 				<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
-				<li class="chooseItem" value="需求數量"><a href="<c:url value='search.do?type=byAmount&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">需求數量</a></li>
+				<li class="chooseItem" value="數量"><a href="<c:url value='search.do?type=byAmount&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">數量</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
 					<ul id="dropdownList01" class="dropdown-content">
 						<li class="chooseDropdownItem" value="最新發佈"><a href="<c:url value='search.do?type=byDemandtime&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">最新發佈</a></li>
@@ -80,9 +80,27 @@
 					</ul></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
-						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
+						<!-- 有登入時，會有學校頁面或者個人頁面 -->
+						<c:if test="${not empty LoginOK}">
+							<c:if test="${LoginOK.beanName.equals('member')}">
+								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+							</c:if>
+
+							<c:if test="${LoginOK.beanName.equals('school')}">
+								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+							</c:if>
+						</c:if>
 						<li class="divider"></li>
-						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+						<!-- 沒登入時，必須看到登入按鈕 -->
+						<c:choose>
+							<c:when test="${empty LoginOK}">
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+							</c:when>
+
+							<c:otherwise>
+								<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul></li>
 			</ul>
 		</div>

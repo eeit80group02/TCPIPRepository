@@ -36,3 +36,7 @@ i[id^="requiredStar"] {
 .DetailTitle {
 	float: left;
 }
+
+#bottomDiv {
+	margin-top: 50px;
+}

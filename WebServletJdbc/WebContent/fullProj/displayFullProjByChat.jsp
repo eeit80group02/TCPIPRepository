@@ -39,8 +39,6 @@
 	<!-- 內容 -->
 	<main>
 	<div class="row" id="mainboard">
-
-
 		<!-- 第一列 -->
 		<div class="row">
 			<!-- 板向左偏離兩格 -->
@@ -259,55 +257,48 @@
 					</div>
 				</div>
 
-
-
 				<div class="card-panel hoverable row"
 					style="background-color: #FFFCEC">
 					<!-- 問與答 -->
 					<div class="row">
 						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white" style="background-color: #D1F0E5; font-size: 2em; font-weight: 900; font-family: 微軟正黑體">
-							問與答
+							意見版
 						</div>
 					</div>
 					<!-- 問與答 -->
 					<div class="row">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
-							<div class="card-panel white">
-								
-								<!-- 如果是學校 -->
-								<div class="row">
-									<div class="col l2">
-										  <div class="chip">
-										    <img src="images/yuna.jpg" alt="Contact Person">
-										    Jane Doe
-										  </div>
-										<div class="btn red white-text">
-											<i class="material-icons">forum</i>
-										</div>
-									</div>
-									<div class="col l10 red lighten-4" style="font-size:1.6em;font-weight:600">
-										要問的問題在這，如果這個問題真的十分可怕的非常長的跟長恨歌一樣的時候不知道會發生事情就來試試看
-									</div>
-								</div>
-								
-								<!-- 答案 -->
-								<div class="row">
-									<div class="col l2">
-										<div class="btn green white-text">
-											<i class="material-icons">chat_bubble</i>
-										</div>
-									</div>
-									<div class="col l10" style="font-size:1.6em;font-weight:600">
-										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情
-									</div>
-								</div>
-								<!-- 答案 -->
+							<div id="discuss" class="card-panel white">
+								<!-- 內容在jQuery -->
 							</div>	
 						</div>
 					</div>
 				</div>
 			</div>
-
+			<!-- 發問用按鈕 -->
+			 <c:if test="${empty fullProj.createDate}">
+				  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+						<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">留言</a>
+				  </div>
+			  </c:if>
+			<!-- 發問用按鈕 -->
+			
+			<!-- 提問用modal -->
+			  <div id="askmodal" class="modal bottom-sheet" style="min-height:40vh;">
+			    <div class="modal-content">
+			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我要<span class="red-text">留言</span>...</h4>
+			      <textarea id="content" rows="10" cols="40" style="height:10em;" name=""></textarea>
+			    </div>
+			    <div class="modal-footer">
+			   		<c:if test="${LoginOK.beanName.equals('school')}">
+			      		<button id="schoolButton" class=" modal-action modal-close btn-large red white-text" type="button" style="font-size:1.6em;font-weight:600;">學校送出</button>
+			     	</c:if>
+			     	<c:if test="${LoginOK.beanName.equals('member')}">
+			      		<button id="memberButton" class=" modal-action modal-close btn-large red white-text" type="button" style="font-size:1.6em;font-weight:600;">發起者送出</button>
+			    	</c:if>
+			    </div>
+			  </div>			
+			<!-- 提問用modal -->
 
 			<!-- 按鈕版面 -->
 			<div class="col l2">
@@ -353,7 +344,6 @@
 								<input type="hidden" name="title" value="${fullProj.title}"> 
 								<input type="hidden" name="projAbstract" value="${fullProj.projAbstract}"> 
 								<input type="hidden" name="content" value='${fullProj.content}'> 
-						   <%-- <input type="hidden" name="location" value="${fullProj.location}"> --%>
 								<input type="hidden" name="activityStartTime" value="<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
 								<input type="hidden" name="activityEndTime" value="<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
 								<input type="hidden" name="estMember" value="${fullProj.estMember}"> 
@@ -367,28 +357,8 @@
 				</c:if>
 			</div>
 		</div>
-		</div>
-<!-- 		<div id="myDiv"></div> -->
+	</div>
 
-<%-- 		<c:if --%>
-<%-- <%-- 			test="${LoginOK.beanName.equals('member') && empty fullProj.createDate}">	 --%> 
-<%-- 		會員留言：<br> --%>
-<%-- <!-- 			<textarea id="memberContent"></textarea> --> --%>
-<%-- <!-- 			<sapn id="memberError"></sapn> --> --%>
-<%-- <!-- 			<br> --> --%>
-<%-- <!-- 			<input type="button" id="memberButton" value="傳送"> --> --%>
-<%-- <!-- 			<br> --> --%>
-<%-- <%-- 		</c:if> --%> 
-
-<%-- <%-- 		<c:if --%> 
-<%-- <%-- 			test="${LoginOK.beanName.equals('school') && empty fullProj.createDate}">	 --%> 
-<%-- <!-- 		學校留言：<br> --> --%>
-<%-- <!-- 			<textarea id="schoolContent"></textarea> --> --%>
-<%-- <!-- 			<sapn id="schoolError"></sapn> --> --%>
-<%-- <!-- 			<br> --> --%>
-<%-- <!-- 			<input type="button" id="schoolButton" value="傳送"> --> --%>
-<%-- <!-- 			<br> --> --%>
-<%-- <%-- 		</c:if> --%> 
 	</main>
 
 
@@ -425,24 +395,20 @@
 
 	        
 			$("#memberButton").on("click",function(){
-				if($("#memberContent").val().length < 10) {
-					$("#memberError").html("留言必須大於10個字");
+				if($("#content").val().trim().length < 10) {
+					alert("留言必須大於10個字");
 				}
 				else{
-					$("#memberError").empty();
 					addMemberMessage();
-					$("#memberContent").val("");
 				}
 			});
 			
 			$("#schoolButton").on("click",function(){
-				if($("#schoolContent").val().length < 10) {
-					$("#schoolError").html("留言必須大於10個字");
+				if($("#content").val().trim().length < 10) {
+					alert("留言必須大於10個字");
 				}
 				else{
-					$("#schoolError").empty();
 					addSchoolMessage();
-					$("#schoolContent").val("");
 				}
 			});
 		
@@ -450,24 +416,26 @@
 				$.ajax({
 					"url": "<c:url value='/projModify.do' />",
 					"type":"POST",
-					"data":{"type":"addMember","fullProjId":"${fullProj.fullProjId}","memberId":"${fullProj.memberId}","content":$("#memberContent").val()},
+					"data":{"type":"addMember","fullProjId":"${fullProj.fullProjId}","memberId":"${fullProj.memberId}","content":$("#content").val()},
 					"dataType" :"json",
 					"success":function(data){
 						displayMessage();
 					}
 				});
+				$("#content").val("");
 			}
 			
 			function addSchoolMessage(){
 				$.ajax({
 					"url": "<c:url value='/projModify.do' />",
 					"type":"POST",
-					"data":{"type":"addSchool","fullProjId":"${fullProj.fullProjId}","schoolId":"${fullProj.schoolId}","content":$("#schoolContent").val()},
+					"data":{"type":"addSchool","fullProjId":"${fullProj.fullProjId}","schoolId":"${fullProj.schoolId}","content":$("#content").val()},
 					"dataType" :"json",
 					"success":function(data){
 						displayMessage();
 					}
 				});
+				$("#content").val("");
 			}
 			
 			function displayMessage(){
@@ -479,25 +447,24 @@
 					"success":function(data){
 						// data => Object
 						// console.log(data);
-						$("#test > div").remove();
+						$("#discuss > div").remove();
 						$.each(data.result,function(index,value){
 							// data.result => Array[]
 							// Array[index] => Object
 							if(value.schoolId == "null"){
-		 						var memberContent = "會員ID:" + value.memberId + "<br>" + 
-			 										"留言:" + value.memberMessage + "<br>" +
-			  										"時間:" + value.memberMessageTime + "<br>" + 
-													"--------------------------------";	
-		 						var contentDiv = $("<div></div>").html(memberContent);
-		 						$("#test").append(contentDiv);
+		 						var content = "<div class='col l2'>發起者</div>" + 
+		 									  "<div class='col l10 card-panel' style='font-size:1.6em;font-weight:600;border-left:10px double #76ff03;'>" +
+		 									  value.memberMessage + "</div>";
+		 						var contentDiv = $("<div class='row'></div>").html(content);
+		 						$("#discuss").append(contentDiv);
 							}
+						
 							if(value.memberId == "null"){
-								var schoolContent = "學校ID:" + value.schoolId + "<br>" + 
-	 												"留言:" + value.schoolMessage + "<br>" +
-	  												"時間:" + value.schoolMessageTime + "<br>" + 
-	  												"--------------------------------";
-								var contentDiv = $("<div></div>").html(schoolContent);
-								$("#test").append(contentDiv);
+								var content = "<div class='col l10 card-panel' style='font-size:1.6em;font-weight:600;border-right:10px double red;'>" + 
+											   value.schoolMessage + "</div>" + 
+											  "<div class='col l2'>學校</div>";
+								var contentDiv = $("<div class='row'></div>").html(content);
+								$("#discuss").append(contentDiv);
 							}
 						});
 					}
@@ -506,13 +473,13 @@
 		});
 		
 		$(function() {
+			//註冊提問modal
+			$("#askbtn").leanModal();
 			//mainboard固定大小
 			$("#mainboard").css("min-height","100vh");
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%

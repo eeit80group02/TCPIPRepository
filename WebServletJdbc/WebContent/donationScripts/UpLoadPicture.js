@@ -5,8 +5,6 @@ $(window).load(function() {
 			var lowercaseFileName = fileName.toLowerCase();
 			var checkFileType = lowercaseFileName.match(/\.(jpg|gif|jpeg|png)$/g);
 			
-			console.log(fileName);
-
 			if (checkFileType != null) {
 				if (this.files && this.files[0]) {
 					var reader = new FileReader();

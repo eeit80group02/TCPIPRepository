@@ -182,6 +182,10 @@ public class RegisterServlet extends HttpServlet {
 			}
 			//電話
 			if((phone == null || phone.trim().length() == 0) && (cellPhone == null || cellPhone.trim().length() == 0)){
+				System.out.println("phone:"+phone);
+				System.out.println("phone.trim:"+phone.trim());
+				System.out.println("cellPhone:"+cellPhone);
+				System.out.println("cellPhone.trim:"+cellPhone.trim());
 				errMsg.put("errPhoneEmpty", "*");
 				errMsg.put("errCellPhoneEmpty", "手機或電話其中一欄位為必填");
 			}

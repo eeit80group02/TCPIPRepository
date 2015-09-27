@@ -108,7 +108,7 @@
 <!-- 								</span> -->
 <!-- 							</a>											 -->
 <!-- 						</div> -->
-					</div>				
+					</div>	
 					<div class="white card-panel left hoverable" style="min-height:60vh">
 						<div>
 							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
@@ -116,14 +116,14 @@
 							</h3>
 							<div class="row divider red" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
-								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value="/donation/InsertDonateGoods.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										建立物資需求
 									</span>
 								</a>
 							</div>
 							<div class="row">
-								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value="/donation/AllDeamndBySchool.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										全部物資需求
 									</span>
