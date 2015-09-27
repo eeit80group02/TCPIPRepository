@@ -8,6 +8,11 @@ i {
 	cursor: pointer;
 }
 
+#searchIcon {
+	cursor: text;
+	color: graytext;
+}
+
 body {
 	cursor: default;
 	background-color: #FFEBEB;

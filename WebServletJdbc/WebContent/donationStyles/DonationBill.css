@@ -46,7 +46,7 @@ select:disabled {
 	background-color: #CCEEFF;
 }
 
-#test1 table tr td {
+#test1 table tr td{
 	border: 1px solid #ff7575;
 	text-align: center;
 }
@@ -87,10 +87,6 @@ select:disabled {
 	padding: 5px;
 }
 
-#test1 table tbody td:nth-child(3) {
-	text-align: left;
-}
-
 /* test2 */
 #test2 table {
 	font-size: 1.2em;
@@ -114,6 +110,21 @@ select:disabled {
 	color: white;
 }
 
+#test2 .textNeed, #test2 #textUnit {
+	font-size: 1.2em;
+	text-align: center;
+	max-width: 58px;
+}
+
+#test2 .imgBill {
+	vertical-align: middle;	
+	max-width: 100px;
+	width: expression(this.width > 100 ? "100px" : this.width);
+	max-height: 100px;
+	height: expression(this.height > 100 ? "100px" : this.height);
+	border: 1px solid black;
+}
+
 #test2 #remark02 {
 	background-color: white;
 	text-align: left;
@@ -126,17 +137,17 @@ select:disabled {
 }
 
 /* test3 */
-#test3 {
+#test2 {
 	text-align: center;
 }
 
-#test3 select {
+#test2 select {
 	border: 1px solid black;
 	border-radius: 4px;
 	width: 45%;
 }
 
-#test3 #ddlCity, #test3 #ddlCity1, #test3 #addressLeft01 {
+#test2 #ddlCity, #test2 #ddlCity1, #test3 #addressLeft01 {
 	float: left;
 }
 
@@ -144,11 +155,11 @@ select:disabled {
 	float: right;
 }
 
-#test3 div input[id^=text] {
+#test2 div input[id^=text] {
 	font-size: 1.2em;
 }
 
-#test3 .leftTitle, #test3 .rightTitle {
+#test2 .leftTitle, #test2 .rightTitle {
 	color: #3CB371;
 	font-size: 2em;
 }

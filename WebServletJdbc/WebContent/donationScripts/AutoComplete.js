@@ -2,7 +2,7 @@ $(function() {
 	var txt; // 物件
 	var xhr = null;
 	var lists = null;
-
+	
 	$("*").click(div01hide);
 
 	txt = document.getElementById("searchDonation");
@@ -68,8 +68,5 @@ $(function() {
 	function div01hide() {
 		$("#div01").css("display", "none");
 	}
-	$("#searchIcon").click(function() {
-		
-	});
 
-});
+}(jQuery));

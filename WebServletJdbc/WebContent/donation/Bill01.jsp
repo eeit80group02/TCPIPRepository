@@ -70,14 +70,14 @@
 					<br>
 					<ul class="tabs">
 						<li class="tab col s3" id="pageTab01"><a href="#test1" class="active">受贈單位</a></li>
-						<li class="tab col s3 disabled" id="pageTab02"><a href="#test2" >捐獻明細</a></li>
-						<li class="tab col s3 disabled" id="pageTab04"><a href="#test3" >完成捐獻</a></li>
+						<li class="tab col s3" id="pageTab02"><a href="#test2" >捐獻明細</a></li>
+						<li class="tab col s3" id="pageTab04"><a href="#test3" >完成捐獻</a></li>
 					</ul>
 					<br>
 
 				</div>
 
-				<!-- 第二頁 start -->
+				<!-- 第一頁 start -->
 				<div id="test1" class="col s12">
 
 					<div class="col s12">
@@ -155,7 +155,7 @@
 
 
 				</div>
-				<!-- 第二頁 end -->
+				<!-- 第一頁 end -->
 	</center>
 
 	<!-- 宅配通 bottom start -->
@@ -163,11 +163,6 @@
 	<!-- 等畫面跑完，在載入 js 檔 -->
 	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-
-	<!-- 標頭專用 bottom start -->
-	<!-- 必須最後載入才有效果 -->
-	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<!-- 標頭專用 bottom end -->
 
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
