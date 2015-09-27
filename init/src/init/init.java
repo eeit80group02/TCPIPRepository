@@ -16,7 +16,7 @@ public class init
 		InsertProcessingProj.start();    //新增會員和學校的交談過程
 		InsertProcessingMember.start();  //新增學校和會員的交談過程
 		InsertFullProj.start();          //新增完整計畫
-		InsertParticipator.start();
+		InsertParticipator.start();      //參加人
 		InsertMissionBoard.start();
 		InsertMissionSet.start();
 		InsertMission.start();

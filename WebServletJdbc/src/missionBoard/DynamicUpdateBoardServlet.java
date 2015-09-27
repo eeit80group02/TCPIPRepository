@@ -3,6 +3,7 @@ package missionBoard;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -169,7 +170,27 @@ public class DynamicUpdateBoardServlet extends HttpServlet {
 
 			System.out.println("missionSetId=" + missionSetId);
 
+			List<MissionBean> beans = new MissionDAOJdbc().findByMissionSetId(Integer.valueOf(missionSetId));
+			for (MissionBean bean : beans) {
+				if (bean.getMainMissionId() != null) {
+					// this is subMission, delete first
+					boolean deleteSubMission = new MissionDAOJdbc().delete(bean.getMissionId());
+					System.out.println("Delete SubMission: " + deleteSubMission);
+				}
+			}
+			System.out.println("All subMission under mission should be removed!");
+
+			for (MissionBean bean : beans) {
+				if (bean.getMainMissionId() == null) {
+					// this is Mission, delete before MisisonSet
+					boolean deleteMission = new MissionDAOJdbc().delete(bean.getMissionId());
+					System.out.println("Delete Mission: " + deleteMission);
+				}
+			}
+			System.out.println("All mission under missionSet should be removed!");
+
 			boolean result = new MissionSetDAOJdbc().delete(Integer.valueOf(missionSetId));
+			System.out.println("Remove missionSet: " + result);
 
 			response.setContentType("text/plain; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -242,7 +263,18 @@ public class DynamicUpdateBoardServlet extends HttpServlet {
 
 			System.out.println("delete missionId=" + missionId);
 
+			List<MissionBean> beans = new MissionDAOJdbc().findByMainMissionId(Integer.valueOf(missionId));
+			for (MissionBean bean : beans) {
+				if (bean.getMainMissionId() != null) {
+					// this is subMission, delete first
+					boolean deleteSubMission = new MissionDAOJdbc().delete(bean.getMissionId());
+					System.out.println("Delete SubMission: " + deleteSubMission);
+				}
+			}
+			System.out.println("All subMission under mission should be removed!");
+
 			boolean result = new MissionDAOJdbc().delete(Integer.valueOf(missionId));
+			System.out.println("Remove mission: " + result);
 
 			response.setContentType("text/plain; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -251,7 +283,7 @@ public class DynamicUpdateBoardServlet extends HttpServlet {
 			} else {
 				out.write(FAILED);
 			}
-		} 
+		}
 
 	}
 

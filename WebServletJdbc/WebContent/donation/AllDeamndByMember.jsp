@@ -62,7 +62,6 @@
 					</form>
 				</li>
 				<li><i class="large material-icons" id="clearIcon">clear</i></li>
-				<li class="chooseItem" value="熱門"><a href="#">熱門</a></li>
 				<li class="chooseItem" value="數量"><a href="<c:url value='search.do?type=byAmount&range=oneSchool&schoolId=${OneAllDemands[0].schoolId}'/>">數量</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
 					<ul id="dropdownList01" class="dropdown-content">
