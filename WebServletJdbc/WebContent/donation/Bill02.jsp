@@ -99,17 +99,16 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3" id="pageTab01"><a href="#test1" class="active">捐獻背包</a></li>
-						<li class="tab col s3" id="pageTab02"><a href="#test2" class="">捐獻明細</a></li>
-						<li class="tab col s3" id="pageTab03"><a href="#test3" class="">填寫資料</a></li>
-						<li class="tab col s3" id="pageTab04"><a href="#test4" class="">完成捐獻</a></li>
+						<li class="tab col s3" id="pageTab01"><a href="#test1" class="disabled">受贈單位</a></li>
+						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">捐獻明細</a></li>
+						<li class="tab col s3" id="pageTab04"><a href="#test4" class="disabled">完成捐獻</a></li>
 					</ul>
 					<br>
 
 				</div>
 
 							<!-- 第一頁 -->
-				<div id="test1" class="col s12">
+				<div id="test2" class="col s12">
 					<div class="col s12">
 						<div id="warnText">
 							<span>確認捐獻物品明細</span>
@@ -151,7 +150,7 @@
 								</tr>
 							</thead>
 							<tbody>
-									<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
+							<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
 										<tr>
 										<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}"></td>
 										<td>${item.schoolName}<br> <br>${OneSchoolBill.addressComplete}</td>
@@ -171,26 +170,6 @@
 															<i class="small material-icons">delete</i>
 														</button>
 													</td>
-<%-- 								<c:forEach var='item' items='${DonationCart.content}' varStatus='vs'> --%>
-<!-- 										<tr> -->
-<%-- 											<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.value.donationId}&schoolId=${item.value.schoolId}" alt="${item.value.supplyName}" title="${item.value.supplyName}"></td> --%>
-<%-- 											<td>${item.value.schoolName}<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號</td> --%>
-<%-- 											<td>${item.value.supplyStatus}</td> --%>
-<%-- 											<td style="word-break: break-all;"><div id="remark" class="remark">${item.value.demandContent}</div></td> --%>
-											
-<!-- 											<td> -->
-<%-- 												<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating"> --%>
-<!-- 													<i class="small material-icons">remove</i> -->
-<%-- 												</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.value.originalDemandUnit}</label> --%>
-<%-- 												<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating"> --%>
-<!-- 													<i class="small material-icons">add</i> -->
-<!-- 												</button> -->
-<!-- 											</td> -->
-<!-- 											<td class="deleteRow"> -->
-<!-- 												<button type="button" class="btn btn-small btn-floating"> -->
-<!-- 													<i class="small material-icons">delete</i> -->
-<!-- 												</button> -->
-<!-- 											</td> -->
 									
 											<script type="text/javascript">
 											
@@ -261,7 +240,6 @@
 															$("#text${vs.index}").empty();
 															$("#text${vs.index}").val("1");
 														}
-														console.log("${item.value.schoolName}");
 														console.log(input);
 														clearInterval(changeStepTimer);
 														clearTimeout(setValueTimer);
@@ -273,146 +251,12 @@
 									</c:forEach>
 							</tbody>
 						</table>
-						<br> <br>
-
-						<button type="button" id="page01Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="捐獻牆"><i class="small material-icons">favorite</i></a>
-						</button>
-						<button type="button" id="page01Mid" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
-						</button>
-						<button type="submit" id="page01Next" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-						</button>
 					</form>
-					<br>
-				</div>
-				<!-- 第一頁 end -->
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-
-				<!-- 第二頁 start -->
-				<div id="test2" class="col s12">
-
-					<div class="col s12">
-						<div class="warnText">
-							<span>確認捐獻物品明細</span>
-							<!-- 操作小叮嚀 start -->
-							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
-								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
-							</button>
-							<!-- Modal Structure -->
-							<div id="modalNote02" class="modal modal-fixed-footer">
-								<div class="modal-content">
-									<h4>操作小叮嚀：</h4>
-									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，進入填寫資料。
-										</li>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻。
-										</li>
-									</ol>
-								</div>
-								<div class="modal-footer">
-									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
-								</div>
-							</div>
-							<!-- 操作小叮嚀 end -->
-
-						</div>
-						<br>
 					</div>
-
-					<form action="">
-						<table id="donationBill02" class="responsive-table">
-							<thead>
-								<tr>
-									<td>受捐獻單位</td>
-									<td>捐獻物資</td>
-									<td>移除</td>
-									<td>下一步</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>屏東縣鹽埔鄉鹽埔國民小學<br> <br>屏東縣鹽埔鄉鹽南村勝利路30號
-									</td>
-									<td>延長線 30條<br>排球 20顆<br>籃球 40顆<br>DVD空白光碟片 100片
-									</td>
-									<td class="deleteRow">
-										<button type="button" class="btn btn-small btn-floating">
-											<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="移除"><i class="small material-icons">delete</i></a>
-										</button>
-									</td>
-									<td>
-										<button type="button" id="page02Next" class="btn btn-small btn-floating">
-											<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>礁溪國民小學<br> <br>宜蘭縣礁溪鄉礁溪路四段135號
-									</td>
-									<td>延長線 30條<br>排球 20顆<br>籃球 40顆<br>DVD空白光碟片 100片
-									</td>
-									<td class="deleteRow">
-										<button type="button" class="btn btn-small btn-floating">
-											<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="移除"><i class="small material-icons">delete</i></a>
-										</button>
-									</td>
-									<td>
-										<button type="button" id="page02Next" class="btn btn-small btn-floating">
-											<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-										</button>
-									</td>
-								</tr>
-								<tr>
-									<td>苗栗縣蓬萊國小<br> <br>苗栗縣南庄鄉蓬萊村19鄰118號
-									</td>
-									<td>延長線 30條<br>排球 20顆<br>籃球 40顆<br>DVD空白光碟片 100片
-									</td>
-									<td class="deleteRow">
-										<button type="button" class="btn btn-small btn-floating">
-											<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="移除"><i class="small material-icons">delete</i></a>
-										</button>
-									</td>
-									<td>
-										<button type="button" id="page02Next" class="btn btn-small btn-floating">
-											<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-										</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<br> <br>
-
-						<button type="button" id="page02Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="上一步"><i class="small material-icons">keyboard_arrow_left</i></a>
-						</button>
-						<button type="button" id="page02Clear" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
-						</button>
-
-					</form>
-
-
-				</div>
-				<!-- 第二頁 end -->
-
-				<!-- 第三頁 start -->
-				<div id="test3" class="col s12">
+					<br><br><br><br><br>
+				
 					<div class="col s12">
+					<br><br><br><br><br>
 						<div class="warnText">
 							<span class="redStar"><i class="tiny material-icons">star</i></span>&nbsp;<span>本頁皆為必填欄位</span>
 							<!-- 宅配小叮嚀 start -->
@@ -465,7 +309,7 @@
 						<!-- 左上 -->
 						<div class="input-field col m12 s12">
 							<!-- 會員基本姓名 -->
-							<input type="text" id="textLeft01" disabled value="林大揚"><label for="textLeft01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></label>
+							<input type="text" id="textLeft01" disabled value="${LoginOK.lastName}${LoginOK.firstName}"><label for="textLeft01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></label>
 							<!-- 會員基本性別 -->
 							<select class="browser-default" id="textLeft06" disabled="disabled">
 								<option value="先生">先生</option>
@@ -484,20 +328,20 @@
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 會員基本地址 -->
-							<input type="text" id="textLeft02" disabled value="武暖路159-1號"><label for="textLeft02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;</span></label>
+							<input type="text" id="textLeft02" disabled value="${LoginOK.address}"><label for="textLeft02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;</span></label>
 						</div>
 
 						<div class="input-field col m12 s12">
 							<!-- 會員基本電話 -->
-							<input type="text" id="textLeft03" disabled value="0229888888"><label for="textLeft03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;</span></label>
+							<input type="text" id="textLeft03" disabled value="${LoginOK.phone}"><label for="textLeft03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;</span></label>
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 會員基本手機 -->
-							<input type="text" id="textLeft04" disabled value="0973737373"><label for="textLeft04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;</span></label>
+							<input type="text" id="textLeft04" disabled value="${LoginOK.cellPhone}"><label for="textLeft04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;</span></label>
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 會員基本 E-mail -->
-							<input type="text" id="textLeft05" disabled value="eeit80group02@gmail.com"><label for="textLeft05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;</span></label>
+							<input type="text" id="textLeft05" disabled value="${LoginOK.email}"><label for="textLeft05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;</span></label>
 						</div>
 					</div>
 					<div class="col s12 m12 l6">
@@ -508,11 +352,21 @@
 							</button>
 							&nbsp;填寫寄件人資料
 							<!-- 一鍵輸入 -->
-							<button type="button" id="OneClick" class="btn btn-small btn-floating">一鍵填</button>
+							<button type="button" id="OneClickDonationBillFinal" class="btn btn-small btn-floating">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+							</button>
 						</div>
 						<br>
+						
+						
+						
+						
+						
+						
+						
+						
+			<form name='producrOrder' action='<c:url value="checkOrder.do"/>' method='GET'>
 						<!-- 右上 寄件人系列 -->
-
 						<div class="input-field col m12 s12">
 							<!-- 寄件人姓名 -->
 							<input class="required" required="required" autocomplete="off" type="text" id="txtOcname" name="txtOcname" maxlength="15"><label for="txtOcname" class="" id="textRightLable01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;姓名&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
@@ -596,20 +450,27 @@
 							<!-- 寄件人E-mail -->
 							<input class="required" required="required" autocomplete="off" type="text" id="txtOemail" name="txtOemail"><label for="txtOemail" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
 						</div>
-
-					</div>
+						<input type='hidden' name='linkto' value='stepThree'>
+				<input type='hidden' name='schoolId3' value='${OneSchoolBill.schoolId}'>
+				<input type='hidden' name='dealId'>
+			</form>
+					</div>				
 					<div class="col s12">
 						<br>
 						<hr>
 						<br>
 					</div>
+					
+					
+					
 					<div class="col s12 m12 l6">
+					
 						<!-- 左下 -->
 						<div class="leftTitle">收件人資料</div>
 						<br>
 						<div class="input-field col m12 s12">
 							<!-- 收件人姓名 -->
-							<input name="txtGcname" type="text" id="txtGcname" class="required" disabled="disabled" value="大安高工"><label for="txtGcname"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;捐獻單位&nbsp;</span></label>
+							<input name="txtGcname" type="text" id="txtGcname" class="required" disabled="disabled" value="${OneSchoolBill.name}"><label for="txtGcname"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;捐獻單位&nbsp;</span></label>
 							<!-- 收件人姓別 Hide -->
 							<select class="browser-default" name="ddlGcname_ex" id="ddlGcname_ex" class="required">
 								<option value="先生">先生</option>
@@ -673,7 +534,7 @@
 
 						<div class="input-field col m12 s12">
 							<!-- 收件人地址 -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtGaddress" name="txtGaddress" disabled="disabled" value="臺北市大安區復興南路二段"><label for="txtGaddress" class=""><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址</span></label>
+							<input class="required" required="required" autocomplete="off" type="text" id="txtGaddress" name="txtGaddress" disabled="disabled" value="${OneSchoolBill.addressComplete}"><label for="txtGaddress" class=""><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址</span></label>
 						</div>
 
 
@@ -796,52 +657,25 @@
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="確認送出"><i class="small material-icons">done</i></a>
 						</button>
 					</form>
+					
 					<div id="result"></div>
-					<button type="button" id="page03Ok" class="btn btn-small btn-floating">
-						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-					</button>
 
-
+				<button type="submit" id="page03Ok" class="btn btn-small btn-floating" onclick="Button1Click()">
+					<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
+				</button>
+				
+				<!-- 進行資料庫存取訂單 -->
+				<script>
+					function Button1Click()
+					{
+					// 預約結果/單號存取
+					document.producrOrder.dealId.value=$("#result").text();      
+					document.producrOrder.submit();      
+					}
+				</script>
+				
 				</div>
-				<!-- 第四頁 -->
-				<div id="test4" class="col s12">
-
-					<form action="">
-						<table id="donationBill04" class="responsive-table">
-							<thead>
-								<tr>
-									<td>姓名</td>
-									<td>E-mail</td>
-									<td>電話</td>
-									<td>手機</td>
-									<td>宅配單號</td>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>上杉謙信</td>
-									<td>warCraftIII@gmail.com</td>
-									<td>022222222</td>
-									<td>0919191919</td>
-									<td><span id="resultShow">1122334455</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</form>
-
-					<br>
-					<button type="button" id="page04ToPage01" class="btn btn-small btn-floating">
-						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻背包"><i class="small material-icons">card_giftcard</i></a>
-					</button>
-					<button type="button" id="page04ToPage02" class="btn btn-small btn-floating">
-						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻清單"><i class="small material-icons">list</i></a>
-					</button>
-
-				</div>
-
-
-			</div>
-		</div>
+			
 	</center>
 
 	<!-- 宅配通 bottom start -->
@@ -958,6 +792,44 @@
 			});
 		});
 	</script>
+	
+	
+		<!-- 處理訂單 -->
+		<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
+			<form action='<c:url value="checkOrder.do"/>' method='POST'>
+			<script type="text/javascript">
+				(function($) {
+					$("#btnSend").click(function() {
+						var donationId = "${item.donationId}";
+						var donateAmount = $("#text${vs.index}").val();			
+						
+						xhr = new XMLHttpRequest();
+						if (xhr != null) {
+							xhr.addEventListener("readystatechange", function(donateAmount){
+								if (xhr.readyState == 4) {
+									if (xhr.status == 200) {
+										lists = xhr.responseText;
+									} else {
+										alert("something is wrong!");
+									}
+								}
+							});
+							xhr.open("POST", "cart.do", true);
+							xhr.setRequestHeader("Content-Type",
+									"application/x-www-form-urlencoded")
+							// 假設會員id為5
+							xhr.send("toCart=update&donationId="+"${item.donationId}"+"&donateAmount="+donateAmount);
+						}
+// 						$("#page01").removeAttr("class");
+// 						$(":active").removeAttr("class");
+// 						$("#page02").attr("class","active");
+					});
+				}(jQuery));
+			</script>
+			</form>
+		</c:forEach>
+	
+	
 	<!-- 宅配通 bottom start -->
 
 	<!-- 等畫面跑完，在載入 js 檔 -->

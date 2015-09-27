@@ -366,34 +366,6 @@ public class DonationService {
 		return newDetailItems;
 	}
 	
-	// 會員新增訂單
-	public boolean saveBooking(DonationOrderBean donationOrderBean, 
-			List<DonationOrderDetailBean> list) {
-		boolean result = false;
-		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
-		
-		// "設定交易"
-		
-		// 新增訂單主檔
-		donationOrderBean = donationOrderDAOJdbc.insert(donationOrderBean);
-		if (donationOrderBean != null) {
-			// 取得自增主鍵
-			int pk = donationOrderBean.getDonationOrderId();
-			for (DonationOrderDetailBean d : list) {
-				// 將所有明細設定自增主鍵
-				d.setDonationOederId(pk);
-				donationOrderDetailDAOJdbc = new DonationOrderDetailDAOJdbc();
-				donationOrderDetailDAOJdbc.insert(d);
-				// 新增訂單明細
-				System.out.println("訂單新增成功");
-				result = true;
-			}
-		} else {
-			System.out.println("Not success in DonationService");
-		}
-		return result;
-	}
-	
 	public List<DonationBeanDuplicate> findDemandsByMember() {
 		donationDAOJdbc  = new DonationDAOJdbc();
 		
@@ -470,6 +442,7 @@ public class DonationService {
 		return listDuplivate;
 	}
 	
+	// 不分學校做訂單處理
 	public void bookingOrder(DonationOrderBean donationOrderBean, DonationCart dCart) {
 		
 		// 真正要進資料庫儲存的捐贈明細資料(OrderDetailBeanBean)
@@ -528,8 +501,14 @@ public class DonationService {
 		// 進行交易
 		// 1.新增捐贈 主檔與副檔
 		// ***交易控制
-		boolean b = this.saveBooking(donationOrderBean, orderDetailList);
-		System.out.println("新增主副檔:"+b);
+//		boolean b = this.saveBooking(donationOrderBean, orderDetailList);
+		DonationOrderBean newBean = this.saveBooking(donationOrderBean, orderDetailList);
+		if(newBean != null) {
+			System.out.println("新增主副檔: OK");
+		} else {
+			System.out.println("新增主副檔: NO");
+		}
+		
 		
 		// 2.更新Donation表
 		// 從資料庫抓出所有捐贈資料，需要更新的Donation(Orgin)
@@ -553,5 +532,131 @@ public class DonationService {
 		}
 
 		
+	}
+	
+	// 會員新增訂單
+	public DonationOrderBean saveBooking(DonationOrderBean donationOrderBean, 
+			List<DonationOrderDetailBean> list) {
+		boolean result = false;
+		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
+		
+		// "設定交易"
+		
+		// 新增訂單主檔
+		donationOrderBean = donationOrderDAOJdbc.insert(donationOrderBean);
+		if (donationOrderBean != null) {
+			// 取得自增主鍵
+			int pk = donationOrderBean.getDonationOrderId();
+			for (DonationOrderDetailBean d : list) {
+				// 將所有明細設定自增主鍵
+				d.setDonationOederId(pk);
+				donationOrderDetailDAOJdbc = new DonationOrderDetailDAOJdbc();
+				donationOrderDetailDAOJdbc.insert(d);
+				// 新增訂單明細
+				System.out.println("訂單新增成功");
+				result = true;
+			}
+		} else {
+			System.out.println("Not success in DonationService");
+		}
+		if(donationOrderBean != null) {
+			return donationOrderBean;
+		} else {
+			return null;
+		}
+	}
+	
+	// 依單間學校做訂單處理
+	public DonationOrderBean OneSchoolOrderBooking(DonationOrderBean donationOrderBean, int schoolId, DonationCart cart){
+		DonationOrderDAO dao = new DonationOrderDAOJdbc();
+		donationOrderBean = dao.insert(donationOrderBean);
+		// 取得新增訂單的自增主鍵
+		int pk = donationOrderBean.getDonationOrderId();
+		
+		// 取得單間學校(主檔+明細)
+		DonationBillBean bill = cart.getDonationOfOneSchool(schoolId);
+		// 取得單間學校被選取的所有需求(全部明細)
+		List<DonationBeanDuplicate> list = bill.getDbdList();
+		
+		// 真正要進資料庫儲存的捐贈明細資料(OrderDetailBeanBean)
+		List<DonationOrderDetailBean> orderDetailList = new ArrayList<>();
+		DonationOrderDetailBean donationOrderDetailBean;
+		
+		// 經過資料轉換，需要更新的Donation(Part)
+		List<DonationBean> donationBeanListPart = new ArrayList<>();
+		
+		
+		for(DonationBeanDuplicate d : list) {
+			
+			// a.訂單明細封裝
+			donationOrderDetailBean = new DonationOrderDetailBean();
+			//donationOederId 為交易時取出的pk鍵
+			donationOrderDetailBean.setDonationId(d.getDonationId());
+			// 作字串處理
+			donationOrderDetailBean.setSupplyName(d.getSupplyName()+" "+d.getSchoolName());
+			donationOrderDetailBean.setDonationAmount(d.getDonateAmount());
+			orderDetailList.add(donationOrderDetailBean);
+			
+			// b.原始需求數量更新封裝
+			DonationBean donationBeanPart = new DonationBean();
+			donationBeanPart.setDonationId(d.getDonationId());
+			donationBeanPart.setSchoolId(d.getSchoolId());
+			// 進行狀態的邏輯判斷if (x-y != 0)...
+			if (d.getDemandNumber() - d.getDonateAmount() <= 0) {
+				donationBeanPart.setDonationStatus("是");
+			} else {
+				donationBeanPart.setDonationStatus("否");
+			}
+			
+			donationBeanPart.setSupplyName(d.getSupplyName());
+			donationBeanPart.setOriginalDemandNumber(d.getOriginalDemandNumber());
+			donationBeanPart.setOriginalDemandUnit(d.getOriginalDemandUnit());
+			// 進行狀態的邏輯運算
+			// 系統改設等於原始需求數量
+			donationBeanPart.setDemandNumber(d.getDemandNumber() - d.getDonateAmount());
+			donationBeanPart.setSize(d.getSize());
+			donationBeanPart.setDemandContent(d.getDemandContent());
+			donationBeanPart.setSupplyStatus(d.getSupplyStatus());
+			donationBeanPart.setDemandTime(d.getDemandTime());
+			donationBeanPart.setExpireTime(d.getExpireTime());
+			donationBeanPart.setImageName(d.getImageName());
+			donationBeanPart.setImageFile(d.getImageFile());
+			donationBeanPart.setImageLength(d.getImageLength());
+			donationBeanPart.setRemark(d.getRemark());
+			donationBeanListPart.add(donationBeanPart);
+		}
+		
+		// 進行交易
+		// 1.新增捐贈 主檔與副檔
+		// ***交易控制
+//		boolean b = this.saveBooking(donationOrderBean, orderDetailList);
+		DonationOrderBean newBean = this.saveBooking(donationOrderBean, orderDetailList);
+		if(newBean != null) {
+			System.out.println("新增主副檔: OK");
+		} else {
+			System.out.println("新增主副檔: NO");
+		}
+		
+		// 2.更新Donation表
+		// 從資料庫抓出所有捐贈資料，需要更新的Donation(Orgin)
+		List<DonationBean> donationBeanListOrgin = this.findDemands();
+		
+		// 3. 產生要更新的DonationBean
+//		List<DonationBean> donationBeanListUpdate = new ArrayList<>();
+		
+		for (DonationBean od : donationBeanListOrgin) {
+			for (DonationBean pd : donationBeanListPart) {
+				if (od.getDonationId() == pd.getDonationId()) {
+					// 包裝轉換
+					od.setDonationStatus(pd.getDonationStatus());
+					od.setDemandNumber(pd.getDemandNumber());
+					
+					// select出imgFile/imgLength/imgName
+					this.updateDemandByMember(od);
+					System.out.println("schoolId:"+pd.getSchoolId()+"受到更新");
+				}
+			}
+		}
+		return newBean;
 	}
 }
