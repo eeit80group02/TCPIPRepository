@@ -88,13 +88,11 @@
 					<div class="input-field col m12 s12">
 						<input type="text" id="schoolName" disabled value="${LoginOK.name}"><label for="schoolName"><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="學校名稱"><span class="DetailTitle"><i class="tiny material-icons">location_city</i>&nbsp;申請單位&nbsp;</span></a></span></label>
 					</div>
-
-
-
+					
 					<!-- 上傳圖片 -->
 					<div id="basicDataHead">
 						<div class="input-field col m12 s12">
-							<input type="file" id="imageName" required="required"><label for="imageName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400"><span class="DetailTitle"><i class="tiny material-icons">image</i>&nbsp;上傳封面&nbsp;<i class="tiny material-icons" id="requiredStar01">star</i></span></a><br> <br> <a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400">
+							<input type="file" id="imageName" name='imageName' required="required"><label for="imageName"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400"><span class="DetailTitle"><i class="tiny material-icons">image</i>&nbsp;上傳封面&nbsp;<i class="tiny material-icons" id="requiredStar01">star</i></span></a><br> <br> <a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="點我上傳圖片，建議最佳上傳圖片大小為 400 * 400">
 									<div id="donationPictureFrame">
 										<center>
 											<!-- 強迫img在div內部置中 -->
@@ -159,9 +157,6 @@
 					</button>
 
 				</div>
-
-
-
 			</div>
 		</form>
 
