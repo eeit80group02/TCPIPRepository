@@ -17,18 +17,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
 <!-- 標頭專用 top end -->
 
-<!-- 預設 （本機）-->
-<link rel="stylesheet" href="../donationStyles/jquery-ui.css">
-<script type="text/javascript" src="../donationScripts/jquery-1.10.2.js"></script>
+<!-- <script type="text/javascript" src="../donationScripts/jquery-1.10.2.js"></script> -->
 <script type="text/javascript" src="../donationScripts/jquery-ui.js"></script>
-
-<!-- 預設（遠端） -->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 <!-- 自訂 -->
@@ -37,8 +32,8 @@
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
 
 <!-- 在多加載一次picture-big，比較保險 -->
-
 <script type="text/javascript" src="../donationScripts/picture-big.js"></script>
+
 </head>
 <body>
 	<!-- 我就是標頭 start -->
@@ -164,11 +159,6 @@
 		</div>
 
 	</center>
-	<!-- 標頭專用 bottom start -->
-	<!-- 必須最後載入才有效果 -->
-	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js" type="text/javascript"></script>
-	<!-- 標頭專用 bottom end -->
 
 	<script>
 		// deleteAll
@@ -263,6 +253,8 @@
 			}
 		}
 	</script>
+
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<script type="text/javascript" src="../donationScripts/ScreenSize.js"></script>
 	<script type="text/javascript" src="../donationScripts/AutoComplete.js"></script>
 </body>
