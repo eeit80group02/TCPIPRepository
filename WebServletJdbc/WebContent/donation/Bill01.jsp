@@ -34,7 +34,7 @@
 </head>
 
 <body>
-<!-- 驗證是否為會員 -->
+	<!-- 驗證是否為會員 -->
 	<c:if test="${LoginOK.beanName.equals('school') }">
 		<c:redirect url="/error/permission.jsp" />
 	</c:if>
@@ -52,10 +52,27 @@
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
-						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
-						<li class="divider"></li>
-						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+						<!-- 有登入時，會有學校頁面或者個人頁面 -->
+						<c:if test="${not empty LoginOK}">
+							<c:if test="${LoginOK.beanName.equals('member')}">
+								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+							</c:if>
 
+							<c:if test="${LoginOK.beanName.equals('school')}">
+								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+							</c:if>
+						</c:if>
+						<li class="divider"></li>
+						<!-- 沒登入時，必須看到登入按鈕 -->
+						<c:choose>
+							<c:when test="${empty LoginOK}">
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+							</c:when>
+
+							<c:otherwise>
+								<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul></li>
 			</ul>
 		</div>
@@ -70,8 +87,8 @@
 					<br>
 					<ul class="tabs">
 						<li class="tab col s3" id="pageTab01"><a href="#test1" class="active">受贈單位</a></li>
-						<li class="tab col s3" id="pageTab02"><a href="#test2" >捐獻明細</a></li>
-						<li class="tab col s3" id="pageTab04"><a href="#test3" >完成捐獻</a></li>
+						<li class="tab col s3 disabled" id="pageTab02"><a href="#test2">捐獻明細</a></li>
+						<li class="tab col s3 disabled" id="pageTab03"><a href="#test3">完成捐獻</a></li>
 					</ul>
 					<br>
 
@@ -84,16 +101,17 @@
 						<div class="warnText">
 							<span>確認捐獻物品明細</span>
 							<!-- 操作小叮嚀 start -->
-							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
+							<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
 							<!-- Modal Structure -->
-							<div id="modalNote02" class="modal modal-fixed-footer">
+							<div id="modalNote01" class="modal modal-fixed-footer">
 								<div class="modal-content">
 									<h4>操作小叮嚀：</h4>
 									<ol>
 										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，進入填寫資料。
 										</li>
+										<br>
 										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻。
 										</li>
 									</ol>
@@ -109,7 +127,7 @@
 					</div>
 
 					<form action="">
-						<table id="donationBill02" class="responsive-table">
+						<table id="donationBill01" class="responsive-table">
 							<thead>
 								<tr>
 									<td>受捐獻單位</td>
@@ -119,14 +137,14 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var='item' items='${DemandOBSchool}'>
-								<tr>
-									<td>${item.name}<br> <br>${item.addressComplete}</td>
+								<c:forEach var='item' items='${DemandOBSchool}'>
+									<tr>
+										<td>${item.name}<br> <br>${item.addressComplete}</td>
 										<td>
 											<table>
 												<c:forEach var='initem' items='${item.dbdList}'>
 													<tr>
-														<td>${initem.supplyName} ${initem.demandNumber}${initem.originalDemandUnit}</td>
+														<td>${initem.supplyName}${initem.demandNumber}${initem.originalDemandUnit}</td>
 													</tr>
 												</c:forEach>
 											</table>
@@ -138,16 +156,15 @@
 										</td>
 										<td>
 											<form action='<c:url value="checkOrder.do"/>' method='GET'>
-											<button type="submit" id="page02Next" class="btn btn-small btn-floating">
-												<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-											</button>
-											<input type='hidden' name='linkto' value='stepTwo'>
-											<input type='hidden' name='schoolId' value='${item.schoolId}'>
+												<button type="submit" id="page02Next" class="btn btn-small btn-floating">
+													<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
+												</button>
+												<input type='hidden' name='linkto' value='stepTwo'> <input type='hidden' name='schoolId' value='${item.schoolId}'>
 											</form>
 										</td>
-								</tr>
-							</c:forEach>
-								
+									</tr>
+								</c:forEach>
+
 							</tbody>
 						</table>
 						<br> <br>
@@ -161,7 +178,6 @@
 	<!-- 宅配通 bottom start -->
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
-	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
 
 	<!-- 一鍵Demo -->
