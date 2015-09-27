@@ -2,11 +2,11 @@ package model;
 
 import java.io.Serializable;
 
-public class ProjDiscusBean implements Serializable
+public class ProjDiscussBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	
-	private Integer projDiscusId;               // 流水編號
+	private Integer projDiscussId;               // 流水編號
 	private Integer fullProjId;                 // 完整計畫編號	
 	private Integer questionMemberId;           // 提問者編號(提問人的會員編號)	
 	private String questionMemberContent;       // 提問問題內容(會員提問)	
@@ -15,18 +15,18 @@ public class ProjDiscusBean implements Serializable
 	private java.util.Date answerMemberTime;    // 回覆問題的時間	
 	private Integer answerMemberId;             // 回覆問題者(會員編號-活動發起人)	
 	
-	public ProjDiscusBean()
+	public ProjDiscussBean()
 	{
 	}
 
-	public Integer getProjDiscusId()
+	public Integer getProjDiscussId()
 	{
-		return projDiscusId;
+		return projDiscussId;
 	}
 
-	public void setProjDiscusId(Integer projDiscusId)
+	public void setProjDiscussId(Integer projDiscussId)
 	{
-		this.projDiscusId = projDiscusId;
+		this.projDiscussId = projDiscussId;
 	}
 
 	public Integer getFullProjId()
@@ -102,7 +102,7 @@ public class ProjDiscusBean implements Serializable
 	@Override
 	public String toString()
 	{
-		return "ProjDiscusBean [projDiscusId=" + projDiscusId + ", fullProjId=" + fullProjId + ", questionMemberId=" + questionMemberId + ", questionMemberContent=" + questionMemberContent + ", questionMemberTime=" + questionMemberTime
+		return "ProjDiscusBean [projDiscusId=" + projDiscussId + ", fullProjId=" + fullProjId + ", questionMemberId=" + questionMemberId + ", questionMemberContent=" + questionMemberContent + ", questionMemberTime=" + questionMemberTime
 				+ ", answerMemberContent=" + answerMemberContent + ", answerMemberTime=" + answerMemberTime + ", answerMemberId=" + answerMemberId + "]";
 	}
 

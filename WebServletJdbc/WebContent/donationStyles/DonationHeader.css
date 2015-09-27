@@ -23,8 +23,12 @@ body {
 }
 
 .nav-wrapper ul li a {
+	min-width: 100px;
 	font-size: 1.4em;
-	font-weight: bold;
+}
+
+.nav-wrapper ul li .dropdown-content a {
+	font-size: 1.2em;
 }
 
 #dropdownList01, #dropdownList02 {
@@ -47,5 +51,5 @@ body {
 }
 
 .navbar-fixed .nav-wrapper .dropdown-button {
-	min-width: 120px;
+	
 }

@@ -1,11 +1,11 @@
 @CHARSET "UTF-8";
 
 #donationPicture {
+	vertical-align: middle;	
 	max-width: 400px;
 	width: expression(this.width > 400 ? "400px" : this.width);
 	max-height: 400px;
 	height: expression(this.height > 400 ? "400px" : this.height);
-	vertical-align: middle;
 }
 
 #donationPictureFrame {
