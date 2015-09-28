@@ -17,22 +17,47 @@ public class InsertMissionBoard
 	public static void start()
 	{
 		
+//		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+//			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+//		{
+//			pstmt.setInt(1,2);   						
+//			pstmt.setString(2,"亞成鳥青少年野地教育計畫");				
+//			pstmt.setInt(3,4);					
+//			
+//			pstmt.executeUpdate();
+//		}
+//		catch(Exception e)
+//		{
+//			e.printStackTrace();
+//		}
+		
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
-			pstmt.setInt(1,2);   						
-			pstmt.setString(2,"亞成鳥青少年野地教育計畫");				
-			pstmt.setInt(3,4);					
-			
-			pstmt.executeUpdate();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+			{
+				pstmt.setInt(1,12);   						
+				pstmt.setString(2,"偏鄉科學創意教學深耕計畫");				
+				pstmt.setInt(3,4);					
+				
+				pstmt.executeUpdate();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		
-
-		
+		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+			{
+				pstmt.setInt(1,13);   						
+				pstmt.setString(2,"【將軍國小暑期服務】美人魚現身將軍嶼");				
+				pstmt.setInt(3,4);					
+				
+				pstmt.executeUpdate();
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		
 		System.out.println("任務板資料新增完成");
 }
