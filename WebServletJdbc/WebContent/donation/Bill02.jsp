@@ -221,13 +221,18 @@
 
 												/* 按下鼠標處理函數 */
 												$("#buttonSub${vs.index}").mousedown(function() {
-													// 													var input = $("#text${vs.index}").val();
+													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
-														setSubValue();
+														setAddValue();
+
+													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+														$("#text${vs.index}").val("${item.demandNumber}");
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請輸入正整數</span>', 1800, 'rounded');
+														$("#text${vs.index}").empty();
 														$("#text${vs.index}").val("1");
 													}
 
@@ -235,17 +240,20 @@
 
 												/* 按下鼠標處理函數 */
 												$("#buttonAdd${vs.index}").mousedown(function() {
-													// 													var input = $("#text${vs.index}").val();
+													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setAddValue();
 
+													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+														$("#text${vs.index}").val("${item.demandNumber}");
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-														$("#text${vs.index}").val(1);
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請輸入正整數</span>', 1800, 'rounded');
+														$("#text${vs.index}").empty();
+														$("#text${vs.index}").val("1");
 													}
-
 												});
 
 												/* 鬆開鼠標處理函數 */
@@ -253,9 +261,13 @@
 
 												function checkText() {
 													var input = $("#text${vs.index}").val();
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+
+													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+														$("#text${vs.index}").val("${item.demandNumber}");
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請輸入正整數</span>', 1800, 'rounded');
 														$("#text${vs.index}").empty();
 														$("#text${vs.index}").val("1");
 													}
