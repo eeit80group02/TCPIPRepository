@@ -399,12 +399,18 @@
 							</div>
 							<div class="warnText">為確保身分正確，請選擇下方欄位</div>
 							<div class="input-field col m12 s12">
+								<div class="DetailTitle01">
+									<i class="tiny material-icons">edit</i><span>&nbsp;性別&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
+								</div>
 								<select class="browser-default" name="ddlOcname_ex" id="ddlOcname_ex">
 									<option value="先生">先生</option>
 									<option value="小姐">小姐</option>
 								</select> <br>
 							</div>
 							<div class="input-field col m12 s12">
+								<div class="DetailTitle01">
+									<i class="tiny material-icons">edit</i><span>&nbsp;縣市別＆區域別&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
+								</div>
 								<!-- 寄件人姓別 -->
 								<label for="ddlCity"></label>
 								<!-- 寄件人縣市別 -->
@@ -459,8 +465,6 @@
 									<option value="">請選擇區域別</option>
 								</select> <input type="hidden" name="hidArea" id="hidArea"> <input name="txtPostno" type="text" maxlength="3" id="txtPostno" style="width: 25px; display: none;" value=""><br> <br> <br>
 							</div>
-
-
 							<input type='hidden' name='linkto' value='stepThree'> <input type='hidden' name='schoolId3' value='${OneSchoolBill.schoolId}'> <input type='hidden' name='dealId'>
 						</form>
 					</div>
@@ -469,8 +473,6 @@
 						<hr>
 						<br>
 					</div>
-
-
 
 					<div class="col s12 m12 l6">
 
@@ -486,14 +488,17 @@
 							<!-- 收件人地址 -->
 							<input class="required" required="required" autocomplete="off" type="text" id="txtGaddress" name="txtGaddress" disabled="disabled" value="${OneSchoolBill.addressComplete}"><label for="txtGaddress" class=""><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址</span></label>
 						</div>
-						<div class="warnText">為確保資料正確，請選擇下方欄位</div>
 						<div class="input-field col m12 s12">
 							<select class="browser-default" name="ddlGcname_ex" id="ddlGcname_ex" class="required">
 								<option value="先生">先生</option>
 								<option value="小姐">小姐</option>
 							</select>
 						</div>
+						<div class="warnText">為確保資料正確，請選擇下方欄位</div>
 						<div class="input-field col m12 s12">
+							<div class="DetailTitle01">
+								<i class="tiny material-icons">edit</i><span>&nbsp;縣市別＆區域別&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
+							</div>
 							<label for="ddlCity1"></label>
 							<!-- 收件人縣市別 disabled -->
 							<select class="browser-default" name="ddlCity1" id="ddlCity1">
@@ -595,10 +600,10 @@
 							<div id="chkSpec">
 								<input id="chkSpec_0" type="checkbox" name="chkSpec$0" checked> <label for="chkSpec_0">s60</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkSpec_1" type="checkbox" name="chkSpec$1"> <label for="chkSpec_1">s90</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkSpec_2" type="checkbox" name="chkSpec$2"> <label for="chkSpec_2">s120</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkSpec_3" type="checkbox" name="chkSpec$3"> <label for="chkSpec_3">s150</label> <br>
 							</div>
+							<br>
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 內容物 -->
-
 							<input class="required" required="required" autocomplete="off" type="text" id="txtPkgexp" name="txtPkgexp" maxlength="25"><label for="txtPkgexp" class="" id="textRightLable06"><i class="tiny material-icons">edit</i><span class="DetailTitle">&nbsp;內容物&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
 							<div class="DetailTitle01">
 								<i class="tiny material-icons">edit</i><span>&nbsp;內容物分類&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
@@ -681,9 +686,9 @@
 						</button>
 					</form>
 
-					<div id="result"></div>
-
-
+					<div class="warnText" id="resultDiv">
+						<span id="result"></span><span id="failResult"></span> <br>
+					</div>
 					<!-- 進行資料庫存取訂單 -->
 					<script>
 						function Button1Click() {

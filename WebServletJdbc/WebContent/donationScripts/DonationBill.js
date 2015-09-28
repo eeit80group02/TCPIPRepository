@@ -192,10 +192,27 @@ $(window).load(function() {
 		}
 	}
 
-//	$("#page02Next").css("display", "none");
+	$("#page02Next").css("display", "none");
+
 	$("#btnSend").click(function() {
-//		$(this).css("display", "none");
-		$("#page02Next").css("display", "inline");
+		$("#result").text("");
+		$("#failResult").text("");
+	});
+
+	$("*").hover(function() {
+		var result = $("#result").text();
+		console.log(result.trim().length);
+		if (result == "預約失敗！" || result.trim().length <= 5) {
+			// 我失敗了
+			if (result == "預約失敗！") {
+				$("#failResult").text("請檢查資料是否都有填寫！");
+			}
+		} else {
+			// 我成功
+			$("#failResult").text("");
+			$("#btnSend").css("display", "none");
+			$("#page02Next").css("display", "inline");
+		}
 	});
 
 }(jQuery));

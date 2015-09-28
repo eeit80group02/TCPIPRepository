@@ -175,7 +175,6 @@ select:disabled {
 	color: #3CB371;
 	text-align: left;
 	font-size: 1.2em;
-	font-weight: bold;
 }
 
 #test2 .hrefToWebsite {
@@ -209,7 +208,7 @@ select:disabled {
 	color: white;
 }
 
-#result {
+#resultDiv {
 	padding: 10px;
 	height: 50px;
 }
