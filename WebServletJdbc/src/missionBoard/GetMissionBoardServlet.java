@@ -97,12 +97,14 @@ public class GetMissionBoardServlet extends HttpServlet {
 				PrintWriter out = response.getWriter();
 				JSONObject jsonObject = new JSONObject();
 				jsonObject.put("result", "noMissionSetFound!");
+				out.write(jsonObject.toJSONString());
 			}
 		} else {
 			response.setContentType("application/json; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put("result", "noBoardFound");
+			out.write(jsonObject.toJSONString());
 		}
 	}
 
