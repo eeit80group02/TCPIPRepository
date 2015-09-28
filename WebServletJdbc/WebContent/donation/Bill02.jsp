@@ -90,13 +90,15 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -116,9 +118,9 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">受贈單位</a></li>
-						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">捐獻明細</a></li>
-						<li class="tab col s3 disabled" id="pageTab04"><a href="#test4" class="disabled">完成捐獻</a></li>
+						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻明細</a></li>
+						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">填寫資料</a></li>
+						<li class="tab col s3 disabled" id="pageTab03"><a href="#test3" class="disabled">完成捐獻</a></li>
 					</ul>
 					<br>
 
@@ -841,7 +843,7 @@
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 

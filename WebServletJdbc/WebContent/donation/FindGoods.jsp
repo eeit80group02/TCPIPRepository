@@ -84,13 +84,15 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -145,13 +147,12 @@
 						</button>
 					</span> <span id="trashHeadRightBtn">
 						<button type="button" id="donateDelete" class="btn btn-small btn-floating">
-							<a a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
+							<a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
 						</button>
 					</span>
 				</div>
 
 				<div class="alert alert-success" role="alert" id="trashBody">
-
 					<h3 id="trashHead">
 						<span id="donateBagTitle">捐獻背包</span>
 					</h3>
@@ -244,6 +245,7 @@
 							document.cookie = "Items=" + lists + ";expire=" + now.toUTCString();
 
 						} else {
+
 							// 						alert("something is wrong!");
 						}
 					}
