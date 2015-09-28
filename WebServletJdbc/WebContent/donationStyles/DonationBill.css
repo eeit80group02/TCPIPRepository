@@ -214,19 +214,7 @@ select:disabled {
 }
 
 /* Modal 專用 */
-#test1 #modalNote01 .modal-content {
-	color: black;
-	text-align: left;
-	font-size: 1.4em;
-}
-
-#test2 .modal-content {
-	color: black;
-	text-align: left;
-	font-size: 1.4em;
-}
-
-#test2 .modal-content {
+.modal-content {
 	color: black;
 	text-align: left;
 	font-size: 1.2em;
