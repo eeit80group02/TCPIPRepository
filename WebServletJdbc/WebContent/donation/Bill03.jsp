@@ -100,8 +100,8 @@
 
 				</div>
 
-				<!-- 第四頁 -->
-				<div id="test4" class="col s12">
+				<!-- 第三頁 -->
+				<div id="test3" class="col s12">
 
 					<form action="">
 						<table id="donationBill04" class="responsive-table">
@@ -127,10 +127,10 @@
 					</form>
 
 					<br>
-					<button type="button" id="page04ToPage01" class="btn btn-small btn-floating">
+					<button type="button" id="page03ToPage01" class="btn btn-small btn-floating">
 						<a href="<c:url value="/donation/demand.do?type=FindGoods" />" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻背包"><i class="small material-icons">card_giftcard</i></a>
 					</button>
-					<button type="button" id="page04ToPage02" class="btn btn-small btn-floating">
+					<button type="button" id="page03ToPage02" class="btn btn-small btn-floating">
 						<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻清單"><i class="small material-icons">list</i></a>
 					</button>
 
@@ -142,13 +142,7 @@
 	</center>
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
-	<script type="text/javascript" src="../donationScripts/SexSwitch.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-
-	<!-- 標頭專用 bottom start -->
-	<!-- 必須最後載入才有效果 -->
-	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<!-- 標頭專用 bottom end -->
 
 </body>
 </html>

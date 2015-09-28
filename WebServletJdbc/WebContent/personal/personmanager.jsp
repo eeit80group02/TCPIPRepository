@@ -29,57 +29,120 @@
 <div class="row" id="mainboard">
 			<div class="card-panel indigo lighten-5 hoverable" id="backboard">
 				<div class="row" id="secondboard">
-					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
-						<div class="row">
-							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='showMemberData.do' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									修改資料
-								</span>
-							</a>
-						</div>
-						<div class="row divider" style="height:10px;"></div>						
-						<div class="row yellow lighten-3 card-panel">
+					<!-- 第一張 -->
+					<div class="card-panel left hoverable" style="min-height:60vh" id="firstdiv">
+						<div>
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								參加活動
+							</h3>
+							<div class="row divider amber" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
-								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
-									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+								<a href="<c:url value="/participator.do?type=displayFullProjByParticipator" />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<span class="fontStyle">
 										我參加過的完整計畫
 									</span>
 								</a>
 							</div>
 							<div class="row">
-								<a id="changepassworda" href="<c:url value='' />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
 									<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										執行中的完整計劃
+										申請參加的完整計畫
 									</span>
 								</a>											
-							</div>																
-						</div>						
+							</div>	
+							<div class="row">
+								<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
+									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+										申請參加的完整計畫
+									</span>
+								</a>											
+							</div>							
+						</div>
 					</div>
-					<div class="white card-panel left" style="min-height:60vh">
-						<div class="row">
-							<a id="changepassworda" href="<c:url value='../primaryProj/createPrimaryProjForm.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" >
+
+					<!-- 第二張 -->
+					<div class="card-panel left hoverable" style="min-height:60vh" id="firstdiv">
+						<div>
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								舉辦活動
+							</h3>
+							<div class="row divider amber" style="opacity:0.5;height:10px;"></div>
+								<div class="row">
+									<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj/createPrimaryProjForm.jsp' />">
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+											建立初步計畫
+										</span>
+									</a>
+								</div>
+								<div class="row">
+									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonalByPending' />"> 
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+											審核初步計畫
+										</span>
+									</a>
+								</div>										
+								<div class="row">
+									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByChat' />">
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+											洽談中完整計畫
+										</span>
+									</a>											
+								</div>								
+								<div class="row">
+									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByParticipate' />">
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+											審核志工
+										</span>
+									</a>											
+								</div>
+						
+						</div>
+					</div>					
+
+
+					<!-- 第三張 -->
+					<div class="card-panel left hoverable" style="min-height:60vh" id="firstdiv">
+						<div>
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								瀏覽活動
+							</h3>
+							<div class="row divider amber" style="opacity:0.5;height:10px;"></div>
+								<div class="row">
+									<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonal' />">
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+												我建立的初步計畫
+										</span>
+									</a>
+								</div>		
+								<div class="row">
+									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonal' />">
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+												瀏覽完整計畫
+										</span>
+									</a>											
+								</div>	
+								<div class="row">
+									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='' />">
+										<span  style="font-family:微軟正黑體;font-size:1.2em;">
+												我發布的完整計畫
+										</span>
+									</a>											
+								</div>								
+						</div>
+					</div>
+										
+					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								個人管理
+							</h3>
+							<div class="row divider amber" style="opacity:0.5;height:10px;"></div><div class="row">
+							<a class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='showMemberData.do' />">
 								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									建立初步計畫
+									修改資料
 								</span>
 							</a>
 						</div>
-						<div class="row divider" style="height:10px;"></div>					
-						<div class="row">
-							<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonal' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									我建立的初步計畫
-								</span>
-							</a>
-						</div>					
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj.do?type=displayPersonalByPending' />"> 
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-									審核初步計畫
-								</span>
-							</a>
-						</div>					
-					</div>				
-					<div class="white card-panel left" style="min-height:60vh">
+					</div>
 <!-- 						<div class="row"> -->
 <!-- 							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" > -->
 <!-- 								<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
@@ -88,50 +151,8 @@
 <!-- 							</a>											 -->
 <!-- 						</div>					 -->
 <!-- 						<div class="row divider" style="height:10px;"></div> -->
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonal' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										瀏覽完整計畫
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										我發布的完整計畫
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										我發布的初步計畫
-								</span>
-							</a>											
-						</div>											
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByChat' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										洽談中完整計畫
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonalByParticipate' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										招募中(審核志工)
-								</span>
-							</a>											
-						</div>
-						<div class="row">
-							<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
-								<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										志工 看申請中的計畫
-								</span>
-							</a>											
-						</div>
-						<a href='<c:url value='/schoolDemand/SchoolDemandServlet.do?type=mdisplays'/>'></a>											
-					</div>				
+					
+
 				</div>
 
 

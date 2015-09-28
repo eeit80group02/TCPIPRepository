@@ -121,6 +121,28 @@ public class ParticipatorService
 		return result;
 	}
 	
+	public List<ParticipatorBean> dispalyFullProjByParticipator(ParticipatorBean bean) 
+	{
+		List<ParticipatorBean> result = new ArrayList<ParticipatorBean>();
+		if(bean != null)
+		{
+			// 找出該會員申請過的資料
+			int memberId = bean.getMemberId();
+			for(ParticipatorBean temp: participatorDAO.selectByMemberId(memberId))
+			{
+				if(temp.getParticipateStatus().equals("已通過"))
+				{
+					// join 計畫 才能有計畫名稱
+					int fullProjId = temp.getFullProjId();
+					FullProjBean fullProjBean = fullProjDAO.findByPrimaryKey(fullProjId);
+					temp.setFullProjBean(fullProjBean);
+					result.add(temp);
+				}
+			}
+		}
+		return result;
+	}
+
 	public boolean agreeParticipator(ParticipatorBean bean)
 	{
 		if(bean != null)
@@ -230,7 +252,6 @@ public class ParticipatorService
 	{
 
 	}
-
 
 
 }

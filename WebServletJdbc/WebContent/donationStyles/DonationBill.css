@@ -63,7 +63,7 @@ select:disabled {
 }
 
 #test1 .imgBill {
-	vertical-align: middle;	
+	vertical-align: middle;
 	max-width: 100px;
 	width: expression(this.width > 100 ? "100px" : this.width);
 	max-height: 100px;
@@ -85,10 +85,6 @@ select:disabled {
 	overflow: auto;
 	border: 1px solid black;
 	padding: 5px;
-}
-
-#test1 table tbody td:nth-child(3) {
-	text-align: left;
 }
 
 /* test2 */
@@ -114,6 +110,21 @@ select:disabled {
 	color: white;
 }
 
+#test2 .textNeed, #test2 #textUnit {
+	font-size: 1.2em;
+	text-align: center;
+	max-width: 58px;
+}
+
+#test2 .imgBill {
+	vertical-align: middle;
+	max-width: 100px;
+	width: expression(this.width > 100 ? "100px" : this.width);
+	max-height: 100px;
+	height: expression(this.height > 100 ? "100px" : this.height);
+	border: 1px solid black;
+}
+
 #test2 #remark02 {
 	background-color: white;
 	text-align: left;
@@ -125,40 +136,39 @@ select:disabled {
 	padding: 5px;
 }
 
-/* test3 */
-#test3 {
+#test2 {
 	text-align: center;
 }
 
-#test3 select {
+#test2 select {
 	border: 1px solid black;
 	border-radius: 4px;
 	width: 45%;
 }
 
-#test3 #ddlCity, #test3 #ddlCity1, #test3 #addressLeft01 {
+#test2 #ddlCity, #test2 #ddlCity1, #test2 #addressLeft01 {
 	float: left;
 }
 
-#test3 #ddlArea, #test3 #addressLeft02, #test3 #ddlOcname_ex, #test3 #ddlArea1, #test3 #textLeft06 {
+#test2 #ddlArea, #test2 #addressLeft02, #test2 #ddlOcname_ex, #test2 #ddlArea1, #test2 #textLeft06 {
 	float: right;
 }
 
-#test3 div input[id^=text] {
+#test2 div input[id^=text] {
 	font-size: 1.2em;
 }
 
-#test3 .leftTitle, #test3 .rightTitle {
+#test2 .leftTitle, #test2 .rightTitle {
 	color: #3CB371;
 	font-size: 2em;
 }
 
-#test3 .DetailTitle {
+#test2 .DetailTitle {
 	/* 	各輸入項的名稱 */
 	font-size: 1.4em;
 }
 
-#test3 .DetailTitle01 {
+#test2 .DetailTitle01 {
 	/* 	各輸入項右下的名稱 */
 	color: #3CB371;
 	text-align: left;
@@ -166,7 +176,7 @@ select:disabled {
 	font-weight: bold;
 }
 
-#test3 .hrefToWebsite {
+#test2 .hrefToWebsite {
 	color: #5599FF;
 }
 
@@ -174,23 +184,23 @@ select:disabled {
 	display: none;
 }
 
-/* test4 */
-#test4 table {
+/* test3 */
+#test3 table {
 	font-size: 1.2em;
 	cursor: default;
 	background-color: white;
 }
 
-#test4 table tbody tr:HOVER {
+#test3 table tbody tr:HOVER {
 	background-color: #CCEEFF;
 }
 
-#test4 table tr td {
+#test3 table tr td {
 	border: 1px solid #ff7575;
 	text-align: center;
 }
 
-#test4 table thead tr {
+#test3 table thead tr {
 	font-weight: bold;
 	border-bottom: 1px solid black;
 	background-color: #ff7575;
@@ -203,42 +213,25 @@ select:disabled {
 }
 
 /* Modal 專用 */
-#test2 .modal-content {
-	color: black;
-	text-align: left;
-	font-size: 1.4em;
-}
-
 #test1 #modalNote01 .modal-content {
 	color: black;
 	text-align: left;
 	font-size: 1.4em;
 }
 
-#test2 .modal-content h4, #test1 .modal-content h4 {
-	text-align: center;
-}
-
-#test3 #modalNote03 td:nth-child(1) {
-	background-color: #ff7575;
-	font-size: 1.2em;
-}
-
-#test3 #modalNote03 {
+#test2 .modal-content {
 	color: black;
-}
-
-#test3 #modalNote03 td {
-	text-align: center;
-	font-size: 1em;
-}
-
-#test3 #modalNote03 ol li {
 	text-align: left;
 	font-size: 1.4em;
 }
 
-#test3 .someTitle {
-	font-size: 1.2em;
+#test2 .modal-content {
+	color: black;
 	text-align: left;
+	font-size: 1.2em;
+}
+
+#test2 .modal-content h4 {
+	font-size: 1.4em;
+	text-align: center;
 }

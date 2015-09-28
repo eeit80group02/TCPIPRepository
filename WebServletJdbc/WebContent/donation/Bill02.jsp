@@ -64,7 +64,7 @@
 </head>
 
 <body>
-<!-- 驗證是否為會員 -->
+	<!-- 驗證是否為會員 -->
 	<c:if test="${LoginOK.beanName.equals('school') }">
 		<c:redirect url="/error/permission.jsp" />
 	</c:if>
@@ -82,10 +82,27 @@
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
-						<li class="chooseDropdownItem" value="會員頁面"><a href="#">會員頁面</a></li>
-						<li class="divider"></li>
-						<li class="chooseDropdownItem" value="登入/出"><a href="#">登入/出</a></li>
+						<!-- 有登入時，會有學校頁面或者個人頁面 -->
+						<c:if test="${not empty LoginOK}">
+							<c:if test="${LoginOK.beanName.equals('member')}">
+								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+							</c:if>
 
+							<c:if test="${LoginOK.beanName.equals('school')}">
+								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+							</c:if>
+						</c:if>
+						<li class="divider"></li>
+						<!-- 沒登入時，必須看到登入按鈕 -->
+						<c:choose>
+							<c:when test="${empty LoginOK}">
+								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+							</c:when>
+
+							<c:otherwise>
+								<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul></li>
 			</ul>
 		</div>
@@ -107,22 +124,23 @@
 
 				</div>
 
-							<!-- 第一頁 -->
+				<!-- 第二頁 start -->
 				<div id="test2" class="col s12">
 					<div class="col s12">
-						<div id="warnText">
+						<div class="warnText">
 							<span>確認捐獻物品明細</span>
-							<!-- 小叮嚀 start -->
+							<!-- 操作小叮嚀 start -->
 							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
 							<!-- Modal Structure -->
 							<div id="modalNote02" class="modal modal-fixed-footer">
 								<div class="modal-content">
-									<h4>小叮嚀：</h4>
+									<h4>操作小叮嚀：</h4>
 									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_before</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
+										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">remove</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">add</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
 										</li>
+										<br>
 										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除捐獻物品。
 										</li>
 									</ol>
@@ -131,7 +149,7 @@
 									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
 								</div>
 							</div>
-							<!-- 小叮嚀 end -->
+							<!-- 操作小叮嚀 end -->
 
 						</div>
 						<br>
@@ -150,150 +168,148 @@
 								</tr>
 							</thead>
 							<tbody>
-							<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
-										<tr>
+								<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
+									<tr>
 										<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}"></td>
 										<td>${item.schoolName}<br> <br>${OneSchoolBill.addressComplete}</td>
 										<td>${item.supplyStatus}</td>
 										<td style="word-break: break-all;"><div id="remark" class="remark">${item.demandContent}</div></td>
-									
-													<td>
-														<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
-															<i class="small material-icons">remove</i>
-														</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.originalDemandUnit}</label>
-														<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
-															<i class="small material-icons">add</i>
-														</button>
-													</td>
-													<td class="deleteRow">
-														<button type="button" class="btn btn-small btn-floating">
-															<i class="small material-icons">delete</i>
-														</button>
-													</td>
-									
-											<script type="text/javascript">
-											
-												$(window).load(function() {
-													var step = 1; // 默認步長
-													var changeStepTimer = null; // 改變速度計數器
-													var setValueTimer = null; // 設置值計數器
-	
-													/* 改變速度私有方法 */
-													var changeStep = function() {
-														// 每隔 2 秒速度加 5
-														changeStepTimer = setInterval(function() {
-															step += 5
-														}, 2000);
+
+										<td>
+											<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
+												<i class="small material-icons">remove</i>
+											</button> <input type="text" id="text${vs.index}" value="1" autocomplete="off" class="textNeed"> <label for="text" id="textUnit" class="textUnit">${item.originalDemandUnit}</label>
+											<button type="button" id="buttonAdd${vs.index}" class="btn btn-small btn-floating">
+												<i class="small material-icons">add</i>
+											</button>
+										</td>
+										<td class="deleteRow">
+											<button type="button" class="btn btn-small btn-floating">
+												<i class="small material-icons">delete</i>
+											</button>
+										</td>
+
+										<script type="text/javascript">
+											$(window).load(function() {
+												var step = 1; // 默認步長
+												var changeStepTimer = null; // 改變速度計數器
+												var setValueTimer = null; // 設置值計數器
+
+												/* 改變速度私有方法 */
+												var changeStep = function() {
+													// 每隔 2 秒速度加 5
+													changeStepTimer = setInterval(function() {
+														step += 5
+													}, 2000);
+												}
+
+												/* 設置值私有方法 */
+												var setAddValue = function() {
+													// 													var input = $("#text${vs.index}").val();
+													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
+													setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
+												}
+
+												/* 設置值私有方法 */
+												var setSubValue = function() {
+													// 													var input = $("#text${vs.index}").val();
+													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
+													setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
+												}
+
+												/* 按下鼠標處理函數 */
+												$("#buttonSub${vs.index}").mousedown(function() {
+													// 													var input = $("#text${vs.index}").val();
+													// 正規表示法找整數
+													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+														changeStep();
+														setSubValue();
+													} else {
+														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														$("#text${vs.index}").val("1");
 													}
-	
-													/* 設置值私有方法 */
-													var setAddValue = function() {
-	// 													var input = $("#text${vs.index}").val();
-														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
-														setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
+
+												});
+
+												/* 按下鼠標處理函數 */
+												$("#buttonAdd${vs.index}").mousedown(function() {
+													// 													var input = $("#text${vs.index}").val();
+													// 正規表示法找整數
+													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+														changeStep();
+														setAddValue();
+
+													} else {
+														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														$("#text${vs.index}").val(1);
 													}
-	
-													/* 設置值私有方法 */
-													var setSubValue = function() {
-	// 													var input = $("#text${vs.index}").val();
-														$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
-														setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
+
+												});
+
+												/* 鬆開鼠標處理函數 */
+												$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
+
+												function checkText() {
+													var input = $("#text${vs.index}").val();
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+													} else {
+														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														$("#text${vs.index}").empty();
+														$("#text${vs.index}").val("1");
 													}
-	
-													/* 按下鼠標處理函數 */
-													$("#buttonSub${vs.index}").mousedown(function() {
-	// 													var input = $("#text${vs.index}").val();
-														// 正規表示法找整數
-														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-															changeStep();
-															setSubValue();
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").val("1");
-														}
-	
-													});
-	
-													/* 按下鼠標處理函數 */
-													$("#buttonAdd${vs.index}").mousedown(function() {
-	// 													var input = $("#text${vs.index}").val();
-														// 正規表示法找整數
-														if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
-															changeStep();
-															setAddValue();
-															
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").val(1);
-														}
-	
-													});
-	
-													/* 鬆開鼠標處理函數 */
-													$("*").mouseup(checkText).keydown(checkText).keyup(checkText);
-	
-													function checkText() {
-														var input = $("#text${vs.index}").val();
-														if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
-														} else {
-															Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-															$("#text${vs.index}").empty();
-															$("#text${vs.index}").val("1");
-														}
-														console.log(input);
-														clearInterval(changeStepTimer);
-														clearTimeout(setValueTimer);
-														step = 1;
-													}
-												}(jQuery));
-												</script>
-											</tr>
-									</c:forEach>
+													console.log(input);
+													clearInterval(changeStepTimer);
+													clearTimeout(setValueTimer);
+													step = 1;
+												}
+											}(jQuery));
+										</script>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</form>
-					</div>
-					<br><br><br><br><br>
-				
-					<div class="col s12">
-					<br><br><br><br><br>
+					<br>
+					<div class="col s12" id="billList2">
+						<br>
+						<hr>
+						<br>
 						<div class="warnText">
-							<span class="redStar"><i class="tiny material-icons">star</i></span>&nbsp;<span>本頁皆為必填欄位</span>
-							<!-- 宅配小叮嚀 start -->
+							<span class="redStar"><i class="tiny material-icons">star</i></span>&nbsp;<span>以下皆為必填欄位</span>
 							<button type="button" data-target="modalNote03" class="btn btn-small btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
-							<!-- Modal Structure -->
-							<div id="modalNote03" class="modal modal-fixed-footer">
-								<div class="modal-content">
-									<h4>宅配小叮嚀：</h4>
-									<ol type="A">
-										<li>宅配通須知：</li>
-										<ol>
-											<li><a href="https://www.e-can.com.tw/serviceNormalTemp.aspx?id=1&amp;sys_id=1" target="_blank" class="hrefToWebsite">無法收送貨件區域 </a></li>
-											<li><a href="https://www.e-can.com.tw/search_Freight.aspx" target="_blank" class="hrefToWebsite">運費查詢</a></li>
-											<li><a href="https://www.e-can.com.tw/serviceNormalTemp.aspx?id=6&amp;sys_id=15" class="hrefToWebsite">託運條款</a></li>
-										</ol>
-										<li>常溫貨件規格：長+寬+高≦150公分(含)以下。</li>
-										<li>貨件重量：限20公斤(含)以下。</li>
-										<li>超過交件時間配送時效順延一天。</li>
-										<li>以下區域恕不提供宅配通貨件配送服務：</li>
-										<ol>
-											<li>澎湖地區：望安鄉、七美鄉、虎井島、桶盤島、大倉嶼、員貝嶼、鳥嶼、花嶼、吉貝嶼。</li>
-											<li>金門地區：烏坵、烈嶼、大膽、二膽。</li>
-											<li>馬祖地區(連江縣)：南竿鄉、北竿鄉、莒光鄉、東引鄉。</li>
-											<li>澎湖地區：望安鄉、七美鄉、虎井島、桶盤島、大倉嶼、員貝嶼、鳥嶼、花嶼、吉貝嶼。</li>
-										</ol>
-										<li>宅配服務提供三段式四種彈性指定送達時段，配合收件人的時間，快速送件流程，於指定時段送達。</li>
-									</ol>
-								</div>
-								<div class="modal-footer">
-									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
-								</div>
-							</div>
-							<!-- 宅配小叮嚀 end -->
-
 						</div>
+						<!-- 宅配小叮嚀 start -->
+						<!-- Modal Structure -->
+						<div id="modalNote03" class="modal modal-fixed-footer">
+							<div class="modal-content">
+								<h4>宅配小叮嚀：</h4>
+								<ol type="A">
+									<li>宅配通須知：</li>
+									<ol>
+										<li><a href="https://www.e-can.com.tw/serviceNormalTemp.aspx?id=1&amp;sys_id=1" target="_blank" class="hrefToWebsite">無法收送貨件區域 </a></li>
+										<li><a href="https://www.e-can.com.tw/search_Freight.aspx" target="_blank" class="hrefToWebsite">運費查詢</a></li>
+										<li><a href="https://www.e-can.com.tw/serviceNormalTemp.aspx?id=6&amp;sys_id=15" target="_blank" class="hrefToWebsite">託運條款</a></li>
+									</ol>
+									<li>常溫貨件規格：長+寬+高≦150公分(含)以下。</li>
+									<li>貨件重量：限20公斤(含)以下。</li>
+									<li>超過交件時間配送時效順延一天。</li>
+									<li>以下區域恕不提供宅配通貨件配送服務：</li>
+									<ol>
+										<li>澎湖地區：望安鄉、七美鄉、虎井島、桶盤島、大倉嶼、員貝嶼、鳥嶼、花嶼、吉貝嶼。</li>
+										<li>金門地區：烏坵、烈嶼、大膽、二膽。</li>
+										<li>馬祖地區(連江縣)：南竿鄉、北竿鄉、莒光鄉、東引鄉。</li>
+										<li>澎湖地區：望安鄉、七美鄉、虎井島、桶盤島、大倉嶼、員貝嶼、鳥嶼、花嶼、吉貝嶼。</li>
+									</ol>
+									<li>宅配服務提供三段式四種彈性指定送達時段，配合收件人的時間，快速送件流程，於指定時段送達。</li>
+								</ol>
+							</div>
+							<div class="modal-footer">
+								<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+							</div>
+						</div>
+						<!-- 宅配小叮嚀 end -->
 						<br>
 					</div>
 
@@ -357,114 +373,105 @@
 							</button>
 						</div>
 						<br>
-						
-						
-						
-						
-						
-						
-						
-						
-			<form name='producrOrder' action='<c:url value="checkOrder.do"/>' method='GET'>
-						<!-- 右上 寄件人系列 -->
-						<div class="input-field col m12 s12">
-							<!-- 寄件人姓名 -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtOcname" name="txtOcname" maxlength="15"><label for="txtOcname" class="" id="textRightLable01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;姓名&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-							<!-- 寄件人姓別 -->
-							<select class="browser-default" name="ddlOcname_ex" id="ddlOcname_ex">
-								<option value="先生">先生</option>
-								<option value="小姐">小姐</option>
-							</select>
-						</div>
 
-						<div class="input-field col m12 s12">
-							<label for="ddlCity"></label>
-							<!-- 寄件人縣市別 -->
-							<select class="browser-default" name="ddlCity" id="ddlCity">
-								<option value="">請選擇縣市別</option>
-								<option value="基隆市">基隆市</option>
-								<option value="臺北市">臺北市</option>
-								<option value="新北市">新北市</option>
-								<option value="桃園市">桃園市</option>
-								<option value="新竹市">新竹市</option>
-								<option value="新竹縣">新竹縣</option>
-								<option value="苗栗縣">苗栗縣</option>
-								<option value="臺中市">臺中市</option>
-								<option value="南投縣">南投縣</option>
-								<option value="彰化縣">彰化縣</option>
-								<option value="雲林縣">雲林縣</option>
-								<option value="嘉義市">嘉義市</option>
-								<option value="嘉義縣">嘉義縣</option>
-								<option value="臺南市">臺南市</option>
-								<option value="高雄市">高雄市</option>
-								<option value="屏東縣">屏東縣</option>
-								<option value="宜蘭縣">宜蘭縣</option>
-								<option value="花蓮縣">花蓮縣</option>
-								<option value="臺東縣">臺東縣</option>
-								<option value="澎湖縣">澎湖縣</option>
-								<option value="金門縣">金門縣</option>
-							</select>
-							<script type="text/javascript">
-								$('#ddlCity').on("change", function() {
-									$('#ddlArea option').remove();
-									$('#txtPostno').attr("value", "");
-									$('#ddlArea').append("<option value=''>請選擇區域別</option>");
-									$.ajax({
-										url : '../GetCityServlet',
-										type : "post",
-										data : {
-											"city" : $('#ddlCity').val()
-										},
-										datatype : 'json',
-										success : function(result) {
-											var areas = (typeof result.d) == 'string' ? eval('(' + result.d + ')') : result.d;
-											for (var i = 0; i < areas.length; i++) {
-												$('#ddlArea').append("<option value='" + areas[i].Zip + "'>" + areas[i].Name + "</option>");
+						<form name='producrOrder' action='<c:url value="checkOrder.do"/>' method='GET'>
+							<!-- 右上 寄件人系列 -->
+							<div class="input-field col m12 s12">
+								<!-- 寄件人姓名 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOcname" name="txtOcname" maxlength="15"><label for="txtOcname" class="" id="textRightLable01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;姓名&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
+								<!-- 寄件人姓別 -->
+								<select class="browser-default" name="ddlOcname_ex" id="ddlOcname_ex">
+									<option value="先生">先生</option>
+									<option value="小姐">小姐</option>
+								</select>
+							</div>
+
+							<div class="input-field col m12 s12">
+								<label for="ddlCity"></label>
+								<!-- 寄件人縣市別 -->
+								<select class="browser-default" name="ddlCity" id="ddlCity">
+									<option value="">請選擇縣市別</option>
+									<option value="基隆市">基隆市</option>
+									<option value="臺北市">臺北市</option>
+									<option value="新北市">新北市</option>
+									<option value="桃園市">桃園市</option>
+									<option value="新竹市">新竹市</option>
+									<option value="新竹縣">新竹縣</option>
+									<option value="苗栗縣">苗栗縣</option>
+									<option value="臺中市">臺中市</option>
+									<option value="南投縣">南投縣</option>
+									<option value="彰化縣">彰化縣</option>
+									<option value="雲林縣">雲林縣</option>
+									<option value="嘉義市">嘉義市</option>
+									<option value="嘉義縣">嘉義縣</option>
+									<option value="臺南市">臺南市</option>
+									<option value="高雄市">高雄市</option>
+									<option value="屏東縣">屏東縣</option>
+									<option value="宜蘭縣">宜蘭縣</option>
+									<option value="花蓮縣">花蓮縣</option>
+									<option value="臺東縣">臺東縣</option>
+									<option value="澎湖縣">澎湖縣</option>
+									<option value="金門縣">金門縣</option>
+								</select>
+								<script type="text/javascript">
+									$('#ddlCity').on("change", function() {
+										$('#ddlArea option').remove();
+										$('#txtPostno').attr("value", "");
+										$('#ddlArea').append("<option value=''>請選擇區域別</option>");
+										$.ajax({
+											url : '../GetCityServlet',
+											type : "post",
+											data : {
+												"city" : $('#ddlCity').val()
+											},
+											datatype : 'json',
+											success : function(result) {
+												var areas = (typeof result.d) == 'string' ? eval('(' + result.d + ')') : result.d;
+												for (var i = 0; i < areas.length; i++) {
+													$('#ddlArea').append("<option value='" + areas[i].Zip + "'>" + areas[i].Name + "</option>");
+												}
 											}
-										}
+										});
 									});
-								});
-							</script>
+								</script>
 
-							<!-- 寄件人區域別 -->
-							<select class="browser-default" name="ddlArea" id="ddlArea">
-								<option value="">請選擇區域別</option>
-							</select> <input type="hidden" name="hidArea" id="hidArea"> <input name="txtPostno" type="text" maxlength="3" id="txtPostno" style="width: 25px; display: none;" value=""><br> <br> <br>
-						</div>
+								<!-- 寄件人區域別 -->
+								<select class="browser-default" name="ddlArea" id="ddlArea">
+									<option value="">請選擇區域別</option>
+								</select> <input type="hidden" name="hidArea" id="hidArea"> <input name="txtPostno" type="text" maxlength="3" id="txtPostno" style="width: 25px; display: none;" value=""><br> <br> <br>
+							</div>
 
-						<div class="input-field col m12 s12">
-							<!-- 寄件人地址 -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtOaddress" name="txtOaddress"><label for="txtOaddress" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-						</div>
+							<div class="input-field col m12 s12">
+								<!-- 寄件人地址 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOaddress" name="txtOaddress"><label for="txtOaddress" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
+							</div>
 
-						<div class="input-field col m12 s12">
-							<!-- 寄件人電話 -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtOtel" name="txtOtel" maxlength="16"><label for="txtOtel" class="" id="textRightLable03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-						</div>
+							<div class="input-field col m12 s12">
+								<!-- 寄件人電話 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOtel" name="txtOtel" maxlength="16"><label for="txtOtel" class="" id="textRightLable03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
+							</div>
 
-						<div class="input-field col m12 s12">
-							<!-- 寄件人手機 -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtOmobile" name="txtOmobile" maxlength="10"><label for="txtOmobile" class="" id="textRightLable04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-						</div>
-						<div class="input-field col m12 s12">
-							<!-- 寄件人E-mail -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtOemail" name="txtOemail"><label for="txtOemail" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-						</div>
-						<input type='hidden' name='linkto' value='stepThree'>
-				<input type='hidden' name='schoolId3' value='${OneSchoolBill.schoolId}'>
-				<input type='hidden' name='dealId'>
-			</form>
-					</div>				
+							<div class="input-field col m12 s12">
+								<!-- 寄件人手機 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOmobile" name="txtOmobile" maxlength="10"><label for="txtOmobile" class="" id="textRightLable04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
+							</div>
+							<div class="input-field col m12 s12">
+								<!-- 寄件人E-mail -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOemail" name="txtOemail"><label for="txtOemail" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
+							</div>
+							<input type='hidden' name='linkto' value='stepThree'> <input type='hidden' name='schoolId3' value='${OneSchoolBill.schoolId}'> <input type='hidden' name='dealId'>
+						</form>
+					</div>
 					<div class="col s12">
 						<br>
 						<hr>
 						<br>
 					</div>
-					
-					
-					
+
+
+
 					<div class="col s12 m12 l6">
-					
+
 						<!-- 左下 -->
 						<div class="leftTitle">收件人資料</div>
 						<br>
@@ -645,37 +652,38 @@
 							});
 						</script>
 						<!-- 宅配被隱藏end -->
-						<button type="button" id="page03Prev" class="btn btn-small btn-floating">
-							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="上一步"><i class="small material-icons">keyboard_arrow_left</i></a>
+
+
+						<button type="button" id="page02Prev" class="btn btn-small btn-floating">
+							<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="上一步"><i class="small material-icons">keyboard_arrow_left</i></a>
 						</button>
 
-						<button type="button" id="page03Clean" class="btn btn-small btn-floating">
+						<button type="button" id="page02Clean" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清除"><i class="small material-icons">clear</i></a>
 						</button>
 
 						<button type="submit" id="btnSend" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="確認送出"><i class="small material-icons">done</i></a>
 						</button>
+						<button type="submit" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
+							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
+						</button>
 					</form>
-					
+
 					<div id="result"></div>
 
-				<button type="submit" id="page03Ok" class="btn btn-small btn-floating" onclick="Button1Click()">
-					<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
-				</button>
-				
-				<!-- 進行資料庫存取訂單 -->
-				<script>
-					function Button1Click()
-					{
-					// 預約結果/單號存取
-					document.producrOrder.dealId.value=$("#result").text();      
-					document.producrOrder.submit();      
-					}
-				</script>
-				
+
+					<!-- 進行資料庫存取訂單 -->
+					<script>
+						function Button1Click() {
+							// 預約結果/單號存取
+							document.producrOrder.dealId.value = $("#result").text();
+							document.producrOrder.submit();
+						}
+					</script>
 				</div>
-			
+			</div>
+		</div>
 	</center>
 
 	<!-- 宅配通 bottom start -->
@@ -792,20 +800,20 @@
 			});
 		});
 	</script>
-	
-	
-		<!-- 處理訂單 -->
-		<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
-			<form action='<c:url value="checkOrder.do"/>' method='POST'>
+
+
+	<!-- 處理訂單 -->
+	<c:forEach var='item' items='${OneSchoolBill.dbdList}' varStatus='vs'>
+		<form action='<c:url value="checkOrder.do"/>' method='POST'>
 			<script type="text/javascript">
 				(function($) {
 					$("#btnSend").click(function() {
 						var donationId = "${item.donationId}";
-						var donateAmount = $("#text${vs.index}").val();			
-						
+						var donateAmount = $("#text${vs.index}").val();
+
 						xhr = new XMLHttpRequest();
 						if (xhr != null) {
-							xhr.addEventListener("readystatechange", function(donateAmount){
+							xhr.addEventListener("readystatechange", function(donateAmount) {
 								if (xhr.readyState == 4) {
 									if (xhr.status == 200) {
 										lists = xhr.responseText;
@@ -815,31 +823,24 @@
 								}
 							});
 							xhr.open("POST", "cart.do", true);
-							xhr.setRequestHeader("Content-Type",
-									"application/x-www-form-urlencoded")
+							xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
 							// 假設會員id為5
-							xhr.send("toCart=update&donationId="+"${item.donationId}"+"&donateAmount="+donateAmount);
+							xhr.send("toCart=update&donationId=" + "${item.donationId}" + "&donateAmount=" + donateAmount);
 						}
-// 						$("#page01").removeAttr("class");
-// 						$(":active").removeAttr("class");
-// 						$("#page02").attr("class","active");
+						// 						$("#page01").removeAttr("class");
+						// 						$(":active").removeAttr("class");
+						// 						$("#page02").attr("class","active");
 					});
 				}(jQuery));
 			</script>
-			</form>
-		</c:forEach>
-	
-	
+		</form>
+	</c:forEach>
+
+
 	<!-- 宅配通 bottom start -->
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
-	<script type="text/javascript" src="../donationScripts/DonationBillGetNumber.js"></script>
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-
-	<!-- 標頭專用 bottom start -->
-	<!-- 必須最後載入才有效果 -->
-	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
-	<!-- 標頭專用 bottom end -->
 
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>

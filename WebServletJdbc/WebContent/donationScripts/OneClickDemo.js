@@ -31,12 +31,12 @@
 		$("#txtGmobile").val("0902022022");
 		$("#txtPkgexp").val("跳繩和墊板");
 
-		$("#test3 #textRightLable01").attr("class", "active");
-		$("#test3 #textRightLable02").attr("class", "active");
-		$("#test3 #textRightLable03").attr("class", "active");
-		$("#test3 #textRightLable04").attr("class", "active");
-		$("#test3 #textRightLable05").attr("class", "active");
-		$("#test3 #textRightLable06").attr("class", "active");
+		$("#test2 #textRightLable01").attr("class", "active");
+		$("#test2 #textRightLable02").attr("class", "active");
+		$("#test2 #textRightLable03").attr("class", "active");
+		$("#test2 #textRightLable04").attr("class", "active");
+		$("#test2 #textRightLable05").attr("class", "active");
+		$("#test2 #textRightLable06").attr("class", "active");
 
 	});
 
