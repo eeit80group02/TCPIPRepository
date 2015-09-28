@@ -50,14 +50,6 @@ public class ProjDiscussServlet extends HttpServlet
 		{
 			postDiscuss(request,response);
 		}
-//		else if(type.equals("addMember"))
-//		{
-//			addMemberMessage(request,response);
-//		}
-//		else if(type.equals("addSchool"))
-//		{
-//			addSchoolMessage(request,response);
-//		}
 	}
 
 	private void postDiscuss(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
@@ -98,7 +90,35 @@ public class ProjDiscussServlet extends HttpServlet
 	private void replyDiscuss(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getParameter("type"));
+		response.setContentType("application/json; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		
+		HttpSession session = request.getSession();
+		
+		MemberBean memberBean = null;
+		if(session.getAttribute("LoginOK") instanceof MemberBean)
+		{
+			memberBean = (MemberBean) session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
+		
+		String projDiscussId = request.getParameter("projDiscussId");
+		String content = request.getParameter("content");
+		
+		int pId = Integer.parseInt(projDiscussId);
+		
+		ProjDiscussBean projDiscusBean = new ProjDiscussBean();
+		projDiscusBean.setProjDiscussId(pId);
+		projDiscusBean.setAnswerMemberId(memberBean.getMemberId());
+		projDiscusBean.setAnswerMemberContent(content);
+		
+		JSONObject result = service.replyDiscuss(projDiscusBean);
+		out.write(result.toJSONString());
 	}
 
 	private void displayDiscuss(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
