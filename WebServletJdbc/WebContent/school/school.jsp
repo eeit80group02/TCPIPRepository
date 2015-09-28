@@ -116,14 +116,14 @@
 							</h3>
 							<div class="row divider red" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
-								<a href="<c:url value="/donation/InsertDonateGoods.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value="../donation/InsertDonateGoods.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										建立物資需求
 									</span>
 								</a>
 							</div>
 							<div class="row">
-								<a href="<c:url value="/donation/AllDeamndBySchool.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										全部物資需求
 									</span>

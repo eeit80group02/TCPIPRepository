@@ -17,4 +17,8 @@ public interface MissionDAO
 
 	public List<MissionBean> getAll();
 
+	List<MissionBean> findByMissionSetId(int id);
+
+	List<MissionBean> findByMainMissionId(int id);
+
 }

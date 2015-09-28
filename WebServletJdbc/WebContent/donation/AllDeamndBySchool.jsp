@@ -105,9 +105,11 @@
 					<h4>操作小叮嚀：</h4>
 					<ol>
 						<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">assignment</i></a>&nbsp;單擊左鍵，可以查看捐獻記錄。
-						</li><br>
+						</li>
+						<br>
 						<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>&nbsp;單擊左鍵，可以進行修改內容。
-						</li><br>
+						</li>
+						<br>
 						<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>&nbsp;單擊左鍵，進入管理問與答。
 						</li>
 					</ol>
@@ -202,6 +204,7 @@
 					</c:forEach>
 				</ul>
 			</div>
+
 			<div id="test2" class="col s12">
 
 				<ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
@@ -257,7 +260,7 @@
 											<span class="midText">${item.originalDemandNumber-item.demandNumber}/${item.originalDemandNumber}${item.originalDemandUnit}</span><br>
 											<!-- 左 icon -->
 											<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
-												<button type="button" data-target="modalNote01${vs.index}" class="btn btn-small btn-floating modal-trigger">
+												<button type="button" data-target="modalNote02${vs.index}" class="btn btn-small btn-floating modal-trigger">
 													<i class="small material-icons">assignment</i>
 												</button>
 											</span>
@@ -335,13 +338,13 @@
 											<span class="midText">${item.originalDemandNumber-item.demandNumber}/${item.originalDemandNumber}${item.originalDemandUnit}</span><br>
 											<!-- 左 icon -->
 											<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
-												<button type="button" data-target="modalNote01${vs.index}" class="btn btn-small btn-floating modal-trigger">
+												<button type="button" data-target="modalNote03${vs.index}" class="btn btn-small btn-floating modal-trigger">
 													<i class="small material-icons">assignment</i>
 												</button>
 											</span>
 											<!-- 中 icon -->
-											<span class="midIcon"> <a href="#" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
-											</span>
+											<!-- <span class="midIcon"> <a href="#" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a> -->
+											<!-- </span> -->
 
 											<!-- 右 icon -->
 											<span class="rightIcon"> <a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>

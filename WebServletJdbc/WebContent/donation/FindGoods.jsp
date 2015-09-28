@@ -56,6 +56,7 @@
 						</div>
 					</form>
 				</li>
+
 				<li><i class="large material-icons" id="clearIcon">clear</i></li>
 				<li class="chooseItem" value="數量"><a href="<c:url value='search.do?type=byAmount'/>">數量</a></li>
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList01">時間<i class="mdi-navigation-arrow-drop-down right"></i></a>
@@ -257,5 +258,6 @@
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<script type="text/javascript" src="../donationScripts/ScreenSize.js"></script>
 	<script type="text/javascript" src="../donationScripts/AutoComplete.js"></script>
+
 </body>
 </html>

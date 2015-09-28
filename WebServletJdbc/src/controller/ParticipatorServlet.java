@@ -81,11 +81,59 @@ public class ParticipatorServlet extends HttpServlet
 				dispalyParticipator(request,response);
 				return;
 			}
+			
+			// 顯示 會員參予過的計畫列表
+			if(type.equals("displayFullProjByParticipator"))
+			{
+				System.out.println("執行 ParticipatorServlet displayFullProjByParticipator");
+				System.out.println(request.getRequestURI() + "?" + request.getQueryString());
+				
+				displayFullProjByParticipator(request,response);
+				return;
+			}
 		}
 		
 		String contextPath = request.getContextPath();
 		response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
 		return;
+	}
+
+	private void displayFullProjByParticipator(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		
+		HttpSession session = request.getSession();
+		MemberBean memberBean = null;
+		
+		// if session.getAttribute("LoginOK") 無法轉型 => 不是會員登入，無操作權力
+		if(session.getAttribute("LoginOK") != null && session.getAttribute("LoginOK") instanceof MemberBean)
+		{
+			memberBean = (MemberBean)session.getAttribute("LoginOK");
+		}
+		else
+		{
+			String context = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(context + "/error/permission.jsp"));
+			return;
+		}
+		
+		ParticipatorBean participatorBean = new ParticipatorBean();
+		participatorBean.setMemberId(memberBean.getMemberId());
+		
+		List<ParticipatorBean> result = service.dispalyFullProjByParticipator(participatorBean);
+		
+		if(result != null)
+		{
+			request.setAttribute("participator",result);
+			request.getRequestDispatcher("/personal/displayPersonalParticipateFullProjAll.jsp").forward(request,response);
+			return;
+		}
+		else
+		{
+			String contextPath = request.getContextPath();
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/error/permission.jsp"));
+			return;
+		}
 	}
 
 	private void agreeParticipator(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
