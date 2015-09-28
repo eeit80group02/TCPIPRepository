@@ -569,9 +569,9 @@ public class DonationService {
 	// 依單間學校做訂單處理
 	public DonationOrderBean OneSchoolOrderBooking(DonationOrderBean donationOrderBean, int schoolId, DonationCart cart){
 		DonationOrderDAO dao = new DonationOrderDAOJdbc();
-		donationOrderBean = dao.insert(donationOrderBean);
+//		donationOrderBean = dao.insert(donationOrderBean);
 		// 取得新增訂單的自增主鍵
-		int pk = donationOrderBean.getDonationOrderId();
+//		int pk = donationOrderBean.getDonationOrderId();
 		
 		// 取得單間學校(主檔+明細)
 		DonationBillBean bill = cart.getDonationOfOneSchool(schoolId);
