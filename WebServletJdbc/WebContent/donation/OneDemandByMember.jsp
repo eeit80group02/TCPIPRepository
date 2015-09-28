@@ -48,13 +48,15 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -312,6 +314,7 @@
 	</center>
 	<iframe name='hidden_frame' style='width: 0px; height: 0px'></iframe>
 	<script type="text/javascript" src="../donationScripts/DonationQA.js"></script>
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 </body>
 </html>

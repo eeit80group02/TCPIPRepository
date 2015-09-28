@@ -84,13 +84,15 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -244,6 +246,7 @@
 							document.cookie = "Items=" + lists + ";expire=" + now.toUTCString();
 
 						} else {
+
 							// 						alert("something is wrong!");
 						}
 					}
