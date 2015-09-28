@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -37,6 +38,7 @@
 					<tr>
 						<th>完整計畫編號</th>
 						<th>完整計畫標題</th>
+						<th>時間</th>
 						<th>狀態</th>
 						<th>link</th>
 					</tr>
@@ -46,6 +48,7 @@
 						<tr>
 							<td style="font-size:1.6em;font-weight:600">${bean.fullProjId}</td>
 							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
+							<td><fmt:formatDate value="${bean.activityStartTime}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${bean.activityEndTime}" pattern="yyyy-MM-dd"/></td>
 							<td class="red-text" style="font-size:1.6em;font-weight:600">${bean.projStatus}
 							<td>
 								<c:choose>

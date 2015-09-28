@@ -33,6 +33,7 @@
 		<div class="col l6 offset-l3">
 		<div class="row center-align card-panel blue-text" style="font-size:4em;">參予過的完整計畫</div>
 		<c:forEach var="bean" items="${participator}">
+			${bean.fullProjBean.fullProjId}暫時顯示編號 最後DEMO應該拿掉 只留名稱<br>
 			${bean.fullProjBean.title}<br>
 			<fmt:formatDate value="${bean.fullProjBean.activityStartTime}" pattern="yyyy-MM-dd"/><br>
 			<fmt:formatDate value="${bean.fullProjBean.activityEndTime}" pattern="yyyy-MM-dd"/><br>
