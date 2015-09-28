@@ -254,7 +254,7 @@
 			//Set Initail Board from database
 			var boardInformation;
 			var participatorList;
-			var fullProjId = <% request.getParameter("fullProjId"); %>;
+			var fullProjId = ${param.fullProjId};
 			$.ajax({
     			url:'<c:url value="/GetMissionBoardServlet" />',
     	   		type:'get',
