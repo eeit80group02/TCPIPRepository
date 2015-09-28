@@ -82,6 +82,7 @@ public class GetMissionBoardServlet extends HttpServlet {
 				}
 
 				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("result", "succeed");
 				jsonObject.put("missionBoard", missionBoard);
 				jsonObject.put("missionSets", missionSets);
 				jsonObject.put("missions", missions);
