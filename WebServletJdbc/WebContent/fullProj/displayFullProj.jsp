@@ -38,7 +38,7 @@
 			<div class="col l4 btn yellow lighten-3 black-text offset-l2">
 				<fmt:formatNumber var="mid" value="${fullProj.memberId}" pattern="0000"/>
 				<span style="font-family:微軟正黑體;font-size:1.5em;font-weight:600;width:100%;">發起者:${fullProj.memberBean.lastName}${fullProj.memberBean.firstName}[No.${mid}]</span>			
-			</div>		
+			</div>
 		</div>
 		<!-- 第二列 -->
 		<div class="row">
@@ -169,7 +169,7 @@
 					</div>
 					<!-- 計畫內容 -->
 					<div class="row">
-						<div class="col l12 card-panel hoverable"  style="background-color:#D1F0E5;">
+						<div class="col l8 card-panel offset-l2 hoverable"  style="background-color:#D1F0E5;">
 							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
 							${fullProj.content}
 							</p>
@@ -230,12 +230,12 @@
 <!-- 								</div> -->
 								<!-- 答案 -->
 
-								<div class="row">
-									<a href="#replymodal" id="replybtn" class="col l2 btn-large right black-text center-align  green accent-1" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體;">
-										<i class="material-icons black-text" style="font-size:1.5em;vertical-align:bottom;">input</i>
-										回覆 
-									</a>
-								</div>
+<!-- 								<div class="row"> -->
+<!-- 									<a href="#replymodal" id="replybtn" class="col l2 btn-large right black-text center-align  green accent-1" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體;"> -->
+<!-- 										<i class="material-icons black-text" style="font-size:1.5em;vertical-align:bottom;">input</i> -->
+<!-- 										回覆  -->
+<!-- 									</a> -->
+<!-- 								</div> -->
 							</div>	
 						</div>
 					</div>					
@@ -275,17 +275,16 @@
 			    	</c:if>
 			    </c:if>
 			</div>
-			
-			<div class="col l2">
+			<div>
 				<form action="<c:url value="/draganddrop.jsp" />" method="get">
 					<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
 <!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
-					<button type="submit" class="btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:2em;width:100%">
+					<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
 						<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
-						任務板
+						<span style="width:100%;">任務板</span>
 					</button>
 				</form>
-			</div>
+			</div>	
 			
 		</div>	
 	</div>

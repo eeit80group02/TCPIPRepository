@@ -36,7 +36,6 @@
 			<table class="bordered highlight centered">
 				<thead style="font-size:2em;">
 					<tr>
-						<th>完整計畫編號</th>
 						<th>完整計畫標題</th>
 						<th>時間</th>
 						<th>狀態</th>
@@ -46,7 +45,6 @@
 				<tbody>
 					<c:forEach var="bean" items="${fullProj}">
 						<tr>
-							<td style="font-size:1.6em;font-weight:600">${bean.fullProjId}</td>
 							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
 							<td><fmt:formatDate value="${bean.activityStartTime}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${bean.activityEndTime}" pattern="yyyy-MM-dd"/></td>
 							<td class="red-text" style="font-size:1.6em;font-weight:600">${bean.projStatus}

@@ -51,12 +51,19 @@
 						活動時間:<fmt:formatDate value="${bean.activityStartTime}"/>~<fmt:formatDate value="${bean.activityEndTime}"/>
 					</div>
 				</div>
+				<!-- 活動地點 -->
+				<div class="row"  style="font-size:2em;font-weight:600;font-family:微軟正黑體;">
+					<div class="col l3 right-align">
+						<i class="material-icons green-text accent-3" style="font-size:1.4em;vertical-align:bottom;">location_on</i>
+					</div>
+					<div class="col l9 left-align" >
+						活動地點:${bean.fullProjBean.location}
+					</div>
+				</div>				
 				
-				地點 ${bean.fullProjBean.location}
-				
-				看是否要再給個 看計畫的連結?
 				<!-- 拒絕按鈕 -->
 				<div class="row">
+					<a class="col l2 btn-large red white-text left center-align" href=""style="font-size:2em;font-weight:600;font-family:微軟正黑體;">計畫內容</a>
 					<form action="<c:url value="/participator.do" />" method="post">
 						<input type="hidden" name="participatorId" value="${bean.participatorId}">
 						<input type="hidden" name="option" value="2" />
