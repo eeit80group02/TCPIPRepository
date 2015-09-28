@@ -75,7 +75,7 @@ public class GetMissionBoardServlet extends HttpServlet {
 						mission.put("missionStatus", missionBean.getMissionStatus());
 						mission.put("mainMissionId", missionBean.getMainMissionId());
 
-						// System.out.println("mission="+mission);
+						System.out.println("mission="+mission);
 
 						missions.put("mission" + missionBean.getMissionId(), mission);
 					}
