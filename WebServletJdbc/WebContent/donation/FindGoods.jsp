@@ -193,9 +193,9 @@
 			}
 		}
 		// 傳入已加入購物車的清單
-		var i = "${item}";
-		var data = $("#" + i + "");
-		deleteImage(data);
+// 		var i = "${item}";
+// 		var data = $("#" + i + "");
+// 		deleteImage(data);
 
 		// there's the gallery and the trash
 		var $gallery = $("#gallery"), $trash = $("#trash"), $head5 = $(".ui-widget-header");

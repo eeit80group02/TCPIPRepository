@@ -51,6 +51,10 @@
 						活動時間:<fmt:formatDate value="${bean.activityStartTime}"/>~<fmt:formatDate value="${bean.activityEndTime}"/>
 					</div>
 				</div>
+				
+				地點 ${bean.fullProjBean.location}
+				
+				看是否要再給個 看計畫的連結?
 				<!-- 拒絕按鈕 -->
 				<div class="row">
 					<form action="<c:url value="/participator.do" />" method="post">
@@ -67,31 +71,6 @@
 	</div>
 	<!-- 主要版面 -->
 </main>
-
-<!-- 	<table border="1"> -->
-<!-- 		<tr> -->
-<!-- 			<th>計畫編號</th> -->
-<!-- 			<th>計畫名稱</th> -->
-<!-- 			<th>時間</th> -->
-<!-- 			<th>button</th> -->
-<!-- 		</tr> -->
-		
-<%-- 		<c:forEach var="bean" items="${participator}"> --%>
-<!-- 			<tr> -->
-<%-- 				<td>${bean.fullProjId}</td> --%>
-<%-- 				<td>${bean.fullProjBean.title}</td> --%>
-<%-- 				<td><fmt:formatDate value="${bean.activityStartTime}"/>~<fmt:formatDate value="${bean.activityEndTime}"/></td> --%>
-<!-- 				<td> -->
-				
-<%-- 				<form action="<c:url value="/participator.do" />" method="post"> --%>
-<%-- 					<input type="hidden" name="participatorId" value="${bean.participatorId}"> --%>
-<!-- 					<input type="hidden" name="option" value="2" /> -->
-<!-- 					<input type="hidden" name="type" value="cancel"> -->
-<!-- 					<button class="btn red white-text btndiv right" type="submit">拒絕</button> -->
-<!-- 				</form>	</td> -->
-<!-- 			</tr> -->
-<%-- 		</c:forEach> --%>
-<!-- 	</table> -->
 
 	<!-- 頁尾 -->
 	<c:import url="/template/footer.jsp"

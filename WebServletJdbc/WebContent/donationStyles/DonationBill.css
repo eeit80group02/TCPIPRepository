@@ -29,6 +29,7 @@ select:disabled {
 .warnText {
 	text-align: center;
 	color: red;
+	font-weight: bold;
 }
 
 .redStar {
@@ -125,12 +126,13 @@ select:disabled {
 	border: 1px solid black;
 }
 
-#test2 #remark02 {
+#test2 .remark {
 	background-color: white;
 	text-align: left;
-	max-width: 360px;
+	max-width: 200px;
 	min-height: 80px;
-	max-height: 110px;
+	max-height: 100px;
+	word-break: break-all;
 	overflow: auto;
 	border: 1px solid black;
 	padding: 5px;
@@ -231,7 +233,7 @@ select:disabled {
 	font-size: 1.2em;
 }
 
-#test2 .modal-content h4 {
+.modal-content h4 {
 	font-size: 1.4em;
 	text-align: center;
 }
