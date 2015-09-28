@@ -284,7 +284,6 @@
 						<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
 						任務板
 					</button>
-					
 				</form>
 			</div>
 			
@@ -292,7 +291,7 @@
 	</div>
 </main>
 
-
+		
 			
 			<!-- 回覆用modal -->
 			  <div id="replymodal" class="modal bottom-sheet" style="min-height:40vh;">
@@ -353,6 +352,7 @@
 	
 	
 		$(function() {
+			
 			//leanModal註冊
 			$("#askbtn").leanModal();
 			$("#replybtn").leanModal();
@@ -437,16 +437,7 @@
 		  					if(value.answerMemberId == "null"){
 		  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
 		  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
-// 		  						           console.log($(content));
-// 		  						         $(content).children("a");
-								
-								$(".btnmodal").click(function(){
-									$("#replymodal").openModal();
-								})
-								
-								$("body").click(function(){
-									$("#replymodal").closeModal();
-								});
+
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
@@ -468,7 +459,7 @@
 		  								   
 	 						var contentDiv = $("<div class='row'></div>").html(content);
 	 						$("#discuss").append(contentDiv);
-		  															
+	 						$("#projDiscuss"+value.projDiscussId).leanModal();
 		  				// 可以正常跑
 // 		  					<c:if test="${LoginOK.beanName.equals('member')}">
 // 								<c:if test="${LoginOK.memberId == fullProj.memberId}">
