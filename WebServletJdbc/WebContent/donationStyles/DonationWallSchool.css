@@ -91,11 +91,29 @@
 }
 
 /* Modal */
-#modalNote01 .modal-content {
+.modal-content {
 	text-align: left;
+	font-size: 1.2em;
+}
+
+.modal-content h4 {
+	text-align: center;
+}
+
+.modal-content .donationRecorder {
+	text-align: center;
 	font-size: 1.4em;
 }
 
-#modalNote01 .modal-content h4 {
+.modal-content .donationRecorder td {
 	text-align: center;
+	border: 1px solid #ff7575;
+}
+
+.modal-content .donationRecorder thead tr {
+	background-color: #ff7575;
+}
+
+.modal-content .donationRecorder tbody tr:HOVER {
+	background-color: #CCEEFF;
 }
