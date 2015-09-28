@@ -37,7 +37,7 @@
 							</h3>
 							<div class="row divider amber" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
-								<a href="<c:url value="" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value="/participator.do?type=displayFullProjByParticipator" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										我參加過的完整計畫
 									</span>
@@ -68,7 +68,7 @@
 							</h3>
 							<div class="row divider amber" style="opacity:0.5;height:10px;"></div>
 								<div class="row">
-									<a id="changepassworda" href="<c:url value='../primaryProj/createPrimaryProjForm.jsp' />" class="col l12 btn-large yellow lighten-5 black-text" >
+									<a id="changepassworda" class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/primaryProj/createPrimaryProjForm.jsp' />">
 										<span  style="font-family:微軟正黑體;font-size:1.2em;">
 											建立初步計畫
 										</span>
