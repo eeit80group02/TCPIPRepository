@@ -31,7 +31,7 @@
 	<div class="row" id="mainboard">
 		<!-- 6欄置中 -->
 		<div class="col l6 offset-l3">
-		<div class="row center-align card-panel blue-text" style="font-size:4em;">參加的活動計畫</div>
+		<div class="row center-align card-panel blue-text" style="font-size:4em;">申請中的完整計畫</div>
 		<c:forEach items="${participator}" var="bean">
 			<!-- 開始列出參與的計畫 -->
 			<div class="card-panel black-text light-blue lighten-4">

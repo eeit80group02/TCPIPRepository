@@ -210,7 +210,7 @@
 
 <!-- 					</div> -->
 					<!-- 問與答 -->					
-					<div class="row">
+					<div class="row" id="questiondiv">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<div id="discuss" class="card-panel white">
 							<!-- 內容在jQuery -->
@@ -435,10 +435,18 @@
 		  								  "<div align='right'><small>" + value.questionMemberTime + "</small></div></div>";
 		  					
 		  					if(value.answerMemberId == "null"){
-		  						content += "<a href='#replymodal' id='projDiscuss' + value.projDiscussId + class='col l2 btn-large right black-text center-align  green accent-1' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
+		  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
 		  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
-// 								content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='btn red white-text right' style='font-family:微軟正黑體;font-size:1.8em;font-weight:600'>回覆</a>"
-		  						$("#projDiscuss" + value.projDiscussId).leanModal();
+// 		  						           console.log($(content));
+// 		  						         $(content).children("a");
+								
+								$(".btnmodal").click(function(){
+									$("#replymodal").openModal();
+								})
+								
+								$("body").click(function(){
+									$("#replymodal").closeModal();
+								});
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
@@ -456,7 +464,7 @@
 // 	 														 "<input type='hidden' name='type' value='reply'>" + 
 // 	 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
 // 	 									}
-		  								   
+// 		  					 console.log($("#projDiscuss" + value.projDiscussId));
 		  								   
 	 						var contentDiv = $("<div class='row'></div>").html(content);
 	 						$("#discuss").append(contentDiv);
