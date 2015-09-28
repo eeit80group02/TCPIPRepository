@@ -147,13 +147,12 @@
 						</button>
 					</span> <span id="trashHeadRightBtn">
 						<button type="button" id="donateDelete" class="btn btn-small btn-floating">
-							<a a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
+							<a href="cart.do?toCart=deleteAll" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="清空背包"><i class="tiny material-icons">delete</i></a>
 						</button>
 					</span>
 				</div>
 
 				<div class="alert alert-success" role="alert" id="trashBody">
-
 					<h3 id="trashHead">
 						<span id="donateBagTitle">捐獻背包</span>
 					</h3>
