@@ -163,16 +163,14 @@
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-<<<<<<< HEAD
+
 	<script>
 		var lists = '${newItemsInCart}';
 		var now = new Date();
 		now.setTime(now.getTime() + 1000 * 60 * 60 * 24 * 30);
 		document.cookie = "Items=" + lists + ";expire=" + now.toUTCString();
 	</script>
-
-=======
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
+
 </body>
 </html>
