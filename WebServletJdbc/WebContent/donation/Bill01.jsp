@@ -103,28 +103,29 @@
 						<div class="warnText">
 							<span>確認捐獻物品明細</span>
 							<!-- 操作小叮嚀 start -->
-							<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
-								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
+							<button type="button" data-target="modalNote01" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="large material-icons">local_library</i></a>
 							</button>
-							<!-- Modal Structure -->
-							<div id="modalNote01" class="modal modal-fixed-footer">
-								<div class="modal-content">
-									<h4>操作小叮嚀：</h4>
-									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，進入填寫資料。
-										</li>
-										<br>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻。
-										</li>
-									</ol>
-								</div>
-								<div class="modal-footer">
-									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
-								</div>
-							</div>
-							<!-- 操作小叮嚀 end -->
-
 						</div>
+						<!-- Modal Structure -->
+						<div id="modalNote01" class="modal modal-fixed-footer">
+							<div class="modal-content">
+								<h4>操作小叮嚀：</h4>
+								<ol>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，進入填寫資料。
+									</li>
+									<br>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻。
+									</li>
+								</ol>
+							</div>
+							<div class="modal-footer">
+								<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+							</div>
+						</div>
+						<!-- 操作小叮嚀 end -->
+
+
 						<br>
 					</div>
 
@@ -158,7 +159,7 @@
 										</td>
 										<td>
 											<form action='<c:url value="checkOrder.do"/>' method='GET'>
-												<button type="submit" id="page02Next" class="btn btn-small btn-floating">
+												<button type="submit" id="page01Next${item.schoolId}" class="btn btn-small btn-floating">
 													<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
 												</button>
 												<input type='hidden' name='linkto' value='stepTwo'> <input type='hidden' name='schoolId' value='${item.schoolId}'>

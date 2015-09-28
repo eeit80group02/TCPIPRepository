@@ -192,7 +192,7 @@ $(window).load(function() {
 		}
 	}
 
-	$("#page02Next").css("display", "none");
+//	$("#page02Next").css("display", "none");
 	$("#btnSend").click(function() {
 //		$(this).css("display", "none");
 		$("#page02Next").css("display", "inline");
