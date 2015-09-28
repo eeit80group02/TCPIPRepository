@@ -27,15 +27,30 @@
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row" style="margin-top: 100px">
-			<div class="container" style="height: 500px;border: 2px solid black;">
-				<div style="margin: 150px">
-					<span></span>
-					<h3>親愛的會員${LoginOk.lastName}${LoginOk.firstName} 您好，您的會員資料已修改成功，數秒後自動轉移請稍候片刻......</h3>
-					<a href="<c:url value='../index.jsp'/>">如果未自動轉移轉移請點</a>
+	
+		<div class="row valign-wrapper" id="mainboard">
+			<div class="col l8 offset-l2 valign card-panel white z-depth-3" style="min-height:40vh" id="cardboard">
+				<div class="row center-align" style="font-family:微軟正黑體;font-size:5em;" id="msgboard">
+					${LoginOk.lastName}${LoginOk.firstName} 您好<br>您的會員資料已修改成功<br>
+					<span style="font-size:0.4em;">3秒後將至首頁...</span>
 				</div>
-			</div>
-		</div>
+				<div class="row">
+					<a class="col l2 offset-l5 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回首頁</a>
+				</div>
+			</div>		
+		</div>	
+	
+	
+	
+<!-- 		<div class="row" style="margin-top: 100px"> -->
+<!-- 			<div class="container" style="height: 500px;border: 2px solid black;"> -->
+<!-- 				<div style="margin: 150px"> -->
+<!-- 					<span></span> -->
+<%-- 					<h3>親愛的會員${LoginOk.lastName}${LoginOk.firstName} 您好，您的會員資料已修改成功，數秒後自動轉移請稍候片刻......</h3> --%>
+<%-- 					<a href="<c:url value='../index.jsp'/>">如果未自動轉移轉移請點</a> --%>
+<!-- 				</div> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
 	</main>
 
 	<!-- 頁尾 -->

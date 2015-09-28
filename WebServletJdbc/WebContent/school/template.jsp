@@ -57,6 +57,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			
 			//mainboard min-height
 			$("#mainboard").css("min-height","80vh");
 			//navagation上logo的高度

@@ -155,6 +155,19 @@
 <!-- 						</div>											 -->
 					</div>
 					
+					<!-- 第四張 -->					
+					<div class="white card-panel left" style="min-height:60vh" id="firstdiv">
+							<h3 class="row center-align" style="width:100%;font-weight:600;font-family:微軟正黑體;">
+								學校管理
+							</h3>
+							<div class="row divider amber" style="opacity:0.5;height:10px;"></div><div class="row">
+							<a class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/school/showSchoolData.do' />">
+								<span  style="font-family:微軟正黑體;font-size:1.2em;">
+									修改資料
+								</span>
+							</a>
+						</div>
+					</div>					
 				</div>
 
 
