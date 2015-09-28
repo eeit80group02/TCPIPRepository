@@ -177,6 +177,15 @@
 					</div>
 				</div>
 
+<!-- 			<!-- 發問用按鈕 -->
+<%-- 			<c:if test="${LoginOK.beanName.equals('member')}"> --%>
+<%-- 				<c:if test="${LoginOK.memberId != fullProj.memberId}"> --%>
+<!-- 					<div class="fixed-action-btn" style="bottom: 45px; right: 24px;"> -->
+<!-- 						<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">提問</a> -->
+<!-- 					</div> -->
+<%-- 				</c:if> --%>
+<%-- 			</c:if> --%>
+<!-- 			<!-- 發問用按鈕 -->
 
 
 				<div class="card-panel hoverable row" style="background-color:#FFFCEC">
@@ -185,12 +194,16 @@
 						<div class="col l8 btn-large offset-l2 card-panel hoverable black-text white"  style="background-color:#D1F0E5;font-size:2em;font-weight:900;font-family:微軟正黑體">
 							問與答
 						</div>
-						<div class="col l2 btn-large card-panel hoverable indigo darken-4"  style="background-color:#D1F0E5;font-size:1.6em;font-weight:600;font-family:微軟正黑體;width:15%;margin-left:10px;">
-							<a href="#askmodal" id="askbtn" class="white-text center-align" >
-								<i class="material-icons" style="font-size:1.5em;vertical-align:middle;">live_help</i>
-								我要提問
-							</a>
-						</div>
+						<c:if test="${LoginOK.beanName.equals('member')}">
+							<c:if test="${LoginOK.memberId != fullProj.memberId}">
+								<div class="col l2 btn-large card-panel hoverable indigo darken-4"  style="background-color:#D1F0E5;font-size:1.6em;font-weight:600;font-family:微軟正黑體;width:15%;margin-left:10px;">
+									<a href="#askmodal" id="askbtn" class="white-text center-align" >
+										<i class="material-icons" style="font-size:1.5em;vertical-align:middle;">live_help</i>
+										我要提問
+									</a>
+								</div>
+							</c:if>
+						</c:if>
 					</div>
 
 <!-- 					<div id="discuss" class="row"> -->
@@ -279,21 +292,13 @@
 	</div>
 </main>
 
-			<!-- 發問用按鈕 -->
-			<c:if test="${LoginOK.beanName.equals('member')}">
-				<c:if test="${LoginOK.memberId != fullProj.memberId}">
-					<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-						<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">提問</a>
-					</div>
-				</c:if>
-			</c:if>
-			<!-- 發問用按鈕 -->
+
 			
 			<!-- 回覆用modal -->
 			  <div id="replymodal" class="modal bottom-sheet" style="min-height:40vh;">
 			    <div class="modal-content">
 			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我的<span class="red-text">回覆</span>是...</h4>
-			      <textarea id="content" rows="10" cols="40" style="height:10em;" name=""></textarea>
+			      <textarea id="relpyContent" rows="10" cols="40" style="height:10em;" name=""></textarea>
 			    </div>
 			    <div class="modal-footer">
 			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
@@ -374,15 +379,15 @@
 				</c:choose>
 			});
 			
-// 			<c:if test="${not empty sessionScope.success}">
-// 				<c:remove var="success" scope="session"/>
-// 				alert("已申請成功，等待發起者審核");
-// 			</c:if>
+			<c:if test="${not empty sessionScope.success}">
+				<c:remove var="success" scope="session"/>
+				alert("已申請成功，等待發起者審核");
+			</c:if>
 			
-// 			<c:if test="${not empty sessionScope.participate}">
-// 				<c:remove var="participate" scope="session"/>
-// 				alert("此活動時間，亦有其他計畫進行中");
-// 			</c:if>
+			<c:if test="${not empty sessionScope.participate}">
+				<c:remove var="participate" scope="session"/>
+				alert("此活動時間，亦有其他計畫進行中");
+			</c:if>
 		});
 		
 		$(function(){
@@ -393,6 +398,7 @@
 					alert("留言必須大於10個字");
 				}else{
 					postMessage();
+					$("#content").val("");
 				}
 			});
 			
@@ -427,10 +433,12 @@
 	 									   value.questionMember + " 問:<br>" + 
 		 								   value.questionMemberContent + "<br>" +
 		  								  "<div align='right'><small>" + value.questionMemberTime + "</small></div></div>";
-		  										
+		  					
 		  					if(value.answerMemberId == "null"){
-								content += "<a href='#askmodal' id='projDiscuss" + value.projDiscussId + "' class='btn red white-text right' style='font-family:微軟正黑體;font-size:1.8em;font-weight:600'>回覆</a>"
-		  						$("#projDiscuss1").leanModal();
+		  						content += "<a href='#replymodal' id='projDiscuss' + value.projDiscussId + class='col l2 btn-large right black-text center-align  green accent-1' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
+		  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
+// 								content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='btn red white-text right' style='font-family:微軟正黑體;font-size:1.8em;font-weight:600'>回覆</a>"
+		  						$("#projDiscuss" + value.projDiscussId).leanModal();
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
