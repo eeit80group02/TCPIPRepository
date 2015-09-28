@@ -28,7 +28,7 @@ public class GetMissionBoardServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer fullProjId = 2;
+		Integer fullProjId = Integer.valueOf(request.getParameter("fullProjId"));
 		
 		MissionBoardDAOJdbc mbdao = new MissionBoardDAOJdbc();
 		MissionBoardBean board = mbdao.findByFullProjId(fullProjId);
