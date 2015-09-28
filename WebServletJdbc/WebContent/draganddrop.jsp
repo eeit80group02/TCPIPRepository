@@ -264,7 +264,6 @@
     	   			boardInformation = result;
     	   			console.log(result);
     	   			
-    	   			if(boardInformation.result == "succeed"){
 	    	   			//ajax get all participator
 	    				$.ajax({
 	    					url:'<c:url value="/GetParticipatorServlet" />',
@@ -281,7 +280,7 @@
 	    					}
 	    				});
 	    	   			
-	    	   			
+	    				if(boardInformation.result == "succeed"){
 	    	   			
 	    	   			
 	    	   			$('.boardName').val(result.missionBoard.boardName);
@@ -757,52 +756,45 @@
 			$(document).on('click','.addMission',function() {
 				var $this = $(this);
 				//ajax get random participator in this fullProj, set to host
-				$.ajax({
-    				url:'<c:url value="/GetParticipatorServlet" />',
-    	   			type:'get',
-    	   			data:{'missionBoardId':$('.missionBoardId').val(),
-    	   				  'fullProjId':$('.fullProjId').val() },
-    	   			dataType:'json',
-    	   			success:function(result){
-    	   				console.log(result);
+				
+    	   		var host = "待認領";
+    	   		var hostName = "姓名";
+    	   		
+    	   		$.each(participatorList.members,function(){
+    	   			host = this.memberId;
+    	   			hostName = this.memberName;
+    	   		})
     	   				
-    	   				var host = "待認領";
-    	   				var hostName = "姓名";
-    	   				$.each(result.members,function(){
-    	   					host = this.memberId;
-    	   					hostName = this.memberName;
-    	   				})
-    	   				
-    	   				var missionSetId = $this.siblings('input.missionSetOrder').val()
-    					var name = "新任務";
-    					var date = new Date();
-    					var endTime = parseInt(date.getYear()+1900) + "-" + parseInt(date.getMonth()+1) + "-" + parseInt(date.getDate());
-    					var missionPriority = "普通";
-    					var missionPosition = $this.siblings('ul').children('li').size()+1;
-    					var missionStatus =  "進行中";
-    					var mainMissionId = "";
+    	   		var missionSetId = $this.siblings('input.missionSetOrder').val()
+    			var name = "新任務";
+    			var date = new Date();
+    			var endTime = parseInt(date.getYear()+1900) + "-" + parseInt(date.getMonth()+1) + "-" + parseInt(date.getDate());
+    			var missionPriority = "普通";
+    			var missionPosition = $this.siblings('ul').children('li').size()+1;
+    			var missionStatus =  "進行中";
+    			var mainMissionId = "";
     					
-    					//Updata database
-    					$.ajax({
-    	    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
-    	    			    type:'post',
-    	    			    data:{'action':'InsertMission',
-    	    			    	  'missionSetId':missionSetId,
-    	    			    	  'name':name,
-    	    			    	  'host':host,
-    	    			    	  'endTime':endTime,
-    	    			    	  'missionPriority':missionPriority,
-    	    			    	  'missionPosition':missionPosition,
-    	    			    	  'missionStatus':missionStatus,
-    	    			    	  'mainMissionId':mainMissionId},
-    	    			    dataType:'json',
-    	    			    success:function(result){
-    	    			    	console.log(result);
-    	    			    	if(result.result == "succeed"){
-    	    			    		var date = result.mission.endTime.split('-');
-									var endTime = parseInt(date[0]-1911) + "-" + date[1] + "-" + date[2];
+    			//Updata database
+    			$.ajax({
+    	    		url:'<c:url value="/DynamicUpdateBoardServlet" />',
+    	    		type:'post',
+    	    		data:{'action':'InsertMission',
+    	    			  'missionSetId':missionSetId,
+    	    			  'name':name,
+    	    			  'host':host,
+    	    			  'endTime':endTime,
+    	    			  'missionPriority':missionPriority,
+    	    			  'missionPosition':missionPosition,
+    	    			  'missionStatus':missionStatus,
+    	    			  'mainMissionId':mainMissionId},
+    	    		dataType:'json',
+    	    		success:function(result){
+    	    			console.log(result);
+    	    			if(result.result == "succeed"){
+    	    				var date = result.mission.endTime.split('-');
+							var endTime = parseInt(date[0]-1911) + "-" + date[1] + "-" + date[2];
     	    			    		
-    	    			    		var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>"+ result.mission.name +"</div>" +
+    	    			    var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>"+ result.mission.name +"</div>" +
     	    								  "<div id='missionId"+ result.mission.missionId + "' style='display:none'>" +
     	    								  "<input type='text' class='missionExecutor' value='" + hostName + "' name='" + result.mission.host + "'>" +
     	    								  "<input type='text' class='missionDate' value='" + endTime + "' >" +
@@ -813,23 +805,15 @@
     	    								  "<input type='text' class='missionSetId' value='" + result.mission.missionSetId + "'></div>");
     	    			    		
     	    						
-    	    						$mission.appendTo($this.siblings( "ul" ));
+    	    				$mission.appendTo($this.siblings( "ul" ));
     	    			    		
-    	    			    	}
-    	    			    },
-    	    			    error:function(result){
-    	    			    	console.log("error");
-    	    			    	console.log(result);
-    	    			    }
-    	    			});
-    	   				
-    	   			},
-    	   			error:function(result){
-    	   				console.log(result);
-    	   			}
-    	   
-       			});
-				
+    	    			}
+    	    		},
+    	    		error:function(result){
+    	    			console.log("error");
+    	    			console.log(result);
+    	    		}
+    	    	});
 				
 			});
 			
