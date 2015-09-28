@@ -133,6 +133,8 @@
 								<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">頭像</span>
 								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture">
 							</div>									
+<!-- 							                   		後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorPictureType}${MsgErr.errorPicture}</font>
 							<!-- 身分證驗證按鈕 -->
 							 <button data-target="identityVarifyModal" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
 <!-- 							 <a href="#modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</a> -->
@@ -203,7 +205,7 @@
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
 						<input id="phone" type="text" class="validate" name="phone"  value="${param.phone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
+							<font color="red" size="-1">${MsgErr.errPhoneEmpty}</font>
 						<label for="phone" style="font-size:1.3em;font-weight:600;">室內電話</label>
 											
 					</div>
