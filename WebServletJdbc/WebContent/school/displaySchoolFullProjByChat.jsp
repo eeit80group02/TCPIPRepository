@@ -10,7 +10,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>displayPersonalFullProjByChat</title>
+<title>displaySchoolFullProjByChat</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 	<!-- 頁面主題提示 -->
 	<div class="row brown darken-4" id="pagetitle">
 		<h3 class="white-text"
-			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.lastName}${LoginOK.firstName}</h3>
+			id="membername" style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;display:inline-block;">${LoginOK.name}</h3>
 	</div>	
 
 <main>
@@ -35,7 +35,7 @@
 					<tr>
 						<th>須洽談計畫編號</th>
 						<th>完整計畫標題</th>
-						<th>學校?</th>
+						<th>發起者</th>
 						<th>時間</th>
 						<th>link</th>
 					</tr>
@@ -45,7 +45,7 @@
 						<tr>
 							<td style="font-size:1.6em;font-weight:600">${bean.fullProjId}</td>
 							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
-							<td>${bean.schoolBean.name}</td>
+							<td>${bean.memberBean.lastName}</td>
 							<td><fmt:formatDate value="${bean.activityStartTime}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${bean.activityEndTime}" pattern="yyyy-MM-dd"/></td>
 								<c:url value="/fullProj.do" var="path">
 									<c:param name="type" value="displayFullProjByChat" />
@@ -80,6 +80,12 @@
 			
 			//body的最小高度
 			$("#mainboard").css("min-height","100vh");
+			//show出修改密碼
+			$("#changepassworda").on("click",function(){
+				$("#changepassword").css("display","block");	
+			})
+
+			
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);

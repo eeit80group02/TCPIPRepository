@@ -17,15 +17,18 @@ import model.dao.FullProjDAOJdbc;
 import model.dao.MemberDAOJdbc;
 import model.dao.MissionBoardDAOJdbc;
 import model.dao.ParticipatorDAOJdbc;
+import model.dao.SchoolDAOJdbc;
 import model.dao.interfaces.FullProjDAO;
 import model.dao.interfaces.MemberDAO;
 import model.dao.interfaces.MissionBoardDAO;
 import model.dao.interfaces.ParticipatorDAO;
+import model.dao.interfaces.SchoolDAO;
 
 public class FullProjService
 {
 	private FullProjDAO fullProjDAO = null;
 	private MemberDAO memberDAO = null;
+	private SchoolDAO schoolDAO = null;
 	private MissionBoardDAO missionBoardDAO = null;
 	private ParticipatorDAO participatorDAO = null;
 	
@@ -33,6 +36,7 @@ public class FullProjService
 	{
 		fullProjDAO = new FullProjDAOJdbc();
 		memberDAO = new MemberDAOJdbc();
+		schoolDAO = new SchoolDAOJdbc();
 		missionBoardDAO = new MissionBoardDAOJdbc();
 		participatorDAO = new ParticipatorDAOJdbc();
 	}
@@ -93,6 +97,8 @@ public class FullProjService
 			{
 				if(temp.getProjStatus().equals("洽談中"))
 				{
+					// 學校資料
+					temp.setSchoolBean(schoolDAO.findByPrimaryKey(temp.getSchoolId()));
 					result.add(temp);
 				}
 			}
@@ -112,6 +118,7 @@ public class FullProjService
 			{
 				if(temp.getProjStatus().equals("洽談中"))
 				{
+					temp.setMemberBean(memberDAO.select(temp.getMemberId()));
 					result.add(temp);
 				}
 			}

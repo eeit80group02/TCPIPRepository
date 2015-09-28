@@ -50,7 +50,7 @@
 								</a>
 							</div>
 							<div class="row">
-								<a href="<c:url value="" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value="/fullProj.do?type=displaySchoolByChat" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										洽談中完整計畫
 									</span>
