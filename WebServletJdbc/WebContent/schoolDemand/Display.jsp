@@ -160,7 +160,7 @@
 				
 					<div class="row">
 						<div class="col l10 offset-l1 card-panel blue-text hoverable center-align" style="font-size:1.4em;font-family:微軟正黑體;font-weight:600">
-							 內容${Demand.activityContact}
+							 ${Demand.content}
 						</div>
 					</div>
 				
@@ -173,10 +173,10 @@
   					</div>
   					<div class="col l8 left-align">
   						<div class="row" style="font-size:1.6em;font-weight:900">
-  							活動負責人:${Demand.activityContact}
+  							活動負責人:${Demand.activityHost}
   						</div>
   						<div class="row" style="font-size:1.6em;font-weight:900">
-  							負責人聯絡電話:
+  							負責人聯絡方式:${Demand.activityContact}
   						</div>
   					</div>
 				</div>

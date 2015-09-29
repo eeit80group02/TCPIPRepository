@@ -114,6 +114,7 @@
 							<div class="col l4">
 									<div id="forlocation" class="forinput">理想地點</div>
 									<select id="locationselect">
+											<option value="" disabled selected>請選擇</option>
 											<option value="10001">台北市</option>
 											<option value="10002">新北市</option>
 											<option value="10003">桃園市</option>
@@ -148,8 +149,9 @@
 						
 						<!-- 活動時間 -->
 						<div class="input-field row">
-							<div class="col l4">
-								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">預計活動開始時間</span></div>
+							<div class="forinput" id="activityTime">活動時間</div>			
+							<div class="col l4" id="forActivityTime">
+								<div class="forinput "><span style="font-size:0.8em;font-weight:300;">預計活動開始時間</span></div>
 								<input type="date" name="startTime" id="starttime" value="${param.startTime}" required />
 							</div>
 							<div class="col l2">
@@ -222,10 +224,10 @@
 						<div class="row" id="btndiv">
 							<div class="col l8">
 								<!-- 留意!!這邊有name=action -->
-								<button  class="btn-large yellow lighten-5 black-text right" type="submit" name="action" id="submitbtn">
+								<button  class="btn-large red white-text right" type="submit" name="action" id="submitbtn">
 									<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
 								</button>
-								<button  class="btn-large yellow lighten-5 black-text right" type="reset" name="action">
+								<button  class="btn-large red white-text right" type="reset" name="action">
 									<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 								</button>
 							</div>
@@ -258,6 +260,10 @@
 <script>
 		(function($) {
 		   
+			//讓活動地點標題對齊
+			var dis = $("#forActivityTime").css("padding-left");
+			$("#activityTime").css("padding-left",dis);
+			
 			//指定ckeditor()的skin
 			CKEDITOR.replace("content",{skin:"moono"})
 			

@@ -315,7 +315,7 @@
 	    					console.log(title);
 	    	    			var $missionSet = $('<li id="missionSetOrderId' + this.missionSetId + '" class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + this.missionSetId + 
 	    	    						'" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
-	    	    						'</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
+	    	    						'</div><ul></ul><div class="addMission sortable btn-floating btn-large red">' +
 	    	    						'<i class="large material-icons">add</i></div><input type="hidden" class="missionSetOrder" value="' + this.missionSetOrder + '">');
 	    	    			
 	    	    			console.log("ul element length="+$ul.children('li').length);
@@ -365,7 +365,7 @@
 	    	   				if( mainMissionId == void 0){
 	    	   					var $ul = $('#missionSet'+this.missionSetId).siblings('ul');
 	//     	   					console.log("name="+this.name);
-	    	   					var $mainMission = $("<li id='missionOrderId" + this.missionId + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>" + this.name + "</div>" +
+	    	   					var $mainMission = $("<li id='missionOrderId" + this.missionId + "'></li>").html("<div class='li_edit btn'>" + this.name + "</div>" +
 	      													  "<div id='missionId"+ this.missionId + "' style='display:none'>" +
 	      													  "<input type='text' class='missionExecutor' value='" + this.host + "' name='" + this.memberId + "' >" +
 	      													  "<input type='text' class='missionDate' value=" + dateFormat + ">" +
@@ -678,7 +678,7 @@
     			    	if(result.result == "succeed"){
     			    		var $missionSet = $('<li id="missionSetOrderId' + result.missionSet.missionSetId + '" class="#cddc39 lime"></li>').html('<div id="missionSet' + result.missionSet.missionSetId + 
     								  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ result.missionSet.name +
-    								  '</div><ul></ul><div class="addMission sortable btn-floating btn-large waves-effect waves-light red">' +
+    								  '</div><ul></ul><div class="addMission sortable btn-floating btn-large red">' +
     								  '<i class="large material-icons">add</i></div></div><input type="hidden" class="missionSetOrder" value="'+ result.missionSet.missionSetOrder + '" >');
 	    			    	
     			    		$('.nested_with_switc').append($missionSet);
@@ -820,7 +820,7 @@
     	    				var date = result.mission.endTime.split('-');
 							var endTime = parseInt(date[0]-1911) + "-" + date[1] + "-" + date[2];
     	    			    		
-    	    			    var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>"+ result.mission.name +"</div>" +
+    	    			    var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit btn'>"+ result.mission.name +"</div>" +
     	    								  "<div id='missionId"+ result.mission.missionId + "' style='display:none'>" +
     	    								  "<input type='text' class='missionExecutor' value='" + hostName + "' name='" + result.mission.host + "'>" +
     	    								  "<input type='text' class='missionDate' value='" + endTime + "' >" +
@@ -1211,7 +1211,7 @@
 				//NewPos contain parent li itself +1, and next Pos will be the slot to put +1
 				var newPos = $('#'+mainMissionId).parent().siblings().size() + 1 + 1;
 				
-				var $li = $("<li id='missionOrderId" + subDataRowId + "'></li>").html("<div class='li_edit waves-effect waves-light btn'>"+ subMissionName +"</div>" +
+				var $li = $("<li id='missionOrderId" + subDataRowId + "'></li>").html("<div class='li_edit btn'>"+ subMissionName +"</div>" +
 						  "<div id='missionId"+ missionId + "' style='display:none'>" +
 						  "<input type='text' class='missionExecutor' value='" + subMissionExecutor + "' >" +
 						  "<input type='text' class='missionDate' value='" + subMissionDate + "' >" +
@@ -1421,7 +1421,7 @@
     			    	});
     			    	
     					$('.missionParticipator ul').first().prepend('<div class="' + dataExecutorId + '" style="width:100px;display:inline-block;">' + dataExecutor + '</div>');
-    					$('.missionParticipator ul').last().append('<div class="addParticipator btn-floating btn waves-effect waves-light #2196f3 blue"><i class="material-icons">add</i></div>')
+    					$('.missionParticipator ul').last().append('<div class="addParticipator btn-floating btn #2196f3 blue"><i class="material-icons">add</i></div>')
     			    },
     			    error:function(result){
     			    	console.log(result);

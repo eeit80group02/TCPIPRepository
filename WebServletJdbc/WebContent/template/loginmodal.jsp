@@ -41,9 +41,9 @@
 				    </div>
 				    <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
 				    	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-					      <a href="#!" id="memberloginSubmit" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">登入</a>
-						  <a href="<c:url value="/forgotPassword/forgotPassword.jsp" />" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">忘記密碼</a>	      
-					      <a href="<c:url value="/register/register.jsp" />" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">註冊帳號</a>
+					      <a href="#!" id="memberloginSubmit" class="modal-action modal-close btn-large amber darken-2">登入</a>
+						  <a href="<c:url value="/forgotPassword/forgotPassword.jsp" />" class="modal-action modal-close btn-large amber darken-2">忘記密碼</a>	      
+					      <a href="<c:url value="/register/register.jsp" />" class="modal-action modal-close btn-large amber darken-2">註冊帳號</a>
 				    	</div>
 				    </div>
 			    </div>

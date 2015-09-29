@@ -210,12 +210,12 @@ public class SchoolDemandServlet extends HttpServlet {
 			}
 		}
 		if(!errorMsg.containsKey("activityContact")){
-			if (activityContact.length() > 20) {
+			if (activityContact.length() > 100) {
 				errorMsg.put("activityContact", "輸入長度有問題");
 			}
 		}
 		if(!errorMsg.containsKey("content")){
-			if (content.length() > 20) {
+			if (content.length() > 500) {
 				errorMsg.put("content", "輸入長度有問題");
 			}
 		}

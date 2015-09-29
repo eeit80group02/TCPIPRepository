@@ -81,9 +81,9 @@
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">
       						計畫摘要
-	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-	      						Follow
-	      						</span>
+<!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
+<!-- 	      						Follow -->
+<!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
       							<p style="height:55%">摘要內容</p>
@@ -111,9 +111,9 @@
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">
       						計畫摘要
-	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-	      						Follow
-	      						</span>
+<!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
+<!-- 	      						Follow -->
+<!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
       						<p style="height:55%">摘要內容</p>
@@ -140,9 +140,9 @@
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">
       						計畫摘要
-	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-	      						Follow
-	      						</span>
+<!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
+<!-- 	      						Follow -->
+<!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
       						<p style="height:55%">摘要內容</p>
@@ -176,9 +176,9 @@
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">
       						計畫摘要
-	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-	      						Follow
-	      						</span>
+<!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
+<!-- 	      						Follow -->
+<!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
       						<p style="height:55%">摘要內容</p>
@@ -207,9 +207,9 @@
 						<div class="card-reveal lime lighten-5" style="height:100%">
        						<span class="card-title grey-text text-darken-4" style="height:15%">
       						計畫摘要
-	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-	      						Follow
-	      						</span>
+<!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
+<!-- 	      						Follow -->
+<!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
       						<p style="height:55%">摘要內容</p>
@@ -237,9 +237,9 @@
 						<div class="card-reveal lime lighten-5" style="height:100%">
       						<span class="card-title grey-text text-darken-4" style="height:15%">
       						計畫摘要
-	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
-	      						Follow
-	      						</span>
+<!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
+<!-- 	      						Follow -->
+<!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
       						<p style="height:55%">摘要內容</p>

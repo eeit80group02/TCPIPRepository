@@ -244,10 +244,10 @@
 					
 				<!-- button -->
 					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 						</button>
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
 						</button>
 
@@ -363,7 +363,7 @@
 		 <!-- modal footer -->
 		 <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
 		   	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-		      <a href="#!" id="backregister" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">回註冊頁</a>
+		      <a href="#!" id="backregister" class="modal-action modal-close btn-large amber darken-2">回註冊頁</a>
 		   	</div>
 		 </div>
 		 </div>
