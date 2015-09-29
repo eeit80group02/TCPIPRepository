@@ -74,9 +74,9 @@
 						<!-- 會員名稱 -->
 						<div class="row">
 								<!-- 這裡要印會員名稱但還沒有el -->
-								<div class="forinput col l3 right-align">會員名稱:</div>
+								<div class="forinput col l3 right-align">會員名稱:${LoginOK.lastName}${LoginOK.firstName}</div>
 								<!-- 小心!!這裡是初步計畫id -->
-								<input type="hidden" name="primaryProjId" value="${param.primaryProjId}" />
+								<input type="hidden" name="memberId" value="${param.memberId}" />
 						</div>
 					</div>						
 						
