@@ -32,7 +32,7 @@ public class InsertFakeInfos extends HttpServlet{
 		request.setCharacterEncoding("UTF-8");
 		String content = request.getParameter("projAbstract");
 		
-		String updateToDataBase = "insert into fulProj(Content) values(?)";
+		String updateToDataBase = "update fullproj set content=? where fullProjId=?";
 		
 		
 		try{
@@ -42,6 +42,7 @@ public class InsertFakeInfos extends HttpServlet{
 			Connection conn = datasorce.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(updateToDataBase);
 			pstmt.setString(1, content);
+			pstmt.setInt(2, 13);
 			pstmt.execute();
 			
 			pstmt.close();

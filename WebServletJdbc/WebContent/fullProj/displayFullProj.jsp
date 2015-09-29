@@ -63,7 +63,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">活動地點</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 									${fullProj.location}							
 									</div>
 								</div>
@@ -80,7 +80,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">活動時間</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 										<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd" /> ~ 
 										<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd" />									
 									</div>
@@ -98,7 +98,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">招募人數</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 									${fn:length(fullProj.participatorMap.pass)}/${fullProj.estMember}							
 									</div>
 								</div>
@@ -115,7 +115,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">活動預算</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 									${fullProj.budget}							
 									</div>
 								</div>
@@ -436,9 +436,11 @@
 							
 	 						var content = "<div class='col l2'><div class='btn red white-text'>" +
 	 									  "<i class='material-icons'>textsms</i></div></div>" +
-	 									  "<div class='col l10' style='font-size:1.6em;font-weight:600'>" +
+	 									  "<div class='col l10' style='font-size:1.6em;font-weight:600;'>" +
 	 									   value.questionMember + " 問:<br>" + 
-		 								   value.questionMemberContent + "<br>" +
+	 									  "<div class='row' style='word-break:break-all'>"+ 
+		 								   value.questionMemberContent + 
+		 								  "</div>"+
 		  								  "<div align='right'><small>" + value.questionMemberTime + "</small></div></div>";
 		  					
 		  					if(value.answerMemberId == "null"){
@@ -453,7 +455,7 @@
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
-								   		   "<div class='col l10' style='font-size:1.6em;font-weight:600'> " +
+								   		   "<div class='col l10' style='font-size:1.6em;font-weight:600;white-space:pre-wrap;'> " +
 								   			value.answerMember + " 答:<br>" + 
 								     		value.answerMemberContent + "<br>" +
   								  		   "<div align='right'><small>" + value.answerMemberTime + "</small></div></div>";
@@ -481,25 +483,39 @@
 	    	console.log(fromJava);
 			function initMap() {
 			  var directionsService = new google.maps.DirectionsService,
-			  	  directionsDisplay = new google.maps.DirectionsRenderer,
-			  	  centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
-			  var map = new google.maps.Map(document.getElementById('googlemap'), {
-			    zoom: 19,
-			    center: centerlatlng
-			  });
-			  
-			  
-			  calculateAndDisplayRoute(directionsService, directionsDisplay);
-			  directionsDisplay.setMap(map);
-			
-			
+			  	  directionsDisplay = new google.maps.DirectionsRenderer;
+			  if(fromJava.fulprojLocation){
+			  	var centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+			  	var map = new google.maps.Map(document.getElementById('googlemap'), {
+				    zoom: 16,
+				    center: centerlatlng
+				  	});	
+				  calculateAndDisplayRoute(directionsService, directionsDisplay);
+				  directionsDisplay.setMap(map);
+			  }else{
+					  var centerlatlng = new google.maps.LatLng(fromJava.lat,fromJava.lng);
+					  var map = new google.maps.Map(document.getElementById('googlemap'), {
+						    zoom: 16,
+						    center: centerlatlng
+					  });
+					  
+					  var marker = new google.maps.Marker({
+						    position: centerlatlng,
+						    map: map,
+						    title: '活動地點'
+				  		})
+				}
 			}
 			
 			function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 				
-				var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
-				var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
-			  directionsService.route({
+				if(fromJava.fulprojLocation){
+					var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+					var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
+				}else{
+					return;
+				}		  
+				directionsService.route({
 			    origin: start,
 			    destination: destination,
 			    travelMode: google.maps.TravelMode.DRIVING

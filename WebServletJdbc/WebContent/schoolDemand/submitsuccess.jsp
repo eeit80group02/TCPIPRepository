@@ -55,6 +55,10 @@
 	<script type="text/javascript" src="../js/materialize.min.js"></script>
 	<script>
 		$(function() {
+			//置中訊息
+			var carhei = $("#cardboard").height(),
+				mbhei  = $("#msgboard").height();
+			$("#msgboard").css("margin-top",(carhei-mbhei)/2)			
 			//mainboard最小高度
 			$("#mainboard").css("min-height","80vh");
 			//navagation上logo的高度

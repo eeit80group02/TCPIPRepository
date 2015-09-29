@@ -44,7 +44,14 @@
 				</c:if>
 				
 <!-- 				公開&相同 -->
-				<li><a class="btn red white-text" style="font-weight:600;font-family:微軟正黑體;" href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提出計畫</a></li>
+				<c:choose>
+					<c:when test="${LoginOK.beanName.equals('school')}">
+					
+					</c:when>
+					<c:otherwise>
+				<li><a class="btn red white-text" style="font-weight:600;font-family:微軟正黑體;" href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提出計畫</a></li>	
+					</c:otherwise>
+				</c:choose>
 				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />">捐獻牆</a></li>
 				
