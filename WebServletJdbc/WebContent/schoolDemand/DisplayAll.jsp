@@ -57,7 +57,7 @@
 												loyalty
 											</i>								
 								            <div class="col l10 card-title black-text center-align" style="font-size:1.6em;font-weight:600;line-height:160%;">
-								         	  	需求計畫名稱${bean.activityTopic}
+								         	  	${bean.activityTopic}
 								            </div>
 							            </div>
 							            <div class="row" style="font-size:1.4em;font-family:標楷體;font-weight:600">
