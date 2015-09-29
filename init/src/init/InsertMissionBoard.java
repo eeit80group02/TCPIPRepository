@@ -17,20 +17,6 @@ public class InsertMissionBoard
 	public static void start()
 	{
 		
-//		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-//			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-//		{
-//			pstmt.setInt(1,2);   						
-//			pstmt.setString(2,"亞成鳥青少年野地教育計畫");				
-//			pstmt.setInt(3,4);					
-//			
-//			pstmt.executeUpdate();
-//		}
-//		catch(Exception e)
-//		{
-//			e.printStackTrace();
-//		}
-		
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{

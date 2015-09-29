@@ -15,10 +15,11 @@ public class InsertMissionSet {
 
 	public static void start() {
 
+		//【將軍國小暑期服務】美人魚現身將軍嶼
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 1);
-			pstmt.setString(2, "課程組");
+			pstmt.setInt(1, 13);
+			pstmt.setString(2, "第一天");
 			pstmt.setInt(3, 1);
 
 			pstmt.executeUpdate();
@@ -28,8 +29,8 @@ public class InsertMissionSet {
 
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 1);
-			pstmt.setString(2, "器材組");
+			pstmt.setInt(1, 13);
+			pstmt.setString(2, "第二天");
 			pstmt.setInt(3, 2);
 
 			pstmt.executeUpdate();
@@ -39,8 +40,8 @@ public class InsertMissionSet {
 
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 1);
-			pstmt.setString(2, "美宣組");
+			pstmt.setInt(1, 13);
+			pstmt.setString(2, "第三天");
 			pstmt.setInt(3, 3);
 
 			pstmt.executeUpdate();
@@ -51,8 +52,8 @@ public class InsertMissionSet {
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
-				pstmt.setInt(1,1);   						
-				pstmt.setString(2,"活動組");				
+				pstmt.setInt(1,13);   						
+				pstmt.setString(2,"第四天");				
 				pstmt.setInt(3,4);					
 				
 				pstmt.executeUpdate();
@@ -62,6 +63,73 @@ public class InsertMissionSet {
 				e.printStackTrace();
 			}
 
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 13);
+			pstmt.setString(2, "第五天");
+			pstmt.setInt(3, 5);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 13);
+			pstmt.setString(2, "第六天");
+			pstmt.setInt(3, 6);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		//偏鄉科學創意教學深耕計畫
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 12);
+			pstmt.setString(2, "人事費");
+			pstmt.setInt(3, 1);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 12);
+			pstmt.setString(2, "活動費");
+			pstmt.setInt(3, 2);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 12);
+			pstmt.setString(2, "教材費");
+			pstmt.setInt(3, 3);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setInt(1, 12);
+			pstmt.setString(2, "運費");
+			pstmt.setInt(3, 4);
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		System.out.println("任務集資料新增完成");
 	}
 
