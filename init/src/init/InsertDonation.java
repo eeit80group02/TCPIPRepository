@@ -483,7 +483,7 @@ public class InsertDonation {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println("Donation新增成功");
+		System.out.println("Donation新增成功1");
 	}
 
 	public static void main(String[] args) {
