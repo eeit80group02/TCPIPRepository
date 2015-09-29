@@ -20,6 +20,8 @@ public class init
 		InsertMissionBoard.start();
 		InsertMissionSet.start();
 		InsertMission.start();
+		InsertDonation.start();			//Donation
+		
 		System.out.println("資料全部已新增");		
 		Date end = new Date(System.currentTimeMillis());
 		System.out.println("費時:" + (end.getTime()-start.getTime()) + "ms");
