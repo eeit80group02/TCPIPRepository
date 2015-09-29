@@ -1041,14 +1041,14 @@
 		}
 	};
 
-// 	$(function () {
-// 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
-// 			console.log(responseJson);
-// 			$("#captchaKey").val(responseJson.captchaKey);
-// 			$("#captchaField").text(responseJson.captchaImage);
-// 			$("#captchaImage").attr("src",$("#captchaField").val());
-// 		}); 
-// 	});
+	$(function () {
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+			console.log(responseJson);
+			$("#captchaKey").val(responseJson.captchaKey);
+			$("#captchaField").text(responseJson.captchaImage);
+			$("#captchaImage").attr("src",$("#captchaField").val());
+		}); 
+	});
 	
  	function refresh() {
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
