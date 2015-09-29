@@ -36,7 +36,7 @@ import global.GlobalService;
 				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-08-11 10:20").getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(sdf.parse("2015-11-11 10:20").getTime()));
 				
-				File file = new File("image/Donation/donation01.jpg");
+				File file = new File("image/Donation/donation01.png");
 				try(FileInputStream fis = new FileInputStream(file);)
 				{
 					pstmt.setString(12, file.getName());							// 圖片檔名
@@ -94,7 +94,7 @@ import global.GlobalService;
 				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-07-01 14:30").getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(sdf.parse("2015-10-01 14:30").getTime()));
 				
-				file = new File("image/Donation/donation03.jpg");
+				file = new File("image/Donation/donation03.png");
 				try(FileInputStream fis = new FileInputStream(file);)
 				{
 					pstmt.setString(12, file.getName());							// 圖片檔名
@@ -123,7 +123,7 @@ import global.GlobalService;
 				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-08-21 12:30").getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(sdf.parse("2015-11-21 12:30").getTime()));
 				
-				file = new File("image/Donation/donation04.jpg");
+				file = new File("image/Donation/donation04.png");
 				try(FileInputStream fis = new FileInputStream(file);)
 				{
 					pstmt.setString(12, file.getName());							// 圖片檔名
@@ -297,7 +297,7 @@ import global.GlobalService;
 				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-07-15 16:35").getTime()));
 				pstmt.setTimestamp(11,new java.sql.Timestamp(sdf.parse("2015-10-15 16:35").getTime()));
 				
-				file = new File("image/Donation/donation10.jpg");
+				file = new File("image/Donation/donation10.png");
 				try(FileInputStream fis = new FileInputStream(file);)
 				{
 					pstmt.setString(12, file.getName());							// 圖片檔名
@@ -327,7 +327,7 @@ import global.GlobalService;
 				pstmt.setTimestamp(11,new java.sql.Timestamp(sdf.parse("2015-11-16 17:55").getTime()));
 				pstmt.setString(15, "");// remark
 		
-				file = new File("image/donation/Goods01.jpg");
+				file = new File("image/donation/donation11.png");
 				try (FileInputStream fis = new FileInputStream(file);) {
 					pstmt.setString(12, file.getName());// imageName
 					pstmt.setBinaryStream(13, fis, file.length());// imageFile
@@ -343,7 +343,7 @@ import global.GlobalService;
 				{
 					e.printStackTrace();
 				}
-				System.out.println("捐獻需求新增成功");
+				System.out.println("Donation新增成功");
 	}
 	public static void main(String[] args){
 		InsertDonation.start();
