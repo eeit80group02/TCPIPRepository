@@ -289,7 +289,7 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean == null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
 		session.removeAttribute("Demand");
@@ -633,7 +633,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		session.removeAttribute("list");
 		bean = (SchoolBean)session.getAttribute("LoginOK");
 		if(bean == null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 		}
 		result = service.displayPersonalRender(bean);
 		request.setAttribute("list", result);
@@ -657,7 +657,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		session.removeAttribute("list");
 		sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean == null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
 		int schoolId = sbean.getSchoolId();

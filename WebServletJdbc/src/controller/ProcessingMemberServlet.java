@@ -66,7 +66,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
-			response.sendRedirect("/login/login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
 		
@@ -104,7 +104,8 @@ public class ProcessingMemberServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
 		String processingMemberId = request.getParameter("processingMemberId");
 		String memberId = request.getParameter("memberId");
@@ -146,7 +147,8 @@ public class ProcessingMemberServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
 		String processingMemberId = request.getParameter("processingMemberId");
 		String memberId = request.getParameter("memberId");
@@ -185,7 +187,8 @@ public class ProcessingMemberServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
 		String schoolDemandId = request.getParameter("schoolDemandId");
 		String memberId = request.getParameter("memberId");

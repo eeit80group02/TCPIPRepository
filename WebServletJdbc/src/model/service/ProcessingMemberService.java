@@ -116,12 +116,12 @@ public class ProcessingMemberService {
 		SchoolDemandBean sDBean= null;
 		ProcessingMemberBean result = null;
 		if (bean != null) {
-			bean.setProcessingMemberId(bean.getProcessingMemberId());
 			bean.setCheckStatus("未通過");
 			result = processingMemberDAO.update(bean);
 			if(result != null){
-				temp = processingMemberDAO.findByPrimaryKeyRender(bean.getProcessingMemberId());
-				if(temp == null){
+				temp = processingMemberDAO.findBySchoolDemandIdRender(bean.getSchoolDemandId());
+				System.out.println("++++++"+temp);
+				if(temp.isEmpty()){
 					sDBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
 					sDBean.setDemandStatus("待洽談");
 					sDBean = schoolDemandDAO.update(sDBean);

@@ -313,14 +313,15 @@ public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 		return result;
 
 	}
-	private static final String SELECT_BY_ID_Render = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE processingMemberId = ? and checkStatus='已通過";
+	private static final String SELECT_BY_SCHOOLDEMANDID_RENDER = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE SchoolDemandId = ? and checkStatus='待審核'";
 	@Override
-	public List<ProcessingMemberBean> findByPrimaryKeyRender(int processingMemberId) {
+	public List<ProcessingMemberBean> findBySchoolDemandIdRender(int SchoolDemandId) {
 		List<ProcessingMemberBean> result = null;
 		ProcessingMemberBean bean = null;
 		try(Connection conn = datasource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);){
-			pstmt.setInt(1,processingMemberId);
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_SCHOOLDEMANDID_RENDER);){
+			pstmt.setInt(1,SchoolDemandId);
+			result = new ArrayList<ProcessingMemberBean>();
 			try(ResultSet rset = pstmt.executeQuery();){
 				if(rset.next()){
 					bean = new ProcessingMemberBean();

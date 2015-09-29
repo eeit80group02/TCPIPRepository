@@ -21,5 +21,5 @@ public interface ProcessingMemberDAO
 	
 	public List<ProcessingMemberBean> finByMemerId(int MemberId);
 	
-	public List<ProcessingMemberBean> findByPrimaryKeyRender(int processingMemberId);
+	public List<ProcessingMemberBean> findBySchoolDemandIdRender(int SchoolDemandId);
 }
