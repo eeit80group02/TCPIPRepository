@@ -19,8 +19,8 @@ public class InsertDonation {
 	public static void start() {
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			
 			// 第一筆資料
-			// ======================================================================
 			pstmt.setInt(1, 64632); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "各式包包"); // 物資名稱
@@ -47,7 +47,6 @@ public class InsertDonation {
 			}
 
 			// 第二筆資料
-			// ======================================================================
 			pstmt.setInt(1, 64632); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "呼拉圈"); // 物資名稱
@@ -74,7 +73,6 @@ public class InsertDonation {
 			}
 
 			// 第三筆資料
-			// ======================================================================
 			pstmt.setInt(1, 64632); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "奇異筆、麥克筆"); // 物資名稱
@@ -101,7 +99,6 @@ public class InsertDonation {
 			}
 
 			// 第四筆資料
-			// ======================================================================
 			pstmt.setInt(1, 64632); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "投影機"); // 物資名稱
@@ -128,7 +125,6 @@ public class InsertDonation {
 			}
 
 			// 第五筆資料
-			// ======================================================================
 			pstmt.setInt(1, 64632); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "手風琴"); // 物資名稱
@@ -155,7 +151,6 @@ public class InsertDonation {
 			}
 
 			// 第六筆資料
-			// ======================================================================
 			pstmt.setInt(1, 44658); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "折疊桌"); // 物資名稱
@@ -182,7 +177,6 @@ public class InsertDonation {
 			}
 
 			// 第七筆資料
-			// ======================================================================
 			pstmt.setInt(1, 44658); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "礦泉水"); // 物資名稱
@@ -209,7 +203,6 @@ public class InsertDonation {
 			}
 
 			// 第八筆資料
-			// ======================================================================
 			pstmt.setInt(1, 44658); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "耳溫槍"); // 物資名稱
@@ -236,7 +229,6 @@ public class InsertDonation {
 			}
 
 			// 第九筆資料
-			// ======================================================================
 			pstmt.setInt(1, 44658); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "防蚊液"); // 物資名稱
@@ -263,7 +255,6 @@ public class InsertDonation {
 			}
 
 			// 第十筆資料
-			// ======================================================================
 			pstmt.setInt(1, 44658); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "鞋子"); // 物資名稱
@@ -290,7 +281,6 @@ public class InsertDonation {
 			}
 
 			// 第十一筆資料
-			// ======================================================================
 			pstmt.setInt(1, 94735);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "運貨用板車");// supplyName
@@ -299,7 +289,7 @@ public class InsertDonation {
 			pstmt.setInt(6, 40);// demandNumber
 			pstmt.setString(7, "長度不超過150公分");// size
 			pstmt.setString(8, "搬運大型物品時需要，例如：講桌");// demandContent
-			pstmt.setString(9, "不拘");// supplyStatus
+			pstmt.setString(9, "二手");// supplyStatus
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-08-16 17:55").getTime()));
 			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-11-16 17:55").getTime()));
@@ -316,7 +306,6 @@ public class InsertDonation {
 			}
 
 			// 第十二筆資料
-			// ======================================================================
 			pstmt.setInt(1, 94735);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "電風扇");// supplyName
@@ -342,7 +331,6 @@ public class InsertDonation {
 			}
 
 			// 第十三筆資料
-			// ======================================================================
 			pstmt.setInt(1, 94735);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "3號電池");// supplyName
@@ -368,7 +356,6 @@ public class InsertDonation {
 			}
 
 			// 第十四筆資料
-			// ======================================================================
 			pstmt.setInt(1, 94735);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "75度酒精");// supplyName
@@ -384,6 +371,106 @@ public class InsertDonation {
 			pstmt.setString(15, "酒精屬易然物品，請小心包裝！");// remark
 
 			file = new File("image/Donation/donation14.png");
+			try (FileInputStream fis = new FileInputStream(file);) {
+				pstmt.setString(12, file.getName());// imageName
+				pstmt.setBinaryStream(13, fis, file.length());// imageFile
+				pstmt.setLong(14, file.length());// imageLength
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			// 第十五筆資料
+			pstmt.setInt(1, 154705);// schoolId
+			pstmt.setString(2, "否");// donationStatus
+			pstmt.setString(3, "血壓機");// supplyName
+			pstmt.setInt(4, 2);// originalDemandNumber
+			pstmt.setString(5, "台");// originalDemandUnit
+			pstmt.setInt(6, 18);// demandNumber
+			pstmt.setString(7, "一般規格");// size
+			pstmt.setString(8, "保健室缺少血壓機");// demandContent
+			pstmt.setString(9, "不拘");// supplyStatus
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-16 13:55").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-16 13:55").getTime()));
+			pstmt.setString(15, "無");// remark
+			
+			file = new File("image/Donation/donation15.png");
+			try (FileInputStream fis = new FileInputStream(file);) {
+				pstmt.setString(12, file.getName());// imageName
+				pstmt.setBinaryStream(13, fis, file.length());// imageFile
+				pstmt.setLong(14, file.length());// imageLength
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			// 第十六筆資料
+			pstmt.setInt(1, 154705);// schoolId
+			pstmt.setString(2, "否");// donationStatus
+			pstmt.setString(3, "延長線");// supplyName
+			pstmt.setInt(4, 10);// originalDemandNumber
+			pstmt.setString(5, "條");// originalDemandUnit
+			pstmt.setInt(6, 10);// demandNumber
+			pstmt.setString(7, "5米～10米");// size
+			pstmt.setString(8, "教室連接電腦的延長線數量不夠");// demandContent
+			pstmt.setString(9, "不拘");// supplyStatus
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-16 10:55").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-16 10:55").getTime()));
+			pstmt.setString(15, "三孔或兩孔延長線都可以！感謝！");// remark
+			
+			file = new File("image/Donation/donation16.png");
+			try (FileInputStream fis = new FileInputStream(file);) {
+				pstmt.setString(12, file.getName());// imageName
+				pstmt.setBinaryStream(13, fis, file.length());// imageFile
+				pstmt.setLong(14, file.length());// imageLength
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			// 第十七筆資料
+			pstmt.setInt(1, 144628);// schoolId
+			pstmt.setString(2, "否");// donationStatus
+			pstmt.setString(3, "室內拖鞋");// supplyName
+			pstmt.setInt(4, 50);// originalDemandNumber
+			pstmt.setString(5, "雙");// originalDemandUnit
+			pstmt.setInt(6, 50);// demandNumber
+			pstmt.setString(7, "M或L");// size
+			pstmt.setString(8, "圖書館內需要");// demandContent
+			pstmt.setString(9, "全新");// supplyStatus
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-20 13:55").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-20 13:55").getTime()));
+			pstmt.setString(15, "本校圖書館需穿著館內提供的拖鞋，以保持圖書館內部整潔。");// remark
+			
+			file = new File("image/Donation/donation17.png");
+			try (FileInputStream fis = new FileInputStream(file);) {
+				pstmt.setString(12, file.getName());// imageName
+				pstmt.setBinaryStream(13, fis, file.length());// imageFile
+				pstmt.setLong(14, file.length());// imageLength
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			// 第十八筆資料
+			pstmt.setInt(1, 144628);// schoolId
+			pstmt.setString(2, "否");// donationStatus
+			pstmt.setString(3, "掃把");// supplyName
+			pstmt.setInt(4, 25);// originalDemandNumber
+			pstmt.setString(5, "支");// originalDemandUnit
+			pstmt.setInt(6, 25);// demandNumber
+			pstmt.setString(7, "塑膠掃把");// size
+			pstmt.setString(8, "掃把太舊");// demandContent
+			pstmt.setString(9, "不拘");// supplyStatus
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-20 12:55").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-20 12:55").getTime()));
+			pstmt.setString(15, "無");// remark
+			
+			file = new File("image/Donation/donation18.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(12, file.getName());// imageName
 				pstmt.setBinaryStream(13, fis, file.length());// imageFile
