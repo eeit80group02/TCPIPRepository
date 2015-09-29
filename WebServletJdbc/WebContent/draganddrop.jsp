@@ -22,8 +22,6 @@
 }
 
 .nested_with_switc {
-	white-space:nowrap;
-	overflow-y:auto;
 	width: 100%;
 	min-height:600px;
 }

@@ -230,7 +230,7 @@
 			    	<c:if test="${LoginOK.memberId != fullProj.memberId && not flag}">
 					    <form id="participator" action="<c:url value="/participator.do" />" method="post">
 							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-							<input type="hidden" name="startTime" value="${startTime}">
+							<input type="hidden" name="startTime" value="${u}">
 							<input type="hidden" name="endTime" value="${endTime}">
 							<input type="hidden" name="type" value="participate">
 							<input id="participatorSubmit" class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="button" value="加入活動" >			
@@ -454,21 +454,16 @@
 	    <script>
 	    	
 	    	var fromJava = <%=request.getAttribute("googleMap")%>
-	    	
+	    	console.log(fromJava);
 			function initMap() {
 			  var directionsService = new google.maps.DirectionsService,
 			  	  directionsDisplay = new google.maps.DirectionsRenderer,
 			  	  centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
 			  var map = new google.maps.Map(document.getElementById('googlemap'), {
-			    zoom: 17,
+			    zoom: 19,
 			    center: centerlatlng
 			  });
 			  
-// 			  var nearbySearchService = new google.maps.places.PlacesService(map);
-// 			  nearbySearchService.nearbySearch({
-// 				  location:centerlatlng,
-// 				  radius:
-// 			  })
 			  
 			  calculateAndDisplayRoute(directionsService, directionsDisplay);
 			  directionsDisplay.setMap(map);

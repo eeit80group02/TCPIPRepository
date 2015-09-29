@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 /*
@@ -24,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+
+import org.apache.http.entity.InputStreamEntity;
 
 import global.GlobalService;
 import model.SchoolBean;
@@ -134,10 +137,16 @@ public class ModifySchoolServlet extends HttpServlet {
 							System.out.println("請選擇正確格式");
 						}
 					} else {                  
-						File file = new File("C:\\Users\\Student\\git\\TCPIPRepository\\WebServletJdbc\\image\\school\\default.jpg");
-						is  = new FileInputStream(file);
-						frontCoverName = file.getName();
-						frontCoverLength = file.length();
+//						File file = new File("C:\\Users\\Student\\git\\TCPIPRepository\\WebServletJdbc\\image\\school\\default.jpg");
+//						is  = new FileInputStream(file);
+						
+						
+						is = getServletContext().getResourceAsStream("/images/default.jpg");
+						frontCover = GlobalService.convertInputStreamToByteArray(is);
+						frontCoverName = "default.jpg";
+//						frontCoverLength = (long) GlobalService.convertInputStreamToByteArray(is).length;
+						frontCoverLength = (long) frontCover.length;
+						
 					}
 				}
 			}
@@ -163,10 +172,18 @@ public class ModifySchoolServlet extends HttpServlet {
 				errMsg.put("errorAddressCompleteEmpty", "學校地址(完整)為必填");
 			}
 			// 圖片
-			if (is != null) {
-				frontCover = GlobalService.convertInputStreamToByteArray(is);
-				is.close();
-			}
+			
+//			if (is != null) {
+//				ByteArrayOutputStream os = new ByteArrayOutputStream();
+//				byte[] buffer = new byte[1024];
+//				int n = 0 ;
+//				while((n = is.read(buffer))!=-1){
+//					os.write(buffer, 0, n);
+//				}
+//				frontCover = os.toByteArray();
+//				frontCover = GlobalService.convertInputStreamToByteArray(is);
+//				is.close();
+//			}
 			//關於我
 			if(aboutMe.length()>140){
 				errMsg.put("textAreaLimit", "字數限制為140字以內");

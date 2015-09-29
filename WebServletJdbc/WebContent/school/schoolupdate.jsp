@@ -70,12 +70,12 @@
 					<!-- (教育部學校代碼)(帳號) -->
 					<div class="row">
 							<div class="forinput col l3 right-align">學校編號:</div>
-							<input class="col l7 black-text" name="schoolId" id="schoolId" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+							<input class="col l7 black-text" name="schoolId" id="schoolId" type="text" readonly="readonly" value="${school.schoolId}" style="font-size:1.6em;font-family:微軟正黑體;">
 					</div>
 					<!-- 學校名稱 -->
 					<div class="row">
 							<div class="forinput col l3 right-align">學校名稱:</div>
-							<input class="col l7 black-text"name="name" id="name" type="text" readonly="readonly" style="font-size:1.6em;font-family:微軟正黑體;">
+							<input class="col l7 black-text"name="name" id="name" type="text" readonly="readonly" value="${school.name}" style="font-size:1.6em;font-family:微軟正黑體;">
 					</div>
 				</div>					
 				

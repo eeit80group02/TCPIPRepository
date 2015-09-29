@@ -32,10 +32,10 @@ private MemberDAOJdbc dao;
 		//信件內容
 		Multipart multiPart = new MimeMultipart("alternative");
 		MimeBodyPart htmlPart = new MimeBodyPart();
-		
+		String url = "http://" + GlobalService.HOST + ":8080/" + GlobalService.CONTEXT_PATH + "/RegisterVerification.do?id=" + encodeId + "&code=" + identityCode ;
 		try {
 			htmlPart.setContent("<p>親愛的會員"+ firstName +" 您好,<br /> 請點選以下的連結完成認證</p>"
-					+ "http://" + GlobalService.HOST + ":8080/" + GlobalService.CONTEXT_PATH + "/RegisterVerification.do?id=" + encodeId + "&code=" + identityCode, "text/html; charset=utf-8");
+					+ "<a href='"+ url +"'>http://" + GlobalService.HOST + ":8080/" + GlobalService.CONTEXT_PATH + "/RegisterVerification.do?id=" + encodeId + "&code=" + identityCode+"</a>", "text/html; charset=utf-8 ");
 			multiPart.addBodyPart(htmlPart);
 			
 			//執行寄送信件的方法

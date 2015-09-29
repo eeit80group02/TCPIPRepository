@@ -341,8 +341,8 @@
 	    	    				}
 	    	    			}
 	    	    			
-//	    	    			var width = $('div > div > ul').width() + 310;
-//	    	    			$ul.css('width', width);
+	    	    			var width = $('div > div > ul').width() + 310;
+	    	    			$ul.css('width', width);
 	    	    			
 	    				});
 	    	   			
@@ -1131,7 +1131,7 @@
 									hostName +'</div></div>' +
 									'<input type="hidden" class="subMissionPriority" value="普通" >' +
 									'<input type="hidden" class="subMissionPosition" value="' + result.mission.missionPosition + '">' +
-									'<input type="hidden" class="mainDataRowLocation" value="missionId'+ result.mission.missionId +'">' +
+									'<input type="hidden" class="mainDataRowLocation" value="missionId'+ result.mission.mainMissionId +'">' +
 									'<input type="hidden" class="missionId" value="' + result.mission.missionId + '"></div>');
 							
     						$('.subMissionContainer ul li.notSortable').before($subMission);
