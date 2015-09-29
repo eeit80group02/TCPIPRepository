@@ -18,4 +18,6 @@ public interface ProcessingMemberDAO
 	public boolean delete(int processingMemberId);
 	
 	public List<ProcessingMemberBean> finBySchoolDemandId(int schoolDemandId);
+	
+	public List<ProcessingMemberBean> finByMemerId(int MemberId);
 }

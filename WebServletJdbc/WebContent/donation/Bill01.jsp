@@ -60,13 +60,17 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -86,8 +90,8 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3" id="pageTab01"><a href="#test1" class="active">受贈單位</a></li>
-						<li class="tab col s3 disabled" id="pageTab02"><a href="#test2">捐獻明細</a></li>
+						<li class="tab col s3" id="pageTab01"><a href="#test1" class="active">捐獻明細</a></li>
+						<li class="tab col s3 disabled" id="pageTab02"><a href="#test2">填寫資料</a></li>
 						<li class="tab col s3 disabled" id="pageTab03"><a href="#test3">完成捐獻</a></li>
 					</ul>
 					<br>
@@ -101,28 +105,29 @@
 						<div class="warnText">
 							<span>確認捐獻物品明細</span>
 							<!-- 操作小叮嚀 start -->
-							<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
-								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
+							<button type="button" data-target="modalNote01" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="large material-icons">local_library</i></a>
 							</button>
-							<!-- Modal Structure -->
-							<div id="modalNote01" class="modal modal-fixed-footer">
-								<div class="modal-content">
-									<h4>操作小叮嚀：</h4>
-									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，進入填寫資料。
-										</li>
-										<br>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻。
-										</li>
-									</ol>
-								</div>
-								<div class="modal-footer">
-									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
-								</div>
-							</div>
-							<!-- 操作小叮嚀 end -->
-
 						</div>
+						<!-- Modal Structure -->
+						<div id="modalNote01" class="modal modal-fixed-footer">
+							<div class="modal-content">
+								<h4>操作小叮嚀：</h4>
+								<ol>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">navigate_next</i></a>&nbsp;單擊左鍵，進入填寫資料。
+									</li>
+									<br>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除該筆捐獻。
+									</li>
+								</ol>
+							</div>
+							<div class="modal-footer">
+								<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+							</div>
+						</div>
+						<!-- 操作小叮嚀 end -->
+
+
 						<br>
 					</div>
 
@@ -156,7 +161,7 @@
 										</td>
 										<td>
 											<form action='<c:url value="checkOrder.do"/>' method='GET'>
-												<button type="submit" id="page02Next" class="btn btn-small btn-floating">
+												<button type="submit" id="page01Next${item.schoolId}" class="btn btn-small btn-floating">
 													<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
 												</button>
 												<input type='hidden' name='linkto' value='stepTwo'> <input type='hidden' name='schoolId' value='${item.schoolId}'>
@@ -179,7 +184,7 @@
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 

@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭 css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
@@ -38,7 +37,7 @@
 
 			<a href="#" class="brand-logo center">問與答</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
-				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons" id="pleaseLogin">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
 						<!-- 有登入時，會有學校頁面或者個人頁面 -->
 						<c:if test="${not empty LoginOK}">
@@ -48,13 +47,17 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -135,16 +138,23 @@
 									if (xhr.readyState == 4) {
 										if (xhr.status == 200) {
 											lists = xhr.responseText;
+
+											// 設定cookie值
+											var now = new Date();
+											now.setTime(now.getTime() + 1000 * 60 * 60 * 24 * 30);
+											document.cookie = "Items=" + lists + ";expire=" + now.toUTCString();
+
 											// 											alert("新增購物車品項一");
 										} else {
-											alert("something is wrong!");
+											// 											alert("something is wrong!");
 										}
 									}
 								});
 								xhr.open("POST", "cart.do", true);
 								xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit="
-										+ "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
+								// 								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit="
+								// 										+ "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
+								xhr.send("toCart=insert&returnJson=true&donationId=" + "${OneDemand.donationId}");
 							}
 						}
 					</script>
@@ -189,7 +199,6 @@
 							<i class="tiny material-icons">help</i>&nbsp;<b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
-								<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
 							<br>${item.memberMessage}
 							<div class="talkTime">
@@ -214,7 +223,6 @@
 				</c:forEach>
 			</ul>
 		</div>
-		<hr>
 
 		<script>
 			var addBtn = document.getElementById("send-message");
@@ -242,7 +250,7 @@
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
 						datas = JSON.parse(lists);
-						// 						alert("ms " + datas);
+						//alert(datas);
 						var memberId = datas[0];
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];
@@ -257,7 +265,7 @@
 						var xi1textx = document.createTextNode("help");
 
 						var xb1x = document.createElement("b");
-						var xb1textx = document.createTextNode(memberId + " :");
+						var xb1textx = document.createTextNode("我" + " :");
 
 						var xdiv1textx = document.createTextNode(memberMessage);
 
@@ -304,7 +312,9 @@
 						}(jQuery));
 
 					} else {
-						alert("something is wrong!");
+						Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>無法操作，請登入會員帳號</span>', 5000, 'rounded');
+						$("#pleaseLogin").trigger("click");
+						// alert("something is wrong!");
 					}
 				}
 			}
@@ -312,6 +322,7 @@
 	</center>
 	<iframe name='hidden_frame' style='width: 0px; height: 0px'></iframe>
 	<script type="text/javascript" src="../donationScripts/DonationQA.js"></script>
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 </body>
 </html>

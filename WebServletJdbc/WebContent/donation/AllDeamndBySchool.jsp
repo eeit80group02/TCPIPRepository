@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -41,6 +42,7 @@
 		<div class="nav-wrapper">
 			<ul id="nav-mobile1" class="left hide-on-med-and-down">
 				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 			<a href="#" class="brand-logo center">管理物資</a>
 
@@ -71,13 +73,17 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -96,7 +102,7 @@
 		<div id="donateBody">
 			<br>
 			<!-- 操作小叮嚀 start -->
-			<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
+			<button type="button" data-target="modalNote01" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
 				<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 			</button>
 			<!-- Modal Structure -->
@@ -170,7 +176,8 @@
 																<tr>
 																	<td>${initem.name}</td>
 																	<td>${initem.donationAmount}</td>
-																	<td>${initem.donationOederDate}</td>
+																	<%-- 																	<td>${initem.donationOederDate}</td> --%>
+																	<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																</tr>
 															</c:when>
 														</c:choose>
@@ -192,7 +199,7 @@
 										</button>
 									</span>
 									<!-- 中 icon -->
-									<span class="midIcon"> <a href="#" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
+									<span class="midIcon"> <a href="<c:url value='demand.do?type=UpdateOneDemand&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
 									</span>
 
 									<!-- 右 icon -->
@@ -236,6 +243,8 @@
 																<td>捐獻時間</td>
 															</tr>
 														</thead>
+														<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm" /></td>
+
 														<tbody>
 															<c:forEach var='initem' items='${OneAllDetails}'>
 																<c:choose>
@@ -243,7 +252,8 @@
 																		<tr>
 																			<td>${initem.name}</td>
 																			<td>${initem.donationAmount}</td>
-																			<td>${initem.donationOederDate}</td>
+																			<%-- 																			<td>${initem.donationOederDate}</td> --%>
+																			<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																		</tr>
 																	</c:when>
 																</c:choose>
@@ -297,11 +307,6 @@
 										<div class="footIcin">
 
 											<!-- 捐獻記錄 start -->
-											<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
-												<button type="button" data-target="modalNote03${vs.index}" class="btn btn-small btn-floating modal-trigger">
-													<i class="small material-icons">assignment</i>
-												</button>
-											</span>
 											<!-- Modal Structure -->
 											<div id="modalNote03${vs.index}" class="modal modal-fixed-footer">
 												<div class="modal-content">
@@ -321,7 +326,8 @@
 																		<tr>
 																			<td>${initem.name}</td>
 																			<td>${initem.donationAmount}</td>
-																			<td>${initem.donationOederDate}</td>
+																			<%-- 																			<td>${initem.donationOederDate}</td> --%>
+																			<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																		</tr>
 																	</c:when>
 																</c:choose>
@@ -361,5 +367,6 @@
 		</div>
 	</center>
 	<script type="text/javascript" src="../donationScripts/AllDeamnBySchool.js"></script>
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 </body>
 </html>

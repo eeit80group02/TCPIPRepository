@@ -99,8 +99,8 @@ public class DemandSelected extends HttpServlet {
 			
 			/* 單一需求內容 */
 			DonationBeanDuplicate donationBeanDuplicate  = service.findOneDemand(donationId);
-			System.out.println("time1 "+donationBeanDuplicate.getDemandTime());
-			System.out.println("time2 "+donationBeanDuplicate.getExpireTime());
+//			System.out.println("time1 "+donationBeanDuplicate.getDemandTime());
+//			System.out.println("time2 "+donationBeanDuplicate.getExpireTime());
 			
 			/* 留言處理 */
 			DonationDiscussService donationDiscussService = new DonationDiscussService();

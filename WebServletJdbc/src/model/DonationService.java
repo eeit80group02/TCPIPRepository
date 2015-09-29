@@ -165,7 +165,7 @@ public class DonationService {
 		return donationBean;
 	}
 	public List<DonationBeanDuplicate> findOneAllDeamndByMember(int schoolId) {
-		System.out.println("rrrschoolId = "+schoolId);
+//		System.out.println("rrrschoolId = "+schoolId);
 		// 比對schoolId後得到一間學校所有捐獻
 		List<DonationBean> resultDisplay = new ArrayList<>();
 		
@@ -322,13 +322,13 @@ public class DonationService {
 					dodBean.setDonationOederId(d.getDonationOederId());
 					dodBean.setDonationId(d.getDonationId());
 					dodBean.setDonationAmount(d.getDonationAmount());
-					System.out.println("@@ "+dodBean.getDonationOederId()+"/"+dodBean.getDonationId()+"/"+dodBean.getDonationAmount());
+//					System.out.println("@@ "+dodBean.getDonationOederId()+"/"+dodBean.getDonationId()+"/"+dodBean.getDonationAmount());
 					dodBeanList.add(dodBean);
 					
 				}
 			}
 		}
-		System.out.println("dodBeanList = "+dodBeanList);
+//		System.out.println("dodBeanList = "+dodBeanList);
 		
 		// 送回前端顯示的捐獻明細
 		List<DonationOrderDuplicateBean> newDetailItems = new ArrayList<>();
@@ -569,9 +569,9 @@ public class DonationService {
 	// 依單間學校做訂單處理
 	public DonationOrderBean OneSchoolOrderBooking(DonationOrderBean donationOrderBean, int schoolId, DonationCart cart){
 		DonationOrderDAO dao = new DonationOrderDAOJdbc();
-		donationOrderBean = dao.insert(donationOrderBean);
+//		donationOrderBean = dao.insert(donationOrderBean);
 		// 取得新增訂單的自增主鍵
-		int pk = donationOrderBean.getDonationOrderId();
+//		int pk = donationOrderBean.getDonationOrderId();
 		
 		// 取得單間學校(主檔+明細)
 		DonationBillBean bill = cart.getDonationOfOneSchool(schoolId);

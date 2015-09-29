@@ -39,24 +39,24 @@
 							<div class="row">
 								<a href="<c:url value="/participator.do?type=displayFullProjByParticipator" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
-										我參加過的完整計畫
+										參予過的完整計畫
 									</span>
 								</a>
 							</div>
 							<div class="row">
 								<a class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
 									<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										申請參加的完整計畫
+										申請中的完整計畫
 									</span>
 								</a>											
 							</div>	
-							<div class="row">
-								<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
-									<span  style="font-family:微軟正黑體;font-size:1.2em;">
-										申請參加的完整計畫
-									</span>
-								</a>											
-							</div>							
+<!-- 							<div class="row"> -->
+<%-- 								<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />"> --%>
+<!-- 									<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 										申請參加的完整計畫 -->
+<!-- 									</span> -->
+<!-- 								</a>											 -->
+<!-- 							</div>							 -->
 						</div>
 					</div>
 
@@ -114,15 +114,15 @@
 										</span>
 									</a>
 								</div>		
+<!-- 								<div class="row"> -->
+<%-- 									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonal' />"> --%>
+<!-- 										<span  style="font-family:微軟正黑體;font-size:1.2em;"> -->
+<!-- 												瀏覽完整計畫 -->
+<!-- 										</span> -->
+<!-- 									</a>											 -->
+<!-- 								</div>	 -->
 								<div class="row">
 									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/fullProj.do?type=displayPersonal' />">
-										<span  style="font-family:微軟正黑體;font-size:1.2em;">
-												瀏覽完整計畫
-										</span>
-									</a>											
-								</div>	
-								<div class="row">
-									<a id="changepassworda"  class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='' />">
 										<span  style="font-family:微軟正黑體;font-size:1.2em;">
 												我發布的完整計畫
 										</span>

@@ -529,6 +529,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		System.out.println("----------------------------------會員顯示待洽談----------------------------------");
 		List<SchoolDemandBean> result = null;
 		HttpSession session = request.getSession();
+		session.removeAttribute("mlist");
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
 			if(mbean.getMemberId()==null){
@@ -537,7 +538,7 @@ public class SchoolDemandServlet extends HttpServlet {
 				return;
 			}
 		}
-		result = service.mdisplays();
+		result = service.mdisplays(mbean);
 		System.out.println(result.size());
 		
 		if (!result.isEmpty()) {
@@ -546,7 +547,8 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 			
 		} else {
-			System.out.println("查詢失敗   導向登入頁面");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+			System.out.println("查詢失敗   導向登入頁面");   
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 		}
 	}
 

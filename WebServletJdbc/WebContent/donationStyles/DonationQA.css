@@ -119,7 +119,6 @@ span.glyphicon-ok-sign {
 #donationImage {
 	text-align: center;
 	width: 30%;
-	max-width: 400px;
 	min-width: 300px;
 }
 
@@ -133,10 +132,10 @@ span.glyphicon-ok-sign {
 }
 
 #donationPicture {
-	max-width: 400px;
-	width: expression(this.width > 400 ? "400px" : this.width);
-	max-height: 400px;
-	height: expression(this.height > 400 ? "400px" : this.height);
+	max-width: 300px;
+	width: expression(this.width > 300 ? "300px" : this.width);
+	max-height: 300px;
+	height: expression(this.height > 300 ? "300px" : this.height);
 	vertical-align: middle;
 	border: 1px solid black;
 }

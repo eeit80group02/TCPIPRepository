@@ -31,49 +31,53 @@
 
 </head>
 <body>
-	<center>
-		<!-- 我就是標頭 start -->
-		<div class="navbar-fixed">
-			<nav>
-				<div class="nav-wrapper">
-					<ul id="nav-mobile1" class="left hide-on-med-and-down">
-						<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
-						<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
-					</ul>
+	<!-- 我就是標頭 start -->
+	<div class="navbar-fixed">
+		<nav>
+			<div class="nav-wrapper">
+				<ul id="nav-mobile1" class="left hide-on-med-and-down">
+					<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+					<li><a href="FindGoods.jsp"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
+				</ul>
 
-					<a href="#" class="brand-logo center">填寫捐獻需求</a>
-					<ul id="nav-mobile3" class="right hide-on-med-and-down">
-						<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
-							<ul id="dropdownList03" class="dropdown-content">
-								<!-- 有登入時，會有學校頁面或者個人頁面 -->
-								<c:if test="${not empty LoginOK}">
-									<c:if test="${LoginOK.beanName.equals('member')}">
-										<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
-									</c:if>
-
-									<c:if test="${LoginOK.beanName.equals('school')}">
-										<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
-									</c:if>
+				<a href="#" class="brand-logo center">填寫捐獻需求</a>
+				<ul id="nav-mobile3" class="right hide-on-med-and-down">
+					<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+						<ul id="dropdownList03" class="dropdown-content">
+							<!-- 有登入時，會有學校頁面或者個人頁面 -->
+							<c:if test="${not empty LoginOK}">
+								<c:if test="${LoginOK.beanName.equals('member')}">
+									<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
 								</c:if>
-								<li class="divider"></li>
-								<!-- 沒登入時，必須看到登入按鈕 -->
-								<c:choose>
-									<c:when test="${empty LoginOK}">
-										<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
-									</c:when>
 
-									<c:otherwise>
-										<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
-									</c:otherwise>
-								</c:choose>
-							</ul></li>
-					</ul>
-				</div>
-			</nav>
-		</div>
-		<br>
-		<!-- 我就是標頭 end -->
+								<c:if test="${LoginOK.beanName.equals('school')}">
+									<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+									<li class="divider"></li>
+									<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+									<li class="divider"></li>
+									<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
+								</c:if>
+							</c:if>
+							<li class="divider"></li>
+							<!-- 沒登入時，必須看到登入按鈕 -->
+							<c:choose>
+								<c:when test="${empty LoginOK}">
+									<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								</c:when>
 
+								<c:otherwise>
+									<li><a href="<c:url value="/login/logout.jsp" />">登出</a></li>
+								</c:otherwise>
+							</c:choose>
+						</ul></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+	<br>
+	<!-- 我就是標頭 end -->
+
+	<center>
 		<form id="drop-a-line" enctype='multipart/form-data' action='donate.do' method='POST'>
 			<div id="warnText">
 				<i class="tiny material-icons">star</i>&nbsp;<span>符號為必填欄位</span>
@@ -88,7 +92,7 @@
 					<div class="input-field col m12 s12">
 						<input type="text" id="schoolName" disabled value="${LoginOK.name}"><label for="schoolName"><span class="DetailTitle"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="學校名稱"><span class="DetailTitle"><i class="tiny material-icons">location_city</i>&nbsp;申請單位&nbsp;</span></a></span></label>
 					</div>
-					
+
 					<!-- 上傳圖片 -->
 					<div id="basicDataHead">
 						<div class="input-field col m12 s12">
@@ -159,7 +163,6 @@
 				</div>
 			</div>
 		</form>
-
 	</center>
 
 	<!-- 標頭專用 bottom start -->

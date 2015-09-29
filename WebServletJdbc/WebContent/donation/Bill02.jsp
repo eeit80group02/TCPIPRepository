@@ -90,13 +90,17 @@
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
 						<!-- 沒登入時，必須看到登入按鈕 -->
 						<c:choose>
 							<c:when test="${empty LoginOK}">
-								<li><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
+								<li id="loginAccount"><a href="<c:url value="/index.jsp" />" class="modal-trigger">登入</a></li>
 							</c:when>
 
 							<c:otherwise>
@@ -116,9 +120,9 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">受贈單位</a></li>
-						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">捐獻明細</a></li>
-						<li class="tab col s3 disabled" id="pageTab04"><a href="#test4" class="disabled">完成捐獻</a></li>
+						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻明細</a></li>
+						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">填寫資料</a></li>
+						<li class="tab col s3 disabled" id="pageTab03"><a href="#test3" class="disabled">完成捐獻</a></li>
 					</ul>
 					<br>
 
@@ -130,28 +134,28 @@
 						<div class="warnText">
 							<span>確認捐獻物品明細</span>
 							<!-- 操作小叮嚀 start -->
-							<button type="button" data-target="modalNote02" class="btn btn-small btn-floating modal-trigger">
-								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
+							<button type="button" data-target="modalNote02" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="large material-icons">local_library</i></a>
 							</button>
-							<!-- Modal Structure -->
-							<div id="modalNote02" class="modal modal-fixed-footer">
-								<div class="modal-content">
-									<h4>操作小叮嚀：</h4>
-									<ol>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">remove</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">add</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
-										</li>
-										<br>
-										<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除捐獻物品。
-										</li>
-									</ol>
-								</div>
-								<div class="modal-footer">
-									<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
-								</div>
-							</div>
-							<!-- 操作小叮嚀 end -->
-
 						</div>
+						<!-- Modal Structure -->
+						<div id="modalNote02" class="modal modal-fixed-footer">
+							<div class="modal-content">
+								<h4>操作小叮嚀：</h4>
+								<ol>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">remove</i></a>&nbsp;、&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">add</i></a>&nbsp;單擊左鍵，可對數量做加減，若按壓不放，可以加速數字變動。
+									</li>
+									<br>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">delete</i></a>&nbsp;雙擊左鍵，即可移除捐獻物品。
+									</li>
+								</ol>
+							</div>
+							<div class="modal-footer">
+								<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+							</div>
+						</div>
+						<!-- 操作小叮嚀 end -->
+
 						<br>
 					</div>
 
@@ -173,7 +177,7 @@
 										<td><img class="imgBill" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${item.donationId}&schoolId=${item.schoolId}" alt="${item.supplyName}" title="${item.supplyName}"></td>
 										<td>${item.schoolName}<br> <br>${OneSchoolBill.addressComplete}</td>
 										<td>${item.supplyStatus}</td>
-										<td style="word-break: break-all;"><div id="remark" class="remark">${item.demandContent}</div></td>
+										<td><div id="remark" class="remark">${item.demandContent}</div></td>
 
 										<td>
 											<button type="button" id="buttonSub${vs.index}" class="btn btn-small btn-floating">
@@ -219,13 +223,18 @@
 
 												/* 按下鼠標處理函數 */
 												$("#buttonSub${vs.index}").mousedown(function() {
-													// 													var input = $("#text${vs.index}").val();
+													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setSubValue();
+
+													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+														$("#text${vs.index}").val("${item.demandNumber}");
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請輸入正整數</span>', 1800, 'rounded');
+														$("#text${vs.index}").empty();
 														$("#text${vs.index}").val("1");
 													}
 
@@ -233,17 +242,20 @@
 
 												/* 按下鼠標處理函數 */
 												$("#buttonAdd${vs.index}").mousedown(function() {
-													// 													var input = $("#text${vs.index}").val();
+													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test($("#text${vs.index}").val())) && parseInt($("#text${vs.index}").val()) > 0 && parseInt($("#text${vs.index}").val()) < 10000) {
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setAddValue();
 
+													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+														$("#text${vs.index}").val("${item.demandNumber}");
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
-														$("#text${vs.index}").val(1);
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請輸入正整數</span>', 1800, 'rounded');
+														$("#text${vs.index}").empty();
+														$("#text${vs.index}").val("1");
 													}
-
 												});
 
 												/* 鬆開鼠標處理函數 */
@@ -251,9 +263,13 @@
 
 												function checkText() {
 													var input = $("#text${vs.index}").val();
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) < 10000) {
+													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+
+													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+														$("#text${vs.index}").val("${item.demandNumber}");
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
-														Materialize.toast('<span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;<span>請輸入正整數，且不可超過上限</span>', 1800, 'rounded');
+														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請輸入正整數</span>', 1800, 'rounded');
 														$("#text${vs.index}").empty();
 														$("#text${vs.index}").val("1");
 													}
@@ -276,7 +292,7 @@
 						<br>
 						<div class="warnText">
 							<span class="redStar"><i class="tiny material-icons">star</i></span>&nbsp;<span>以下皆為必填欄位</span>
-							<button type="button" data-target="modalNote03" class="btn btn-small btn-floating modal-trigger">
+							<button type="button" data-target="modalNote03" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 							</button>
 						</div>
@@ -326,21 +342,6 @@
 						<div class="input-field col m12 s12">
 							<!-- 會員基本姓名 -->
 							<input type="text" id="textLeft01" disabled value="${LoginOK.lastName}${LoginOK.firstName}"><label for="textLeft01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;會員姓名&nbsp;</span></label>
-							<!-- 會員基本性別 -->
-							<select class="browser-default" id="textLeft06" disabled="disabled">
-								<option value="先生">先生</option>
-								<option value="小姐">小姐</option>
-							</select>
-						</div>
-						<div class="input-field col m12 s12">
-							<!-- 會員基本縣市別 -->
-							<select class="browser-default" id="addressLeft01" name="address01">
-								<option value="宜蘭縣">宜蘭縣</option>
-							</select>
-							<!-- 會員基本區域別 -->
-							<select class="browser-default" id="addressLeft02" name="address02">
-								<option value="礁溪鄉">礁溪鄉</option>
-							</select> <br> <br> <br>
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 會員基本地址 -->
@@ -379,14 +380,40 @@
 							<div class="input-field col m12 s12">
 								<!-- 寄件人姓名 -->
 								<input class="required" required="required" autocomplete="off" type="text" id="txtOcname" name="txtOcname" maxlength="15"><label for="txtOcname" class="" id="textRightLable01"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;姓名&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-								<!-- 寄件人姓別 -->
-								<select class="browser-default" name="ddlOcname_ex" id="ddlOcname_ex">
-									<option value="先生">先生</option>
-									<option value="小姐">小姐</option>
-								</select>
+							</div>
+							<div class="input-field col m12 s12">
+								<!-- 寄件人地址 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOaddress" name="txtOaddress"><label for="txtOaddress" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
 							</div>
 
 							<div class="input-field col m12 s12">
+								<!-- 寄件人電話 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOtel" name="txtOtel" maxlength="16"><label for="txtOtel" class="" id="textRightLable03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
+							</div>
+
+							<div class="input-field col m12 s12">
+								<!-- 寄件人手機 -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOmobile" name="txtOmobile" maxlength="10"><label for="txtOmobile" class="" id="textRightLable04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
+							</div>
+							<div class="input-field col m12 s12">
+								<!-- 寄件人E-mail -->
+								<input class="required" required="required" autocomplete="off" type="text" id="txtOemail" name="txtOemail"><label for="txtOemail" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
+							</div>
+							<div class="warnText">為確保身分正確，請選擇下方欄位</div>
+							<div class="input-field col m12 s12">
+								<div class="DetailTitle01">
+									<i class="tiny material-icons">edit</i><span>&nbsp;性別&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
+								</div>
+								<select class="browser-default" name="ddlOcname_ex" id="ddlOcname_ex">
+									<option value="先生">先生</option>
+									<option value="小姐">小姐</option>
+								</select> <br>
+							</div>
+							<div class="input-field col m12 s12">
+								<div class="DetailTitle01">
+									<i class="tiny material-icons">edit</i><span>&nbsp;縣市別＆區域別&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
+								</div>
+								<!-- 寄件人姓別 -->
 								<label for="ddlCity"></label>
 								<!-- 寄件人縣市別 -->
 								<select class="browser-default" name="ddlCity" id="ddlCity">
@@ -417,7 +444,7 @@
 									$('#ddlCity').on("change", function() {
 										$('#ddlArea option').remove();
 										$('#txtPostno').attr("value", "");
-										$('#ddlArea').append("<option value=''>請選擇區域別</option>");
+										$('#ddlArea').append("_$tag____________請選擇區域別_$tag____");
 										$.ajax({
 											url : '../GetCityServlet',
 											type : "post",
@@ -428,7 +455,7 @@
 											success : function(result) {
 												var areas = (typeof result.d) == 'string' ? eval('(' + result.d + ')') : result.d;
 												for (var i = 0; i < areas.length; i++) {
-													$('#ddlArea').append("<option value='" + areas[i].Zip + "'>" + areas[i].Name + "</option>");
+													$('#ddlArea').append("_$tag________________________________" + areas[i].Name + "_$tag____");
 												}
 											}
 										});
@@ -440,25 +467,6 @@
 									<option value="">請選擇區域別</option>
 								</select> <input type="hidden" name="hidArea" id="hidArea"> <input name="txtPostno" type="text" maxlength="3" id="txtPostno" style="width: 25px; display: none;" value=""><br> <br> <br>
 							</div>
-
-							<div class="input-field col m12 s12">
-								<!-- 寄件人地址 -->
-								<input class="required" required="required" autocomplete="off" type="text" id="txtOaddress" name="txtOaddress"><label for="txtOaddress" class="" id="textRightLable02"><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-							</div>
-
-							<div class="input-field col m12 s12">
-								<!-- 寄件人電話 -->
-								<input class="required" required="required" autocomplete="off" type="text" id="txtOtel" name="txtOtel" maxlength="16"><label for="txtOtel" class="" id="textRightLable03"><i class="tiny material-icons">phone</i><span class="DetailTitle">&nbsp;電話&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
-							</div>
-
-							<div class="input-field col m12 s12">
-								<!-- 寄件人手機 -->
-								<input class="required" required="required" autocomplete="off" type="text" id="txtOmobile" name="txtOmobile" maxlength="10"><label for="txtOmobile" class="" id="textRightLable04"><i class="tiny material-icons">smartphone</i><span class="DetailTitle">&nbsp;手機&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-							</div>
-							<div class="input-field col m12 s12">
-								<!-- 寄件人E-mail -->
-								<input class="required" required="required" autocomplete="off" type="text" id="txtOemail" name="txtOemail"><label for="txtOemail" class="" id="textRightLable05"><i class="tiny material-icons">mail</i><span class="DetailTitle">&nbsp;E-mail&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></label>
-							</div>
 							<input type='hidden' name='linkto' value='stepThree'> <input type='hidden' name='schoolId3' value='${OneSchoolBill.schoolId}'> <input type='hidden' name='dealId'>
 						</form>
 					</div>
@@ -467,8 +475,6 @@
 						<hr>
 						<br>
 					</div>
-
-
 
 					<div class="col s12 m12 l6">
 
@@ -479,13 +485,22 @@
 							<!-- 收件人姓名 -->
 							<input name="txtGcname" type="text" id="txtGcname" class="required" disabled="disabled" value="${OneSchoolBill.name}"><label for="txtGcname"><i class="tiny material-icons">account_circle</i><span class="DetailTitle">&nbsp;捐獻單位&nbsp;</span></label>
 							<!-- 收件人姓別 Hide -->
+						</div>
+						<div class="input-field col m12 s12">
+							<!-- 收件人地址 -->
+							<input class="required" required="required" autocomplete="off" type="text" id="txtGaddress" name="txtGaddress" disabled="disabled" value="${OneSchoolBill.addressComplete}"><label for="txtGaddress" class=""><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址</span></label>
+						</div>
+						<div class="input-field col m12 s12">
 							<select class="browser-default" name="ddlGcname_ex" id="ddlGcname_ex" class="required">
 								<option value="先生">先生</option>
 								<option value="小姐">小姐</option>
 							</select>
 						</div>
-
+						<div class="warnText">為確保資料正確，請選擇下方欄位</div>
 						<div class="input-field col m12 s12">
+							<div class="DetailTitle01">
+								<i class="tiny material-icons">edit</i><span>&nbsp;縣市別＆區域別&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
+							</div>
 							<label for="ddlCity1"></label>
 							<!-- 收件人縣市別 disabled -->
 							<select class="browser-default" name="ddlCity1" id="ddlCity1">
@@ -538,13 +553,6 @@
 								<option value="">請選擇區域別</option>
 							</select><input type="hidden" name="hidArea1" id="hidArea1"> <input name="txtPostno1" type="text" maxlength="3" id="txtPostno1" style="display: none;" value=""><br> <br> <br>
 						</div>
-
-						<div class="input-field col m12 s12">
-							<!-- 收件人地址 -->
-							<input class="required" required="required" autocomplete="off" type="text" id="txtGaddress" name="txtGaddress" disabled="disabled" value="${OneSchoolBill.addressComplete}"><label for="txtGaddress" class=""><i class="tiny material-icons">location_city</i><span class="DetailTitle">&nbsp;地址</span></label>
-						</div>
-
-
 					</div>
 					<div class="col s12 m12 l6">
 						<div class="rightTitle">
@@ -576,18 +584,28 @@
 							<div class="DetailTitle01">
 								<i class="tiny material-icons">edit</i><span>&nbsp;指定送達時段&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span><br>
 							</div>
-							<span id="chkTrimtime"> <input id="chkTrimtime_0" type="checkbox" name="chkTrimtime$0" checked> <label for="chkTrimtime_0">不指定</label> <input id="chkTrimtime_1" type="checkbox" name="chkTrimtime$1"> <label for="chkTrimtime_1">上午時段</label> <input id="chkTrimtime_2" type="checkbox" name="chkTrimtime$2"> <label for="chkTrimtime_2">12~17時</label> <input id="chkTrimtime_3" type="checkbox" name="chkTrimtime$3"> <label for="chkTrimtime_3">17~20時</label></span>
+							<div id="chkTrimtime">
+								<div>
+									<input id="chkTrimtime_0" type="checkbox" name="chkTrimtime$0" checked><label for="chkTrimtime_0">不指定</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkTrimtime_1" type="checkbox" name="chkTrimtime$1"><label for="chkTrimtime_1">上午時段</label>
+								</div>
+								<br>
+								<div>
+									<input id="chkTrimtime_2" type="checkbox" name="chkTrimtime$2"> <label for="chkTrimtime_2">12~17時</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkTrimtime_3" type="checkbox" name="chkTrimtime$3"> <label for="chkTrimtime_3">17~20時</label>
+								</div>
+							</div>
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 貨件規格 -->
 							<div class="DetailTitle01">
 								<i class="tiny material-icons">edit</i><span>&nbsp;貨件規格&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
 							</div>
-							<span id="chkSpec"> <input id="chkSpec_0" type="checkbox" name="chkSpec$0" checked> <label for="chkSpec_0">s60</label> <input id="chkSpec_1" type="checkbox" name="chkSpec$1"> <label for="chkSpec_1">s90</label> <input id="chkSpec_2" type="checkbox" name="chkSpec$2"> <label for="chkSpec_2">s120</label> <input id="chkSpec_3" type="checkbox" name="chkSpec$3"> <label for="chkSpec_3">s150</label><br> <br></span>
+							<div id="chkSpec">
+								<input id="chkSpec_0" type="checkbox" name="chkSpec$0" checked> <label for="chkSpec_0">s60</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkSpec_1" type="checkbox" name="chkSpec$1"> <label for="chkSpec_1">s90</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkSpec_2" type="checkbox" name="chkSpec$2"> <label for="chkSpec_2">s120</label>&nbsp;&nbsp;&nbsp;&nbsp; <input id="chkSpec_3" type="checkbox" name="chkSpec$3"> <label for="chkSpec_3">s150</label> <br>
+							</div>
+							<br>
 						</div>
 						<div class="input-field col m12 s12">
 							<!-- 內容物 -->
-
 							<input class="required" required="required" autocomplete="off" type="text" id="txtPkgexp" name="txtPkgexp" maxlength="25"><label for="txtPkgexp" class="" id="textRightLable06"><i class="tiny material-icons">edit</i><span class="DetailTitle">&nbsp;內容物&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span></label>
 							<div class="DetailTitle01">
 								<i class="tiny material-icons">edit</i><span>&nbsp;內容物分類&nbsp;<span class="redStar"><i class="tiny material-icons">star</i></span></span> <br>
@@ -665,14 +683,15 @@
 						<button type="submit" id="btnSend" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="確認送出"><i class="small material-icons">done</i></a>
 						</button>
-						<button type="submit" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
+						<!--勿修改下行 type="button" -->
+						<button type="button" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
 						</button>
 					</form>
 
-					<div id="result"></div>
-
-
+					<div class="warnText" id="resultDiv">
+						<span id="result"></span><span id="failResult"></span> <br>
+					</div>
 					<!-- 進行資料庫存取訂單 -->
 					<script>
 						function Button1Click() {
@@ -841,7 +860,7 @@
 
 	<!-- 等畫面跑完，在載入 js 檔 -->
 	<script type="text/javascript" src="../donationScripts/DonationBill.js"></script>
-
+	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 	<!-- 一鍵Demo -->
 	<script type="text/javascript" src="../donationScripts/OneClickDemo.js"></script>
 

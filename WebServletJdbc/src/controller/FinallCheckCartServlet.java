@@ -152,6 +152,10 @@ public class FinallCheckCartServlet extends HttpServlet {
 				dCart.deleteDonationOfOneSchool(schoolId);
 			}
 			
+			// 傳送購物車最新資訊.
+			String idString = dCart.getDonationIdString();
+			request.setAttribute("newItemsInCart", idString);
+			
 //			List<DonationBillBean> list = dCart.getDonationOrderBySchool();
 //			session.setAttribute("DemandOBSchool", list);
 			request.setAttribute("OrderDetail", orderBean);
