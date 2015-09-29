@@ -111,12 +111,16 @@ public class ProcessingMemberService {
 
 	public ProcessingMemberBean disagree(ProcessingMemberBean bean) {
 		List<ProcessingMemberBean> list = null;
+		List<ProcessingMemberBean> temp = null;
+
 		ProcessingMemberBean result = null;
 		if (bean != null) {
 			bean.setProcessingMemberId(bean.getProcessingMemberId());
 			bean.setCheckStatus("未通過");
-			System.out.println(bean);
 			result = processingMemberDAO.update(bean);
+			if(result != null){
+				
+			}
 		}
 		return result;
 	}
