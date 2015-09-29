@@ -79,14 +79,16 @@
 							<span>需求人數:10/20</span>
 						</div>
 						<div class="card-reveal lime lighten-5" style="height:100%">
-      						<span class="card-title grey-text text-darken-4" style="height:15%">
+      						<span class="card-title grey-text text-darken-4" style="height:15%;word-break;">
       						計畫摘要
 <!-- 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;"> -->
 <!-- 	      						Follow -->
 <!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
-      							<p style="height:55%">摘要內容</p>
+      							<p style="height:55%">
+      							「部落孩子攜手教學計劃」中黃老師已參與計畫近5年。每周四和五都特地上山到部落為部份孩子進行一對一的教學輔導。黄老師花費了相當多的時間與精力設計課程與互動方式，利用生動有趣的說明讓孩子學習起來輕鬆有自信，降低挫折感，提升學習的樂趣，並且認真地紀錄每個孩子的學習情況和進度，課程和教材都是依他們的程度而量身訂做
+      							</p>
       						<div class="divider"></div>
       						<div class="center-align">
 								<a href="#"><h5>more...</h5></a>
@@ -116,7 +118,10 @@
 <!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
-      						<p style="height:55%">摘要內容</p>
+      						<p style="height:55%">
+							每個人的成長過整裡不一定都有長期住院的經驗，但我們都曾有過陪伴在病床旁邊照護親人的時刻，甚至我們的朋友家人就是在醫院裡一起揮汗工作的一群人。
+							小丑醫生的存在不只是讓病床上的孩子有機會看到歡笑逗趣的演出，也是讓在場的每顆緊張的心，可以暫時放下緊繃與壓力，漾起一抹微笑，得以放鬆。
+							</p>
       						<div class="divider"></div>
       						<div class="center-align">
 								<a href="#"><h5>more...</h5></a>
@@ -145,7 +150,9 @@
 <!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
-      						<p style="height:55%">摘要內容</p>
+      						<p style="height:55%">
+							眷村曾是大時代下的文化，人們共同的記憶，但時代的洪流並沒有讓珍貴的文化資產得以保存，而是淹沒在都市叢林與商業開發之中。隨著眷改條例施行，老眷村紛紛頹圮、改建，喚醒人們對於眷村特殊文化價值與歷史記憶保存的反思。
+							</p>
       						<div class="divider"></div>
       						<div class="center-align">
 								<a href="#"><h5>more...</h5></a>
@@ -181,7 +188,9 @@
 <!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
-      						<p style="height:55%">摘要內容</p>
+      						<p style="height:55%">日本廣域躲避盤大賽10月3日即將展開，然而，一個更大的問題又再次出現。
+
+							由於比賽地點位於日本栃木縣小山市的比賽場地周遭並非觀光地區，不僅旅館很有限，從台灣到東京、東京到小山市的交通費用也十分棘手，社團志工老師坦言，旅費經過估算以後，所需的費用並不如想像中的樂觀...</p>
       						<div class="divider"></div>
       						<div class="center-align">
 								<a href="#"><h5>more...</h5></a>
@@ -212,7 +221,25 @@
 <!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
-      						<p style="height:55%">摘要內容</p>
+      						<p style="height:55%">
+      						你認識台灣第五大族群嗎？
+
+							你曾留心路過身旁，說著不同語言的人群嗎？
+							
+							從今開始，放下我們的漠視、不再只是擦肩，
+							
+							讓我們重新認識這群，獨在異鄉的越南新住民。
+							
+							
+							
+							基於工作、家庭等因素，使得這些新住民無法回家
+							
+							於是我們拍片、當信差。
+							
+							寄送在台灣的新住民對越南家鄉的思念、一句「不用掛心」或為他們做一道簡單的菜。
+
+      						
+      						</p>
       						<div class="divider"></div>
       						<div class="center-align">
 								<a href="#"><h5>more...</h5></a>
@@ -242,7 +269,11 @@
 <!-- 	      						</span> -->
       						</span>
       						<div class="divider"></div>
-      						<p style="height:55%">摘要內容</p>
+      						<p style="height:55%">
+							 閱讀，早已在升學導向的台灣走了調，許多人在考試壓力的催逼下，對閱讀失去了興致。應付課內的教科書都來不及了，哪還有時間去閱讀其他的書籍？這樣的教育體制，使我們漸漸忘卻讀書的真諦，忘記了閱讀到一本好書的感覺。
+							
+							舉辦這次活動，我們要的其實很簡單，我們希望讓下一代的孩子，有機會不要再向我們一樣，只是為了升學而讀書，而是因為書中的奧秘和驚奇，真正地愛上閱讀。     						
+      						</p>
       						<div class="divider"></div>
       						<div class="center-align">
 								<a href="#"><h5>more...</h5></a>

@@ -457,7 +457,9 @@
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
 								   		   "<div class='col l10' style='font-size:1.6em;font-weight:600;white-space:pre-wrap;'> " +
 								   			value.answerMember + " 答:<br>" + 
-								     		value.answerMemberContent + "<br>" +
+								   			"<div class='row' style='word-break:break-all;'>" +
+								     		value.answerMemberContent + 
+											"</div>" +
   								  		   "<div align='right'><small>" + value.answerMemberTime + "</small></div></div>";
 		  					}
 		  								   

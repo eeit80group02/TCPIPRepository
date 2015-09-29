@@ -137,6 +137,7 @@
 						<div class="input-field row">
 							<div class="forinput" id="activityTime">活動時間</div>	
 							<div class="col l4">
+								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">活動開始時間</span></div>
 								<input type="date" name="activityStartTime" id="activityStartTime" value="${param.activityStartTime}" required />
 							</div>	
 							<div class="col l2">

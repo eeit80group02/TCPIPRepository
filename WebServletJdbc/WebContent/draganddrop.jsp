@@ -67,7 +67,7 @@
 	<c:import url="/template/header.jsp" context="${pageContext.request.contextPath}"></c:import>
 
 
-  <div id="loadingmodal" class="modal" style="position:fixed;left:50%;width:200px;">
+  <div id="loadingmodal" class="modal" style="position:fixed;width:400px;">
     <div class="modal-content">
 	  <div class="progress">
 	      <div class="indeterminate"></div>

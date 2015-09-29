@@ -125,7 +125,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">計畫標題</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>${fullProj.title}</div>
+									<div style="font-size:1.4em;">${fullProj.title}</div>
 								</div>
 							</div>
 						</div>
@@ -140,7 +140,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">活動地點</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>${fullProj.location}</div>
+									<div style="font-size:1.4em;">${fullProj.location}</div>
 								</div>
 							</div>
 						</div>
@@ -156,7 +156,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">活動時間</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 										<fmt:formatDate var="startTime" value="${fullProj.activityStartTime}" type="date" pattern="yyyy-MM-dd" />
 										<fmt:formatDate var="endTime" value="${fullProj.activityEndTime}" type="date" pattern="yyyy-MM-dd" />
 										${startTime} ~ ${endTime}
@@ -177,7 +177,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">招募人數</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>${fullProj.estMember}</div>
+									<div style="font-size:1.4em;">${fullProj.estMember}</div>
 								</div>
 							</div>
 						</div>
@@ -193,7 +193,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">活動預算</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>${fullProj.budget}</div>
+									<div style="font-size:1.4em;">${fullProj.budget}</div>
 								</div>
 							</div>
 						</div>
@@ -249,7 +249,7 @@
 					</div>
 					<!-- 計畫內容 -->
 					<div class="row">
-						<div class="col l12 card-panel hoverable" style="background-color: #D1F0E5;">
+						<div class="col l8 offset-l2 card-panel hoverable" style="background-color: #D1F0E5;">
 							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
 								${fullProj.content}
 							</p>
