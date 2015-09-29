@@ -179,7 +179,6 @@
 				</c:forEach>
 			</ul>
 		</div>
-		<hr>
 	</center>
 	<script type="text/javascript" src="../donationScripts/DonationWallHead.js"></script>
 </body>

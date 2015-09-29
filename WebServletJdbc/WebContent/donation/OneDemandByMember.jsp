@@ -16,7 +16,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <!-- 標頭 css -->
 <link rel="stylesheet" href="../donationStyles/DonationHeader.css">
@@ -38,7 +37,7 @@
 
 			<a href="#" class="brand-logo center">問與答</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
-				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons" id="pleaseLogin">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
 						<!-- 有登入時，會有學校頁面或者個人頁面 -->
 						<c:if test="${not empty LoginOK}">
@@ -139,7 +138,7 @@
 											lists = xhr.responseText;
 											// 											alert("新增購物車品項一");
 										} else {
-											alert("something is wrong!");
+											// 											alert("something is wrong!");
 										}
 									}
 								});
@@ -216,7 +215,6 @@
 				</c:forEach>
 			</ul>
 		</div>
-		<hr>
 
 		<script>
 			var addBtn = document.getElementById("send-message");
@@ -244,7 +242,7 @@
 					if (xhr.status == 200) {
 						lists = xhr.responseText;
 						datas = JSON.parse(lists);
-						// 						alert("ms " + datas);
+						//alert(datas);
 						var memberId = datas[0];
 						var memberMessage = datas[1];
 						var memberMessageTime = datas[2];
@@ -259,7 +257,7 @@
 						var xi1textx = document.createTextNode("help");
 
 						var xb1x = document.createElement("b");
-						var xb1textx = document.createTextNode(memberId + " :");
+						var xb1textx = document.createTextNode("我"+" :");
 
 						var xdiv1textx = document.createTextNode(memberMessage);
 
@@ -306,7 +304,9 @@
 						}(jQuery));
 
 					} else {
-						alert("something is wrong!");
+						Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>請登入帳號</span>', 3000, 'rounded');
+						$("#pleaseLogin").trigger("click");
+						// alert("something is wrong!");
 					}
 				}
 			}

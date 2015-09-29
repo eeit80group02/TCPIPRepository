@@ -18,6 +18,8 @@
 	});
 
 	// DonationBillFinal
+	$("#txtGtel").val("0266318168");
+	$("#txtGmobile").val("0911223344");
 	$("#OneClickDonationBillFinal").click(function() {
 		// 寄件人(會員方)
 		$("#txtOcname").val("簡小文");
@@ -27,10 +29,8 @@
 		$("#txtOemail").val("dora@gmail.com");
 
 		// 收件人(學校方)
-		$("#txtGtel").val("02040204");
-		$("#txtGmobile").val("0902022022");
-		$("#txtPkgexp").val("跳繩和墊板");
 
+		$("#txtPkgexp").val("跳繩和墊板");
 		$("#test2 #textRightLable01").attr("class", "active");
 		$("#test2 #textRightLable02").attr("class", "active");
 		$("#test2 #textRightLable03").attr("class", "active");

@@ -37,6 +37,7 @@ public class FullProjBean implements Serializable
 	
 	private String base64String;					// base64字串
 	private MemberBean memberBean;					// 會員資料
+	private SchoolBean schoolBean;				    // 學校資料
 	private Map<String,List<ParticipatorBean>> participatorMap;	// 參加人集合<待審核 & 已通過>
 	
 	public FullProjBean()
@@ -331,6 +332,16 @@ public class FullProjBean implements Serializable
 	public void setParticipatorMap(Map<String,List<ParticipatorBean>> participatorMap)
 	{
 		this.participatorMap = participatorMap;
+	}
+
+	public SchoolBean getSchoolBean()
+	{
+		return schoolBean;
+	}
+
+	public void setSchoolBean(SchoolBean schoolBean)
+	{
+		this.schoolBean = schoolBean;
 	}
 
 	@Override

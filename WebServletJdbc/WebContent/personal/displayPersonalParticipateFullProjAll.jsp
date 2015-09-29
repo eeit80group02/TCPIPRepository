@@ -28,11 +28,74 @@
 
 <main>
 	<!-- 主要版面 -->
+<div class="row" id="mainboard">
+	<div class="col l8 offset-l2 indigo lighten-5">
+		<div class="row center-align card-panel blue-text" style="font-size:4em;">參加過的完整計畫</div>
+		<div class="row card-panel" >
+			<table class="bordered highlight centered">
+				<thead style="font-size:2em;">
+					<tr>
+						<th>完整計畫名稱</th>
+						<th>活動時間</th>
+						<th>活動狀態</th>
+						<th>link</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="bean" items="${participator}">
+						<tr>
+							<td>${bean.fullProjBean.title}</td>
+							<td>
+								<fmt:formatDate value="${bean.fullProjBean.activityStartTime}" pattern="yyyy-MM-dd"/>
+								~
+								<fmt:formatDate value="${bean.fullProjBean.activityEndTime}" pattern="yyyy-MM-dd"/>
+							</td>
+							<td>
+								${bean.fullProjBean.projStatus}
+							</td>
+						
+							<td>
+								<!-- 連結都還未給 -->
+								<c:if test="${bean.fullProjBean.projStatus.equals('招募中')}">
+									<a href="${path}" class="btn-large yellow lighten-5 black-text">
+										任務板
+									</a>
+								</c:if>
+								<c:if test="${bean.fullProjBean.projStatus.equals('已完成')}">
+									<a href="${path}" class="btn-large yellow lighten-5 black-text">
+										活動花序
+									</a>
+								</c:if>		
+								
+							</td>
+						</tr>
+					</c:forEach>			
+				</tbody>
+			</table>			
+		</div>
+	</div>
+</div>
+<!-- 主要版面 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 主要版面 -->
 	<div class="row" id="mainboard">
 		<!-- 6欄置中 -->
 		<div class="col l6 offset-l3">
-		<div class="row center-align card-panel blue-text" style="font-size:4em;">參予過的完整計畫</div>
+		<div class="row center-align card-panel blue-text" style="font-size:4em;">參加過的完整計畫</div>
 		<c:forEach var="bean" items="${participator}">
+			${bean.fullProjBean.fullProjId}暫時顯示編號 最後DEMO應該拿掉 只留名稱<br>
 			${bean.fullProjBean.title}<br>
 			<fmt:formatDate value="${bean.fullProjBean.activityStartTime}" pattern="yyyy-MM-dd"/><br>
 			<fmt:formatDate value="${bean.fullProjBean.activityEndTime}" pattern="yyyy-MM-dd"/><br>

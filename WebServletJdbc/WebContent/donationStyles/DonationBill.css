@@ -175,7 +175,6 @@ select:disabled {
 	color: #3CB371;
 	text-align: left;
 	font-size: 1.2em;
-	font-weight: bold;
 }
 
 #test2 .hrefToWebsite {
@@ -209,25 +208,13 @@ select:disabled {
 	color: white;
 }
 
-#result {
+#resultDiv {
 	padding: 10px;
 	height: 50px;
 }
 
 /* Modal 專用 */
-#test1 #modalNote01 .modal-content {
-	color: black;
-	text-align: left;
-	font-size: 1.4em;
-}
-
-#test2 .modal-content {
-	color: black;
-	text-align: left;
-	font-size: 1.4em;
-}
-
-#test2 .modal-content {
+.modal-content {
 	color: black;
 	text-align: left;
 	font-size: 1.2em;
