@@ -54,6 +54,8 @@
 									<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 									<li class="divider"></li>
 									<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+									<li class="divider"></li>
+									<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 								</c:if>
 							</c:if>
 							<li class="divider"></li>
@@ -142,17 +144,13 @@
 
 					<!-- 需求說明(為什麼需要這項物資) -->
 					<div class="input-field col m12 s12">
-						<br>
-						<input type='text' id="demandContent" name='demandContent' value='${OneDemand.demandContent}' class="materialize-textarea" required="required"></input>
-						<label for="demandContent" class="" id="textLable05"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求說明&nbsp;<i class="tiny material-icons" id="requiredStar05">star</i></span></a></label>
+						<br> <input type='text' id="demandContent" name='demandContent' value='${OneDemand.demandContent}' class="materialize-textarea" required="required"></input> <label for="demandContent" class="" id="textLable05"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="說明為什麼需要這項物資"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;需求說明&nbsp;<i class="tiny material-icons" id="requiredStar05">star</i></span></a></label>
 					</div>
 				</div>
 
 				<!-- 備註 -->
 				<div class="input-field col s12 m12 l12" id="bottomDiv">
-					<br>
-					<input type='text' id="remark" name='remark' value='${OneDemand.remark}' class="materialize-textarea"></input>
-					<label for="remark" class="" id="textLable06"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
+					<br> <input type='text' id="remark" name='remark' value='${OneDemand.remark}' class="materialize-textarea"></input> <label for="remark" class="" id="textLable06"><a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="補充說明"><span class="DetailTitle"><i class="tiny material-icons">create</i>&nbsp;備註&nbsp;</span></a></label>
 					<button type="submit" id="sendMessage" name='hidden' value='update' class="btn btn-small btn-floating">
 						<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
 					</button>

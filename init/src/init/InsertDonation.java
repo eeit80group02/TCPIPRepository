@@ -311,6 +311,33 @@ import global.GlobalService;
 					e.printStackTrace();
 				}
 				
+				// 第十一筆資料
+				// ======================================================================
+				pstmt.setInt(1, 11601);// schoolId
+				pstmt.setString(2, "否");// donationStatus
+				pstmt.setString(3, "運貨用板車");// supplyName
+				pstmt.setInt(4, 40);// originalDemandNumber
+				pstmt.setString(5, "台");// originalDemandUnit
+				pstmt.setInt(6, 40);// demandNumber
+				pstmt.setString(7, "長度不超過150公分");// size
+				pstmt.setString(8, "搬運大型物品時需要，例如：講桌");// demandContent
+				pstmt.setString(9, "不拘");// supplyStatus
+				sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-08-16 17:55").getTime()));
+				pstmt.setTimestamp(11,new java.sql.Timestamp(sdf.parse("2015-11-16 17:55").getTime()));
+				pstmt.setString(15, "");// remark
+		
+				file = new File("image/donation/Goods01.jpg");
+				try (FileInputStream fis = new FileInputStream(file);) {
+					pstmt.setString(12, file.getName());// imageName
+					pstmt.setBinaryStream(13, fis, file.length());// imageFile
+					pstmt.setLong(14, file.length());// imageLength
+		
+				} catch (Exception e) 
+				{
+					e.printStackTrace();
+				}
+				
 				}
 				catch(Exception e)
 				{

@@ -86,6 +86,8 @@
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
@@ -124,7 +126,7 @@
 				<div id="test3" class="col s12">
 					<div class="col s12">
 						<div class="warnText">
-							<span>確認捐獻物品明細</span>
+							<span>感謝您的捐獻</span>
 							<!-- 操作小叮嚀 start -->
 							<button type="button" data-target="modalNote04" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
 								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="large material-icons">local_library</i></a>
@@ -188,7 +190,6 @@
 					</button>
 
 				</div>
-
 
 			</div>
 		</div>
