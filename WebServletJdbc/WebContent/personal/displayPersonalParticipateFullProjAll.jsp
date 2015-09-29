@@ -57,7 +57,10 @@
 							<td>
 								<!-- 連結都還未給 -->
 								<c:if test="${bean.fullProjBean.projStatus.equals('招募中')}">
-									<a href="${path}" class="btn-large yellow lighten-5 black-text">
+									<c:url var="mission" value="/draganddrop.jsp" >
+										<c:param name="fullProjId" value="${bean.fullProjBean.fullProjId}" />
+									</c:url>
+									<a href="${mission}" class="btn-large yellow lighten-5 black-text">
 										任務板
 									</a>
 								</c:if>

@@ -36,7 +36,7 @@ import model.service.FullProjService;
 
 @WebServlet("/fullProj.do")
 @MultipartConfig(location = "",
-				 maxFileSize = 1024 * 1024 * 2)
+				 maxFileSize = 1024 * 1024 * 1024)
 public class FullProjServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
