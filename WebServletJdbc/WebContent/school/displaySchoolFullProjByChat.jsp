@@ -43,7 +43,7 @@
 					<c:forEach var="bean" items="${fullProj}">
 						<tr>
 							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
-							<td>${bean.memberBean.lastName}</td>
+							<td>${bean.memberBean.lastName}${bean.memberBean.firstName}</td>
 							<td><fmt:formatDate value="${bean.activityStartTime}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${bean.activityEndTime}" pattern="yyyy-MM-dd"/></td>
 								<c:url value="/fullProj.do" var="path">
 									<c:param name="type" value="displayFullProjByChat" />

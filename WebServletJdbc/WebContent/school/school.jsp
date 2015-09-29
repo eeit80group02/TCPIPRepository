@@ -43,7 +43,7 @@
 							</h3>
 							<div class="row divider red" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
-								<a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />" class="col l12 btn-large yellow lighten-5 black-text" >
+								<a href="<c:url value="/fullProj.do?type=displayPersonalByChat" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
 										我申請的初步計畫
 									</span>
@@ -85,13 +85,13 @@
 									</span>
 								</a>
 							</div>					
-							<div class="row">
-								<a href="#!" class="col l12 btn-large yellow lighten-5 black-text" >
-									<span class="fontStyle">
-											待洽談
-									</span>
-								</a>											
-							</div>
+<!-- 							<div class="row"> -->
+<!-- 								<a href="#!" class="col l12 btn-large yellow lighten-5 black-text" > -->
+<!-- 									<span class="fontStyle"> -->
+<!-- 											待洽談 -->
+<!-- 									</span> -->
+<!-- 								</a>											 -->
+<!-- 							</div> -->
 						</div>						
 
 <!-- 						<div class="row"> -->
