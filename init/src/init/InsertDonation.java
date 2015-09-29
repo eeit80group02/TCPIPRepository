@@ -72,7 +72,7 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第三筆資料
+			// 第三筆資料(64632 臺中市 鐵山國小)
 			pstmt.setInt(1, 64632); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "奇異筆、麥克筆"); // 物資名稱
@@ -380,7 +380,7 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十五筆資料(154705 花蓮縣 縣立奇美國小)
+			// 第十五筆資料(154705 花蓮縣 奇美國小)
 			pstmt.setInt(1, 154705);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "血壓機");// supplyName
@@ -405,7 +405,7 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十六筆資料(154705 花蓮縣 縣立奇美國小)
+			// 第十六筆資料(154705 花蓮縣 奇美國小)
 			pstmt.setInt(1, 154705);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "延長線");// supplyName
@@ -604,7 +604,7 @@ public class InsertDonation {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
+
 			// 第二十四筆資料(74502 彰化縣 鹿港國中)
 			pstmt.setInt(1, 74502);// schoolId
 			pstmt.setString(2, "否");// donationStatus
@@ -619,7 +619,7 @@ public class InsertDonation {
 			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-27 10:58").getTime()));
 			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-27 10:58").getTime()));
 			pstmt.setString(15, "無");// remark
-			
+
 			file = new File("image/Donation/donation24.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(12, file.getName());// imageName
