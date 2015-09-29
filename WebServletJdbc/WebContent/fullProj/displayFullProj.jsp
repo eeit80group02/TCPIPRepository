@@ -81,9 +81,8 @@
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
 									<div>
-									<fmt:formatDate var="startTime" value="${fullProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
-									<fmt:formatDate var="endTime" value="${fullProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />									
-									${startTime} ~ ${endTime}							
+										<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd" /> ~ 
+										<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd" />									
 									</div>
 								</div>
 							</div>	
@@ -177,17 +176,6 @@
 					</div>
 				</div>
 
-<!-- 			<!-- 發問用按鈕 -->
-<%-- 			<c:if test="${LoginOK.beanName.equals('member')}"> --%>
-<%-- 				<c:if test="${LoginOK.memberId != fullProj.memberId}"> --%>
-<!-- 					<div class="fixed-action-btn" style="bottom: 45px; right: 24px;"> -->
-<!-- 						<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">提問</a> -->
-<!-- 					</div> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:if> --%>
-<!-- 			<!-- 發問用按鈕 -->
-
-
 				<div class="card-panel hoverable row" style="background-color:#FFFCEC">
 					<!-- 問與答 -->
 					<div class="row">
@@ -206,36 +194,11 @@
 						</c:if>
 					</div>
 
-<!-- 					<div id="discuss" class="row"> -->
-
-<!-- 					</div> -->
 					<!-- 問與答 -->					
 					<div class="row" id="questiondiv">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<div id="discuss" class="card-panel white">
 							<!-- 內容在jQuery -->
-								<!-- 問題 -->
-								
-								<!-- 問題 -->
-								<!-- 答案 -->
-<!-- 								<div class="row"> -->
-<!-- 									<div class="col l2"> -->
-<!-- 										<div class="btn green white-text"> -->
-<!-- 											<i class="material-icons">chat_bubble</i> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="col l10" style="font-size:1.6em;font-weight:600"> -->
-<!-- 										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情 -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-								<!-- 答案 -->
-
-<!-- 								<div class="row"> -->
-<!-- 									<a href="#replymodal" id="replybtn" class="col l2 btn-large right black-text center-align  green accent-1" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體;"> -->
-<!-- 										<i class="material-icons black-text" style="font-size:1.5em;vertical-align:bottom;">input</i> -->
-<!-- 										回覆  -->
-<!-- 									</a> -->
-<!-- 								</div> -->
 							</div>	
 						</div>
 					</div>					
@@ -297,9 +260,10 @@
 			    <div class="modal-content">
 			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我的<span class="red-text">回覆</span>是...</h4>
 			      <textarea id="relpyContent" rows="10" cols="40" style="height:10em;" name=""></textarea>
+			      <input id="projDiscussId"type="hidden" value="" />
 			    </div>
 			    <div class="modal-footer">
-			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
+			      <button id="reply" class=" modal-action modal-close btn-large red white-text" type="button" style="font-size:1.6em;font-weight:600;">送出</button>
 			    </div>
 			  </div>			
 			<!-- 回覆用modal -->
@@ -401,11 +365,31 @@
 				}
 			});
 			
+			$("#reply").on("click",function(){
+				if($("#relpyContent").val().trim().length < 10){
+					alert("留言必須大於10個字");
+				}else{
+					replyMessage();
+					$("#relpyContent").val("");
+				}
+			});
 			function postMessage(){
 				$.ajax({
 					"url":"<c:url value='/projDiscuss.do' />",
 					"type":"POST",
 					"data":{"type":"post","fullProjId":"${fullProj.fullProjId}","content":$("#content").val()},
+					"dataType" :"json",
+					"success":function(data){
+						displayMessage();
+					}
+				});
+			}
+			
+			function replyMessage(){
+				$.ajax({
+					"url":"<c:url value='/projDiscuss.do' />",
+					"type":"POST",
+					"data":{"type":"reply","projDiscussId":$("#projDiscussId").val(),"content":$("#relpyContent").val()},
 					"dataType" :"json",
 					"success":function(data){
 						displayMessage();
@@ -421,7 +405,7 @@
 					"success":function(data){
 					 // data => Object
 					 // console.log(data);
-// 						$("#discuss > div").remove();
+						$("#discuss > div").remove();
 						$.each(data.result,function(index,value){
 // 							data.result => Array[]
 // 							Array[index] => Object
@@ -434,8 +418,13 @@
 		  								  "<div align='right'><small>" + value.questionMemberTime + "</small></div></div>";
 		  					
 		  					if(value.answerMemberId == "null"){
-		  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
-		  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
+		  						// 很奇怪的毛毛蟲問題
+		  						<c:if test="${LoginOK.beanName.equals('member')}">
+		  							<c:if test="${LoginOK.memberId == fullProj.memberId}">
+				  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
+				  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
+		  							</c:if>
+		  						</c:if>
 
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
@@ -446,35 +435,16 @@
   								  		   "<div align='right'><small>" + value.answerMemberTime + "</small></div></div>";
 		  					}
 		  								   
-// 		 									if(value.answerMemberId == "null"){
-// 	 										console.log(value.projDiscusId);
-// 	 										memberContent += "<div align='right'>" +
-// 	 														 "<form action='<c:url value='/projDiscuss.do' />' method='post'>" +
-// 	 														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
-// 	 														 "<input type='hidden' name='type' value='reply'>" + 
-// 	 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
-// 	 									}
 // 		  					 console.log($("#projDiscuss" + value.projDiscussId));
 		  								   
 	 						var contentDiv = $("<div class='row'></div>").html(content);
 	 						$("#discuss").append(contentDiv);
 	 						$("#projDiscuss"+value.projDiscussId).leanModal();
-		  				// 可以正常跑
-// 		  					<c:if test="${LoginOK.beanName.equals('member')}">
-// 								<c:if test="${LoginOK.memberId == fullProj.memberId}">
-// 									if(value.answerMemberId == "null"){
-// 										console.log(value.projDiscusId);
-// 										memberContent += "<div align='right'>" +
-// 														 "<form action='<c:url value='/projDiscuss.do' />' method='post'>" +
-// 														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
-// 														 "<input type='hidden' name='type' value='reply'>" + 
-// 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
-// 									}
-// 								</c:if>
-//  							</c:if>
-		  										
-							
-
+							$("#projDiscuss"+value.projDiscussId).on("click",function(){
+// 								var str = $(this).prop("id").substring(11);
+								$("#projDiscussId").val($(this).prop("id").substring(11));
+// 								console.log(str);
+							});
 						});
 					}
 				});

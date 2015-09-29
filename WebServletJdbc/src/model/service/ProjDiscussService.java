@@ -87,9 +87,30 @@ public class ProjDiscussService
 		}
 		return jsonObject;
 	}
+	
+	public JSONObject replyDiscuss(ProjDiscussBean bean)
+	{
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("result","failure");
+		if(bean != null)
+		{
+			// 先查詢
+			ProjDiscussBean temp = projDiscusDAO.findByPrimaryKey(bean.getProjDiscussId());
+			temp.setAnswerMemberId(bean.getAnswerMemberId());
+			temp.setAnswerMemberContent(bean.getAnswerMemberContent());
+			temp.setAnswerMemberTime(new java.util.Date(System.currentTimeMillis()));
+			
+			bean = projDiscusDAO.update(temp);
+			if(bean != null)
+			{
+				jsonObject.put("result","success");
+			}
+		}
+		return jsonObject;
+	}
+	
 	public static void main(String[] args)
 	{
 		
 	}
-
 }

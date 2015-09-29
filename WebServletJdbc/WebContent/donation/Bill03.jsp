@@ -122,6 +122,36 @@
 
 				<!-- 第三頁 -->
 				<div id="test3" class="col s12">
+					<div class="col s12">
+						<div class="warnText">
+							<span>確認捐獻物品明細</span>
+							<!-- 操作小叮嚀 start -->
+							<button type="button" data-target="modalNote04" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
+								<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="large material-icons">local_library</i></a>
+							</button>
+						</div>
+						<!-- Modal Structure -->
+						<div id="modalNote04" class="modal modal-fixed-footer">
+							<div class="modal-content">
+								<h4>小叮嚀：</h4>
+								<ol>
+									<li><a href="https://www.e-can.com.tw/index.aspx" target="_blank" class="hrefToWebsite">宅配通官方網站</a></li>
+									<li><a href="https://www.e-can.com.tw/reservationUNMember_edit.aspx" target="_blank" class="hrefToWebsite">查詢訂單</a></li>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">list</i></a>&nbsp;點擊左鍵，回到捐獻明細。
+									</li>
+									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">card_giftcard</i></a>&nbsp;點擊左鍵，回到捐獻牆。
+									</li>
+								</ol>
+							</div>
+							<div class="modal-footer">
+								<a href="#!" class=" modal-action modal-close btn btn-tiny btn-floating"><i class="tiny material-icons">check</i></a>
+							</div>
+						</div>
+						<!-- 操作小叮嚀 end -->
+
+						<br>
+					</div>
+
 
 					<form action="">
 						<table id="donationBill04" class="responsive-table">
@@ -151,7 +181,7 @@
 						<a href="<c:url value="/donation/demand.do?type=FindGoods" />" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻背包"><i class="small material-icons">card_giftcard</i></a>
 					</button>
 					<button type="button" id="page03ToPage02" class="btn btn-small btn-floating">
-						<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻清單"><i class="small material-icons">list</i></a>
+						<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="到捐獻明細"><i class="small material-icons">list</i></a>
 					</button>
 
 				</div>
