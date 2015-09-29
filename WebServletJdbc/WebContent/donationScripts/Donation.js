@@ -254,9 +254,4 @@ $(function() {
 		}
 		return false;
 	});
-
-	/** 09/28 加入 * */
-	$("#donateTotal").one('mouseover', function() {
-		Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>登入後，可進行捐獻</span>', 5000, 'rounded');
-	});
 });

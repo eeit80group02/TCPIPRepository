@@ -136,9 +136,12 @@
 								<h4>小叮嚀：</h4>
 								<ol>
 									<li><a href="https://www.e-can.com.tw/index.aspx" target="_blank" class="hrefToWebsite">宅配通官方網站</a></li>
+									<br>
 									<li><a href="https://www.e-can.com.tw/reservationUNMember_edit.aspx" target="_blank" class="hrefToWebsite">查詢訂單</a></li>
+									<br>
 									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">list</i></a>&nbsp;點擊左鍵，回到捐獻明細。
 									</li>
+									<br>
 									<li>對著&nbsp;<a class="btn btn-tiny btn-floating"><i class="tiny material-icons">card_giftcard</i></a>&nbsp;點擊左鍵，回到捐獻牆。
 									</li>
 								</ol>
