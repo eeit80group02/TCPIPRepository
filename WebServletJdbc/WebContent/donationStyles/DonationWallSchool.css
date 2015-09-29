@@ -12,12 +12,12 @@
 
 #gallery {
 	/*整塊大塊的捐獻牆*/
+	
 	padding: 0px;
-	margin: 0px;
-	min-width: 460px;
-	width: 100%;
-	min-height: 450px;
-	float: left;
+	margin: 0px auto;
+	max-width: 795px;
+	min-width: 400px;
+	min-height: 400px;
 }
 
 .gallery li {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -98,7 +99,7 @@
 		<div id="donateBody">
 			<br>
 			<!-- 操作小叮嚀 start -->
-			<button type="button" data-target="modalNote01" class="btn btn-small btn-floating modal-trigger">
+			<button type="button" data-target="modalNote01" class="btn light-blue darken-4 btn-large btn-floating modal-trigger">
 				<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="小叮嚀"><i class="small material-icons">local_library</i></a>
 			</button>
 			<!-- Modal Structure -->
@@ -172,7 +173,8 @@
 																<tr>
 																	<td>${initem.name}</td>
 																	<td>${initem.donationAmount}</td>
-																	<td>${initem.donationOederDate}</td>
+<%-- 																	<td>${initem.donationOederDate}</td> --%>
+																	<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																</tr>
 															</c:when>
 														</c:choose>
@@ -194,7 +196,7 @@
 										</button>
 									</span>
 									<!-- 中 icon -->
-									<span class="midIcon"> <a href="#" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
+									<span class="midIcon"> <a href="<c:url value='demand.do?type=UpdateOneDemand&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
 									</span>
 
 									<!-- 右 icon -->
@@ -238,6 +240,8 @@
 																<td>捐獻時間</td>
 															</tr>
 														</thead>
+														<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm" /></td>
+														
 														<tbody>
 															<c:forEach var='initem' items='${OneAllDetails}'>
 																<c:choose>
@@ -245,7 +249,8 @@
 																		<tr>
 																			<td>${initem.name}</td>
 																			<td>${initem.donationAmount}</td>
-																			<td>${initem.donationOederDate}</td>
+<%-- 																			<td>${initem.donationOederDate}</td> --%>
+																			<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																		</tr>
 																	</c:when>
 																</c:choose>
@@ -299,11 +304,6 @@
 										<div class="footIcin">
 
 											<!-- 捐獻記錄 start -->
-											<span class="leftIcon"> <!-- data-target 跟底下的 id 要一樣 -->
-												<button type="button" data-target="modalNote03${vs.index}" class="btn btn-small btn-floating modal-trigger">
-													<i class="small material-icons">assignment</i>
-												</button>
-											</span>
 											<!-- Modal Structure -->
 											<div id="modalNote03${vs.index}" class="modal modal-fixed-footer">
 												<div class="modal-content">
@@ -323,7 +323,8 @@
 																		<tr>
 																			<td>${initem.name}</td>
 																			<td>${initem.donationAmount}</td>
-																			<td>${initem.donationOederDate}</td>
+<%-- 																			<td>${initem.donationOederDate}</td> --%>
+																		<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																		</tr>
 																	</c:when>
 																</c:choose>

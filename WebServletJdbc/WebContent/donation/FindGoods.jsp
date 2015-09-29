@@ -177,7 +177,7 @@
 							Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請使用會員帳號登入，可進行捐獻</span>', 5000, 'rounded');
 						});
 						$("#donateTotal").mousedown(function() {
-							alert("請登入會員帳號");
+							alert("由首頁登入會員帳號");
 							$("#TCPIP").trigger("click");
 						});
 					</script>
