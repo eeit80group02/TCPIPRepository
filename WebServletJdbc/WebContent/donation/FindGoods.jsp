@@ -86,6 +86,8 @@
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
@@ -191,6 +193,10 @@
 						$("#donateTotal").one('mouseover', function() {
 							Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>登入後，可進行捐獻</span>', 5000, 'rounded');
 							$("#pleaseLogin").trigger("click");
+						});
+						$("#donateTotal").mousedown(function() {
+							alert("由首頁登入會員帳號");
+							$("#TCPIP").trigger("click");
 						});
 					</script>
 				</c:when>

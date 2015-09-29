@@ -148,7 +148,7 @@ $(window).load(function() {
 			}
 		} else {
 			// 我成功
-			$("#failResult").text("");
+			$("#failResult").text("，感謝您的捐獻，點擊下一步完成操作！");
 			$("#btnSend").css("display", "none");
 			$("#page02Next").css("display", "inline");
 		}

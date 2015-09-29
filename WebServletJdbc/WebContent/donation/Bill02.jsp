@@ -92,6 +92,8 @@
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
@@ -442,7 +444,7 @@
 									$('#ddlCity').on("change", function() {
 										$('#ddlArea option').remove();
 										$('#txtPostno').attr("value", "");
-										$('#ddlArea').append("<option value=''>請選擇區域別</option>");
+										$('#ddlArea').append("_$tag____________請選擇區域別_$tag____");
 										$.ajax({
 											url : '../GetCityServlet',
 											type : "post",
@@ -453,7 +455,7 @@
 											success : function(result) {
 												var areas = (typeof result.d) == 'string' ? eval('(' + result.d + ')') : result.d;
 												for (var i = 0; i < areas.length; i++) {
-													$('#ddlArea').append("<option value='" + areas[i].Zip + "'>" + areas[i].Name + "</option>");
+													$('#ddlArea').append("_$tag________________________________" + areas[i].Name + "_$tag____");
 												}
 											}
 										});

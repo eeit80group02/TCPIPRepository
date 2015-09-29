@@ -42,6 +42,7 @@
 		<div class="nav-wrapper">
 			<ul id="nav-mobile1" class="left hide-on-med-and-down">
 				<li><a href="../index.jsp"><img alt="TCPIP" title="TCPIP" id="TCPIP" src="../images/DonationHeader01.png"></a></li>
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 			<a href="#" class="brand-logo center">管理物資</a>
 
@@ -74,6 +75,8 @@
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
@@ -173,7 +176,7 @@
 																<tr>
 																	<td>${initem.name}</td>
 																	<td>${initem.donationAmount}</td>
-<%-- 																	<td>${initem.donationOederDate}</td> --%>
+																	<%-- 																	<td>${initem.donationOederDate}</td> --%>
 																	<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																</tr>
 															</c:when>
@@ -241,7 +244,7 @@
 															</tr>
 														</thead>
 														<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm" /></td>
-														
+
 														<tbody>
 															<c:forEach var='initem' items='${OneAllDetails}'>
 																<c:choose>
@@ -249,7 +252,7 @@
 																		<tr>
 																			<td>${initem.name}</td>
 																			<td>${initem.donationAmount}</td>
-<%-- 																			<td>${initem.donationOederDate}</td> --%>
+																			<%-- 																			<td>${initem.donationOederDate}</td> --%>
 																			<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																		</tr>
 																	</c:when>
@@ -323,8 +326,8 @@
 																		<tr>
 																			<td>${initem.name}</td>
 																			<td>${initem.donationAmount}</td>
-<%-- 																			<td>${initem.donationOederDate}</td> --%>
-																		<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
+																			<%-- 																			<td>${initem.donationOederDate}</td> --%>
+																			<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																		</tr>
 																	</c:when>
 																</c:choose>
