@@ -24,8 +24,8 @@
 		// 寄件人(會員方)
 		$("#txtOcname").val("簡小文");
 		$("#txtOaddress").val("臺北市大安區復興南路一段");
-		$("#txtOtel").val("02020202");
-		$("#txtOmobile").val("0909090909");
+		$("#txtOtel").val("0222815416");
+		$("#txtOmobile").val("0916075266");
 		$("#txtOemail").val("dora@gmail.com");
 
 		// 收件人(學校方)
