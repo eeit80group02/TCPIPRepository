@@ -31,40 +31,40 @@
 	
 	<!-- 內容 -->
 	<main>
-		<div class="row">
+		<div class="row" id="mainboard">
 		<!-- 側邊篩選條件欄 -->
-			<div class="col l3 offset-l1 z-depth-3 hide-on-med-and-down"
-				style="position: absolute; top: 166; padding: 0" id="sidebar">
-				<div class="collection"
-					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-					<ul style="margin: 0;">
-						<li class="collection-header collection-item center-align"
-							style="padding: 0;"><h5 class="teal accent-2"
-								style="margin: 0; display: block; padding: 15px 0 15px 0;">排序</h5></li>
-						<li><a href="#!" class="collection-item">即將結束</a></li>
-						<li><a href="#!" class="collection-item">活動時間</a></li>
-						<li><a href="#!" class="collection-item">需求人數</a></li>
-						<li><a href="#!" class="collection-item">已募集人數</a></li>
-					</ul>
-				</div>
-				<div class="collection"
-					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;">
-					<ul style="margin: 0;">
-						<!-- 提示[篩選] -->
-						<li class="collection-header collection-item center-align"
-							style="padding: 0;"><h5 class="teal accent-2"
-								style="margin: 0; display: block; padding: 15px 0 15px 0;">篩選</h5></li>
-						<li><a href="#!" class="collection-item">北部地區</a></li>
-						<li><a href="#!" class="collection-item">中部地區</a></li>
-						<li><a href="#!" class="collection-item">南部地區</a></li>
-						<li><a href="#!" class="collection-item">東部地區</a></li>
-					</ul>
-				</div>
-			</div>
+<!-- 			<div class="col l3 offset-l1 z-depth-3 hide-on-med-and-down" -->
+<!-- 				style="position: absolute; top: 166; padding: 0" id="sidebar"> -->
+<!-- 				<div class="collection" -->
+<!-- 					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;"> -->
+<!-- 					<ul style="margin: 0;"> -->
+<!-- 						<li class="collection-header collection-item center-align" -->
+<!-- 							style="padding: 0;"><h5 class="teal accent-2" -->
+<!-- 								style="margin: 0; display: block; padding: 15px 0 15px 0;">排序</h5></li> -->
+<!-- 						<li><a href="#!" class="collection-item">即將結束</a></li> -->
+<!-- 						<li><a href="#!" class="collection-item">活動時間</a></li> -->
+<!-- 						<li><a href="#!" class="collection-item">需求人數</a></li> -->
+<!-- 						<li><a href="#!" class="collection-item">已募集人數</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 				<div class="collection" -->
+<!-- 					style="margin: 0 auto; font-family: 微軟正黑體; font-weight: 900;"> -->
+<!-- 					<ul style="margin: 0;"> -->
+<!-- 						提示[篩選] -->
+<!-- 						<li class="collection-header collection-item center-align" -->
+<!-- 							style="padding: 0;"><h5 class="teal accent-2" -->
+<!-- 								style="margin: 0; display: block; padding: 15px 0 15px 0;">篩選</h5></li> -->
+<!-- 						<li><a href="#!" class="collection-item">北部地區</a></li> -->
+<!-- 						<li><a href="#!" class="collection-item">中部地區</a></li> -->
+<!-- 						<li><a href="#!" class="collection-item">南部地區</a></li> -->
+<!-- 						<li><a href="#!" class="collection-item">東部地區</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 			
 			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
 			<!-- 初步計畫列表 -->
-			<div class="col l8 offset-l4" id="projlist">
+			<div class="col l8 offset-l2" id="projlist">
 				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
@@ -121,25 +121,13 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
-			//固定側邊欄所在位置
-			$(window).on("scroll", function() {
-				if ($(this).scrollTop() <= $("#projlist").position().top) {
-					$("#sidebar").css({
-						"position" : "absolute",
-						"top" : $("#projlist").position().top
-					});
-				} else {
-					$("#sidebar").css({
-						"position" : "fixed",
-						"top" : 0
-					});
-				}
-			})
+
+			//main board
+			$("#mainboard").css("min-height","80vh");
+			
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
-			//註冊modal事件
-			$(".modal-trigger").leanModal();
 			//觸發卡片翻轉事件
 			$(".touche").each(function() {
 				$(this).mouseover(function() {
@@ -149,16 +137,12 @@
 					$(".card-title", this).trigger("click");
 				})
 			})
-			//footer中連結的文字大小
-			$("a").css("font-size", "1.2em");
-			//提示區塊的按鈕
-			$(".projinfos").css("margin", "0px auto");
 			//navagation上logo的高度
 			$("img[title='TCPIP']").attr("height", "70");
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "310px");
+			$(".card").css("width", "380px");
 		})
 	</script>
 	<script>

@@ -28,14 +28,14 @@
 	<div class="row" id="mainboard">
 		
 		<!-- 篩選條件置頂 -->
-		<div class="row">
-				<div class="col l12 center-align">
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">北部地區</button>
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">中部地區</button>
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">南部地區</button>
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">東部地區</button>
-				</div>
-		</div>		
+<!-- 		<div class="row"> -->
+<!-- 				<div class="col l12 center-align"> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">北部地區</button> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">中部地區</button> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">南部地區</button> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">東部地區</button> -->
+<!-- 				</div> -->
+<!-- 		</div>		 -->
 		
 		<!-- 8欄置中 -->
 		<div class="col l10 offset-l1">
