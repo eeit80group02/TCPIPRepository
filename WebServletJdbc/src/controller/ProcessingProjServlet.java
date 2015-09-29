@@ -262,7 +262,7 @@ public class ProcessingProjServlet extends HttpServlet
 		{
 			String contextPath = request.getContextPath();
 			
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/primaryProj.do?type=displayAll"));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/primaryProj/submitsuccess.jsp"));
 			return;
 		}
 		else

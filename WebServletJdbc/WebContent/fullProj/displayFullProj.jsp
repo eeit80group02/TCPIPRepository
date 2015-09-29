@@ -230,24 +230,48 @@
 			    	<c:if test="${LoginOK.memberId != fullProj.memberId && not flag}">
 					    <form id="participator" action="<c:url value="/participator.do" />" method="post">
 							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-							<input type="hidden" name="startTime" value="${u}">
-							<input type="hidden" name="endTime" value="${endTime}">
+							<input type="hidden" name="startTime" value="<fmt:formatDate value='${fullProj.activityStartTime}' pattern="yyyy-MM-dd" />">
+							<input type="hidden" name="endTime" value="<fmt:formatDate value='${fullProj.activityEndTime}' pattern="yyyy-MM-dd" />">
 							<input type="hidden" name="type" value="participate">
 							<input id="participatorSubmit" class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="button" value="加入活動" >			
 						</form>
 			    	</c:if>
 			    </c:if>
 			</div>
-			<div>
-				<form action="<c:url value="/draganddrop.jsp" />" method="get">
-					<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
-					<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
-						<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
-						<span style="width:100%;">任務板</span>
-					</button>
-				</form>
-			</div>	
+			
+			<!-- 任物版藏起來 參加者可看見 -->
+			<c:if test="${LoginOK.beanName.equals('member')}">
+				<c:forEach var="participattor" items="${fullProj.participatorMap.pass}">
+					<c:if test="${participattor.memberId == LoginOK.memberId}">
+						<div>
+							<form action="<c:url value="/draganddrop.jsp" />" method="get">
+								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+			<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
+								<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
+									<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
+									<span style="width:100%;">任務板</span>
+								</button>
+							</form>
+						</div>	
+					</c:if>
+				</c:forEach>
+			</c:if>
+			
+			<!-- 任物版藏起來學校可看見 -->
+			<c:if test="${LoginOK.beanName.equals('school')}">
+				<c:if test="${fullProj.schoolId == LoginOK.schoolId}">
+					<div>
+						<form action="<c:url value="/draganddrop.jsp" />" method="get">
+							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+		<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
+							<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
+								<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
+								<span style="width:100%;">任務板</span>
+							</button>
+						</form>
+					</div>	
+				</c:if>
+			</c:if>
 			
 		</div>	
 	</div>

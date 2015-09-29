@@ -51,7 +51,7 @@
 						</div>
 						<div class="row">
 							<div class="row" style="font-family:微軟正黑體;font-size:2em;">密碼</div>
-							<input class="row" type="text" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error" style="color:red;">${error.password}</span>
+							<input class="row" type="password" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error" style="color:red;">${error.password}</span>
 						</div>
 						<input type="hidden" name="type" value="member">
 						<div class="row"  style="font-family:微軟正黑體;font-size:1.3em;font-weight:600;">
@@ -73,11 +73,11 @@
 					<form action="<c:url value="/LoginServlet.do" />" method="post">
 						<div class="row">
 							<div class="row" style="font-family:微軟正黑體;font-size:2em;">學校帳號</div>
-							<input class="row" type="text" name="account"  value="${param.account}" style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error">${error.account}</span>
+							<input class="row" type="text" name="account"  value="${param.account}" style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error" style="color:red;">${error.account}</span>
 						</div>
 						<div class="row">
 							<div class="row" style="font-family:微軟正黑體;font-size:2em;">學校密碼</div>
-							<input class="row" type="text" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error">${error.password}</span>
+							<input class="row" type="password" name="password" value="${param.password}"  style="font-family:微軟正黑體;font-size:1.5em;" /><span class="error" style="color:red;">${error.password}</span>
 						</div>
 						<input type="hidden" name="type" value="school">
 						<div class="row">

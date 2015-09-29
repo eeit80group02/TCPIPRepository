@@ -90,7 +90,7 @@ public class PrimaryProjDAOJdbc implements PrimaryProjDAO
 	}
 
 	// Select ALL ----->getAll(){}
-	private static final String SELECT_ALL = "SELECT primaryProjId,memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus FROM PrimaryProj";
+	private static final String SELECT_ALL = "SELECT primaryProjId,memberId,title,frontCoverName,frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus FROM PrimaryProj ORDER BY primaryProjId DESC";
 
 	@Override
 	public List<PrimaryProjBean> getAll()

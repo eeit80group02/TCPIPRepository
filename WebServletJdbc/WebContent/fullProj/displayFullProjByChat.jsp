@@ -342,13 +342,14 @@
 								<input type="hidden" name="memberId" value="${fullProj.memberId}"> 
 								<input type="hidden" name="schoolId" value="${fullProj.schoolId}"> 
 								<input type="hidden" name="title" value="${fullProj.title}"> 
+								<input type="hidden" name="location" value="${fullProj.location}"> 
 								<input type="hidden" name="projAbstract" value="${fullProj.projAbstract}"> 
 								<input type="hidden" name="content" value='${fullProj.content}'> 
 								<input type="hidden" name="activityStartTime" value="<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd"/>">
 								<input type="hidden" name="activityEndTime" value="<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd"/>">
 								<input type="hidden" name="estMember" value="${fullProj.estMember}"> 
 								<input type="hidden" name="budget" value="${fullProj.budget}"> 
-								<input type="hidden" name="orgArchitecture" value="${fullProj.orgArchitecture}"> 
+								<input type="hidden" name="orgArchitecture" value='${fullProj.orgArchitecture}'> 
 								<input type="hidden" name="base64String" value="${fullProj.base64String}">
 								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">補齊完整計畫</button>
 							</form>
