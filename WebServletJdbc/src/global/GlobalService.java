@@ -71,7 +71,6 @@ public class GlobalService
 	{
 		// ���瑼��
 		String mimeType = name.substring(name.lastIndexOf('.') + 1);
-		
 		if(mimeType.equalsIgnoreCase("JPG") || mimeType.equalsIgnoreCase("JPEG"))
 			return "data:image/jpeg;base64," + Base64.encodeBase64String(data);
 		else if(mimeType.equalsIgnoreCase("PNG"))
