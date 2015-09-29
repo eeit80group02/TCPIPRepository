@@ -190,7 +190,6 @@
 							<i class="tiny material-icons">help</i>&nbsp;<b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
-								<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
 							<br>${item.memberMessage}
 							<div class="talkTime">

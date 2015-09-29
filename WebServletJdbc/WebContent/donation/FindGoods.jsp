@@ -74,7 +74,7 @@
 						<li class="chooseDropdownItem" value="二手"><a href="<c:url value='search.do?supplyStatus=3'/>">二手</a></li>
 					</ul></li>
 
-				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons" id="pleaseLogin">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
 						<!-- 有登入時，會有學校頁面或者個人頁面 -->
 						<c:if test="${not empty LoginOK}">
@@ -158,6 +158,47 @@
 					</h3>
 				</div>
 			</div>
+
+			<!-- 有登入時，會有學校頁面或者個人頁面 -->
+			<c:if test="${not empty LoginOK}">
+				<c:if test="${LoginOK.beanName.equals('member')}">
+					<!-- 會員登入 -->
+					<script type="text/javascript">
+						$("#donateTotal").one('mouseover', function() {
+							Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>點我進行捐獻</span>', 3000, 'rounded');
+						});
+					</script>
+				</c:if>
+
+				<c:if test="${LoginOK.beanName.equals('school')}">
+					<!-- 學校登入 -->
+					<script type="text/javascript">
+						$("#donateTotal").one('mouseover', function() {
+							Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>請使用會員帳號登入，可進行捐獻</span>', 5000, 'rounded');
+						});
+						$("#donateTotal").mousedown(function() {
+							alert("請登入會員帳號");
+							$("#TCPIP").trigger("click");
+						});
+					</script>
+				</c:if>
+			</c:if>
+			<!-- 沒登入時，必須看到登入按鈕 -->
+			<c:choose>
+				<c:when test="${empty LoginOK}">
+					<!-- 沒登入時 -->
+					<script type="text/javascript">
+						$("#donateTotal").one('mouseover', function() {
+							Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>登入後，可進行捐獻</span>', 5000, 'rounded');
+							$("#pleaseLogin").trigger("click");
+						});
+					</script>
+				</c:when>
+				<c:otherwise>
+					<!-- 有登入時 -->
+				</c:otherwise>
+			</c:choose>
+
 		</div>
 
 	</center>
@@ -193,9 +234,9 @@
 			}
 		}
 		// 傳入已加入購物車的清單
-// 		var i = "${item}";
-// 		var data = $("#" + i + "");
-// 		deleteImage(data);
+		// 		var i = "${item}";
+		// 		var data = $("#" + i + "");
+		// 		deleteImage(data);
 
 		// there's the gallery and the trash
 		var $gallery = $("#gallery"), $trash = $("#trash"), $head5 = $(".ui-widget-header");
