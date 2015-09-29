@@ -134,10 +134,12 @@ public class ModifySchoolServlet extends HttpServlet {
 							System.out.println("請選擇正確格式");
 						}
 					} else {                  
-						File file = new File("C:\\Users\\Student\\git\\TCPIPRepository\\WebServletJdbc\\image\\school\\default.jpg");
-						is  = new FileInputStream(file);
-						frontCoverName = file.getName();
-						frontCoverLength = file.length();
+//						File file = new File("C:\\Users\\Student\\git\\TCPIPRepository\\WebServletJdbc\\image\\school\\default.jpg");
+//						is  = new FileInputStream(file);
+						is = getServletContext().getResourceAsStream("/images/default.jpg");
+						
+						frontCoverName = "default";
+						frontCoverLength = (long) GlobalService.convertInputStreamToByteArray(is).length;
 					}
 				}
 			}
