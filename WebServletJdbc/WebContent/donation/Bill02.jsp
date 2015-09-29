@@ -227,7 +227,7 @@
 													// 正規表示法找整數
 													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
-														setAddValue();
+														setSubValue();
 
 													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
