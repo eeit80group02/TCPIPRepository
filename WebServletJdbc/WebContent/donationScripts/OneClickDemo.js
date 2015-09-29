@@ -1,12 +1,12 @@
 (function($) {
 	// InsertDonateGoods
 	$("#OneClickInsertDonateGoods").click(function() {
-		$("#supplyName").val("2B 鉛筆/自動筆");
-		$("#originalDemandNumber").val("80");
-		$("#originalDemandUnit").val("枝");
-		$("#size").val("筆芯 0.5 mm");
-		$("#demandContent").val("作為獎品給學生，或提供給弱勢家庭的孩童");
-		$("#remark").val("盡量在學校正常開放時間寄送");
+		$("#supplyName").val("果皮刨刀");
+		$("#originalDemandNumber").val("6");
+		$("#originalDemandUnit").val("支");
+		$("#size").val("寬口握把式");
+		$("#demandContent").val("學校烹飪課上課用");
+		$("#remark").val("衛生、乾淨為主，盡量在學校正常開放時間寄送");
 
 		$("#textLable01").attr("class", "active");
 		$("#textLable02").attr("class", "active");
@@ -24,8 +24,8 @@
 		// 寄件人(會員方)
 		$("#txtOcname").val("簡小文");
 		$("#txtOaddress").val("臺北市大安區復興南路一段");
-		$("#txtOtel").val("02020202");
-		$("#txtOmobile").val("0909090909");
+		$("#txtOtel").val("0222815416");
+		$("#txtOmobile").val("0916075266");
 		$("#txtOemail").val("dora@gmail.com");
 
 		// 收件人(學校方)
