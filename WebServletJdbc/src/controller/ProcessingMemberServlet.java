@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -122,13 +123,13 @@ public class ProcessingMemberServlet extends HttpServlet{
 		}else{
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
-		
+		File image = new File(getServletContext().getRealPath("/images/fullProj/default.jpg"));
+		System.out.println(image);
 		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
 		bean.setSchoolDemandId(sDId);
 		System.out.println(bean);
-		bean = service.agree(bean);
-		System.out.println(bean);
+		bean = service.agree(bean,image);
 		if(bean!=null){
 			System.out.println("同意成功");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/passMember.jsp");

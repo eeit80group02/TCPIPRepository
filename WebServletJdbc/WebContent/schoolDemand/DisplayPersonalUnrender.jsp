@@ -117,7 +117,7 @@
 							${processingMember.memberBean.lastName}${processingMember.memberBean.firstName}
 						</div>
 						<div class="col l4 left schldiv" >
- 							已被推薦次數:${processingMember.memberBean.recommendCount}
+<%--  							已被推薦次數:${processingMember.memberBean.recommendCount} --%>
 
 						</div>
 						<div class="col l4 right right-align">
