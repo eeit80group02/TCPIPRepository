@@ -113,14 +113,19 @@ public class ProcessingMemberService {
 	public ProcessingMemberBean disagree(ProcessingMemberBean bean) {
 		List<ProcessingMemberBean> list = null;
 		List<ProcessingMemberBean> temp = null;
-
+		SchoolDemandBean sDBean= null;
 		ProcessingMemberBean result = null;
 		if (bean != null) {
 			bean.setProcessingMemberId(bean.getProcessingMemberId());
 			bean.setCheckStatus("未通過");
 			result = processingMemberDAO.update(bean);
 			if(result != null){
-				
+				temp = processingMemberDAO.findByPrimaryKeyRender(bean.getProcessingMemberId());
+				if(temp == null){
+					sDBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
+					sDBean.setDemandStatus("待洽談");
+					sDBean = schoolDemandDAO.update(sDBean);
+				}
 			}
 		}
 		return result;

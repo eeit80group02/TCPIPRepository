@@ -313,5 +313,35 @@ public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 		return result;
 
 	}
+	private static final String SELECT_BY_ID_Render = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE processingMemberId = ? and checkStatus='已通過";
+	@Override
+	public List<ProcessingMemberBean> findByPrimaryKeyRender(int processingMemberId) {
+		List<ProcessingMemberBean> result = null;
+		ProcessingMemberBean bean = null;
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_ID);){
+			pstmt.setInt(1,processingMemberId);
+			try(ResultSet rset = pstmt.executeQuery();){
+				if(rset.next()){
+					bean = new ProcessingMemberBean();
+					bean.setProcessingMemberId(rset.getInt("processingMemberId"));
+					bean.setSchoolDemandId(rset.getInt("schoolDemandId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					bean.setCheckTime(rset.getTimestamp("checkTime"));
+					bean.setCheckStatus(rset.getString("checkStatus"));
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 }
