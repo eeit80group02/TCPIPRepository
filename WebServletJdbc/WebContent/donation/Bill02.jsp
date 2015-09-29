@@ -444,7 +444,7 @@
 									$('#ddlCity').on("change", function() {
 										$('#ddlArea option').remove();
 										$('#txtPostno').attr("value", "");
-										$('#ddlArea').append("_$tag____________請選擇區域別_$tag____");
+										$('#ddlArea').append("<option value=''>請選擇區域別</option>");
 										$.ajax({
 											url : '../GetCityServlet',
 											type : "post",
@@ -455,7 +455,7 @@
 											success : function(result) {
 												var areas = (typeof result.d) == 'string' ? eval('(' + result.d + ')') : result.d;
 												for (var i = 0; i < areas.length; i++) {
-													$('#ddlArea').append("_$tag________________________________" + areas[i].Name + "_$tag____");
+													$('#ddlArea').append("<option value='" + areas[i].Zip + "'>" + areas[i].Name + "</option>");
 												}
 											}
 										});

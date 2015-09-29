@@ -46,7 +46,7 @@
           			<!-- ¥d -->
           			<c:if test="${not empty mlist}">
           				<c:forEach items="${mlist}" var="bean">
-				          	<div class="col l5 white offset-l1 card-panel hoverable" style="padding:5px;">
+				          	<div class="col l5 white offset-l1 light-green lighten-4 card-panel hoverable" style="padding:5px;">
 				          		<c:url value="/schoolDemand/SchoolDemandServlet.do?type=display" var="path">
 									<c:param name="type" value="mdisplay" />
 									<c:param name="schoolDemandId" value="${bean.schoolDemandId}" />
