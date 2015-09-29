@@ -681,7 +681,8 @@
 						<button type="submit" id="btnSend" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="確認送出"><i class="small material-icons">done</i></a>
 						</button>
-						<button type="submit" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
+						<!--勿修改下行 type="button" -->
+						<button type="button" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
 						</button>
 					</form>
