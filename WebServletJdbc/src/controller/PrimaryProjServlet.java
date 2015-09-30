@@ -302,6 +302,8 @@ public class PrimaryProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if(projAbstract.trim().length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)
@@ -624,6 +626,8 @@ public class PrimaryProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if(projAbstract.trim().length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)
