@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class init
 {
-
-	private String test = "hahaha";
 	public static void main(String[] args)
 	{
 		Date start = new Date(System.currentTimeMillis());

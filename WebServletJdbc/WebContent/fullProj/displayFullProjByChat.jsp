@@ -334,8 +334,7 @@
 
 				<!-- 導向修改頁面，並且把這頁資料傳送過去 -->
 				<c:if test="${LoginOK.beanName.equals('member')}">
-					<c:if
-						test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中') && empty fullProj.schoolConfirm}">
+					<c:if test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中') && empty fullProj.schoolConfirm}">
 						<div class="card-panel white">
 							<form action="<c:url value="/fullProj/updateFullProjForm.jsp" />" method="post" accept-charset="UTF-8">
 								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}"> 
