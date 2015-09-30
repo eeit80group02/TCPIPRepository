@@ -100,7 +100,7 @@
 									<div id="donationPictureFrame">
 										<center>
 											<!-- 強迫img在div內部置中 -->
-											<img id="donationPicture" src="" alt="" title="上傳圖片">
+											<img id="donationPicture" src="${UpdateImage}" alt="" title="上傳圖片">
 										</center>
 
 									</div>
