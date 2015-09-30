@@ -32,7 +32,7 @@ private MemberDAOJdbc dao;
 		//信件內容
 		Multipart multiPart = new MimeMultipart("alternative");
 		MimeBodyPart htmlPart = new MimeBodyPart();
-		String url = "http://" + GlobalService.HOST + ":8080/" + GlobalService.CONTEXT_PATH + "/RegisterVerification.do?id=" + encodeId + "&code=" + identityCode ;
+		String url = "http://" + GlobalService.HOST + "/" + GlobalService.CONTEXT_PATH + "/RegisterVerification.do?id=" + encodeId + "&code=" + identityCode ;
 		try {
 			htmlPart.setContent("<p>親愛的會員"+ firstName +" 您好,<br /> 請點選以下的連結完成認證</p>"
 					+ "<a href='"+ url +"'>http://" + GlobalService.HOST + ":8080/" + GlobalService.CONTEXT_PATH + "/RegisterVerification.do?id=" + encodeId + "&code=" + identityCode+"</a>", "text/html; charset=utf-8 ");
@@ -69,7 +69,7 @@ private MemberDAOJdbc dao;
 		MimeBodyPart htmlPart = new MimeBodyPart();
 		try {
 			htmlPart.setContent("<p>親愛的會員"+ dbFirstName +" 您好,<br /> 請點選以下的連結重新修改您的密碼</p>"
-					+ "http://"+ GlobalService.HOST + ":8080/" + GlobalService.CONTEXT_PATH + "/resetPassword.do?user=" + encodedId + "&code=" + encodedPassword, "text/html; charset=utf-8");
+					+ "http://"+ GlobalService.HOST + "/" + GlobalService.CONTEXT_PATH + "/resetPassword.do?user=" + encodedId + "&code=" + encodedPassword, "text/html; charset=utf-8");
 			multiPart.addBodyPart(htmlPart);
 		} catch (MessagingException e) {
 			e.printStackTrace();

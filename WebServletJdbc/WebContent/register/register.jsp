@@ -141,7 +141,7 @@
 						</div>
 						<!-- 身分證字號 -->
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
-							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly" value="${param.idNumber}">
+							<input id="idcardNumber" type="text" class="validate" name="idNumber" required value="${param.idNumber}">
 <!-- 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required> -->
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
