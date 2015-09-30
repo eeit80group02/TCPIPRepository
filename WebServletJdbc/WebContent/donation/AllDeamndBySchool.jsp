@@ -247,7 +247,6 @@
 																<td>捐獻時間</td>
 															</tr>
 														</thead>
-														<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm" /></td>
 
 														<tbody>
 															<c:forEach var='initem' items='${OneAllDetails}'>

@@ -595,43 +595,46 @@ public class DonationService {
 		
 		
 		for(DonationBeanDuplicate d : list) {
-			
-			// a.訂單明細封裝
-			donationOrderDetailBean = new DonationOrderDetailBean();
-			//donationOederId 為交易時取出的pk鍵
-			donationOrderDetailBean.setDonationId(d.getDonationId());
-			// 作字串處理
-			donationOrderDetailBean.setSupplyName(d.getSupplyName()+" "+d.getSchoolName());
-			donationOrderDetailBean.setDonationAmount(d.getDonateAmount());
-			orderDetailList.add(donationOrderDetailBean);
-			
-			// b.原始需求數量更新封裝
-			DonationBean donationBeanPart = new DonationBean();
-			donationBeanPart.setDonationId(d.getDonationId());
-			donationBeanPart.setSchoolId(d.getSchoolId());
-			// 進行狀態的邏輯判斷if (x-y != 0)...
-			if (d.getDemandNumber() - d.getDonateAmount() <= 0) {
-				donationBeanPart.setDonationStatus("是");
-			} else {
-				donationBeanPart.setDonationStatus("否");
+			// 捐獻數量不等於0才做明細新增
+			if(d.getDonateAmount() != 0) {
+				// a.訂單明細封裝
+				donationOrderDetailBean = new DonationOrderDetailBean();
+				//donationOederId 為交易時取出的pk鍵
+				donationOrderDetailBean.setDonationId(d.getDonationId());
+				// 作字串處理
+				donationOrderDetailBean.setSupplyName(d.getSupplyName()+" "+d.getSchoolName());
+				donationOrderDetailBean.setDonationAmount(d.getDonateAmount());
+				orderDetailList.add(donationOrderDetailBean);
+				
+				// b.原始需求數量更新封裝
+				DonationBean donationBeanPart = new DonationBean();
+				donationBeanPart.setDonationId(d.getDonationId());
+				donationBeanPart.setSchoolId(d.getSchoolId());
+				// 進行狀態的邏輯判斷if (x-y != 0)...
+				if (d.getDemandNumber() - d.getDonateAmount() <= 0) {
+					donationBeanPart.setDonationStatus("是");
+				} else {
+					donationBeanPart.setDonationStatus("否");
+				}
+				
+				donationBeanPart.setSupplyName(d.getSupplyName());
+				donationBeanPart.setOriginalDemandNumber(d.getOriginalDemandNumber());
+				donationBeanPart.setOriginalDemandUnit(d.getOriginalDemandUnit());
+				// 進行狀態的邏輯運算
+				// 系統改設等於原始需求數量
+				// 當捐獻物品被取消時 d.getDonateAmount()為0
+				donationBeanPart.setDemandNumber(d.getDemandNumber() - d.getDonateAmount());
+				donationBeanPart.setSize(d.getSize());
+				donationBeanPart.setDemandContent(d.getDemandContent());
+				donationBeanPart.setSupplyStatus(d.getSupplyStatus());
+				donationBeanPart.setDemandTime(d.getDemandTime());
+				donationBeanPart.setExpireTime(d.getExpireTime());
+				donationBeanPart.setImageName(d.getImageName());
+				donationBeanPart.setImageFile(d.getImageFile());
+				donationBeanPart.setImageLength(d.getImageLength());
+				donationBeanPart.setRemark(d.getRemark());
+				donationBeanListPart.add(donationBeanPart);
 			}
-			
-			donationBeanPart.setSupplyName(d.getSupplyName());
-			donationBeanPart.setOriginalDemandNumber(d.getOriginalDemandNumber());
-			donationBeanPart.setOriginalDemandUnit(d.getOriginalDemandUnit());
-			// 進行狀態的邏輯運算
-			// 系統改設等於原始需求數量
-			donationBeanPart.setDemandNumber(d.getDemandNumber() - d.getDonateAmount());
-			donationBeanPart.setSize(d.getSize());
-			donationBeanPart.setDemandContent(d.getDemandContent());
-			donationBeanPart.setSupplyStatus(d.getSupplyStatus());
-			donationBeanPart.setDemandTime(d.getDemandTime());
-			donationBeanPart.setExpireTime(d.getExpireTime());
-			donationBeanPart.setImageName(d.getImageName());
-			donationBeanPart.setImageFile(d.getImageFile());
-			donationBeanPart.setImageLength(d.getImageLength());
-			donationBeanPart.setRemark(d.getRemark());
-			donationBeanListPart.add(donationBeanPart);
 		}
 		
 		// 進行交易
