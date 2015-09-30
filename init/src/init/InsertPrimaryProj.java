@@ -24,79 +24,12 @@ public class InsertPrimaryProj
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 		{
-			// 第一筆資料  ======================================================================
-			pstmt.setInt(1,7);				// memberId 發起者
-			pstmt.setString(2,"造神計畫");		// title    計畫名稱
-			
-			//計畫封面圖片載入
-			File file = new File("image/primaryProj/primaryProj01.jpg");
-			try(FileInputStream fis = new FileInputStream(file);)
-			{
-				pstmt.setString(3,file.getName());			// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
-				pstmt.setLong(5,file.length());					// frontCoverLength
-
-				pstmt.setString(6,"幫助偏遠學校使用辦公室軟體應用");		// projAbstract 計畫摘要
-				pstmt.setString(7,"Word...Office軟體應用");		// content 計畫內容
-				pstmt.setString(8,"台中");						// idealPlace
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-				pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015/08/08").getTime()));  // activityStartTime
-				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015/08/15").getTime())); // activityEndTime
-				
-				pstmt.setInt(11,20);  		// demandNum 志工人數
-				pstmt.setInt(12,200000);   	// budget
-				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				pstmt.setString(14,"洽談完成");  // projStatus
-				
-				pstmt.executeUpdate();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-
-			
-			// 第二筆資料  ======================================================================
-			pstmt.setInt(1,4);				// memberId 發起者
-			pstmt.setString(2,"關懷偏鄉熱血團");		// title    計畫名稱
-			
-			//計畫封面圖片載入
-			file = new File("image/primaryProj/primaryProj02.jpg");
-			try(FileInputStream fis = new FileInputStream(file);)
-			{
-				pstmt.setString(3,file.getName());				// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
-				pstmt.setLong(5,file.length());					// frontCoverLength
-
-				pstmt.setString(6,"一群有理想、抱負的資策會畢業學員，具有充分的資訊技術及教學能力，希望在資訊能力上能帶領偏鄉兒童拉近資訊時代必備的能力。"); // projAbstract 計畫摘要
-				pstmt.setString(7,"我們安排基礎程式語言、scratch的教學...");		// content 計畫內容
-				pstmt.setString(8,"嘉義市");						// idealPlace
-				
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-				pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015/7/1").getTime()));  // activityStartTime
-				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015/7/15").getTime())); // activityEndTime
-				
-				pstmt.setInt(11,20);  		// demandNum 志工人數
-				pstmt.setInt(12,90000);   	// budget
-				
-				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				pstmt.setString(14,"待洽談");  // projStatus
-				
-				pstmt.executeUpdate();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-			}
-			
 			// 第三筆資料  ======================================================================
-			pstmt.setInt(1,5);				// memberId 發起者
+			pstmt.setInt(1,7);							// memberId 發起者
 			pstmt.setString(2,"亞成鳥青少年野地教育計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
-			file = new File("image/primaryProj/primaryProj03.jpg");
+			File file = new File("image/primaryProj/primaryProj03.jpg");
 			try(FileInputStream fis = new FileInputStream(file);)
 			{
 				pstmt.setString(3,file.getName());				// frontCoverName
@@ -104,7 +37,7 @@ public class InsertPrimaryProj
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
 				pstmt.setString(6,"每個人心中都有亮光，不一定被看見。 四天的陪伴，我們帶領青少年走入美麗的山林，遠離熟悉的生活。過程中，當面對困難和挑戰，我們說：「沒關係，這一段路我們陪你一起走」當有了跨越的勇氣，一切，也不再那麼困難。"); // projAbstract 計畫摘要
-				pstmt.setString(7,"在被隔絕的深山中，一個人沒有辦法輕易放棄。除了靠自己的雙腳走出去，沒有一個辦法可以立刻讓人回到溫暖的被窩或舒適的家。\n我們認為這些孩子們需要的，其實是一個能夠脫離他們混亂日常的機會。孩子們在深山中，有機會忘去種種的負面情緒，讓自己的心靜下來，不去煩惱家中或學校的種種壓力，探索自己內心的需求，去看到不一樣的事物，而長天數的登山給了他們一個機會去脫離這些處境。登山在精神與體力上的挑戰，讓他們沒有空閒去煩惱這些事，而有機會跳出許多的束縛與負面的情緒，讓他們能敞開心胸面對更多不一樣的事物。");		// content 計畫內容
+				pstmt.setString(7,"");		// content 計畫內容
 				pstmt.setString(8,"台中市");						// idealPlace
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

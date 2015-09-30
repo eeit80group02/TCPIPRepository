@@ -22,7 +22,7 @@
 	<!-- 內容 -->
 	<main>
 		<% 	
- 			response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+//  			response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
 		%>		
 		
 		<div class="row valign-wrapper" id="mainboard">

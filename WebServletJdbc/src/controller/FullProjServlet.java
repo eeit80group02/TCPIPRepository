@@ -214,7 +214,7 @@ public class FullProjServlet extends HttpServlet
 			System.out.println(fullProjBean);
 			System.out.println("==================================================");
 			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fId));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=display&fullProjId=" + fId));
 			return;
 		}
 	}
@@ -549,6 +549,8 @@ public class FullProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if ( projAbstract.length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)

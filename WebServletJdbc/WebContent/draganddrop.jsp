@@ -75,6 +75,12 @@
     </div>
   </div>	
   
+ 	<!-- 頁面主題提示 -->
+	<div class="row grey darken-4 valign-wrapper" id="pagetitle">
+		<h1 class="valign center-align white-text"
+			style="font-family: 微軟正黑體; margin: 0 auto; font-size: 5em;"></h1>
+	</div>
+	<!-- 頁面主題提示 -->
 
 
 	<!-- 主要任務集版面 -->
@@ -87,7 +93,7 @@
 				
 				<div class="col l2">
 					<div class="input-field">
-						<input id="nameTitle" type="text" class="validate">
+						<input placeholder="請輸入任務集名稱" id="nameTitle" type="text" class="validate">
 					</div>
 				</div>
 				<div class="col l1">
@@ -135,10 +141,10 @@
 		</div>
 		<div class="row">
 			<div class="col l6">
-				<div id="confirmMissionSet" class="btn"><h6>完成</h6></div>
+				<div id="confirmMissionSet" class="btn" style="font-size:1em;padding:0px;width:99%">完成</div>
 			</div>
 			<div class="col l6">
-				<div id="deleteMissionSet" class="btn"><h6>刪除</h6></div>
+				<div id="deleteMissionSet" class="btn" style="font-size:1em;padding:0px;width:99%">刪除</div>
 			</div>
 		</div>
 	</div>

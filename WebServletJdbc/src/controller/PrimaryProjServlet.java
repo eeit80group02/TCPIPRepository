@@ -188,7 +188,7 @@ public class PrimaryProjServlet extends HttpServlet
 			if(result != null)
 			{
 				// 成功導向
-				System.out.println(result);
+//				System.out.println(result);
 				System.out.println("==================================================");
 				request.setAttribute("primaryProj",result);
 				request.getRequestDispatcher("/personal/displayPersonalPrimaryProj.jsp").forward(request,response);;
@@ -302,6 +302,8 @@ public class PrimaryProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if(projAbstract.trim().length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)
@@ -512,7 +514,6 @@ public class PrimaryProjServlet extends HttpServlet
 	private void displayPrimaryProjAll(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 		System.out.println("======================================================");
 		
 		List<PrimaryProjBean> beans = service.displayPrimaryProjAll();
@@ -625,6 +626,8 @@ public class PrimaryProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if(projAbstract.trim().length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)

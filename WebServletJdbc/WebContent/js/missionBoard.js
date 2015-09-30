@@ -119,8 +119,10 @@
 				stop: function(event, ui){
 					var temp = $("ul.nested_with_switc").sortable("toArray");
 					
+					$("#loadingmodal").openModal();
 					$.each(temp, function(index, value){
 						console.log(index + ":" + value);
+						var lastIndex = temp.length - 1;
 						
 // 						$('#'+value+' > input.missionSetOrder').val(index+1);
 						var missionSetPos = index+1;
@@ -146,7 +148,12 @@
 		    			    },
 		    			    error:function(result){
 		    			    	console.log(result);
-		    			    }
+		    			    },
+		        	   		complete:function(){
+		        	   			if( missionSetPos == lastIndex + 1 ){
+		        	   				$("#loadingmodal").closeModal();
+		        	   			}
+		        	   		}
 		    			});
 
 					});
@@ -214,6 +221,12 @@
 	    						count = 1;
 	    					}
 	    						
+		    				//Get last missionId, when last mission ajax send back close modal
+		    				var lastIndex = orderArray.length-2;
+		    				if( i == lastIndex ){
+		    					var lastSubMissionId = $('#'+pair[0]+' .missionId').val();
+		    				}
+		    				
 	    					console.log( "1.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
 	    					if(pair[0] != "undefined" ){
 		    					var missionId = $('#'+pair[0]+' .missionId').val();
@@ -232,7 +245,7 @@
 			    				console.log("missionId",missionId);
 			    				console.log("missionSetId",missionSetId);
 			    				console.log("mainMissionId",mainMissionId);
-		 				    	//Updata database
+		 				    	//Update database
 			    	    		$.ajax({
 			    		    		url:'DynamicUpdateBoardServlet',
 			    		    		type:'post',
@@ -252,10 +265,20 @@
 			    		    			if(result.result=="succeed"){
 			    		    		    	$('#missionId'+ result.mission.missionId +' > input.subMissionPosition').val(result.mission.missionPosition);
 			    		    		    }
+			    		    			
+			    		    			console.log("lastSubMissionId",lastSubMissionId);
+			    		    			if( result.mission.missionId == lastSubMissionId ){
+			    		    				$("#loadingmodal").closeModal();
+			    		    			}
 			    		    		},
 			    		    		error:function(result){
 			    		    		    console.log(result);
-			    		    		}
+			    		    		},
+			    		    		beforeSend:function(){
+			    		    			if( i == 0 ){
+			    		    				$("#loadingmodal").openModal();
+			    		    			}
+				    	   			}
 			    		    	});
 	    					}
 	    					console.log( "Position",$('#'+pair[0]+' input.subMissionPosition').val() );
@@ -272,7 +295,6 @@
 			var substrStart = window.location.search.lastIndexOf("=") + 1;
 			var substrRes =  window.location.search.substr(substrStart);
 			var fullProjId = substrRes;
-			
 			$.ajax({
     			url:"GetMissionBoardServlet",
     	   		type:'get',
@@ -284,6 +306,9 @@
     	   		success:function(result){
     	   			boardInformation = result;
     	   			console.log(result);
+    	   			$('#pagetitle > h1').text(boardInformation.missionBoard.boardName);
+    	   			
+    	   			
     	   			
 	    	   			//ajax get all participator
 	    				$.ajax({
@@ -407,89 +432,6 @@
 	    	   				} else {
 	    	   					//Set subMission sortable
 	    	   					setSubMissionSortable();
-// 	    	   					$(".subMissionContainer ul").sortable({
-// 									cursor : 'move',
-// 									toleranceElement : '> div',
-// 									item : 'li', //Specifies which items inside the element should be sortable.
-// 									handle : 'div',
-// 									placeholder : "placeholder",
-// 									forcePlaceholderSize: true,
-// 									start: function(e, ui){
-// 								        ui.placeholder.height(ui.helper.outerHeight());
-// 								        $('.placeholder').css('background-color','#3f51b5 indigo');
-// 								    },
-// 				    				stop: function(event, ui){
-// 				    					var orderArray = new Array();
-// 				    					var child = $('.subMissionContainer ul > li').each(function(){
-// 				    						orderArray.push($(this).children().attr("id")+":"+$(this).children('div').children('input.mainDataRowLocation').val());
-// 				    					});
-// 				    					console.log("order",orderArray);  
-				    					
-// 				    					var mainMissionId;
-// 				    					var count = 1;
-// 				    					for(var i = 0; i < orderArray.length; i++){
-// 				    						var pair = orderArray[i].split(":");
-// 			 	    						console.log("pair",pair);
-			 	    						
-// 			 	    						if( mainMissionId != pair[1] ){
-// 				    							mainMissionId = pair[1];
-// 				    							count = 1;
-// 				    						}
-				    						
-// 				    						console.log( "1.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
-// 				    						if(pair[0] != "undefined" ){
-// 					    						var missionId = $('#'+pair[0]+' .missionId').val();
-// 					    						var missionSetId = $('#'+$('#'+pair[0]+' > input.mainDataRowLocation').val()+' > input.missionSetId').val();
-// 					    						var name = $('#'+pair[0]+' > textarea').val();
-// 					    						var host = $('#'+pair[0]+' .subMissionExecutor').attr('name');
-// 					    						var date = $('#'+pair[0]+' .subMissionDate').val();
-// 					    						var sep = date.split('-');
-// 					    						var endTime = (parseInt(sep[0])+1911) + "-" + sep[1] + "-" + sep[2];
-// 					    						var missionPriority = "普通";
-// 					    						console.log( "2.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
-// 					    						var missionPosition = count;
-// 					    						console.log( "3.Position",$('#'+pair[0]+' input.subMissionPosition').val() );
-// 					    						var missionStatus = $('#'+pair[0]+' .subMissionStatus').val();
-// 					    						var mainMissionId2 = $('#'+pair[0]+' .mainDataRowLocation').val().substring(9);
-// 	// 				    						var mainMissionId = mainMissionIdName.substring(9);
-// 					    						console.log("missionId",missionId);
-// 					    						console.log("missionSetId",missionSetId);
-// 					    						console.log("mainMissionId",mainMissionId);
-// 	// 				    						//Updata database
-// 					    	    				$.ajax({
-// 					    		    			    url:'<c:url value="/DynamicUpdateBoardServlet" />',
-// 					    		    			    type:'post',
-// 					    		    			    data:{'action':'UpdateMissionPosition',
-// 					    		    			    	  'missionId':missionId,
-// 					    		    			    	  'missionSetId':missionSetId,
-// 					    		    			    	  'name':name,
-// 					    		    			    	  'host':host,
-// 					    		    			    	  'endTime':endTime,
-// 					    		    			    	  'missionPriority':missionPriority,
-// 					    		    			    	  'missionPosition':missionPosition,
-// 					    		    			    	  'missionStatus':missionStatus,
-// 					    		    			    	  'mainMissionId':mainMissionId2},
-// 					    		    			    dataType:'json',
-// 					    		    			    success:function(result){
-// 					    		    			    	console.log(result);
-// 					    		    			    	if(result.result=="succeed"){
-// 					    		    			    		$('#missionId'+ result.mission.missionId +' > input.subMissionPosition').val(result.mission.missionPosition);
-// 					    		    			    	}
-// 					    		    			    },
-// 					    		    			    error:function(result){
-// 					    		    			    	console.log(result);
-// 					    		    			    }
-// 					    		    			});
-					    						
-					    						
-// 				    						}
-// 				    						console.log( "Position",$('#'+pair[0]+' input.subMissionPosition').val() );
-	
-// 											count++;
-// 				    					} 	    					
-// 				    				}
-// 								})
-	    	   					
 	    	   					
 	    	    	   			//add subMission from database
 	    	    	   			var $ul = $('.subMissionContainer ul');
@@ -599,6 +541,11 @@
     							count = 1;
     						}
     						
+    						//Get last missionId, when last mission ajax send back close modal
+    						if( i == orderArray.length - 1  ){
+    							var lastMission = $('#'+pair[0]+ ' > div:last-child').attr('id').substring(9);
+    						}
+    						
     						var missionId = $('#'+pair[0]+ ' > div:last-child').attr('id').substring(9);
     						var missionSetId = $('input[value=' + pair[1] + '].missionSetOrder').siblings('div').first().attr('id').substring(10);
     						console.log("missionSetId!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",missionSetId);
@@ -612,7 +559,10 @@
     						var missionStatus =  $('#'+pair[0]+ ' > div:last-child > input.missionStatus').val();
     						var mainMissionId = $('#'+pair[0]+ ' > div:last-child > input.mainMissionId').val();
     						
-    						//Updata database
+    						console.log("i1",i);
+    						
+    						
+    						//Update database
     	    				$.ajax({
     		    			    url:'DynamicUpdateBoardServlet',
     		    			    type:'post',
@@ -635,11 +585,21 @@
 //     		    			    		console.log("mission Name",result.mission.name);
 //     		    			    		console.log("newPos",$('#missionId'+ result.mission.missionId +' > input.missionPosition').val());
     		    			    	}
+    		    			    	
+    		    			    	
+    		        	   			if( result.mission.missionId == lastMission ){
+    		        	   				$("#loadingmodal").closeModal();
+    		        	   			}
     		    			    },
     		    			    error:function(result){
     		    			    	console.log("error");
     		    			    	console.log(result);
-    		    			    }
+    		    			    },
+    		    			    beforeSend:function(){
+    		    			    	if( i == 0 ){
+    		    			    		$("#loadingmodal").openModal();
+    		    			    	}
+    		    	   			}
     		    			});
     						
     						
@@ -664,7 +624,7 @@
 				console.log("name",name);
 				var missionSetOrder = missionSetOrder;
 				console.log("missionSetOrder",missionSetOrder);
-				//Updata database
+				//Update database
 				$.ajax({
     			    url:'DynamicUpdateBoardServlet',
     			    type:'post',
@@ -693,7 +653,13 @@
     			    error:function(result){
     			    	console.log(result);
     			    	console.log("Insert new missionSet failed!");
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 				
 			}
@@ -733,7 +699,7 @@
 				console.log("missionPosition",missionPosition);
 				console.log("missionStatus",missionStatus);
 				console.log("mainMissionId",mainMissionId);
-				//Updata database
+				//Update database
 				$.ajax({
     			    url:'DynamicUpdateBoardServlet',
     			    type:'post',
@@ -773,7 +739,13 @@
     			    error:function(result){
     			    	console.log("error");
     			    	console.log(result);
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 			}
 			
@@ -800,7 +772,7 @@
     			var missionStatus =  "進行中";
     			var mainMissionId = "";
     					
-    			//Updata database
+    			//Update database
     			$.ajax({
     	    		url:'DynamicUpdateBoardServlet',
     	    		type:'post',
@@ -838,7 +810,13 @@
     	    		error:function(result){
     	    			console.log("error");
     	    			console.log(result);
-    	    		}
+    	    		},
+    	    		beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     	    	});
 				
 			});
@@ -1015,7 +993,13 @@
     			    		},
     			    		error:function(result){
     			    	   		console.log(result);
-    			    		}
+    			    		},
+    			    		beforeSend:function(){
+    			   				$("#loadingmodal").openModal();
+    			   			},
+    		    	   		complete:function(){
+    		    	   			$("#loadingmodal").closeModal();
+    		    	   		}
     					});
     							
     							
@@ -1043,7 +1027,13 @@
     			    		},
     			    		error:function(result){
     			    	   		console.log(result);
-    			    		}
+    			    		},
+    			    		beforeSend:function(){
+    			   				$("#loadingmodal").openModal();
+    			   			},
+    		    	   		complete:function(){
+    		    	   			$("#loadingmodal").closeModal();
+    		    	   		}
     					});
     				}
     						
@@ -1092,7 +1082,7 @@
 				console.log("missionPosition",missionPosition);
 				console.log("missionStatus",missionStatus);
 				console.log("mainMissionId",mainMissionId);
-				//Updata database
+				//Update database
 				$.ajax({
     			    url:'DynamicUpdateBoardServlet',
     			    type:'post',
@@ -1158,7 +1148,13 @@
     			    error:function(result){
     			    	console.log("error");
     			    	console.log(result);
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 				
 				
@@ -1266,7 +1262,13 @@
     			    },
     			    error:function(result){
     			    	console.log("error!!!!!",result);
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 				
 				
@@ -1283,7 +1285,7 @@
 				console.log("deleteMissionSetPos",deletePos);
 				
 				var deleteCondition = true;
-				$('ul.nested_with_switc > li').each(function(){
+				$('ul.nested_with_switc > li').each(function(index, value){
 					var oldPos = $(this).children('input.missionSetOrder').val();
 					console.log("oldPos",oldPos);
 					var newPos = oldPos;
@@ -1310,27 +1312,18 @@
 	    			    	  'name':name,
 	    			    	  'missionBoardId':missionBoardId},
 	    			    dataType:'json',
-	    			    async:false,
 	    			    success:function(result){
 	    			    	console.log(result);
 	    			    	if(result.result == "succeed"){
-	    			    		console.log("succeed!!!!!!!!!!!!!");
-// 	    			    		console.log($(this));
 	    			    		$this.children('input.missionSetOrder').val(result.missionSet.missionSetOrder);
-	    			    		console.log($this.children('input.missionSetOrder').val());
 	    			    	} else {
-	    			    		console.log(name);
 	    			    		deleteCondition = false;
-	    			    		console.log("Update missionSet order failed!");
 	    			    	}
 	    			    },
 	    			    error:function(result){
 	    			    	console.log(result);
-	    			    },
+	    			    }
 	    			});
-					
-					
-					
 					
 				});
 				
@@ -1353,7 +1346,13 @@
 	    			},
 	    			error:function(result){
 	    			    console.log(result);
-	    			}
+	    			},
+	    			beforeSend:function(){
+		   				$("#loadingmodal").openModal();
+		   			},
+	    	   		complete:function(){
+	    	   			$("#loadingmodal").closeModal();
+	    	   		}
 	    		});
 
 				
@@ -1425,7 +1424,13 @@
     			    },
     			    error:function(result){
     			    	console.log(result);
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 
 
@@ -1521,7 +1526,13 @@
     			    },
     			    error:function(result){
     			    	console.log(result);
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 			});
 			
@@ -1685,7 +1696,7 @@
 				console.log("missionPosition",missionPosition);
 				console.log("missionStatus",missionStatus);
 				console.log("mainMissionId",mainMissionId);
-				//Updata database
+				//Update database
 				$.ajax({
     			    url:'ynamicUpdateBoardServlet',
     			    type:'post',
@@ -1731,7 +1742,13 @@
     			    error:function(result){
     			    	console.log("error");
     			    	console.log(result);
-    			    }
+    			    },
+    			    beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
     			});
 			}
 			
