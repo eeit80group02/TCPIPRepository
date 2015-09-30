@@ -45,7 +45,10 @@ public class DonationServlet extends HttpServlet {
 		// 必須學校登入會員才可使用
 		HttpSession session = request.getSession(false);
 		if (session == null) {
+			System.out.println("session == null");
 			// 導向登入畫面
+		} else {
+			System.out.println("session != null");
 		}
 		
 		// 驗證是否為學校登入
