@@ -120,7 +120,7 @@ public class ProcessingMemberService {
 			result = processingMemberDAO.update(bean);
 			if(result != null){
 				temp = processingMemberDAO.findBySchoolDemandIdRender(bean.getSchoolDemandId());
-				System.out.println("++++++"+temp);
+				//System.out.println("++++++"+temp);
 				if(temp.isEmpty()){
 					sDBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
 					sDBean.setDemandStatus("待洽談");

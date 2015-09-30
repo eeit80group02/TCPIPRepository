@@ -40,7 +40,7 @@ public class SchoolDemandService {
 	public SchoolDemandBean creat(SchoolDemandBean bean){
 		SchoolDemandBean result = null;
 		OffersBean oBean = bean.getOfferBean();
-		System.out.println(bean);
+		//System.out.println(bean);
 		if(bean!=null){
 			bean.setDemandStatus("待洽談");
 			bean.setCreateDate(new java.util.Date(System.currentTimeMillis()));
@@ -138,9 +138,9 @@ public class SchoolDemandService {
 			}
 			sDBean.setProcessingMemberList(plist);
 		}
-		for(SchoolDemandBean v:result){
-			System.out.println(v);
-		}
+//		for(SchoolDemandBean v:result){
+//			System.out.println(v);
+//		}
 		return result;
 	}
 	public SchoolDemandBean mdisplay(SchoolDemandBean bean){
@@ -171,7 +171,7 @@ public class SchoolDemandService {
 			}
 		}
 		for(ProcessingMemberBean pMBean: pMlist){
-			System.out.println(pMBean);
+//			System.out.println(pMBean);
 			for(SchoolDemandBean sDBean : list){
 				if(pMBean.getSchoolDemandId() == sDBean.getSchoolDemandId()){
 					temp.add(sDBean);
