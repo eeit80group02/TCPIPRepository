@@ -84,7 +84,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		
 		bean.setMemberId(memberId);
 		bean.setSchoolDemandId(sId);
-		System.out.println(bean);
+		//System.out.println(bean);
 		bean = service.application(bean);
 		if(bean!=null){
 			System.out.println("建立成功" + bean);
@@ -125,11 +125,11 @@ public class ProcessingMemberServlet extends HttpServlet{
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
 		File image = new File(getServletContext().getRealPath("/images/fullProj/default.jpg"));
-		System.out.println(image);
+		//System.out.println(image);
 		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
 		bean.setSchoolDemandId(sDId);
-		System.out.println(bean);
+		//System.out.println(bean);
 		bean = service.agree(bean,image);
 		if(bean!=null){
 			System.out.println("同意成功");
@@ -170,7 +170,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
 		bean.setSchoolDemandId(sDId);
-		System.out.println(bean);
+		//System.out.println(bean);
 		bean = service.disagree(bean);
 		if(bean!=null){
 			System.out.println("拒絕成功" + bean);

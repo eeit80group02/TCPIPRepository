@@ -241,7 +241,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 			session.setAttribute("error", errorMsg);
 			session.setAttribute("data", data);
-			System.out.println(data);
+			//System.out.println(data);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
 			return;
 		}
@@ -426,7 +426,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 			session.setAttribute("error", errorMsg);
 			session.setAttribute("data", data);
-			System.out.println(data);
+			//System.out.println(data);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
 			return;
 		}
@@ -438,7 +438,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		obean.setRoom(checkRoom);
 		obean.setPlace(checkPlace);
 		obean.setFood(checkFood);
-		System.out.println(obean);
+		//System.out.println(obean);
 		// 存入Bean
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);
@@ -476,7 +476,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			return;
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
-		System.out.println(bean);
+		//System.out.println(bean);
 		session.removeAttribute("Demand");
 		int schoolDemandId = bean.getSchoolDemandId();
 		bean.setSchoolDemandId(schoolDemandId);
