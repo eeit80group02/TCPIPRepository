@@ -94,6 +94,7 @@
 							<div class="col l4">
 									<div id="forlocation" class="forinput">理想地點</div>
 									<select id="locationselect">
+											<option value="" disabled selected>請選擇</option>									
 											<option value="10001">台北市</option>
 											<option value="10002">新北市</option>
 											<option value="10003">桃園市</option>

@@ -36,7 +36,7 @@ import model.service.FullProjService;
 
 @WebServlet("/fullProj.do")
 @MultipartConfig(location = "",
-				 maxFileSize = 1024 * 1024 * 2)
+				 maxFileSize = 1024 * 1024 * 1024)
 public class FullProjServlet extends HttpServlet
 {
 	private static final long serialVersionUID = 1L;
@@ -816,6 +816,7 @@ public class FullProjServlet extends HttpServlet
 					JSONObject j3 = (JSONObject) j2.get("geometry");
 					JSONObject j4 = (JSONObject) j3.get("location");
 					jobj = this.getNearestStationAndLocation(j4);
+					
 				}
 				
 				
@@ -838,8 +839,8 @@ public class FullProjServlet extends HttpServlet
 			Map map2 = hasTrafficResults(lat, lng,"bus_station");
 			if((int)map2.get("resultnumbers") == 0){
 				Map map3 = hasTrafficResults(lat, lng,"airport");
-				if((int)map2.get("resultnumbers") == 0){
-					
+				if((int)map3.get("resultnumbers") == 0){
+					return jobj;
 				}else{
 					System.out.println("最近的航空站");
 					finaljobj = this.autoBoxingInfo(map3, jobj);

@@ -49,6 +49,8 @@
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
@@ -136,6 +138,12 @@
 									if (xhr.readyState == 4) {
 										if (xhr.status == 200) {
 											lists = xhr.responseText;
+
+											// 設定cookie值
+											var now = new Date();
+											now.setTime(now.getTime() + 1000 * 60 * 60 * 24 * 30);
+											document.cookie = "Items=" + lists + ";expire=" + now.toUTCString();
+
 											// 											alert("新增購物車品項一");
 										} else {
 											// 											alert("something is wrong!");
@@ -144,8 +152,9 @@
 								});
 								xhr.open("POST", "cart.do", true);
 								xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit="
-										+ "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
+								// 								xhr.send("toCart=insert&donationId=" + "${OneDemand.donationId}" + "&schoolId=" + "${OneDemand.schoolId}" + "&schoolName=" + "${OneDemand.schoolName}" + "&donationStatus=" + "${OneDemand.donationStatus}" + "&supplyName=" + "${OneDemand.supplyName}" + "&originalDemandNumber=" + "${OneDemand.originalDemandNumber}" + "&originalDemandUnit="
+								// 										+ "${OneDemand.originalDemandUnit}" + "&demandNumber=" + "${OneDemand.demandNumber}" + "&size=" + "${OneDemand.size}" + "&demandContent=" + "${OneDemand.demandContent}" + "&supplyStatus=" + "${OneDemand.supplyStatus}" + "&demandTime=" + "${OneDemand.demandTime}" + "&expireTime=" + "${OneDemand.expireTime}" + "&remark=" + "${OneDemand.remark}");
+								xhr.send("toCart=insert&returnJson=true&donationId=" + "${OneDemand.donationId}");
 							}
 						}
 					</script>
@@ -190,7 +199,6 @@
 							<i class="tiny material-icons">help</i>&nbsp;<b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
-								<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
 							<br>${item.memberMessage}
 							<div class="talkTime">
@@ -257,7 +265,7 @@
 						var xi1textx = document.createTextNode("help");
 
 						var xb1x = document.createElement("b");
-						var xb1textx = document.createTextNode("我"+" :");
+						var xb1textx = document.createTextNode("我" + " :");
 
 						var xdiv1textx = document.createTextNode(memberMessage);
 
@@ -304,7 +312,7 @@
 						}(jQuery));
 
 					} else {
-						Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>請登入帳號</span>', 3000, 'rounded');
+						Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>無法操作，請登入會員帳號</span>', 5000, 'rounded');
 						$("#pleaseLogin").trigger("click");
 						// alert("something is wrong!");
 					}

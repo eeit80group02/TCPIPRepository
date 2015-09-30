@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
-			response.sendRedirect("/login/login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
 		
@@ -83,7 +84,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		
 		bean.setMemberId(memberId);
 		bean.setSchoolDemandId(sId);
-		System.out.println(bean);
+		//System.out.println(bean);
 		bean = service.application(bean);
 		if(bean!=null){
 			System.out.println("建立成功" + bean);
@@ -103,7 +104,8 @@ public class ProcessingMemberServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
 		String processingMemberId = request.getParameter("processingMemberId");
 		String memberId = request.getParameter("memberId");
@@ -122,13 +124,13 @@ public class ProcessingMemberServlet extends HttpServlet{
 		}else{
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=displayPersonalUnrender");
 		}
-		
+		File image = new File(getServletContext().getRealPath("/images/fullProj/default.jpg"));
+		//System.out.println(image);
 		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
 		bean.setSchoolDemandId(sDId);
-		System.out.println(bean);
-		bean = service.agree(bean);
-		System.out.println(bean);
+		//System.out.println(bean);
+		bean = service.agree(bean,image);
 		if(bean!=null){
 			System.out.println("同意成功");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/passMember.jsp");
@@ -145,7 +147,8 @@ public class ProcessingMemberServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		SchoolBean sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
 		String processingMemberId = request.getParameter("processingMemberId");
 		String memberId = request.getParameter("memberId");
@@ -167,7 +170,7 @@ public class ProcessingMemberServlet extends HttpServlet{
 		bean.setProcessingMemberId(pMId);
 		bean.setMemberId(mId);
 		bean.setSchoolDemandId(sDId);
-		System.out.println(bean);
+		//System.out.println(bean);
 		bean = service.disagree(bean);
 		if(bean!=null){
 			System.out.println("拒絕成功" + bean);
@@ -184,7 +187,8 @@ public class ProcessingMemberServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean ==null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
+			return;
 		}
 		String schoolDemandId = request.getParameter("schoolDemandId");
 		String memberId = request.getParameter("memberId");

@@ -28,7 +28,7 @@ public class DonationJsonSimpleDemo extends HttpServlet {
 		String url = "jdbc:sqlserver://localhost:1433;DatabaseName=TCPIP";
 		String query = "select name from school where name like  ?";
 		String keyword = request.getParameter("term");
-		System.out.println("keyword "+keyword);
+//		System.out.println("keyword "+keyword);
 		keyword = "%" + keyword + "%";
 		try{
 			DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
@@ -44,8 +44,8 @@ public class DonationJsonSimpleDemo extends HttpServlet {
 				 list.add(rs.getString(1));
 			 }
 			 out.print(list.toJSONString());
-			 System.out.println("@@");
-			 System.out.println("list "+list);
+//			 System.out.println("@@");
+//			 System.out.println("list "+list);
 		}
 		catch(SQLException e){
 			out.println("Error:" + e.getMessage());

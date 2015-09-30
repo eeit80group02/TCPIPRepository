@@ -40,7 +40,7 @@ public class SchoolDemandService {
 	public SchoolDemandBean creat(SchoolDemandBean bean){
 		SchoolDemandBean result = null;
 		OffersBean oBean = bean.getOfferBean();
-		System.out.println(bean);
+		//System.out.println(bean);
 		if(bean!=null){
 			bean.setDemandStatus("待洽談");
 			bean.setCreateDate(new java.util.Date(System.currentTimeMillis()));
@@ -138,9 +138,9 @@ public class SchoolDemandService {
 			}
 			sDBean.setProcessingMemberList(plist);
 		}
-		for(SchoolDemandBean v:result){
-			System.out.println(v);
-		}
+//		for(SchoolDemandBean v:result){
+//			System.out.println(v);
+//		}
 		return result;
 	}
 	public SchoolDemandBean mdisplay(SchoolDemandBean bean){
@@ -156,30 +156,30 @@ public class SchoolDemandService {
 		}
 		return result;
 	}
-	public List<SchoolDemandBean> mdisplays(){
+	public List<SchoolDemandBean> mdisplays(MemberBean bean){
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
+		List<SchoolDemandBean> temp = new ArrayList<SchoolDemandBean>();
 		List<SchoolDemandBean> list = null;
-		List<OffersBean> olist = null;
-		List<SchoolBean> slist = null;
+		List<ProcessingMemberBean> pMlist = null;
 		list = schoolDemandDao.getAll();
-		olist = offersDao.getAll();
-		slist = schoolDao.getAll();
-		for(SchoolDemandBean bean : list){
-			for(SchoolBean sbean : slist){
-				if(bean.getSchoolId().equals(sbean.getSchoolId())){
-					bean.setSchoolBean(sbean);
-				}
+		pMlist = processingMemberDao.finByMemerId(bean.getMemberId());
+		for(SchoolDemandBean sDBean : list){
+			if(sDBean.getDemandStatus().equals("待洽談") || sDBean.getDemandStatus().equals("洽談中")){
+				sDBean.setOfferBean(offersDao.findByPrimaryKey(sDBean.getSchoolDemandId()));
+				sDBean.setSchoolBean(schoolDao.findByPrimaryKey(sDBean.getSchoolId()));
+				result.add(sDBean);
 			}
-			for(OffersBean obean:olist){
-				if(bean.getDemandStatus().equals("待洽談") && bean.getSchoolDemandId().equals(obean.getSchoolDemandId())){
-					bean.setOfferBean(obean);
-					result.add(bean);
+		}
+		for(ProcessingMemberBean pMBean: pMlist){
+//			System.out.println(pMBean);
+			for(SchoolDemandBean sDBean : list){
+				if(pMBean.getSchoolDemandId() == sDBean.getSchoolDemandId()){
+					temp.add(sDBean);
 				}
 			}
 		}
-		slist.clear();
-		list.clear();
-		olist.clear();
+		pMlist.clear();
+		result.removeAll(temp);
 		return result;
 	}
 	

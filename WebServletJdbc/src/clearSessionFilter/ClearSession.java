@@ -32,9 +32,10 @@ public class ClearSession implements Filter{
 			session.removeAttribute("error");
 			session.removeAttribute("data");
 		}
-		if(!request.getServletPath().equals("/schoolDemand/SchoolDemandServlet.do")&&!request.getServletPath().equals("/schoolDemand/Display.jsp")&&!request.getServletPath().equals("/schoolDemand/UpdataSchoolDemand.jsp") ){
-			session.removeAttribute("Demand");
-		}
+//		if(!request.getServletPath().equals("/schoolDemand/SchoolDemandServlet.do")&&!request.getServletPath().equals("/schoolDemand/Display.jsp")&&!request.getServletPath().equals("/schoolDemand/UpdataSchoolDemand.jsp") ){
+//			System.out.println("刪除");
+//			session.removeAttribute("Demand");
+//		}
 		chain.doFilter(request, response);
 	}
 	

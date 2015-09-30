@@ -92,6 +92,8 @@
 								<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+								<li class="divider"></li>
+								<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 							</c:if>
 						</c:if>
 						<li class="divider"></li>
@@ -225,7 +227,7 @@
 													// 正規表示法找整數
 													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
-														setAddValue();
+														setSubValue();
 
 													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
@@ -681,7 +683,8 @@
 						<button type="submit" id="btnSend" class="btn btn-small btn-floating">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="確認送出"><i class="small material-icons">done</i></a>
 						</button>
-						<button type="submit" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
+						<!--勿修改下行 type="button" -->
+						<button type="button" id="page02Next" class="btn btn-small btn-floating" onclick="Button1Click()">
 							<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="下一步"><i class="small material-icons">keyboard_arrow_right</i></a>
 						</button>
 					</form>

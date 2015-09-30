@@ -48,8 +48,9 @@ public class ProcessingMemberService {
 		return result;
 	}
 
-	public ProcessingMemberBean agree(ProcessingMemberBean bean) {
-		File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/image/fullProj/default.jpg");
+	public ProcessingMemberBean agree(ProcessingMemberBean bean , File file) {
+		//File image = new File("C:/Users/Student/git/TCPIPRepository/WebServletJdbc/image/fullProj/default.jpg");
+		File image = file;
 		FileInputStream is = null;
 		List<ProcessingMemberBean> list = null;
 		ProcessingMemberBean result = null;
@@ -111,12 +112,21 @@ public class ProcessingMemberService {
 
 	public ProcessingMemberBean disagree(ProcessingMemberBean bean) {
 		List<ProcessingMemberBean> list = null;
+		List<ProcessingMemberBean> temp = null;
+		SchoolDemandBean sDBean= null;
 		ProcessingMemberBean result = null;
 		if (bean != null) {
-			bean.setProcessingMemberId(bean.getProcessingMemberId());
 			bean.setCheckStatus("未通過");
-			System.out.println(bean);
 			result = processingMemberDAO.update(bean);
+			if(result != null){
+				temp = processingMemberDAO.findBySchoolDemandIdRender(bean.getSchoolDemandId());
+				//System.out.println("++++++"+temp);
+				if(temp.isEmpty()){
+					sDBean = schoolDemandDAO.findByPrimaryKey(bean.getSchoolDemandId());
+					sDBean.setDemandStatus("待洽談");
+					sDBean = schoolDemandDAO.update(sDBean);
+				}
+			}
 		}
 		return result;
 	}

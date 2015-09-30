@@ -54,6 +54,8 @@
 									<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
 									<li class="divider"></li>
 									<li><a href="<c:url value="InsertDonateGoods.jsp" />">建立需求</a></li>
+									<li class="divider"></li>
+									<li><a href="<c:url value='/donation/demand.do?type=AllDeamndBySchool&schoolId=${LoginOK.schoolId}'/>"> 管理物資 </a></li>
 								</c:if>
 							</c:if>
 							<li class="divider"></li>

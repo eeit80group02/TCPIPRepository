@@ -86,9 +86,10 @@
 								<div class="forinput col l3 right-align">會員編號:${param.memberId}</div>
 								<input type="hidden" name="memberId" value="${param.memberId}" />
 						</div>
-						<!-- 學校編號 -->
+						<!-- 學校名稱 -->
 						<div class="row">
-								<div class="forinput col l3 right-align">學校編號:${param.schoolId}</div>
+								<!-- el沒改!!!! -->
+								<div class="forinput col l3 right-align">學校名稱:${param.schoolId}</div>
 								<input type="hidden" name="schoolId" value="${param.schoolId}" />
 						</div>
 					</div>
@@ -134,8 +135,9 @@
 						<!-- 活動時間 -->
 <%-- 						<input type="date" value="${param.startTime}" name="startTime"> --%>
 						<div class="input-field row">
+							<div class="forinput" id="activityTime">活動時間</div>	
 							<div class="col l4">
-								<div class="forinput ">活動時間<span style="font-size:0.8em;font-weight:300;" class="right-align">活動開始時間</span></div>
+								<div class="forinput"><span style="font-size:0.8em;font-weight:300;">活動開始時間</span></div>
 								<input type="date" name="activityStartTime" id="activityStartTime" value="${param.activityStartTime}" required />
 							</div>	
 							<div class="col l2">
@@ -254,6 +256,11 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 <script>
 		(function($) {
+			
+			//讓活動地點標題對齊
+			var dis = $("#forActivityTime").css("padding-left");
+			$("#activityTime").css("padding-left",dis);
+			
 		   $("#view").on("click",function(){
 			$("#picture").trigger("click");   
 		   })

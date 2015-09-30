@@ -210,12 +210,12 @@ public class SchoolDemandServlet extends HttpServlet {
 			}
 		}
 		if(!errorMsg.containsKey("activityContact")){
-			if (activityContact.length() > 20) {
+			if (activityContact.length() > 100) {
 				errorMsg.put("activityContact", "輸入長度有問題");
 			}
 		}
 		if(!errorMsg.containsKey("content")){
-			if (content.length() > 20) {
+			if (content.length() > 500) {
 				errorMsg.put("content", "輸入長度有問題");
 			}
 		}
@@ -241,7 +241,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 			session.setAttribute("error", errorMsg);
 			session.setAttribute("data", data);
-			System.out.println(data);
+			//System.out.println(data);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
 			return;
 		}
@@ -289,7 +289,7 @@ public class SchoolDemandServlet extends HttpServlet {
 
 		sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean == null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
 		session.removeAttribute("Demand");
@@ -426,7 +426,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 			session.setAttribute("error", errorMsg);
 			session.setAttribute("data", data);
-			System.out.println(data);
+			//System.out.println(data);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
 			return;
 		}
@@ -438,7 +438,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		obean.setRoom(checkRoom);
 		obean.setPlace(checkPlace);
 		obean.setFood(checkFood);
-		System.out.println(obean);
+		//System.out.println(obean);
 		// 存入Bean
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);
@@ -476,7 +476,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			return;
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
-		System.out.println(bean);
+		//System.out.println(bean);
 		session.removeAttribute("Demand");
 		int schoolDemandId = bean.getSchoolDemandId();
 		bean.setSchoolDemandId(schoolDemandId);
@@ -529,6 +529,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		System.out.println("----------------------------------會員顯示待洽談----------------------------------");
 		List<SchoolDemandBean> result = null;
 		HttpSession session = request.getSession();
+		session.removeAttribute("mlist");
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
 			if(mbean.getMemberId()==null){
@@ -537,7 +538,7 @@ public class SchoolDemandServlet extends HttpServlet {
 				return;
 			}
 		}
-		result = service.mdisplays();
+		result = service.mdisplays(mbean);
 		System.out.println(result.size());
 		
 		if (!result.isEmpty()) {
@@ -546,7 +547,8 @@ public class SchoolDemandServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 			
 		} else {
-			System.out.println("查詢失敗   導向登入頁面");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+			System.out.println("查詢失敗   導向登入頁面");   
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 		}
 	}
 
@@ -631,7 +633,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		session.removeAttribute("list");
 		bean = (SchoolBean)session.getAttribute("LoginOK");
 		if(bean == null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 		}
 		result = service.displayPersonalRender(bean);
 		request.setAttribute("list", result);
@@ -655,7 +657,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		session.removeAttribute("list");
 		sbean = (SchoolBean)session.getAttribute("LoginOK");
 		if(sbean == null){
-			response.sendRedirect("login.jsp");
+			response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 			return;
 		}
 		int schoolId = sbean.getSchoolId();

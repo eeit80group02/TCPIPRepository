@@ -121,6 +121,14 @@ public class DonationService {
 		return dbdc;
 	}
 	
+	// for base64 picture
+	public DonationBean findOneDemandPicture(int donationId){
+		donationDAOJdbc = new DonationDAOJdbc();
+		DonationBean odb = donationDAOJdbc.findByPrimaryKey(donationId);
+		
+		return odb;
+	}
+	
 	// 包裝資料
 	public DonationBean UpdateOneDemandBySchool(DonationBean donationBeanInput) {
 		
@@ -165,7 +173,7 @@ public class DonationService {
 		return donationBean;
 	}
 	public List<DonationBeanDuplicate> findOneAllDeamndByMember(int schoolId) {
-		System.out.println("rrrschoolId = "+schoolId);
+//		System.out.println("rrrschoolId = "+schoolId);
 		// 比對schoolId後得到一間學校所有捐獻
 		List<DonationBean> resultDisplay = new ArrayList<>();
 		
@@ -322,13 +330,13 @@ public class DonationService {
 					dodBean.setDonationOederId(d.getDonationOederId());
 					dodBean.setDonationId(d.getDonationId());
 					dodBean.setDonationAmount(d.getDonationAmount());
-					System.out.println("@@ "+dodBean.getDonationOederId()+"/"+dodBean.getDonationId()+"/"+dodBean.getDonationAmount());
+//					System.out.println("@@ "+dodBean.getDonationOederId()+"/"+dodBean.getDonationId()+"/"+dodBean.getDonationAmount());
 					dodBeanList.add(dodBean);
 					
 				}
 			}
 		}
-		System.out.println("dodBeanList = "+dodBeanList);
+//		System.out.println("dodBeanList = "+dodBeanList);
 		
 		// 送回前端顯示的捐獻明細
 		List<DonationOrderDuplicateBean> newDetailItems = new ArrayList<>();

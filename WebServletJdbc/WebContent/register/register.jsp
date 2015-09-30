@@ -133,13 +133,15 @@
 								<span style="font-family:微軟正黑體;font-size:1.5em;cursor:pointer;">頭像</span>
 								<input style="position:absolute;top:0;left:0;width:auto;height:100%;opacity:0;cursor:pointer;" type="file" id="picture" accept="image/x-png, image/jpeg" name="picture">
 							</div>									
+<!-- 							                   		後端錯誤訊息顯示 -->
+							<font color="red" size="-1">${MsgErr.errorPictureType}${MsgErr.errorPicture}</font>
 							<!-- 身分證驗證按鈕 -->
 							 <button data-target="identityVarifyModal" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
 <!-- 							 <a href="#modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</a> -->
 						</div>
 						<!-- 身分證字號 -->
 						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
-							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly">
+							<input id="idcardNumber" type="text" class="validate" name="idNumber" required readonly="readonly" value="${param.idNumber}">
 <!-- 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required> -->
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
@@ -203,7 +205,7 @@
 					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
 						<input id="phone" type="text" class="validate" name="phone"  value="${param.phone}">
 <!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
+							<font color="red" size="-1">${MsgErr.errPhoneEmpty}</font>
 						<label for="phone" style="font-size:1.3em;font-weight:600;">室內電話</label>
 											
 					</div>
@@ -242,10 +244,10 @@
 					
 				<!-- button -->
 					<div class="row" id="btndiv">
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="reset" name="action">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 						</button>
-						<button  class="col l2 btn-large waves-effect waves-light right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
+						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
 						</button>
 
@@ -361,7 +363,7 @@
 		 <!-- modal footer -->
 		 <div class="modal-footer blue lighten-5 valign-wrapper" style="height:20%;padding:0;">
 		   	<div class="row valign" style="font-family:微軟正黑體;font-weight:600;">
-		      <a href="#!" id="backregister" class="modal-action modal-close waves-effect waves-yellow btn-large amber darken-2">回註冊頁</a>
+		      <a href="#!" id="backregister" class="modal-action modal-close btn-large amber darken-2">回註冊頁</a>
 		   	</div>
 		 </div>
 		 </div>
@@ -1041,14 +1043,14 @@
 		}
 	};
 
-// 	$(function () {
-// 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
-// 			console.log(responseJson);
-// 			$("#captchaKey").val(responseJson.captchaKey);
-// 			$("#captchaField").text(responseJson.captchaImage);
-// 			$("#captchaImage").attr("src",$("#captchaField").val());
-// 		}); 
-// 	});
+	$(function () {
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+			console.log(responseJson);
+			$("#captchaKey").val(responseJson.captchaKey);
+			$("#captchaField").text(responseJson.captchaImage);
+			$("#captchaImage").attr("src",$("#captchaField").val());
+		}); 
+	});
 	
  	function refresh() {
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {

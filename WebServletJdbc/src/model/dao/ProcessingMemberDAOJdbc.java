@@ -283,4 +283,66 @@ public class ProcessingMemberDAOJdbc implements ProcessingMemberDAO
 		return result;
 	}
 
+	private static final String SELECT_BY_MEMBERID = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE memberId = ?" ;
+	@Override
+	public List<ProcessingMemberBean> finByMemerId(int MemberId) {
+		List<ProcessingMemberBean> result = null;
+		ProcessingMemberBean bean = null;
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_MEMBERID);){
+				pstmt.setInt(1,MemberId);
+				try(ResultSet rset = pstmt.executeQuery();){
+					result = new ArrayList<ProcessingMemberBean>();
+					while(rset.next()){
+						bean = new ProcessingMemberBean();
+						bean.setProcessingMemberId(rset.getInt("processingMemberId"));
+						bean.setSchoolDemandId(rset.getInt("schoolDemandId"));
+						bean.setMemberId(rset.getInt("memberId"));
+						bean.setCheckTime(rset.getTimestamp("checkTime"));
+						bean.setCheckStatus(rset.getString("checkStatus"));
+						result.add(bean);
+					}
+				}
+				catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		return result;
+
+	}
+	private static final String SELECT_BY_SCHOOLDEMANDID_RENDER = "SELECT processingMemberId,schoolDemandId,memberId,checkTime,checkStatus FROM ProcessingMember WHERE SchoolDemandId = ? and checkStatus='待審核'";
+	@Override
+	public List<ProcessingMemberBean> findBySchoolDemandIdRender(int SchoolDemandId) {
+		List<ProcessingMemberBean> result = null;
+		ProcessingMemberBean bean = null;
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_SCHOOLDEMANDID_RENDER);){
+			pstmt.setInt(1,SchoolDemandId);
+			result = new ArrayList<ProcessingMemberBean>();
+			try(ResultSet rset = pstmt.executeQuery();){
+				if(rset.next()){
+					bean = new ProcessingMemberBean();
+					bean.setProcessingMemberId(rset.getInt("processingMemberId"));
+					bean.setSchoolDemandId(rset.getInt("schoolDemandId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					bean.setCheckTime(rset.getTimestamp("checkTime"));
+					bean.setCheckStatus(rset.getString("checkStatus"));
+					result.add(bean);
+				}
+			}
+			catch(SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

@@ -71,10 +71,10 @@ public class DonationCart {
 			System.out.println("remove donationId= "+donationId);
 			cart.remove(donationId);
 			
-			Set<Integer> i = cart.keySet();
-			for (Integer s : i) {
-				System.out.println("in delete's cart= "+ s);
-			}
+//			Set<Integer> i = cart.keySet();
+//			for (Integer s : i) {
+//				System.out.println("in delete's cart= "+ s);
+//			}
 			
 			return true;
 		}
@@ -119,7 +119,7 @@ public class DonationCart {
 	public List<DonationBillBean> getDonationOrderBySchool(){
 		// 學校id
 		Set<Integer> sets = this.getSchoolIdSet();
-		System.out.println("sets "+sets);
+//		System.out.println("sets "+sets);
 		// 購物車所有物品
 		List<DonationBeanDuplicate> list = this.getList();
 		// 找出學校資料
@@ -151,7 +151,7 @@ public class DonationCart {
 			
 			for(DonationBeanDuplicate d : list) {
 				if(i == d.getSchoolId()) {
-					System.out.println("i= "+i+", d.getSchoolId= "+d.getSchoolId());
+//					System.out.println("i= "+i+", d.getSchoolId= "+d.getSchoolId());
 					// 單一學校的單一捐獻需求
 					dbdList.add(d);
 				}
@@ -162,13 +162,13 @@ public class DonationCart {
 			billList.add(billBean);
 		}
 		
-		for(DonationBillBean d : billList) {
-			System.out.println("schoolData = "+d);
-			List<DonationBeanDuplicate> items = d.getDbdList();
-			for(DonationBeanDuplicate ds : items){
-				System.out.println("oneOfAll = "+ds);
-			}
-		}
+//		for(DonationBillBean d : billList) {
+//			System.out.println("schoolData = "+d);
+//			List<DonationBeanDuplicate> items = d.getDbdList();
+//			for(DonationBeanDuplicate ds : items){
+//				System.out.println("oneOfAll = "+ds);
+//			}
+//		}
 		
 		return billList;
 	}
@@ -184,18 +184,18 @@ public class DonationCart {
 	}
 	// 傳回其中一間學校的捐獻資料
 	public DonationBillBean getDonationOfOneSchool(int schoolId){
-		System.out.println("in@@schoolId="+schoolId);
+//		System.out.println("in@@schoolId="+schoolId);
 		DonationBillBean dBean = null;
 		
 		List<DonationBillBean> list = this.getDonationOrderBySchool();
-		System.out.println("list = "+list);
+//		System.out.println("list = "+list);
 		for(DonationBillBean d : list) {
-			System.out.println("99uuuu"+d.getSchoolId());
+//			System.out.println("99uuuu"+d.getSchoolId());
 			if(d.getSchoolId() == schoolId) {
 				dBean = d;
 			}
 		}
-		System.out.println("==================");
+//		System.out.println("==================");
 //		Map<Integer, DonationBillBean> map = this.getContentOfMap();
 //		Set<Integer> sets = map.keySet();
 //		System.out.println("schoolId11601 = "+schoolId);
@@ -207,7 +207,7 @@ public class DonationCart {
 //				dBean = map.get(i);
 //			}
 //		}
-		System.out.println("***dBean = "+dBean);
+//		System.out.println("***dBean = "+dBean);
 		return dBean;
 	}
 	// 取得同間學校的需求

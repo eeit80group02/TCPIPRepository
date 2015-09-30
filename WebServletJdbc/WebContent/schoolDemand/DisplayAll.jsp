@@ -28,14 +28,14 @@
 	<div class="row" id="mainboard">
 		
 		<!-- 篩選條件置頂 -->
-		<div class="row">
-				<div class="col l12 center-align">
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">北部地區</button>
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">中部地區</button>
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">南部地區</button>
-					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">東部地區</button>
-				</div>
-		</div>		
+<!-- 		<div class="row"> -->
+<!-- 				<div class="col l12 center-align"> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">北部地區</button> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">中部地區</button> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">南部地區</button> -->
+<!-- 					<button class="btn-large red" style="font-family:微軟正黑體;font-size:2em;font-weight:600">東部地區</button> -->
+<!-- 				</div> -->
+<!-- 		</div>		 -->
 		
 		<!-- 8欄置中 -->
 		<div class="col l10 offset-l1">
@@ -46,7 +46,7 @@
           			<!-- 卡 -->
           			<c:if test="${not empty mlist}">
           				<c:forEach items="${mlist}" var="bean">
-				          	<div class="col l5 white offset-l1 card-panel hoverable" style="padding:5px;">
+				          	<div class="col l5 white offset-l1 light-green lighten-4 card-panel hoverable" style="padding:5px;">
 				          		<c:url value="/schoolDemand/SchoolDemandServlet.do?type=display" var="path">
 									<c:param name="type" value="mdisplay" />
 									<c:param name="schoolDemandId" value="${bean.schoolDemandId}" />
@@ -57,7 +57,7 @@
 												loyalty
 											</i>								
 								            <div class="col l10 card-title black-text center-align" style="font-size:1.6em;font-weight:600;line-height:160%;">
-								         	  	需求計畫名稱${bean.activityTopic}
+								         	  	${bean.activityTopic}
 								            </div>
 							            </div>
 							            <div class="row" style="font-size:1.4em;font-family:標楷體;font-weight:600">

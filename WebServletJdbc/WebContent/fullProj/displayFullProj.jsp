@@ -63,7 +63,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">活動地點</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 									${fullProj.location}							
 									</div>
 								</div>
@@ -80,10 +80,9 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">活動時間</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
-									<fmt:formatDate var="startTime" value="${fullProj.activityStartTime}"  type="date" pattern="yyyy-MM-dd" />
-									<fmt:formatDate var="endTime" value="${fullProj.activityEndTime}"  type="date" pattern="yyyy-MM-dd" />									
-									${startTime} ~ ${endTime}							
+									<div style="font-size:1.4em;">
+										<fmt:formatDate value="${fullProj.activityStartTime}" pattern="yyyy-MM-dd" /> ~ 
+										<fmt:formatDate value="${fullProj.activityEndTime}" pattern="yyyy-MM-dd" />									
 									</div>
 								</div>
 							</div>	
@@ -99,7 +98,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">招募人數</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 									${fn:length(fullProj.participatorMap.pass)}/${fullProj.estMember}							
 									</div>
 								</div>
@@ -116,7 +115,7 @@
 									<h5 class="itemheader center-align" style="display:inline-block;margin:0 auto;">活動預算</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>
+									<div style="font-size:1.4em;">
 									${fullProj.budget}							
 									</div>
 								</div>
@@ -177,17 +176,6 @@
 					</div>
 				</div>
 
-<!-- 			<!-- 發問用按鈕 -->
-<%-- 			<c:if test="${LoginOK.beanName.equals('member')}"> --%>
-<%-- 				<c:if test="${LoginOK.memberId != fullProj.memberId}"> --%>
-<!-- 					<div class="fixed-action-btn" style="bottom: 45px; right: 24px;"> -->
-<!-- 						<a href="#askmodal" id="askbtn" class="btn red white-text right" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">提問</a> -->
-<!-- 					</div> -->
-<%-- 				</c:if> --%>
-<%-- 			</c:if> --%>
-<!-- 			<!-- 發問用按鈕 -->
-
-
 				<div class="card-panel hoverable row" style="background-color:#FFFCEC">
 					<!-- 問與答 -->
 					<div class="row">
@@ -206,36 +194,11 @@
 						</c:if>
 					</div>
 
-<!-- 					<div id="discuss" class="row"> -->
-
-<!-- 					</div> -->
 					<!-- 問與答 -->					
 					<div class="row" id="questiondiv">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<div id="discuss" class="card-panel white">
 							<!-- 內容在jQuery -->
-								<!-- 問題 -->
-								
-								<!-- 問題 -->
-								<!-- 答案 -->
-<!-- 								<div class="row"> -->
-<!-- 									<div class="col l2"> -->
-<!-- 										<div class="btn green white-text"> -->
-<!-- 											<i class="material-icons">chat_bubble</i> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 									<div class="col l10" style="font-size:1.6em;font-weight:600"> -->
-<!-- 										要回覆的答案在這裡，如果很長的時候不知道會不會很可怕不過不管它就是先嘗試就對了不知道會發生什麼樣的事情 -->
-<!-- 									</div> -->
-<!-- 								</div> -->
-								<!-- 答案 -->
-
-<!-- 								<div class="row"> -->
-<!-- 									<a href="#replymodal" id="replybtn" class="col l2 btn-large right black-text center-align  green accent-1" style="font-size:1.5em;font-weight:600;font-family:微軟正黑體;"> -->
-<!-- 										<i class="material-icons black-text" style="font-size:1.5em;vertical-align:bottom;">input</i> -->
-<!-- 										回覆  -->
-<!-- 									</a> -->
-<!-- 								</div> -->
 							</div>	
 						</div>
 					</div>					
@@ -267,24 +230,48 @@
 			    	<c:if test="${LoginOK.memberId != fullProj.memberId && not flag}">
 					    <form id="participator" action="<c:url value="/participator.do" />" method="post">
 							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-							<input type="hidden" name="startTime" value="${startTime}">
-							<input type="hidden" name="endTime" value="${endTime}">
+							<input type="hidden" name="startTime" value="<fmt:formatDate value='${fullProj.activityStartTime}' pattern="yyyy-MM-dd" />">
+							<input type="hidden" name="endTime" value="<fmt:formatDate value='${fullProj.activityEndTime}' pattern="yyyy-MM-dd" />">
 							<input type="hidden" name="type" value="participate">
 							<input id="participatorSubmit" class="btn-large white-text red accent-2" style="font-family:微軟正黑體;font-size:1.5em;width:100%" type="button" value="加入活動" >			
 						</form>
 			    	</c:if>
 			    </c:if>
 			</div>
-			<div>
-				<form action="<c:url value="/draganddrop.jsp" />" method="get">
-					<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
-<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
-					<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
-						<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
-						<span style="width:100%;">任務板</span>
-					</button>
-				</form>
-			</div>	
+			
+			<!-- 任物版藏起來 參加者可看見 -->
+			<c:if test="${LoginOK.beanName.equals('member')}">
+				<c:forEach var="participattor" items="${fullProj.participatorMap.pass}">
+					<c:if test="${participattor.memberId == LoginOK.memberId}">
+						<div>
+							<form action="<c:url value="/draganddrop.jsp" />" method="get">
+								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+			<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
+								<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
+									<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
+									<span style="width:100%;">任務板</span>
+								</button>
+							</form>
+						</div>	
+					</c:if>
+				</c:forEach>
+			</c:if>
+			
+			<!-- 任物版藏起來學校可看見 -->
+			<c:if test="${LoginOK.beanName.equals('school')}">
+				<c:if test="${fullProj.schoolId == LoginOK.schoolId}">
+					<div>
+						<form action="<c:url value="/draganddrop.jsp" />" method="get">
+							<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}">
+		<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
+							<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
+								<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
+								<span style="width:100%;">任務板</span>
+							</button>
+						</form>
+					</div>	
+				</c:if>
+			</c:if>
 			
 		</div>	
 	</div>
@@ -297,9 +284,10 @@
 			    <div class="modal-content">
 			      <h4 style="font-weight:600;font-famly:微軟正黑體;">我的<span class="red-text">回覆</span>是...</h4>
 			      <textarea id="relpyContent" rows="10" cols="40" style="height:10em;" name=""></textarea>
+			      <input id="projDiscussId"type="hidden" value="" />
 			    </div>
 			    <div class="modal-footer">
-			      <button class=" modal-action modal-close btn-large red white-text" type="submit" style="font-size:1.6em;font-weight:600;">送出</button>
+			      <button id="reply" class=" modal-action modal-close btn-large red white-text" type="button" style="font-size:1.6em;font-weight:600;">送出</button>
 			    </div>
 			  </div>			
 			<!-- 回覆用modal -->
@@ -401,11 +389,31 @@
 				}
 			});
 			
+			$("#reply").on("click",function(){
+				if($("#relpyContent").val().trim().length < 10){
+					alert("留言必須大於10個字");
+				}else{
+					replyMessage();
+					$("#relpyContent").val("");
+				}
+			});
 			function postMessage(){
 				$.ajax({
 					"url":"<c:url value='/projDiscuss.do' />",
 					"type":"POST",
 					"data":{"type":"post","fullProjId":"${fullProj.fullProjId}","content":$("#content").val()},
+					"dataType" :"json",
+					"success":function(data){
+						displayMessage();
+					}
+				});
+			}
+			
+			function replyMessage(){
+				$.ajax({
+					"url":"<c:url value='/projDiscuss.do' />",
+					"type":"POST",
+					"data":{"type":"reply","projDiscussId":$("#projDiscussId").val(),"content":$("#relpyContent").val()},
 					"dataType" :"json",
 					"success":function(data){
 						displayMessage();
@@ -421,60 +429,50 @@
 					"success":function(data){
 					 // data => Object
 					 // console.log(data);
-// 						$("#discuss > div").remove();
+						$("#discuss > div").remove();
 						$.each(data.result,function(index,value){
 // 							data.result => Array[]
 // 							Array[index] => Object
 							
 	 						var content = "<div class='col l2'><div class='btn red white-text'>" +
 	 									  "<i class='material-icons'>textsms</i></div></div>" +
-	 									  "<div class='col l10' style='font-size:1.6em;font-weight:600'>" +
+	 									  "<div class='col l10' style='font-size:1.6em;font-weight:600;'>" +
 	 									   value.questionMember + " 問:<br>" + 
-		 								   value.questionMemberContent + "<br>" +
+	 									  "<div class='row' style='word-break:break-all'>"+ 
+		 								   value.questionMemberContent + 
+		 								  "</div>"+
 		  								  "<div align='right'><small>" + value.questionMemberTime + "</small></div></div>";
 		  					
 		  					if(value.answerMemberId == "null"){
-		  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
-		  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
+		  						// 很奇怪的毛毛蟲問題
+		  						<c:if test="${LoginOK.beanName.equals('member')}">
+		  							<c:if test="${LoginOK.memberId == fullProj.memberId}">
+				  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
+				  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
+		  							</c:if>
+		  						</c:if>
 
 		  					}else{
 		  						content += "<div class='col l2'><div class='btn green white-text'>" +
 						           		   "<i class='material-icons'>chat_bubble</i></div></div>" +
-								   		   "<div class='col l10' style='font-size:1.6em;font-weight:600'> " +
+								   		   "<div class='col l10' style='font-size:1.6em;font-weight:600;white-space:pre-wrap;'> " +
 								   			value.answerMember + " 答:<br>" + 
-								     		value.answerMemberContent + "<br>" +
+								   			"<div class='row' style='word-break:break-all;'>" +
+								     		value.answerMemberContent + 
+											"</div>" +
   								  		   "<div align='right'><small>" + value.answerMemberTime + "</small></div></div>";
 		  					}
 		  								   
-// 		 									if(value.answerMemberId == "null"){
-// 	 										console.log(value.projDiscusId);
-// 	 										memberContent += "<div align='right'>" +
-// 	 														 "<form action='<c:url value='/projDiscuss.do' />' method='post'>" +
-// 	 														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
-// 	 														 "<input type='hidden' name='type' value='reply'>" + 
-// 	 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
-// 	 									}
 // 		  					 console.log($("#projDiscuss" + value.projDiscussId));
 		  								   
 	 						var contentDiv = $("<div class='row'></div>").html(content);
 	 						$("#discuss").append(contentDiv);
 	 						$("#projDiscuss"+value.projDiscussId).leanModal();
-		  				// 可以正常跑
-// 		  					<c:if test="${LoginOK.beanName.equals('member')}">
-// 								<c:if test="${LoginOK.memberId == fullProj.memberId}">
-// 									if(value.answerMemberId == "null"){
-// 										console.log(value.projDiscusId);
-// 										memberContent += "<div align='right'>" +
-// 														 "<form action='<c:url value='/projDiscuss.do' />' method='post'>" +
-// 														 "<input type='hidden' name='projDiscuss' value='" + value.projDiscusId + "'>" + 
-// 														 "<input type='hidden' name='type' value='reply'>" + 
-// 														 "<button type='submit' class='btn-large white-text red' style='width:100%;font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>回覆</button></form></div>";
-// 									}
-// 								</c:if>
-//  							</c:if>
-		  										
-							
-
+							$("#projDiscuss"+value.projDiscussId).on("click",function(){
+// 								var str = $(this).prop("id").substring(11);
+								$("#projDiscussId").val($(this).prop("id").substring(11));
+// 								console.log(str);
+							});
 						});
 					}
 				});
@@ -484,33 +482,42 @@
 	    <script>
 	    	
 	    	var fromJava = <%=request.getAttribute("googleMap")%>
-	    	
+	    	console.log(fromJava);
 			function initMap() {
 			  var directionsService = new google.maps.DirectionsService,
-			  	  directionsDisplay = new google.maps.DirectionsRenderer,
-			  	  centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
-			  var map = new google.maps.Map(document.getElementById('googlemap'), {
-			    zoom: 17,
-			    center: centerlatlng
-			  });
-			  
-// 			  var nearbySearchService = new google.maps.places.PlacesService(map);
-// 			  nearbySearchService.nearbySearch({
-// 				  location:centerlatlng,
-// 				  radius:
-// 			  })
-			  
-			  calculateAndDisplayRoute(directionsService, directionsDisplay);
-			  directionsDisplay.setMap(map);
-			
-			
+			  	  directionsDisplay = new google.maps.DirectionsRenderer;
+			  if(fromJava.fulprojLocation){
+			  	var centerlatlng = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+			  	var map = new google.maps.Map(document.getElementById('googlemap'), {
+				    zoom: 16,
+				    center: centerlatlng
+				  	});	
+				  calculateAndDisplayRoute(directionsService, directionsDisplay);
+				  directionsDisplay.setMap(map);
+			  }else{
+					  var centerlatlng = new google.maps.LatLng(fromJava.lat,fromJava.lng);
+					  var map = new google.maps.Map(document.getElementById('googlemap'), {
+						    zoom: 16,
+						    center: centerlatlng
+					  });
+					  
+					  var marker = new google.maps.Marker({
+						    position: centerlatlng,
+						    map: map,
+						    title: '活動地點'
+				  		})
+				}
 			}
 			
 			function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 				
-				var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
-				var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
-			  directionsService.route({
+				if(fromJava.fulprojLocation){
+					var start = new google.maps.LatLng(fromJava.fulprojLocation.lat,fromJava.fulprojLocation.lng);
+					var destination = new google.maps.LatLng(fromJava.closestStation.lat,fromJava.closestStation.lng);
+				}else{
+					return;
+				}		  
+				directionsService.route({
 			    origin: start,
 			    destination: destination,
 			    travelMode: google.maps.TravelMode.DRIVING
