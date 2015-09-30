@@ -261,6 +261,17 @@ public class FullProjService
 				fullProjBean.setProjStatus("招募中");
 				fullProjDAO.update(fullProjBean);
 				
+				// 發起者 加入參加人表格
+				ParticipatorBean participatorBean = new ParticipatorBean();
+				participatorBean.setFullProjId(fullProjBean.getFullProjId());
+				participatorBean.setMemberId(fullProjBean.getMemberId());
+				participatorBean.setActivityStartTime(fullProjBean.getActivityStartTime());
+				participatorBean.setActivityEndTime(fullProjBean.getActivityEndTime());
+				participatorBean.setCheckTime(new java.util.Date(System.currentTimeMillis()));
+				participatorBean.setParticipateStatus("已通過");
+				participatorDAO.insert(participatorBean);
+				
+				// 任務版建立
 				MissionBoardBean missionBoardBean = new MissionBoardBean();
 				missionBoardBean.setFullProjId(fullProjBean.getFullProjId());
 				missionBoardBean.setName(fullProjBean.getTitle());

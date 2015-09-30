@@ -214,7 +214,7 @@ public class FullProjServlet extends HttpServlet
 			System.out.println(fullProjBean);
 			System.out.println("==================================================");
 			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fId));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=display&fullProjId=" + fId));
 			return;
 		}
 	}
