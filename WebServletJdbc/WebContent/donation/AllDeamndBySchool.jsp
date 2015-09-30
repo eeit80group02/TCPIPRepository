@@ -176,7 +176,6 @@
 																<tr>
 																	<td>${initem.name}</td>
 																	<td>${initem.donationAmount}</td>
-																	<%-- 																	<td>${initem.donationOederDate}</td> --%>
 																	<td><fmt:formatDate value="${initem.donationOederDate}" pattern="yyyy-MM-dd hh:mm" /></td>
 																</tr>
 															</c:when>
@@ -199,8 +198,13 @@
 										</button>
 									</span>
 									<!-- 中 icon -->
-									<span class="midIcon"> <a href="<c:url value='demand.do?type=UpdateOneDemand&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
-									</span>
+
+									<c:choose>
+										<c:when test="${item.donationStatus == '否'}">
+											<span class="midIcon"> <a href="<c:url value='demand.do?type=UpdateOneDemand&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
+											</span>
+										</c:when>
+									</c:choose>
 
 									<!-- 右 icon -->
 									<span class="rightIcon"> <a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
