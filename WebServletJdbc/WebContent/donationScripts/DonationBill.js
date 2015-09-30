@@ -1,8 +1,7 @@
 $(window).load(function() {
 
 	// 雙擊左鍵刪除一整列
-	$("#test1 #donationBill01 tbody .deleteRow button").dblclick(deleteTableRow);
-	$("#test2 #donationBill02 tbody .deleteRow button").dblclick(deleteTableRow);
+	$("#test1 .deleteRow button").dblclick(deleteTableRow);
 
 	function deleteTableRow() {
 		$(this).parents('tr').css("display", "none");

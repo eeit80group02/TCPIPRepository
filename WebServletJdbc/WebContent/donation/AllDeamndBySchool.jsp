@@ -247,7 +247,6 @@
 																<td>捐獻時間</td>
 															</tr>
 														</thead>
-														<td class="dataValue"><fmt:formatDate value="${OneDemand.demandTime}" pattern="yyyy-MM-dd hh:mm" /></td>
 
 														<tbody>
 															<c:forEach var='initem' items='${OneAllDetails}'>
@@ -279,8 +278,12 @@
 												</button>
 											</span>
 											<!-- 中 icon -->
-											<span class="midIcon"> <a href="#" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
-											</span>
+											<c:choose>
+												<c:when test="${item.donationStatus == '否'}">
+													<span class="midIcon"> <a href="<c:url value='demand.do?type=UpdateOneDemand&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
+													</span>
+												</c:when>
+											</c:choose>
 
 											<!-- 右 icon -->
 											<span class="rightIcon"> <a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
@@ -353,8 +356,12 @@
 												</button>
 											</span>
 											<!-- 中 icon -->
-											<!-- <span class="midIcon"> <a href="#" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a> -->
-											<!-- </span> -->
+											<c:choose>
+												<c:when test="${item.donationStatus == '否'}">
+													<span class="midIcon"> <a href="<c:url value='demand.do?type=UpdateOneDemand&donationId=${item.donationId}&schoolId=${item.schoolId}'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">brush</i></a>
+													</span>
+												</c:when>
+											</c:choose>
 
 											<!-- 右 icon -->
 											<span class="rightIcon"> <a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>

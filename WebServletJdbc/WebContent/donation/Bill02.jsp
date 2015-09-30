@@ -188,7 +188,7 @@
 											</button>
 										</td>
 										<td class="deleteRow">
-											<button type="button" class="btn btn-small btn-floating">
+											<button type="button" class="btn btn-small btn-floating" id="deleteRow${vs.index}">
 												<i class="small material-icons">delete</i>
 											</button>
 										</td>
@@ -209,14 +209,14 @@
 
 												/* 設置值私有方法 */
 												var setAddValue = function() {
-													// 													var input = $("#text${vs.index}").val();
+													// var input = $("#text${vs.index}").val();
 													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
 													setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
 												}
 
 												/* 設置值私有方法 */
 												var setSubValue = function() {
-													// 													var input = $("#text${vs.index}").val();
+													// var input = $("#text${vs.index}").val();
 													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
 													setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
 												}
@@ -225,11 +225,11 @@
 												$("#buttonSub${vs.index}").mousedown(function() {
 													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+													if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setSubValue();
 
-													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+													} else if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
 														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
@@ -244,11 +244,11 @@
 												$("#buttonAdd${vs.index}").mousedown(function() {
 													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+													if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setAddValue();
 
-													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+													} else if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
 														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
@@ -263,9 +263,9 @@
 
 												function checkText() {
 													var input = $("#text${vs.index}").val();
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+													if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) <= "${item.demandNumber}") {
 
-													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+													} else if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
 														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
@@ -273,11 +273,17 @@
 														$("#text${vs.index}").empty();
 														$("#text${vs.index}").val("1");
 													}
-													console.log(input);
 													clearInterval(changeStepTimer);
 													clearTimeout(setValueTimer);
 													step = 1;
 												}
+
+												$("#deleteRow${vs.index}").dblclick(function() {
+													$("#text${vs.index}").val("0");
+													Materialize.toast('<i class="tiny material-icons">check_circle</i>&nbsp;<span>移除成功</span>', 1800, 'rounded');
+													$(this).parents('tr').css("display", "none");
+												});
+
 											}(jQuery));
 										</script>
 									</tr>

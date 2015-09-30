@@ -244,6 +244,7 @@
 					
 				<!-- button -->
 					<div class="row" id="btndiv">
+						<div id="demo" class="btn">一鍵Demo</div>
 						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
 							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
 						</button>
@@ -381,8 +382,12 @@
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	
 	<script>
+
 	
-			(function($) {			
+	
+			(function($) {
+				
+				
 				var inputDate = $("#datepicker");
 				var changeYearButtons = function() {
 					setTimeout(function() {
@@ -535,7 +540,21 @@
 				makeanimate($("#birthday"),$( "#birthvalidatediv" ),$("#birthvalidatediv>li"));
 				makeanimate($("#email"),$( "#emailvalidatediv" ),$("#emailvalidatediv>li"));
 				
-
+			
+				
+				//一鍵demo
+				$( "#demo" ).click(function() {
+					$("#accounts").trigger("focus").val("eeit8013");
+					$("#lastName").focus().val("Xie");
+					$("#firstName").focus().val("JiQian");
+					$("#boy").focus().click();
+					$("#phone").focus().val("02-2793008");
+					$("#cellPhone").focus().val("0927-770689");
+					$("#birthday").focus().val("1991-04-23");
+					$("#email").focus().val("zicehuijava80@gmail.com");
+					$("#address").focus().val("台北市大安區仁愛路四段27巷1號");
+				});			
+				
 			//表單驗證
 				//身分證字號
 				$("#backregister").on("click",function(){
@@ -1043,14 +1062,14 @@
 		}
 	};
 
-	$(function () {
-		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
-			console.log(responseJson);
-			$("#captchaKey").val(responseJson.captchaKey);
-			$("#captchaField").text(responseJson.captchaImage);
-			$("#captchaImage").attr("src",$("#captchaField").val());
-		}); 
-	});
+// 	$(function () {
+// 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+// 			console.log(responseJson);
+// 			$("#captchaKey").val(responseJson.captchaKey);
+// 			$("#captchaField").text(responseJson.captchaImage);
+// 			$("#captchaImage").attr("src",$("#captchaField").val());
+// 		}); 
+// 	});
 	
  	function refresh() {
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
