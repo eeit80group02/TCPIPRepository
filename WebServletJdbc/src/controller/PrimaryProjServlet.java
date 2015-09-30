@@ -188,7 +188,7 @@ public class PrimaryProjServlet extends HttpServlet
 			if(result != null)
 			{
 				// 成功導向
-				System.out.println(result);
+//				System.out.println(result);
 				System.out.println("==================================================");
 				request.setAttribute("primaryProj",result);
 				request.getRequestDispatcher("/personal/displayPersonalPrimaryProj.jsp").forward(request,response);;
