@@ -22,6 +22,11 @@
 			font-weight:300;
 			width:100%;
 		}
+		
+		
+		#primaryContentImgLimit img{
+			max-width:100%;
+		}
 </style>
 </head>
 <body class="light-blue lighten-5">
@@ -78,7 +83,7 @@
 						</div>
 					</div>
 					<!-- 計畫內容 -->
-					<div class="row">
+					<div class="row" id="primaryContentImgLimit">
 						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
 							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
 							${primaryProj.content}

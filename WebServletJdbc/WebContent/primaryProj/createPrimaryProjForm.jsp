@@ -186,7 +186,7 @@
 						</div>
 						
 						<!-- 計畫內容 -->
-						<div class="row">
+						<div class="row" id="limitImgSize">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
 								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
@@ -240,7 +240,10 @@
 		   })
 		   
 			//指定ckeditor()的skin
-			CKEDITOR.replace("content",{skin:"moono"})
+			CKEDITOR.replace("content",{skin:"moono"});
+		   //限定ckeditor中的圖片大小
+		   var imgwidth = $("#content").width();
+		   $("#limitImgSize>img").css("max-width",imgwidth);
 			
 			
 			//datepicker初始化(活動時間)
