@@ -32,8 +32,8 @@ public class InsertDonation {
 			pstmt.setString(9, "全新"); // 物資狀態(全新/二手/不拘)
 
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-08-11 10:20").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-11-11 10:20").getTime()));
+			pstmt.setDate(10, new java.sql.Date(sdf.parse("2015-08-11 10:20").getTime()));
+			pstmt.setDate(11, new java.sql.Date(sdf.parse("2015-11-11 10:20").getTime()));
 
 			File file = new File("image/Donation/donation01.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
