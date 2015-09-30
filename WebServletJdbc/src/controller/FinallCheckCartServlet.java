@@ -33,7 +33,6 @@ public class FinallCheckCartServlet extends HttpServlet {
 		// 驗證 session，按下禮物 icon與 booking鈕時都要檢查是否是登入會員的狀態
 		HttpSession session = request.getSession(false);
 		if (session == null) {
-			//...
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/FindGoods.jsp"));
 			return;
@@ -84,13 +83,6 @@ public class FinallCheckCartServlet extends HttpServlet {
 		// for stepThree
 		String schoolId3 = request.getParameter("schoolId3");
 		String dealId = request.getParameter("dealId");
-		System.out.println("name"+name);
-		System.out.println("address"+address);
-		System.out.println("phone"+phone);
-		System.out.println("email"+email);
-		System.out.println("memberId"+memberId);
-		System.out.println("schoolId3"+schoolId3);
-		System.out.println("dealId"+dealId);
 		
 		// 封裝訂單主檔
 		DonationOrderBean donationOrderBean = new DonationOrderBean();
@@ -102,41 +94,30 @@ public class FinallCheckCartServlet extends HttpServlet {
 		donationOrderBean.setEmail(email);
 		donationOrderBean.setPickTime(new Date());
 		donationOrderBean.setDonationOederDate(new Date());
-		// 假定貨運單編號
 		donationOrderBean.setDealId(dealId);
 		
-		
 		if (linkto.equals("stepOne")) {
-			
 			List<DonationBillBean> list = dCart.getDonationOrderBySchool();
 			request.setAttribute("DemandOBSchool", list);
 			
-			System.out.println("cart work");
 			RequestDispatcher rd = request.getRequestDispatcher("Bill01.jsp");
 			rd.forward(request, response);
 			return;
-			
-//			response.sendRedirect(response.encodeRedirectURL(request
-//					.getContextPath()+"/donation/CheckDonationList.jsp"));
-//			return;
 			
 		} if (linkto.equals("stepTwo")) {
 			int schoolId = 0;
 			if(schoolIdStr == null || schoolIdStr.trim().length() == 0) {
 				System.out.println("stepTwo 資料錯誤");
 			}
+			
 			schoolId = Integer.parseInt(schoolIdStr);
 			DonationBillBean dBean = dCart.getDonationOfOneSchool(schoolId);
+			
 			request.setAttribute("OneSchoolBill", dBean);
 			
-			System.out.println("cart work");
 			RequestDispatcher rd = request.getRequestDispatcher("Bill02.jsp");
 			rd.forward(request, response);
 			return;
-			
-//			response.sendRedirect(response.encodeRedirectURL(request
-//					.getContextPath()+"/donation/CheckDonationList.jsp"));
-//			return;
 			
 		} if (linkto.equals("stepThree")) {
 			int schoolId = 0;
@@ -148,36 +129,20 @@ public class FinallCheckCartServlet extends HttpServlet {
 			DonationService service = new DonationService();
 			DonationOrderBean orderBean = service.OneSchoolOrderBooking(donationOrderBean, schoolId, dCart);
 			
+			// 刪除其中一間捐給學校的的資料
 			if(orderBean != null) {
 				dCart.deleteDonationOfOneSchool(schoolId);
 			}
 			
-			// 傳送購物車最新資訊.
+			// 傳送購物車最新資訊，製造cookie
 			String idString = dCart.getDonationIdString();
+			
 			request.setAttribute("newItemsInCart", idString);
-			
-//			List<DonationBillBean> list = dCart.getDonationOrderBySchool();
-//			session.setAttribute("DemandOBSchool", list);
 			request.setAttribute("OrderDetail", orderBean);
-			
-			System.out.println("cart work");
 			RequestDispatcher rd = request.getRequestDispatcher("Bill03.jsp");
 			rd.forward(request, response);
 			return;
-			
-//			response.sendRedirect(response.encodeRedirectURL(request
-//					.getContextPath()+"/donation/CheckDonationList.jsp"));
-//			return;
-			
-		}  else if (linkto.equals("checkBooking")) {
-			
-			
-			
-			System.out.println("cart work");
-			RequestDispatcher rd = request.getRequestDispatcher("Bill02.jsp");
-			rd.forward(request, response);
-			return;
-			
+
 		}
 	}
 }

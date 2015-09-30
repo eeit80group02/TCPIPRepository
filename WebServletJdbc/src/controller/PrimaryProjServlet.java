@@ -512,7 +512,6 @@ public class PrimaryProjServlet extends HttpServlet
 	private void displayPrimaryProjAll(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 		System.out.println("======================================================");
 		
 		List<PrimaryProjBean> beans = service.displayPrimaryProjAll();

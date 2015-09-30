@@ -30,7 +30,7 @@
 
 		// 收件人(學校方)
 
-		$("#txtPkgexp").val("跳繩和墊板");
+		$("#txtPkgexp").val("搬運請小心！");
 		$("#test2 #textRightLable01").attr("class", "active");
 		$("#test2 #textRightLable02").attr("class", "active");
 		$("#test2 #textRightLable03").attr("class", "active");

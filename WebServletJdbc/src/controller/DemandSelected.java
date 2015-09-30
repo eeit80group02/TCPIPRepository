@@ -1,5 +1,7 @@
 package controller;
 
+import global.GlobalService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -168,12 +170,22 @@ public class DemandSelected extends HttpServlet {
 			int donationId = Integer.parseInt(donationIdStr);
 			int schoolId = Integer.parseInt(schoolIdStr);
 			
-			DonationBean donationBean = new DonationBean();
+			
 			DonationService service = new DonationService();
 			DonationBeanDuplicate donationBeanDuplicate = service.findOneDemand(donationId);
 			
+			DonationBean donationBean = new DonationBean();
+			donationBean = service.findOneDemandPicture(donationId);
+
+			byte[] image = donationBean.getImageFile();
+			System.out.println("image= "+image);
+			String imageName = donationBean.getImageName();
+			System.out.println("imageName= "+imageName);
+			String ImageBase64 = GlobalService.convertByteArrayToBase64String(imageName, image);
+			System.out.println("ImageBase64= "+ImageBase64);
 //			request.setAttribute("OneDemand", donationBeanDuplicate);
 			session.setAttribute("OneDemand", donationBeanDuplicate);
+			session.setAttribute("UpdateImage", ImageBase64);
 //			RequestDispatcher rd = request.getRequestDispatcher("UpdateOneDemand.jsp");
 //			rd.forward(request, response);
 //			return;

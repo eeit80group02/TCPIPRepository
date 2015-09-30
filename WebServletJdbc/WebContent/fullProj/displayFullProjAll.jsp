@@ -76,7 +76,7 @@
 				<div class="touche">
 					<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 						<div class="card-image activator"
-							style="background-image: url('${fullProj.base64String}'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+							style="background-image: url('<c:url value="/getImage.do?type=fullProj&fullProjId=${fullProj.fullProjId}" />'); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 						</div>
 						<div class="card-content">
 							<p style="font-size: 20pt" class="truncate">${fullProj.title}</p>

@@ -4,8 +4,6 @@ import java.util.Date;
 
 public class init
 {
-
-	private String test = "hahaha";
 	public static void main(String[] args)
 	{
 		Date start = new Date(System.currentTimeMillis());
@@ -20,7 +18,11 @@ public class init
 		InsertMissionBoard.start();
 		InsertMissionSet.start();
 		InsertMission.start();
-		InsertDonation.start();			//Donation
+		
+		// Donation 系列 start
+		InsertDonation.start();
+		// InsertDonationOrder.start();
+		// Donation 系列 end
 		
 		System.out.println("資料全部已新增");		
 		Date end = new Date(System.currentTimeMillis());

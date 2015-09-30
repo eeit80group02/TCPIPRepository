@@ -45,7 +45,10 @@ public class DonationServlet extends HttpServlet {
 		// 必須學校登入會員才可使用
 		HttpSession session = request.getSession(false);
 		if (session == null) {
+			System.out.println("session == null");
 			// 導向登入畫面
+		} else {
+			System.out.println("session != null");
 		}
 		
 		// 驗證是否為學校登入
@@ -66,7 +69,6 @@ public class DonationServlet extends HttpServlet {
 		} else if (obj instanceof SchoolBean) {
 			System.out.println("學校登入狀態，");
 		}
-		System.out.println("@@1");
 		// 1.接收資料
 		int donationId = 0; 						// 捐獻編號(流水號)(只要物品規格不同，視為兩筆) PK
 		String donationIdStr = null; 		
@@ -97,7 +99,6 @@ public class DonationServlet extends HttpServlet {
 		String remark = null; 						// 備註(可以填寫額外的訊息)
 		
 		String choice = request.getParameter("hidden");
-		System.out.println("@@12");
 		InputStream is = null;
 		String mimeType = null;
 		Map<String,String> errorMsgs = new HashMap<>();
@@ -183,7 +184,7 @@ public class DonationServlet extends HttpServlet {
 				remark = "無";
 //				errorMsgs.put("errorSupplyStatus", "物資狀態(全新/二手/不拘)");
 			} 
-		}System.out.println("@@3");
+		}
 		if(!choice.equals("insert")) {
 			if(donationIdStr == null || donationIdStr.trim().length() == 0) {
 				errorMsgs.put("errorDonationIdStr", "系統須帶入donationId");
@@ -214,18 +215,15 @@ public class DonationServlet extends HttpServlet {
 		donationBean.setSize(size);
 		donationBean.setDemandContent(demandContent);
 		donationBean.setSupplyStatus(supplyStatus);
-		System.out.println("@@4");
 		// 系統設定時間
 		if (!choice.equals("delete")) {
 			if (choice.equals("insert")){
 				demandTime = new Date(System.currentTimeMillis());
-				System.out.println("demandTime: "+demandTime);
 				donationBean.setDemandTime(demandTime);
 				// 時間運算，預計三個月後截止
 				Calendar cDate = Calendar.getInstance();
 				cDate.add(Calendar.MONTH, 3);
 				expireTime = cDate.getTime();
-				System.out.println("expireTime: "+expireTime);
 				donationBean.setExpireTime(expireTime);
 				// 圖片處理
 				byte[] image = GlobalService.convertInputStreamToByteArray(is);
@@ -247,7 +245,6 @@ public class DonationServlet extends HttpServlet {
 				donationBean.setRemark(remark);
 			}
 		}
-		System.out.println("@@5");
 		if (choice.equals("insert")) {
 			// 4.永續層存取
 			DonationService service = new DonationService();
@@ -281,7 +278,6 @@ public class DonationServlet extends HttpServlet {
 			// 4.永續層存取
 			DonationService service = new DonationService();
 			DonationBean donationBeanUpdate = service.UpdateOneDemandBySchool(donationBean);
-			System.out.println("@@6");
 			if (donationBeanUpdate == null) {
 				errorMsgs.put("Fail", "物資需求更新失敗");
 				System.out.println("物資需求更新失敗");
