@@ -5,6 +5,8 @@ public class ImageHolder {
 	private String name;
 	private String contentType;
 	private byte[] content;
+	private long contentLength;
+	
 	public int getId() {
 		return id;
 	}
@@ -28,6 +30,14 @@ public class ImageHolder {
 	}
 	public void setContent(byte[] content) {
 		this.content = content;
+	}
+	public long getContentLength()
+	{
+		return contentLength;
+	}
+	public void setContentLength(long contentLength)
+	{
+		this.contentLength = contentLength;
 	}
 	
 }
