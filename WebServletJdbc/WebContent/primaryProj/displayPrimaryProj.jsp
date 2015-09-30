@@ -46,7 +46,7 @@
 	<div class="row">
 		<!-- 第一列 -->
 		<div class="row">
-			<div class="col l2 btn yellow lighten-3 black-text offset-l2" style="font-family:微軟正黑體;font-size:1.4em;font-weight:600;">
+			<div class="col l4 btn yellow lighten-3 black-text offset-l2" style="font-family:微軟正黑體;font-size:1.4em;font-weight:600;">
 				<fmt:formatNumber var="mid" value="${primaryProj.memberId}" pattern="0000"/>
 				發起者:${primaryProj.memberBean.lastName}${primaryProj.memberBean.firstName}[No.${mid}]			
 			</div>		

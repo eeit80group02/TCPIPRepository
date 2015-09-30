@@ -101,7 +101,7 @@ $(function() {
 		imgSrc = datas[12];// 圖片路徑
 		originalDemandUnit = datas[13];
 
-		address = '屏東縣鹽埔鄉鹽南村d勝利路30號';
+		address = '屏東縣鹽埔鄉鹽南村勝利路30號';
 		var img = $(
 				'<center><table><tr><td rowspan="8"><img alt='
 						+ supplyName
@@ -131,43 +131,7 @@ $(function() {
 						+ datas[1]
 						+ '&type=OneDemandByMember" target="_blank"><img alt="問與答" title="問與答" src="../images/QA.png" width="80px" border="2px solid black"></a></td><td style="text-align: right; width: 180px; vertical-align: top; padding-top: 10px;">備註：</td><td style="border: 1px solid black; padding: 5px; word-break: break-all;"><div style="width: 350px; height: 120px; overflow: auto;">'
 						+ remark + '</div></td></tr></tfoot></table><script type="text/javascript">	$(".buyIcon").click(function() {$("#DonationWall").trigger("click");});</script></center>').appendTo("body");
-		// var img = $('<center><table><tr><td rowspan="10"><img alt=' +
-		// supplyName + ' title=' + supplyName + ' src=' + imgSrc + '
-		// width="300"></td><td style="text-align: right; width:
-		// 180px;">物資名稱：</td><td style="width: 350px; word-break: break-all;">'
-		// + supplyName + '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">需求數量：</td><td style="width: 350px;">' + demandNumber + ' ' +
-		// originalDemandUnit + '</td></tr><tr><td style="text-align: right;
-		// width: 180px;">尺寸規格：</td><td style="width: 350px;">' + size +
-		// '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">物資狀態：</td><td style="width: 350px;">' + supplyStatus +
-		// '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">需求單位：</td><td style="width: 350px;">' + schoolName +
-		// '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">需求單位地址：</td><td style="width: 350px;">' + address +
-		// '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">募集起始時間：</td><td style="width: 350px;">' + demandTime +
-		// '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">募集結束時間：</td><td style="width: 350px;">' + expireTime +
-		// '</td></tr><tr><td style="text-align: right; width:
-		// 180px;">募集原因：</td><td style="width: 350px; word-break: break-all;">'
-		// + demandContent + '</td></tr><tfoot><tr><td style="text-align:
-		// center; vertical-align: text-top; padding-top: 20px;"><a
-		// href="demand.do?donationId=' + datas[0] + '&schoolId=' + datas[1] +
-		// '&type=OneDemandByMember" target="_blank"><img alt="問與答" title="問與答"
-		// src="../images/QA.png" width="80px" border="2px solid black"></a>
-		// <br> <a href="demand.do?donationId=' + datas[0] + '&schoolId=' +
-		// datas[1] + '&type=OneDemandByMember" target="_blank"><img
-		// alt="查看同學校的其他物資" title="查看同學校的其他物資" src="../images/search.png"
-		// width="35px" style="float: left;"></a> <a href="cart.do?donationId='
-		// + datas[0] + '&toCart=insert&dialog=true" target="_blank"><img
-		// alt="加入捐獻背包" title="加入捐獻背包" src="../images/buy.png" width="35px"
-		// style="float: right;"></a></td><td style="text-align: right; width:
-		// 180px; vertical-align: top; padding-top: 10px;">備註：</td><td
-		// style="border: 1px solid black; padding: 5px; word-break:
-		// break-all;"><div style="width: 350px; height: 120px; overflow:
-		// auto;">' + remark +
-		// '</div></td></tr></tfoot></table></center>').appendTo("body");
+	
 		setTimeout(function() {
 			img.dialog({
 				title : title,

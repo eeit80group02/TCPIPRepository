@@ -121,6 +121,14 @@ public class DonationService {
 		return dbdc;
 	}
 	
+	// for base64 picture
+	public DonationBean findOneDemandPicture(int donationId){
+		donationDAOJdbc = new DonationDAOJdbc();
+		DonationBean odb = donationDAOJdbc.findByPrimaryKey(donationId);
+		
+		return odb;
+	}
+	
 	// 包裝資料
 	public DonationBean UpdateOneDemandBySchool(DonationBean donationBeanInput) {
 		
