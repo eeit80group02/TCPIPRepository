@@ -549,6 +549,8 @@ public class FullProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if ( projAbstract.length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)
