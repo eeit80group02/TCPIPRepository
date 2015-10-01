@@ -153,7 +153,7 @@
 														<script type="text/javascript">
 															$(function() {
 																$("#OneClickOneDemandBySchool${vs.index}").click(function() {																	
-																	$("#your-message${vs.index}").val("只要是單色的紙都可以接受，感謝您的詢問！");
+																	$("#your-message${vs.index}").val("只要是素色的紙都可以接受，感謝您的詢問！");
 																	$(".sayBoardText${vs.index}").attr("class", "active");
 																});
 															}(jQuery));

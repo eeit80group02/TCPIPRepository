@@ -42,8 +42,7 @@
 
 	// OneDemandByMember
 	$("#OneClickOneDemandByMember").click(function() {
-		$("#your-message").val("請問哪個時間方便收件呢？");
+		$("#your-message").val("一定用用白色的紙嗎？如果手邊有其他顏色的話可以接受嗎？");
 		$("#sayBoardText").attr("class", "active");
 	});
-
 }(jQuery));
