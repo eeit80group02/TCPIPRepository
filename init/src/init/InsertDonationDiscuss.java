@@ -56,7 +56,7 @@ public class InsertDonationDiscuss {
 			pstmt.setString(3, "請問哪個時間方便收件呢？"); // 會員留言
 			pstmt.setTimestamp(4, new java.sql.Timestamp(sdf.parse("2015-11-26 18:28").getTime()));	// 會員留言時間
 			pstmt.setInt(5, 94522); // 學校編號
-			pstmt.setString(6, "您好，因為空白紙張是用來印工作上的文件，所以目前只需要白色的謝謝"); // 學校留言
+			pstmt.setString(6, "您好，只要是上班時間周一至周五都歡迎寄件到學校，謝謝"); // 學校留言
 			pstmt.setTimestamp(7, new java.sql.Timestamp(sdf.parse("2015-11-30 10:12").getTime())); // 學校留言時間
 			pstmt.executeUpdate();
 
