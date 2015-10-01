@@ -900,7 +900,7 @@ public class InsertMission {
 			pstmt.setInt(2, 42);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
-			pstmt.setInt(5, 1);
+			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
 			pstmt.setInt(7, 9);
 			pstmt.setInt(8, 2); // MissionSetId 待填
