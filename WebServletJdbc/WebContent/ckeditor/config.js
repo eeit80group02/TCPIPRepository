@@ -9,6 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	// http://docs.ckeditor.com/#!/api/CKEDITOR.config
 
 	// The toolbar groups arrangement, optimized for two toolbar rows.
+//	config.extraPlugins += "base64image";
 	config.height = 500;
 	config.charLimit = 1;
 	config.toolbar = 'TabToolbar'

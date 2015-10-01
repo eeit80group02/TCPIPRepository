@@ -181,13 +181,7 @@
 	    			    },
 	    			    error:function(result){
 	    			    	console.log("error!!!!!",result);
-	    			    },
-	    			    beforeSend:function(){
-	    	   				$("#loadingmodal").openModal();
-	    	   			},
-	        	   		complete:function(){
-	        	   			$("#loadingmodal").closeModal();
-	        	   		}
+	    			    }
 	    			});
 					
 					
@@ -301,7 +295,6 @@
 			var substrStart = window.location.search.lastIndexOf("=") + 1;
 			var substrRes =  window.location.search.substr(substrStart);
 			var fullProjId = substrRes;
-			
 			$.ajax({
     			url:"GetMissionBoardServlet",
     	   		type:'get',
@@ -313,6 +306,9 @@
     	   		success:function(result){
     	   			boardInformation = result;
     	   			console.log(result);
+    	   			$('#pagetitle > h1').text(boardInformation.missionBoard.boardName);
+    	   			
+    	   			
     	   			
 	    	   			//ajax get all participator
 	    				$.ajax({
@@ -1289,7 +1285,7 @@
 				console.log("deleteMissionSetPos",deletePos);
 				
 				var deleteCondition = true;
-				$('ul.nested_with_switc > li').each(function(){
+				$('ul.nested_with_switc > li').each(function(index, value){
 					var oldPos = $(this).children('input.missionSetOrder').val();
 					console.log("oldPos",oldPos);
 					var newPos = oldPos;
@@ -1316,33 +1312,18 @@
 	    			    	  'name':name,
 	    			    	  'missionBoardId':missionBoardId},
 	    			    dataType:'json',
-	    			    async:false,
 	    			    success:function(result){
 	    			    	console.log(result);
 	    			    	if(result.result == "succeed"){
-	    			    		console.log("succeed!!!!!!!!!!!!!");
-// 	    			    		console.log($(this));
 	    			    		$this.children('input.missionSetOrder').val(result.missionSet.missionSetOrder);
-	    			    		console.log($this.children('input.missionSetOrder').val());
 	    			    	} else {
-	    			    		console.log(name);
 	    			    		deleteCondition = false;
-	    			    		console.log("Update missionSet order failed!");
 	    			    	}
 	    			    },
 	    			    error:function(result){
 	    			    	console.log(result);
-	    			    },
-	    			    beforeSend:function(){
-	    	   				$("#loadingmodal").openModal();
-	    	   			},
-	        	   		complete:function(){
-	        	   			$("#loadingmodal").closeModal();
-	        	   		}
+	    			    }
 	    			});
-					
-					
-					
 					
 				});
 				
