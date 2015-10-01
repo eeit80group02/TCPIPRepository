@@ -64,7 +64,7 @@
 			
 			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
 			<!-- 初步計畫列表 -->
-			<div class="col l8 offset-l2" id="projlist">
+			<div class="col l8 offset-l2" id="projlist" style="border:2px solid red;">
 				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
@@ -76,7 +76,7 @@
 						<div class="touche">
 							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 								<div class="card-image activator"
-									style="background-image: url('<c:url value="/getImage.do?type=primaryProj&primaryProjId=${primaryProj.primaryProjId}" />'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+									style="background-image: url('<c:url value="/getImage.do?type=primaryProj&primaryProjId=${primaryProj.primaryProjId}" />'); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 								</div>
 								<div class="card-content">
 									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
@@ -124,6 +124,9 @@
 
 			//main board
 			$("#mainboard").css("min-height","80vh");
+			//置中log用
+			$(".centerdiv").css("padding-left");
+			console.log($(".touche".width());
 			
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
@@ -142,7 +145,8 @@
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "380px");
+// 			$(".centerdiv").css("width", "100%");
+			$(".card").css("width", "310px");
 		})
 	</script>
 	<script>
