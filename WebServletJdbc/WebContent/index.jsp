@@ -65,8 +65,8 @@
 		</div>
 		<!-- 卡片列區塊的container -->
 		<div id="cardBoardContainer">
-			<c:forEach var="aVar" items="${bean}" begin="1" end="3">
 				<div class="centerdiv">
+			<c:forEach var="aVar" items="${bean}" begin="1" end="3">
 					<div class="touche">
 						<div class="card medium left hoverable light-green lighten-5"
 							style="margin: 10px">
@@ -95,8 +95,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
 			</c:forEach>
+				</div>
 			<!-- 卡片列 -->
 <!-- 			<div class="centerdiv"> -->
 <!-- 				卡片1 -->
