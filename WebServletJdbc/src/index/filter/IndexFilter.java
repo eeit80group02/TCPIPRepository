@@ -53,11 +53,14 @@ public class IndexFilter implements Filter {
 				List<FullProjBean> beans = dao1.getAll();
 				//完整計畫
 				List<FullProjBean> theBeans = new ArrayList<FullProjBean>();
+				List<Integer> numbers = new ArrayList<Integer>();
 				HttpSession session = req.getSession();
 				session.setAttribute("bean", theBeans);
-				int num = 0;
+				session.setAttribute("numbers", numbers);
+				int i = 1;
 				for (FullProjBean bean : beans) {
-					if (bean.getProjStatus().trim().equals("招募中")) {
+					if (bean.getProjStatus().trim().equals("招募中") && i <= 6) {
+						int num = -1;
 						String base64String = GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(), bean.getFrontCover());
 						bean.setBase64String(base64String);
 						theBeans.add(bean);
@@ -69,8 +72,8 @@ public class IndexFilter implements Filter {
 								num++;
 							}
 						}
-						session.setAttribute("num", num);
-						num = 0;
+						numbers.add(num);
+						i++;
 						System.out.println("我有一根大香蕉");
 					}
 				}
