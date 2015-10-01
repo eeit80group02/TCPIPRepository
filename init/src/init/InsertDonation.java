@@ -17,8 +17,7 @@ public class InsertDonation {
 	private static final String INSERT = "INSERT INTO Donation (schoolId, donationStatus, supplyName, originalDemandNumber, originalDemandUnit, demandNumber, size, demandContent, supplyStatus, demandTime, expireTime, imageName, imageFile, imageLength, remark) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 	public static void start() {
-		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			// try start
 			// 第一筆資料(14659 新北市 市立野柳國小)
 			pstmt.setInt(1, 14659); // 學校編號 FK
@@ -40,7 +39,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "因近期為開學期間，希望各位捐贈者能踴躍捐獻"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "因近期為開學期間，希望各位捐贈者能踴躍捐獻。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -66,7 +65,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "因設備老舊，許多體育設備不敷使用，希望各界善心人士提供呼拉圈供孩童上課使用"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "因設備老舊，許多體育設備不敷使用，希望各界善心人士提供呼拉圈供孩童上課使用。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -92,7 +91,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "期望整合不同領域的專業資源，帶給偏鄉孩童完整的教育"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "期望整合不同領域的專業資源，帶給偏鄉孩童完整的教育。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -118,7 +117,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "堪用，無缺零件"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "堪用，無缺零件。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -144,7 +143,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "此為大型物資超出物流載運限制，如欲捐贈請直接聯絡社福機構"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "此為大型物資超出物流載運限制，如欲捐贈請直接聯絡社福機構。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -170,7 +169,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "耐用好收納佳"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "耐用好收納佳～"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -196,7 +195,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "希望能募集一些礦泉水或運動飲料提供協助的志工朋友，避免在活動中發生中暑狀況"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "希望能募集一些礦泉水或運動飲料提供協助的志工朋友，避免在活動中發生中暑狀況。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -248,7 +247,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "進入夏季蚊蟲增多，希望可以募得一些防蚊蟲叮咬物品，謝謝"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "進入夏季蚊蟲增多，希望可以募得一些防蚊蟲叮咬物品，謝謝！"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -274,7 +273,7 @@ public class InsertDonation {
 				pstmt.setString(12, file.getName()); // 圖片檔名
 				pstmt.setBinaryStream(13, fis, file.length()); // 圖片(需要的物品的圖片)
 				pstmt.setLong(14, file.length()); // 圖片長度
-				pstmt.setString(15, "耐用、好穿，最好是有氣墊的款式"); // 備註(可以填寫額外的訊息)
+				pstmt.setString(15, "耐用、好穿，最好是有氣墊的款式。"); // 備註(可以填寫額外的訊息)
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -343,7 +342,7 @@ public class InsertDonation {
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-08-16 17:55").getTime()));
 			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-11-16 17:55").getTime()));
-			pstmt.setString(15, "盡量以大廠牌的電池為主");// remark
+			pstmt.setString(15, "盡量以大廠牌的電池為主。");// remark
 
 			file = new File("image/Donation/donation13.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
@@ -516,8 +515,8 @@ public class InsertDonation {
 			pstmt.setString(8, "行政會議室使用");// demandContent
 			pstmt.setString(9, "不拘");// supplyStatus
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-05-20 12:55").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-06-20 12:55").getTime()));
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-06-20 12:55").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-09-20 12:55").getTime()));
 			pstmt.setString(15, "螢幕壞了，行政電腦輸出重要設備！");// remark
 
 			file = new File("image/Donation/donation20.png");
@@ -541,8 +540,8 @@ public class InsertDonation {
 			pstmt.setString(8, "辦大型活動時需要");// demandContent
 			pstmt.setString(9, "不拘");// supplyStatus
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-05-20 10:55").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-08-20 10:55").getTime()));
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-06-20 10:55").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-09-20 10:55").getTime()));
 			pstmt.setString(15, "園遊會、家長日，讓外賓休息用。");// remark
 
 			file = new File("image/Donation/donation21.png");
@@ -621,6 +620,56 @@ public class InsertDonation {
 			pstmt.setString(15, "無");// remark
 
 			file = new File("image/Donation/donation24.png");
+			try (FileInputStream fis = new FileInputStream(file);) {
+				pstmt.setString(12, file.getName());// imageName
+				pstmt.setBinaryStream(13, fis, file.length());// imageFile
+				pstmt.setLong(14, file.length());// imageLength
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// 第二十五筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
+			pstmt.setString(2, "否");// donationStatus
+			pstmt.setString(3, "頸繩(識別證帶)");// supplyName
+			pstmt.setInt(4, 50);// originalDemandNumber
+			pstmt.setString(5, "條");// originalDemandUnit
+			pstmt.setInt(6, 10);// demandNumber
+			pstmt.setString(7, "成人型");// size
+			pstmt.setString(8, "製作訪客證");// demandContent
+			pstmt.setString(9, "不拘");// supplyStatus
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-26 10:28").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-26 10:28").getTime()));
+			pstmt.setString(15, "訪客進入校園時需配戴訪客證。");// remark
+
+			file = new File("image/Donation/donation25.png");
+			try (FileInputStream fis = new FileInputStream(file);) {
+				pstmt.setString(12, file.getName());// imageName
+				pstmt.setBinaryStream(13, fis, file.length());// imageFile
+				pstmt.setLong(14, file.length());// imageLength
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// 第二十六筆資料(124542 高雄市 市立那瑪夏國中)
+			pstmt.setInt(1, 124542);// schoolId
+			pstmt.setString(2, "否");// donationStatus
+			pstmt.setString(3, "大型塑膠袋");// supplyName
+			pstmt.setInt(4, 50);// originalDemandNumber
+			pstmt.setString(5, "包");// originalDemandUnit
+			pstmt.setInt(6, 50);// demandNumber
+			pstmt.setString(7, "50*60公分");// size
+			pstmt.setString(8, "各教室的垃圾桶使用");// demandContent
+			pstmt.setString(9, "全新");// supplyStatus
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-10-01 10:58").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-01-01 10:58").getTime()));
+			pstmt.setString(15, "標準垃圾桶適用即可。");// remark
+
+			file = new File("image/Donation/donation26.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(12, file.getName());// imageName
 				pstmt.setBinaryStream(13, fis, file.length());// imageFile
