@@ -174,10 +174,10 @@
 						</table>
 						<br> <br>
 					</form>
-
-
 				</div>
-				<!-- 第一頁 end -->
+			</div>
+		</div>
+		<!-- 第一頁 end -->
 	</center>
 
 	<!-- 宅配通 bottom start -->
