@@ -14,11 +14,11 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 
-@WebFilter(
-		urlPatterns={"/*"},
-		initParams = {
-			@WebInitParam(name="index", value="/index.jsp")
-		})
+//@WebFilter(
+//		urlPatterns={"/*"},
+//		initParams = {
+//			@WebInitParam(name="index", value="/index.jsp")
+//		})
 public class IndexFilter  implements Filter{
 	Collection<String> url = new ArrayList<String>();
 	
