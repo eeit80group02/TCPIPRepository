@@ -94,11 +94,7 @@
 			</tr>
 			<tr>
 				<td class="dataName">需求單位：</td>
-				<td class="dataValue">${OneDemand.schoolName}</td>
-			</tr>
-			<tr>
-				<td class="dataName">需求單位地址：</td>
-				<td class="dataValue">屏東縣鹽埔鄉鹽南村勝利路30號</td>
+				<td class="dataValue"><a href="https://www.google.com.tw/maps/search/${OneDemand.schoolName}" target="_blank" title="${OneDemand.schoolName}">${OneDemand.schoolName}</a></td>
 			</tr>
 			<tr>
 				<td class="dataName">募集起始時間：</td>
@@ -161,7 +157,7 @@
 				</tr>
 			</tfoot>
 		</table>
-		</div>
+
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
 			<div class="row" id="sayBoard">
