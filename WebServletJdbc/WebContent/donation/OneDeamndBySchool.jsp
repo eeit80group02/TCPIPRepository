@@ -76,7 +76,7 @@
 		<!-- 表格基本資料 -->
 		<table id="donationDetailTable">
 			<tr>
-				<td rowspan="10" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
+				<td rowspan="9" id="donationImage"><img alt="${OneDemand.supplyName}" title="${OneDemand.supplyName}" src="${pageContext.servletContext.contextPath}/_00_init/ImageServletMVC?donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}" id="donationPicture"></td>
 				<td class="dataName">物資名稱：</td>
 				<td class="dataValue">${OneDemand.supplyName}</td>
 			</tr>
@@ -94,11 +94,7 @@
 			</tr>
 			<tr>
 				<td class="dataName">需求單位：</td>
-				<td class="dataValue">${OneDemand.schoolName}</td>
-			</tr>
-			<tr>
-				<td class="dataName">需求單位地址：</td>
-				<td class="dataValue">屏東縣鹽埔鄉鹽南村勝利路30號</td>
+				<td class="dataValue"><a href="https://www.google.com.tw/maps/search/${OneDemand.schoolName}" target="_blank" title="${OneDemand.schoolName}">${OneDemand.schoolName}</a></td>
 			</tr>
 			<tr>
 				<td class="dataName">募集起始時間：</td>
@@ -127,11 +123,10 @@
 			<ul class="collapsible" data-collapsible="expandable">
 				<c:forEach var='item' items='${AllMessages}' varStatus="vs">
 					<li id='li'>
-						<div class="collapsible-header">
+						<div class="collapsible-header" style="word-break: break-all;">
 							<span class="glyphicon glyphicon-question-sign"></span> <b>${item.memberName}</b>：
 							<c:if test="${!empty item.schoolMessage}">
 								<span class="schoolCheck"><span class="schoolCheck"><i class="small material-icons">check_circle</i></span></span>
-								<!-- 								<span class="glyphicon glyphicon-ok-sign"></span> -->
 							</c:if>
 							<br>${item.memberMessage}
 							<div class="talkTime">
@@ -146,11 +141,24 @@
 											<form class="schoolTalkBack" action='<c:url value="/donation/messages.do"/>' method='POST'>
 												<div class="row">
 													<div class="input-field col m10 s10">
-														<textarea id="your-message" name='textarea' class="materialize-textarea"></textarea>
-														<label for="your-message" class=""><i class="medium material-icons">comment</i></label>
+														<textarea id="your-message${vs.index}" name='textarea' class="materialize-textarea" style="font-size: 1.2em"></textarea>
+														<label for="your-message${vs.index}" class="sayBoardText${vs.index}"><i class="medium material-icons">comment</i></label>
 													</div>
 
 													<div class="messageGO">
+														<button type="button" id="OneClickOneDemandBySchool${vs.index}" } class="btn btn-small btn-floating">
+															<a class="text tooltipped" data-position="right" data-delay="20" data-tooltip="自動填入"><i class="tiny material-icons">whatshot</i></a>
+														</button>
+
+														<script type="text/javascript">
+															$(function() {
+																$("#OneClickOneDemandBySchool${vs.index}").click(function() {																	
+																	$("#your-message${vs.index}").val("只要是單色的紙都可以接受，感謝您的詢問！");
+																	$(".sayBoardText${vs.index}").attr("class", "active");
+																});
+															}(jQuery));
+														</script>
+
 														<button type="submit" class="btn btn-small btn-floating" id="send-message">
 															<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="送出"><i class="small material-icons">done</i></a>
 														</button>
