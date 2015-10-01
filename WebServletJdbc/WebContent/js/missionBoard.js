@@ -338,8 +338,8 @@
 	    					var $ul = $('.nested_with_switc');
 	    					var title = this.missionSetName;
 	    					console.log(title);
-	    	    			var $missionSet = $('<li id="missionSetOrderId' + this.missionSetId + '" class="#cddc39 lime" style=""></li>').html('<div id="missionSet' + this.missionSetId + 
-	    	    						'" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ title +
+	    	    			var $missionSet = $('<li id="missionSetOrderId' + this.missionSetId + '" class="#fff9c4 yellow lighten-4" style=""></li>').html('<div id="missionSet' + this.missionSetId + 
+	    	    						'" class="missionTitle #d7ccc8 brown lighten-4" style="height:60px;font-size:22px;line-height:60px;">'+ title +
 	    	    						'</div><ul></ul><div class="addMission sortable btn-floating btn-large red">' +
 	    	    						'<i class="large material-icons">add</i></div><input type="hidden" class="missionSetOrder" value="' + this.missionSetOrder + '">');
 	    	    			
@@ -390,7 +390,7 @@
 	    	   				if( mainMissionId == void 0){
 	    	   					var $ul = $('#missionSet'+this.missionSetId).siblings('ul');
 	//     	   					console.log("name="+this.name);
-	    	   					var $mainMission = $("<li id='missionOrderId" + this.missionId + "'></li>").html("<div class='li_edit btn'>" + this.name + "</div>" +
+	    	   					var $mainMission = $("<li id='missionOrderId" + this.missionId + "'></li>").html("<div class='li_edit btn' style='font-weight:600;'>" + this.name + "</div>" +
 	      													  "<div id='missionId"+ this.missionId + "' style='display:none'>" +
 	      													  "<input type='text' class='missionExecutor' value='" + this.host + "' name='" + this.memberId + "' >" +
 	      													  "<input type='text' class='missionDate' value=" + dateFormat + ">" +
@@ -427,19 +427,19 @@
 	    	   					
 	    	   					//*************************************************************************
 	    	   					if( this.missionPriority == "非常緊急" && $('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable') == false ){
-	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 	    	   						$('#missionId'+this.missionId).siblings('div').addClass('#f44336 red');
 	    	   					} else if( this.missionPriority == "緊急" && $('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable') == false ) {
 	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
-	    	   						$('#missionId'+this.missionId).siblings('div').addClass('#fdd835 yellow darken-1');
+	    	   						$('#missionId'+this.missionId).siblings('div').addClass('#1a237e indigo darken-4');
 	    	   					} else {
-	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
 	    	   					}
 
 	    	   					if(this.missionStatus=="已完成"){
 	        						console.log('主任務: '+this.name+' 已完成');
-	        						$('#missionId'+this.missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+	        						$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
 	        						$('#missionId'+this.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
 	        					}
@@ -656,8 +656,8 @@
     			    success:function(result){
     			    	console.log(result);
     			    	if(result.result == "succeed"){
-    			    		var $missionSet = $('<li id="missionSetOrderId' + result.missionSet.missionSetId + '" class="#cddc39 lime"></li>').html('<div id="missionSet' + result.missionSet.missionSetId + 
-    								  '" class="missionTitle #ff5722 deep-orange" style="height:60px;font-size:22px;line-height:60px;">'+ result.missionSet.name +
+    			    		var $missionSet = $('<li id="missionSetOrderId' + result.missionSet.missionSetId + '" class="#fff9c4 yellow lighten-4"></li>').html('<div id="missionSet' + result.missionSet.missionSetId + 
+    								  '" class="missionTitle #d7ccc8 brown lighten-4" style="height:60px;font-size:22px;line-height:60px;">'+ result.missionSet.name +
     								  '</div><ul></ul><div class="addMission sortable btn-floating btn-large red">' +
     								  '<i class="large material-icons">add</i></div></div><input type="hidden" class="missionSetOrder" value="'+ result.missionSet.missionSetOrder + '" >');
 	    			    	
@@ -757,7 +757,7 @@
 //    			    		if( result.mission.missionStatus == "已完成" ){
 //    	    					console.log('任務已完成');
 //    	    					console.log($('#missionId'+missionId).siblings('div'));
-//    	    					$('#missionId'+this.missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+//    	    					$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 //    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
 //    	    					$('#missionId'+result.mission.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
 //    	    				}
@@ -765,13 +765,13 @@
     			    		
     			    		//*************************************************************************************
     	   					if( result.mission.missionPriority == "非常緊急" && $('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable') == false ){
-    	   						$('#missionId'+missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+    	   						$('#missionId'+missionId).siblings('div').removeClass('#1a237e indigo darken-4');
     	   						$('#missionId'+missionId).siblings('div').addClass('#f44336 red');
     	   					} else if( result.mission.missionPriority == "緊急" && $('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable') == false ) {
     	   						$('#missionId'+missionId).siblings('div').removeClass('#f44336 red');
-    	   						$('#missionId'+missionId).siblings('div').addClass('#fdd835 yellow darken-1');
+    	   						$('#missionId'+missionId).siblings('div').addClass('#1a237e indigo darken-4');
     	   					} else {
-    	   						$('#missionId'+missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+    	   						$('#missionId'+missionId).siblings('div').removeClass('#1a237e indigo darken-4');
     	   						$('#missionId'+missionId).siblings('div').removeClass('#f44336 red');
     	   					}
     			    		
@@ -834,7 +834,7 @@
     	    				var date = result.mission.endTime.split('-');
 							var endTime = parseInt(date[0]-1911) + "-" + date[1] + "-" + date[2];
     	    			    		
-    	    			    var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit btn'>"+ result.mission.name +"</div>" +
+    	    			    var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit btn'  style='font-weight:600;'>"+ result.mission.name +"</div>" +
     	    								  "<div id='missionId"+ result.mission.missionId + "' style='display:none'>" +
     	    								  "<input type='text' class='missionExecutor' value='" + hostName + "' name='" + result.mission.host + "'>" +
     	    								  "<input type='text' class='missionDate' value='" + endTime + "' >" +
@@ -1283,7 +1283,7 @@
 								}
 							});
 							
-    	    				var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit btn'>"+ result.mission.name +"</div>" +
+    	    				var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit btn'  style='font-weight:600;'>"+ result.mission.name +"</div>" +
     	  						  "<div id='missionId"+ result.mission.missionId + "' style='display:none'>" +
     	  						  "<input type='text' class='missionExecutor' value='" + hostName + "' name='" + result.mission.host + "'>" +
     	  						  "<input type='text' class='missionDate' value='" + endTime + "' >" +
@@ -1755,7 +1755,7 @@
 					
 					updateMission($('.dataRowLocation').val().substring(9));
 				} else {
-					$('#missionId'+this.missionId).siblings('div').removeClass('#fdd835 yellow darken-1');
+					$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 					$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
 					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('disable');
 					$('.missionDetailDialog .missionName').addClass('disable');
