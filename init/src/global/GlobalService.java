@@ -8,18 +8,12 @@ import java.text.SimpleDateFormat;
 
 public class GlobalService
 {	
-<<<<<<< HEAD
-	public static final String HOST = "eeit80group02.cloudapp.net";
-//	public static final String USERNAME = "sa";  //sa
-//	public static final String PASSWORD = "sa123456"; //sa123456
-=======
-	public static final String HOST = "127.0.0.1";
-	public static final String USERNAME = "sasa";  //sa
-	public static final String PASSWORD = "passw0rd"; //sa123456
->>>>>>> 46eeb63bd53fc38c847470eda0316c62c3f27a34
-//	public static final String HOST = "qjtxi3tofr.database.windows.net";    //
+	public static final String HOST = "qjtxi3tofr.database.windows.net";    //
 	public static final String USERNAME = "eeit80group02@qjtxi3tofr";     //sa
 	public static final String PASSWORD = "p@ssw0rd"; //sa123456
+//	public static final String HOST = "127.0.0.1";
+//	public static final String USERNAME = "sasa";  //sa
+//	public static final String PASSWORD = "passw0rd"; //sa123456
 	public static final String DATABASE = "TCPIP";
 	public static final String URL = "jdbc:sqlserver://" + GlobalService.HOST + ":1433;databaseName=" + GlobalService.DATABASE;
 	public static final String JNDI = "java:comp/env/jdbc/TCPIP";
