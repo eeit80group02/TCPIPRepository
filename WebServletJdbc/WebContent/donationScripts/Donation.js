@@ -6,8 +6,7 @@ $(function() {
 	$(document).ready(function() {
 		$(".bigimg").hoverpulse({
 			size : 30, // number of pixels to pulse element (in each direction)
-			speed : 200
-		// speed of the animation
+			speed : 200	// speed of the animation
 		});
 	});
 
