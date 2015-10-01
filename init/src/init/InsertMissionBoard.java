@@ -20,7 +20,7 @@ public class InsertMissionBoard
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
-				pstmt.setInt(1,12);   						
+				pstmt.setInt(1,11);   						
 				pstmt.setString(2,"偏鄉科學創意教學深耕計畫");				
 				pstmt.setInt(3,4);					
 				
@@ -34,7 +34,7 @@ public class InsertMissionBoard
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
-				pstmt.setInt(1,13);   						
+				pstmt.setInt(1,12);   						
 				pstmt.setString(2,"【將軍國小暑期服務】美人魚現身將軍嶼");				
 				pstmt.setInt(3,4);					
 				
