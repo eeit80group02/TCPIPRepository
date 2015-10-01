@@ -5,8 +5,10 @@ package init;
  */
 import global.GlobalService;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,11 +23,12 @@ public class InsertPrimaryProj
 	private static final String INSERT = "INSERT INTO PrimaryProj (memberId, title, frontCoverName, frontCover,frontCoverLength,projAbstract,content,idealPlace,activityStartTime,activityEndTime,demandNum,budget,createDate,projStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	public static void start()
 	{
+		StringBuilder content = new StringBuilder();
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 		{
 			// 第三筆資料  ======================================================================
-			pstmt.setInt(1,7);							// memberId 發起者
+			pstmt.setInt(1,8);							// memberId 發起者
 			pstmt.setString(2,"亞成鳥青少年野地教育計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -37,19 +40,35 @@ public class InsertPrimaryProj
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
 				pstmt.setString(6,"每個人心中都有亮光，不一定被看見。 四天的陪伴，我們帶領青少年走入美麗的山林，遠離熟悉的生活。過程中，當面對困難和挑戰，我們說：「沒關係，這一段路我們陪你一起走」當有了跨越的勇氣，一切，也不再那麼困難。"); // projAbstract 計畫摘要
-				pstmt.setString(7,"");		// content 計畫內容
+				
+				File contentFile = new File("primaryContent/1.txt");
+				try(BufferedReader br = new BufferedReader(new FileReader(contentFile));)
+				{
+					String buffer = br.readLine();
+					while(buffer != null)
+					{
+						content.append(buffer);
+						buffer = br.readLine();
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+				pstmt.setString(7,content.toString());			// content
 				pstmt.setString(8,"台中市");						// idealPlace
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015-08-21").getTime()));  // activityStartTime
-				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-08-30").getTime())); // activityEndTime
+				pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015-11-01").getTime()));  // activityStartTime
+				pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015-11-04").getTime())); // activityEndTime
 				
 				pstmt.setInt(11,12);  		// demandNum 志工人數
 				pstmt.setInt(12,150000);   	// budget
 				
 //				pstmt.setTimestamp(13,new java.sql.Timestamp(System.currentTimeMillis()));  //  createDate
-				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015-04-28").getTime()));
-				pstmt.setString(14,"洽談完成");  // projStatus
+				pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015-08-28").getTime()));
+				pstmt.setString(14,"待洽談");  // projStatus
 				
 				pstmt.executeUpdate();
 			}
@@ -59,7 +78,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第四筆資料  ======================================================================
-			pstmt.setInt(1,7);				// memberId 發起者
+			pstmt.setInt(1,7);						// memberId 發起者
 			pstmt.setString(2,"友善生活實踐計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -70,8 +89,25 @@ public class InsertPrimaryProj
 				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
-				pstmt.setString(6,"2014年新化龍燈農藥廠事件的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？我們相信，在這塊土地上，一定還有堅持對環境友善的農民，以及默默為綠色環境努力的人們，我們期望，透過小農徵文比賽，讓這些友善環境的故事被看見，為這片土地帶來美好的滋養。更期盼，藉由小農徵文比賽、友善環境人文講座、友善綠藝市集、農事體驗小旅行…的舉辦，為這片土地盡一份心力。現在，想邀請你，支持我們的理念與行動，和我們共同邁向夢想中的友善環境。"); // projAbstract 計畫摘要
-				pstmt.setString(7,"美麗的家園大目降(TAVOCAN)意為\"山林之地\"，為平埔族語，我們的祖先說，這是一個擁有山林之美的地方。在被隔絕的深山中，一個人沒有辦法輕易放棄。除了靠自己的雙腳走出去，沒有一個辦法可以立刻讓人回到溫暖的被窩或舒適的家。\n2014年4月，龍燈農藥廠事件對台南新化、關廟地區的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？");		// content 計畫內容
+				pstmt.setString(6,"2015年新化龍燈農藥廠事件的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？我們相信，在這塊土地上，一定還有堅持對環境友善的農民，以及默默為綠色環境努力的人們，我們期望，透過小農徵文比賽，讓這些友善環境的故事被看見，為這片土地帶來美好的滋養。更期盼，藉由小農徵文比賽、友善環境人文講座、友善綠藝市集、農事體驗小旅行…的舉辦，為這片土地盡一份心力。現在，想邀請你，支持我們的理念與行動，和我們共同邁向夢想中的友善環境。"); // projAbstract 計畫摘要
+				
+				content.delete(0,content.length());
+				File contentFile = new File("primaryContent/2.txt");
+				try(BufferedReader br = new BufferedReader(new FileReader(contentFile));)
+				{
+					String buffer = br.readLine();
+					while(buffer != null)
+					{
+						content.append(buffer);
+						buffer = br.readLine();
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+				pstmt.setString(7,content.toString());			// content 計畫內容
 				pstmt.setString(8,"台南市");						// idealPlace
 				
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
