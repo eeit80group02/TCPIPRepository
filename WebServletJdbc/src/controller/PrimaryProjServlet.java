@@ -149,7 +149,7 @@ public class PrimaryProjServlet extends HttpServlet
 			if(result != null)
 			{
 				// 成功導向
-				System.out.println(result);
+//				System.out.println(result);
 				System.out.println("==================================================");
 				request.setAttribute("primaryProj",result);
 				request.getRequestDispatcher("/personal/displayPersonalPrimaryProjByPending.jsp").forward(request,response);
@@ -445,7 +445,7 @@ public class PrimaryProjServlet extends HttpServlet
 		if(primaryBean != null)
 		{
 			// 成功導向
-			System.out.println(primaryBean);
+//			System.out.println(primaryBean);
 			
 			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=display&primaryProjId=" + primaryBean.getPrimaryProjId());
 		}
@@ -496,7 +496,7 @@ public class PrimaryProjServlet extends HttpServlet
 		if(bean != null)
 		{
 			// 成功導向
-			System.out.println(bean);
+//			System.out.println(bean);
 			System.out.println("======================================================");
 			request.setAttribute("primaryProj",bean);
 			request.getRequestDispatcher("/primaryProj/displayPrimaryProj.jsp").forward(request,response);
@@ -764,7 +764,7 @@ public class PrimaryProjServlet extends HttpServlet
 		if(bean != null)
 		{
 			// 成功導向
-			System.out.println(bean);
+//			System.out.println(bean);
 			HttpSession session = request.getSession();
 			session.setAttribute("primaryProj",bean);
 			response.sendRedirect(request.getContextPath() + "/primaryProj/displayPrimaryProj.jsp");
