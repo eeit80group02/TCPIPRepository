@@ -24,15 +24,81 @@ public class InsertPrimaryProj
 	public static void start()
 	{
 		StringBuilder content = new StringBuilder();
-		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
-			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
-		{
+ 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
+ 	 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
+ 	 		{
+ 				// 第一筆資料  ======================================================================
+ 				pstmt.setInt(1,7);				// memberId 發起者
+ 				pstmt.setString(2,"造神計畫");		// title    計畫名稱
+ 				
+ 				//計畫封面圖片載入
+ 				File file = new File("image/primaryProj/primaryProj01.jpg");
+ 				try(FileInputStream fis = new FileInputStream(file);)
+ 				{
+ 					pstmt.setString(3,file.getName());			// frontCoverName
+ 					pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
+ 					pstmt.setLong(5,file.length());					// frontCoverLength
+ 	
+ 					pstmt.setString(6,"幫助偏遠學校使用辦公室軟體應用");		// projAbstract 計畫摘要
+ 					pstmt.setString(7,"Word...Office軟體應用");		// content 計畫內容
+ 					pstmt.setString(8,"台中");						// idealPlace
+ 					
+ 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+ 					pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015/08/08").getTime()));  // activityStartTime
+ 					pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015/08/15").getTime())); // activityEndTime
+ 					
+ 					pstmt.setInt(11,20);  		// demandNum 志工人數
+ 					pstmt.setInt(12,200000);   	// budget
+ 					
+ 					pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015/05/28").getTime()));  //  createDate
+ 					pstmt.setString(14,"待洽談");  // projStatus
+ 					
+ 					pstmt.executeUpdate();
+ 				}
+ 				catch(Exception e)
+ 				{
+ 					e.printStackTrace();
+ 				}
+ 	
+ 				
+ 				// 第二筆資料  ======================================================================
+ 				pstmt.setInt(1,4);				// memberId 發起者
+ 				pstmt.setString(2,"關懷偏鄉熱血團");		// title    計畫名稱
+ 				
+ 				//計畫封面圖片載入
+ 				file = new File("image/primaryProj/primaryProj02.jpg");
+ 				try(FileInputStream fis = new FileInputStream(file);)
+ 				{
+ 					pstmt.setString(3,file.getName());				// frontCoverName
+ 					pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
+ 					pstmt.setLong(5,file.length());					// frontCoverLength
+ 	
+ 					pstmt.setString(6,"一群有理想、抱負的資策會畢業學員，具有充分的資訊技術及教學能力，希望在資訊能力上能帶領偏鄉兒童拉近資訊時代必備的能力。"); // projAbstract 計畫摘要
+ 					pstmt.setString(7,"我們安排基礎程式語言、scratch的教學...");		// content 計畫內容
+ 					pstmt.setString(8,"嘉義市");						// idealPlace
+ 					
+ 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+ 					pstmt.setTimestamp(9,new java.sql.Timestamp(sdf.parse("2015/7/1").getTime()));  // activityStartTime
+ 					pstmt.setTimestamp(10,new java.sql.Timestamp(sdf.parse("2015/7/15").getTime())); // activityEndTime
+ 					
+ 					pstmt.setInt(11,20);  		// demandNum 志工人數
+ 					pstmt.setInt(12,90000);   	// budget
+ 					
+ 					pstmt.setTimestamp(13,new java.sql.Timestamp(sdf.parse("2015/05/28").getTime()));  //  createDate
+ 					pstmt.setString(14,"待洽談");  // projStatus
+ 					
+ 					pstmt.executeUpdate();
+ 				}
+ 				catch(Exception e)
+ 			{
+ 					e.printStackTrace();
+ 				}
 			// 第三筆資料  ======================================================================
 			pstmt.setInt(1,8);							// memberId 發起者
 			pstmt.setString(2,"亞成鳥青少年野地教育計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
-			File file = new File("image/primaryProj/primaryProj03.jpg");
+			file = new File("image/primaryProj/primaryProj03.jpg");
 			try(FileInputStream fis = new FileInputStream(file);)
 			{
 				pstmt.setString(3,file.getName());				// frontCoverName
@@ -78,7 +144,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第四筆資料  ======================================================================
-			pstmt.setInt(1,7);						// memberId 發起者
+			pstmt.setInt(1,8);						// memberId 發起者
 			pstmt.setString(2,"友善生活實踐計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -180,7 +246,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第六筆資料  ======================================================================
-			pstmt.setInt(1,2);				// memberId 發起者
+			pstmt.setInt(1,8);				// memberId 發起者
 			pstmt.setString(2,"徐超斌方舟教室夢想計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -229,7 +295,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第七筆資料  ======================================================================
-			pstmt.setInt(1,5);				// memberId 發起者
+			pstmt.setInt(1,2);				// memberId 發起者
 			pstmt.setString(2,"方舟計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -278,7 +344,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第八筆資料  ======================================================================
-			pstmt.setInt(1,6);				// memberId 發起者
+			pstmt.setInt(1,3);				// memberId 發起者
 			pstmt.setString(2,"台南康家百年聚落光芒計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -327,7 +393,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第九筆資料  ======================================================================
-			pstmt.setInt(1,5);				// memberId 發起者
+			pstmt.setInt(1,4);				// memberId 發起者
 			pstmt.setString(2,"讓親愛部落學童音樂種子發芽");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -376,7 +442,7 @@ public class InsertPrimaryProj
 			}
 			
 			// 第十筆資料  ======================================================================
-			pstmt.setInt(1,6);				// memberId 發起者
+			pstmt.setInt(1,5);				// memberId 發起者
 			pstmt.setString(2,"全台募殼計劃");		// title    計畫名稱
 			
 			//計畫封面圖片載入
@@ -426,7 +492,7 @@ public class InsertPrimaryProj
 			
 			
 			// 第十一筆資料  ======================================================================
-			pstmt.setInt(1,2);				// memberId 發起者
+			pstmt.setInt(1,6);				// memberId 發起者
 			pstmt.setString(2,"電池女孩繪集計畫");		// title    計畫名稱
 			
 			//計畫封面圖片載入

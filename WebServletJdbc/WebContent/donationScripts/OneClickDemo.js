@@ -22,11 +22,11 @@
 	$("#txtGmobile").val("0911223344");
 	$("#OneClickDonationBillFinal").click(function() {
 		// 寄件人(會員方)
-		$("#txtOcname").val("簡小文");
-		$("#txtOaddress").val("臺北市大安區復興南路一段");
-		$("#txtOtel").val("0222815416");
-		$("#txtOmobile").val("0916075266");
-		$("#txtOemail").val("dora@gmail.com");
+		$("#txtOcname").val("簡建文");
+		$("#txtOaddress").val("台北市大安區信義路四段32號");
+		$("#txtOtel").val("022540395");
+		$("#txtOmobile").val("0987820258");
+		$("#txtOemail").val("eeit8031@gmail.com");
 
 		// 收件人(學校方)
 
@@ -42,8 +42,7 @@
 
 	// OneDemandByMember
 	$("#OneClickOneDemandByMember").click(function() {
-		$("#your-message").val("請問哪個時間方便收件呢？");
+		$("#your-message").val("一定用用白色的紙嗎？如果手邊有其他顏色的話可以接受嗎？");
 		$("#sayBoardText").attr("class", "active");
 	});
-
 }(jQuery));
