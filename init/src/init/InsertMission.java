@@ -875,6 +875,40 @@ public class InsertMission {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		// 【將軍國小暑期服務】美人魚現身將軍嶼
+		// 子任務
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setString(1, "仙女棒");
+			pstmt.setInt(2, 42);
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setString(4, "普通");
+			pstmt.setInt(5, 1);
+			pstmt.setString(6, "進行中");
+			pstmt.setInt(7, 9);
+			pstmt.setInt(8, 2); // MissionSetId 待填
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
+			pstmt.setString(1, "會下雪的聖誕樹");
+			pstmt.setInt(2, 42);
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setString(4, "普通");
+			pstmt.setInt(5, 1);
+			pstmt.setString(6, "進行中");
+			pstmt.setInt(7, 9);
+			pstmt.setInt(8, 2); // MissionSetId 待填
+
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		System.out.println("任務資料新增完成");
 	}
