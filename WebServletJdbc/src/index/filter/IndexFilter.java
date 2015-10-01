@@ -1,5 +1,7 @@
 package index.filter;
-
+/*
+ * 功能: 將index改為動態頁面
+ */
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -74,7 +76,6 @@ public class IndexFilter implements Filter {
 						}
 						numbers.add(num);
 						i++;
-						System.out.println("我有一根大香蕉");
 					}
 				}
 				chain.doFilter(request, response);
