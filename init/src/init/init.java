@@ -22,6 +22,7 @@ public class init
 		// Donation 系列 start
 		InsertDonation.start();
 		// InsertDonationOrder.start();
+		InsertDonationDiscuss.start();
 		// Donation 系列 end
 		
 		System.out.println("資料全部已新增");		

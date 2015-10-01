@@ -161,7 +161,7 @@
 				</div>
 			</div>
 			<input type='hidden' name='donationId' value='${OneDemand.donationId}'>
-			<td><input type='submit' name='hidden' value='delete'></td>
+<!-- 			<td><input type='submit' name='hidden' value='delete'></td> -->
 		</form>
 	</center>
 
