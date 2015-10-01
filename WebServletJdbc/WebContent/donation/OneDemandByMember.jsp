@@ -157,7 +157,7 @@
 				</tr>
 			</tfoot>
 		</table>
-		</div>
+
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
 			<div class="row" id="sayBoard">

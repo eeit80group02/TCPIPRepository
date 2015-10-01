@@ -362,7 +362,6 @@
 													</span>
 												</c:when>
 											</c:choose>
-
 											<!-- 右 icon -->
 											<span class="rightIcon"> <a href="<c:url value='demand.do?type=OneDeamndBySchool&donationId=${item.donationId}&schoolId=${item.schoolId}&manage=yes'/>" class="btn btn-tiny btn-floating"><i class="tiny material-icons">help</i></a>
 											</span>
