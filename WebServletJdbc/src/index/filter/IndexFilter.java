@@ -153,4 +153,3 @@ public class IndexFilter implements Filter {
 
 	}
 }
->>>>>>> 93ad58cd0680255085a3c84611ff2dde43e5bbdd

@@ -64,7 +64,7 @@
 			
 			<c:set var="listlength" value="${fn:length(primaryProjAll)}" />
 			<!-- 初步計畫列表 -->
-			<div class="col l8 offset-l2" id="projlist" style="border:2px solid red;">
+			<div class="col l8 offset-l2" id="projlist">
 				<div class="centerdiv">
 				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
 					<c:url value="/primaryProj.do" var="path">
@@ -126,8 +126,8 @@
 			$("#mainboard").css("min-height","80vh");
 			//置中log用
 			$(".centerdiv").css("padding-left");
-			console.log($(".touche".width());
-			
+			var cardwidth = $(".touche").width() - 60;
+			console.log(cardwidth);
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
@@ -146,7 +146,8 @@
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
 // 			$(".centerdiv").css("width", "100%");
-			$(".card").css("width", "310px");
+			var finalcardWidth = Math.floor(cardwidth/3);
+			$(".card").css("width", finalcardWidth);
 		})
 	</script>
 	<script>

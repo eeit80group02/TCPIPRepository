@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<!-- 卡片列區塊的container -->
-		<div>
+		<div id="cardBoardContainer">
 			<c:forEach var="aVar" items="${bean}" begin="1" end="3">
 				<div class="centerdiv">
 					<div class="touche">
@@ -195,7 +195,7 @@
 
 
 
-<!-- 			<!-- 	卡片列2 --> -->
+<!-- 			<!-- 	卡片列2 --> 
 
 <!-- 			<div class="centerdiv"> -->
 <!-- 				卡片1 -->
@@ -300,10 +300,10 @@
 <!-- 				</div> -->
 
 <!-- 			</div> -->
-<!-- 			<!-- 卡片列區塊的container --> -->
+<!-- 			<!-- 卡片列區塊的container --> 
 <!-- 		</div> -->
-<!-- 		<!--募集資訊區塊的container  --> -->
-<!-- 	</div> -->
+<!-- 		<!--募集資訊區塊的container  --> 
+	</div>
 
 
 	<!-- 活動花絮區塊的container -->
@@ -320,13 +320,17 @@
 
 			<img
 				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-				src="picture/result1.PNG" name="activity"> <img
+				src="picture/result1.PNG" name="activity"> 
+			<img
 				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-				src="picture/result2.PNG" name="activity"> <img
+				src="picture/result2.PNG" name="activity"> 
+			<img
 				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-				src="picture/result3.PNG" name="activity"> <img
+				src="picture/result3.PNG" name="activity"> 
+			<img
 				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-				src="picture/result4.PNG" name="activity"> <img
+				src="picture/result4.PNG" name="activity"> 
+			<img
 				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
 				src="picture/result5.PNG" name="activity">
 
@@ -348,6 +352,9 @@
 	<script>
 		$(function() {
 
+			//cardBoardContainer的最小高度
+			$("#cardBoardContainer").css("min-height","80vh");
+			
 			//觸發卡片翻轉事件
 			$(".touche").each(function() {
 				$(this).mouseover(function() {
