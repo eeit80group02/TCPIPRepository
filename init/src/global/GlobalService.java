@@ -12,13 +12,8 @@ public class GlobalService
 //	public static final String USERNAME = "eeit80group02@qjtxi3tofr";     //sa
 //	public static final String PASSWORD = "p@ssw0rd"; //sa123456
 	public static final String HOST = "127.0.0.1";
-<<<<<<< HEAD
-	public static final String USERNAME = "sasa";  //sa
-	public static final String PASSWORD = "passw0rd"; //sa123456
-=======
 	public static final String USERNAME = "sa";  //sa
 	public static final String PASSWORD = "sa123456"; //sa123456
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 	public static final String DATABASE = "TCPIP";
 	public static final String URL = "jdbc:sqlserver://" + GlobalService.HOST + ":1433;databaseName=" + GlobalService.DATABASE;
 	public static final String JNDI = "java:comp/env/jdbc/TCPIP";
