@@ -1181,7 +1181,7 @@
 				
 			});
 			
-			
+			//*******************************************************************************
 			//Set subMissionSettings dialog close condition
 			$('#transferToMission').click(function(){
 				var mainMissionId = $('#'+$('.subMissionLocation').val()).children('input[class="mainDataRowLocation"]').val();
@@ -1207,6 +1207,58 @@
 				//NewPos contain parent li itself +1, and next Pos will be the slot to put +1
 				var newPos = $('#'+mainMissionId).parent().siblings().size() + 1 + 1;
 				
+				
+				//Update database
+    			$.ajax({
+    	    		url:'DynamicUpdateBoardServlet',
+    	    		type:'post',
+    	    		data:{'action':'InsertMission',
+    	    			  'missionSetId':missionSetId,
+    	    			  'name':subMissionName,
+    	    			  'host':host,
+    	    			  'endTime':subMissionDate,
+    	    			  'missionPriority':"普通",
+    	    			  'missionPosition':newPos,
+    	    			  'missionStatus':subMissionStatus,
+    	    			  'mainMissionId':""},
+    	    		dataType:'json',
+    	    		success:function(result){
+    	    			console.log(result);
+    	    			if(result.result == "succeed"){
+//    	    				var date = result.mission.endTime.split('-');
+//							var endTime = parseInt(date[0]-1911) + "-" + date[1] + "-" + date[2];
+//    	    			    		
+//    	    			    var $mission = $("<li id='missionOrderId" + result.mission.missionId + "'></li>").html("<div class='li_edit btn'>"+ result.mission.name +"</div>" +
+//    	    								  "<div id='missionId"+ result.mission.missionId + "' style='display:none'>" +
+//    	    								  "<input type='text' class='missionExecutor' value='" + hostName + "' name='" + result.mission.host + "'>" +
+//    	    								  "<input type='text' class='missionDate' value='" + endTime + "' >" +
+//    	    								  "<input type='text' class='missionPriority' value='" + result.mission.missionPriority + "'>"+
+//    	    								  "<input type='text' class='mainMissionId' value='" + result.mission.mainMissionId + "' >" + 
+//    	    								  "<input type='text' class='missionPosition' value='" + result.mission.missionPosition + "'>" + 
+//    	    								  "<input type='text' class='missionStatus' value='" + result.mission.missionStatus + "' >" +
+//    	    								  "<input type='text' class='missionSetId' value='" + result.mission.missionSetId + "'></div>");
+//    	    			    		
+//    	    						
+//    	    				$mission.appendTo($this.siblings( "ul" ));
+    	    			    		
+    	    			}
+    	    		},
+    	    		error:function(result){
+    	    			console.log("error");
+    	    			console.log(result);
+    	    		},
+    	    		beforeSend:function(){
+    	   				$("#loadingmodal").openModal();
+    	   			},
+        	   		complete:function(){
+        	   			$("#loadingmodal").closeModal();
+        	   		}
+    	    	});
+				
+				
+				
+				
+				
 				var $li = $("<li id='missionOrderId" + subDataRowId + "'></li>").html("<div class='li_edit btn'>"+ subMissionName +"</div>" +
 						  "<div id='missionId"+ missionId + "' style='display:none'>" +
 						  "<input type='text' class='missionExecutor' value='" + subMissionExecutor + "' >" +
@@ -1216,6 +1268,10 @@
 						  "<input type='text' class='missionPosition' value='" + newPos + "' >" + 
 						  "<input type='text' class='missionStatus' value='" + subMissionStatus + "' >" +
 						  "<input type='text' class='missionSetId' value='" + missionSetId + "'></div>");
+				
+
+				
+				
 				
 				$('#'+mainMissionId).parent().parent().append($li);
 				$('#'+subMissionId).parent().remove();

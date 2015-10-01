@@ -10,27 +10,22 @@
 <body>
 			<form action="<c:url value='/fakeInfos.do' />" method="post">
 			
+			<textarea rows="100" cols="100" name="projAbstract" id="projAbstract"></textarea>
+				
+			<button type="submit">submit</button>
 			
-						<div class="row">
-							<div class="col l8">
-								<div class="forinput">計畫摘要<span style="font-size:0.8em;font-weight:300;">字數僅限100字內</span></div>
-								<textarea class="materialize-textarea" id="content" name="projAbstract" style="font-size:1.2em;color:black;font-weight:600;" required>${param.projAbstract}</textarea>
-							</div>
-							<div class="col l4">	
-								<span class="error">${error.projAbstract}</span>
-							</div>
-						</div>
-
-						<input type="submit" value="submit">
-
 			</form>
 			
 			
 <script type="text/javascript" src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
+<script>
+	alert("hahaha");
 
+
+</script>
 <script>
 //指定ckeditor()的skin
-CKEDITOR.replace(content,{skin:"moono"});
+CKEDITOR.replace(projAbstract,{skin:"moono"});
 </script>
 
 </body>

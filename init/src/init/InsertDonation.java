@@ -20,8 +20,8 @@ public class InsertDonation {
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			// try start
-			// 第一筆資料(64632 臺中市 鐵山國小)
-			pstmt.setInt(1, 64632); // 學校編號 FK
+			// 第一筆資料(14659 新北市 市立野柳國小)
+			pstmt.setInt(1, 14659); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "各式包包"); // 物資名稱
 			pstmt.setInt(4, 140); // 原始輸入需求
@@ -46,8 +46,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第二筆資料(64632 臺中市 鐵山國小)
-			pstmt.setInt(1, 64632); // 學校編號 FK
+			// 第二筆資料(14659 新北市 市立野柳國小)
+			pstmt.setInt(1, 14659); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "呼拉圈"); // 物資名稱
 			pstmt.setInt(4, 70); // 原始輸入需求
@@ -72,8 +72,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第三筆資料(64632 臺中市 鐵山國小)
-			pstmt.setInt(1, 64632); // 學校編號 FK
+			// 第三筆資料(14659 新北市 市立野柳國小)
+			pstmt.setInt(1, 14659); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "奇異筆、麥克筆"); // 物資名稱
 			pstmt.setInt(4, 50); // 原始輸入需求
@@ -98,8 +98,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第四筆資料(64632 臺中市 鐵山國小)
-			pstmt.setInt(1, 64632); // 學校編號 FK
+			// 第四筆資料(14659 新北市 市立野柳國小)
+			pstmt.setInt(1, 14659); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "投影機"); // 物資名稱
 			pstmt.setInt(4, 10); // 原始輸入需求
@@ -124,8 +124,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第五筆資料(64632 臺中市 鐵山國小)
-			pstmt.setInt(1, 64632); // 學校編號 FK
+			// 第五筆資料(14659 新北市 市立野柳國小)
+			pstmt.setInt(1, 14659); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "手風琴"); // 物資名稱
 			pstmt.setInt(4, 8); // 原始輸入需求
@@ -150,8 +150,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第六筆資料(44658 新竹縣 寶山國小)
-			pstmt.setInt(1, 44658); // 學校編號 FK
+			// 第六筆資料(54696 苗栗縣 縣立新開國小)
+			pstmt.setInt(1, 54696); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "折疊桌"); // 物資名稱
 			pstmt.setInt(4, 20); // 原始輸入需求
@@ -176,8 +176,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第七筆資料(44658 新竹縣 寶山國小)
-			pstmt.setInt(1, 44658); // 學校編號 FK
+			// 第七筆資料(54696 苗栗縣 縣立新開國小)
+			pstmt.setInt(1, 54696); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "礦泉水"); // 物資名稱
 			pstmt.setInt(4, 30); // 原始輸入需求
@@ -202,8 +202,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第八筆資料(44658 新竹縣 寶山國小)
-			pstmt.setInt(1, 44658); // 學校編號 FK
+			// 第八筆資料(54696 苗栗縣 縣立新開國小)
+			pstmt.setInt(1, 54696); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "耳溫槍"); // 物資名稱
 			pstmt.setInt(4, 10); // 原始輸入需求
@@ -228,8 +228,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第九筆資料(44658 新竹縣 寶山國小)
-			pstmt.setInt(1, 44658); // 學校編號 FK
+			// 第九筆資料(54696 苗栗縣 縣立新開國小)
+			pstmt.setInt(1, 54696); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "防蚊液"); // 物資名稱
 			pstmt.setInt(4, 10); // 原始輸入需求
@@ -254,8 +254,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十筆資料(44658 新竹縣 寶山國小)
-			pstmt.setInt(1, 44658); // 學校編號 FK
+			// 第十筆資料(54696 苗栗縣 縣立新開國小)
+			pstmt.setInt(1, 54696); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "鞋子"); // 物資名稱
 			pstmt.setInt(4, 30); // 原始輸入需求
@@ -280,8 +280,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十一筆資料(94735 雲林縣 口湖國小)
-			pstmt.setInt(1, 94735);// schoolId
+			// 第十一筆資料(74751 彰化縣 縣立頂庄國小)
+			pstmt.setInt(1, 74751);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "運貨用板車");// supplyName
 			pstmt.setInt(4, 40);// originalDemandNumber
@@ -305,8 +305,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十二筆資料(94735 雲林縣 口湖國小)
-			pstmt.setInt(1, 94735);// schoolId
+			// 第十二筆資料(74751 彰化縣 縣立頂庄國小)
+			pstmt.setInt(1, 74751);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "電風扇");// supplyName
 			pstmt.setInt(4, 10);// originalDemandNumber
@@ -330,8 +330,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十三筆資料(94735 雲林縣 口湖國小)
-			pstmt.setInt(1, 94735);// schoolId
+			// 第十三筆資料(74751 彰化縣 縣立頂庄國小)
+			pstmt.setInt(1, 74751);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "3號電池");// supplyName
 			pstmt.setInt(4, 100);// originalDemandNumber
@@ -355,8 +355,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十四筆資料(94735 雲林縣 口湖國小)
-			pstmt.setInt(1, 94735);// schoolId
+			// 第十四筆資料(74751 彰化縣 縣立頂庄國小)
+			pstmt.setInt(1, 74751);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "75%酒精");// supplyName
 			pstmt.setInt(4, 18);// originalDemandNumber
@@ -380,7 +380,7 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十五筆資料(154705 花蓮縣 奇美國小)
+			// 第十五筆資料(154705 花蓮縣 縣立奇美國小)
 			pstmt.setInt(1, 154705);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "血壓機");// supplyName
@@ -405,7 +405,7 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十六筆資料(154705 花蓮縣 奇美國小)
+			// 第十六筆資料(154705 花蓮縣 縣立奇美國小)
 			pstmt.setInt(1, 154705);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "延長線");// supplyName
@@ -430,8 +430,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十七筆資料(144628 臺東縣 太平國小)
-			pstmt.setInt(1, 144628);// schoolId
+			// 第十七筆資料(134519 屏東縣 縣立萬巒國中)
+			pstmt.setInt(1, 134519);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "室內拖鞋");// supplyName
 			pstmt.setInt(4, 50);// originalDemandNumber
@@ -455,8 +455,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十八筆資料(144628 臺東縣 太平國小)
-			pstmt.setInt(1, 144628);// schoolId
+			// 第十八筆資料(134519 屏東縣 縣立萬巒國中)
+			pstmt.setInt(1, 134519);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "掃把");// supplyName
 			pstmt.setInt(4, 25);// originalDemandNumber
@@ -480,8 +480,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第十九筆資料(74502 彰化縣 鹿港國中)
-			pstmt.setInt(1, 74502);// schoolId
+			// 第十九筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "封箱膠帶");// supplyName
 			pstmt.setInt(4, 90);// originalDemandNumber
@@ -505,8 +505,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第二十筆資料(74502 彰化縣 鹿港國中)
-			pstmt.setInt(1, 74502);// schoolId
+			// 第二十筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
 			pstmt.setString(2, "是");// donationStatus
 			pstmt.setString(3, "電視機");// supplyName
 			pstmt.setInt(4, 1);// originalDemandNumber
@@ -530,8 +530,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第二十一筆資料(74502 彰化縣 鹿港國中)
-			pstmt.setInt(1, 74502);// schoolId
+			// 第二十一筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
 			pstmt.setString(2, "是");// donationStatus
 			pstmt.setString(3, "椅子");// supplyName
 			pstmt.setInt(4, 100);// originalDemandNumber
@@ -555,8 +555,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第二十二筆資料(74502 彰化縣 鹿港國中)
-			pstmt.setInt(1, 74502);// schoolId
+			// 第二十二筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "時鐘");// supplyName
 			pstmt.setInt(4, 12);// originalDemandNumber
@@ -580,8 +580,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第二十三筆資料(74502 彰化縣 鹿港國中)
-			pstmt.setInt(1, 74502);// schoolId
+			// 第二十三筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "空白紙張");// supplyName
 			pstmt.setInt(4, 15);// originalDemandNumber
@@ -605,8 +605,8 @@ public class InsertDonation {
 				e.printStackTrace();
 			}
 
-			// 第二十四筆資料(74502 彰化縣 鹿港國中)
-			pstmt.setInt(1, 74502);// schoolId
+			// 第二十四筆資料(94522 雲林縣 縣立宜梧國中)
+			pstmt.setInt(1, 94522);// schoolId
 			pstmt.setString(2, "否");// donationStatus
 			pstmt.setString(3, "衛生紙");// supplyName
 			pstmt.setInt(4, 30);// originalDemandNumber

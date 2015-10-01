@@ -18,7 +18,7 @@ public class InsertMissionSet {
 		//【將軍國小暑期服務】美人魚現身將軍嶼
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 13);
+			pstmt.setInt(1, 2);
 			pstmt.setString(2, "第一天");
 			pstmt.setInt(3, 1);
 
@@ -29,7 +29,7 @@ public class InsertMissionSet {
 
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 13);
+			pstmt.setInt(1, 2);
 			pstmt.setString(2, "第二天");
 			pstmt.setInt(3, 2);
 
@@ -40,7 +40,7 @@ public class InsertMissionSet {
 
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 13);
+			pstmt.setInt(1, 2);
 			pstmt.setString(2, "第三天");
 			pstmt.setInt(3, 3);
 
@@ -52,7 +52,7 @@ public class InsertMissionSet {
 		try(Connection conn = DriverManager.getConnection(URL,USERNAME,PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 			{
-				pstmt.setInt(1,13);   						
+				pstmt.setInt(1,2);   						
 				pstmt.setString(2,"第四天");				
 				pstmt.setInt(3,4);					
 				
@@ -65,7 +65,7 @@ public class InsertMissionSet {
 
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 13);
+			pstmt.setInt(1, 2);
 			pstmt.setString(2, "第五天");
 			pstmt.setInt(3, 5);
 
@@ -76,7 +76,7 @@ public class InsertMissionSet {
 
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 13);
+			pstmt.setInt(1, 2);
 			pstmt.setString(2, "第六天");
 			pstmt.setInt(3, 6);
 
@@ -88,7 +88,7 @@ public class InsertMissionSet {
 		//偏鄉科學創意教學深耕計畫
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 12);
+			pstmt.setInt(1, 1);
 			pstmt.setString(2, "人事費");
 			pstmt.setInt(3, 1);
 
@@ -99,7 +99,7 @@ public class InsertMissionSet {
 		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 12);
+			pstmt.setInt(1, 1);
 			pstmt.setString(2, "活動費");
 			pstmt.setInt(3, 2);
 
@@ -110,7 +110,7 @@ public class InsertMissionSet {
 		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 12);
+			pstmt.setInt(1, 1);
 			pstmt.setString(2, "教材費");
 			pstmt.setInt(3, 3);
 
@@ -121,7 +121,7 @@ public class InsertMissionSet {
 		
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
-			pstmt.setInt(1, 12);
+			pstmt.setInt(1, 1);
 			pstmt.setString(2, "運費");
 			pstmt.setInt(3, 4);
 
