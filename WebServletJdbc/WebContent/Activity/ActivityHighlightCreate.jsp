@@ -265,7 +265,7 @@
 					$("#memberId").val(responseJson.memberId);
 				} else {
 					alert("活動花絮已存在,請從花絮頁面查看!");
-					window.location = "<c:url value='/Activity/ActivityHighlightDisplayAll.jsp' />";	
+					window.location = "<c:url value='/ActivityHighlightDisplayAllServlet.do' />";	
 				}
 			}); 
 			
