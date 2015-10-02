@@ -16,5 +16,8 @@ public interface TrackProjDAO
 	public TrackProjBean update(TrackProjBean bean);
 
 	public boolean delete(int trackProjId);
-
+	
+	public TrackProjBean findByMemberId(int memberId, int fullProjId);
+	
+	public List<TrackProjBean> getMemberAll(int memberId);
 }
