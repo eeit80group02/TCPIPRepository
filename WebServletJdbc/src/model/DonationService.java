@@ -28,6 +28,19 @@ public class DonationService {
 	private DonationOrderDAOJdbc donationOrderDAOJdbc;
 	private DonationOrderDetailDAOJdbc donationOrderDetailDAOJdbc;
 	
+	// 取出會員所有明細
+	public List<DonationOrderBean> getAllDetailByMember(int memberId){
+		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
+		List<DonationOrderBean> orderList = donationOrderDAOJdbc.getAll();
+		List<DonationOrderBean> newOrderList = new ArrayList<>();
+		for(DonationOrderBean d : orderList) {
+			if(d.getMemberId() == memberId){
+				newOrderList.add(d);
+			}
+		}
+		return newOrderList;
+	}
+	
 	// 取出所有訂單及其明細
 	public List<DonationODBean> getAllOD(){
 		donationOrderDAOJdbc = new DonationOrderDAOJdbc();

@@ -32,10 +32,6 @@ public class DonationMemberSearchServlet extends HttpServlet {
 		} else {
 			System.out.println("同session");
 		}
-//		if(session == null) {
-//			// ...
-//			System.out.println("session: "+session);
-//		}
 		
 		// 1.接收資料
 		String supplyStatus = request.getParameter("supplyStatus");

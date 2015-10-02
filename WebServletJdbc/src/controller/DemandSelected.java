@@ -21,6 +21,7 @@ import model.DonationODBean;
 import model.DonationOrderBean;
 import model.DonationOrderDuplicateBean;
 import model.DonationService;
+import model.MemberBean;
 import model.SchoolBean;
 
 //@WebServlet("/OneDemand")
@@ -50,10 +51,20 @@ public class DemandSelected extends HttpServlet {
 			session.setAttribute("DonationCart", dCart);
 		}
 		
+		// 讀取會員資料
+		int memberId = 0;
+		Object obj = session.getAttribute("LoginOK");
+		if (obj instanceof MemberBean) {
+			System.out.println("會員登入狀態，轉至確定訂單頁");
+			MemberBean mBean = (MemberBean) session.getAttribute("LoginOK");
+			memberId = mBean.getMemberId();
+		}
+		
 		// 1.接收資料
 		String type = request.getParameter("type");
 		String schoolIdStr = request.getParameter("schoolId");
 		String donationIdStr = request.getParameter("donationId");
+		
 		if (type.equals("FindGoods")) {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
@@ -205,6 +216,18 @@ public class DemandSelected extends HttpServlet {
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/UpdateOneDemand.jsp"));
 			return;
+		} else if(type.equals("OrderDetailByMember")) {
+			if(memberId == 0) {
+				response.sendRedirect(response.encodeRedirectURL(request
+						.getContextPath()+"../index.jsp"));
+			} else {
+				DonationService service = new DonationService();
+				List<DonationOrderBean> list = service.getAllDetailByMember(memberId);
+				session.setAttribute("MOD", list);
+				response.sendRedirect(response.encodeRedirectURL(request
+						.getContextPath()+"/donation/Bill04.jsp"));
+				return;
+			}
 		}
 	}
 }
