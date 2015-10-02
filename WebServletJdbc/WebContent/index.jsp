@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<!-- 卡片列區塊的container -->
-		<div id="cardContainer">
+		<div>
 			<div class="centerdiv">
 				<c:forEach var="aVar" items="${bean}" begin="1" end="3">
 					<div class="touche">
@@ -97,7 +97,6 @@
 					</div>
 				</c:forEach>
 			</div>
-<<<<<<< HEAD
 			<!-- 卡片列 -->
 			<!-- 			<div class="centerdiv"> -->
 			<!-- 				卡片1 -->
@@ -310,35 +309,6 @@
 			<!-- 	</div> -->
 
 
-			<!-- 活動花絮區塊的container -->
-			<div class="teal lighten-5">
-				<div class="row valign-wrapper">
-					<!-- 段落提示 -->
-					<div class="card-panel yellow accent-2 z-depth-6 projinfos "
-						style="width: 15%;">
-						<h4 style="margin: 0" class="center-align">花絮剪影</h4>
-					</div>
-				</div>
-				<!-- 	花絮圖片列 -->
-				<div class="activity" style="height: 400px; clear: both;">
-
-					<img
-						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-						src="picture/result1.PNG" name="activity"> <img
-						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-						src="picture/result2.PNG" name="activity"> <img
-						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-						src="picture/result3.PNG" name="activity"> <img
-						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-						src="picture/result4.PNG" name="activity"> <img
-						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
-						src="picture/result5.PNG" name="activity">
-
-				</div>
-				<!-- 活動花絮區塊的conytainer -->
-=======
-	</div>
-</div>
 	<!-- 活動花絮區塊的container -->
 	<div class="teal lighten-5">
 		<div class="row valign-wrapper">
@@ -346,7 +316,6 @@
 			<div class="card-panel yellow accent-2 z-depth-6 projinfos "
 				style="width: 15%;">
 				<h4 style="margin: 0" class="center-align">花絮剪影</h4>
->>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 			</div>
 		</div>
 		<!-- 	花絮圖片列 -->
