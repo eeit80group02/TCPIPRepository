@@ -39,8 +39,8 @@
 				<div class="centerdiv">
 				<c:forEach  var="activityHighLight" items="${activityHighLightAll}" varStatus="varStatus" >
 					<c:url value="/ActivityHighlightDisplayAllServlet.do" var="path">
-						<c:param name="memberId" value="${activityHighLightAll.memberId}" />
-						<c:param name="fullProjId" value="${activityHighLightAll.fullProjId}" />
+						<c:param name="memberId" value="${activityHighLight.memberId}" />
+						<c:param name="fullProjId" value="${activityHighLight.fullProjId}" />
 					</c:url>
 					
 					<!-- 卡片開始 -->
@@ -48,11 +48,11 @@
 							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 								<!-- 花絮封面圖片 -->
 								<div class="card-image activator"
-									style="background-image: url(${activityHighLightAll.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+									style="background-image: url(${activityHighLight.base64String}); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 								</div>
 								<!-- 花絮的名稱(完整計畫的名稱) -->
 								<div class="card-content" style="font-size: 20pt" class="truncate">
-									${activityHighLightAll.fullProjBean.title}
+									${activityHighLight.fullProjBean.title}
 								</div>
 								<!-- 連結到花絮的收看頁面 -->
 								<div class="card-action right-align">
@@ -93,8 +93,8 @@
 			$("#mainboard").css("min-height","100vh");
 			
 			
-			$.get("<c:url value='/ActivityHighlightDisplayAllServlet' />", function(responseJson) {
-				console.log(responseJson);
+// 			$.get("<c:url value='/ActivityHighlightDisplayAllServlet' />", function(responseJson) {
+// 				console.log(responseJson);
 // 				if(responseJson.error == "尚未建立花絮!") {
 // 					$("#error").html("<h4>查詢錯誤!</h4>");
 // 				} else {
@@ -105,7 +105,7 @@
 // 					$("#frontCover").attr("src", responseJson.frontCover);
 // 					$("#content").html(responseJson.content);
 // 				}
-			}); 
+// 			}); 
 			
 		})
 	</script>
