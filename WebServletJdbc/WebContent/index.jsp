@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<!-- 募集資訊區塊的container -->
-	<div class="row">
+	<div class="row" id="cardBoardContainer">
 
 		<div class="row valign-wrapper">
 			<!-- 段落提示 -->
@@ -128,7 +128,7 @@
 			<!-- 					</div> -->
 			<!-- 				</div> -->
 
-
+     
 			<!-- 				卡片2 -->
 			<!-- 				<div class="touche"> -->
 			<!-- 					<div class="card medium left hoverable light-green lighten-5" -->
@@ -195,7 +195,7 @@
 
 
 			<!-- 			<!-- 	卡片列2 -->
-			-->
+			
 
 			<!-- 			<div class="centerdiv"> -->
 			<!-- 				卡片1 -->
@@ -299,12 +299,12 @@
 			<!-- 					</div> -->
 			<!-- 				</div> -->
 
-			<!-- 			</div> -->
+						</div>
 			<!-- 			<!-- 卡片列區塊的container -->
-			-->
-			<!-- 		</div> -->
+			
+					</div>
 			<!-- 		<!--募集資訊區塊的container  -->
-			-->
+			
 			<!-- 	</div> -->
 
 
@@ -349,7 +349,9 @@
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script>
 		$(function() {
-
+			//cardBoardContainer min-height
+			$("#cardBoardContainer").css("min-height","90vh");
+			
 			//觸發卡片翻轉事件
 			$(".touche").each(function() {
 				$(this).mouseover(function() {
