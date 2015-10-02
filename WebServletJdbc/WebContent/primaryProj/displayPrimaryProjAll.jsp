@@ -121,7 +121,9 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
-
+			//
+			
+			
 			//main board
 			$("#mainboard").css("min-height","80vh");
 			//置中log用

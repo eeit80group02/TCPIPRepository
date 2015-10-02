@@ -18,6 +18,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 import model.ActivityHighlightBean;
+import model.FullProjBean;
 import model.dao.interfaces.ActivityHighlightDAO;
 
 public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
@@ -242,6 +243,20 @@ public class ActivityHighlightDAOJdbc implements ActivityHighlightDAO
 			}
 		return result;
 	}
+	
+	
+	public FullProjBean getJoinFullProjBean(int fullprojid){
+		
+		FullProjDAOJdbc jdbcService = new FullProjDAOJdbc();
+		FullProjBean bean = jdbcService.findByPrimaryKey(fullprojid);
+		if(bean != null){
+			return bean;
+		}else{
+			return new FullProjBean();
+		}
+		
+	}
+	
 	
 	public static void main(String[] args)
 	{

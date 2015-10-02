@@ -13,7 +13,25 @@ public class ActivityHighlightBean implements Serializable
 	private Long frontCoverLength;		// 封面圖片長度
 	private String videoURL;			// 影片路徑(嵌入youtube影片的網址-參考flyingV)
 	private String content;				// 文章(花絮的內文 - 用ckeditor編輯)
+	private String base64String;		// frontCover轉為base64String
+	private FullProjBean fullProjBean;		// frontCover轉為base64String
 	
+	public FullProjBean getFullProjBean() {
+		return fullProjBean;
+	}
+
+	public void setFullProjBean(FullProjBean fullProjBean) {
+		this.fullProjBean = fullProjBean;
+	}
+
+	public String getBase64String() {
+		return base64String;
+	}
+
+	public void setBase64String(String base64String) {
+		this.base64String = base64String;
+	}
+
 	public ActivityHighlightBean()
 	{
 	}
