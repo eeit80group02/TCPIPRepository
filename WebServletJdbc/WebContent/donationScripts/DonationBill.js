@@ -26,7 +26,7 @@ $(window).load(function() {
 		$(this).trigger($.Event("click"));
 		Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>按 Esc 或 <i class="tiny material-icons">done</i> 關閉視窗</span>', 2000, 'rounded');
 	});
-	
+
 	// 第三頁的小叮嚀
 	$("#test3 button[data-target='modalNote04']").one('mouseover', function() {
 		// 第一次移過去等同 click
@@ -127,6 +127,15 @@ $(window).load(function() {
 		if (/^[a-zA-Z0-9._-]+@([a-zA-Z0-9.-]+\.)+[a-zA-Z0-9.-]{2,4}$/.test(checkTxtOemail)) {
 		} else {
 			Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>E-mail 格式錯誤</span>', 1800, 'rounded');
+		}
+	}
+
+	$("#txtPkgexp").blur(checkTxtPkgexp);	
+	function checkTxtPkgexp() {
+		// 內容物判斷
+		var checkTxtPkgexp = $("#txtPkgexp").val();
+		if(checkTxtPkgexp==null||checkTxtPkgexp.trim().length==0){
+			Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>內容物不可為空白</span>', 1800, 'rounded');
 		}
 	}
 

@@ -64,9 +64,9 @@
 			</div>
 		</div>
 		<!-- 卡片列區塊的container -->
-		<div>
+		<div id="cardContainer">
 			<div class="centerdiv">
-				<c:forEach var="aVar" items="${bean}" varStatus="par">
+				<c:forEach var="aVar" items="${bean}" begin="1" end="3">
 					<div class="touche">
 						<div class="card medium left hoverable light-green lighten-5"
 							style="margin: 10px">
@@ -77,16 +77,17 @@
 								<p style="font-size: 20pt" class="truncate">${aVar.title}</p>
 							</div>
 							<div class="card-action right-align">
-								<span>需求人數:${numbers[par.index]}/${aVar.estMember}</span>
+								<span>需求人數:${num}/${aVar.estMember}</span>
 							</div>
 							<div class="card-reveal lime lighten-5" style="height: 100%">
 								<span class="card-title grey-text text-darken-4"
-									style="height: 15%;"> 計畫摘要 <span
-									class="waves-effect waves-light btn right amber lighten-3"
-									style="padding: 0 10px 0 10px; color: black;"> Follow </span>
+									style="height: 15%;"> 計畫摘要 	      						<span class="waves-effect waves-light btn right amber lighten-3" style="padding:0 10px 0 10px;color:black;">
+										      						Follow 	      						</span>
 								</span>
 								<div class="divider"></div>
-								<p style="height: 55%">${aVar.projAbstract}</p>
+								<p style="height: 55%">
+									${aVar.projAbstract}
+								</p>
 								<div class="divider"></div>
 								<div class="center-align">
 									<a href="#"><h5>more...</h5></a>
@@ -96,6 +97,7 @@
 					</div>
 				</c:forEach>
 			</div>
+<<<<<<< HEAD
 			<!-- 卡片列 -->
 			<!-- 			<div class="centerdiv"> -->
 			<!-- 				卡片1 -->
@@ -334,7 +336,37 @@
 
 				</div>
 				<!-- 活動花絮區塊的conytainer -->
+=======
+	</div>
+</div>
+	<!-- 活動花絮區塊的container -->
+	<div class="teal lighten-5">
+		<div class="row valign-wrapper">
+			<!-- 段落提示 -->
+			<div class="card-panel yellow accent-2 z-depth-6 projinfos "
+				style="width: 15%;">
+				<h4 style="margin: 0" class="center-align">花絮剪影</h4>
+>>>>>>> branch 'master' of https://github.com/eeit80group02/TCPIPRepository.git
 			</div>
+		</div>
+		<!-- 	花絮圖片列 -->
+		<div class="activity" style="height: 400px; clear: both;">
+
+			<img
+				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
+				src="picture/result1.PNG" name="activity"> <img
+				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
+				src="picture/result2.PNG" name="activity"> <img
+				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
+				src="picture/result3.PNG" name="activity"> <img
+				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
+				src="picture/result4.PNG" name="activity"> <img
+				class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
+				src="picture/result5.PNG" name="activity">
+
+		</div>
+		<!-- 活動花絮區塊的conytainer -->
+	</div>
 	</main>
 
 
@@ -349,6 +381,7 @@
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script>
 		$(function() {
+			
 			//cardBoardContainer min-height
 			$("#cardBoardContainer").css("min-height","90vh");
 			
@@ -393,6 +426,8 @@
 				prevArrow : null,
 				nextArrow : null
 			});
+			
+			
 			//花絮播放事件
 			$(".activity").slick({
 				centerMode : true,

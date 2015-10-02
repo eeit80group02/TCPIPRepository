@@ -152,7 +152,7 @@
 				<div id="trashHeadTitleIcons">
 					<span id="trashHeadLeftBtn">
 						<button type="submit" id="donateTotal" class="btn btn-small btn-floating">
-							<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="加入捐獻背包"><i class="tiny material-icons">card_giftcard</i></a>
+							<a href="<c:url value='checkOrder.do?linkto=stepOne'/>" class="text tooltipped" data-position="top" data-delay="20" data-tooltip="查看捐獻清單"><i class="tiny material-icons">card_giftcard</i></a>
 						</button>
 					</span> <span id="trashHeadRightBtn">
 						<button type="button" id="donateDelete" class="btn btn-small btn-floating">

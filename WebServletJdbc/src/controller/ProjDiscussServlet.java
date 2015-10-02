@@ -131,7 +131,7 @@ public class ProjDiscussServlet extends HttpServlet
 		int fId = Integer.parseInt(fullProjId);
 		
 		JSONObject jsonObject = service.select(fId);
-		System.out.println(jsonObject);
+//		System.out.println(jsonObject);
 		out.write(jsonObject.toJSONString());
 	}
 }
