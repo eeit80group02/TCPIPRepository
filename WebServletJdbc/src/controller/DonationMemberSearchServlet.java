@@ -181,9 +181,11 @@ public class DonationMemberSearchServlet extends HttpServlet {
 					response.sendRedirect(response.encodeRedirectURL(request
 							.getContextPath()+"/donation/AllDeamndByMember.jsp"));
 					return;
+					
 				} else {
+					System.out.println("777123@@");
 					dbdList = donationSearchService.searchByOriginalDemandNumber();
-
+					System.out.println("aaaaaaaaaaa@@");
 					if(dbdList.isEmpty()) {
 						System.out.println("123");
 						dbdList = donationSearchService.searchSchoolByOriginalDemandNumber(schoolId);
