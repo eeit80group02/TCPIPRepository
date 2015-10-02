@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>捐獻明細</title>
+<title>填寫資料</title>
 
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
@@ -78,7 +78,7 @@
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
-			<a href="#" class="brand-logo center">捐獻明細</a>
+			<a href="#" class="brand-logo center">填寫資料</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
@@ -120,7 +120,7 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻明細</a></li>
+						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻清單</a></li>
 						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">填寫資料</a></li>
 						<li class="tab col s3 disabled" id="pageTab03"><a href="#test3" class="disabled">完成捐獻</a></li>
 					</ul>
