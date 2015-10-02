@@ -67,6 +67,42 @@ public class InsertDonationOrder {
 			pstmt.setTimestamp(8, new java.sql.Timestamp(sdf.parse("2015-10-01 10:17").getTime()));// donationOederDate
 			pstmt.setString(9, "網路預約成功！ 您的預約單號：105800399889");// dealId
 			pstmt.executeUpdate();
+			
+			// 第五筆資料 貨運單號？
+			pstmt.setInt(1, 6);// memberId
+			pstmt.setString(2, "簡建文");// name
+			pstmt.setString(3, "台北市大安區信義路四段32號");// address
+			pstmt.setString(4, "022540395");// phone
+			pstmt.setString(5, "0987820258");// cellPhone
+			pstmt.setString(6, "eeit8031@gmail.com");// email			
+			pstmt.setTimestamp(7, new java.sql.Timestamp(sdf.parse("2015-07-07 17:18").getTime()));// pickTime
+			pstmt.setTimestamp(8, new java.sql.Timestamp(sdf.parse("2015-07-07 17:18").getTime()));// donationOederDate
+			pstmt.setString(9, "網路預約成功！ 您的預約單號：105800122112");// dealId
+			pstmt.executeUpdate();
+			
+			// 第六筆資料 貨運單號？
+			pstmt.setInt(1, 6);// memberId
+			pstmt.setString(2, "簡建文");// name
+			pstmt.setString(3, "台北市大安區信義路四段32號");// address
+			pstmt.setString(4, "022540395");// phone
+			pstmt.setString(5, "0987820258");// cellPhone
+			pstmt.setString(6, "eeit8031@gmail.com");// email			
+			pstmt.setTimestamp(7, new java.sql.Timestamp(sdf.parse("2015-07-07 17:18").getTime()));// pickTime
+			pstmt.setTimestamp(8, new java.sql.Timestamp(sdf.parse("2015-07-07 17:18").getTime()));// donationOederDate
+			pstmt.setString(9, "網路預約成功！ 您的預約單號：105800859223");// dealId
+			pstmt.executeUpdate();
+			
+			// 第五筆資料 貨運單號？
+			pstmt.setInt(1, 6);// memberId
+			pstmt.setString(2, "簡建文");// name
+			pstmt.setString(3, "台北市大安區信義路四段32號");// address
+			pstmt.setString(4, "022540395");// phone
+			pstmt.setString(5, "0987820258");// cellPhone
+			pstmt.setString(6, "eeit8031@gmail.com");// email			
+			pstmt.setTimestamp(7, new java.sql.Timestamp(sdf.parse("2015-07-07 17:18").getTime()));// pickTime
+			pstmt.setTimestamp(8, new java.sql.Timestamp(sdf.parse("2015-07-07 17:18").getTime()));// donationOederDate
+			pstmt.setString(9, "網路預約成功！ 您的預約單號：105800485512");// dealId
+			pstmt.executeUpdate();
 
 			// try end
 		} catch (Exception e) {
