@@ -25,7 +25,7 @@
 		<div class="row valign-wrapper" id="mainboard">
 			<div class="col l8 offset-l2 valign card-panel white z-depth-3" style="min-height:40vh" id="cardboard">
 				<div class="row center-align" style="font-family:微軟正黑體;font-size:5em;" id="msgboard">
-					無法連線至網路<br>請重新再試
+					請稍後再試!
 				</div>
 				<div class="row">
 					<a class="col l2 offset-l5 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回首頁</a>

@@ -33,29 +33,29 @@
 		<!-- 主要版面 -->
 		<div class="row" id="mainboard">
 			
+
 			<!-- 活動花絮列表 -->
 			<div class="col l11 offset-l1" id="projlist">
 				<div class="centerdiv">
-				<c:forEach  var="primaryProj" items="${primaryProjAll}" varStatus="varStatus" >
-					<c:url value="/primaryProj.do" var="path">
-						<c:param name="type" value="display" />
-						<c:param name="primaryProjId" value="${primaryProj.primaryProjId}" />
+				<c:forEach  var="activityHighLight" items="${activityHighLightAll}" varStatus="varStatus" >
+					<c:url value="/Activity/ActivityHighlightDisplay.jsp" var="path">
+						<c:param name="memberId" value="${activityHighLight.memberId}" />
+						<c:param name="fullProjId" value="${activityHighLight.fullProjId}" />
 					</c:url>
 					
 					<!-- 卡片開始 -->
 						<div class="touche">
 							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${primaryProj.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+								<div class="card-image activator" style="background-image: url(${activityHighLight.base64String}); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 								</div>
 								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content">
-									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
+								<div class="card-content" style="font-size: 20pt" class="truncate">
+									${activityHighLight.fullProjBean.title}
 								</div>
 								<!-- 連結到花絮的收看頁面 -->
 								<div class="card-action right-align">
-									<a href="${path }">take a look</a>
+									<a href="${path}">take a look</a>
 								</div>
 							</div>
 						</div>
@@ -79,20 +79,6 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		$(function() {
-			//固定側邊欄所在位置
-			$(window).on("scroll", function() {
-				if ($(this).scrollTop() <= $("#projlist").position().top) {
-					$("#sidebar").css({
-						"position" : "absolute",
-						"top" : $("#projlist").position().top
-					});
-				} else {
-					$("#sidebar").css({
-						"position" : "fixed",
-						"top" : 0
-					});
-				}
-			})
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
@@ -104,6 +90,22 @@
 			$(".card").css("width", "310px");
 			//設定主要面板高度
 			$("#mainboard").css("min-height","100vh");
+			
+			
+// 			$.get("<c:url value='/ActivityHighlightDisplayAllServlet' />", function(responseJson) {
+// 				console.log(responseJson);
+// 				if(responseJson.error == "尚未建立花絮!") {
+// 					$("#error").html("<h4>查詢錯誤!</h4>");
+// 				} else {
+// 					$("#projName").append(responseJson.projName);	
+// 					$("#memberName").append(responseJson.memberName);
+// 					var offset = responseJson.videoURL.indexOf("watch?v=")+8;
+// 					$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+responseJson.videoURL.substring(offset, offset+11));
+// 					$("#frontCover").attr("src", responseJson.frontCover);
+// 					$("#content").html(responseJson.content);
+// 				}
+// 			}); 
+			
 		})
 	</script>
 	<script>

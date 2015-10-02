@@ -28,6 +28,19 @@ public class DonationService {
 	private DonationOrderDAOJdbc donationOrderDAOJdbc;
 	private DonationOrderDetailDAOJdbc donationOrderDetailDAOJdbc;
 	
+	// 取出會員所有明細
+	public List<DonationOrderBean> getAllDetailByMember(int memberId){
+		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
+		List<DonationOrderBean> orderList = donationOrderDAOJdbc.getAll();
+		List<DonationOrderBean> newOrderList = new ArrayList<>();
+		for(DonationOrderBean d : orderList) {
+			if(d.getMemberId() == memberId){
+				newOrderList.add(d);
+			}
+		}
+		return newOrderList;
+	}
+	
 	// 取出所有訂單及其明細
 	public List<DonationODBean> getAllOD(){
 		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
@@ -81,10 +94,13 @@ public class DonationService {
 			odList.add(newODBean);
 		}
 		
-		for(DonationODBean td : odList) {
-			System.out.println("ODB="+td);
+		// 設定取前n筆資料 
+		List<DonationODBean> od5 = new ArrayList<>();
+		for(int i = 0; i < 4; i++) {
+			od5.add(odList.get(i));
+			System.out.println("od5="+od5.get(i));
 		}
-		return odList;
+		return od5;
 	}
 	
 	// 學校新增需求

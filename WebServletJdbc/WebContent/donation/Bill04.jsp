@@ -41,7 +41,7 @@
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
-			<a href="#" class="brand-logo center">查詢宅配</a>
+			<a href="<c:url value='/donation/demand.do?type=OrderDetailByMember'/>" class="brand-logo center">查詢宅配</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
@@ -49,6 +49,7 @@
 						<c:if test="${not empty LoginOK}">
 							<c:if test="${LoginOK.beanName.equals('member')}">
 								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+								<li><a href="<c:url value='/donation/demand.do?type=OrderDetailByMember'/>">查詢宅配</a></li>
 							</c:if>
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
@@ -96,13 +97,15 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>假姓名</td>
-									<td>假E-mail</td>
-									<td>假電話</td>
-									<td>假手機</td>
-									<td><span id="resultShow">假宅配單號</span></td>
-								</tr>
+								<c:forEach var='item' items='${MOD}'>
+									<tr>
+										<td>${item.name}</td>
+										<td>${item.email}</td>
+										<td>${item.phone}</td>
+										<td>${item.cellPhone}</td>
+										<td><span id="resultShow">${item.dealId}</span></td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</form>
