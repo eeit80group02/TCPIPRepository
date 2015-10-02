@@ -104,6 +104,22 @@
 			$(".card").css("width", "310px");
 			//設定主要面板高度
 			$("#mainboard").css("min-height","100vh");
+			
+			
+			$.get("<c:url value='/ActivityHighlightDisplayAllServlet' />", function(responseJson) {
+				console.log(responseJson);
+// 				if(responseJson.error == "尚未建立花絮!") {
+// 					$("#error").html("<h4>查詢錯誤!</h4>");
+// 				} else {
+// 					$("#projName").append(responseJson.projName);	
+// 					$("#memberName").append(responseJson.memberName);
+// 					var offset = responseJson.videoURL.indexOf("watch?v=")+8;
+// 					$("#YouTubeURL").attr("src","//www.youtube.com/embed/"+responseJson.videoURL.substring(offset, offset+11));
+// 					$("#frontCover").attr("src", responseJson.frontCover);
+// 					$("#content").html(responseJson.content);
+// 				}
+			}); 
+			
 		})
 	</script>
 	<script>

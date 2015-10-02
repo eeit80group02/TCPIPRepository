@@ -54,7 +54,6 @@ public class ActivityHighlightPostServlet extends HttpServlet {
 
 			if (resultBean != null) {
 				out.write("花絮創建成功!");
-
 			} else {
 				out.write("花絮創建失敗!");
 			}
