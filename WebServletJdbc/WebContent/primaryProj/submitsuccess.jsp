@@ -31,8 +31,8 @@
 					已將申請送出<br>請靜候審核
 				</div>
 				<div class="row">
-					<a class="col l2 offset-l5 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回首頁</a>
-					<a class="col l2 offset-l5 center-align btn-large red" href="<c:url value="/primaryProj.do?type=displayAll" />" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回初步計畫</a>
+					<a class="col l2 offset-l4 center-align btn-large red" href="${pageContext.request.contextPath}/index.jsp" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回首頁</a>
+					<a class="col l3 btn-large yellow lighten-4 black-text" href="<c:url value="/primaryProj.do?type=displayAll" />" style="font-family:微軟正黑體;font-size:1.6em;font-weight:600">回初步計畫</a>
 				</div>
 			</div>		
 		</div>		
