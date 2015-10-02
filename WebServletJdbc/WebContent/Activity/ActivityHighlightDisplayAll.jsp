@@ -47,8 +47,7 @@
 						<div class="touche">
 							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 								<!-- 花絮封面圖片 -->
-								<div class="card-image activator"
-									style="background-image: url(${activityHighLight.base64String}); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+								<div class="card-image activator" style="background-image: url(${activityHighLight.base64String}); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 								</div>
 								<!-- 花絮的名稱(完整計畫的名稱) -->
 								<div class="card-content" style="font-size: 20pt" class="truncate">
