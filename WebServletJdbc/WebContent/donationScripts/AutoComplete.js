@@ -6,6 +6,7 @@ $(function() {
 	$("*").click(div01hide);
 
 	txt = document.getElementById("searchDonation");
+	txt.addEventListener("keydown", getData, false);
 	txt.addEventListener("keyup", getData, false);
 	div01 = document.getElementById("div01");
 
