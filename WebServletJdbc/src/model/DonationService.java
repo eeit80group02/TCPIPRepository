@@ -94,10 +94,13 @@ public class DonationService {
 			odList.add(newODBean);
 		}
 		
-		for(DonationODBean td : odList) {
-			System.out.println("ODB="+td);
+		// 設定取前n筆資料 
+		List<DonationODBean> od5 = new ArrayList<>();
+		for(int i = 0; i < 4; i++) {
+			od5.add(odList.get(i));
+			System.out.println("od5="+od5.get(i));
 		}
-		return odList;
+		return od5;
 	}
 	
 	// 學校新增需求

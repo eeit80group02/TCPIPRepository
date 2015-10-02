@@ -245,6 +245,16 @@
 			});
 				
 			
+			for (var i in CKEDITOR.instances) {
+	        	CKEDITOR.instances[i].on('change', function(){
+	        		$('#content').each(function(){
+	        			var $textarea = $(this);
+	        			$textarea.val(CKEDITOR.instances[$textarea.attr('name')].getData());
+	        		});
+	        	});
+	        }
+			
+			
 			$.get("<c:url value='/ActivityHighlightCreateInitServlet?fullProjId=${param.fullProjId}&memberId=${param.memberId}' />", function(responseJson) {
 				console.log(responseJson);
 				

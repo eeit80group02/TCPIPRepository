@@ -560,7 +560,7 @@ public class DonationSearchService {
 		return dbdList;
 	}
 	
-	public List<DonationBeanDuplicate> searchByOriginalDemandNumber(){
+	public List<DonationBeanDuplicate> searchSchoolByOriginalDemandNumber(int schoolId){
 		DonationBeanDuplicate dbd;
 		DonationDAOJdbc donationDAO = new DonationDAOJdbc();
 		List<DonationBean> odbList = donationDAO.getAllByODNumber();
@@ -568,7 +568,7 @@ public class DonationSearchService {
 		List<DonationBeanDuplicate> dbdList = new ArrayList<>();
 		SchoolDAOJdbc schoolDAO;
 		for(DonationBean odb : odbList) {
-			if (odb.getDonationStatus().equals("否")) {
+			if (odb.getDonationStatus().equals("否") && odb.getSchoolId() == schoolId) {
 				dbd = new DonationBeanDuplicate();
 				dbd.setDonationId(odb.getDonationId());
 				dbd.setSchoolId(odb.getSchoolId());
@@ -601,34 +601,12 @@ public class DonationSearchService {
 				dbd.setImageLength(odb.getImageLength());
 				dbd.setRemark(odb.getRemark());
 				dbdList.add(dbd);//16->18
-				
-//				dbd = new DonationBeanDuplicate();
-//				schoolDAO = new SchoolDAOJdbc();
-//				SchoolBean sBean = schoolDAO.findByPrimaryKey(odb.getSchoolId());
-//				String schoolName = sBean.getName();
-//				
-//				dbd.setDonationId(odb.getDonationId());
-//				dbd.setSchoolId(odb.getSchoolId());
-//				// 設定 schoolName
-//				dbd.setSchoolName(schoolName);
-//				dbd.setDonationStatus(odb.getDonationStatus());
-//				dbd.setSupplyName(odb.getSupplyName());
-//				dbd.setOriginalDemandNumber(odb.getOriginalDemandNumber());
-//				dbd.setOriginalDemandUnit(odb.getOriginalDemandUnit());
-//				dbd.setDemandNumber(odb.getDemandNumber());
-//				// 預設為 1
-//				dbd.setDonateAmount(1);
-//				dbd.setSize(odb.getSize());
-//				dbd.setDemandTime(odb.getDemandTime());
-//				dbd.setExpireTime(odb.getExpireTime());
-//				dbd.setRemark(odb.getRemark());
-//				dbdList.add(dbd);
 			}
 		}
 		return dbdList;
 	}
 	
-	public List<DonationBeanDuplicate> searchSchoolByOriginalDemandNumber(int schoolId){
+	public List<DonationBeanDuplicate> searchByOriginalDemandNumber(){
 		DonationBeanDuplicate dbd;
 		DonationDAOJdbc donationDAO = new DonationDAOJdbc();
 		List<DonationBean> odbList = donationDAO.getAllByODNumber();
@@ -636,7 +614,7 @@ public class DonationSearchService {
 		List<DonationBeanDuplicate> dbdList = new ArrayList<>();
 		SchoolDAOJdbc schoolDAO;
 		for(DonationBean odb : odbList) {
-			if (odb.getDonationStatus().equals("否") && odb.getSchoolId() == schoolId) {
+			if (odb.getDonationStatus().equals("否")) {
 				dbd = new DonationBeanDuplicate();
 				dbd.setDonationId(odb.getDonationId());
 				dbd.setSchoolId(odb.getSchoolId());
