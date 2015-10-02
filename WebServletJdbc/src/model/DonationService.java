@@ -662,7 +662,7 @@ public class DonationService {
 				//donationOederId 為交易時取出的pk鍵
 				donationOrderDetailBean.setDonationId(d.getDonationId());
 				// 作字串處理
-				donationOrderDetailBean.setSupplyName(d.getSupplyName()+" "+d.getSchoolName());
+				donationOrderDetailBean.setSupplyName(d.getSupplyName());
 				donationOrderDetailBean.setDonationAmount(d.getDonateAmount());
 				orderDetailList.add(donationOrderDetailBean);
 				
@@ -676,7 +676,6 @@ public class DonationService {
 				} else {
 					donationBeanPart.setDonationStatus("否");
 				}
-				
 				donationBeanPart.setSupplyName(d.getSupplyName());
 				donationBeanPart.setOriginalDemandNumber(d.getOriginalDemandNumber());
 				donationBeanPart.setOriginalDemandUnit(d.getOriginalDemandUnit());
