@@ -40,7 +40,7 @@
           <!-- footer下半部的container -->
           <div class="footer-copyright">
             <div class="container">
-            © 2015 Copyright
+            &copy; 2015 Copyright
             </div>
           </div>
         </footer>

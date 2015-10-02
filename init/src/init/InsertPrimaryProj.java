@@ -155,7 +155,7 @@ public class InsertPrimaryProj
 				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
-				pstmt.setString(6,"2015年新化龍燈農藥廠事件的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？我們相信，在這塊土地上，一定還有堅持對環境友善的農民，以及默默為綠色環境努力的人們，我們期望，透過小農徵文比賽，讓這些友善環境的故事被看見，為這片土地帶來美好的滋養。更期盼，藉由小農徵文比賽、友善環境人文講座、友善綠藝市集、農事體驗小旅行…的舉辦，為這片土地盡一份心力。現在，想邀請你，支持我們的理念與行動，和我們共同邁向夢想中的友善環境。"); // projAbstract 計畫摘要
+				pstmt.setString(6,"2015年新化龍燈農藥廠事件的衝擊，讓我們再度省思人與土地的關係，以及我們想要過什麼樣的生活？我們相信，在這塊土地上，一定還有堅持對環境友善的農民，以及默默為綠色環境努力的人們，我們期望，透過小農徵文比賽，讓這些友善環境的故事被看見，為這片土地帶來美好的滋養。"); // projAbstract 計畫摘要
 				
 				content.delete(0,content.length());
 				File contentFile = new File("primaryContent/2.txt");
@@ -206,7 +206,7 @@ public class InsertPrimaryProj
 				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
-				pstmt.setString(6,"漁村的小孩不知道什麼是「夢想」，起初我們提供一個有點心吃的活動，對他們來說已經非常滿足。 「練習飛盤」這件事對於隊上大多數的孩子來說，是第一次學習如何把事情做好，我們也不斷地教導：「不管做什麼都要很專心，剩下的老師們來想辦法。」 九年過去，孩子們很努力的達到設定的目標，我們的努力終究還是不足，需要更多人的幫助與支持。"); // projAbstract 計畫摘要
+				pstmt.setString(6,"漁村的小孩不知道什麼是「夢想」，起初我們提供一個有點心吃的活動，對他們來說已經非常滿足。 「練習飛盤」這件事對於隊上大多數的孩子來說，是第一次學習如何把事情做好，我們也不斷地教導：「不管做什麼都要很專心，剩下的老師們來想辦法。」 九年過去，孩子們很努力的達到設定的目標"); // projAbstract 計畫摘要
 				content.delete(0,content.length());
 				File contentFile = new File("primaryContent/3.txt");
 				try(BufferedReader br = new BufferedReader(new FileReader(contentFile));)
@@ -355,7 +355,7 @@ public class InsertPrimaryProj
 				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
-				pstmt.setString(6,"隨著台灣工商社會的發展，許多人出外到都市打拼，使得農村人口高齡化，青壯人口外移，造成農村聚落逐漸沒落的現象。台南市新化區礁坑仔社區就是這樣一個老聚落，這在老聚落裡面，百年歷史的老厝正逐漸崩壞凋零，許多動人故事與美好事物隨著老人家過世而消失，這些都是台灣社會共同的無形財產，一旦流失就再也找不回來，台灣的根是長在農村的土地上，保存我們的根是刻不容緩的事，期待透過點燈與音樂會找回我們忘記的回憶。"); // projAbstract 計畫摘要
+				pstmt.setString(6,"隨著台灣工商社會的發展，許多人出外到都市打拼，使得農村人口高齡化，青壯人口外移，造成農村聚落逐漸沒落的現象。台南市新化區礁坑仔社區就是這樣一個老聚落，這在老聚落裡面，百年歷史的老厝正逐漸崩壞凋零，許多動人故事與美好事物隨著老人家過世而消失，這些都是台灣社會共同的無形財產，一旦流失就再也找不回來"); // projAbstract 計畫摘要
 				content.delete(0,content.length());
 				File contentFile = new File("primaryContent/6.txt");
 				try(BufferedReader br = new BufferedReader(new FileReader(contentFile));)
@@ -552,7 +552,7 @@ public class InsertPrimaryProj
 				pstmt.setBinaryStream(4,fis,file.length()); 	// frontCover
 				pstmt.setLong(5,file.length());					// frontCoverLength
 
-				pstmt.setString(6,"我們是新竹縣職能治療師公會，對於0~6歲學齡前發展遲緩的孩子，我們透過遊戲來引導孩子學習策略並提供家長和老師建議，使發展遲緩的孩子可以獲得最大的學習及生活獨立性。103年，我們進入了新竹縣6個醫療缺乏鄉鎮、19所幼稚園及數個家庭開始了發掘遲緩兒並提供早期療育的工作。現在，因為先/後天的弱勢與經費不足，有100多位孩子將無法取得早療補助資格而中斷療育；因此我們計劃使用FlyingV募資平台來給予協助。"); // projAbstract 計畫摘要
+				pstmt.setString(6,"我們是新竹縣職能治療師公會，對於0~6歲學齡前發展遲緩的孩子，我們透過遊戲來引導孩子學習策略並提供家長和老師建議，使發展遲緩的孩子可以獲得最大的學習及生活獨立性。"); // projAbstract 計畫摘要
 				content.delete(0,content.length());
 				File contentFile = new File("primaryContent/10.txt");
 				try(BufferedReader br = new BufferedReader(new FileReader(contentFile));)

@@ -454,7 +454,6 @@ public class PrimaryProjServlet extends HttpServlet
 	private void displayPrimaryProj(HttpServletRequest request,HttpServletResponse response) throws ServletException,IOException
 	{
 		request.setCharacterEncoding("UTF-8");
-		System.out.println(request.getRequestURI() + "?" + request.getQueryString());
 		
 		// 錯誤訊息 容器
 		Map<String,String> errorMsg = new HashMap<String,String>();
