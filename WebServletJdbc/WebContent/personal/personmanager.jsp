@@ -39,7 +39,7 @@
 							<div class="row">
 								<a href="<c:url value="/participator.do?type=displayFullProjByParticipator" />" class="col l12 btn-large yellow lighten-5 black-text" >
 									<span class="fontStyle">
-										參予過的完整計畫
+										參與過的完整計畫
 									</span>
 								</a>
 							</div>
