@@ -87,6 +87,12 @@ public class DemandSelected extends HttpServlet {
 			List<DonationBeanDuplicate> listdbd = service.findOneAllDeamndByMember(schoolId);
 			List<String> list = dCart.getDonationIdList();
 			
+			// 跑馬燈資料查詢
+			List<DonationODBean> ODlist =  service.getAllOD();
+			System.out.println("OD WORK");
+			
+			session.setAttribute("ODS", ODlist);
+			
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", listdbd);
 //			session.setAttribute("cartItems", list);
