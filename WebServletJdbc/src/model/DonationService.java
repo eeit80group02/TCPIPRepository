@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +27,65 @@ public class DonationService {
 	
 	private DonationOrderDAOJdbc donationOrderDAOJdbc;
 	private DonationOrderDetailDAOJdbc donationOrderDetailDAOJdbc;
+	
+	// 取出所有訂單及其明細
+	public List<DonationODBean> getAllOD(){
+		donationOrderDAOJdbc = new DonationOrderDAOJdbc();
+		// 原始資料
+		List<DonationOrderBean> orderList = donationOrderDAOJdbc.getAll();
+		Collections.reverse(orderList);
+		
+		donationOrderDetailDAOJdbc = new DonationOrderDetailDAOJdbc();
+		List<DonationOrderDetailBean> detailList = donationOrderDetailDAOJdbc.getAll();
+		
+		// 要封裝的訂單主檔
+		List<DonationODBean> odList = new ArrayList<>();
+		DonationODBean newODBean;
+		// 要封裝的明細
+		List<DonationOrderDetailBean> newDetailList;
+		DonationOrderDetailBean newDetailBean;
+		
+		for(DonationOrderBean d : orderList){
+			// 此訂單下的全部明細
+			newDetailList = new ArrayList<>();
+			
+			// 包裝主檔資料
+			newODBean = new DonationODBean();
+			newODBean.setDonationOrderId(d.getDonationOrderId());
+			newODBean.setMemberId(d.getMemberId());
+			newODBean.setName(d.getName());
+			newODBean.setAddress(d.getAddress());
+			newODBean.setPhone(d.getPhone());
+			newODBean.setCellPhone(d.getCellPhone());
+			newODBean.setEmail(d.getEmail());
+			newODBean.setPickTime(d.getPickTime());
+			newODBean.setDonationOederDate(d.getDonationOederDate());
+			newODBean.setDealId(d.getDealId());
+			
+			for(DonationOrderDetailBean od : detailList){
+				if(d.getDonationOrderId() == od.getDonationOederId()){
+					// 包裝明細資料
+					newDetailBean = new DonationOrderDetailBean();
+					newDetailBean.setDonationOrderDetailId(od.getDonationOrderDetailId());
+					newDetailBean.setDonationOederId(od.getDonationOederId());
+					newDetailBean.setDonationId(od.getDonationId());
+					newDetailBean.setSupplyName(od.getSupplyName());
+					newDetailBean.setDonationAmount(od.getDonationAmount());
+					// add其中一筆
+					newDetailList.add(newDetailBean);
+				}
+			}
+			// 封裝所有明細
+			newODBean.setDodbList(newDetailList);
+			// 封裝一筆訂單
+			odList.add(newODBean);
+		}
+		
+		for(DonationODBean td : odList) {
+			System.out.println("ODB="+td);
+		}
+		return odList;
+	}
 	
 	// 學校新增需求
 	public DonationBean saveDemand(DonationBean donationBean) {
@@ -602,7 +662,7 @@ public class DonationService {
 				//donationOederId 為交易時取出的pk鍵
 				donationOrderDetailBean.setDonationId(d.getDonationId());
 				// 作字串處理
-				donationOrderDetailBean.setSupplyName(d.getSupplyName()+" "+d.getSchoolName());
+				donationOrderDetailBean.setSupplyName(d.getSupplyName());
 				donationOrderDetailBean.setDonationAmount(d.getDonateAmount());
 				orderDetailList.add(donationOrderDetailBean);
 				
@@ -616,7 +676,6 @@ public class DonationService {
 				} else {
 					donationBeanPart.setDonationStatus("否");
 				}
-				
 				donationBeanPart.setSupplyName(d.getSupplyName());
 				donationBeanPart.setOriginalDemandNumber(d.getOriginalDemandNumber());
 				donationBeanPart.setOriginalDemandUnit(d.getOriginalDemandUnit());

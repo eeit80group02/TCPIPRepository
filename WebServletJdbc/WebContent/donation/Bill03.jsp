@@ -72,14 +72,14 @@
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
-			<a href="#" class="brand-logo center">捐獻明細</a>
+			<a href="#" class="brand-logo center">完成捐獻</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
 						<!-- 有登入時，會有學校頁面或者個人頁面 -->
 						<c:if test="${not empty LoginOK}">
 							<c:if test="${LoginOK.beanName.equals('member')}">
-								<li><a href="<c:url value="/personal/personmanager.jsp" />">完成捐獻</a></li>
+								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
 							</c:if>
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
