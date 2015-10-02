@@ -38,7 +38,7 @@
 			<div class="col l11 offset-l1" id="projlist">
 				<div class="centerdiv">
 				<c:forEach  var="activityHighLight" items="${activityHighLightAll}" varStatus="varStatus" >
-					<c:url value="/ActivityHighlightDisplayAllServlet.do" var="path">
+					<c:url value="/Activity/ActivityHighlightDisplay.jsp" var="path">
 						<c:param name="memberId" value="${activityHighLight.memberId}" />
 						<c:param name="fullProjId" value="${activityHighLight.fullProjId}" />
 					</c:url>
