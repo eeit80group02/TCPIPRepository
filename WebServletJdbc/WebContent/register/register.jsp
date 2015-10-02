@@ -45,88 +45,90 @@
 	<div class="row">
 		<!-- 檢查表單填寫情況 -->
 		<div class="col l3" id="validateform" style="position:absolute;">
-	        <div class="card-panel hoverable" style="padding:0;margin:0;">
-			  <ul id="formul" class="collapsible" data-collapsible="accordion" style="font-family:微軟正黑體;font-weight:600;margin:0;">
-			    <li style="margin:0;">
-			      <button class="deep-orange lighten-4 left-align" id="accountinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;" autofocus><i class="material-icons">play_arrow</i>帳號</button>
-			      <div class="cyan lighten-5 black-text"  id="accountinfo">
-<!-- 			      	<div style="font-size:1.2em;"> -->
-					      		<ul id="actvalidatediv" class="card-panel cyan lighten-5" style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
-						      		<li id="liheight"style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li>
-						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li>
-						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li>
-						      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li>
-					      		</ul>
-<!-- 			      	</div> -->
-			      </div>
-			    </li>
-			    <li style="margin:0">
-			      <button class="deep-orange lighten-4 left-align" id="passwordinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼</button>
-			      <div class="yan lighten-5 black-text" id="passwordinfo">
-<!-- 			      	<div style="font-size:1.2em;"> -->
-			      		<ul id="pswdvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic1"></i><span id="rule2text1">必須包含英文字母</span></li>
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic6"></i><span id="rule2text6">必須包含數字</span></li>
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic3"></i><span id="rule2text3">必須包含至少一特殊符號</span></li>
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic4"></i><span id="rule2text4">不得有中文字元</span></li>
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic5"></i><span id="rule2text5">必須介於10~16個字元間</span></li>
-			      		</ul>
-<!-- 			      	</div>			       -->
-			      </div>
-			    </li>
-			    <li style="margin:0">
-			      <button class="deep-orange lighten-4 left-align"style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼確認</button>
-			      <div class="yan lighten-5 black-text">
-<!-- 			      	<div style="font-size:1.2em;"> -->
-			      		<ul id="chkvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic2"></i><span id="rule2text2">密碼與密碼確認必須相同</span></li>
-			      		</ul>
-<!-- 			      	</div>			       -->
-			      </div>
-			    </li>
-			    <li style="margin:0">
-			      <button class="deep-orange lighten-4 left-align" id="phoneinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>聯絡方式</button>
-			      <div class="cyan lighten-5 black-text" id="phoneinfo">
-<!-- 			      <div style="font-size:1.2em;"> -->
-			      		<ul id="phonevalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic1"></i><span id="rule3text1">室內電話、手機至少擇一選填</span></li>
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic2"></i><span id="rule3text2">室內電話符合格式</span></li>
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic3"></i><span id="rule3text3">手機符合格式</span></li>
-			      		</ul>
-<!-- 			      	</div>	 -->
-			      </div>
-			    </li>
-			    <li style="margin:0">
-			      <button class="deep-orange lighten-4 left-align" id="birthdayinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>生日</button>
-			      <div class="cyan lighten-5 black-text" id="birthdayinfo">
-<!-- 			      <div style="font-size:1.2em;"> -->
-			      		<ul id="birthvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule5pic1"></i><span id="rule5text1">生日符合格式</span></li>
-			      		</ul>
-<!-- 			      	</div>	 -->
-			      </div>
-			    </li>
-			    <li style="margin:0">
-			      <button class="deep-orange lighten-4 left-align" id="emailinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>Email</button>
-			      <div class="cyan lighten-5 black-text" id="emailinfo">
-<!-- 			      <div style="font-size:1.2em;"> -->
-			      		<ul id="emailvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
-				      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule4pic1"></i><span id="rule4text1">Email符合格式</span></li>
-			      		</ul>
-<!-- 			      	</div>	 -->
-			      </div>
-			    </li>
-			  </ul>
-	        
+	        <div class="row">
+		        <div class="card-panel hoverable" style="padding:0;margin:0;">
+				  <ul id="formul" class="collapsible" data-collapsible="accordion" style="font-family:微軟正黑體;font-weight:600;margin:0;">
+				    <li style="margin:0;">
+				      <button class="deep-orange lighten-4 left-align" id="accountinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;" autofocus><i class="material-icons">play_arrow</i>帳號</button>
+				      <div class="cyan lighten-5 black-text"  id="accountinfo">
+	<!-- 			      	<div style="font-size:1.2em;"> -->
+						      		<ul id="actvalidatediv" class="card-panel cyan lighten-5" style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+							      		<li id="liheight"style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic1"></i><span id="rule1text1">必須包含英文字母</span></li>
+							      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic4"></i><span id="rule1text4">必須包含數字</span></li>
+							      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic2"></i><span id="rule1text2">不得包含任何特殊符號及中文字元</span></li>
+							      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule1pic3"></i><span id="rule1text3">必須介於10~16個字元間</span></li>
+						      		</ul>
+	<!-- 			      	</div> -->
+				      </div>
+				    </li>
+				    <li style="margin:0">
+				      <button class="deep-orange lighten-4 left-align" id="passwordinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼</button>
+				      <div class="yan lighten-5 black-text" id="passwordinfo">
+	<!-- 			      	<div style="font-size:1.2em;"> -->
+				      		<ul id="pswdvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic1"></i><span id="rule2text1">必須包含英文字母</span></li>
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic6"></i><span id="rule2text6">必須包含數字</span></li>
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic3"></i><span id="rule2text3">必須包含至少一特殊符號</span></li>
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic4"></i><span id="rule2text4">不得有中文字元</span></li>
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic5"></i><span id="rule2text5">必須介於10~16個字元間</span></li>
+				      		</ul>
+	<!-- 			      	</div>			       -->
+				      </div>
+				    </li>
+				    <li style="margin:0">
+				      <button class="deep-orange lighten-4 left-align"style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>密碼確認</button>
+				      <div class="yan lighten-5 black-text">
+	<!-- 			      	<div style="font-size:1.2em;"> -->
+				      		<ul id="chkvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule2pic2"></i><span id="rule2text2">密碼與密碼確認必須相同</span></li>
+				      		</ul>
+	<!-- 			      	</div>			       -->
+				      </div>
+				    </li>
+				    <li style="margin:0">
+				      <button class="deep-orange lighten-4 left-align" id="phoneinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>聯絡方式</button>
+				      <div class="cyan lighten-5 black-text" id="phoneinfo">
+	<!-- 			      <div style="font-size:1.2em;"> -->
+				      		<ul id="phonevalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic1"></i><span id="rule3text1">室內電話、手機至少擇一選填</span></li>
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic2"></i><span id="rule3text2">室內電話符合格式</span></li>
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule3pic3"></i><span id="rule3text3">手機符合格式</span></li>
+				      		</ul>
+	<!-- 			      	</div>	 -->
+				      </div>
+				    </li>
+				    <li style="margin:0">
+				      <button class="deep-orange lighten-4 left-align" id="birthdayinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>生日</button>
+				      <div class="cyan lighten-5 black-text" id="birthdayinfo">
+	<!-- 			      <div style="font-size:1.2em;"> -->
+				      		<ul id="birthvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule5pic1"></i><span id="rule5text1">生日符合格式</span></li>
+				      		</ul>
+	<!-- 			      	</div>	 -->
+				      </div>
+				    </li>
+				    <li style="margin:0">
+				      <button class="deep-orange lighten-4 left-align" id="emailinfohead" style="font-size:1.4em;display:block;width:100%;padding:0;margin:0;border:2px solid #ffccbc;"><i class="material-icons">play_arrow</i>Email</button>
+				      <div class="cyan lighten-5 black-text" id="emailinfo">
+	<!-- 			      <div style="font-size:1.2em;"> -->
+				      		<ul id="emailvalidatediv" class="card-panel cyan lighten-5"  style="padding:0px;margin:0;font-size:1.4em;font-weight:600;font-family:微軟正黑體;height:1px;">
+					      		<li style="opacity:0"><i class="material-icons" style="vertical-align:text-bottom;" id="rule4pic1"></i><span id="rule4text1">Email符合格式</span></li>
+				      		</ul>
+	<!-- 			      	</div>	 -->
+				      </div>
+				    </li>
+				  </ul>
+		        
+		        </div>
 	        </div>
+
 		</div>
 		
 		<!-- 切版面開始 -->
-		<div class="col l6 offset-l3">
+		<div class="col l9 offset-l3">
 			<!-- 表單本體開始 --> 
 			<form class="card-panel hoverable green lighten-5" action="<c:url value='register.do' />" method="post" enctype="multipart/form-data" style="padding:2.5em;" id="registerform">
 
-				<div class="row">
 						<!-- 頭像上傳 -->
 						<div class="row">
 							<div class="col l2 btn yellow lighten-5 black-text tooltipped" data-position="right" data-delay="50"  data-tooltip="圖檔僅接受jpg、png格式，檔案大小請勿超過2M" style="position:relative;display:block;overflow:hidden;cursor:pointer;">
@@ -136,123 +138,139 @@
 <!-- 							                   		後端錯誤訊息顯示 -->
 							<font color="red" size="-1">${MsgErr.errorPictureType}${MsgErr.errorPicture}</font>
 							<!-- 身分證驗證按鈕 -->
-							 <button data-target="identityVarifyModal" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
+							 <button data-target="identityVarifyModal" class="col l2 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</button>
 <!-- 							 <a href="#modal2" class="col l3 btn modal-trigger yellow lighten-5 black-text" style="font-family:微軟正黑體;font-size:1.5em;" id="idcardnumberbtn">身分驗證</a> -->
 						</div>
-						<!-- 身分證字號 -->
-						<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
-							<input id="idcardNumber" type="text" class="validate" name="idNumber" required value="${param.idNumber}">
-<!-- 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required> -->
-<!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
-							<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
-							
+
+
+				<div class="row">
+						<div class="col l6">
+
+							<!-- 身分證字號 -->
+							<div class="input-field row tooltipped" data-position="left" data-delay="50"  data-tooltip="請點擊身分證驗證按鈕">
+								<input id="idcardNumber" type="text" class="validate" name="idNumber" required value="${param.idNumber}">
+	<!-- 							<input id="idcardNumber" type="text" class="validate" name="idNumber" required> -->
+	<!-- 							                   		後端錯誤訊息顯示 -->
+								<font color="red" size="-1">${MsgErr.errorIdNumberEmpty}</font>
+								<label for="idcardNumber" style="font-size:1.3em;font-weight:600;">身分證字號</label>
+								
+							</div>
+							<!-- 帳號 -->
+							<div class="input-field row">
+								<input id="accounts" type="text" class="validate" name="account" value="${param.account }" required>
+	<!-- 							                   		後端錯誤訊息顯示 -->
+								<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
+								<label for="accounts" style="font-size:1.3em;font-weight:600;">帳號</label>
+								
+							</div>
+							<!-- 密碼 -->
+							<div class="input-field row">
+								<input id="passwords" type="password" class="validate" name="password" required>
+	<!-- 														後端錯誤訊息顯示 -->
+								<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
+								<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
+							</div>						
+							<!-- 密碼確認 -->
+							<div class="input-field row">
+								<input id="check" type="password" class="validate" name="check" required>
+	<!-- 														後端錯誤訊息顯示 -->
+								<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
+								<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
+							</div>
 						</div>
-						<!-- 帳號 -->
-						<div class="input-field row">
-							<input id="accounts" type="text" class="validate" name="account" value="${param.account }" required>
-<!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorAccountEmpty}${MsgErr.errorAccountExists}</font>
-							<label for="accounts" style="font-size:1.3em;font-weight:600;">帳號</label>
-							
-						</div>
-						<!-- 密碼 -->
-						<div class="input-field row">
-							<input id="passwords" type="password" class="validate" name="password" required>
-<!-- 														後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorPasswordEmpty}</font>
-							<label for="passwords" style="font-size:1.3em;font-weight:600;">密碼</label>
-						</div>						
-						<!-- 密碼確認 -->
-						<div class="input-field row">
-							<input id="check" type="password" class="validate" name="check" required>
-<!-- 														後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errorCheckEmpty}</font>
-							<label for="check" style="font-size:1.3em;font-weight:600;">密碼確認</label>
+						<div class="col l6 center-align">
+					        <!-- 圖片預覽 -->
+					        	<img class="card-panel hoverable center-align" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
 						</div>
 				</div>
 
 				
 				<div class="row">
-				<!-- 姓氏 -->
-					<div class="col l4 input-field left" style="padding-left:0;">
-						<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastName}">
-<!-- 													後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
-						<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
-					</div>				
+							<div class="col l6">
+							<!-- 姓氏 -->
+								<div class="row input-field" style="padding-left:0;">
+									<input id="lastName" type="text" class="validate" name="lastName" required value="${param.lastName}">
+			<!-- 													後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorLastNameEmpty}</font>
+									<label for="lastName" style="font-size:1.3em;font-weight:600;">姓氏</label>
+								</div>							
+							<!-- 名字 -->
+								<div class="row input-field">
+									<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstName}" >
+			<!-- 													後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorFirstNameEmpty}</font>
+									<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
+								</div>							
+							<!-- 生日 -->
+								<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
+									<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
+			<!-- 													後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorBirthdayStrEmpty}${MsgErr.errFormat}</font>				
+									<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>	
+								</div>										
+							<!-- 性別 -->					
+								<div class="row input-field" id="genderradio">
+									<input type="radio" id="boy" name="gender" value="1" />
+					     			<label for="boy">男</label>
+					     			<input type="radio" id="girl" name="gender" value="2"/>
+					      			<label for="girl">女</label>
+			<!-- 		      										後端錯誤訊息顯示 -->
+									<font color="red" size="-1" class="col l3">${MsgErr.errorGenderEmpty}</font>					
+								</div>			
 				
-				<!-- 名字 -->
-					<div class="col l4 input-field left">
-						<input id="firstName" type="text" class="validate" name="firstName" required value="${param.firstName}" >
-<!-- 													後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorFirstNameEmpty}</font>
-						<label for="firstName" style="font-size:1.3em;font-weight:600;">名字</label>
-					</div>				
-				
-				<!-- 性別 -->					
-					<div class="col l4 input-field left" id="genderradio">
-						<input type="radio" id="boy" name="gender" value="1" />
-		     			<label for="boy">男</label>
-		     			<input type="radio" id="girl" name="gender" value="2"/>
-		      			<label for="girl">女</label>
-<!-- 		      										後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorGenderEmpty}</font>					
-					</div>				
+							</div>
+							<div class="col l6">
+							<!-- 電話 -->
+								<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
+									<input id="phone" type="text" class="validate" name="phone"  value="${param.phone}">
+			<!-- 							                   		後端錯誤訊息顯示 -->
+										<font color="red" size="-1">${MsgErr.errPhoneEmpty}</font>
+									<label for="phone" style="font-size:1.3em;font-weight:600;">室內電話</label>
+														
+								</div>
+								
+							<!-- 手機 -->
+								<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
+									<input id="cellPhone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
+			<!-- 							                   		後端錯誤訊息顯示 -->
+										<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
+									<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
+								</div>
+								
+			
+			
+							<!-- Email -->
+								<div class="row input-field">
+									<input id="email" type="text" class="validate" name="email" required value="${param.email}">
+			<!-- 													後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorEmailEmpty}${MsgErr.errorEmailExists}</font>					
+									<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>	
+								</div>
+								
+							<!-- Address -->
+								<div class="row input-field">
+									<input id="address" type="text" class="validate" name="address" required value="${param.address}">
+			<!-- 													後端錯誤訊息顯示 -->
+									<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
+									<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>
+								</div>
+								
+							<!-- button -->
+								<div class="row" id="btndiv">
+									<div id="demo" class="btn-large right">一鍵Demo</div>
+									<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
+										<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
+									</button>
+									<button  class="col l2 btn-large right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
+										<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
+									</button>
+								</div>							
+							</div>
+		
 				</div>
 				
-				<!-- 電話 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：02-66666631" >
-						<input id="phone" type="text" class="validate" name="phone"  value="${param.phone}">
-<!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errPhoneEmpty}</font>
-						<label for="phone" style="font-size:1.3em;font-weight:600;">室內電話</label>
-											
-					</div>
-					
-				<!-- 手機 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：0912-345678">
-						<input id="cellPhone" type="text" class="validate" name="cellPhone" value="${param.cellPhone}">
-<!-- 							                   		後端錯誤訊息顯示 -->
-							<font color="red" size="-1">${MsgErr.errCellPhoneEmpty}</font>
-						<label for="phone" style="font-size:1.3em;font-weight:600;">手機</label>					
-					</div>
-					
-				<!-- 生日 -->
-					<div class="row input-field tooltipped" data-position="left" data-delay="50"  data-tooltip="範例：2015-10-07">
-						<input id="birthday" type="text" class="validate" name="birthday" required value="${param.birthday}">
-<!-- 													後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorBirthdayStrEmpty}${MsgErr.errFormat}</font>				
-						<label for="birthday" style="font-size:1.3em;font-weight:600;">生日</label>	
-					</div>
 
-				<!-- Email -->
-					<div class="row input-field">
-						<input id="email" type="text" class="validate" name="email" required value="${param.email}">
-<!-- 													後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorEmailEmpty}${MsgErr.errorEmailExists}</font>					
-						<label for="email" style="font-size:1.3em;font-weight:600;">E-mail</label>	
-					</div>
 					
-				<!-- Address -->
-					<div class="row input-field">
-						<input id="address" type="text" class="validate" name="address" required value="${param.address}">
-<!-- 													後端錯誤訊息顯示 -->
-						<font color="red" size="-1">${MsgErr.errorAddressEmpty}</font>						
-						<label for="address" style="font-size:1.3em;font-weight:600;">地址</label>
-					</div>
-					
-				<!-- button -->
-					<div class="row" id="btndiv">
-						<div id="demo" class="btn">一鍵Demo</div>
-						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="reset" name="action">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">取消</span>
-						</button>
-						<button  class="col l2 btn-large right yellow lighten-5 black-text" type="submit" name="action" id="submitbtn">
-							<span style="font-family:微軟正黑體;font-size:1.3em;">送出</span>
-						</button>
-
-					</div>
 				</form>
 				
 				
@@ -260,10 +278,6 @@
 		<!-- 表單版面 col l6 -->		
 		
 		
-		<!-- 圖片預覽版面  col l2-->
-		<div class="col l2">
-			<img class="card-panel hoverable" id="view" src="" style="height: 6.75cm; width: 5.25cm;border:5px solid black;padding:0;" >
-		</div>
 
 	</div>
 </main>
@@ -489,7 +503,12 @@
 		    
 			//mouseover時，單個input元素被舉起
 			$(".input-field").addClass("hoverable");
-
+			
+			
+			//圖片置中
+			var imgleftMargin = ($("#imagerow").width() - $("#view").width()) / 2 ;
+			$("#view").css("margin-left",imgleftMargin);
+			
 			//取消註冊gender的hover特效
 			$("#genderradio").removeClass("hoverable");
 			//開始填寫 input元素時 背景轉為白色

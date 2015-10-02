@@ -76,7 +76,7 @@
 						<div class="touche">
 							<div class="card medium left hoverable light-green lighten-5" style="margin: 10px">
 								<div class="card-image activator"
-									style="background-image: url('<c:url value="/getImage.do?type=primaryProj&primaryProjId=${primaryProj.primaryProjId}" />'); background-size: 100%; background-repeat: no-repeat;cursor:pointer;">
+									style="background-image: url('<c:url value="/getImage.do?type=primaryProj&primaryProjId=${primaryProj.primaryProjId}" />'); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 								</div>
 								<div class="card-content">
 									<p style="font-size: 20pt" class="truncate">${primaryProj.title}</p>
@@ -124,7 +124,10 @@
 
 			//main board
 			$("#mainboard").css("min-height","80vh");
-			
+			//置中log用
+			$(".centerdiv").css("padding-left");
+			var cardwidth = $(".touche").width() - 60;
+			console.log(cardwidth);
 			//提示頁面主題欄的高度
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
@@ -142,7 +145,9 @@
 			//設定body寬度為100%
 			$("body").css("width", "100%").css("height", "100%");
 			$(".centerdiv").css("height", "385px");
-			$(".card").css("width", "380px");
+// 			$(".centerdiv").css("width", "100%");
+			var finalcardWidth = Math.floor(cardwidth/3);
+			$(".card").css("width", finalcardWidth);
 		})
 	</script>
 	<script>
