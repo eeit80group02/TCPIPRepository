@@ -57,8 +57,8 @@ public class InsertDonation {
 			pstmt.setString(9, "不拘"); // 物資狀態(全新/二手/不拘)
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-10-21 18:11").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-01-21 18:11").getTime()));
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-21 18:11").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-09-21 18:11").getTime()));
 
 			file = new File("image/Donation/donation02.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
@@ -187,8 +187,8 @@ public class InsertDonation {
 			pstmt.setString(9, "全新"); // 物資狀態(全新/二手/不拘)
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-12-01 14:11").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-03-01 14:11").getTime()));
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-10-05 14:11").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-01-05 14:11").getTime()));
 
 			file = new File("image/Donation/donation07.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
