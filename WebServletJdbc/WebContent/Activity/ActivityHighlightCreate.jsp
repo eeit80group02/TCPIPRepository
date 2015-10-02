@@ -247,10 +247,16 @@
 			
 			$.get("<c:url value='/ActivityHighlightCreateInitServlet?fullProjId=${param.fullProjId}&memberId=${param.memberId}' />", function(responseJson) {
 				console.log(responseJson);
-				$("#projName").val(responseJson.projName);	
-				$("#memberName").val(responseJson.memberName);
-				$("#fullProjId").val(responseJson.fullProjId);
-				$("#memberId").val(responseJson.memberId);
+				
+				if(responseJson.result == void 0 ){
+					$("#projName").val(responseJson.projName);	
+					$("#memberName").val(responseJson.memberName);
+					$("#fullProjId").val(responseJson.fullProjId);
+					$("#memberId").val(responseJson.memberId);
+				} else {
+					alert("活動花絮已存在,請從花絮頁面查看!");
+					window.location = "<c:url value='/Activity/ActivityHighlightDisplayAll.jsp' />";	
+				}
 			}); 
 			
 			
