@@ -58,7 +58,7 @@ public class InsertDonation {
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-21 18:11").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-09-21 18:11").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-12-21 18:11").getTime()));
 
 			file = new File("image/Donation/donation02.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
@@ -214,7 +214,7 @@ public class InsertDonation {
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-07-31 14:30").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-11-01 14:30").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-10-01 14:30").getTime()));
 
 			file = new File("image/Donation/donation08.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
@@ -240,7 +240,7 @@ public class InsertDonation {
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-25 13:38").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-11-25 13:38").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2015-12-25 13:38").getTime()));
 
 			file = new File("image/Donation/donation09.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
