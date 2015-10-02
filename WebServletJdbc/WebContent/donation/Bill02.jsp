@@ -338,10 +338,7 @@
 					<div class="col s12 m12 l6">
 						<br>
 						<div class="leftTitle">
-							會員基本資料&nbsp;
-							<button type="button" id="buttonLeft01" class="btn btn-small btn-floating">
-								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="修改會員資料"><i class="small material-icons">account_box</i></a>
-							</button>
+							會員基本資料&nbsp;							
 						</div>
 						<br>
 						<!-- 左上 -->

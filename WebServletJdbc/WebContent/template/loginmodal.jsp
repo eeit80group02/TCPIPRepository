@@ -84,13 +84,15 @@
 	<script>
 		(function($) {
 			
-			function LoginFunction(){
+			$("#modal1").on("keydown",function(event){
 				if(event.keyCode == 13 && $("#member").hasClass("active")){
-					$("#memberloginSubmit").submit();
+					$('#memberlogin').submit();
 				}else if(event.keyCode == 13 && $("#school").hasClass("active")){
-					$("#schoolloginSubmit").submit();
+					$('#schoollogin').submit();
 				}
-			}
+			});
+			
+
 			
 			//會員登入
 			$('#memberloginSubmit').on("click",function(){
