@@ -84,10 +84,8 @@
 					</div>
 					<!-- 計畫內容 -->
 					<div class="row" id="primaryContentImgLimit">
-						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
-							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
+						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;"  style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
 							${primaryProj.content}
-							</p>
 						</div>
 					</div>
 				</div>

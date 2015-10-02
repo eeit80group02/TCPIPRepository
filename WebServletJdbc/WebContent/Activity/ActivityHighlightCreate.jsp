@@ -245,10 +245,7 @@
 			});
 				
 			
-			
-			
-			
-			$.get("<c:url value='/ActicityHighlightCreateInitServlet' />", function(responseJson) {
+			$.get("<c:url value='/ActivityHighlightCreateInitServlet?fullProjId=${param.fullProjId}&memberId=${param.memberId}' />", function(responseJson) {
 				console.log(responseJson);
 				$("#projName").val(responseJson.projName);	
 				$("#memberName").val(responseJson.memberName);
@@ -275,17 +272,18 @@
     	   		  	   	    	"videoURL" : $("#videoURL").val() },
     	   				dataType:'text',
     	   				success:function(result){
-    						$("#result").text(result);
+//     						alert("花絮創建成功!");
+    	   					window.location = "<c:url value='/Activity/ActivityHighlightDisplay.jsp?fullProjId=" + $("#fullProjId").val() + "&memberId=" + $("#memberId").val() + "' />";
     	   				}
     	   
        				});
 				} else {
-					$("#result").text("欄位需填齊!");
+					alert("確認資料填齊，請稍候再試!");
 				}
 			});
 			
 			$("#preview").on("click",function(){
-				var newWindow = window.open('<c:url value="/ActivityHighlightPreview.jsp" />');
+				var newWindow = window.open('<c:url value="/Activity/ActivityHighlightPreview.jsp" />');
 				newWindow.window.content = $("#content").val();
 				newWindow.window.frontCover = $("#frontCover").attr("src");
 				newWindow.window.fullProjName = $("#projName").val();

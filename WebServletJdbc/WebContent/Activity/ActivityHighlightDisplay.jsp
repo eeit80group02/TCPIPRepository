@@ -131,7 +131,7 @@
 			var pagetitleheight = ($(window).height() * 0.25);
 			$("#pagetitle").css("height", pagetitleheight);
 			
-			$.get("<c:url value='/ActicityHighlightDisplayServlet' />", function(responseJson) {
+			$.get("<c:url value='/ActivityHighlightDisplayServlet?fullProjId=${param.fullProjId}&memberId=${param.memberId}' />", function(responseJson) {
 				console.log(responseJson);
 				if(responseJson.error == "尚未建立花絮!") {
 					$("#error").html("<h4>查詢錯誤!</h4>");

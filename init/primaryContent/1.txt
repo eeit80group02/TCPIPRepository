@@ -1,5 +1,4 @@
-﻿content
-<p><span style="font-size:20px"><img src="https://i.imgur.com/6hCcocf.jpg" style="height:auto; width:728px" /></span></p>
+﻿<p><span style="font-size:20px"><img src="https://i.imgur.com/6hCcocf.jpg" style="height:auto; width:728px" /></span></p>
 
 <p><span style="font-size:20px">（原始圖片來源：<a href="https://www.flickr.com/photos/marcoven/15078757909/in/photolist-qFUEVb-4BfPCe-65YcT-dJW5dt-a2yxdh-c8AKQU-56x6sh-cAyegy-cAyetG-qrLTwe-oYszoD-4BfPzr-dJ3Bag-dJ9dLE-dJ3MSt-dJ3MEV-dJ9gRC-4Bk6h7-gexCVt-pxSYfA-pk4aHd-cAye43-dJ3Qdi-dJ3xbp-b2dqiH-rsuNpi-rmNU75-pECPo7-i7N6dq-bJouJc-qqVNRJ-rhCz2s-r7DXkU-cAys2N-cAysej-8MXvms-wnimR-4QjL5o-4nfizS-7hMMLb-7hMPVE-56sVdR-4mk4Vr-4QfoDa-pZNo5S-7hHQkV-7hMMRC-4nfizQ-aHNJsg-i29PTF" target="_blank">Marcoven_雪山東峰369路口</a>, C.C by Flickr）</span></p>
 

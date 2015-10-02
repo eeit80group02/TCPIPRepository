@@ -1,5 +1,4 @@
-﻿content
-<table style="line-height:18.1818px; width:750px">
+﻿<table style="line-height:18.1818px; width:750px">
 	<tbody>
 		<tr>
 			<td>

@@ -19,25 +19,28 @@ import model.dao.MemberDAOJdbc;
 /**
  * Servlet implementation class ActicityHighlightInitServlet
  */
-@WebServlet("/ActicityHighlightCreateInitServlet")
-public class ActicityHighlightCreateInitServlet extends HttpServlet {
+@WebServlet("/ActivityHighlightCreateInitServlet")
+public class ActivityHighlightCreateInitServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int fullProjId = 1;
-		int memberId = 1;
+		String fullProjId = request.getParameter("fullProjId");
+		String memberId = request.getParameter("memberId");
 		// get memberId, fullProjId from outer page
-		
+		System.out.println("fullProjId="+fullProjId);
+		System.out.println("memberId="+memberId);
 		
 		FullProjDAOJdbc proj = new FullProjDAOJdbc();
-		FullProjBean projBean = proj.findByPrimaryKey(fullProjId);
+		FullProjBean projBean = proj.findByPrimaryKey(Integer.valueOf(fullProjId));
 		String projName = projBean.getTitle();
+		System.out.println("projName="+projName);
 		
 		MemberDAOJdbc member = new MemberDAOJdbc();
-		MemberBean memberBean = member.select(memberId);
+		MemberBean memberBean = member.select(Integer.valueOf(memberId));
 		String memberName = memberBean.getLastName() + memberBean.getFirstName();
+		System.out.println("memberName="+memberName);
 		
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("projName", projName);
@@ -48,6 +51,7 @@ public class ActicityHighlightCreateInitServlet extends HttpServlet {
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out= response.getWriter();
 		out.write(jsonObject.toJSONString());
+		System.out.println("jsonObject="+jsonObject.toJSONString());
 		
 	}
 

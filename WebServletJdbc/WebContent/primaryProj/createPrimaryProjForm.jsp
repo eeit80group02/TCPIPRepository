@@ -20,6 +20,9 @@
 			font-family:微軟正黑體;		
 		}
 		
+		#limitImgSize img{
+			max-width:100%;
+		}
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>createPrimaryProj</title>

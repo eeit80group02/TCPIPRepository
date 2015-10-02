@@ -1,5 +1,4 @@
-﻿content
-<p><span style="font-size:20px"><strong>團隊緣起</strong><strong>]</strong></span></p>
+﻿<p><span style="font-size:20px"><strong>團隊緣起</strong><strong>]</strong></span></p>
 
 <p><span style="font-size:20px"><strong>「關於方向：</strong><strong>D</strong><strong>」</strong></span></p>
 

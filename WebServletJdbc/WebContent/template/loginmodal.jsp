@@ -83,10 +83,23 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 	<script>
 		(function($) {
+			
+			$("#modal1").on("keydown",function(event){
+				if(event.keyCode == 13 && $("#member").hasClass("active")){
+					$('#memberlogin').submit();
+				}else if(event.keyCode == 13 && $("#school").hasClass("active")){
+					$('#schoollogin').submit();
+				}
+			});
+			
+
+			
+			//會員登入
 			$('#memberloginSubmit').on("click",function(){
 				$('#memberlogin').submit();
 			});
 			
+			//學校登入
 			$("#schoolloginSubmit").on("click",function(){
 				$('#schoollogin').submit();
 			})
