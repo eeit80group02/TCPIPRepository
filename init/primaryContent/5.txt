@@ -1,5 +1,4 @@
-﻿content
-<h1><span style="font-size:20px">【福山部落：方舟計畫】</span></h1>
+﻿<h1><span style="font-size:20px">【福山部落：方舟計畫】</span></h1>
 
 <p><span style="font-size:20px"><img alt="" src="https://i.imgur.com/J3qHNzx.jpg" style="height:537px; width:800px" /></span></p>
 

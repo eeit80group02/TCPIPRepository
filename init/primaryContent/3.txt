@@ -1,5 +1,4 @@
-﻿content
-<div>
+﻿<div>
 <p><span style="font-size:20px"><img src="https://d15ds55abggjxg.cloudfront.net/project_content/393e62bbaa767b040d38b1ab80a62864.png" style="height:auto; width:728px" /></span></p>
 
 <p>&nbsp;</p>

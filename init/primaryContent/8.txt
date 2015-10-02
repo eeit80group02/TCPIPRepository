@@ -1,5 +1,4 @@
-﻿content
-<p><span style="font-size:20px"><strong><strong><img alt="" src="https://i.imgur.com/nJWLpdP.jpg?1" style="height:121px; width:624px" /></strong></strong></span></p>
+﻿<p><span style="font-size:20px"><strong><strong><img alt="" src="https://i.imgur.com/nJWLpdP.jpg?1" style="height:121px; width:624px" /></strong></strong></span></p>
 
 <p>&nbsp;</p>
 
