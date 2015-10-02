@@ -29,8 +29,7 @@ public class ActivityHighlightDisplayAllServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String queryOrder = request.getParameter("type");
-		if(queryOrder.equals("display")){
+
 			List<ActivityHighlightBean> queryResult = new ActivityHighlightDAOJdbc().getAll();
 				if(queryResult.size() != 0){
 				List<ActivityHighlightBean> beanstransferToBase64 = new ArrayList<ActivityHighlightBean>();
@@ -52,7 +51,7 @@ public class ActivityHighlightDisplayAllServlet extends HttpServlet {
 					
 				}
 		
-		}
+	
 //		List<ActivityHighlightBean> beans = new ActivityHighlightDAOJdbc().getAll();
 //		
 //		JSONObject activityhighlights = new JSONObject();
