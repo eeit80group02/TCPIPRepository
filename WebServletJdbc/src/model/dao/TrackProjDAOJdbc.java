@@ -175,6 +175,62 @@ public class TrackProjDAOJdbc implements TrackProjDAO
 		return false;
 	}
 	
+	private static final String SELECT_BY_MEMBERID = "SELECT trackProjId,fullProjId,memberId FROM TrackProj WHERE memberId = ? and fullProjId=?";
+	@Override
+	public TrackProjBean findByMemberId(int memberId,int fullProjId) {
+		TrackProjBean result = null;
+
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_MEMBERID);){
+			pstmt.setInt(1,memberId);
+			pstmt.setInt(2,fullProjId);
+			try(ResultSet rset = pstmt.executeQuery();){
+				if(rset.next()){
+					result = new TrackProjBean();
+					result.setTrackProjId(rset.getInt("trackProjId"));
+					result.setFullProjId(rset.getInt("fullProjId"));
+					result.setMemberId(rset.getInt("memberId"));
+				}
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	private static final String SELECT_BY_MEMBERID_ALL = "SELECT trackProjId,fullProjId,memberId FROM TrackProj WHERE memberId = ?";
+	@Override
+	public List<TrackProjBean> getMemberAll(int memberId) {
+		List<TrackProjBean> result = null;
+		TrackProjBean bean = null;
+		try(Connection conn = datasource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(SELECT_BY_MEMBERID);){
+			pstmt.setInt(1,memberId);
+			try(ResultSet rset = pstmt.executeQuery();){
+				if(rset.next()){
+					bean = new TrackProjBean();
+					bean.setTrackProjId(rset.getInt("trackProjId"));
+					bean.setFullProjId(rset.getInt("fullProjId"));
+					bean.setMemberId(rset.getInt("memberId"));
+					result.add(bean);
+				}
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	public static void main(String[] args)
 	{
 		TrackProjDAO dao = new TrackProjDAOJdbc();
@@ -191,4 +247,5 @@ public class TrackProjDAOJdbc implements TrackProjDAO
 //		System.out.println(dao.update(bean1));
 		System.out.println(dao.delete(1));
 	}
+
 }
