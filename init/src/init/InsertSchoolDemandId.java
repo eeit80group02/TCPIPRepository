@@ -266,6 +266,29 @@ public class InsertSchoolDemandId {
 					e.printStackTrace();
 				}
 				
+				// 第十一筆資料  ======================================================================
+				try
+				{
+					pstmt.setInt(1,24672);					    // schoolId 學校編號
+					pstmt.setInt(2,14);  	                    // participant 預計參與的學生人數
+					pstmt.setString(3,"偏鄉科學創意教學深耕計畫");	// activityTopicPicture 活動主題(指學校希望志工規劃的主題)
+					pstmt.setString(4,"宜蘭縣");			        // activityLocation 活動地點(非必填)
+					pstmt.setString(5,"教育資源匱乏的學童們");	// activitySuitable 參與本活動的學生狀態
+					pstmt.setString(6,"李銓德");		            // activityHost 活動負責人(學校方負責此項計畫的聯絡人)
+					pstmt.setString(7,"0981-454-698");		    // activityContact 負責人聯絡方式(市話、手機皆可，前端提醒使用者依照輸入的格式)
+//					pstmt.setTimestamp(8,new java.sql.Timestamp(System.currentTimeMillis()));	// createDate 建立日期(計畫需求發佈的日期)- 可以算出媒合期截止時間
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					pstmt.setTimestamp(8,new java.sql.Timestamp(sdf.parse("2015-03-24").getTime()));
+					pstmt.setString(9,"翻山越嶺，深入中央山脈的深處，以知識傳道的教育行者，將科學的智慧放入背包，為偏鄉的孩子，帶來一場場驚聲連連的科學知識盛宴。\n我是田園老師，每學期走訪上百所的偏鄉學校，為孩子們帶來一場場精彩的科學課。Vstory 報導：他雖然不是學校教師，卻一學期走訪超過140所偏鄉學校\n一學期教導超過 8000 位偏鄉孩童，源於一場八八水災\n2009 年莫拉克颱風所帶來的八八水災，重創了許多山區原住民的部落，除了財產的損失外，「教育」也深受其影響。當大人們忙著重建滿目瘡痍的家園，無心兼顧孩子們的學習時，教育更顯得力不從心⋯⋯。\n為了讓家長老師能夠有更多的心力重建家園，當時我把孩子們集中在大禮堂，在部落心靈嚴重受創的天災之後，給孩子們上一堂科學課。\n用生動有趣的科學知識，幫助孩子們透過學習，找回笑容、也找回自信。也因此，深耕偏鄉科學教育的千里藍圖，逐漸在我的足下展開，短短數年間學校間口耳相傳及他鄉的校長積極的聯絡下…由一開始的3所學校，擴增為155所，都是偏遠資源缺乏的學校。\n這六年來我每學期走訪於六縣市40個鄉鎮之間，接觸了15個原住民族群，我用自己的眼睛看到的、耳朵聽到的、雙腳走到的，皆是偏鄉對於科學教育資源的渴望！因此我毅然決然地持續走在這條科學道路上，於是點成線、線成面，6個縣市155所學校，織成我的偏鄉科學教育深耕地圖！");            //content 需求內容(1000字?)
+					pstmt.setString(10,"待洽談");	            //demandStatus  計畫狀態(待洽談、洽談中、待洽談、洽談失敗)
+					
+					pstmt.executeUpdate();
+					
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
 				
 			}
 		catch(Exception e)
