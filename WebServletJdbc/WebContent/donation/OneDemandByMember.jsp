@@ -234,11 +234,18 @@
 			function load() {
 				xhr = new XMLHttpRequest();
 				if (xhr != null) {
-					xhr.addEventListener("readystatechange", returnData);
-					xhr.open("POST", "messages.do", true);
-					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-					// 假設會員id為5
-					xhr.send("reporter=member&textarea=" + textByMember.value + "&donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}&returnJson=true")
+					var yourMessage = $("#your-message").val();
+					if (yourMessage == null || yourMessage.trim().length == 0) {
+						Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>留言不能為空白</span>', 5000, 'rounded');
+						return;
+					} else {
+						xhr.addEventListener("readystatechange", returnData);
+						xhr.open("POST", "messages.do", true);
+						xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						// 假設會員id為5
+						xhr.send("reporter=member&textarea=" + textByMember.value + "&donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}&returnJson=true");
+					}
+
 				}
 			}
 

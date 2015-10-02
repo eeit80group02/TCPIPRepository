@@ -57,8 +57,8 @@ public class InsertDonation {
 			pstmt.setString(9, "不拘"); // 物資狀態(全新/二手/不拘)
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-10-21 18:11").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-01-21 18:11").getTime()));
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-09-21 18:11").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-09-21 18:11").getTime()));
 
 			file = new File("image/Donation/donation02.png");
 			try (FileInputStream fis = new FileInputStream(file);) {
@@ -77,7 +77,7 @@ public class InsertDonation {
 			pstmt.setString(3, "奇異筆、麥克筆"); // 物資名稱
 			pstmt.setInt(4, 50); // 原始輸入需求
 			pstmt.setString(5, "隻"); // 原始輸入需求單位
-			pstmt.setInt(6, 50); // 現在需求數量
+			pstmt.setInt(6, 28); // 現在需求數量
 			pstmt.setString(7, "粗"); // 尺寸規格(物品的大
 			pstmt.setString(8, "下鄉絕育資料、行政資料標記號"); // 需求說明(為什
 			pstmt.setString(9, "全新"); // 物資狀態(全新/二手/不拘)
@@ -103,7 +103,7 @@ public class InsertDonation {
 			pstmt.setString(3, "投影機"); // 物資名稱
 			pstmt.setInt(4, 10); // 原始輸入需求
 			pstmt.setString(5, "台"); // 原始輸入需求單位
-			pstmt.setInt(6, 10); // 現在需求數量
+			pstmt.setInt(6, 7); // 現在需求數量
 			pstmt.setString(7, "高解析HD"); // 尺寸規格(物品的大
 			pstmt.setString(8, "志工活動中與上課使用"); // 需求說明(為什
 			pstmt.setString(9, "全新"); // 物資狀態(全新/二手/不拘)
@@ -179,16 +179,16 @@ public class InsertDonation {
 			pstmt.setInt(1, 54696); // 學校編號 FK
 			pstmt.setString(2, "否"); // 捐獻是否完成
 			pstmt.setString(3, "礦泉水"); // 物資名稱
-			pstmt.setInt(4, 30); // 原始輸入需求
+			pstmt.setInt(4, 40); // 原始輸入需求
 			pstmt.setString(5, "箱"); // 原始輸入需求單位
-			pstmt.setInt(6, 30); // 現在需求數量
+			pstmt.setInt(6, 18); // 現在需求數量
 			pstmt.setString(7, "600cc"); // 尺寸規格(物品的大
 			pstmt.setString(8, "校園園遊會"); // 需求說明(為什
 			pstmt.setString(9, "全新"); // 物資狀態(全新/二手/不拘)
 
 			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-12-01 14:11").getTime()));
-			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-03-01 14:11").getTime()));
+			pstmt.setTimestamp(10, new java.sql.Timestamp(sdf.parse("2015-10-05 14:11").getTime()));
+			pstmt.setTimestamp(11, new java.sql.Timestamp(sdf.parse("2016-01-05 14:11").getTime()));
 
 			file = new File("image/Donation/donation07.png");
 			try (FileInputStream fis = new FileInputStream(file);) {

@@ -17,15 +17,42 @@ public class InsertDonationOrderDetail {
 		try (Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD); PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			// try start
 
-			/** 貨運單號1 start **/
+			/** 貨運單號？ start **/
 			// 第一筆資料
 			pstmt.setInt(1, 1);// donationOederId
+			pstmt.setInt(2, 3);// donationId
+			pstmt.setString(3, "奇異筆、麥克筆");// supplyName
+			pstmt.setInt(4, 22);// donationAmount
+			pstmt.executeUpdate();
+			/** 貨運單號？ end **/
+			
+			/** 貨運單號？ start **/
+			// 第二筆資料
+			pstmt.setInt(1, 2);// donationOederId
+			pstmt.setInt(2, 4);// donationId
+			pstmt.setString(3, "投影機");// supplyName
+			pstmt.setInt(4, 3);// donationAmount
+			pstmt.executeUpdate();
+			/** 貨運單號？ end **/
+			
+			/** 貨運單號？ start **/
+			// 第三筆資料
+			pstmt.setInt(1, 3);// donationOederId
+			pstmt.setInt(2, 7);// donationId
+			pstmt.setString(3, "礦泉水");// supplyName
+			pstmt.setInt(4, 22);// donationAmount
+			pstmt.executeUpdate();
+			/** 貨運單號？ end **/
+			
+			/** 貨運單號1 start **/
+			// 第一筆資料
+			pstmt.setInt(1, 4);// donationOederId
 			pstmt.setInt(2, 20);// donationId
 			pstmt.setString(3, "電視機");// supplyName
 			pstmt.setInt(4, 1);// donationAmount
 			pstmt.executeUpdate();
 			// 第二筆資料
-			pstmt.setInt(1, 1);// donationOederId
+			pstmt.setInt(1, 4);// donationOederId
 			pstmt.setInt(2, 21);// donationId 電視
 			pstmt.setString(3, "椅子");// supplyName
 			pstmt.setInt(4, 20);// donationAmount
@@ -34,7 +61,7 @@ public class InsertDonationOrderDetail {
 
 			/** 貨運單號2 start **/
 			// 第三筆資料
-			pstmt.setInt(1, 2);// donationOederId
+			pstmt.setInt(1, 5);// donationOederId
 			pstmt.setInt(2, 21);// donationId
 			pstmt.setString(3, "椅子");// supplyName
 			pstmt.setInt(4, 60);// donationAmount
@@ -44,7 +71,7 @@ public class InsertDonationOrderDetail {
 			
 			/** 貨運單號3 start **/
 			// 第四筆資料
-			pstmt.setInt(1, 3);// donationOederId
+			pstmt.setInt(1, 6);// donationOederId
 			pstmt.setInt(2, 22);// donationId
 			pstmt.setString(3, "時鐘");// supplyName
 			pstmt.setInt(4, 4);// donationAmount
@@ -53,7 +80,7 @@ public class InsertDonationOrderDetail {
 			
 			/** 貨運單號4 start **/
 			// 第五筆資料
-			pstmt.setInt(1, 4);// donationOederId
+			pstmt.setInt(1, 7);// donationOederId
 			pstmt.setInt(2, 25);// donationId
 			pstmt.setString(3, "頸繩(識別證帶)");// supplyName
 			pstmt.setInt(4, 40);// donationAmount
