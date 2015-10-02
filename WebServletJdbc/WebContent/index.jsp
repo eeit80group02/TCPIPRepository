@@ -54,7 +54,7 @@
 		</div>
 	</div>
 	<!-- 募集資訊區塊的container -->
-	<div class="row">
+	<div class="row" id="cardContainer">
 
 		<div class="row valign-wrapper">
 			<!-- 段落提示 -->
@@ -64,7 +64,7 @@
 			</div>
 		</div>
 		<!-- 卡片列區塊的container -->
-		<div id="cardContainer">
+		<div>
 			<div class="centerdiv">
 				<c:forEach var="aVar" items="${bean}" begin="1" end="3">
 					<div class="touche">
@@ -97,8 +97,8 @@
 					</div>
 				</c:forEach>
 			</div>
+		</div>
 	</div>
-</div>
 	<!-- 活動花絮區塊的container -->
 	<div class="teal lighten-5">
 		<div class="row valign-wrapper">
