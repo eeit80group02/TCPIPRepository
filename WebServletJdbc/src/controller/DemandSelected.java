@@ -17,6 +17,7 @@ import model.DonationBeanDuplicate;
 import model.DonationCart;
 import model.DonationDiscussBeanDuplicate;
 import model.DonationDiscussService;
+import model.DonationODBean;
 import model.DonationOrderBean;
 import model.DonationOrderDuplicateBean;
 import model.DonationService;
@@ -58,6 +59,12 @@ public class DemandSelected extends HttpServlet {
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
 			List<String> list = dCart.getDonationIdList();
+			
+			// 跑馬燈資料查詢
+			List<DonationODBean> ODlist =  service.getAllOD();
+			System.out.println("OD WORK");
+			
+			session.setAttribute("ODS", ODlist);
 			
 //			request.setAttribute("AllDemands", listDuplivate);
 			session.setAttribute("AllDemands", listDuplivate);
