@@ -18,6 +18,7 @@ public class init
 		InsertMissionBoard.start();
 		InsertMissionSet.start();
 		InsertMission.start();
+		InsertActivityHighLigth.start();
 		
 		// Donation 系列 start
 		InsertDonation.start();

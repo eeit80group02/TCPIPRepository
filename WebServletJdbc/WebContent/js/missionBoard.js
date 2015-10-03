@@ -1,6 +1,4 @@
 		$(function() {
-			
-			
 			//Set mission board container height fit with window
 			$('.nested_with_switc').height($(window).height()*0.7);
 			
@@ -8,7 +6,6 @@
 			$(document).on('mouseenter','.addSubMissionExecutor', function(){
 				$(this).css({'cursor':'pointer'});
 			});
-			
 			
 			//Set subMissionDatepicker
 			function setSubMissionDatepicker(){
@@ -107,7 +104,6 @@
 			}
 			
 			
-			
 			//Define container for mission board
 			$("ul.nested_with_switc").sortable({
 				cursor : 'move',
@@ -123,8 +119,6 @@
 					$.each(temp, function(index, value){
 						console.log(index + ":" + value);
 						var lastIndex = temp.length - 1;
-						
-// 						$('#'+value+' > input.missionSetOrder').val(index+1);
 						var missionSetPos = index+1;
 						var missionSetId = $('#'+value+' div:first-child').attr('id').substring(10);
 						var name = $('#'+value+' > div:first-child').text();
@@ -282,7 +276,6 @@
 			    		    	});
 	    					}
 	    					console.log( "Position",$('#'+pair[0]+' input.subMissionPosition').val() );
-	
 							count++;
 	    				} 	    					
 	    			}
@@ -308,27 +301,23 @@
     	   			console.log(result);
     	   			$('#pagetitle > h1').text(boardInformation.missionBoard.boardName);
     	   			
-    	   			
-    	   			
-	    	   			//ajax get all participator
-	    				$.ajax({
-	    					url:'GetParticipatorServlet',
-	    		   			type:'get',
-	    		   			data:{'missionBoardId':boardInformation.missionBoard.missionBoardId,
-	    		   				  'fullProjId':boardInformation.missionBoard.fullProjId },
-	    		   			dataType:'json',
-	    		   			success:function(result){
-	    		   				console.log(result);
-	    		   				participatorList = result;
-	    					},
-	    					error:function(result){
-	    						console.log(result);
-	    					}
-	    				});
+	    	   		//ajax get all participator
+	    			$.ajax({
+	    				url:'GetParticipatorServlet',
+	    		   		type:'get',
+	    		   		data:{'missionBoardId':boardInformation.missionBoard.missionBoardId,
+	    		   			  'fullProjId':boardInformation.missionBoard.fullProjId },
+	    		   		dataType:'json',
+	    		   		success:function(result){
+	    		   			console.log(result);
+	    		   			participatorList = result;
+	    				},
+	    				error:function(result){
+	    					console.log(result);
+	    				}
+	    			});
 	    	   			
-	    				if(boardInformation.result == "succeed"){
-	    	   			
-	    	   			
+	    			if(boardInformation.result == "succeed"){
 	    	   			$('.boardName').val(result.missionBoard.boardName);
 	    	   			$('.fullProjId').val(result.missionBoard.fullProjId);
 	    	   			$('.missionBoardId').val(result.missionBoard.missionBoardId);
@@ -365,15 +354,12 @@
 	    	    					$('ul.nested_with_switc input.missionSetOrder[value=' + temp + ']').parent().after($missionSet);
 	    	    				}
 	    	    			}
-	    	    			
 	    	    			var width = $('div > div > ul').width() + 310;
 	    	    			$ul.css('width', width);
 	    	    			
 	    				});
 	    	   			
 	    				setMissionSortable();
-	    	   			
-	    	   			
 	    	   			
 	    	   			//Add mission from database
 	    	   			$.each(result.missions, function(){
@@ -389,7 +375,6 @@
 	    	   				//Check if this is subMission or not
 	    	   				if( mainMissionId == void 0){
 	    	   					var $ul = $('#missionSet'+this.missionSetId).siblings('ul');
-	//     	   					console.log("name="+this.name);
 	    	   					var $mainMission = $("<li id='missionOrderId" + this.missionId + "'></li>").html("<div class='li_edit btn' style='font-weight:600;'>" + this.name + "</div>" +
 	      													  "<div id='missionId"+ this.missionId + "' style='display:none'>" +
 	      													  "<input type='text' class='missionExecutor' value='" + this.host + "' name='" + this.memberId + "' >" +
@@ -424,8 +409,6 @@
 									}
 	        	    			}
 	    	   					
-	    	   					
-	    	   					//*************************************************************************
 	    	   					if( this.missionPriority == "非常緊急" && $('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable') == false ){
 	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 	    	   						$('#missionId'+this.missionId).siblings('div').addClass('#f44336 red');
@@ -441,7 +424,7 @@
 	        						console.log('主任務: '+this.name+' 已完成');
 	        						$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
 	    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
-	        						$('#missionId'+this.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
+	        						$('#missionId'+this.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable').css('text-decoration','line-through');
 	        					}
 	    	   					
 	    	   					
@@ -496,7 +479,6 @@
 										   													   'color':'#9e9e9e grey'})
 	    	    				}
 	    	    	   			
-	    	    	   			
 								setSubMissionDatepicker();    
 								
 	    	    				//Set datapicker icon position
@@ -506,12 +488,7 @@
 	    	    					  'cursor':'pointer'}).addClass('col l2');
 	    	    				
 	    	    				$('.subMissionSettings').css({'cursor':'pointer'});
-	    	    				
-	    	    				
 	    	   				}
-	    	   				
-	    	   				
-	    	   				
 	    	   			});
     	   			}
     	   		},
@@ -523,7 +500,6 @@
     	   		}
     	   
        		});
-			
 			
 			//Define mission sortable in MissionSet
 			function setMissionSortable(){
@@ -578,7 +554,6 @@
     						
     						console.log("i1",i);
     						
-    						
     						//Update database
     	    				$.ajax({
     		    			    url:'DynamicUpdateBoardServlet',
@@ -597,12 +572,8 @@
     		    			    success:function(result){
     		    			    	console.log(result);
     		    			    	if(result.result == "succeed"){
-//     		    			    		console.log("succeed in!");
     		    			    		$('#'+pair[0]+ ' input.missionPosition').val(result.mission.missionPosition);
-//     		    			    		console.log("mission Name",result.mission.name);
-//     		    			    		console.log("newPos",$('#missionId'+ result.mission.missionId +' > input.missionPosition').val());
     		    			    	}
-    		    			    	
     		    			    	try {
     		    			    		if( result.mission.missionId == lastMission ){
     		        	   				$("#loadingmodal").closeModal();
@@ -621,11 +592,8 @@
     		    			    	}
     		    	   			}
     		    			});
-    						
-    						
     						count++;
     					}
-    					
     				}
     			})
 			}
@@ -637,7 +605,6 @@
 				if(title==""){
 					title = "MissionSet";
 				}
-				
 				var missionBoardId = boardInformation.missionBoard.missionBoardId;
 				console.log("missionBoardId",missionBoardId);
 				var name = title;
@@ -662,12 +629,8 @@
     								  '<i class="large material-icons">add</i></div></div><input type="hidden" class="missionSetOrder" value="'+ result.missionSet.missionSetOrder + '" >');
 	    			    	
     			    		$('.nested_with_switc').append($missionSet);
-//	    					var width = $('div > div > ul').width() + 310;
-//	    					$('.nested_with_switc').css('width', width);
 	    					$('#nameTitle').val("");
-	    					
 	    					setMissionSortable();
-	    					
     			    	}
     			    },
     			    error:function(result){
@@ -754,16 +717,6 @@
     			    		$('#missionId'+missionId+' > input.missionStatus').val(result.mission.missionStatus);
     			    		$('#missionId'+missionId+' > input.mainMissionId').val(result.mission.mainMissionId);
     			    		
-//    			    		if( result.mission.missionStatus == "已完成" ){
-//    	    					console.log('任務已完成');
-//    	    					console.log($('#missionId'+missionId).siblings('div'));
-//    	    					$('#missionId'+this.missionId).siblings('div').removeClass('#1a237e indigo darken-4');
-//    	   						$('#missionId'+this.missionId).siblings('div').removeClass('#f44336 red');
-//    	    					$('#missionId'+result.mission.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
-//    	    				}
-    			    		
-    			    		
-    			    		//*************************************************************************************
     	   					if( result.mission.missionPriority == "非常緊急" && $('#'+$('.dataRowLocation').val()).siblings("div").hasClass('disable') == false ){
     	   						$('#missionId'+missionId).siblings('div').removeClass('#1a237e indigo darken-4');
     	   						$('#missionId'+missionId).siblings('div').addClass('#f44336 red');
@@ -1096,14 +1049,12 @@
 			$('.openSubMissionWindow').on('click',function(){
 				var parent = $(this).parent();
 				$(this).css('display','none');
-// 				console.log($(event.target).siblings('div').find('.subMissionName').val() );
 				$(event.target).siblings('div').find('.subMissionName').val('');
 				$(event.target).siblings('div').find('.subMissionDate').val('');
 				$(event.target).siblings('div').find('.addSubMissionExecutor').html('<img src="images/memberIcon.png">');
 
 				$('.subMission').show();
 			})
-			
 			
 			$('.addSubMission').on('click',function(){
 				var missionSetId = $('#'+$('.dataRowLocation').val()).children('input.missionSetId').val();
@@ -1153,7 +1104,6 @@
 								}
 							});
 							
-							
     						var $subMission = $('<li class="#81d4fa light-blue lighten-3" style="width:585.906px;height:60px;margin:2px 0px;"></li>').html('<div id="subDataRow' + result.mission.missionId + '" class="row" style="width:585.906px;height:60px;">' +
 									'<div class="subMissionSettings col l1"><i class="material-icons" style="padding:10px 0px;font-size:40px;">settings</i></div>' +
 									'<div class="col l1" style="padding:15px 12px;"><input type="checkbox" id="subMissionCheckbox'+ result.mission.missionId +'" class="subMissionStatus filled-in" value="進行中" >'+
@@ -1182,10 +1132,6 @@
 							
 							$('.subMissionSettings').css({'cursor':'pointer'});
 							
-							
-    						
-    						
-    						
     			    	}
     			    },
     			    error:function(result){
@@ -1252,7 +1198,6 @@
 				//NewPos contain parent li itself +1, and next Pos will be the slot to put +1
 				var newPos = $('#'+mainMissionId).parent().siblings().size() + 1 + 1;
 				
-				
 				//Update database
     			$.ajax({
     	    		url:'DynamicUpdateBoardServlet',
@@ -1299,9 +1244,8 @@
     	    				if( result.mission.missionStatus == "已完成" ){
     	    					console.log('任務已完成');
     	    					console.log($('#missionId'+missionId).siblings('div'));
-    	    					$('#missionId'+result.mission.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable');
+    	    					$('#missionId'+result.mission.missionId).siblings('div').addClass('#bdbdbd grey lighten-1 disable').css('text-decoration','line-through');
     	    				}
-    	    				
     			    		
     	    				$('#'+$('.subMissionLocation').val()).parent().remove();
     			    		$('.subMissionSettingsDialog').dialog( "close" );		
@@ -1483,7 +1427,6 @@
 				
 			});
 			
-			
 			//Get initial mission information and set to dialog
 			$(document).on('click','.li_edit',function() {
 				if($('.missionDetailDialog').dialog( "isOpen" )){
@@ -1496,7 +1439,6 @@
 				var dataDate = $(div).siblings("div").children(".missionDate").val();
 				var dataPriority = $(div).siblings("div").children(".missionPriority").val();
 				var dataExecutorId = $(div).siblings("div").children(".missionExecutor").attr("name");
-// 				var dataStatus = $(div).siblings("div").children(".missionStatus").val();
 				
 				//Ajax get missionParticipator
 				$.ajax({
@@ -1537,10 +1479,6 @@
 				$('.missionDetailDialog .missionExecutor').attr('name',dataExecutorId);
 				$('.missionDetailDialog .missionDate').val(dataDate);
 				
-// 				$('.missionParticipator ul').empty();
-// 				console.log($('.missionParticipator ul'));
-// 				$('.missionParticipator ul').first().prepend('<div class="' + dataExecutorId + '" style="width:100px;display:inline-block;">' + dataExecutor + '</div>');
-// 				$('.missionParticipator ul').last().append('<div class="addParticipator btn-floating btn waves-effect waves-light #2196f3 blue"><i class="material-icons">add</i></div>')
 				
 				if($(event.target).hasClass('disable')){
 					$('.missionDetailDialog .missionStatus').prop('checked', true);
@@ -1570,16 +1508,10 @@
 					}
 				});
 
-				
-				
-				
 				$('.missionDetailDialog').dialog( "open" );
 				$(".ui-dialog-titlebar").hide();
 				
-			
-				
 			});
-			
 			
 			//Cancel subMission
 			$('.cancelSubMission').on('click',function(){
@@ -1749,6 +1681,7 @@
 					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('disable');
 					$(event.target).prop('checked',false);
 					$('#'+$('.dataRowLocation').val()).siblings("div").removeClass('#bdbdbd grey lighten-1');
+					$('#'+$('.dataRowLocation').val()).siblings("div").css('text-decoration','none');
 					$('#'+$('.dataRowLocation').val()+' .missionStatus').val('進行中');
 					
 					console.log($('#'+$('.dataRowLocation').val()+' .missionStatus').val());
@@ -1761,6 +1694,7 @@
 					$('.missionDetailDialog .missionName').addClass('disable');
 					$(event.target).prop('checked',true);
 					$('#'+$('.dataRowLocation').val()).siblings("div").addClass('#bdbdbd grey lighten-1');
+					$('#'+$('.dataRowLocation').val()).siblings("div").css('text-decoration','line-through');
 					$('#'+$('.dataRowLocation').val()+' .missionStatus').val('已完成');
 					
 					console.log($('#'+$('.dataRowLocation').val()+' .missionStatus').val());
@@ -1813,7 +1747,6 @@
     			    	if(result.result == "succeed"){
     			    		console.log('succeed in!');
     			    		
-//    			    		$('#'+$('input[value=' + missionId + '].missionId').siblings('input.mainDataRowLocation').val()).children('input.missionSetId').val(result.mission.missionSetId);
     						$('input[value=' + missionId + '].missionId').siblings('textarea').val(result.mission.name);
     						
     						$.each(participatorList,function(){
@@ -1876,8 +1809,6 @@
 			$(document).on('change','.subMissionName',function(){
 				updateSubMission($(event.target).siblings('input.missionId').val());
 			});
-			
-			
 			
 			
 			//JQuery datepicker
