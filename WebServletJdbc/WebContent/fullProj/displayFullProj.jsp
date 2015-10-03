@@ -256,7 +256,7 @@
 			<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
 								<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
 									<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
-									<span style="width:100%;">任務板</span>
+									<span style="width:100%;">協作平台</span>
 								</button>
 							</form>
 						</div>	

@@ -15,8 +15,10 @@ import org.json.simple.JSONObject;
 
 import global.GlobalService;
 import model.MissionBean;
+import model.MissionParticipatorBean;
 import model.MissionSetBean;
 import model.dao.MissionDAOJdbc;
+import model.dao.MissionParticipatorDAOJdbc;
 import model.dao.MissionSetDAOJdbc;
 
 @WebServlet("/DynamicUpdateBoardServlet")
@@ -197,6 +199,12 @@ public class DynamicUpdateBoardServlet extends HttpServlet {
 			if (beans != null) {
 				for (MissionBean bean : beans) {
 					if (bean.getMainMissionId() == null) {
+						List<MissionParticipatorBean> missionParticipator = new MissionParticipatorDAOJdbc().selectByMissionId(bean.getMissionId());
+						for(MissionParticipatorBean mp : missionParticipator){
+							new MissionParticipatorDAOJdbc().delete(mp.getMissionParticipatorId());
+						}
+						System.out.println("All missionParticipator under mission delete!");
+						
 						// this is Mission, delete before MisisonSet
 						boolean deleteMission = new MissionDAOJdbc().delete(bean.getMissionId());
 						System.out.println("Delete Mission: " + deleteMission);
@@ -283,6 +291,12 @@ public class DynamicUpdateBoardServlet extends HttpServlet {
 
 			System.out.println("delete missionId=" + missionId);
 
+			List<MissionParticipatorBean> missionParticipator = new MissionParticipatorDAOJdbc().selectByMissionId(Integer.valueOf(missionId));
+			for(MissionParticipatorBean mp : missionParticipator){
+				new MissionParticipatorDAOJdbc().delete(mp.getMissionParticipatorId());
+			}
+			System.out.println("All missionParticipator under mission delete!");
+			
 			List<MissionBean> beans = new MissionDAOJdbc().findByMainMissionId(Integer.valueOf(missionId));
 			if (beans != null) {
 				for (MissionBean bean : beans) {

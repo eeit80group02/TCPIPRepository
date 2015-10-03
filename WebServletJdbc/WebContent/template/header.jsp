@@ -45,8 +45,8 @@
 				
 				<!-- 公開&相同 -->
 				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽計畫</a></li>
-				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />">捐獻牆</a></li>
 				<li><a href="<c:url value="/ActivityHighlightDisplayAllServlet.do" />">瀏覽花絮</a></li>
+				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />">捐獻牆</a></li>
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">

@@ -6,14 +6,17 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.commons.codec.binary.Base64;
+
+
 public class GlobalService
 {	
 //	public static final String HOST = "qjtxi3tofr.database.windows.net";    //
 //	public static final String USERNAME = "eeit80group02@qjtxi3tofr";     //sa
 //	public static final String PASSWORD = "p@ssw0rd"; //sa123456
 	public static final String HOST = "127.0.0.1";
-	public static final String USERNAME = "sasa";  //sa
-	public static final String PASSWORD = "passw0rd"; //sa123456
+	public static final String USERNAME = "sa";  //sa
+	public static final String PASSWORD = "sa123456"; //sa123456
 	public static final String DATABASE = "TCPIP";
 	public static final String URL = "jdbc:sqlserver://" + GlobalService.HOST + ":1433;databaseName=" + GlobalService.DATABASE;
 	public static final String JNDI = "java:comp/env/jdbc/TCPIP";
@@ -76,4 +79,22 @@ public class GlobalService
 		}
 		return result; 
 	}
+	
+	public static String convertByteArrayToBase64String(String name,byte[] data)
+	{
+		// ���瑼��
+		String mimeType = name.substring(name.lastIndexOf('.') + 1);
+		if(mimeType.equalsIgnoreCase("JPG") || mimeType.equalsIgnoreCase("JPEG"))
+			return "data:image/jpeg;base64," + Base64.encodeBase64String(data);
+		else if(mimeType.equalsIgnoreCase("PNG"))
+			return "data:image/png;base64," + Base64.encodeBase64String(data);
+			
+		return null; 
+	}
+	
+	public static byte[] convertBase64StringToByteArray(String data)
+	{
+		return Base64.decodeBase64(data);
+	}
+	
 }

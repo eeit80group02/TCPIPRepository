@@ -47,7 +47,7 @@
 						<tr>
 							<td style="font-size:1.6em;font-weight:600">${bean.title}</td>
 							<td><fmt:formatDate value="${bean.activityStartTime}" pattern="yyyy-MM-dd"/>~<fmt:formatDate value="${bean.activityEndTime}" pattern="yyyy-MM-dd"/></td>
-							<td class="red-text" style="font-size:1.6em;font-weight:600">${bean.projStatus}
+							<td class="red-text" style="font-size:1.4em;font-weight:600">${bean.projStatus}</td>
 							<td>
 								<c:choose>
 									<c:when test="${bean.projStatus.equals('洽談中')}">
@@ -74,9 +74,8 @@
 								</c:if>
 								
 								<a href="${path}" class="btn-large yellow lighten-5 black-text" style="font-size:1.4em;font-weight:600">查看</a>
-							<td>
-						
 							</td>
+						
 						</tr>
 					</c:forEach>			
 				</tbody>
