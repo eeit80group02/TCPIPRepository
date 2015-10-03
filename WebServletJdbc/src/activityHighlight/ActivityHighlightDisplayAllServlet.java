@@ -32,7 +32,7 @@ public class ActivityHighlightDisplayAllServlet extends HttpServlet {
 
 			List<ActivityHighlightBean> queryResult = new ActivityHighlightDAOJdbc().getAll();
 				if(queryResult.size() != 0){
-				List<ActivityHighlightBean> beanstransferToBase64 = new ArrayList<ActivityHighlightBean>();
+					List<ActivityHighlightBean> beanstransferToBase64 = new ArrayList<ActivityHighlightBean>();
 					for(ActivityHighlightBean bean : queryResult){
 						int fullProjId = bean.getFullProjId();
 						ActivityHighlightDAOJdbc jdbcService = new ActivityHighlightDAOJdbc();
@@ -42,8 +42,9 @@ public class ActivityHighlightDisplayAllServlet extends HttpServlet {
 						}
 						bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(), bean.getFrontCover()));
 						beanstransferToBase64.add(bean);
+
 					}
-			
+					
 					request.setAttribute("activityHighLightAll", beanstransferToBase64);
 					request.getRequestDispatcher("/Activity/ActivityHighlightDisplayAll.jsp").forward(request, response);;
 				

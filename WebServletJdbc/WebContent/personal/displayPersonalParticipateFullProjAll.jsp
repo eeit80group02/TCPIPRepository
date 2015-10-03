@@ -61,7 +61,7 @@
 										<c:param name="fullProjId" value="${bean.fullProjBean.fullProjId}" />
 									</c:url>
 									<a href="${mission}" class="btn-large yellow lighten-5 black-text">
-										任務板
+										協作平台
 									</a>
 								</c:if>
 								<c:if test="${bean.fullProjBean.projStatus.equals('已完成')}">
