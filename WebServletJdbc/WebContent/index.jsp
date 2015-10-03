@@ -311,7 +311,7 @@
 			
 			<!-- 	</div> -->
 
-
+			<a id="activityA" href="${pageContext.request.contextPath}/ActivityHighlightDisplayAllServlet.do" style="display:none;"></a>
 			<!-- 活動花絮區塊的container -->
 			<div class="teal lighten-5">
 				<div class="row valign-wrapper">
@@ -323,7 +323,6 @@
 				</div>
 				<!-- 	花絮圖片列 -->
 				<div class="activity" style="height: 400px; clear: both;" id="activityBoard">
-
 					<img
 						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
 						src="picture/result1.PNG" name="activity"> <img
@@ -353,10 +352,10 @@
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script>
 		$(function() {
-			//點div到花絮牆
 			
+			//活動花絮Container click
 			$("#activityBoard").on("click",function(){
-				window.location.replace("http://stackoverflow.com");
+				window.location = $("#activityA").attr("href");
 			});
 			
 			

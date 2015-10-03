@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
 	#content img {
-		max-size:90%;
+		max-width:100%;
 	}
 
 </style>
@@ -65,7 +65,7 @@
 			      			</div>						
 			      			<div class="divider" style="height:1em;"></div>
 			      			<div class="row">
-								<p id="content"></p>
+								<div id="content"></div>
 							</div>					
 						</div>		
 					
