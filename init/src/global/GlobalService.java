@@ -6,6 +6,9 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.apache.commons.codec.binary.Base64;
+
+
 public class GlobalService
 {	
 //	public static final String HOST = "qjtxi3tofr.database.windows.net";    //
@@ -76,4 +79,22 @@ public class GlobalService
 		}
 		return result; 
 	}
+	
+	public static String convertByteArrayToBase64String(String name,byte[] data)
+	{
+		// ���瑼��
+		String mimeType = name.substring(name.lastIndexOf('.') + 1);
+		if(mimeType.equalsIgnoreCase("JPG") || mimeType.equalsIgnoreCase("JPEG"))
+			return "data:image/jpeg;base64," + Base64.encodeBase64String(data);
+		else if(mimeType.equalsIgnoreCase("PNG"))
+			return "data:image/png;base64," + Base64.encodeBase64String(data);
+			
+		return null; 
+	}
+	
+	public static byte[] convertBase64StringToByteArray(String data)
+	{
+		return Base64.decodeBase64(data);
+	}
+	
 }
