@@ -35,7 +35,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight01.png");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=8GjErEIet5E");
 				
@@ -67,7 +67,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight02.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=WI_tONeHpcA");
 				
@@ -100,7 +100,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight03.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=DyhbMZQi1XY");
 				
@@ -132,7 +132,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight04.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=mvYjMSnGWQc");
 				
@@ -165,7 +165,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight05.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=SQlz7Q94b0E");
 				
@@ -197,7 +197,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight06.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=qa_6S52NEdk");
 				
@@ -229,7 +229,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight07.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=H4hiHYCN1oc");
 				
@@ -261,7 +261,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight08.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=sVcwfMYerzM");
 				
@@ -293,7 +293,7 @@ public class InsertActivityHighLigth
 			file = new File("ActivityHighLight/ActivityHighLight09.jpg");
 			try(FileInputStream fis = new FileInputStream(file);) {
 				pstmt.setString(3,file.getName());	// frontCoverName
-				pstmt.setBinaryStream(4,fis,file.length());	// frontCover 
+				pstmt.setBytes(4,GlobalService.convertByteArrayToBase64String(file.getName(), GlobalService.convertInputStreamToByteArray(fis)).getBytes());	// frontCover 
 				pstmt.setLong(5,file.length());		// frontCoverLength 
 				pstmt.setString(6,"https://www.youtube.com/watch?v=0Rv6EIBAvME");
 				

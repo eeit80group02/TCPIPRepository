@@ -40,7 +40,7 @@ public class ActivityHighlightDisplayAllServlet extends HttpServlet {
 						if(fullProjBean != null){
 							bean.setFullProjBean(fullProjBean);
 						}
-						bean.setBase64String(GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(), bean.getFrontCover()));
+						bean.setBase64String(new String(bean.getFrontCover(),"UTF-8"));
 						beanstransferToBase64.add(bean);
 
 					}
