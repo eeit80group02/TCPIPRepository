@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>displayPersonalParticipateFullProjAll</title>
+<title>參加過的完整計畫</title>
 </head>
 <body>
 

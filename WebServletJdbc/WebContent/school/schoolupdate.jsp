@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>學校頁面</title>
+<title>帳號管理</title>
 <style>
 	.forinput {
 		font-size:1.6em;

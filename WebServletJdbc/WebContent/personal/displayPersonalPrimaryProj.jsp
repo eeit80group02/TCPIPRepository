@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>displayPersonalPrimaryProj.jsp</title>
+<title>瀏覽初步計畫</title>
 </head>
 <body>
 	<c:if test="${LoginOK.beanName.equals('school') }">
