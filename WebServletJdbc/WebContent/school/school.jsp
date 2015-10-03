@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>school</title>
+<title>學校專區</title>
 <style>
 	.fontStyle {
 		font-family:微軟正黑體;

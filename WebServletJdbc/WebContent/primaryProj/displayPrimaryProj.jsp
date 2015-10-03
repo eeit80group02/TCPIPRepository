@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<title>displayPrimaryProj</title>
+<title>初步計畫</title>
 <style>
 		.frontImg {
 			width:310px;

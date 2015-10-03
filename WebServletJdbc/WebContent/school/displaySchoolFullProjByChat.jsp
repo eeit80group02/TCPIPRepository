@@ -10,7 +10,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>displaySchoolFullProjByChat</title>
+<title>洽談中完整計畫</title>
 </head>
 <body>
 

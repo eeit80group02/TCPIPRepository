@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>displayPersonalPrimaryProjByPending</title>
+<title>審核初步計畫</title>
 <style>
 	.priProjName{
 		font-size:3em;

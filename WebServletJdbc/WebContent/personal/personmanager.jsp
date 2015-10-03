@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>personmanager.jsp</title>
+<title>會員專區</title>
 </head>
 <body>
 	<c:if test="${LoginOK.beanName.equals('school') }">
