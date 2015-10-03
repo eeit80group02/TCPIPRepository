@@ -10,9 +10,9 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <style>
-#limitImgSize img{
-	max-size:100%;
-}
+	#content img {
+		max-size:90%;
+	}
 
 </style>
 </head>
@@ -57,16 +57,15 @@
 					
 					<!-- 花絮內容 -->
 					<div class="row card-panel yellow lighten-3 hoverable">					
-						<div class="col l8 offset-l2 white" id="limitImgSize">
+						<div class="col l8 offset-l2 white">
 							<div class="row">
 								<div class="video-container">
 			        				<iframe id="YouTubeURL" src="" frameborder="0" allowfullscreen></iframe>
 			      				</div>	
 			      			</div>						
-			      			
+			      			<div class="divider" style="height:1em;"></div>
 			      			<div class="row">
-			      				<div class="divider" style="height:1em;"></div>
-								<div id="content"></div>
+								<p id="content"></p>
 							</div>					
 						</div>		
 					

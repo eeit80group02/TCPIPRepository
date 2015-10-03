@@ -71,7 +71,7 @@
 						<div class="card medium left hoverable light-green lighten-5"
 							style="margin: 10px">
 							<div class="card-image activator"
-								style="background-image: url(${aVar.base64String}); background-size: 100%; background-repeat: no-repeat; cursor: pointer;">
+								style="background-image: url(${aVar.base64String}); background-size: cover; background-repeat: no-repeat; cursor: pointer;">
 							</div>
 							<div class="card-content">
 								<p style="font-size: 20pt" class="truncate">${aVar.title}</p>
@@ -88,8 +88,12 @@
 								<div class="divider"></div>
 								<p style="height: 55%">${aVar.projAbstract}</p>
 								<div class="divider"></div>
+									<c:url var="path" value="/fullProj.do">
+										<c:param name="type" value="display" />
+										<c:param name="fullProjId" value="${aVar.fullProjId}" />
+									</c:url>
 								<div class="center-align">
-									<a href="#"><h5>more...</h5></a>
+									<a href="${path}"><h5>more...</h5></a>
 								</div>
 							</div>
 						</div>
@@ -318,7 +322,7 @@
 					</div>
 				</div>
 				<!-- 	花絮圖片列 -->
-				<div class="activity" style="height: 400px; clear: both;">
+				<div class="activity" style="height: 400px; clear: both;" id="activityBoard">
 
 					<img
 						class="demo-card-image mdl-card mdl-shadow--6dp hoverable circle"
@@ -349,6 +353,13 @@
 		src="//cdn.jsdelivr.net/jquery.slick/1.5.7/slick.min.js"></script>
 	<script>
 		$(function() {
+			//點div到花絮牆
+			
+			$("#activityBoard").on("click",function(){
+				window.location.replace("http://stackoverflow.com");
+			});
+			
+			
 			//cardBoardContainer min-height
 			$("#cardBoardContainer").css("min-height","90vh");
 			
@@ -371,8 +382,6 @@
 			$("body").css("width", "100%");
 			//讓投影片的圖片寬度保持100%
 			$("img[name='sliderpic']").css("width", "100%");
-			//註冊modal事件
-			// 			$(".modal-trigger").leanModal();
 			//帳號、密碼欄focus的背景色變化
 			$("#login > div > input").each(function() {
 				$(this).on({
