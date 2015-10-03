@@ -62,7 +62,7 @@ public class IndexFilter implements Filter {
 				int i = 1;
 				for (FullProjBean bean : beans) {
 					if (bean.getProjStatus().trim().equals("招募中") && i <= 6) {
-						int num = -1;
+						int num = 0;
 						String base64String = GlobalService.convertByteArrayToBase64String(bean.getFrontCoverName(), bean.getFrontCover());
 						bean.setBase64String(base64String);
 						theBeans.add(bean);
