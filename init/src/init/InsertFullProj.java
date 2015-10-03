@@ -12,9 +12,7 @@ import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 
 public class InsertFullProj
 {
@@ -1112,11 +1110,73 @@ public class InsertFullProj
 			{
 				e.printStackTrace();
 			}
+			
+			// 第一筆資料  ==洽談中============================================
+			pstmt.setNull(1,Types.INTEGER);  	// primaryProjId 初步計畫編號
+			pstmt.setNull(2,Types.INTEGER);		// schoolDemandId 學校需求編號
+			pstmt.setInt(3,8);					// memberId 會員編號
+			pstmt.setInt(4,11601);				// schoolId 學校編號
+			pstmt.setString(5,"就差你的臨門一腳");			// title 計畫名稱
+			file = new File("image/fullProj/fullProj06.jpg");
+			try(FileInputStream fis = new FileInputStream(file);)
+			{
+				pstmt.setString(6,file.getName());	// frontCoverName 計畫封面檔名
+				pstmt.setBinaryStream(7,fis,file.length());	// frontCover 計畫封面檔案大小
+				pstmt.setLong(8,file.length());		// frontCoverLength 計畫封面檔案長度
+				
+				pstmt.setString(9,"一個沉重的負擔...『助』X『養』做到真正的弱勢關懷。");		// projAbstract 計畫摘要
+				content.delete(0,content.length());
+				File contentFile = new File("fullProjContent/6.txt");
+				try(BufferedReader br = new BufferedReader(new FileReader(contentFile));)
+				{
+					String buffer = br.readLine();
+					while(buffer != null)
+					{
+						content.append(buffer);
+						buffer = br.readLine();
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				
+				pstmt.setString(10,content.toString());			// content
+				pstmt.setString(11,"宜蘭縣");				// location 活動確定地點
+				
+				pstmt.setString(12,"2015-12-03");				//activityStartTime 活動開始時間
+				pstmt.setString(13,"2015-12-08");				//activityEndTime  活動結束時間
+				
+				pstmt.setInt(14,10);							// estMember  活動志工人數
+				pstmt.setInt(15,946500);						// budget 活動預算
+		
+				pstmt.setNull(16,Types.TIMESTAMP);				// createDate  建立日期
+				pstmt.setString(17,"洽談中");				    // projStatus  計畫狀態  
+				pstmt.setString(18,"<p>教學組3人</p><p>機動組3人</p><p>活動組4人</p>");				// orgArchitecture  成員架構
+				pstmt.setNull(19,Types.NVARCHAR);				// projFileName  完整計畫檔名(pdf)
+				pstmt.setNull(20,Types.VARBINARY);				// projFile  完整計畫檔案(上傳完整計畫的pdf檔)
+				pstmt.setNull(21,Types.BIGINT);					// projFileLength  檔案長度(pdf)
+				
+				pstmt.setNull(22,Types.INTEGER);				// reviews  評價分數(學校評價)(滿分5分)
+				pstmt.setNull(23,Types.NVARCHAR);				// reviewsContent 評價內容(指學校給社團的評價內容)
+				
+				pstmt.setBoolean(24,true);				// schoolConfirm  學校確認狀態(同意、預設null)
+				pstmt.setNull(25,Types.BIT);				// memberConfirm  發起人確認狀態(同意、預設null) TorF
+				
+				pstmt.executeUpdate();
+				//
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
 		}
 		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
+		
+		
 		System.out.println("完整計畫新增完成");
 	}
 	

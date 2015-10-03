@@ -19,6 +19,7 @@ public class init
 		InsertMissionSet.start();
 		InsertMission.start();
 		InsertProjDiscuss.start();  // 問與答
+		InsertProjModify.start();  // 問與答
 		InsertActivityHighLigth.start();
 		
 		// Donation 系列 start

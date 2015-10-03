@@ -4,9 +4,7 @@ import global.GlobalService;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,7 +22,7 @@ public class InsertProjDiscuss
 		try(Connection conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			PreparedStatement pstmt = conn.prepareStatement(INSERT);)
 		{
-			File file = new File("schoolData/projDiscuss");
+			File file = new File("schoolData/projDiscuss.txt");
 			try(BufferedReader br = new BufferedReader(new FileReader(file));)
 			{
 				String line = br.readLine();
