@@ -14,9 +14,9 @@ import org.apache.commons.codec.binary.Base64;
 
 public class GlobalService
 {
-	public static final String HOST = "127.0.0.1";
-	public static final String USERNAME = "sasa";
-	public static final String PASSWORD = "passw0rd";
+	public static final String HOST = "qjtxi3tofr.database.windows.net";
+	public static final String USERNAME = "eeit80group02@qjtxi3tofr";
+	public static final String PASSWORD = "p@ssw0rd";
 	public static final String DATABASE = "TCPIP";
 	public static final String URL = "jdbc:sqlserver://" + GlobalService.HOST + ":1433;databaseName=" + GlobalService.DATABASE;
 	public static final String JNDI = "java:comp/env/jdbc/TCPIP";
