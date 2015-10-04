@@ -184,7 +184,7 @@ public class FullProjServlet extends HttpServlet
 		
 		if(result != null)
 		{
-			System.out.println(result);
+//			System.out.println(result);
 			System.out.println("==================================================");
 			request.setAttribute("fullProj",result);
 			request.getRequestDispatcher("/personal/displayPersonalFullProjByParticipate.jsp").forward(request,response);
@@ -211,10 +211,10 @@ public class FullProjServlet extends HttpServlet
 		if(result)
 		{
 			// 成功導向
-			System.out.println(fullProjBean);
+//			System.out.println(fullProjBean);
 			System.out.println("==================================================");
 			String contextPath = request.getContextPath();
-			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId=" + fId));
+			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=display&fullProjId=" + fId));
 			return;
 		}
 	}
@@ -262,7 +262,7 @@ public class FullProjServlet extends HttpServlet
 		if(result)
 		{
 			// 成功導向
-			System.out.println(fullProjBean);
+//			System.out.println(fullProjBean);
 			System.out.println("==================================================");
 			String contextPath = request.getContextPath();
 			response.sendRedirect(response.encodeRedirectURL(contextPath + "/fullProj.do?type=displayFullProjByChat&fullProjId="+fId));
@@ -300,7 +300,7 @@ public class FullProjServlet extends HttpServlet
 			if(result != null)
 			{
 				// 成功導向
-				System.out.println(result);
+//				System.out.println(result);
 				System.out.println("==================================================");
 				request.setAttribute("fullProj",result);
 				request.getRequestDispatcher("/school/displaySchoolFullProjByChat.jsp").forward(request,response);
@@ -339,7 +339,7 @@ public class FullProjServlet extends HttpServlet
 			if(result != null)
 			{
 				// 成功導向
-				System.out.println(result);
+//				System.out.println(result);
 				System.out.println("==================================================");
 				request.setAttribute("fullProj",result);
 				request.getRequestDispatcher("/personal/displayPersonalFullProjByChat.jsp").forward(request,response);
@@ -378,7 +378,7 @@ public class FullProjServlet extends HttpServlet
 			if(result != null)
 			{
 				// 成功導向
-				System.out.println(result);
+//				System.out.println(result);
 				System.out.println("==================================================");
 				request.setAttribute("fullProj",result);
 				request.getRequestDispatcher("/personal/displayPersonalFullProj.jsp").forward(request,response);;
@@ -431,7 +431,7 @@ public class FullProjServlet extends HttpServlet
 		if(bean != null)
 		{
 			// 成功導向
-			System.out.println(bean);
+//			System.out.println(bean);
 			System.out.println("==============================");
 			request.setAttribute("fullProj",bean);
 			request.getRequestDispatcher("/fullProj/displayFullProjByChat.jsp").forward(request,response);;
@@ -528,7 +528,7 @@ public class FullProjServlet extends HttpServlet
 					if(fileName != null && fileName.trim().length() > 0)
 					{
 						errorMsg.put("imgFile","檔案格式不正確");
-						System.out.println("請選擇正確格式");
+//						System.out.println("請選擇正確格式");
 					}
 //					else
 //					{
@@ -549,6 +549,8 @@ public class FullProjServlet extends HttpServlet
 		if(projAbstract == null || projAbstract.trim().length() == 0)
 		{
 			errorMsg.put("projAbstract","計畫摘要為必填欄位");
+		} else if ( projAbstract.length() > 100){
+			errorMsg.put("projAbstract","字數僅限100字內");
 		}
 		
 		if(content == null || content.trim().length() == 0)
@@ -755,7 +757,7 @@ public class FullProjServlet extends HttpServlet
 		if(bean != null)
 		{
 			// 成功導向
-			System.out.println("單一計劃 :" + bean);
+//			System.out.println("單一計劃 :" + bean);
 			System.out.println("======================================================");
 			request.setAttribute("fullProj",bean);
 			request.setAttribute("googleMap",jobj);

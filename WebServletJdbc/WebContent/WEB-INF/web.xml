@@ -8,7 +8,7 @@
     <res-sharing-scope>Shareable</res-sharing-scope>
   </resource-ref>
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>60</session-timeout>
   </session-config>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -103,4 +103,12 @@
     <servlet-name>DonationGoogleServlet</servlet-name>
     <url-pattern>/donation/google.do</url-pattern>
   </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/errorPage.jsp</location>
+  </error-page>
+  <error-page>
+    <error-code>500</error-code>
+    <location>/errorPage.jsp</location>
+  </error-page>
 </web-app>

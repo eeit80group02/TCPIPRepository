@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
-<title>displayPrimaryProj</title>
+<title>初步計畫</title>
 <style>
 		.frontImg {
 			width:310px;
@@ -21,6 +21,11 @@
 			font-size:1.4em;
 			font-weight:300;
 			width:100%;
+		}
+		
+		
+		#primaryContentImgLimit img{
+			max-width:100%;
 		}
 </style>
 </head>
@@ -46,7 +51,7 @@
 	<div class="row">
 		<!-- 第一列 -->
 		<div class="row">
-			<div class="col l2 btn yellow lighten-3 black-text offset-l2" style="font-family:微軟正黑體;font-size:1.4em;font-weight:600;">
+			<div class="col l4 btn yellow lighten-3 black-text offset-l2" style="font-family:微軟正黑體;font-size:1.4em;font-weight:600;">
 				<fmt:formatNumber var="mid" value="${primaryProj.memberId}" pattern="0000"/>
 				發起者:${primaryProj.memberBean.lastName}${primaryProj.memberBean.firstName}[No.${mid}]			
 			</div>		
@@ -78,11 +83,9 @@
 						</div>
 					</div>
 					<!-- 計畫內容 -->
-					<div class="row">
-						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;">
-							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
+					<div class="row" id="primaryContentImgLimit">
+						<div class="col l8 offset-l2 card-panel hoverable"  style="background-color:#D1F0E5;"  style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
 							${primaryProj.content}
-							</p>
 						</div>
 					</div>
 				</div>

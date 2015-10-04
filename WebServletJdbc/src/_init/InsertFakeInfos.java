@@ -42,7 +42,7 @@ public class InsertFakeInfos extends HttpServlet{
 			Connection conn = datasorce.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(updateToDataBase);
 			pstmt.setString(1, content);
-			pstmt.setInt(2, 13);
+			pstmt.setInt(2, 12);
 			pstmt.execute();
 			
 			pstmt.close();

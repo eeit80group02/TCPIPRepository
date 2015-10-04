@@ -43,6 +43,7 @@
 						<c:if test="${not empty LoginOK}">
 							<c:if test="${LoginOK.beanName.equals('member')}">
 								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+								<li><a href="<c:url value='/donation/demand.do?type=OrderDetailByMember'/>">查詢宅配</a></li>
 							</c:if>
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
@@ -94,11 +95,7 @@
 			</tr>
 			<tr>
 				<td class="dataName">需求單位：</td>
-				<td class="dataValue">${OneDemand.schoolName}</td>
-			</tr>
-			<tr>
-				<td class="dataName">需求單位地址：</td>
-				<td class="dataValue">屏東縣鹽埔鄉鹽南村勝利路30號</td>
+				<td class="dataValue"><a href="https://www.google.com.tw/maps/search/${OneDemand.schoolName}" target="_blank" title="${OneDemand.schoolName}">${OneDemand.schoolName}</a></td>
 			</tr>
 			<tr>
 				<td class="dataName">募集起始時間：</td>
@@ -161,7 +158,7 @@
 				</tr>
 			</tfoot>
 		</table>
-		</div>
+
 		<!-- 留言板 -->
 		<form id="drop-a-line" role="form">
 			<div class="row" id="sayBoard">
@@ -237,11 +234,18 @@
 			function load() {
 				xhr = new XMLHttpRequest();
 				if (xhr != null) {
-					xhr.addEventListener("readystatechange", returnData);
-					xhr.open("POST", "messages.do", true);
-					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
-					// 假設會員id為5
-					xhr.send("reporter=member&textarea=" + textByMember.value + "&donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}&returnJson=true")
+					var yourMessage = $("#your-message").val();
+					if (yourMessage == null || yourMessage.trim().length == 0) {
+						Materialize.toast('<i class="tiny material-icons">info</i>&nbsp;<span>留言不能為空白</span>', 5000, 'rounded');
+						return;
+					} else {
+						xhr.addEventListener("readystatechange", returnData);
+						xhr.open("POST", "messages.do", true);
+						xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+						// 假設會員id為5
+						xhr.send("reporter=member&textarea=" + textByMember.value + "&donationId=${OneDemand.donationId}&schoolId=${OneDemand.schoolId}&returnJson=true");
+					}
+
 				}
 			}
 

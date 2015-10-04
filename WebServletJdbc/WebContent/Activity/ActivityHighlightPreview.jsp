@@ -4,12 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>活動花絮預覽</title>
 <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css" media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+	#content img{
+		max-width:100%;
+	}
 
+</style>
 </head>
 <body class="amber lighten-5">
 	<!-- 頁首 -->
@@ -120,7 +125,7 @@
 
 
 	<!-- script -->
-	<script src="ckeditor/ckeditor.js"></script>
+	<script src="${pageContext.request.contextPath}/ckeditor/ckeditor.js"></script>
 	<script type="text/javascript"
 		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

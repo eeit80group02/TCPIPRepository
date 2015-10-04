@@ -9,7 +9,7 @@
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">	
-<title>personmanager.jsp</title>
+<title>會員專區</title>
 </head>
 <body>
 	<c:if test="${LoginOK.beanName.equals('school') }">
@@ -38,14 +38,14 @@
 							<div class="row divider amber" style="opacity:0.5;height:10px;"></div>
 							<div class="row">
 								<a href="<c:url value="/participator.do?type=displayFullProjByParticipator" />" class="col l12 btn-large yellow lighten-5 black-text" >
-									<span class="fontStyle">
-										參予過的完整計畫
+									<span style="font-family:微軟正黑體;font-size:1.2em;">
+										參與過的完整計畫
 									</span>
 								</a>
 							</div>
 							<div class="row">
 								<a class="col l12 btn-large yellow lighten-5 black-text" href="<c:url value='/participator.do?type=displayParticipator' />">
-									<span  style="font-family:微軟正黑體;font-size:1.2em;">
+									<span style="font-family:微軟正黑體;font-size:1.2em;">
 										申請中的完整計畫
 									</span>
 								</a>											

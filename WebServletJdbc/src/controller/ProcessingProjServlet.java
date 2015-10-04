@@ -182,7 +182,7 @@ public class ProcessingProjServlet extends HttpServlet
 		boolean result = service.agreeProcessingProj(bean);
 		if(result)
 		{
-			response.sendRedirect(request.getContextPath() + "/primaryProj.do?type=displayPersonalByPending");
+			response.sendRedirect(request.getContextPath() + "/fullProj.do?type=displayPersonalByChat");
 		}
 		else
 		{

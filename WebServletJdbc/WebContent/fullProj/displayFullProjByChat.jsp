@@ -6,13 +6,19 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>displayFullProjByChat</title>
+<title>預覽完整計畫</title>
 <link type="text/css" rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style>
+	#displayfulprojLimitImg img{
+		max-width:100%;
+	}
+
+</style>
 </head>
 <body class="deep-orange lighten-5">
 	<c:if test="${LoginOK.beanName.equals('member')}">
@@ -61,7 +67,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">計畫編號</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>${fullProj.fullProjId}</div>
+									${fullProj.fullProjId}
 								</div>
 							</div>
 						</div>
@@ -78,7 +84,7 @@
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">學校編號</h5>
 								</div>
 								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div>${fullProj.schoolId}</div>
+									${fullProj.schoolId}
 								</div>
 							</div>
 						</div>
@@ -248,7 +254,7 @@
 						</div>
 					</div>
 					<!-- 計畫內容 -->
-					<div class="row">
+					<div class="row" id="displayfulprojLimitImg">
 						<div class="col l8 offset-l2 card-panel hoverable" style="background-color: #D1F0E5;">
 							<p style="font-family: 微軟正黑體; font-size: 1.4em; font-weight: 300;">
 								${fullProj.content}
@@ -334,8 +340,7 @@
 
 				<!-- 導向修改頁面，並且把這頁資料傳送過去 -->
 				<c:if test="${LoginOK.beanName.equals('member')}">
-					<c:if
-						test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中') && empty fullProj.schoolConfirm}">
+					<c:if test="${LoginOK.memberId == fullProj.memberId && fullProj.projStatus.equals('洽談中') && empty fullProj.schoolConfirm}">
 						<div class="card-panel white">
 							<form action="<c:url value="/fullProj/updateFullProjForm.jsp" />" method="post" accept-charset="UTF-8">
 								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}"> 

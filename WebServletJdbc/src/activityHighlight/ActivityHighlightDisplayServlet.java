@@ -21,25 +21,27 @@ import model.dao.MemberDAOJdbc;
 /**
  * Servlet implementation class ActicityHighlightDisplayServlet
  */
-@WebServlet("/ActicityHighlightDisplayServlet")
-public class ActicityHighlightDisplayServlet extends HttpServlet {
+@WebServlet("/ActivityHighlightDisplayServlet")
+public class ActivityHighlightDisplayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int memberId = 1;
-		int fullProjId = 1;
+		String memberId = request.getParameter("memberId");
+		String fullProjId = request.getParameter("fullProjId");
+		
+		
 		
 		FullProjDAOJdbc proj = new FullProjDAOJdbc();
-		FullProjBean projBean = proj.findByPrimaryKey(fullProjId);
+		FullProjBean projBean = proj.findByPrimaryKey(Integer.valueOf(fullProjId));
 		String projName = projBean.getTitle();
 		
 		MemberDAOJdbc member = new MemberDAOJdbc();
-		MemberBean memberBean = member.select(memberId);
+		MemberBean memberBean = member.select(Integer.valueOf(memberId));
 		String memberName = memberBean.getLastName() + memberBean.getFirstName();
 		
 		ActivityHighlightDAOJdbc activity = new ActivityHighlightDAOJdbc();
-		ActivityHighlightBean activityBean = activity.findByPrimaryKey(fullProjId);
+		ActivityHighlightBean activityBean = activity.findByPrimaryKey(Integer.valueOf(fullProjId));
 		
 		JSONObject jsonObject = new JSONObject();
 		response.setContentType("application/json; charset=UTF-8");

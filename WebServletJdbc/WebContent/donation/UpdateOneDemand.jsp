@@ -100,7 +100,7 @@
 									<div id="donationPictureFrame">
 										<center>
 											<!-- 強迫img在div內部置中 -->
-											<img id="donationPicture" src="" alt="" title="上傳圖片">
+											<img id="donationPicture" src="${UpdateImage}" alt="" title="上傳圖片">
 										</center>
 
 									</div>
@@ -161,7 +161,7 @@
 				</div>
 			</div>
 			<input type='hidden' name='donationId' value='${OneDemand.donationId}'>
-			<td><input type='submit' name='hidden' value='delete'></td>
+<!-- 			<td><input type='submit' name='hidden' value='delete'></td> -->
 		</form>
 	</center>
 

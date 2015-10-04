@@ -20,9 +20,12 @@
 			font-family:微軟正黑體;		
 		}
 		
+		#limitImgSize img{
+			max-width:100%;
+		}
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>createPrimaryProj</title>
+	<title>建立初步計畫</title>
 </head>
 
 
@@ -94,6 +97,7 @@
 							<div class="col l4">
 									<div id="forlocation" class="forinput">理想地點</div>
 									<select id="locationselect">
+											<option value="" disabled selected>請選擇</option>									
 											<option value="10001">台北市</option>
 											<option value="10002">新北市</option>
 											<option value="10003">桃園市</option>
@@ -185,7 +189,7 @@
 						</div>
 						
 						<!-- 計畫內容 -->
-						<div class="row">
+						<div class="row" id="limitImgSize">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
 								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;">${param.content}</textarea>
@@ -239,7 +243,10 @@
 		   })
 		   
 			//指定ckeditor()的skin
-			CKEDITOR.replace("content",{skin:"moono"})
+			CKEDITOR.replace("content",{skin:"moono"});
+		   //限定ckeditor中的圖片大小
+		   var imgwidth = $("#content").width();
+		   $("#limitImgSize>img").css("max-width",imgwidth);
 			
 			
 			//datepicker初始化(活動時間)

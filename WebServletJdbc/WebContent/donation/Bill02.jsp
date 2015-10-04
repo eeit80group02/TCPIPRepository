@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>捐獻明細</title>
+<title>填寫資料</title>
 
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
@@ -78,7 +78,7 @@
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
-			<a href="#" class="brand-logo center">捐獻明細</a>
+			<a href="#" class="brand-logo center">填寫資料</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
@@ -86,6 +86,7 @@
 						<c:if test="${not empty LoginOK}">
 							<c:if test="${LoginOK.beanName.equals('member')}">
 								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+								<li><a href="<c:url value='/donation/demand.do?type=OrderDetailByMember'/>">查詢宅配</a></li>
 							</c:if>
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
@@ -120,7 +121,7 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻明細</a></li>
+						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻清單</a></li>
 						<li class="tab col s3" id="pageTab02"><a href="#test2" class="active">填寫資料</a></li>
 						<li class="tab col s3 disabled" id="pageTab03"><a href="#test3" class="disabled">完成捐獻</a></li>
 					</ul>
@@ -188,7 +189,7 @@
 											</button>
 										</td>
 										<td class="deleteRow">
-											<button type="button" class="btn btn-small btn-floating">
+											<button type="button" class="btn btn-small btn-floating" id="deleteRow${vs.index}">
 												<i class="small material-icons">delete</i>
 											</button>
 										</td>
@@ -209,14 +210,14 @@
 
 												/* 設置值私有方法 */
 												var setAddValue = function() {
-													// 													var input = $("#text${vs.index}").val();
+													// var input = $("#text${vs.index}").val();
 													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) + step);
 													setValueTimer = setTimeout(setAddValue, 200); // 每隔200毫秒更新文本框數值一次
 												}
 
 												/* 設置值私有方法 */
 												var setSubValue = function() {
-													// 													var input = $("#text${vs.index}").val();
+													// var input = $("#text${vs.index}").val();
 													$("#text${vs.index}").val(parseInt($("#text${vs.index}").val()) - step);
 													setValueTimer = setTimeout(setSubValue, 200); // 每隔200毫秒更新文本框數值一次
 												}
@@ -225,11 +226,11 @@
 												$("#buttonSub${vs.index}").mousedown(function() {
 													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+													if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setSubValue();
 
-													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+													} else if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
 														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
@@ -244,11 +245,11 @@
 												$("#buttonAdd${vs.index}").mousedown(function() {
 													var input = $("#text${vs.index}").val();
 													// 正規表示法找整數
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+													if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) <= "${item.demandNumber}") {
 														changeStep();
 														setAddValue();
 
-													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+													} else if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
 														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
@@ -263,9 +264,9 @@
 
 												function checkText() {
 													var input = $("#text${vs.index}").val();
-													if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) <= "${item.demandNumber}") {
+													if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) <= "${item.demandNumber}") {
 
-													} else if ((/^\d+$/.test(input)) && parseInt(input) > 0 && parseInt(input) > "${item.demandNumber}") {
+													} else if ((/^\d+$/.test(input)) && parseInt(input) >= 0 && parseInt(input) > "${item.demandNumber}") {
 														$("#text${vs.index}").val("${item.demandNumber}");
 														Materialize.toast('<i class="tiny material-icons">info_outline</i>&nbsp;<span>已達需求上限</span>', 1800, 'rounded');
 													} else {
@@ -273,11 +274,17 @@
 														$("#text${vs.index}").empty();
 														$("#text${vs.index}").val("1");
 													}
-													console.log(input);
 													clearInterval(changeStepTimer);
 													clearTimeout(setValueTimer);
 													step = 1;
 												}
+
+												$("#deleteRow${vs.index}").dblclick(function() {
+													$("#text${vs.index}").val("0");
+													Materialize.toast('<i class="tiny material-icons">check_circle</i>&nbsp;<span>移除成功</span>', 1800, 'rounded');
+													$(this).parents('tr').css("display", "none");
+												});
+
 											}(jQuery));
 										</script>
 									</tr>
@@ -332,10 +339,7 @@
 					<div class="col s12 m12 l6">
 						<br>
 						<div class="leftTitle">
-							會員基本資料&nbsp;
-							<button type="button" id="buttonLeft01" class="btn btn-small btn-floating">
-								<a class="text tooltipped" data-position="top" data-delay="20" data-tooltip="修改會員資料"><i class="small material-icons">account_box</i></a>
-							</button>
+							會員基本資料&nbsp;							
 						</div>
 						<br>
 						<!-- 左上 -->

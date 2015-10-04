@@ -241,7 +241,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 			session.setAttribute("error", errorMsg);
 			session.setAttribute("data", data);
-			System.out.println(data);
+			//System.out.println(data);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
 			return;
 		}
@@ -395,12 +395,12 @@ public class SchoolDemandServlet extends HttpServlet {
 			}
 		}
 		if(!errorMsg.containsKey("activityContact")){
-			if (activityContact.length() > 20) {
+			if (activityContact.length() > 100) {
 				errorMsg.put("activityContact", "輸入長度有問題");
 			}
 		}
 		if(!errorMsg.containsKey("content")){
-			if (content.length() > 20) {
+			if (content.length() > 500) {
 				errorMsg.put("content", "輸入長度有問題");
 			}
 		}
@@ -426,8 +426,8 @@ public class SchoolDemandServlet extends HttpServlet {
 		if (!errorMsg.isEmpty()) {
 			session.setAttribute("error", errorMsg);
 			session.setAttribute("data", data);
-			System.out.println(data);
-			response.sendRedirect(request.getContextPath()+"/schoolDemand/CreatSchoolDemand.jsp");
+			//System.out.println(data);
+			response.sendRedirect(request.getContextPath()+"/schoolDemand/UpdataSchoolDemand.jsp");
 			return;
 		}
 
@@ -438,7 +438,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		obean.setRoom(checkRoom);
 		obean.setPlace(checkPlace);
 		obean.setFood(checkFood);
-		System.out.println(obean);
+		//System.out.println(obean);
 		// 存入Bean
 		bean.setSchoolDemandId(schoolDemandId);
 		bean.setSchoolId(schoolId);
@@ -476,7 +476,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			return;
 		}
 		bean = (SchoolDemandBean)session.getAttribute("Demand");
-		System.out.println(bean);
+		//System.out.println(bean);
 		session.removeAttribute("Demand");
 		int schoolDemandId = bean.getSchoolDemandId();
 		bean.setSchoolDemandId(schoolDemandId);

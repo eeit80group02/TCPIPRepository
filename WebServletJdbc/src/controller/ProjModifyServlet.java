@@ -64,9 +64,9 @@ public class ProjModifyServlet extends HttpServlet
 		int fId = Integer.parseInt(fullProjId);
 		int mId = Integer.parseInt(memberId);
 		
-		System.out.println(fId);
-		System.out.println(mId);
-		System.out.println(content);
+//		System.out.println(fId);
+//		System.out.println(mId);
+//		System.out.println(content);
 		
 		ProjModifyBean projModifyBean = new ProjModifyBean();
 		projModifyBean.setFullProjId(fId);
@@ -91,9 +91,9 @@ public class ProjModifyServlet extends HttpServlet
 		int fId = Integer.parseInt(fullProjId);
 		int sId = Integer.parseInt(schoolId);
 		
-		System.out.println(fId);
-		System.out.println(sId);
-		System.out.println(content);
+//		System.out.println(fId);
+//		System.out.println(sId);
+//		System.out.println(content);
 		
 		ProjModifyBean projModifyBean = new ProjModifyBean();
 		projModifyBean.setFullProjId(fId);
@@ -115,7 +115,7 @@ public class ProjModifyServlet extends HttpServlet
 		int fId = Integer.parseInt(fullProjId);
 		
 		JSONObject jsonObject = service.select(fId);
-		System.out.println(jsonObject);
+//		System.out.println(jsonObject);
 		out.write(jsonObject.toJSONString());
 	}
 }

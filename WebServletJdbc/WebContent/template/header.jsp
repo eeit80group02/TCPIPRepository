@@ -33,36 +33,28 @@
 <!-- 				根據登入顯示不同選項 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">
-						<li><a href="<c:url value="/schoolDemand/SchoolDemandServlet.do?type=mdisplays" />">學校需求</a></li>
-<%-- 						<li><a href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提案</a></li> --%>
+ 						<li><a class="btn red white-text" style="font-weight:600;font-family:微軟正黑體;" href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提出計畫</a></li>	
+						<li><a href="<c:url value="/schoolDemand/SchoolDemandServlet.do?type=mdisplays" />">瀏覽需求</a></li>
 					</c:if>
 	
 					<c:if test="${LoginOK.beanName.equals('school')}">
-						<li><a href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />">提需求</a></li>
+						<li><a class="btn red white-text" style="font-weight:600;font-family:微軟正黑體;" href="<c:url value="/schoolDemand/CreatSchoolDemand.jsp" />">提出需求</a></li>
 						<li><a href="<c:url value="/primaryProj.do?type=displayAll" />">初步計畫</a></li>
 					</c:if>
 				</c:if>
 				
-<!-- 				公開&相同 -->
-				<c:choose>
-					<c:when test="${LoginOK.beanName.equals('school')}">
-					
-					</c:when>
-					<c:otherwise>
-				<li><a class="btn red white-text" style="font-weight:600;font-family:微軟正黑體;" href="<c:url value="/primaryProj/createPrimaryProjForm.jsp" />">提出計畫</a></li>	
-					</c:otherwise>
-				</c:choose>
-				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽</a></li>
+				<!-- 公開&相同 -->
+				<li><a href="<c:url value="/fullProj.do?type=displayAll" />">瀏覽計畫</a></li>
+				<li><a href="<c:url value="/ActivityHighlightDisplayAllServlet.do" />">瀏覽花絮</a></li>
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />">捐獻牆</a></li>
-				
 				<!-- 有登入時，會有學校頁面或者個人頁面 -->
 				<c:if test="${not empty LoginOK}">
 					<c:if test="${LoginOK.beanName.equals('member')}">
-						<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+						<li><a href="<c:url value="/personal/personmanager.jsp" />">會員專區</a></li>
 					</c:if>
 	
 					<c:if test="${LoginOK.beanName.equals('school')}">
-						<li><a href="<c:url value="/school/school.jsp" />">學校頁面</a></li>
+						<li><a href="<c:url value="/school/school.jsp" />">學校專區</a></li>
 					</c:if>
 				</c:if>
 					

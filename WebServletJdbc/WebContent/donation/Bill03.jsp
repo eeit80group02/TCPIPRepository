@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>捐獻明細</title>
+<title>完成捐獻</title>
 
 <!-- 標頭專用 top start -->
 <!-- 一定要載入的 -->
@@ -72,7 +72,7 @@
 				<li><a href="<c:url value="/donation/demand.do?type=FindGoods" />"><img alt="捐獻牆" title="捐獻牆" id="DonationWallIcon" src="../images/DonationHeader02.png"></a></li>
 			</ul>
 
-			<a href="#" class="brand-logo center">捐獻明細</a>
+			<a href="#" class="brand-logo center">完成捐獻</a>
 			<ul id="nav-mobile3" class="right hide-on-med-and-down">
 				<li><a class="dropdown-button" href="#!" data-activates="dropdownList03"><i class="large material-icons">person<i class="mdi-navigation-arrow-drop-down right"></i></i></a>
 					<ul id="dropdownList03" class="dropdown-content">
@@ -80,6 +80,7 @@
 						<c:if test="${not empty LoginOK}">
 							<c:if test="${LoginOK.beanName.equals('member')}">
 								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+								<li><a href="<c:url value='/donation/demand.do?type=OrderDetailByMember'/>">查詢宅配</a></li>
 							</c:if>
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
@@ -114,7 +115,7 @@
 				<div class="col s12">
 					<br>
 					<ul class="tabs">
-						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻明細</a></li>
+						<li class="tab col s3 disabled" id="pageTab01"><a href="#test1" class="disabled">捐獻清單</a></li>
 						<li class="tab col s3 disabled" id="pageTab02"><a href="#test2" class="disabled">填寫資料</a></li>
 						<li class="tab col s3" id="pageTab03"><a href="#test3" class="active">完成捐獻</a></li>
 					</ul>

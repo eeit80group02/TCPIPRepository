@@ -21,9 +21,13 @@
 			font-family:微軟正黑體;		
 		}
 		
+		
+		#contentImgSizeLimit img{
+			max-width:100%;
+		}
 	</style>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>updateFullProjForm</title>
+	<title>編輯完整計畫</title>
 </head>
 
 
@@ -205,7 +209,7 @@
 						</div>
 						
 						<!-- 計畫內容 -->
-						<div class="row">
+						<div class="row" id="contentImgSizeLimit">
 							<div class="col l8">
 								<div class="forinput">計畫內容</div>
 								<textarea class="ckeditor" id="content" rows="10" cols="100" name="content" style="font-size:1.2em;color:black;font-weight:600;" required>${param.content}</textarea>

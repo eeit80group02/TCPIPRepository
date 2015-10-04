@@ -80,6 +80,7 @@
 						<c:if test="${not empty LoginOK}">
 							<c:if test="${LoginOK.beanName.equals('member')}">
 								<li><a href="<c:url value="/personal/personmanager.jsp" />">會員頁面</a></li>
+								<li><a href="<c:url value='/donation/demand.do?type=OrderDetailByMember'/>">查詢宅配</a></li>
 							</c:if>
 
 							<c:if test="${LoginOK.beanName.equals('school')}">
@@ -112,7 +113,13 @@
 	<!-- scrollamount 調整跑馬燈速度 -->
 	<!-- 愛心圖示 + 感謝 + 捐獻者名字 +捐獻+ 捐獻物品 -->
 	<marquee id="headMarquee" scrollamount="8">
-		<img src="../images/heart.png" width="20px">感謝 <b> 許阿瑋 </b>捐獻 <b> 50吋 液晶電視 </b><img src="../images/heart.png" width="20px">感謝 <b> 彭翔翔 </b>捐獻 <b> A4 影印紙 </b><img src="../images/heart.png" width="20px">感謝 <b> 郭豪豪 </b>捐獻 <b> 電風扇 </b>
+		<c:forEach var='item' items='${ODS}'>
+			<img src="../images/heart.png" width="20px">感謝 <b> ${item.name}</b>
+			捐獻 
+			<c:forEach var='initem' items='${item.dodbList}'>
+				<b>${initem.supplyName}&nbsp;</b>
+			</c:forEach>
+		</c:forEach>
 	</marquee>
 
 	<center>

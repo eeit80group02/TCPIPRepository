@@ -7,13 +7,20 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>displayFullProj</title>
+<title>完整計畫</title>
 <link type="text/css" rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<style type="text/css">
+	
+	#fulprojLimitImg img{
+		max-width:100%;
+	}
+
+</style>
 </head>
 <body class="deep-orange lighten-5">
 	<!-- 頁首 -->
@@ -167,7 +174,7 @@
 						</div>
 					</div>
 					<!-- 計畫內容 -->
-					<div class="row">
+					<div class="row" id="fulprojLimitImg">
 						<div class="col l8 card-panel offset-l2 hoverable"  style="background-color:#D1F0E5;">
 							<p style="font-family:微軟正黑體;font-size:1.4em;font-weight:300;">
 							${fullProj.content}
@@ -249,7 +256,7 @@
 			<!-- 					<input class="btn-large white-text blue darken-1 accent-2" style="font-family:微軟正黑體;font-size:2em;width:100%" type="submit" value="任務板" >			 -->
 								<button type="submit" class="col l2 btn-large black-text  light-blue lighten-3" style="font-family:微軟正黑體;font-size:1.8em;font-weight:600">
 									<i class="material-icons orange-text" style="font-size:1.5em;vertical-align:middle;">view_week</i>
-									<span style="width:100%;">任務板</span>
+									<span style="width:100%;">協作平台</span>
 								</button>
 							</form>
 						</div>	

@@ -16,7 +16,7 @@ public class DonationCart {
 	public DonationCart() {
 		cart = new LinkedHashMap<>();
 	}
-	
+	// 
 	public List<String> getDonationIdList() {
 		List<String> itemList = new ArrayList<>();
 		Set<Integer> s = cart.keySet();
@@ -50,6 +50,7 @@ public class DonationCart {
 		int donationId = donationBeanDuplicate.getDonationId();
 		if (cart.get(donationId) == null) {
 			cart.put(donationId, donationBeanDuplicate);
+			DonationBeanDuplicate d = cart.get(donationId);
 			return true;
 		} else {
 			return false;

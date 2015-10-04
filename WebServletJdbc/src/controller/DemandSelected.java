@@ -1,5 +1,7 @@
 package controller;
 
+import global.GlobalService;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -15,9 +17,11 @@ import model.DonationBeanDuplicate;
 import model.DonationCart;
 import model.DonationDiscussBeanDuplicate;
 import model.DonationDiscussService;
+import model.DonationODBean;
 import model.DonationOrderBean;
 import model.DonationOrderDuplicateBean;
 import model.DonationService;
+import model.MemberBean;
 import model.SchoolBean;
 
 //@WebServlet("/OneDemand")
@@ -47,15 +51,31 @@ public class DemandSelected extends HttpServlet {
 			session.setAttribute("DonationCart", dCart);
 		}
 		
+		// 讀取會員資料
+		int memberId = 0;
+		Object obj = session.getAttribute("LoginOK");
+		if (obj instanceof MemberBean) {
+			System.out.println("會員登入狀態，轉至確定訂單頁");
+			MemberBean mBean = (MemberBean) session.getAttribute("LoginOK");
+			memberId = mBean.getMemberId();
+		}
+		
 		// 1.接收資料
 		String type = request.getParameter("type");
 		String schoolIdStr = request.getParameter("schoolId");
 		String donationIdStr = request.getParameter("donationId");
+		
 		if (type.equals("FindGoods")) {
 			// 3.呼叫Model
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listDuplivate = service.findDemandsByMember();
 			List<String> list = dCart.getDonationIdList();
+			
+			// 跑馬燈資料查詢
+			List<DonationODBean> ODlist =  service.getAllOD();
+			System.out.println("OD WORK");
+			
+			session.setAttribute("ODS", ODlist);
 			
 //			request.setAttribute("AllDemands", listDuplivate);
 			session.setAttribute("AllDemands", listDuplivate);
@@ -77,6 +97,12 @@ public class DemandSelected extends HttpServlet {
 			DonationService service = new DonationService();
 			List<DonationBeanDuplicate> listdbd = service.findOneAllDeamndByMember(schoolId);
 			List<String> list = dCart.getDonationIdList();
+			
+			// 跑馬燈資料查詢
+			List<DonationODBean> ODlist =  service.getAllOD();
+			System.out.println("OD WORK");
+			
+			session.setAttribute("ODS", ODlist);
 			
 //			request.setAttribute("OneAllDemands", list);
 			session.setAttribute("OneAllDemands", listdbd);
@@ -168,18 +194,40 @@ public class DemandSelected extends HttpServlet {
 			int donationId = Integer.parseInt(donationIdStr);
 			int schoolId = Integer.parseInt(schoolIdStr);
 			
-			DonationBean donationBean = new DonationBean();
+			
 			DonationService service = new DonationService();
 			DonationBeanDuplicate donationBeanDuplicate = service.findOneDemand(donationId);
 			
+			DonationBean donationBean = new DonationBean();
+			donationBean = service.findOneDemandPicture(donationId);
+
+			byte[] image = donationBean.getImageFile();
+			System.out.println("image= "+image);
+			String imageName = donationBean.getImageName();
+			System.out.println("imageName= "+imageName);
+			String ImageBase64 = GlobalService.convertByteArrayToBase64String(imageName, image);
+			System.out.println("ImageBase64= "+ImageBase64);
 //			request.setAttribute("OneDemand", donationBeanDuplicate);
 			session.setAttribute("OneDemand", donationBeanDuplicate);
+			session.setAttribute("UpdateImage", ImageBase64);
 //			RequestDispatcher rd = request.getRequestDispatcher("UpdateOneDemand.jsp");
 //			rd.forward(request, response);
 //			return;
 			response.sendRedirect(response.encodeRedirectURL(request
 					.getContextPath()+"/donation/UpdateOneDemand.jsp"));
 			return;
+		} else if(type.equals("OrderDetailByMember")) {
+			if(memberId == 0) {
+				response.sendRedirect(response.encodeRedirectURL(request
+						.getContextPath()+"../index.jsp"));
+			} else {
+				DonationService service = new DonationService();
+				List<DonationOrderBean> list = service.getAllDetailByMember(memberId);
+				session.setAttribute("MOD", list);
+				response.sendRedirect(response.encodeRedirectURL(request
+						.getContextPath()+"/donation/Bill04.jsp"));
+				return;
+			}
 		}
 	}
 }

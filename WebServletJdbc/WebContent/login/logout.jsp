@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Logout</title>
+<title>登出</title>
 <link type="text/css" rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css"
 	media="screen,projection" />
@@ -17,7 +17,7 @@
 	<% 
 		session.removeAttribute("LoginOK");
 		session.invalidate();
-	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
+// 	   response.setHeader("Refresh", "3; URL="+request.getContextPath()); 
 	%>
 	<!-- 頁首 -->
 	<c:import url="/template/header.jsp"
