@@ -25,7 +25,7 @@ public class InsertMission {
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 1); // MissionSetId 待填
 
@@ -39,9 +39,9 @@ public class InsertMission {
 			pstmt.setString(1, "台灣好好吃");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 1); // MissionSetId 待填
 
@@ -87,7 +87,7 @@ public class InsertMission {
 			pstmt.setString(1, "繽紛一夏");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "普通");
+			pstmt.setString(4, "非常緊急");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -103,7 +103,7 @@ public class InsertMission {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -138,7 +138,7 @@ public class InsertMission {
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 2); // MissionSetId 待填
 
@@ -184,7 +184,7 @@ public class InsertMission {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -200,7 +200,7 @@ public class InsertMission {
 			pstmt.setString(1, "我的家人");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "普通");
+			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -216,7 +216,7 @@ public class InsertMission {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -232,7 +232,7 @@ public class InsertMission {
 			pstmt.setString(1, "淨灘");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "普通");
+			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -267,7 +267,7 @@ public class InsertMission {
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 3); // MissionSetId 待填
 
@@ -281,9 +281,9 @@ public class InsertMission {
 			pstmt.setString(1, "信任遊戲");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 3); // MissionSetId 待填
 
@@ -313,7 +313,7 @@ public class InsertMission {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -345,7 +345,7 @@ public class InsertMission {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -380,7 +380,7 @@ public class InsertMission {
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 4); // MissionSetId 待填
 
@@ -394,7 +394,7 @@ public class InsertMission {
 			pstmt.setString(1, "美人魚的信物—搜索任務");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -426,7 +426,7 @@ public class InsertMission {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -458,7 +458,7 @@ public class InsertMission {
 			pstmt.setString(1, "美人魚的信物—大地遊戲");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -493,7 +493,7 @@ public class InsertMission {
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 5); // MissionSetId 待填
 
@@ -507,7 +507,7 @@ public class InsertMission {
 			pstmt.setString(1, "將軍廚房");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -539,7 +539,7 @@ public class InsertMission {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -571,7 +571,7 @@ public class InsertMission {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -606,7 +606,7 @@ public class InsertMission {
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 6); // MissionSetId 待填
 
@@ -620,9 +620,9 @@ public class InsertMission {
 			pstmt.setString(1, "小天使");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 6); // MissionSetId 待填
 
@@ -652,7 +652,7 @@ public class InsertMission {
 			pstmt.setString(1, "烏龜卡片");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -684,7 +684,7 @@ public class InsertMission {
 			pstmt.setString(1, "頒獎典禮");
 			pstmt.setInt(2, 8);
 			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "非常緊急");
+			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
