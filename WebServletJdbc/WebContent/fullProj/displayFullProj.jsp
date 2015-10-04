@@ -454,7 +454,7 @@
 		  						// 很奇怪的毛毛蟲問題
 		  						<c:if test="${LoginOK.beanName.equals('member')}">
 		  							<c:if test="${LoginOK.memberId == fullProj.memberId}">
-				  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l2 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
+				  						content += "<a href='#replymodal' id='projDiscuss" + value.projDiscussId + "' class='col l3 btn-large right black-text center-align  green accent-1 btnmodal' style='font-size:1.5em;font-weight:600;font-family:微軟正黑體;'>" + 
 				  						           "<i class='material-icons black-text' style='font-size:1.5em;vertical-align:bottom;'>input</i>回覆</a>";
 		  							</c:if>
 		  						</c:if>
