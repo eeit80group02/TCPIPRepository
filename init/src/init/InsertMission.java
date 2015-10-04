@@ -22,7 +22,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "破冰時間");
 			pstmt.setInt(2,8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-01").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "已完成");
@@ -38,7 +38,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "台灣好好吃");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-02").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "已完成");
@@ -54,7 +54,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -70,7 +70,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-10").getTime()));
 			pstmt.setString(4, "非常緊急");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -86,7 +86,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "繽紛一夏");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-10").getTime()));
 			pstmt.setString(4, "非常緊急");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -102,7 +102,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
@@ -118,7 +118,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "晚餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
@@ -135,7 +135,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "早操時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-02").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "已完成");
@@ -151,7 +151,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "科學小尖兵");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-10").getTime()));
 			pstmt.setString(4, "非常緊急");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
@@ -167,7 +167,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -183,7 +183,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-29").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -199,7 +199,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "我的家人");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-12").getTime()));
 			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -215,7 +215,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
@@ -231,7 +231,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "淨灘");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-13").getTime()));
 			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
@@ -247,7 +247,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "晚餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 8);
 			pstmt.setString(6, "進行中");
@@ -264,7 +264,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "早操時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-02").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "已完成");
@@ -280,7 +280,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "信任遊戲");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-04").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "已完成");
@@ -296,7 +296,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-28").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -312,7 +312,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -328,7 +328,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "放風箏");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-29").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -344,7 +344,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
@@ -360,7 +360,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "晚餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
@@ -377,7 +377,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "早操時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-02").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "已完成");
@@ -393,7 +393,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "美人魚的信物—搜索任務");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-11").getTime()));
 			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
@@ -409,7 +409,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "隊輔時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -425,7 +425,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -441,7 +441,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-26").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -457,7 +457,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "美人魚的信物—大地遊戲");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-29").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
@@ -473,7 +473,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "晚餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
@@ -490,7 +490,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "早操時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-01").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "已完成");
@@ -506,7 +506,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "將軍廚房");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
@@ -522,7 +522,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-25").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -538,7 +538,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "唱歌時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-29").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -554,7 +554,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "排練時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-28").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -570,7 +570,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-28").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
@@ -586,7 +586,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "晚會時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-30").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
@@ -603,7 +603,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "早操時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-01").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "已完成");
@@ -619,7 +619,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "小天使");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-02").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "已完成");
@@ -635,7 +635,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "午餐時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -651,7 +651,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "烏龜卡片");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-28").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -667,7 +667,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "分享時間");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-29").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -683,7 +683,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "頒獎典禮");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 6);
 			pstmt.setString(6, "進行中");
@@ -699,7 +699,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "回到溫暖的家");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-28").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 7);
 			pstmt.setString(6, "進行中");
@@ -717,8 +717,8 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "行政管銷");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "普通");
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-10").getTime()));
+			pstmt.setString(4, "緊急");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -733,8 +733,8 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "教材加工人事費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
-			pstmt.setString(4, "普通");
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-08").getTime()));
+			pstmt.setString(4, "非常緊急");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
@@ -749,10 +749,10 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "事務費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-08").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 7); // MissionSetId 待填
 
@@ -765,7 +765,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "助教費用");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-18").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 4);
 			pstmt.setString(6, "進行中");
@@ -781,7 +781,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "郵電等耗材費用");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-19").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 5);
 			pstmt.setString(6, "進行中");
@@ -798,10 +798,10 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "伙食費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-08").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setNull(7, java.sql.Types.INTEGER);
 			pstmt.setInt(8, 8); // MissionSetId 待填
 
@@ -814,7 +814,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "交通費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-13").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
@@ -830,7 +830,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "住宿費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-14").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 3);
 			pstmt.setString(6, "進行中");
@@ -847,7 +847,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "學童教材費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "進行中");
@@ -864,7 +864,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "教材繼送費");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-10-27").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
 			pstmt.setString(6, "進行中");
@@ -882,10 +882,10 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "仙女棒");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-08").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 1);
-			pstmt.setString(6, "進行中");
+			pstmt.setString(6, "已完成");
 			pstmt.setInt(7, 9);
 			pstmt.setInt(8, 2); // MissionSetId 待填
 
@@ -898,7 +898,7 @@ public class InsertMission {
 				PreparedStatement pstmt = conn.prepareStatement(INSERT);) {
 			pstmt.setString(1, "會下雪的聖誕樹");
 			pstmt.setInt(2, 8);
-			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-05-27").getTime()));
+			pstmt.setTimestamp(3, new Timestamp(GlobalService.convertStringToDate("2015-08-29").getTime()));
 			pstmt.setString(4, "普通");
 			pstmt.setInt(5, 2);
 			pstmt.setString(6, "進行中");
