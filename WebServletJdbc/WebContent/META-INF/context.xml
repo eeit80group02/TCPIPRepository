@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-<!-- 	<Resource name="jdbc/TCPIP" type="javax.sql.DataSource" -->
-<!-- 		username="sasa" password="passw0rd" -->
-<!-- 		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" -->
-<!--       	url="jdbc:sqlserver://127.0.0.1:1433;DatabaseName=TCPIP" -->
-<!--       	maxActive="3" -->
-<!--       	maxIdle="2" -->
-<!--       	maxWait="5000" /> -->
-
-<!-- 	<RESOURCE NAME="JDBC/TCPIP" TYPE="JAVAX.SQL.DATASOURCE" -->
-<!-- 		USERNAME="EEIT80GROUP02@QJTXI3TOFR" PASSWORD="P@SSW0RD" -->
-<!-- 		DRIVERCLASSNAME="COM.MICROSOFT.SQLSERVER.JDBC.SQLSERVERDRIVER" -->
-<!--       	URL="JDBC:SQLSERVER://QJTXI3TOFR.DATABASE.WINDOWS.NET:1433;DATABASE=TCPIP" -->
-<!--       	MAXACTIVE="3" -->
-<!--       	MAXIDLE="2" -->
-<!--       	MAXWAIT="5000" />	 -->
+	<Resource name="jdbc/TCPIP" type="javax.sql.DataSource"
+		username="eeit80group02@qjtxi3tofr" password="p@ssw0rd"
+		driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+      	url="jdbc:sqlserver://qjtxi3tofr.database.windows.net:1433;database=TCPIP"
+      	maxActive="3"
+      	maxIdle="2"
+      	maxWait="5000" />	
 </Context>
