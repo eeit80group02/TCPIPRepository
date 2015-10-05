@@ -35,25 +35,36 @@ public class InsertProcessingMember {
 				String str = br.readLine();
 				String[] strArray = str.split("\\s+");
 				
-				pstmt.setInt(1,Integer.parseInt(strArray[0]));
-				pstmt.setInt(2,Integer.parseInt(strArray[1]));
-				if(strArray[2].equals("null")){
-					pstmt.setNull(3,Types.TIMESTAMP);
-				} else {
-					//時間-小時
-					int randomHour = (int) (Math.random()*24);
-					//時間-分秒
-					int randomMinute = (int) (1+Math.random()*59);
-					int randomSecond = (int) (1+Math.random()*59);
-					String formatStr = "%02d";
-					String theHour = String.format(formatStr, randomHour);
-					String theMinute = String.format(formatStr, randomMinute);
-					String theSecond = String.format(formatStr, randomSecond);
-					String temp = strArray[2]+" "+ theHour + ":" + theMinute + ":" + theSecond;
-					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					pstmt.setTimestamp(3,new java.sql.Timestamp(sdf.parse(temp).getTime()));	// registerTime
+				for(int i = 0 ; i < strArray.length ; i++)
+				{
+					if(strArray[i].equalsIgnoreCase("NULL"))
+					{
+						pstmt.setNull(i+1,Types.TIMESTAMP);
+					}
+					else
+					{
+						pstmt.setString(i+1,strArray[i]);
+					}
 				}
-				pstmt.setString(4,strArray[3]);
+//				pstmt.setInt(1,Integer.parseInt(strArray[0]));
+//				pstmt.setInt(2,Integer.parseInt(strArray[1]));
+//				if(strArray[2].equals("null")){
+//					pstmt.setNull(3,Types.TIMESTAMP);
+//				} else {
+//					//時間-小時
+//					int randomHour = (int) (Math.random()*24);
+//					//時間-分秒
+//					int randomMinute = (int) (1+Math.random()*59);
+//					int randomSecond = (int) (1+Math.random()*59);
+//					String formatStr = "%02d";
+//					String theHour = String.format(formatStr, randomHour);
+//					String theMinute = String.format(formatStr, randomMinute);
+//					String theSecond = String.format(formatStr, randomSecond);
+//					String temp = strArray[2]+" "+ theHour + ":" + theMinute + ":" + theSecond;
+//					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//					pstmt.setTimestamp(3,new java.sql.Timestamp(sdf.parse(temp).getTime()));	// registerTime
+//				}
+//				pstmt.setString(4,strArray[3]);
 				pstmt.executeUpdate();
 			}
 
