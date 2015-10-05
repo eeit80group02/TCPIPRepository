@@ -114,7 +114,7 @@
 
 
 				<!-- 計畫資訊 -->
-				<div class="card-panel hoverable row"
+				<div class="card-panel hoverable row head"
 					style="background-color: #FFFCEC">
 
 					<!-- 計畫資訊 -->
@@ -130,8 +130,8 @@
 								<div class="col l4 transparent black-text valign-wrapper">
 									<h5 class="itemheader center-align" style="display: inline-block; margin: 0 auto;">計畫標題</h5>
 								</div>
-								<div class="col l7 btn amber lighten-4 offset-l1 black-text">
-									<div style="font-size:1.4em;">${fullProj.title}</div>
+								<div class="col l7 btn amber lighten-4 offset-l1 black-text" style="font-size:1.4em;">
+									${fullProj.title}
 								</div>
 							</div>
 						</div>
@@ -331,7 +331,7 @@
 							<form action="<c:url value="/fullProj.do" />" method="post">
 								<input type="hidden" name="fullProjId" value="${fullProj.fullProjId}" /> 
 								<input type="hidden" name="type" value="memberConfirm">
-								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">完整計畫發布</button>
+								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">計畫發布</button>
 							</form>
 						</div>
 					</c:if>
@@ -356,7 +356,7 @@
 								<input type="hidden" name="budget" value="${fullProj.budget}"> 
 								<input type="hidden" name="orgArchitecture" value='${fullProj.orgArchitecture}'> 
 								<input type="hidden" name="base64String" value="${fullProj.base64String}">
-								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">補齊完整計畫</button>
+								<button type="submit" class="btn-large white-text red" style="width: 100%; font-size: 1.5em; font-weight: 600; font-family: 微軟正黑體;">補齊計畫</button>
 							</form>
 						</div>
 					</c:if>

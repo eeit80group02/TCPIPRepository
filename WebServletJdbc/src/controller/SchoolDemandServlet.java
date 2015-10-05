@@ -53,7 +53,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			if (type.equals("create")) {
 				// 因為表單必須 post
 				if (request.getMethod().equals("POST")) {
-					System.out.println("create");
+//					System.out.println("create");
 					creat(request, response);
 				} else {
 					errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.70(必須post))");
@@ -61,28 +61,28 @@ public class SchoolDemandServlet extends HttpServlet {
 					return;
 				}
 			} else if (type.equals("update")) {
-				System.out.println("update");
+//				System.out.println("update");
 				update(request, response);
 			} else if (type.equals("updateDisplay")) {
-				System.out.println("updateDisplay");
+//				System.out.println("updateDisplay");
 				updateDisplay(request, response);
 			} else if (type.equals("display")) {
-				System.out.println("display");
+//				System.out.println("display");
 				display(request, response);
 			} else if (type.equals("displays")) {
-				System.out.println("displays");
+//				System.out.println("displays");
 				displays(request, response);
 			} else if (type.equals("displayPersonalRender")) {
-				System.out.println("displayPersonalRender");
+//				System.out.println("displayPersonalRender");
 				displayPersonalRender(request, response);
 			} else if (type.equals("displayPersonalUnrender")) {
-				System.out.println("displayPersonalUnrender");
+//				System.out.println("displayPersonalUnrender");
 				displayPersonalUnrender(request, response);
 			} else if (type.equals("mdisplay")) {
-				System.out.println("mdisplay");
+//				System.out.println("mdisplay");
 				mdisplay(request, response);
 			} else if (type.equals("mdisplays")) {
-				System.out.println("mdisplays");
+//				System.out.println("mdisplays");
 				mdisplays(request, response);
 			}else {
 				errorMsg.put("errorURL","請勿做作不正當請求(PrimaryProjServlet line.83)");
@@ -94,7 +94,7 @@ public class SchoolDemandServlet extends HttpServlet {
 	}
 
 	public void creat(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------新增----------------------------------");
+//		System.out.println("----------------------------------新增----------------------------------");
 		Map<String, String> errorMsg = new HashMap<String, String>();
 		Map<String, String> data = new HashMap<String, String>();
 		SchoolDemandBean bean = new SchoolDemandBean();
@@ -268,7 +268,7 @@ public class SchoolDemandServlet extends HttpServlet {
 		bean = service.creat(bean);
 
 		if (bean != null) {
-			System.out.println("建立成功bean=" + bean);
+//			System.out.println("建立成功bean=" + bean);
 			session.setAttribute("Demand", bean);
 			response.sendRedirect("SchoolDemandServlet.do?type=display");
 			return;
@@ -279,7 +279,7 @@ public class SchoolDemandServlet extends HttpServlet {
 	}
 
 	public void update(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------更新----------------------------------");
+//		System.out.println("----------------------------------更新----------------------------------");
 		SchoolBean sbean = null;
 		SchoolDemandBean bean = new SchoolDemandBean();
 		OffersBean obean = new OffersBean();
@@ -456,17 +456,17 @@ public class SchoolDemandServlet extends HttpServlet {
 		bean = service.update(bean);
 
 		if (bean != null) {
-			System.out.println("更新成功bean=" + bean);
+//			System.out.println("更新成功bean=" + bean);
 			session.setAttribute("Demand", bean);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=display");
 		} else {
-			System.out.println("更新失敗");
+//			System.out.println("更新失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/SchoolDemandServlet.do?type=display");
 		}
 
 	}
 	public void updateDisplay(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------更新前顯示----------------------------------");
+//		System.out.println("----------------------------------更新前顯示----------------------------------");
 		SchoolDemandBean bean =  new SchoolDemandBean();
 		SchoolBean sbean = null;
 		HttpSession session = request.getSession();
@@ -482,23 +482,23 @@ public class SchoolDemandServlet extends HttpServlet {
 		bean.setSchoolDemandId(schoolDemandId);
 		bean = service.updateDisplay(bean);
 		if(bean!=null){
-			System.out.println("查詢成功");
+//			System.out.println("查詢成功");
 			session.setAttribute("Demand", bean);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/UpdataSchoolDemand.jsp");
 		}else{
-			System.out.println("查詢失敗");
+//			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/UpdataSchoolDemand.jsp");
 		}
 		
 	}
 	public void mdisplay(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------會員顯示單筆----------------------------------");
+//		System.out.println("----------------------------------會員顯示單筆----------------------------------");
 		SchoolDemandBean result = new SchoolDemandBean();
 		HttpSession session = request.getSession();
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
 			if(mbean.getMemberId()==null){
-				System.out.println("非會員登入");
+//				System.out.println("非會員登入");
 				response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 				return;
 			}
@@ -512,7 +512,7 @@ public class SchoolDemandServlet extends HttpServlet {
 			sDId = Integer.parseInt(schoolDemandId);
 			sId = Integer.parseInt(schoolId);
 		} catch (NumberFormatException e) {
-			System.out.println("錯誤");
+//			System.out.println("錯誤");
 		}
 		result.setSchoolDemandId(sDId);
 		result.setSchoolId(sId);
@@ -526,34 +526,34 @@ public class SchoolDemandServlet extends HttpServlet {
 		
 	}
 	public void mdisplays(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------會員顯示待洽談----------------------------------");
+//		System.out.println("----------------------------------會員顯示待洽談----------------------------------");
 		List<SchoolDemandBean> result = null;
 		HttpSession session = request.getSession();
 		session.removeAttribute("mlist");
 		MemberBean mbean = (MemberBean)session.getAttribute("LoginOK");
 		if(mbean==null){
 			if(mbean.getMemberId()==null){
-				System.out.println("非會員登入");
+//				System.out.println("非會員登入");
 				response.sendRedirect(request.getContextPath()+"/login/login.jsp");
 				return;
 			}
 		}
 		result = service.mdisplays(mbean);
-		System.out.println(result.size());
+//		System.out.println(result.size());
 		
 		if (!result.isEmpty()) {
-			System.out.println("成功查詢list=" + result);
+//			System.out.println("成功查詢list=" + result);
 			session.setAttribute("mlist", result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 			
 		} else {
-			System.out.println("查詢失敗   導向登入頁面");   
+//			System.out.println("查詢失敗   導向登入頁面");   
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAll.jsp");
 		}
 	}
 
 	public void display(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		System.out.println("----------------------------------查詢單筆----------------------------------");
+//		System.out.println("----------------------------------查詢單筆----------------------------------");
 		SchoolDemandBean bean = null;
 		HttpSession session = request.getSession();
 		String sId = "";
@@ -589,17 +589,17 @@ public class SchoolDemandServlet extends HttpServlet {
 		bean = service.display(bean);
 
 		if (bean != null) {
-			System.out.println("成功查詢bean=" + bean);
+//			System.out.println("成功查詢bean=" + bean);
 			session.setAttribute("Demand", bean);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/Display.jsp");
 		} else {
-			System.out.println("查詢失敗");
+//			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/Display.jsp");
 		}
 	}
 
 	public void displays(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------Star 學校查詢全部----------------------------------");
+//		System.out.println("----------------------------------Star 學校查詢全部----------------------------------");
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		HttpSession session = request.getSession();
@@ -616,17 +616,17 @@ public class SchoolDemandServlet extends HttpServlet {
 		result = service.displays(bean);
 		if (!result.isEmpty()) {
 			session.setAttribute("list", result);
-			System.out.println("成功查詢list=" + result);
+//			System.out.println("成功查詢list=" + result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAllPersonal.jsp");
 		} else {
-			System.out.println("查詢失敗");
+//			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayAllPersonal.jsp");
 		}
 	}
 
 	public void displayPersonalRender(HttpServletRequest request,
 		HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------Star displayPersonalRender----------------------------------");
+//		System.out.println("----------------------------------Star displayPersonalRender----------------------------------");
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolBean bean = null;
 		HttpSession session = request.getSession();
@@ -637,19 +637,19 @@ public class SchoolDemandServlet extends HttpServlet {
 		}
 		result = service.displayPersonalRender(bean);
 		request.setAttribute("list", result);
-		System.out.println(result.size());
+//		System.out.println(result.size());
 		if (!result.isEmpty()) {
 			session.setAttribute("list", result);
-			System.out.println("成功查詢list=" + result);
+//			System.out.println("成功查詢list=" + result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalRender.jsp");
 		} else {
-			System.out.println("查詢失敗");
+//			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalRender.jsp");
 		}
 	}
 
 	public void displayPersonalUnrender(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("----------------------------------Star displayPersonalUnrender----------------------------------");
+//		System.out.println("----------------------------------Star displayPersonalUnrender----------------------------------");
 		List<SchoolDemandBean> result = new ArrayList<SchoolDemandBean>();
 		SchoolDemandBean bean = new SchoolDemandBean();
 		SchoolBean sbean= null;
@@ -665,11 +665,11 @@ public class SchoolDemandServlet extends HttpServlet {
 		result = service.displayPersonalUnrender(bean);
 		if (!result.isEmpty()) {
 			session.setAttribute("list", result);
-			System.out.println("成功查詢list=" + result);
+//			System.out.println("成功查詢list=" + result);
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
 			return;
 		} else {
-			System.out.println("查詢失敗");
+//			System.out.println("查詢失敗");
 			response.sendRedirect(request.getContextPath()+"/schoolDemand/DisplayPersonalUnrender.jsp");
 		}
 	}
