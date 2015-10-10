@@ -1,13 +1,11 @@
 package init;
 
-import java.io.File;
-import java.io.FileInputStream;
+import global.GlobalService;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
-
-import global.GlobalService;
 
 public class InsertDonationDiscuss {
 	private static final String URL = GlobalService.URL;

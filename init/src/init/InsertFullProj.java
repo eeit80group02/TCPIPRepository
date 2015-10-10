@@ -541,7 +541,7 @@ public class InsertFullProj
 				}
 				
 				pstmt.setString(10,content.toString());			// content
-				pstmt.setString(11,"宜蘭縣");				// location 活動確定地點
+				pstmt.setString(11,"宜蘭縣宜蘭國小");				// location 活動確定地點
 				
 				pstmt.setString(12,"2015-11-03");				//activityStartTime 活動開始時間
 				pstmt.setString(13,"2015-11-08");				//activityEndTime  活動結束時間

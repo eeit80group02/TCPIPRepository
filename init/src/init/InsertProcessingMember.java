@@ -14,7 +14,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Types;
-import java.text.SimpleDateFormat;
 
 public class InsertProcessingMember {
 	private static final String URL = GlobalService.URL;

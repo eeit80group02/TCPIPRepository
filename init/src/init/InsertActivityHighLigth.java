@@ -1,16 +1,15 @@
 package init;
 
+import global.GlobalService;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import global.GlobalService;
 
 public class InsertActivityHighLigth 
 {

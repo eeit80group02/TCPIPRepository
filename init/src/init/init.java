@@ -21,6 +21,7 @@ public class init
 		InsertProjDiscuss.start();  // 問與答
 		InsertProjModify.start();  // 問與答
 		InsertActivityHighLigth.start();
+		InsertOffers.start();
 		
 		// Donation 系列 start
 		InsertDonation.start();
