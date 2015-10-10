@@ -572,6 +572,8 @@
 					$("#birthday").focus().val("1991-04-23");
 					$("#email").focus().val("zicehuijava80@gmail.com");
 					$("#address").focus().val("台北市大安區仁愛路四段27巷1號");
+					$("#passwords").focus().val("Coldplay4104@");
+					$("#check").focus().val("Coldplay4104@");
 				});			
 				
 			//表單驗證
@@ -1081,14 +1083,14 @@
 		}
 	};
 
-// 	$(function () {
-// 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
-// 			console.log(responseJson);
-// 			$("#captchaKey").val(responseJson.captchaKey);
-// 			$("#captchaField").text(responseJson.captchaImage);
-// 			$("#captchaImage").attr("src",$("#captchaField").val());
-// 		}); 
-// 	});
+	$(function () {
+		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
+			console.log(responseJson);
+			$("#captchaKey").val(responseJson.captchaKey);
+			$("#captchaField").text(responseJson.captchaImage);
+			$("#captchaImage").attr("src",$("#captchaField").val());
+		}); 
+	});
 	
  	function refresh() {
 		$.get("<c:url value='/GetIdCheckerCaptchaServlet' />", function(responseJson) {
