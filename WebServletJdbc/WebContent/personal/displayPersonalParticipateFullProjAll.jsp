@@ -89,33 +89,6 @@
 	
 	
 	
-	
-	
-	
-	<!-- 主要版面 -->
-	<div class="row" id="mainboard">
-		<!-- 6欄置中 -->
-		<div class="col l6 offset-l3">
-		<div class="row center-align card-panel blue-text" style="font-size:4em;">參加過的完整計畫</div>
-		<c:forEach var="bean" items="${participator}">
-			${bean.fullProjBean.fullProjId}暫時顯示編號 最後DEMO應該拿掉 只留名稱<br>
-			${bean.fullProjBean.title}<br>
-			<fmt:formatDate value="${bean.fullProjBean.activityStartTime}" pattern="yyyy-MM-dd"/><br>
-			<fmt:formatDate value="${bean.fullProjBean.activityEndTime}" pattern="yyyy-MM-dd"/><br>
-			${bean.fullProjBean.projStatus}<br>
-
-			<c:if test="${bean.fullProjBean.projStatus.equals('招募中')}">
-				如果招募中 進行中 有任務版連結?
-			</c:if>
-			
-			<c:if test="${bean.fullProjBean.projStatus.equals('已完成')}">
-				如果完成 有花絮?
-			</c:if>
-			</c:forEach>
-		</div>
-		<!-- 6欄置中 -->
-	</div>
-	<!-- 主要版面 -->
 </main>
 
 	<!-- 頁尾 -->

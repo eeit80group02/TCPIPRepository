@@ -50,7 +50,7 @@
 								<div class="card-image activator" style="background-image: url(${activityHighLight.base64String}); background-size: cover; background-repeat: no-repeat;cursor:pointer;">
 								</div>
 								<!-- 花絮的名稱(完整計畫的名稱) -->
-								<div class="card-content" style="font-size: 20pt" class="truncate">
+								<div class="card-content" style="font-size: 1em" class="truncate">
 									${activityHighLight.fullProjBean.title}
 								</div>
 								<!-- 連結到花絮的收看頁面 -->
